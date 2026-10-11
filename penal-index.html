@@ -1,0 +1,2057 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Derecho Penal Colombiano · Guía Didáctica Interactiva</title>
+<style>
+  :root {
+    --primary: #8b0000;
+    --secondary: #d4a574;
+    --accent: #c53030;
+    --light: #f5f1e8;
+    --dark: #1a202c;
+    --success: #38a169;
+    --warning: #d69e2e;
+    --danger: #c53030;
+    --card-bg: #ffffff;
+    --shadow: 0 4px 15px rgba(0,0,0,0.08);
+    --shadow-hover: 0 8px 25px rgba(0,0,0,0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    background: var(--light);
+    color: var(--dark);
+    line-height: 1.7;
+  }
+
+  header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    color: white;
+    padding: 2rem 1rem;
+    text-align: center;
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::before {
+    content: '⚔️';
+    position: absolute;
+    font-size: 15rem;
+    opacity: 0.05;
+    top: -30px;
+    right: -30px;
+  }
+
+  header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: 2px;
+    position: relative;
+    z-index: 1;
+  }
+
+  header p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    font-style: italic;
+    position: relative;
+    z-index: 1;
+  }
+
+  nav {
+    background: var(--dark);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow);
+  }
+
+  nav ul {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0.5rem;
+  }
+
+  nav a {
+    color: var(--light);
+    text-decoration: none;
+    padding: 0.7rem 1rem;
+    margin: 0.2rem;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    transition: all 0.3s;
+    display: block;
+  }
+
+  nav a:hover {
+    background: var(--secondary);
+    color: var(--dark);
+    transform: translateY(-2px);
+  }
+
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+  }
+
+  section {
+    background: var(--card-bg);
+    margin-bottom: 2.5rem;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    border-left: 5px solid var(--secondary);
+    scroll-margin-top: 80px;
+  }
+
+  section h2 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--secondary);
+  }
+
+  section h3 {
+    color: var(--accent);
+    font-size: 1.4rem;
+    margin: 1.5rem 0 0.8rem;
+  }
+
+  section h4 {
+    color: var(--primary);
+    font-size: 1.15rem;
+    margin: 1rem 0 0.5rem;
+  }
+
+  p { margin-bottom: 1rem; text-align: justify; }
+
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.2rem;
+    margin: 1.5rem 0;
+  }
+
+  .card {
+    background: linear-gradient(135deg, #fff 0%, #f9f6ef 100%);
+    border: 2px solid var(--secondary);
+    border-radius: 10px;
+    padding: 1.2rem;
+    transition: all 0.3s;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--primary);
+  }
+
+  .card .icon {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .card h4 {
+    text-align: center;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+  }
+
+  .card .detail {
+    display: none;
+    margin-top: 0.8rem;
+    padding-top: 0.8rem;
+    border-top: 1px dashed var(--secondary);
+    font-size: 0.95rem;
+  }
+
+  .card.active .detail { display: block; }
+
+  .card .hint {
+    text-align: center;
+    color: var(--accent);
+    font-size: 0.85rem;
+    font-style: italic;
+  }
+
+  .mapa-container {
+    background: #fdfbf5;
+    border: 2px dashed var(--secondary);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    overflow-x: auto;
+  }
+
+  .mapa {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 600px;
+  }
+
+  .nodo {
+    background: var(--primary);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+    font-weight: bold;
+    text-align: center;
+    min-width: 180px;
+    box-shadow: var(--shadow);
+  }
+
+  .nodo.central {
+    background: linear-gradient(135deg, var(--secondary), #e0b888);
+    color: var(--dark);
+    font-size: 1.2rem;
+    padding: 1rem 2rem;
+  }
+
+  .nodo.sub {
+    background: var(--accent);
+    font-size: 0.95rem;
+  }
+
+  .linea {
+    width: 3px;
+    height: 25px;
+    background: var(--secondary);
+  }
+
+  .linea-h {
+    height: 3px;
+    background: var(--secondary);
+    width: 80%;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .rama {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 1rem;
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  .rama-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    min-width: 140px;
+  }
+
+  .ejemplo {
+    background: #e6f7ee;
+    border-left: 4px solid var(--success);
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .ejemplo strong { color: var(--success); }
+
+  .alerta {
+    background: #fff8e1;
+    border-left: 4px solid var(--warning);
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .alerta strong { color: var(--warning); }
+
+  .cita {
+    background: #f0f7ff;
+    border-left: 4px solid var(--accent);
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+    color: var(--primary);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+
+  th {
+    background: var(--primary);
+    color: white;
+    padding: 0.8rem;
+    text-align: left;
+  }
+
+  td {
+    padding: 0.8rem;
+    border-bottom: 1px solid #eee;
+  }
+
+  tr:nth-child(even) { background: #f9f6ef; }
+  tr:hover { background: #f0ead6; }
+
+  .quiz-container {
+    background: linear-gradient(135deg, #f7f4ed 0%, #fff 100%);
+    padding: 1.5rem;
+    border-radius: 10px;
+    border: 2px solid var(--accent);
+  }
+
+  .quiz-header {
+    background: var(--primary);
+    color: white;
+    padding: 1.2rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .quiz-header h3 {
+    color: white;
+    margin: 0 0 0.5rem 0;
+  }
+
+  .progress-bar {
+    background: rgba(255,255,255,0.2);
+    height: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+  }
+
+  .progress-fill {
+    background: var(--secondary);
+    height: 100%;
+    width: 0%;
+    transition: width 0.4s ease;
+  }
+
+  .quiz-stats {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .stat {
+    background: rgba(255,255,255,0.1);
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    font-size: 0.9rem;
+  }
+
+  .stat strong { color: var(--secondary); }
+
+  .quiz-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    padding: 0.5rem;
+    background: #f0ead6;
+    border-radius: 8px;
+  }
+
+  .quiz-tab {
+    background: white;
+    border: 2px solid var(--accent);
+    color: var(--accent);
+    padding: 0.5rem 0.8rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.85rem;
+    transition: all 0.3s;
+    flex: 1;
+    min-width: 100px;
+    text-align: center;
+  }
+
+  .quiz-tab:hover {
+    background: var(--accent);
+    color: white;
+  }
+
+  .quiz-tab.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+  }
+
+  .quiz-section {
+    display: none;
+  }
+
+  .quiz-section.active {
+    display: block;
+    animation: fadeIn 0.4s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .pregunta {
+    margin-bottom: 1.5rem;
+    padding: 1.2rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    border-left: 4px solid var(--accent);
+    transition: all 0.3s;
+  }
+
+  .pregunta.answered {
+    border-left-color: var(--secondary);
+  }
+
+  .pregunta-num {
+    display: inline-block;
+    background: var(--accent);
+    color: white;
+    padding: 0.2rem 0.7rem;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    margin-right: 0.5rem;
+  }
+
+  .pregunta-tipo {
+    display: inline-block;
+    background: var(--secondary);
+    color: var(--dark);
+    padding: 0.2rem 0.7rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    margin-left: 0.3rem;
+    font-weight: bold;
+  }
+
+  .pregunta p { 
+    font-weight: bold; 
+    color: var(--primary); 
+    margin: 0.8rem 0;
+    text-align: left;
+  }
+
+  .opciones { display: flex; flex-direction: column; gap: 0.5rem; }
+
+  .opcion {
+    padding: 0.7rem 1rem;
+    background: #f9f6ef;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+  }
+
+  .opcion:hover:not(.disabled) {
+    border-color: var(--accent);
+    background: #e8f0f7;
+  }
+
+  .opcion.disabled {
+    cursor: not-allowed;
+    opacity: 0.85;
+  }
+
+  .opcion.correcta {
+    background: #c6f6d5;
+    border-color: var(--success);
+    color: var(--success);
+    font-weight: bold;
+  }
+
+  .opcion.incorrecta {
+    background: #fed7d7;
+    border-color: var(--danger);
+    color: var(--danger);
+  }
+
+  .opcion.correcta::after {
+    content: ' ✓';
+    font-weight: bold;
+  }
+
+  .opcion.incorrecta::after {
+    content: ' ✗';
+    font-weight: bold;
+  }
+
+  .explicacion {
+    margin-top: 0.8rem;
+    padding: 0.8rem;
+    background: #f0f7ff;
+    border-left: 3px solid var(--accent);
+    border-radius: 0 6px 6px 0;
+    font-size: 0.9rem;
+    display: none;
+    font-style: italic;
+  }
+
+  .explicacion.visible {
+    display: block;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .resultado-final {
+    margin-top: 2rem;
+    padding: 2rem;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    color: white;
+    border-radius: 12px;
+    text-align: center;
+    display: none;
+  }
+
+  .resultado-final.visible {
+    display: block;
+    animation: fadeIn 0.5s ease;
+  }
+
+  .resultado-final h3 {
+    color: var(--secondary);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .puntaje-final {
+    font-size: 3rem;
+    font-weight: bold;
+    color: var(--secondary);
+    margin: 1rem 0;
+  }
+
+  .desglose-temas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+    text-align: left;
+  }
+
+  .desglose-item {
+    background: rgba(255,255,255,0.1);
+    padding: 1rem;
+    border-radius: 8px;
+  }
+
+  .desglose-item h4 {
+    color: var(--secondary);
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+  }
+
+  .mini-bar {
+    background: rgba(255,255,255,0.2);
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+  }
+
+  .mini-bar-fill {
+    background: var(--secondary);
+    height: 100%;
+    transition: width 0.6s ease;
+  }
+
+  button {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 1rem;
+    transition: all 0.3s;
+  }
+
+  button:hover {
+    background: var(--secondary);
+    color: var(--dark);
+    transform: translateY(-2px);
+  }
+
+  .btn-reset {
+    background: var(--danger);
+    margin-left: 0.5rem;
+  }
+
+  .btn-reset:hover {
+    background: #9b2c2c;
+    color: white;
+  }
+
+  .acordeon-item {
+    margin-bottom: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .acordeon-header {
+    background: var(--accent);
+    color: white;
+    padding: 1rem;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.3s;
+  }
+
+  .acordeon-header:hover { background: var(--primary); }
+
+  .acordeon-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    background: white;
+  }
+
+  .acordeon-content.active {
+    max-height: 2000px;
+    padding: 1rem;
+  }
+
+  .flecha { transition: transform 0.3s; }
+  .acordeon-header.active .flecha { transform: rotate(180deg); }
+
+  footer {
+    background: var(--dark);
+    color: var(--light);
+    text-align: center;
+    padding: 2rem 1rem;
+    margin-top: 2rem;
+  }
+
+  footer p { margin-bottom: 0.5rem; }
+
+  @media (max-width: 768px) {
+    header h1 { font-size: 1.8rem; }
+    section { padding: 1.2rem; }
+    section h2 { font-size: 1.5rem; }
+    nav a { font-size: 0.8rem; padding: 0.5rem 0.7rem; }
+    .quiz-tab { font-size: 0.75rem; padding: 0.4rem 0.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>⚔️ Derecho Penal Colombiano</h1>
+  <p>Guía Didáctica Interactiva · Ley 599 de 2000 (Código Penal)</p>
+</header>
+
+<nav>
+  <ul>
+    <li><a href="#tema1">1. Normas Rectoras</a></li>
+    <li><a href="#tema2">2. Aplicación</a></li>
+    <li><a href="#tema3">3. Conducta</a></li>
+    <li><a href="#tema4">4. Consecuencias</a></li>
+    <li><a href="#tema5">5. Extinción</a></li>
+    <li><a href="#tema6">6. Resp. Civil</a></li>
+    <li><a href="#quiz">Quiz (40)</a></li>
+  </ul>
+</nav>
+
+<main>
+
+  <section>
+    <h2> Introducción</h2>
+    <p>Bienvenido a esta guía interactiva sobre el <strong>Código Penal Colombiano</strong> (Ley 599 de 2000). Este código regula los principios fundamentales del derecho penal, la aplicación de la ley penal, la estructura del delito, las penas, la extinción de la acción penal y la responsabilidad civil derivada del delito.</p>
+    <div class="alerta">
+      <strong>💡 Cómo usar esta guía:</strong> Haz clic en las tarjetas para ver detalles, despliega los acordeones para información adicional y prueba tus conocimientos con el quiz de 40 preguntas al final.
+    </div>
+  </section>
+
+  <!-- TEMA 1: NORMAS RECTORAS -->
+  <section id="tema1">
+    <h2>1. Normas Rectoras de la Ley Penal (Arts. 1 a 13)</h2>
+    <p>Las normas rectoras constituyen la esencia e ideología del sistema penal colombiano. Son principios fundamentales que informan obligatoriamente la interpretación judicial de toda la materia punitiva.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">NORMAS RECTORAS</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Dignidad Humana</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Art. 1°</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Legalidad</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Arts. 6 y 10</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Culpabilidad</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Art. 11</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Lesividad</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Art. 9°</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3> Principios Fundamentales</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">👤</div>
+        <h4>Dignidad Humana (Art. 1°)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Pilar supremo del sistema punitivo. Impide que el ciudadano sea tratado como <strong>mero objeto o instrumento estatal</strong>.</p>
+          <p>Erige la protección personal como límite al <em>Ius Puniendi</em>.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📜</div>
+        <h4>Legalidad y Taxatividad (Arts. 6° y 10°)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p><em>Nullum crimen, nulla poena sine lege</em>: nadie puede ser juzgado sino conforme a leyes preexistentes.</p>
+          <p>Los tipos penales deben ser <strong>claros, explícitos e inequívocos</strong>.</p>
+          <p><strong>Prohíbe la analogía</strong> salvo en materia permisiva.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Culpabilidad (Art. 11)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Prohíbe la <strong>responsabilidad objetiva</strong>.</p>
+          <p>Para que una conducta sea punible se requiere que sea <strong>típica, antijurídica y culpable</strong>.</p>
+          <p>Erradica el derecho penal de autor.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">️</div>
+        <h4>Lesividad (Art. 9°)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Se requiere <strong>lesión o puesta en peligro efectivo</strong> del bien jurídico.</p>
+          <p>La causalidad por sí sola no basta para la imputación jurídica del resultado.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">️</div>
+        <h4>Proporcionalidad (Art. 3°)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Las penas deben responder a:</p>
+          <ul>
+            <li><strong>Necesidad</strong> estricta de prevención</li>
+            <li><strong>Proporcionalidad</strong> justa con la gravedad</li>
+            <li><strong>Razonabilidad</strong> en el caso concreto</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🌍</div>
+        <h4>Integración (Art. 2°)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Incorpora de forma prevalente las normas de <strong>Derechos Humanos</strong> de la Constitución y los Tratados Internacionales ratificados por Colombia.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="cita">
+      <strong>"Las normas rectoras prevalecen sobre las demás disposiciones del código e informan obligatoriamente la interpretación judicial de toda la materia punitiva"</strong> — Art. 13
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si una conducta no está descrita expresamente en la ley como delito, no puede ser sancionada, aunque sea moralmente reprochable. Esto es aplicación del principio de legalidad.
+    </div>
+  </section>
+
+  <!-- TEMA 2: APLICACIÓN DE LA LEY PENAL -->
+  <section id="tema2">
+    <h2>2. Aplicación de la Ley Penal (Arts. 14 a 18)</h2>
+    <p>El Código Penal establece reglas precisas sobre el ámbito espacial de validez de la ley penal colombiana, definiendo cuándo y dónde se aplica.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">APLICACIÓN DE LA LEY PENAL</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Territorialidad</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Art. 14</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Extensión</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Art. 15</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Extraterritorialidad</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Art. 16</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Extradición</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Art. 18</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Principios de Aplicación</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🇨🇴</div>
+        <h4>Territorialidad (Art. 14)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>La ley penal colombiana se aplica a <strong>toda persona</strong> (nacional o extranjera) que infrinja la norma dentro del territorio nacional.</p>
+          <p>Se considera realizada en el lugar donde se desarrolló la acción, donde debió realizarse la omisión, o donde se produjo el resultado.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🚢</div>
+        <h4>Territorialidad por Extensión (Art. 15)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Extiende la validez a conductas cometidas a bordo de <strong>naves o aeronaves del Estado</strong> fuera del país.</p>
+          <p>También aplica a aeronaves/embarcaciones privadas nacionales en alta mar cuando no se haya iniciado juzgamiento en el exterior.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🌎</div>
+        <h4>Extraterritorialidad (Art. 16)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p><strong>Principio Real/Defensa:</strong> delitos contra el Estado, régimen constitucional, administración pública o fe pública.</p>
+          <p><strong>Principio Personalidad:</strong> nacionales que cometan delitos en el extranjero.</p>
+          <p><strong>Principio Universal:</strong> delitos previstos en tratados internacionales.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">✈️</div>
+        <h4>Extradición (Art. 18)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Regula la concesión, solicitud u ofrecimiento de personas conforme a los tratados públicos y la ley.</p>
+          <p><strong>Prohíbe expresamente</strong> la extradición por delitos políticos o por hechos cometidos antes del Acto Legislativo 01 de 1997.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si un colombiano comete un homicidio en Ecuador y regresa a Colombia sin haber sido juzgado allí, puede ser procesado en Colombia por el principio de personalidad (Art. 16).
+    </div>
+  </section>
+
+  <!-- TEMA 3: CONDUCTA PUNIBLE -->
+  <section id="tema3">
+    <h2>3. De la Conducta Punible (Arts. 19 a 33)</h2>
+    <p>Este título regula la estructura del delito, las modalidades de la conducta, las formas de participación y las causales de exclusión de responsabilidad.</p>
+
+    <h3>🗺️ Mapa Conceptual: Estructura del Delito</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">CONDUCTA PUNIBLE</div>
+        <div class="linea"></div>
+        <div class="nodo">TIPICIDAD</div>
+        <div class="linea"></div>
+        <div class="nodo">ANTIJURIDICIDAD</div>
+        <div class="linea"></div>
+        <div class="nodo">CULPABILIDAD</div>
+        <div class="linea"></div>
+        <div class="nodo sub">PUNIBILIDAD</div>
+      </div>
+    </div>
+
+    <h3>📋 Modalidades de la Conducta</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon"></div>
+        <h4>Dolo (Art. 21)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Exige <strong>conocimiento de los hechos</strong> y <strong>voluntad de realización</strong> (o previsión como probable).</p>
+          <p>Es la forma más grave de conducta punible.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">️</div>
+        <h4>Culpa (Art. 22)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Se fundamenta en la <strong>infracción al deber objetivo de cuidado</strong>.</p>
+          <p>El resultado no fue querido pero sí previsible.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon"></div>
+        <h4>Preterintención (Art. 23)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Combina una <strong>conducta dolosa inicial</strong> con un <strong>resultado más grave culposo</strong>.</p>
+          <p>Ejemplo: Golpear con intención de lesionar, pero causar la muerte.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🚫</div>
+        <h4>Omisión (Art. 25)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p><strong>Omisión propia:</strong> no hacer lo que la ley ordena.</p>
+          <p><strong>Omisión impropia (comisión por omisión):</strong> quien, ostentando la <strong>posición de garante</strong>, no evita un resultado típico estando en posibilidad de hacerlo.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>👥 Participación Criminal (Arts. 28-30)</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Figura</th>
+          <th>Definición</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Autor directo</strong></td>
+          <td>Domina la acción</td>
+        </tr>
+        <tr>
+          <td><strong>Autor mediato</strong></td>
+          <td>Domina la voluntad (usa a otro como instrumento)</td>
+        </tr>
+        <tr>
+          <td><strong>Coautor</strong></td>
+          <td>Codominio funcional de la acción</td>
+        </tr>
+        <tr>
+          <td><strong>Determinador</strong></td>
+          <td>Induce o determina a otro a cometer el delito</td>
+        </tr>
+        <tr>
+          <td><strong>Cómplice</strong></td>
+          <td>Colabora con la ejecución del delito</td>
+        </tr>
+        <tr>
+          <td><strong>Interviniente</strong></td>
+          <td>Participa después de la ejecución</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>🛡️ Causales de Ausencia de Responsabilidad</h3>
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>⚔️ Causales de Justificación (Art. 32)</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <ul>
+          <li><strong>Legítima defensa:</strong> repeler agresión actual, injusta y real, de forma proporcionada</li>
+          <li><strong>Estado de necesidad:</strong> sacrificar un bien menor para salvar uno mayor en peligro actual</li>
+          <li><strong>Estricto cumplimiento de un deber legal</strong></li>
+          <li><strong>Cumplimiento de orden legítima</strong></li>
+          <li><strong>Legítimo ejercicio de un derecho, actividad lícita o cargo público</strong></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>🧠 Inimputabilidad (Art. 33)</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Causas de inimputabilidad:</p>
+        <ul>
+          <li><strong>Trastorno mental:</strong> permanente o transitorio con base patológica</li>
+          <li><strong>Inmadurez psicológica:</strong> falta de desarrollo afectivo</li>
+          <li><strong>Diversidad sociocultural:</strong> cosmovisión distinta (ej. indígenas)</li>
+          <li><strong>Estados similares:</strong> cláusula abierta</li>
+        </ul>
+        <div class="alerta">
+          <strong>️ Importante:</strong> La embriaguez NO es causal de inimputabilidad, salvo que sea patológica o sobreviniente.
+        </div>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo de tentativa (Art. 27):</strong> Si alguien inicia la ejecución de un homicidio (dispara) pero no logra consumarlo por circunstancias ajenas a su voluntad (falla el disparo), comete tentativa de homicidio. La pena se reduce entre la mitad del mínimo y 2/3 del máximo.
+    </div>
+  </section>
+
+  <!-- TEMA 4: CONSECUENCIAS JURÍDICAS -->
+  <section id="tema4">
+    <h2>4. Consecuencias Jurídicas de la Conducta Punible (Arts. 34 a 81)</h2>
+    <p>Este título regula las penas, medidas de seguridad, criterios de dosificación y mecanismos sustitutivos de la pena privativa de la libertad.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">CONSECUENCIAS JURÍDICAS</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Penas</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Principales / Sustitutivas</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Medidas de Seguridad</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Inimputables</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Sistema de Cuartos</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Dosificación</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Clasificación de las Penas</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Tipo</th>
+          <th>Ejemplos</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Principales</strong></td>
+          <td>Prisión, prisión perpetua revisable, multa, privativas de otros derechos</td>
+        </tr>
+        <tr>
+          <td><strong>Sustitutivas</strong></td>
+          <td>Prisión domiciliaria, sistemas de servicio comunitario</td>
+        </tr>
+        <tr>
+          <td><strong>Accesorias</strong></td>
+          <td>Inhabilidad para el ejercicio de derechos y funciones públicas</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>📊 Sistema de Cuartos (Arts. 54-62)</h3>
+    <div class="alerta">
+      <strong> Fórmula:</strong>
+      <br>Rango total = Máximo - Mínimo
+      <br>Cada cuarto = Rango total ÷ 4
+      <br><br>
+      <strong>Ejemplo - Homicidio Simple (Art. 103):</strong>
+      <br>Mínimo: 208 meses | Máximo: 450 meses
+      <br>Rango: 450 - 208 = 242 meses
+      <br>Cada cuarto: 242  4 = 60.5 meses
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Situación</th>
+          <th>Cuarto Aplicable</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Sin circunstancias o solo atenuantes</td>
+          <td><strong>1er Cuarto (mínimo)</strong></td>
+        </tr>
+        <tr>
+          <td>Concurren atenuantes Y agravantes</td>
+          <td><strong>2do o 3er Cuarto (medios)</strong></td>
+        </tr>
+        <tr>
+          <td>Solo circunstancias de agravación</td>
+          <td><strong>4to Cuarto (máximo)</strong></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>🔄 Mecanismos Sustitutivos (Arts. 63-68A)</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⏸️</div>
+        <h4>Suspensión Condicional</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Suspensión de la ejecución de la pena privativa de la libertad bajo condiciones.</p>
+          <p>Requisitos objetivos y subjetivos específicos.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon"></div>
+        <h4>Libertad Condicional</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Liberación anticipada del condenado que ha cumplido parte de la pena.</p>
+          <p>Requiere buen comportamiento y cumplimiento de requisitos legales.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon"></div>
+        <h4>Prisión Domiciliaria</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Cumplimiento de la pena en el domicilio del condenado.</p>
+          <p>Aplicable en casos específicos previstos en la ley.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>🏥 Medidas de Seguridad (Arts. 69-81)</h3>
+    <div class="alerta">
+      <strong>📌 Fundadas en la peligrosidad del sujeto inimputable:</strong>
+      <ul>
+        <li>Internación en establecimiento psiquiátrico o clínica adecuada</li>
+        <li>Internación en casa de estudio o trabajo</li>
+        <li>Libertad vigilada</li>
+      </ul>
+      <br>
+      <strong>Exigen control judicial permanente</strong> y pueden suspenderse, sustituirse o cesar cuando se constate la rehabilitación.
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo de tentativa:</strong> Para tentativa de homicidio simple (208-450 meses): Mínimo = 208 ÷ 2 = 104 meses; Máximo = 450 × (2/3) = 300 meses. Rango de la tentativa: 104 a 300 meses.
+    </div>
+  </section>
+
+  <!-- TEMA 5: EXTINCIÓN -->
+  <section id="tema5">
+    <h2>5. Extinción de la Acción y de la Sanción Penal (Arts. 82 a 93)</h2>
+    <p>Este título regula los institutos jurídicos que ponen fin a la potestad persecutoria del Estado o a la ejecución de la sanción impuesta.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">EXTINCIÓN</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Acción Penal</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Arts. 82-87</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Sanción Penal</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Arts. 88-92</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Medidas de Seguridad</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Art. 93</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Causales de Extinción de la Acción Penal (Art. 82)</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚰️</div>
+        <h4>Muerte del Procesado</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Extingue la pretensión punitiva del Estado.</p>
+          <p>No extingue la acción civil de reparación.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">️</div>
+        <h4>Amnistía e Indulto</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p><strong>Amnistía propia:</strong> extingue la acción penal por delitos políticos.</p>
+          <p><strong>Indulto y amnistía impropia:</strong> extinguen la sanción penal impuesta en sentencia.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⏰</div>
+        <h4>Prescripción</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Tiempo igual al máximo de la pena (no menor de 5 ni superior a 20 o 30 años).</p>
+          <p>Aumentos de la mitad para servidores públicos o delitos en el exterior.</p>
+          <p><strong>Imprescriptibles:</strong> delitos sexuales u homicidio contra menores.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🤝</div>
+        <h4>Desistimiento y Caducidad</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Permite la extinción en delitos que requieren querella mediante el perdón/desistimiento de la víctima.</p>
+          <p><strong>Oblación:</strong> pago voluntario del máximo de la multa o indemnización en sanciones pecuniarias.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>📊 Prescripción de la Sanción Penal (Arts. 88-92)</h3>
+    <div class="alerta">
+      <strong> Reglas:</strong>
+      <ul>
+        <li>La pena privativa de la libertad prescribe en el término fijado en la sentencia o en el que falte por ejecutar</li>
+        <li><strong>Mínimo: 5 años</strong></li>
+        <li>La <strong>rehabilitación</strong> restablece los derechos privativos suspendidos como penas accesorias</li>
+        <li>La muerte del procesado, la amnistía o el indulto <strong>NO extinguen</strong> la acción civil de reparación</li>
+      </ul>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si una persona es condenada a 10 años de prisión y cumple 7 años, la sanción prescribe en 5 años (mínimo legal) contados desde que dejó de ejecutarse.
+    </div>
+  </section>
+
+  <!-- TEMA 6: RESPONSABILIDAD CIVIL -->
+  <section id="tema6">
+    <h2>6. Responsabilidad Civil Derivada del Delito y Comiso (Arts. 94 a 100)</h2>
+    <p>La comisión de una conducta punible origina obligaciones civiles de reparación y puede dar lugar al comiso de bienes.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">RESPONSABILIDAD CIVIL</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Reparación Integral</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Daños materiales y morales</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Comiso</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Pérdida de bienes</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Aspectos Fundamentales</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">💰</div>
+        <h4>Obligación de Reparar (Art. 94)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>La comisión de una conducta punible origina la obligación civil de <strong>reparar integralmente</strong> los daños materiales y morales causados.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">👥</div>
+        <h4>Titulares de la Acción (Art. 95)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Personas naturales perjudicadas, sus sucesores, personas jurídicas afectadas directamente, o el actor popular cuando se afecten bienes jurídicos colectivos.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Sujetos Obligados (Art. 96)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Los daños deben ser resarcidos de forma <strong>solidaria</strong> por todos los penalmente responsables, así como por los terceros que conforme a la ley civil estén obligados a responder.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon"></div>
+        <h4>Tasación del Daño (Art. 97)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>El juez puede fijar la indemnización por perjuicios morales en una suma equivalente de <strong>hasta 1.000 SMMLV</strong>.</p>
+          <p>Considera la gravedad de la conducta y el impacto del daño.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🔒</div>
+        <h4>Comiso (Art. 100)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Medida real que implica la <strong>pérdida de propiedad</strong> de los bienes, instrumentos o efectos con los que se cometió el delito o que provengan de su ejecución.</p>
+          <p>Los bienes pasan a poder del Estado o la Fiscalía.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon"></div>
+        <h4>Prescripción (Arts. 98-99)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Prescribe en tiempo igual al de la acción penal cuando se ejercita dentro del proceso penal.</p>
+          <p>La muerte del procesado, la amnistía o el indulto <strong>NO extinguen</strong> la acción civil de reparación.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si "A" y "B" cometen un hurto en solidaridad, ambos son responsables civilmente de reparar el daño a la víctima. Si "A" no puede pagar, "B" debe responder por el total.
+    </div>
+  </section>
+
+  <!-- QUIZ 40 PREGUNTAS -->
+  <section id="quiz">
+    <h2>🎯 Quiz Completo - 40 Preguntas</h2>
+    <p>Pon a prueba tus conocimientos con este quiz exhaustivo. Las preguntas están organizadas por tema. Recibirás retroalimentación inmediata y al final verás tu desempeño desglosado por tema.</p>
+
+    <div class="quiz-container">
+      <div class="quiz-header">
+        <h3>📊 Tu Progreso</h3>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="quiz-stats">
+          <div class="stat">Respondidas: <strong id="respondidas">0</strong>/40</div>
+          <div class="stat">Correctas: <strong id="correctas">0</strong></div>
+          <div class="stat">Incorrectas: <strong id="incorrectas">0</strong></div>
+          <div class="stat">Porcentaje: <strong id="porcentaje">0</strong>%</div>
+        </div>
+      </div>
+
+      <div class="quiz-tabs">
+        <div class="quiz-tab active" onclick="mostrarSeccion('seccion1', this)">T1 (6)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('seccion2', this)">T2 (7)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('seccion3', this)">T3 (7)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('seccion4', this)">T4 (7)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('seccion5', this)">T5 (7)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('seccion6', this)">T6 (6)</div>
+      </div>
+
+      <!-- SECCIÓN 1: NORMAS RECTORAS -->
+      <div class="quiz-section active" id="seccion1">
+        <div class="pregunta" data-correcta="2" data-tema="1">
+          <span class="pregunta-num">1</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El pilar supremo sobre el cual descansa todo el sistema punitivo es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 1)">a) La legalidad</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">b) La culpabilidad</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">c) La dignidad humana</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">d) La lesividad</div>
+          </div>
+          <div class="explicacion">La dignidad humana (Art. 1°) es el pilar supremo del sistema punitivo; impide que el ciudadano sea tratado como mero objeto o instrumento estatal.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="1">
+          <span class="pregunta-num">2</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El principio de legalidad penal se expresa en la fórmula:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 2)">a) Nullum crimen, nulla poena sine lege</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">b) In dubio pro reo</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">c) Pacta sunt servanda</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">d) Ubi jus ibi remedium</div>
+          </div>
+          <div class="explicacion">Nullum crimen, nulla poena sine lege: nadie puede ser juzgado sino conforme a leyes preexistentes al acto que se le imputa (Arts. 6° y 10°).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="1">
+          <span class="pregunta-num">3</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La analogía en materia penal:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 3)">a) Está permitida en todos los casos</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">b) Está prohibida en todos los casos</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">c) Solo se permite en materia de penas</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">d) Está prohibida salvo en materia permisiva</div>
+          </div>
+          <div class="explicacion">La analogía está prohibida en materia penal salvo en materia permisiva (cuando favorece al reo).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="1">
+          <span class="pregunta-num">4</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Para que una conducta sea punible se requiere que sea:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 4)">a) Solo típica</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">b) Típica, antijurídica y culpable</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">c) Solo antijurídica</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">d) Solo culpable</div>
+          </div>
+          <div class="explicacion">La estructura tripartita del delito (Art. 9°) exige tipicidad, antijuridicidad y culpabilidad como filtros obligatorios para la punibilidad.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="1">
+          <span class="pregunta-num">5</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Las normas rectoras del Código Penal:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 5)">a) Son meras recomendaciones</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">b) Solo aplican a los jueces</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">c) Prevalecen sobre las demás disposiciones del código</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">d) Solo aplican a la parte especial</div>
+          </div>
+          <div class="explicacion">Las normas rectoras (Art. 13) constituyen la esencia e ideología del sistema penal y prevalecen sobre las demás disposiciones del código.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="1">
+          <span class="pregunta-num">6</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El principio de lesividad (Art. 9°) exige:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 6)">a) Lesión o puesta en peligro efectivo del bien jurídico</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">b) Solo la intención del autor</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">c) Solo el resultado material</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">d) La confesión del acusado</div>
+          </div>
+          <div class="explicacion">El principio de lesividad exige lesión o puesta en peligro efectivo del bien jurídico. La causalidad por sí sola no basta para la imputación jurídica del resultado.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 2: APLICACIÓN DE LA LEY PENAL -->
+      <div class="quiz-section" id="seccion2">
+        <div class="pregunta" data-correcta="1" data-tema="2">
+          <span class="pregunta-num">7</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El principio de territorialidad (Art. 14) establece que:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 7)">a) Solo aplica a los nacionales</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">b) La ley penal colombiana se aplica a toda persona que infrinja la norma dentro del territorio nacional</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">c) Solo aplica a los extranjeros</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">d) Solo aplica en Bogotá</div>
+          </div>
+          <div class="explicacion">El principio de territorialidad absoluta (Art. 14) establece que la ley penal colombiana se aplica a toda persona (nacional o extranjera) que infrinja la norma dentro del territorio nacional.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="2">
+          <span class="pregunta-num">8</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La territorialidad por extensión (Art. 15) aplica a:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 8)">a) Solo territorio continental</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">b) Solo embajadas</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">c) Naves o aeronaves del Estado fuera del país</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">d) Solo bases militares</div>
+          </div>
+          <div class="explicacion">La territorialidad por extensión (Art. 15) extiende la validez de la ley a conductas cometidas a bordo de naves o aeronaves del Estado fuera del país.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="2">
+          <span class="pregunta-num">9</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El principio universal o de justicia mundial (Art. 16, num. 6) permite:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 9)">a) Juzgar solo a nacionales</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">b) Juzgar solo delitos contra el Estado</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">c) Juzgar solo delitos políticos</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">d) Perseguir delitos previstos en tratados internacionales, aun cometidos en el exterior por extranjeros contra extranjeros</div>
+          </div>
+          <div class="explicacion">El principio universal permite la persecución penal en Colombia respecto de delitos previstos en tratados internacionales, aun cuando hayan sido cometidos en el exterior por extranjeros contra extranjeros, si el sujeto se encuentra en Colombia.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="2">
+          <span class="pregunta-num">10</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La extradición por delitos políticos:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 10)">a) Está expresamente prohibida</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">b) Está permitida</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">c) Depende del presidente</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">d) Solo aplica a extranjeros</div>
+          </div>
+          <div class="explicacion">El Art. 18 prohíbe expresamente la extradición por delitos políticos o por hechos cometidos con anterioridad a la promulgación del Acto Legislativo 01 de 1997.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="2">
+          <span class="pregunta-num">11</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El principio de personalidad (Art. 16) permite aplicar la ley nacional a:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 11)">a) Solo extranjeros en Colombia</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">b) Nacionales que cometan delitos en el extranjero en ciertas condiciones</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">c) Solo funcionarios públicos</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">d) Solo militares</div>
+          </div>
+          <div class="explicacion">El principio de personalidad (Art. 16, nums. 2, 3 y 4) permite aplicar la ley nacional a nacionales que cometan delitos en el extranjero en ciertas condiciones.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="2">
+          <span class="pregunta-num">12</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El principio real o de defensa (Art. 16, num. 1) faculta el juzgamiento en Colombia de quien cometa en el extranjero delitos contra:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 12)">a) Solo la propiedad privada</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">b) Solo personas naturales</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">c) La existencia y seguridad del Estado, el régimen constitucional, la administración pública o la fe pública</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">d) Solo el medio ambiente</div>
+          </div>
+          <div class="explicacion">El principio real o de defensa faculta el juzgamiento en Colombia de quien cometa en el extranjero delitos contra la existencia y seguridad del Estado, el régimen constitucional, la administración pública o la fe pública (falsificación de moneda).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="2">
+          <span class="pregunta-num">13</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Si un colombiano comete un homicidio en Ecuador y regresa a Colombia sin haber sido juzgado allí:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 13)">a) No puede ser juzgado en Colombia</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">b) Solo puede ser juzgado en Ecuador</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">c) Debe ser extraditado</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">d) Puede ser procesado en Colombia por el principio de personalidad</div>
+          </div>
+          <div class="explicacion">Por el principio de personalidad (Art. 16), un nacional que cometa delitos en el extranjero puede ser procesado en Colombia cuando no haya sido juzgado en el exterior.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 3: CONDUCTA PUNIBLE -->
+      <div class="quiz-section" id="seccion3">
+        <div class="pregunta" data-correcta="1" data-tema="3">
+          <span class="pregunta-num">14</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El dolo exige:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 14)">a) Solo la intención</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">b) Conocimiento de los hechos y voluntad de realización (o previsión como probable)</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">c) Solo el resultado</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">d) Solo la culpa</div>
+          </div>
+          <div class="explicacion">El dolo (Art. 21) exige conocimiento de los hechos y voluntad de realización (o previsión como probable).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="3">
+          <span class="pregunta-num">15</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La culpa se fundamenta en:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 15)">a) La intención de dañar</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">b) El dolo directo</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">c) La infracción al deber objetivo de cuidado</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">d) La preterintención</div>
+          </div>
+          <div class="explicacion">La culpa (Art. 22) se fundamenta en la infracción al deber objetivo de cuidado. El resultado no fue querido pero sí previsible.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="3">
+          <span class="pregunta-num">16</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La preterintención combina:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 16)">a) Una conducta dolosa inicial con un resultado más grave culposo</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">b) Dos conductas dolosas</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">c) Dos conductas culposas</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">d) Una omisión y una acción</div>
+          </div>
+          <div class="explicacion">La preterintención (Art. 23) combina una conducta dolosa inicial con un resultado más grave culposo. Ejemplo: Golpear con intención de lesionar, pero causar la muerte.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="3">
+          <span class="pregunta-num">17</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La omisión impropia o comisión por omisión (Art. 25) requiere:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 17)">a) Solo la voluntad de no actuar</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">b) Solo el resultado</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">c) Solo la intención</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">d) Ostentar la posición de garante y tener el deber jurídico de impedir un resultado típico</div>
+          </div>
+          <div class="explicacion">La omisión impropia (Art. 25) asimila al autor de la acción a quien, ostentando la posición de garante y teniendo el deber jurídico de impedir un resultado típico, no lo evita estando en posibilidad de hacerlo.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="3">
+          <span class="pregunta-num">18</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El autor mediato se caracteriza por:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 18)">a) Dominar la acción directamente</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">b) Dominar la voluntad (usa a otro como instrumento)</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">c) Codominio funcional</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">d) Colaborar con la ejecución</div>
+          </div>
+          <div class="explicacion">El autor mediato domina la voluntad, es decir, usa a otro como instrumento para cometer el delito.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="3">
+          <span class="pregunta-num">19</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La tentativa (Art. 27) requiere:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 19)">a) Solo la intención</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">b) Solo los actos preparatorios</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">c) Inicio de ejecución con actos idóneos e unívocos, y falta involuntaria de consumación</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">d) La consumación del delito</div>
+          </div>
+          <div class="explicacion">La tentativa (Art. 27) requiere comienzo de ejecución, actos idóneos, actos inequívocamente dirigidos a la consumación, y falta involuntaria de consumación.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="3">
+          <span class="pregunta-num">20</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La embriaguez como causal de inimputabilidad:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 20)">a) NO es causal, salvo que sea patológica o sobreviniente</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">b) Siempre es causal de inimputabilidad</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">c) Solo es causal si es voluntaria</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">d) Solo es causal en delitos culposos</div>
+          </div>
+          <div class="explicacion">La embriaguez NO es causal de inimputabilidad (Art. 33), salvo que sea patológica o sobreviniente.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 4: CONSECUENCIAS JURÍDICAS -->
+      <div class="quiz-section" id="seccion4">
+        <div class="pregunta" data-correcta="1" data-tema="4">
+          <span class="pregunta-num">21</span><span class="pregunta-tipo">Clasificación</span>
+          <p>Las penas principales incluyen:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 21)">a) Solo la multa</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">b) Prisión, prisión perpetua revisable, multa y privativas de otros derechos</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">c) Solo la prisión domiciliaria</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">d) Solo el servicio comunitario</div>
+          </div>
+          <div class="explicacion">Las penas principales (Arts. 34-53) incluyen prisión, prisión perpetua revisable, multa y privativas de otros derechos.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="4">
+          <span class="pregunta-num">22</span><span class="pregunta-tipo">Conceptual</span>
+          <p>En el sistema de cuartos, si solo hay circunstancias de agravación, el juez se mueve en:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 22)">a) 1er Cuarto (mínimo)</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">b) 2do o 3er Cuarto (medios)</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">c) 4to Cuarto (máximo)</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">d) Fuera del marco legal</div>
+          </div>
+          <div class="explicacion">Si solo concurren circunstancias de agravación, el juez se mueve en el 4to Cuarto (máximo).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="4">
+          <span class="pregunta-num">23</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Para homicidio simple (208-450 meses), cada cuarto equivale a:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 23)">a) 60.5 meses</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">b) 50 meses</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">c) 70 meses</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">d) 40 meses</div>
+          </div>
+          <div class="explicacion">Rango: 450 - 208 = 242 meses. Cada cuarto: 242 ÷ 4 = 60.5 meses.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="4">
+          <span class="pregunta-num">24</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Las medidas de seguridad para inimputables se fundan en:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 24)">a) La culpabilidad</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">b) La antijuridicidad</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">c) La tipicidad</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">d) La peligrosidad del sujeto inimputable</div>
+          </div>
+          <div class="explicacion">Las medidas de seguridad (Arts. 69-78) se fundan en la peligrosidad del sujeto inimputable, no en la culpabilidad.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="4">
+          <span class="pregunta-num">25</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La suspensión condicional de la ejecución de la pena:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 25)">a) Elimina la condena</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">b) Suspende la ejecución de la pena privativa de la libertad bajo condiciones</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">c) Es lo mismo que el indulto</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">d) Solo aplica a menores de edad</div>
+          </div>
+          <div class="explicacion">La suspensión condicional (Arts. 63-68A) suspende la ejecución de la pena privativa de la libertad bajo condiciones específicas.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="4">
+          <span class="pregunta-num">26</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Para la tentativa de homicidio simple (208-450 meses), el máximo de la pena es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 26)">a) 450 meses</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">b) 208 meses</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">c) 300 meses (2/3 del máximo)</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">d) 104 meses</div>
+          </div>
+          <div class="explicacion">En la tentativa, el máximo es 2/3 del máximo del delito consumado: 450 × (2/3) = 300 meses.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="4">
+          <span class="pregunta-num">27</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El control judicial de las medidas de seguridad:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 27)">a) Es permanente durante la ejecución</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">b) Solo al inicio</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">c) Solo al final</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">d) No existe</div>
+          </div>
+          <div class="explicacion">Las medidas de seguridad exigen control judicial permanente durante la ejecución (Arts. 79-81).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 5: EXTINCIÓN -->
+      <div class="quiz-section" id="seccion5">
+        <div class="pregunta" data-correcta="1" data-tema="5">
+          <span class="pregunta-num">28</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La muerte del procesado:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 28)">a) Solo extingue la acción civil</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">b) Extingue la pretensión punitiva pero no la acción civil</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">c) No extingue nada</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">d) Extingue todo</div>
+          </div>
+          <div class="explicacion">La muerte del procesado extingue la pretensión punitiva (acción penal) pero NO extingue la acción civil de reparación.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="5">
+          <span class="pregunta-num">29</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La amnistía propia extingue:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 29)">a) La sanción penal</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">b) La acción civil</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">c) La acción penal por delitos políticos</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">d) Todas las acciones</div>
+          </div>
+          <div class="explicacion">La amnistía propia extingue la acción penal por delitos políticos. El indulto y la amnistía impropia extinguen la sanción penal impuesta en sentencia.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="5">
+          <span class="pregunta-num">30</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La prescripción de la acción penal se fija en un tiempo:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 30)">a) Igual al máximo de la pena (no menor de 5 ni superior a 20 o 30 años)</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">b) De 1 año siempre</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">c) De 10 años siempre</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">d) Igual al mínimo de la pena</div>
+          </div>
+          <div class="explicacion">La prescripción se fija en un tiempo igual al máximo de la pena (no menor de 5 ni superior a 20 o 30 años).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="5">
+          <span class="pregunta-num">31</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Son imprescriptibles:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 31)">a) Los delitos contra el patrimonio</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">b) Los delitos de tránsito</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">c) Las contravenciones</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">d) Los delitos sexuales y el homicidio contra menores</div>
+          </div>
+          <div class="explicacion">Son imprescriptibles los delitos sexuales y el homicidio contra menores.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="5">
+          <span class="pregunta-num">32</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La oblación consiste en:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 32)">a) El perdón de la víctima</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">b) El pago voluntario del máximo de la multa o la indemnización en sanciones pecuniarias</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">c) La prescripción de la acción</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">d) La amnistía</div>
+          </div>
+          <div class="explicacion">La oblación (Art. 87) es el pago voluntario del máximo de la multa o la indemnización en sanciones pecuniarias.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="5">
+          <span class="pregunta-num">33</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La prescripción de la sanción penal tiene un mínimo de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 33)">a) 1 año</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">b) 3 años</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">c) 5 años</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">d) 10 años</div>
+          </div>
+          <div class="explicacion">La pena privativa de la libertad prescribe en el término fijado en la sentencia o en el que falte por ejecutar, con un mínimo de 5 años.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="5">
+          <span class="pregunta-num">34</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La rehabilitación:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 34)">a) Restablece los derechos privativos suspendidos como penas accesorias</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">b) Extingue la acción penal</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">c) Es lo mismo que el indulto</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">d) Solo aplica a menores de edad</div>
+          </div>
+          <div class="explicacion">La rehabilitación (Arts. 88-92) restablece los derechos privativos suspendidos como penas accesorias.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 6: RESPONSABILIDAD CIVIL -->
+      <div class="quiz-section" id="seccion6">
+        <div class="pregunta" data-correcta="1" data-tema="6">
+          <span class="pregunta-num">35</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La comisión de una conducta punible origina:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 35)">a) Solo la pena</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">b) La obligación civil de reparar integralmente los daños materiales y morales</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">c) Solo la medida de seguridad</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">d) Nada adicional</div>
+          </div>
+          <div class="explicacion">El Art. 94 establece que la comisión de una conducta punible origina la obligación civil de reparar integralmente los daños materiales y morales causados.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="6">
+          <span class="pregunta-num">36</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los daños causados deben ser resarcidos:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 36)">a) Solo por el autor directo</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">b) Solo por el Estado</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">c) De forma solidaria por todos los penalmente responsables</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">d) Solo por el cómplice</div>
+          </div>
+          <div class="explicacion">El Art. 96 dispone que los daños deben ser resarcidos de forma solidaria por todos los penalmente responsables del hecho, así como por los terceros que conforme a la ley civil estén obligados a responder.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="6">
+          <span class="pregunta-num">37</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El juez puede fijar la indemnización por perjuicios morales hasta:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 37)">a) 1.000 SMMLV</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">b) 100 SMMLV</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">c) 10.000 SMMLV</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">d) 500 SMMLV</div>
+          </div>
+          <div class="explicacion">El Art. 97 faculta al juez para fijar la indemnización por perjuicios morales en una suma equivalente de hasta 1.000 SMMLV.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="6">
+          <span class="pregunta-num">38</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El comiso (Art. 100) es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 38)">a) Una pena principal</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">b) Una medida de seguridad</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">c) Una pena accesoria</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">d) Una medida real que implica la pérdida de propiedad de los bienes con los que se cometió el delito</div>
+          </div>
+          <div class="explicacion">El comiso (Art. 100) es una medida real que implica la pérdida de propiedad de los bienes, instrumentos o efectos con los que se cometió el delito o que provengan de su ejecución.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="6">
+          <span class="pregunta-num">39</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La acción civil de reparación:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 39)">a) Se extingue con la muerte del procesado</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">b) NO se extingue por la muerte del procesado, la amnistía o el indulto</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">c) Se extingue con el indulto</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">d) Se extingue con la amnistía</div>
+          </div>
+          <div class="explicacion">Los Arts. 98 y 99 aclaran que la muerte del procesado, la amnistía o el indulto NO extinguen la acción civil de reparación.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="6">
+          <span class="pregunta-num">40</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La prescripción de la acción civil, cuando se ejercita dentro del proceso penal:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 40)">a) Es de 1 año</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">b) Es de 5 años siempre</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">c) Es en tiempo igual al de la acción penal</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">d) No prescribe nunca</div>
+          </div>
+          <div class="explicacion">El Art. 98 establece que la acción civil prescribe en tiempo igual al de la acción penal cuando se ejercita dentro del proceso penal.</div>
+        </div>
+      </div>
+
+      <div class="resultado-final" id="resultadoFinal">
+        <h3>🏆 Resultado Final</h3>
+        <div class="puntaje-final" id="puntajeFinal">0/40</div>
+        <p id="mensajeFinal"></p>
+        <div class="desglose-temas" id="desgloseTemas"></div>
+        <button onclick="reiniciarQuiz()" class="btn-reset">🔄 Reiniciar Quiz</button>
+      </div>
+
+      <div style="text-align: center; margin-top: 1.5rem;">
+        <button onclick="verResultadoFinal()">📊 Ver Resultado Final</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>⚔️ Guía Didáctica - Código Penal Colombiano</p>
+  <p>Ley 599 de 2000 · Arts. 1 a 100</p>
+  <p style="margin-top: 1rem; opacity: 0.7;">© 2026 - Material educativo interactivo</p>
+</footer>
+
+<script>
+  function toggleAcordeon(header) {
+    header.classList.toggle('active');
+    const content = header.nextElementSibling;
+    content.classList.toggle('active');
+  }
+
+  let respuestas = {};
+  const totalPreguntas = 40;
+
+  function mostrarSeccion(id, tab) {
+    document.querySelectorAll('.quiz-section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.quiz-tab').forEach(t => t.classList.remove('active'));
+    
+    document.getElementById(id).classList.add('active');
+    tab.classList.add('active');
+  }
+
+  function seleccionar(opcion, preguntaNum) {
+    if (respuestas[preguntaNum] !== undefined) return;
+
+    const pregunta = opcion.closest('.pregunta');
+    const opciones = pregunta.querySelectorAll('.opcion');
+    const correcta = parseInt(pregunta.dataset.correcta);
+    const tema = parseInt(pregunta.dataset.tema);
+    const seleccionada = Array.from(opciones).indexOf(opcion);
+    const explicacion = pregunta.querySelector('.explicacion');
+
+    opciones.forEach(o => o.classList.add('disabled'));
+
+    if (seleccionada === correcta) {
+      opcion.classList.add('correcta');
+      respuestas[preguntaNum] = { correcta: true, tema: tema };
+    } else {
+      opcion.classList.add('incorrecta');
+      opciones[correcta].classList.add('correcta');
+      respuestas[preguntaNum] = { correcta: false, tema: tema };
+    }
+
+    explicacion.classList.add('visible');
+    pregunta.classList.add('answered');
+    actualizarEstadisticas();
+  }
+
+  function actualizarEstadisticas() {
+    const total = Object.keys(respuestas).length;
+    const correctas = Object.values(respuestas).filter(r => r.correcta).length;
+    const incorrectas = total - correctas;
+    const porcentaje = total > 0 ? Math.round((correctas / total) * 100) : 0;
+
+    document.getElementById('respondidas').textContent = total;
+    document.getElementById('correctas').textContent = correctas;
+    document.getElementById('incorrectas').textContent = incorrectas;
+    document.getElementById('porcentaje').textContent = porcentaje;
+
+    const progreso = (total / totalPreguntas) * 100;
+    document.getElementById('progressFill').style.width = progreso + '%';
+  }
+
+  function verResultadoFinal() {
+    const total = Object.keys(respuestas).length;
+    
+    if (total < totalPreguntas) {
+      alert(`⚠️ Aún te faltan ${totalPreguntas - total} preguntas por responder. ¡Completa todas las preguntas primero!`);
+      return;
+    }
+
+    const correctas = Object.values(respuestas).filter(r => r.correcta).length;
+    const porcentaje = Math.round((correctas / totalPreguntas) * 100);
+
+    const resultadoFinal = document.getElementById('resultadoFinal');
+    resultadoFinal.classList.add('visible');
+
+    document.getElementById('puntajeFinal').textContent = `${correctas}/${totalPreguntas}`;
+
+    let mensaje = '';
+    if (porcentaje === 100) {
+      mensaje = '🏆 ¡PERFECTO! Dominas completamente el Derecho Penal Colombiano.';
+    } else if (porcentaje >= 90) {
+      mensaje = '🌟 ¡Excelente! Tienes un dominio sobresaliente del tema.';
+    } else if (porcentaje >= 75) {
+      mensaje = '✅ ¡Muy bien! Buen dominio del tema, con algunos puntos por reforzar.';
+    } else if (porcentaje >= 60) {
+      mensaje = '📚 Aceptable. Te recomendamos repasar los temas donde fallaste.';
+    } else if (porcentaje >= 40) {
+      mensaje = '📖 Necesitas reforzar varios conceptos. Revisa los temas con detenimiento.';
+    } else {
+      mensaje = '🔍 Es necesario estudiar nuevamente todos los temas. ¡No te desanimes!';
+    }
+
+    document.getElementById('mensajeFinal').textContent = mensaje;
+
+    const temas = {
+      1: { nombre: 'T1: Normas Rectoras', total: 6, correctas: 0 },
+      2: { nombre: 'T2: Aplicación', total: 7, correctas: 0 },
+      3: { nombre: 'T3: Conducta', total: 7, correctas: 0 },
+      4: { nombre: 'T4: Consecuencias', total: 7, correctas: 0 },
+      5: { nombre: 'T5: Extinción', total: 7, correctas: 0 },
+      6: { nombre: 'T6: Resp. Civil', total: 6, correctas: 0 }
+    };
+
+    Object.values(respuestas).forEach(r => {
+      if (r.correcta) temas[r.tema].correctas++;
+    });
+
+    const desgloseHTML = Object.values(temas).map(t => {
+      const pct = Math.round((t.correctas / t.total) * 100);
+      return `
+        <div class="desglose-item">
+          <h4>${t.nombre}</h4>
+          <p>${t.correctas}/${t.total} (${pct}%)</p>
+          <div class="mini-bar">
+            <div class="mini-bar-fill" style="width: ${pct}%"></div>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    document.getElementById('desgloseTemas').innerHTML = desgloseHTML;
+
+    resultadoFinal.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  function reiniciarQuiz() {
+    if (!confirm('¿Estás seguro de reiniciar el quiz? Se perderán todas tus respuestas.')) return;
+
+    respuestas = {};
+
+    document.querySelectorAll('.opcion').forEach(o => {
+      o.classList.remove('correcta', 'incorrecta', 'disabled');
+    });
+
+    document.querySelectorAll('.explicacion').forEach(e => {
+      e.classList.remove('visible');
+    });
+
+    document.querySelectorAll('.pregunta').forEach(p => {
+      p.classList.remove('answered');
+    });
+
+    document.getElementById('resultadoFinal').classList.remove('visible');
+
+    actualizarEstadisticas();
+
+    mostrarSeccion('seccion1', document.querySelector('.quiz-tab'));
+    document.getElementById('quiz').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  document.querySelectorAll('nav a').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
