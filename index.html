@@ -1,71 +1,1192 @@
-<!-- Reemplaza las secciones de tarjetas disponibles en tu portal -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portal Jurídico Interactivo · Guías Didácticas del Derecho</title>
+<style>
+  :root {
+    --primary: #1e3a5f;
+    --secondary: #c9a961;
+    --accent: #2c5282;
+    --light: #f7f4ed;
+    --dark: #1a202c;
+    --success: #38a169;
+    --warning: #d69e2e;
+    --danger: #c53030;
+    --info: #3182ce;
+    --purple: #6b46c1;
+    --pink: #d53f8c;
+    --card-bg: #ffffff;
+    --shadow: 0 4px 15px rgba(0,0,0,0.08);
+    --shadow-hover: 0 12px 30px rgba(0,0,0,0.15);
+  }
 
-<!-- Título Preliminar -->
-<div class="card-disponible" data-search="titulo preliminar ley interpretación derogación artículos 1 al 72">
-  <span class="badge-disponible">✓ Disponible</span>
-  <div class="card-icon">⚖️</div>
-  <h3 class="card-title">Título Preliminar</h3>
-  <p class="card-description">Fundamentos del ordenamiento jurídico: la ley, su interpretación, definiciones legales y derogación.</p>
-  <div class="card-meta">
-    <div><strong>6</strong>Temas</div>
-    <div><strong>Arts. 1-72</strong>Artículos</div>
-    <div><strong>40</strong>Preguntas</div>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    background: var(--light);
+    color: var(--dark);
+    line-height: 1.7;
+  }
+
+  header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    color: white;
+    padding: 3rem 1rem 2rem;
+    text-align: center;
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::before {
+    content: '️';
+    position: absolute;
+    font-size: 20rem;
+    opacity: 0.04;
+    top: -50px;
+    right: -50px;
+    transform: rotate(-15deg);
+  }
+
+  header h1 {
+    font-size: 2.8rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: 2px;
+    position: relative;
+    z-index: 1;
+  }
+
+  header .subtitle {
+    font-size: 1.2rem;
+    opacity: 0.95;
+    font-style: italic;
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  header .description {
+    max-width: 800px;
+    margin: 0 auto;
+    font-size: 1rem;
+    opacity: 0.9;
+    position: relative;
+    z-index: 1;
+  }
+
+  .search-container {
+    max-width: 700px;
+    margin: -25px auto 2rem;
+    padding: 0 1rem;
+    position: relative;
+    z-index: 10;
+  }
+
+  .search-box {
+    display: flex;
+    background: white;
+    border-radius: 50px;
+    box-shadow: var(--shadow-hover);
+    overflow: hidden;
+    border: 3px solid var(--secondary);
+  }
+
+  .search-box input {
+    flex: 1;
+    border: none;
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+    font-family: inherit;
+    outline: none;
+    background: transparent;
+  }
+
+  .search-box button {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 0 2rem;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: background 0.3s;
+  }
+
+  .search-box button:hover {
+    background: var(--secondary);
+    color: var(--dark);
+  }
+
+  .stats-container {
+    max-width: 1200px;
+    margin: 0 auto 2rem;
+    padding: 0 1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+
+  .stat-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    text-align: center;
+    border-top: 4px solid var(--secondary);
+    transition: transform 0.3s;
+  }
+
+  .stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+  }
+
+  .stat-card .stat-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .stat-card .stat-number {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--primary);
+  }
+
+  .stat-card .stat-label {
+    color: var(--accent);
+    font-size: 0.95rem;
+    margin-top: 0.3rem;
+  }
+
+  .quick-nav {
+    max-width: 1200px;
+    margin: 0 auto 2rem;
+    padding: 1rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+  }
+
+  .quick-nav a {
+    background: var(--light);
+    color: var(--primary);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: bold;
+    transition: all 0.3s;
+    border: 2px solid transparent;
+  }
+
+  .quick-nav a:hover {
+    background: var(--primary);
+    color: white;
+    border-color: var(--secondary);
+    transform: translateY(-2px);
+  }
+
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem 2rem;
+  }
+
+  .rama-section {
+    background: var(--card-bg);
+    margin-bottom: 2.5rem;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    scroll-margin-top: 20px;
+  }
+
+  .rama-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid;
+  }
+
+  .rama-header .rama-icon {
+    font-size: 3rem;
+  }
+
+  .rama-header h2 {
+    font-size: 2rem;
+    margin: 0;
+  }
+
+  .rama-header .rama-subtitle {
+    font-size: 0.95rem;
+    opacity: 0.7;
+    font-style: italic;
+  }
+
+  .rama-header .badge-count {
+    margin-left: auto;
+    background: var(--light);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: bold;
+  }
+
+  .rama-civil .rama-header { border-color: #c9a961; }
+  .rama-civil .rama-header h2 { color: #6b3410; }
+  .rama-civil .badge-count { color: #6b3410; }
+
+  .rama-penal .rama-header { border-color: #c53030; }
+  .rama-penal .rama-header h2 { color: #c53030; }
+  .rama-penal .badge-count { color: #c53030; }
+
+  .rama-procesal .rama-header { border-color: #3182ce; }
+  .rama-procesal .rama-header h2 { color: #3182ce; }
+  .rama-procesal .badge-count { color: #3182ce; }
+
+  .rama-laboral .rama-header { border-color: #38a169; }
+  .rama-laboral .rama-header h2 { color: #38a169; }
+  .rama-laboral .badge-count { color: #38a169; }
+
+  .rama-admin .rama-header { border-color: #6b46c1; }
+  .rama-admin .rama-header h2 { color: #6b46c1; }
+  .rama-admin .badge-count { color: #6b46c1; }
+
+  .rama-sociedades .rama-header { border-color: #d69e2e; }
+  .rama-sociedades .rama-header h2 { color: #b7791f; }
+  .rama-sociedades .badge-count { color: #b7791f; }
+
+  .rama-constitucional .rama-header { border-color: #d53f8c; }
+  .rama-constitucional .rama-header h2 { color: #d53f8c; }
+  .rama-constitucional .badge-count { color: #d53f8c; }
+
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .card-disponible {
+    background: linear-gradient(135deg, #fff 0%, #f9f6ef 100%);
+    border: 2px solid var(--secondary);
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card-disponible::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--success), var(--secondary));
+  }
+
+  .card-disponible:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--primary);
+  }
+
+  .card-disponible .card-icon {
+    font-size: 3rem;
+    text-align: center;
+    margin-bottom: 0.8rem;
+  }
+
+  .card-disponible .card-title {
+    color: var(--primary);
+    font-size: 1.2rem;
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .card-disponible .card-description {
+    font-size: 0.9rem;
+    color: var(--dark);
+    text-align: center;
+    margin-bottom: 1rem;
+    flex: 1;
+  }
+
+  .card-disponible .card-meta {
+    display: flex;
+    justify-content: space-around;
+    padding: 0.8rem 0;
+    border-top: 1px dashed var(--secondary);
+    border-bottom: 1px dashed var(--secondary);
+    margin-bottom: 1rem;
+    font-size: 0.85rem;
+  }
+
+  .card-disponible .card-meta div {
+    text-align: center;
+  }
+
+  .card-disponible .card-meta strong {
+    display: block;
+    color: var(--primary);
+    font-size: 1.1rem;
+  }
+
+  .card-disponible .card-btn {
+    display: block;
+    background: var(--primary);
+    color: white;
+    text-align: center;
+    padding: 0.8rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s;
+  }
+
+  .card-disponible .card-btn:hover {
+    background: var(--secondary);
+    color: var(--dark);
+    transform: scale(1.02);
+  }
+
+  .card-disponible .badge-disponible {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: var(--success);
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .card-proximamente {
+    background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+    border: 2px dashed #bbb;
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+    opacity: 0.85;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card-proximamente:hover {
+    opacity: 1;
+    transform: translateY(-3px);
+    box-shadow: var(--shadow);
+  }
+
+  .card-proximamente .card-icon {
+    font-size: 3rem;
+    text-align: center;
+    margin-bottom: 0.8rem;
+    filter: grayscale(0.3);
+  }
+
+  .card-proximamente .card-title {
+    color: #555;
+    font-size: 1.2rem;
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .card-proximamente .card-description {
+    font-size: 0.9rem;
+    color: #666;
+    text-align: center;
+    margin-bottom: 1rem;
+    flex: 1;
+  }
+
+  .card-proximamente .card-topics {
+    background: rgba(255,255,255,0.7);
+    padding: 0.8rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+  }
+
+  .card-proximamente .card-topics strong {
+    display: block;
+    color: var(--primary);
+    margin-bottom: 0.3rem;
+    font-size: 0.9rem;
+  }
+
+  .card-proximamente .card-topics ul {
+    list-style: none;
+    padding-left: 0;
+  }
+
+  .card-proximamente .card-topics li {
+    padding: 0.2rem 0;
+    color: #555;
+  }
+
+  .card-proximamente .card-topics li::before {
+    content: '▸ ';
+    color: var(--secondary);
+    font-weight: bold;
+  }
+
+  .card-proximamente .badge-proximamente {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: var(--warning);
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .card-proximamente .coming-btn {
+    display: block;
+    background: #bbb;
+    color: white;
+    text-align: center;
+    padding: 0.8rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: not-allowed;
+  }
+
+  .subseccion {
+    background: var(--light);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-left: 4px solid var(--accent);
+  }
+
+  .subseccion h3 {
+    color: var(--primary);
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .alerta-info {
+    background: linear-gradient(135deg, #e6f7ee 0%, #f0f7ff 100%);
+    border-left: 4px solid var(--success);
+    padding: 1.2rem;
+    margin: 1.5rem 0;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .alerta-info strong {
+    color: var(--success);
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 1.05rem;
+  }
+
+  .alerta-warning {
+    background: #fff8e1;
+    border-left: 4px solid var(--warning);
+    padding: 1.2rem;
+    margin: 1.5rem 0;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .alerta-warning strong {
+    color: var(--warning);
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 1.05rem;
+  }
+
+  footer {
+    background: var(--dark);
+    color: var(--light);
+    text-align: center;
+    padding: 2.5rem 1rem;
+    margin-top: 2rem;
+  }
+
+  footer h3 {
+    color: var(--secondary);
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+  }
+
+  footer p {
+    margin-bottom: 0.5rem;
+    opacity: 0.9;
+  }
+
+  footer .footer-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+
+  footer .footer-links a {
+    color: var(--secondary);
+    text-decoration: none;
+    padding: 0.3rem 0.8rem;
+    border: 1px solid var(--secondary);
+    border-radius: 20px;
+    font-size: 0.9rem;
+    transition: all 0.3s;
+  }
+
+  footer .footer-links a:hover {
+    background: var(--secondary);
+    color: var(--dark);
+  }
+
+  @media (max-width: 768px) {
+    header h1 { font-size: 2rem; }
+    header .subtitle { font-size: 1rem; }
+    .rama-header h2 { font-size: 1.5rem; }
+    .rama-header .rama-icon { font-size: 2.2rem; }
+    .rama-header { flex-wrap: wrap; }
+    .rama-header .badge-count { margin-left: 0; }
+    .stat-card .stat-number { font-size: 1.5rem; }
+  }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .rama-section {
+    animation: fadeInUp 0.6s ease;
+  }
+
+  .card-disponible.hidden,
+  .card-proximamente.hidden {
+    display: none;
+  }
+
+  .no-results {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 3rem;
+    color: var(--accent);
+    font-style: italic;
+    font-size: 1.1rem;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>⚖️ Portal Jurídico Interactivo</h1>
+  <p class="subtitle">Guías Didácticas del Derecho Colombiano</p>
+  <p class="description">
+    Plataforma educativa integral que reúne todas las ramas del derecho en un solo lugar. 
+    Explora mapas conceptuales, tarjetas interactivas, ejemplos prácticos y quizzes de 40 preguntas por tema.
+  </p>
+</header>
+
+<div class="search-container">
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder=" Buscar tema, concepto o rama del derecho..." onkeyup="filtrarContenido()">
+    <button onclick="filtrarContenido()">Buscar</button>
   </div>
-  <a href="titulo-preliminar.html" class="card-btn">📖 Acceder a la Guía</a>
 </div>
 
-<!-- Libro I: De las Personas -->
-<div class="card-disponible" data-search="personas matrimonio filiación patria potestad adopción alimentos guardas personas jurídicas domicilio libro i">
-  <span class="badge-disponible">✓ Disponible</span>
-  <div class="card-icon">👥</div>
-  <h3 class="card-title">Libro I: De las Personas</h3>
-  <p class="card-description">Personalidad jurídica, matrimonio, filiación, patria potestad, adopción, alimentos y protección de incapaces.</p>
-  <div class="card-meta">
-    <div><strong>6</strong>Temas</div>
-    <div><strong>Arts. 73-652</strong>Artículos</div>
-    <div><strong>40</strong>Preguntas</div>
+<div class="stats-container">
+  <div class="stat-card">
+    <div class="stat-icon">📚</div>
+    <div class="stat-number">7</div>
+    <div class="stat-label">Ramas del Derecho</div>
   </div>
-  <a href="libro1-personas.html" class="card-btn">📖 Acceder a la Guía</a>
+  <div class="stat-card">
+    <div class="stat-icon">✅</div>
+    <div class="stat-number">6</div>
+    <div class="stat-label">Guías Disponibles</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-icon">🎯</div>
+    <div class="stat-number">240+</div>
+    <div class="stat-label">Preguntas de Quiz</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-icon">🗺️</div>
+    <div class="stat-number">36+</div>
+    <div class="stat-label">Mapas Conceptuales</div>
+  </div>
 </div>
 
-<!-- Libro II: De los Bienes -->
-<div class="card-disponible" data-search="bienes dominio propiedad muebles inmuebles posesión modos de adquirir servidumbres usufructo libro ii">
-  <span class="badge-disponible">✓ Disponible</span>
-  <div class="card-icon">🏠</div>
-  <h3 class="card-title">Libro II: De los Bienes</h3>
-  <p class="card-description">Clases de bienes, dominio, modos de adquirir, limitaciones del dominio y protección de la propiedad y posesión.</p>
-  <div class="card-meta">
-    <div><strong>5</strong>Temas</div>
-    <div><strong>Arts. 653-1007</strong>Artículos</div>
-    <div><strong>40</strong>Preguntas</div>
-  </div>
-  <a href="libro2-bienes.html" class="card-btn">📖 Acceder a la Guía</a>
+<div class="quick-nav">
+  <a href="#civil">📜 Derecho Civil</a>
+  <a href="#penal">⚔️ Derecho Penal</a>
+  <a href="#procesal">⚖️ Derecho Procesal</a>
+  <a href="#laboral">👷 Derecho Laboral</a>
+  <a href="#admin">🏛️ Derecho Administrativo</a>
+  <a href="#sociedades">💼 Derecho de Sociedades</a>
+  <a href="#constitucional"> Derecho Constitucional</a>
 </div>
 
-<!-- Libro III: Sucesiones -->
-<div class="card-disponible" data-search="sucesión testamento herencia legado asignaciones forzosas legítimas partición donaciones libro iii">
-  <span class="badge-disponible">✓ Disponible</span>
-  <div class="card-icon">📜</div>
-  <h3 class="card-title">Libro III: Sucesiones</h3>
-  <p class="card-description">Sucesión por causa de muerte, testamentos, asignaciones hereditarias, legítimas, partición y donaciones entre vivos.</p>
-  <div class="card-meta">
-    <div><strong>10</strong>Temas</div>
-    <div><strong>Arts. 1008-1493</strong>Artículos</div>
-    <div><strong>40</strong>Preguntas</div>
-  </div>
-  <a href="libro3-sucesiones.html" class="card-btn">📖 Acceder a la Guía</a>
-</div>
+<main>
 
-<!-- Libro IV: Obligaciones y Contratos -->
-<div class="card-disponible" data-search="obligaciones contratos teoría general modalidades efectos extinción compraventa arrendamiento sociedad prelacion prescripción libro iv">
-  <span class="badge-disponible">✓ Disponible</span>
-  <div class="card-icon">📝</div>
-  <h3 class="card-title">Libro IV: Obligaciones y Contratos</h3>
-  <p class="card-description">Teoría general del contrato, modalidades de obligaciones, efectos, extinción, contratos nominados y prescripción.</p>
-  <div class="card-meta">
-    <div><strong>7</strong>Temas</div>
-    <div><strong>Arts. 1494-2545</strong>Artículos</div>
-    <div><strong>40</strong>Preguntas</div>
+  <div class="alerta-info">
+    <strong>📌 Bienvenido al Portal Jurídico</strong>
+    Este portal conecta todas las guías didácticas del derecho colombiano. Las guías marcadas como <span style="background: var(--success); color: white; padding: 0.2rem 0.6rem; border-radius: 10px; font-size: 0.85rem;">DISPONIBLE</span> ya están completas. Las marcadas como <span style="background: var(--warning); color: white; padding: 0.2rem 0.6rem; border-radius: 10px; font-size: 0.85rem;">PRÓXIMAMENTE</span> están en desarrollo.
   </div>
-  <a href="libro4-obligaciones.html" class="card-btn">📖 Acceder a la Guía</a>
-</div>
+
+  <!-- DERECHO CIVIL -->
+  <section class="rama-section rama-civil" id="civil">
+    <div class="rama-header">
+      <div class="rama-icon">📜</div>
+      <div>
+        <h2>Derecho Civil</h2>
+        <p class="rama-subtitle">Regula las relaciones jurídicas entre particulares</p>
+      </div>
+      <div class="badge-count">5 guías disponibles</div>
+    </div>
+
+    <div class="cards-grid">
+      <div class="card-disponible" data-search="titulo preliminar ley interpretación derogación artículos 1 al 72">
+        <span class="badge-disponible">✓ Disponible</span>
+        <div class="card-icon">️</div>
+        <h3 class="card-title">Título Preliminar</h3>
+        <p class="card-description">Fundamentos del ordenamiento jurídico: la ley, su interpretación, definiciones legales y derogación.</p>
+        <div class="card-meta">
+          <div><strong>6</strong>Temas</div>
+          <div><strong>Arts. 1-72</strong>Artículos</div>
+          <div><strong>40</strong>Preguntas</div>
+        </div>
+        <a href="titulo-preliminar.html" class="card-btn"> Acceder a la Guía</a>
+      </div>
+
+      <div class="card-disponible" data-search="personas matrimonio filiación patria potestad adopción alimentos guardas personas jurídicas domicilio libro i">
+        <span class="badge-disponible">✓ Disponible</span>
+        <div class="card-icon"></div>
+        <h3 class="card-title">Libro I: De las Personas</h3>
+        <p class="card-description">Personalidad jurídica, matrimonio, filiación, patria potestad, adopción, alimentos y protección de incapaces.</p>
+        <div class="card-meta">
+          <div><strong>6</strong>Temas</div>
+          <div><strong>Arts. 73-652</strong>Artículos</div>
+          <div><strong>40</strong>Preguntas</div>
+        </div>
+        <a href="libro1-personas.html" class="card-btn">📖 Acceder a la Guía</a>
+      </div>
+
+      <div class="card-disponible" data-search="bienes dominio propiedad muebles inmuebles posesión modos de adquirir servidumbres usufructo libro ii">
+        <span class="badge-disponible">✓ Disponible</span>
+        <div class="card-icon">🏠</div>
+        <h3 class="card-title">Libro II: De los Bienes</h3>
+        <p class="card-description">Clases de bienes, dominio, modos de adquirir, limitaciones del dominio y protección de la propiedad y posesión.</p>
+        <div class="card-meta">
+          <div><strong>5</strong>Temas</div>
+          <div><strong>Arts. 653-1007</strong>Artículos</div>
+          <div><strong>40</strong>Preguntas</div>
+        </div>
+        <a href="libro2-bienes.html" class="card-btn"> Acceder a la Guía</a>
+      </div>
+
+      <div class="card-disponible" data-search="sucesión testamento herencia legado asignaciones forzosas legítimas partición donaciones libro iii">
+        <span class="badge-disponible">✓ Disponible</span>
+        <div class="card-icon">📜</div>
+        <h3 class="card-title">Libro III: Sucesiones</h3>
+        <p class="card-description">Sucesión por causa de muerte, testamentos, asignaciones hereditarias, legítimas, partición y donaciones entre vivos.</p>
+        <div class="card-meta">
+          <div><strong>10</strong>Temas</div>
+          <div><strong>Arts. 1008-1493</strong>Artículos</div>
+          <div><strong>40</strong>Preguntas</div>
+        </div>
+        <a href="libro3-sucesiones.html" class="card-btn">📖 Acceder a la Guía</a>
+      </div>
+
+      <div class="card-disponible" data-search="obligaciones contratos teoría general modalidades efectos extinción compraventa arrendamiento sociedad prelacion prescripción libro iv">
+        <span class="badge-disponible">✓ Disponible</span>
+        <div class="card-icon">📝</div>
+        <h3 class="card-title">Libro IV: Obligaciones y Contratos</h3>
+        <p class="card-description">Teoría general del contrato, modalidades de obligaciones, efectos, extinción, contratos nominados y prescripción.</p>
+        <div class="card-meta">
+          <div><strong>7</strong>Temas</div>
+          <div><strong>Arts. 1494-2545</strong>Artículos</div>
+          <div><strong>40</strong>Preguntas</div>
+        </div>
+        <a href="libro4-obligaciones.html" class="card-btn">📖 Acceder a la Guía</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- DERECHO PENAL -->
+  <section class="rama-section rama-penal" id="penal">
+    <div class="rama-header">
+      <div class="rama-icon">⚔️</div>
+      <div>
+        <h2>Derecho Penal</h2>
+        <p class="rama-subtitle">Normas sustantivas sobre delitos, penas y medidas de seguridad</p>
+      </div>
+      <div class="badge-count">1 guía disponible</div>
+    </div>
+
+    <div class="cards-grid">
+      <div class="card-disponible" data-search="derecho penal código penal ley 599 normas rectoras conducta punible penas medidas de seguridad">
+        <span class="badge-disponible">✓ Disponible</span>
+        <div class="card-icon">️</div>
+        <h3 class="card-title">Código Penal (Ley 599/2000)</h3>
+        <p class="card-description">Normas rectoras, aplicación de la ley penal, conducta punible, consecuencias jurídicas, extinción y responsabilidad civil.</p>
+        <div class="card-meta">
+          <div><strong>6</strong>Temas</div>
+          <div><strong>Arts. 1-100</strong>Artículos</div>
+          <div><strong>40</strong>Preguntas</div>
+        </div>
+        <a href="penal-index.html" class="card-btn"> Acceder a la Guía</a>
+      </div>
+
+      <div class="card-proximamente" data-search="parte general derecho penal teoría del delito punibilidad imputabilidad">
+        <span class="badge-proximamente">🔜 Próximamente</span>
+        <div class="card-icon">📘</div>
+        <h3 class="card-title">Parte General - Teoría del Delito</h3>
+        <p class="card-description">Principios fundamentales, teoría del delito, imputabilidad, punibilidad y concurso de personas.</p>
+        <div class="card-topics">
+          <strong>📋 Temas que incluirá:</strong>
+          <ul>
+            <li>Principios del Derecho Penal</li>
+            <li>Teoría del Delito</li>
+            <li>Imputabilidad e inimputabilidad</li>
+            <li>Concurso de personas</li>
+            <li>Penas y medidas de seguridad</li>
+          </ul>
+        </div>
+        <div class="coming-btn"> En desarrollo</div>
+      </div>
+
+      <div class="card-proximamente" data-search="parte especial delitos contra personas patrimonio administración pública">
+        <span class="badge-proximamente"> Próximamente</span>
+        <div class="card-icon">📕</div>
+        <h3 class="card-title">Parte Especial - Tipos Penales</h3>
+        <p class="card-description">Tipos penales específicos: delitos contra la vida, patrimonio, administración pública, libertad, etc.</p>
+        <div class="card-topics">
+          <strong>📋 Temas que incluirá:</strong>
+          <ul>
+            <li>Delitos contra las personas</li>
+            <li>Delitos contra el patrimonio</li>
+            <li>Delitos contra la administración pública</li>
+            <li>Delitos contra la libertad</li>
+            <li>Delitos sexuales</li>
+          </ul>
+        </div>
+        <div class="coming-btn">🔒 En desarrollo</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DERECHO PROCESAL -->
+  <section class="rama-section rama-procesal" id="procesal">
+    <div class="rama-header">
+      <div class="rama-icon">⚖️</div>
+      <div>
+        <h2>Derecho Procesal</h2>
+        <p class="rama-subtitle">Procedimientos judiciales en las diferentes jurisdicciones</p>
+      </div>
+      <div class="badge-count">Próximamente</div>
+    </div>
+
+    <div class="subseccion">
+      <h3>🔍 Procesal Penal</h3>
+      <div class="cards-grid">
+        <div class="card-proximamente" data-search="proceso penal ley 906 audiencia imputación juicio oral pruebas">
+          <span class="badge-proximamente">🔜 Próximamente</span>
+          <div class="card-icon">🔎</div>
+          <h3 class="card-title">Ley 906 de 2004</h3>
+          <p class="card-description">Sistema penal acusatorio: indagación, investigación, juicio oral y recursos.</p>
+          <div class="card-topics">
+            <strong>📋 Temas que incluirá:</strong>
+            <ul>
+              <li>Principios del sistema acusatorio</li>
+              <li>Etapa de indagación e investigación</li>
+              <li>Imputación y acusación</li>
+              <li>Juicio oral</li>
+              <li>Pruebas y recursos</li>
+            </ul>
+          </div>
+          <div class="coming-btn">🔒 En desarrollo</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="subseccion">
+      <h3>📋 Procesal Civil</h3>
+      <div class="cards-grid">
+        <div class="card-proximamente" data-search="proceso civil cgp código general del proceso declaraciones pertenencia ejecutivo">
+          <span class="badge-proximamente">🔜 Próximamente</span>
+          <div class="card-icon">📑</div>
+          <h3 class="card-title">Código General del Proceso</h3>
+          <p class="card-description">Ley 1564 de 2012: procesos declarativos, ejecutivos, cautelares y especiales.</p>
+          <div class="card-topics">
+            <strong>📋 Temas que incluirá:</strong>
+            <ul>
+              <li>Principios procesales</li>
+              <li>Procesos declarativos</li>
+              <li>Proceso ejecutivo</li>
+              <li>Medidas cautelares</li>
+              <li>Recursos y nulidades</li>
+            </ul>
+          </div>
+          <div class="coming-btn">🔒 En desarrollo</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="subseccion">
+      <h3>🏛️ Procesal Constitucional</h3>
+      <div class="cards-grid">
+        <div class="card-proximamente" data-search="tutela acción popular acción de grupo cumplimiento consulta popular">
+          <span class="badge-proximamente">🔜 Próximamente</span>
+          <div class="card-icon">🛡️</div>
+          <h3 class="card-title">Mecanismos de Protección</h3>
+          <p class="card-description">Acción de tutela, acciones populares, de grupo, de cumplimiento y mecanismos de participación.</p>
+          <div class="card-topics">
+            <strong>📋 Temas que incluirá:</strong>
+            <ul>
+              <li>Acción de tutela</li>
+              <li>Acciones populares y de grupo</li>
+              <li>Acción de cumplimiento</li>
+              <li>Consulta y referendo popular</li>
+              <li>Excepción de inconstitucionalidad</li>
+            </ul>
+          </div>
+          <div class="coming-btn">🔒 En desarrollo</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DERECHO LABORAL -->
+  <section class="rama-section rama-laboral" id="laboral">
+    <div class="rama-header">
+      <div class="rama-icon">👷</div>
+      <div>
+        <h2>Derecho Laboral</h2>
+        <p class="rama-subtitle">Relaciones entre empleadores, trabajadores y el Estado</p>
+      </div>
+      <div class="badge-count">Próximamente</div>
+    </div>
+
+    <div class="cards-grid">
+      <div class="card-proximamente" data-search="derecho laboral individual contrato trabajo prestaciones sociales">
+        <span class="badge-proximamente">🔜 Próximamente</span>
+        <div class="card-icon">💼</div>
+        <h3 class="card-title">Derecho Individual</h3>
+        <p class="card-description">Contrato de trabajo, jornadas, descansos, prestaciones sociales y terminación del contrato.</p>
+        <div class="card-topics">
+          <strong>📋 Temas que incluirá:</strong>
+          <ul>
+            <li>Contrato de trabajo</li>
+            <li>Modalidades de contratación</li>
+            <li>Jornada laboral y descansos</li>
+            <li>Salario y prestaciones sociales</li>
+            <li>Terminación del contrato</li>
+          </ul>
+        </div>
+        <div class="coming-btn">🔒 En desarrollo</div>
+      </div>
+
+      <div class="card-proximamente" data-search="derecho colectivo sindical huelga convención pliego">
+        <span class="badge-proximamente"> Próximamente</span>
+        <div class="card-icon">🤝</div>
+        <h3 class="card-title">Derecho Colectivo</h3>
+        <p class="card-description">Asociación sindical, contratación colectiva, huelga y conflictos colectivos.</p>
+        <div class="card-topics">
+          <strong>📋 Temas que incluirá:</strong>
+          <ul>
+            <li>Libertad sindical</li>
+            <li>Convenciones y pactos colectivos</li>
+            <li>Huelga</li>
+            <li>Conflictos colectivos</li>
+            <li>Tribunales de arbitramento</li>
+          </ul>
+        </div>
+        <div class="coming-btn">🔒 En desarrollo</div>
+      </div>
+
+      <div class="card-proximamente" data-search="seguridad social salud pensión riesgos laborales arl">
+        <span class="badge-proximamente">🔜 Próximamente</span>
+        <div class="card-icon">🏥</div>
+        <h3 class="card-title">Seguridad Social</h3>
+        <p class="card-description">Sistema de salud, pensiones, riesgos laborales y prestaciones económicas.</p>
+        <div class="card-topics">
+          <strong>📋 Temas que incluirá:</strong>
+          <ul>
+            <li>Sistema General de Salud</li>
+            <li>Sistema de Pensiones</li>
+            <li>Riesgos Laborales (ARL)</li>
+            <li>Prestaciones económicas</li>
+            <li>Protección al cesante</li>
+          </ul>
+        </div>
+        <div class="coming-btn">🔒 En desarrollo</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DERECHO ADMINISTRATIVO -->
+  <section class="rama-section rama-admin" id="admin">
+    <div class="rama-header">
+      <div class="rama-icon">🏛️</div>
+      <div>
+        <h2>Derecho Administrativo</h2>
+        <p class="rama-subtitle">Organización y actividad de la Administración Pública</p>
+      </div>
+      <div class="badge-count">Próximamente</div>
+    </div>
+
+    <div class="cards-grid">
+      <div class="card-proximamente" data-search="cpaca código contencioso actos administrativos contratación estatal">
+        <span class="badge-proximamente">🔜 Próximamente</span>
+        <div class="card-icon">📜</div>
+        <h3 class="card-title">Régimen General</h3>
+        <p class="card-description">Actos administrativos, procedimiento administrativo, contratación estatal y responsabilidad.</p>
+        <div class="card-topics">
+          <strong>📋 Temas que incluirá:</strong>
+          <ul>
+            <li>Actos administrativos</li>
+            <li>Procedimiento administrativo (CPACA)</li>
+            <li>Contratación estatal (Ley 80/1150)</li>
+            <li>Responsabilidad extracontractual del Estado</li>
+            <li>Bienes fiscales</li>
+          </ul>
+        </div>
+        <div class="coming-btn">🔒 En desarrollo</div>
+      </div>
+
+      <div class="card-proximamente" data-search="función pública servidores públicos régimen disciplinario">
+        <span class="badge-proximamente"> Próximamente</span>
+        <div class="card-icon">👔</div>
+        <h3 class="card-title">Función Pública</h3>
+        <p class="card-description">Régimen de los servidores públicos, carrera administrativa y régimen disciplinario.</p>
+        <div class="card-topics">
+          <strong>📋 Temas que incluirá:</strong>
+          <ul>
+            <li>Empleo público</li>
+            <li>Carrera administrativa</li>
+            <li>Régimen disciplinario</li>
+            <li>Derechos y deberes</li>
+            <li>Responsabilidad fiscal</li>
+          </ul>
+        </div>
+        <div class="coming-btn">🔒 En desarrollo</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DERECHO DE SOCIEDADES -->
+  <section class="rama-section rama-sociedades" id="sociedades">
+    <div class="rama-header">
+      <div class="rama-icon">💼</div>
+      <div>
+        <h2>Derecho de Sociedades y Mercantil</h2>
+        <p class="rama-subtitle">Actividad empresarial, títulos valores y comercio</p>
+      </div>
+      <div class="badge-count">Próximamente</div>
+    </div>
+
+    <div class="cards-grid">
+      <div class="card-proximamente" data-search="sociedades comerciales sas limitada anónima comerciante">
+        <span class="badge-proximamente">🔜 Próximamente</span>
+        <div class="card-icon">🏢</div>
+        <h3 class="card-title">Sociedades Comerciales</h3>
+        <p class="card-description">Tipos societarios, constitución, administración, transformación y disolución.</p>
+        <div class="card-topics">
+          <strong>📋 Temas que incluirá:</strong>
+          <ul>
+            <li>El comerciante y la empresa</li>
+            <li>Sociedades (S.A., Ltda., S.A.S.)</li>
+            <li>Actos de comercio</li>
+            <li>Registro mercantil</li>
+            <li>Liquidación societaria</li>
+          </ul>
+        </div>
+        <div class="coming-btn">🔒 En desarrollo</div>
+      </div>
+
+      <div class="card-proximamente" data-search="títulos valores cheque letra cambio pagaré acciones">
+        <span class="badge-proximamente">🔜 Próximamente</span>
+        <div class="card-icon">💳</div>
+        <h3 class="card-title">Títulos Valores</h3>
+        <p class="card-description">Letra de cambio, cheque, pagaré, acciones, bonos y otros títulos circulatorios.</p>
+        <div class="card-topics">
+          <strong>📋 Temas que incluirá:</strong>
+          <ul>
+            <li>Teoría general de títulos valores</li>
+            <li>Letra de cambio y pagaré</li>
+            <li>Cheque</li>
+            <li>Acciones y bonos</li>
+            <li>Procesos ejecutivos</li>
+          </ul>
+        </div>
+        <div class="coming-btn">🔒 En desarrollo</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DERECHO CONSTITUCIONAL -->
+  <section class="rama-section rama-constitucional" id="constitucional">
+    <div class="rama-header">
+      <div class="rama-icon">📖</div>
+      <div>
+        <h2>Derecho Constitucional</h2>
+        <p class="rama-subtitle">Estructura del Estado, derechos fundamentales y organización del poder</p>
+      </div>
+      <div class="badge-count">Próximamente</div>
+    </div>
+
+    <div class="cards-grid">
+      <div class="card-proximamente" data-search="constitución política derechos fundamentales estado social organización del poder">
+        <span class="badge-proximamente">🔜 Próximamente</span>
+        <div class="card-icon">🇨🇴</div>
+        <h3 class="card-title">Constitución de 1991</h3>
+        <p class="card-description">Principios fundamentales, derechos, organización del Estado y mecanismos de participación.</p>
+        <div class="card-topics">
+          <strong>📋 Temas que incluirá:</strong>
+          <ul>
+            <li>Principios fundamentales</li>
+            <li>Derechos fundamentales</li>
+            <li>Derechos sociales y económicos</li>
+            <li>Organización del Estado</li>
+            <li>Ramas del poder público</li>
+          </ul>
+        </div>
+        <div class="coming-btn">🔒 En desarrollo</div>
+      </div>
+
+      <div class="card-proximamente" data-search="corte constitucional tutela acciones constitucionales control constitucional">
+        <span class="badge-proximamente">🔜 Próximamente</span>
+        <div class="card-icon">🏛️</div>
+        <h3 class="card-title">Justicia Constitucional</h3>
+        <p class="card-description">Corte Constitucional, tutela, acciones constitucionales y control de constitucionalidad.</p>
+        <div class="card-topics">
+          <strong>📋 Temas que incluirá:</strong>
+          <ul>
+            <li>Corte Constitucional</li>
+            <li>Acción de tutela</li>
+            <li>Control de constitucionalidad</li>
+            <li>Acciones constitucionales</li>
+            <li>Estado de excepción</li>
+          </ul>
+        </div>
+        <div class="coming-btn">🔒 En desarrollo</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="alerta-warning">
+    <strong>📢 Próximas actualizaciones</strong>
+    Este portal se actualizará progresivamente. Cada nueva guía incluirá: mapas conceptuales interactivos, tarjetas expandibles, ejemplos prácticos, tablas comparativas y un quiz de 40 preguntas con retroalimentación inmediata. ¡Vuelve pronto para descubrir nuevas secciones!
+  </div>
+
+</main>
+
+<footer>
+  <h3>⚖️ Portal Jurídico Interactivo</h3>
+  <p>Guías Didácticas del Derecho Colombiano</p>
+  <p style="font-size: 0.9rem; opacity: 0.8; margin-top: 0.5rem;">
+    Plataforma educativa integral con contenido interactivo para el estudio del derecho
+  </p>
+  <div class="footer-links">
+    <a href="#civil">Civil</a>
+    <a href="#penal">Penal</a>
+    <a href="#procesal">Procesal</a>
+    <a href="#laboral">Laboral</a>
+    <a href="#admin">Administrativo</a>
+    <a href="#sociedades">Sociedades</a>
+    <a href="#constitucional">Constitucional</a>
+  </div>
+  <p style="margin-top: 1.5rem; opacity: 0.7; font-size: 0.85rem;">
+    © 2026 - Material educativo interactivo · Todos los derechos reservados
+  </p>
+</footer>
+
+<script>
+  function filtrarContenido() {
+    const busqueda = document.getElementById('searchInput').value.toLowerCase().trim();
+    const cards = document.querySelectorAll('.card-disponible, .card-proximamente');
+    const secciones = document.querySelectorAll('.rama-section');
+    let resultadosVisibles = 0;
+
+    cards.forEach(card => {
+      const texto = card.getAttribute('data-search') || '';
+      const contenido = card.textContent.toLowerCase();
+      const coincide = busqueda === '' || 
+                       texto.includes(busqueda) || 
+                       contenido.includes(busqueda);
+      
+      if (coincide) {
+        card.classList.remove('hidden');
+        resultadosVisibles++;
+      } else {
+        card.classList.add('hidden');
+      }
+    });
+
+    secciones.forEach(seccion => {
+      const cardsVisibles = seccion.querySelectorAll('.card-disponible:not(.hidden), .card-proximamente:not(.hidden)');
+      if (cardsVisibles.length === 0 && busqueda !== '') {
+        seccion.style.display = 'none';
+      } else {
+        seccion.style.display = 'block';
+      }
+    });
+
+    const existente = document.querySelector('.no-results');
+    if (existente) existente.remove();
+
+    if (busqueda !== '' && resultadosVisibles === 0) {
+      const main = document.querySelector('main');
+      const mensaje = document.createElement('div');
+      mensaje.className = 'no-results';
+      mensaje.innerHTML = `🔍 No se encontraron resultados para "<strong>${busqueda}</strong>". Intenta con otros términos.`;
+      main.appendChild(mensaje);
+    }
+  }
+
+  document.querySelectorAll('.quick-nav a, footer .footer-links a').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  window.addEventListener('load', () => {
+    document.querySelectorAll('.stat-card').forEach((card, i) => {
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(20px)';
+      setTimeout(() => {
+        card.style.transition = 'all 0.5s ease';
+        card.style.opacity = '1';
+        card.style.transform = 'translateY(0)';
+      }, i * 100);
+    });
+  });
+</script>
+
+</body>
+</html>
