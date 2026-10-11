@@ -42,7 +42,7 @@
   }
 
   header::before {
-    content: '️';
+    content: '⚖️';
     position: absolute;
     font-size: 20rem;
     opacity: 0.04;
@@ -343,15 +343,23 @@
     font-size: 1.1rem;
   }
 
+  .card-disponible .card-buttons {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+  }
+
   .card-disponible .card-btn {
+    flex: 1;
     display: block;
     background: var(--primary);
     color: white;
     text-align: center;
-    padding: 0.8rem;
+    padding: 0.7rem;
     border-radius: 6px;
     text-decoration: none;
     font-weight: bold;
+    font-size: 0.9rem;
     transition: all 0.3s;
   }
 
@@ -359,6 +367,15 @@
     background: var(--secondary);
     color: var(--dark);
     transform: scale(1.02);
+  }
+
+  .card-disponible .card-btn.pdf-btn {
+    background: var(--danger);
+  }
+
+  .card-disponible .card-btn.pdf-btn:hover {
+    background: #9b2c2c;
+    color: white;
   }
 
   .card-disponible .badge-disponible {
@@ -570,6 +587,9 @@
     .rama-header { flex-wrap: wrap; }
     .rama-header .badge-count { margin-left: 0; }
     .stat-card .stat-number { font-size: 1.5rem; }
+    .card-disponible .card-buttons {
+      flex-direction: column;
+    }
   }
 
   @keyframes fadeInUp {
@@ -597,7 +617,6 @@
 </style>
 </head>
 <body>
-
 <header>
   <h1>⚖️ Portal Jurídico Interactivo</h1>
   <p class="subtitle">Guías Didácticas del Derecho Colombiano</p>
@@ -609,36 +628,36 @@
 
 <div class="search-container">
   <div class="search-box">
-    <input type="text" id="searchInput" placeholder=" Buscar tema, concepto o rama del derecho..." onkeyup="filtrarContenido()">
+    <input type="text" id="searchInput" placeholder="🔍 Buscar tema, concepto o rama del derecho..." onkeyup="filtrarContenido()">
     <button onclick="filtrarContenido()">Buscar</button>
   </div>
 </div>
 
 <div class="stats-container">
   <div class="stat-card">
-    <div class="stat-icon">📚</div>
+    <div class="stat-icon"></div>
     <div class="stat-number">7</div>
     <div class="stat-label">Ramas del Derecho</div>
   </div>
   <div class="stat-card">
     <div class="stat-icon">✅</div>
-    <div class="stat-number">6</div>
+    <div class="stat-number">7</div>
     <div class="stat-label">Guías Disponibles</div>
   </div>
   <div class="stat-card">
     <div class="stat-icon">🎯</div>
-    <div class="stat-number">240+</div>
+    <div class="stat-number">280+</div>
     <div class="stat-label">Preguntas de Quiz</div>
   </div>
   <div class="stat-card">
     <div class="stat-icon">🗺️</div>
-    <div class="stat-number">36+</div>
+    <div class="stat-number">42+</div>
     <div class="stat-label">Mapas Conceptuales</div>
   </div>
 </div>
 
 <div class="quick-nav">
-  <a href="#civil">📜 Derecho Civil</a>
+  <a href="#civil"> Derecho Civil</a>
   <a href="#penal">⚔️ Derecho Penal</a>
   <a href="#procesal">⚖️ Derecho Procesal</a>
   <a href="#laboral">👷 Derecho Laboral</a>
@@ -668,7 +687,7 @@
     <div class="cards-grid">
       <div class="card-disponible" data-search="titulo preliminar ley interpretación derogación artículos 1 al 72">
         <span class="badge-disponible">✓ Disponible</span>
-        <div class="card-icon">️</div>
+        <div class="card-icon">⚖️</div>
         <h3 class="card-title">Título Preliminar</h3>
         <p class="card-description">Fundamentos del ordenamiento jurídico: la ley, su interpretación, definiciones legales y derogación.</p>
         <div class="card-meta">
@@ -676,7 +695,10 @@
           <div><strong>Arts. 1-72</strong>Artículos</div>
           <div><strong>40</strong>Preguntas</div>
         </div>
-        <a href="titulo-preliminar.html" class="card-btn"> Acceder a la Guía</a>
+        <div class="card-buttons">
+          <a href="titulo-preliminar.html" class="card-btn"> Guía</a>
+          <a href="titulo-preliminar.pdf" class="card-btn pdf-btn" target="_blank">📄 PDF</a>
+        </div>
       </div>
 
       <div class="card-disponible" data-search="personas matrimonio filiación patria potestad adopción alimentos guardas personas jurídicas domicilio libro i">
@@ -689,7 +711,10 @@
           <div><strong>Arts. 73-652</strong>Artículos</div>
           <div><strong>40</strong>Preguntas</div>
         </div>
-        <a href="libro1-personas.html" class="card-btn">📖 Acceder a la Guía</a>
+        <div class="card-buttons">
+          <a href="libro1-personas.html" class="card-btn">📖 Guía</a>
+          <a href="libro1-personas.pdf" class="card-btn pdf-btn" target="_blank"> PDF</a>
+        </div>
       </div>
 
       <div class="card-disponible" data-search="bienes dominio propiedad muebles inmuebles posesión modos de adquirir servidumbres usufructo libro ii">
@@ -702,12 +727,15 @@
           <div><strong>Arts. 653-1007</strong>Artículos</div>
           <div><strong>40</strong>Preguntas</div>
         </div>
-        <a href="libro2-bienes.html" class="card-btn"> Acceder a la Guía</a>
+        <div class="card-buttons">
+          <a href="libro2-bienes.html" class="card-btn"> Guía</a>
+          <a href="libro2-bienes.pdf" class="card-btn pdf-btn" target="_blank">📄 PDF</a>
+        </div>
       </div>
 
       <div class="card-disponible" data-search="sucesión testamento herencia legado asignaciones forzosas legítimas partición donaciones libro iii">
         <span class="badge-disponible">✓ Disponible</span>
-        <div class="card-icon">📜</div>
+        <div class="card-icon"></div>
         <h3 class="card-title">Libro III: Sucesiones</h3>
         <p class="card-description">Sucesión por causa de muerte, testamentos, asignaciones hereditarias, legítimas, partición y donaciones entre vivos.</p>
         <div class="card-meta">
@@ -715,7 +743,10 @@
           <div><strong>Arts. 1008-1493</strong>Artículos</div>
           <div><strong>40</strong>Preguntas</div>
         </div>
-        <a href="libro3-sucesiones.html" class="card-btn">📖 Acceder a la Guía</a>
+        <div class="card-buttons">
+          <a href="libro3-sucesiones.html" class="card-btn">📖 Guía</a>
+          <a href="libro3-sucesiones.pdf" class="card-btn pdf-btn" target="_blank"> PDF</a>
+        </div>
       </div>
 
       <div class="card-disponible" data-search="obligaciones contratos teoría general modalidades efectos extinción compraventa arrendamiento sociedad prelacion prescripción libro iv">
@@ -728,7 +759,10 @@
           <div><strong>Arts. 1494-2545</strong>Artículos</div>
           <div><strong>40</strong>Preguntas</div>
         </div>
-        <a href="libro4-obligaciones.html" class="card-btn">📖 Acceder a la Guía</a>
+        <div class="card-buttons">
+          <a href="libro4-obligaciones.html" class="card-btn">📖 Guía</a>
+          <a href="libro4-obligaciones.pdf" class="card-btn pdf-btn" target="_blank">📄 PDF</a>
+        </div>
       </div>
     </div>
   </section>
@@ -747,7 +781,7 @@
     <div class="cards-grid">
       <div class="card-disponible" data-search="derecho penal código penal ley 599 normas rectoras conducta punible penas medidas de seguridad">
         <span class="badge-disponible">✓ Disponible</span>
-        <div class="card-icon">️</div>
+        <div class="card-icon">⚔️</div>
         <h3 class="card-title">Código Penal (Ley 599/2000)</h3>
         <p class="card-description">Normas rectoras, aplicación de la ley penal, conducta punible, consecuencias jurídicas, extinción y responsabilidad civil.</p>
         <div class="card-meta">
@@ -755,7 +789,10 @@
           <div><strong>Arts. 1-100</strong>Artículos</div>
           <div><strong>40</strong>Preguntas</div>
         </div>
-        <a href="penal-index.html" class="card-btn"> Acceder a la Guía</a>
+        <div class="card-buttons">
+          <a href="penal-index.html" class="card-btn">📖 Guía</a>
+          <a href="penal-index.pdf" class="card-btn pdf-btn" target="_blank">📄 PDF</a>
+        </div>
       </div>
 
       <div class="card-proximamente" data-search="parte general derecho penal teoría del delito punibilidad imputabilidad">
@@ -764,7 +801,7 @@
         <h3 class="card-title">Parte General - Teoría del Delito</h3>
         <p class="card-description">Principios fundamentales, teoría del delito, imputabilidad, punibilidad y concurso de personas.</p>
         <div class="card-topics">
-          <strong>📋 Temas que incluirá:</strong>
+          <strong> Temas que incluirá:</strong>
           <ul>
             <li>Principios del Derecho Penal</li>
             <li>Teoría del Delito</li>
@@ -773,16 +810,16 @@
             <li>Penas y medidas de seguridad</li>
           </ul>
         </div>
-        <div class="coming-btn"> En desarrollo</div>
+        <div class="coming-btn">🔒 En desarrollo</div>
       </div>
 
       <div class="card-proximamente" data-search="parte especial delitos contra personas patrimonio administración pública">
-        <span class="badge-proximamente"> Próximamente</span>
-        <div class="card-icon">📕</div>
+        <span class="badge-proximamente">🔜 Próximamente</span>
+        <div class="card-icon"></div>
         <h3 class="card-title">Parte Especial - Tipos Penales</h3>
         <p class="card-description">Tipos penales específicos: delitos contra la vida, patrimonio, administración pública, libertad, etc.</p>
         <div class="card-topics">
-          <strong>📋 Temas que incluirá:</strong>
+          <strong> Temas que incluirá:</strong>
           <ul>
             <li>Delitos contra las personas</li>
             <li>Delitos contra el patrimonio</li>
@@ -797,93 +834,73 @@
   </section>
 
   <!-- DERECHO PROCESAL -->
-<section class="rama-section rama-procesal" id="procesal">
-  <div class="rama-header">
-    <div class="rama-icon">⚖️</div>
-    <div>
-      <h2>Derecho Procesal</h2>
-      <p class="rama-subtitle">Procedimientos judiciales en las diferentes jurisdicciones</p>
+  <section class="rama-section rama-procesal" id="procesal">
+    <div class="rama-header">
+      <div class="rama-icon">⚖️</div>
+      <div>
+        <h2>Derecho Procesal</h2>
+        <p class="rama-subtitle">Procedimientos judiciales en las diferentes jurisdicciones</p>
+      </div>
+      <div class="badge-count">1 guía disponible</div>
     </div>
-    <div class="badge-count">1 guía disponible</div>
-  </div>
 
-  <!-- SUBSECCIÓN: PROCESAL CIVIL (YA DISPONIBLE) -->
-  <div class="subseccion">
-    <h3> Procesal Civil</h3>
-    <div class="cards-grid">
-      <div class="card-disponible" data-search="proceso civil cgp código general del proceso declaraciones pertenencia ejecutivo ley 1564">
-        <span class="badge-disponible">✓ Disponible</span>
-        <div class="card-icon">📑</div>
-        <h3 class="card-title">Código General del Proceso</h3>
-        <p class="card-description">Ley 1564 de 2012: principios, sujetos, competencia, demanda, notificaciones, contestación, tipos de procesos y recursos.</p>
-        <div class="card-meta">
-          <div><strong>11</strong>Temas</div>
-          <div><strong>Arts. 1-365</strong>Artículos</div>
-          <div><strong>40</strong>Preguntas</div>
+    <!-- SUBSECCIÓN: PROCESAL CIVIL (YA DISPONIBLE) -->
+    <div class="subseccion">
+      <h3>📋 Procesal Civil</h3>
+      <div class="cards-grid">
+        <div class="card-disponible" data-search="proceso civil cgp código general del proceso declaraciones pertenencia ejecutivo ley 1564">
+          <span class="badge-disponible">✓ Disponible</span>
+          <div class="card-icon">📑</div>
+          <h3 class="card-title">Código General del Proceso</h3>
+          <p class="card-description">Ley 1564 de 2012: principios, sujetos, competencia, demanda, notificaciones, contestación, tipos de procesos y recursos.</p>
+          <div class="card-meta">
+            <div><strong>11</strong>Temas</div>
+            <div><strong>Arts. 1-365</strong>Artículos</div>
+            <div><strong>40</strong>Preguntas</div>
+          </div>
+          <div class="card-buttons">
+            <a href="procesal-civil.html" class="card-btn">📖 Guía</a>
+            <a href="procesal-civil.pdf" class="card-btn pdf-btn" target="_blank">📄 PDF</a>
+          </div>
         </div>
-        <a href="procesal-civil.html" class="card-btn">📖 Acceder a la Guía</a>
       </div>
     </div>
-  </div>
 
-  <!-- SUBSECCIÓN: PROCESAL PENAL (PRÓXIMAMENTE) -->
-  <div class="subseccion">
-    <h3>🔍 Procesal Penal</h3>
-    <div class="cards-grid">
-      <div class="card-proximamente" data-search="proceso penal ley 906 audiencia imputación juicio oral pruebas sistema acusatorio">
-        <span class="badge-proximamente"> Próximamente</span>
-        <div class="card-icon">🔎</div>
-        <h3 class="card-title">Ley 906 de 2004</h3>
-        <p class="card-description">Sistema penal acusatorio: indagación, investigación, juicio oral y recursos.</p>
-        <div class="card-topics">
-          <strong>📋 Temas que incluirá:</strong>
-          <ul>
-            <li>Principios del sistema acusatorio</li>
-            <li>Etapa de indagación e investigación</li>
-            <li>Imputación y acusación</li>
-            <li>Juicio oral</li>
-            <li>Pruebas y recursos</li>
-          </ul>
+    <!-- SUBSECCIÓN: PROCESAL PENAL (PRÓXIMAMENTE) -->
+    <div class="subseccion">
+      <h3>🔍 Procesal Penal</h3>
+      <div class="cards-grid">
+        <div class="card-proximamente" data-search="proceso penal ley 906 audiencia imputación juicio oral pruebas sistema acusatorio">
+          <span class="badge-proximamente">🔜 Próximamente</span>
+          <div class="card-icon">🔎</div>
+          <h3 class="card-title">Ley 906 de 2004</h3>
+          <p class="card-description">Sistema penal acusatorio: indagación, investigación, juicio oral y recursos.</p>
+          <div class="card-topics">
+            <strong>📋 Temas que incluirá:</strong>
+            <ul>
+              <li>Principios del sistema acusatorio</li>
+              <li>Etapa de indagación e investigación</li>
+              <li>Imputación y acusación</li>
+              <li>Juicio oral</li>
+              <li>Pruebas y recursos</li>
+            </ul>
+          </div>
+          <div class="coming-btn">🔒 En desarrollo</div>
         </div>
-        <div class="coming-btn">🔒 En desarrollo</div>
       </div>
     </div>
-  </div>
 
-  <!-- SUBSECCIÓN: PROCESAL CONSTITUCIONAL (PRÓXIMAMENTE) -->
-  <div class="subseccion">
-    <h3>🏛️ Procesal Constitucional</h3>
-    <div class="cards-grid">
-      <div class="card-proximamente" data-search="tutela acción popular acción de grupo cumplimiento consulta popular mecanismos de protección">
-        <span class="badge-proximamente">🔜 Próximamente</span>
-        <div class="card-icon">️</div>
-        <h3 class="card-title">Mecanismos de Protección</h3>
-        <p class="card-description">Acción de tutela, acciones populares, de grupo, de cumplimiento y mecanismos de participación.</p>
-        <div class="card-topics">
-          <strong> Temas que incluirá:</strong>
-          <ul>
-            <li>Acción de tutela</li>
-            <li>Acciones populares y de grupo</li>
-            <li>Acción de cumplimiento</li>
-            <li>Consulta y referendo popular</li>
-            <li>Excepción de inconstitucionalidad</li>
-          </ul>
-        </div>
-        <div class="coming-btn">🔒 En desarrollo</div>
-      </div>
-    </div>
-  </div>
-</section>
+    <!-- SUBSECCIÓN: PROCESAL CONSTITUCIONAL (PRÓXIMAMENTE) -->
     <div class="subseccion">
       <h3>🏛️ Procesal Constitucional</h3>
       <div class="cards-grid">
-        <div class="card-proximamente" data-search="tutela acción popular acción de grupo cumplimiento consulta popular">
+        <div class="card-proximamente" data-search="tutela acción popular acción de grupo cumplimiento consulta popular mecanismos de protección">
           <span class="badge-proximamente">🔜 Próximamente</span>
-          <div class="card-icon">🛡️</div>
+          <div class="card-icon">️</div>
           <h3 class="card-title">Mecanismos de Protección</h3>
           <p class="card-description">Acción de tutela, acciones populares, de grupo, de cumplimiento y mecanismos de participación.</p>
           <div class="card-topics">
-            <strong>📋 Temas que incluirá:</strong>
+            <strong> Temas que incluirá:</strong>
             <ul>
               <li>Acción de tutela</li>
               <li>Acciones populares y de grupo</li>
@@ -916,7 +933,7 @@
         <h3 class="card-title">Derecho Individual</h3>
         <p class="card-description">Contrato de trabajo, jornadas, descansos, prestaciones sociales y terminación del contrato.</p>
         <div class="card-topics">
-          <strong>📋 Temas que incluirá:</strong>
+          <strong> Temas que incluirá:</strong>
           <ul>
             <li>Contrato de trabajo</li>
             <li>Modalidades de contratación</li>
@@ -929,8 +946,8 @@
       </div>
 
       <div class="card-proximamente" data-search="derecho colectivo sindical huelga convención pliego">
-        <span class="badge-proximamente"> Próximamente</span>
-        <div class="card-icon">🤝</div>
+        <span class="badge-proximamente">🔜 Próximamente</span>
+        <div class="card-icon"></div>
         <h3 class="card-title">Derecho Colectivo</h3>
         <p class="card-description">Asociación sindical, contratación colectiva, huelga y conflictos colectivos.</p>
         <div class="card-topics">
@@ -943,16 +960,16 @@
             <li>Tribunales de arbitramento</li>
           </ul>
         </div>
-        <div class="coming-btn">🔒 En desarrollo</div>
+        <div class="coming-btn"> En desarrollo</div>
       </div>
 
       <div class="card-proximamente" data-search="seguridad social salud pensión riesgos laborales arl">
-        <span class="badge-proximamente">🔜 Próximamente</span>
+        <span class="badge-proximamente"> Próximamente</span>
         <div class="card-icon">🏥</div>
         <h3 class="card-title">Seguridad Social</h3>
         <p class="card-description">Sistema de salud, pensiones, riesgos laborales y prestaciones económicas.</p>
         <div class="card-topics">
-          <strong>📋 Temas que incluirá:</strong>
+          <strong> Temas que incluirá:</strong>
           <ul>
             <li>Sistema General de Salud</li>
             <li>Sistema de Pensiones</li>
@@ -980,7 +997,7 @@
     <div class="cards-grid">
       <div class="card-proximamente" data-search="cpaca código contencioso actos administrativos contratación estatal">
         <span class="badge-proximamente">🔜 Próximamente</span>
-        <div class="card-icon">📜</div>
+        <div class="card-icon"></div>
         <h3 class="card-title">Régimen General</h3>
         <p class="card-description">Actos administrativos, procedimiento administrativo, contratación estatal y responsabilidad.</p>
         <div class="card-topics">
@@ -997,7 +1014,7 @@
       </div>
 
       <div class="card-proximamente" data-search="función pública servidores públicos régimen disciplinario">
-        <span class="badge-proximamente"> Próximamente</span>
+        <span class="badge-proximamente">🔜 Próximamente</span>
         <div class="card-icon">👔</div>
         <h3 class="card-title">Función Pública</h3>
         <p class="card-description">Régimen de los servidores públicos, carrera administrativa y régimen disciplinario.</p>
@@ -1048,7 +1065,7 @@
 
       <div class="card-proximamente" data-search="títulos valores cheque letra cambio pagaré acciones">
         <span class="badge-proximamente">🔜 Próximamente</span>
-        <div class="card-icon">💳</div>
+        <div class="card-icon"></div>
         <h3 class="card-title">Títulos Valores</h3>
         <p class="card-description">Letra de cambio, cheque, pagaré, acciones, bonos y otros títulos circulatorios.</p>
         <div class="card-topics">
@@ -1080,7 +1097,7 @@
     <div class="cards-grid">
       <div class="card-proximamente" data-search="constitución política derechos fundamentales estado social organización del poder">
         <span class="badge-proximamente">🔜 Próximamente</span>
-        <div class="card-icon">🇨🇴</div>
+        <div class="card-icon">🇴</div>
         <h3 class="card-title">Constitución de 1991</h3>
         <p class="card-description">Principios fundamentales, derechos, organización del Estado y mecanismos de participación.</p>
         <div class="card-topics">
@@ -1111,7 +1128,7 @@
             <li>Estado de excepción</li>
           </ul>
         </div>
-        <div class="coming-btn">🔒 En desarrollo</div>
+        <div class="coming-btn"> En desarrollo</div>
       </div>
     </div>
   </section>
