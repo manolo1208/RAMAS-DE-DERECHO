@@ -1,0 +1,2234 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Derecho Procesal Civil - Código General del Proceso</title>
+<style>
+  :root {
+    --primary: #1e3a8a;
+    --secondary: #f59e0b;
+    --accent: #2563eb;
+    --light: #eff6ff;
+    --dark: #1e293b;
+    --success: #059669;
+    --warning: #d97706;
+    --danger: #dc2626;
+    --card-bg: #ffffff;
+    --shadow: 0 4px 15px rgba(0,0,0,0.08);
+    --shadow-hover: 0 8px 25px rgba(0,0,0,0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    background: var(--light);
+    color: var(--dark);
+    line-height: 1.7;
+  }
+
+  header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    color: white;
+    padding: 2rem 1rem;
+    text-align: center;
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::before {
+    content: '⚖️';
+    position: absolute;
+    font-size: 15rem;
+    opacity: 0.05;
+    top: -30px;
+    right: -30px;
+  }
+
+  header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: 2px;
+  }
+
+  header p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    font-style: italic;
+  }
+
+  nav {
+    background: var(--dark);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow);
+  }
+
+  nav ul {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0.5rem;
+  }
+
+  nav a {
+    color: var(--light);
+    text-decoration: none;
+    padding: 0.7rem 1rem;
+    margin: 0.2rem;
+    border-radius: 5px;
+    font-size: 0.85rem;
+    transition: all 0.3s;
+    display: block;
+  }
+
+  nav a:hover {
+    background: var(--secondary);
+    color: var(--dark);
+    transform: translateY(-2px);
+  }
+
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+  }
+
+  section {
+    background: var(--card-bg);
+    margin-bottom: 2.5rem;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    border-left: 5px solid var(--secondary);
+    scroll-margin-top: 80px;
+  }
+
+  section h2 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--secondary);
+  }
+
+  section h3 {
+    color: var(--accent);
+    font-size: 1.4rem;
+    margin: 1.5rem 0 0.8rem;
+  }
+
+  section h4 {
+    color: var(--primary);
+    font-size: 1.15rem;
+    margin: 1rem 0 0.5rem;
+  }
+
+  p { margin-bottom: 1rem; text-align: justify; }
+
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.2rem;
+    margin: 1.5rem 0;
+  }
+
+  .card {
+    background: linear-gradient(135deg, #fff 0%, #f0f7ff 100%);
+    border: 2px solid var(--secondary);
+    border-radius: 10px;
+    padding: 1.2rem;
+    transition: all 0.3s;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--primary);
+  }
+
+  .card .icon {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .card h4 {
+    text-align: center;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+  }
+
+  .card .detail {
+    display: none;
+    margin-top: 0.8rem;
+    padding-top: 0.8rem;
+    border-top: 1px dashed var(--secondary);
+    font-size: 0.95rem;
+  }
+
+  .card.active .detail { display: block; }
+
+  .card .hint {
+    text-align: center;
+    color: var(--accent);
+    font-size: 0.85rem;
+    font-style: italic;
+  }
+
+  .mapa-container {
+    background: #f8fafc;
+    border: 2px dashed var(--secondary);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    overflow-x: auto;
+  }
+
+  .mapa {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 600px;
+  }
+
+  .nodo {
+    background: var(--primary);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+    font-weight: bold;
+    text-align: center;
+    min-width: 180px;
+    box-shadow: var(--shadow);
+  }
+
+  .nodo.central {
+    background: linear-gradient(135deg, var(--secondary), #fbbf24);
+    color: var(--dark);
+    font-size: 1.2rem;
+    padding: 1rem 2rem;
+  }
+
+  .nodo.sub {
+    background: var(--accent);
+    font-size: 0.95rem;
+  }
+
+  .linea {
+    width: 3px;
+    height: 25px;
+    background: var(--secondary);
+  }
+
+  .linea-h {
+    height: 3px;
+    background: var(--secondary);
+    width: 80%;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .rama {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 1rem;
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  .rama-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    min-width: 140px;
+  }
+
+  .ejemplo {
+    background: #ecfdf5;
+    border-left: 4px solid var(--success);
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .ejemplo strong { color: var(--success); }
+
+  .alerta {
+    background: #fffbeb;
+    border-left: 4px solid var(--warning);
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .alerta strong { color: var(--warning); }
+
+  .cita {
+    background: #eff6ff;
+    border-left: 4px solid var(--accent);
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+    color: var(--primary);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+
+  th {
+    background: var(--primary);
+    color: white;
+    padding: 0.8rem;
+    text-align: left;
+  }
+
+  td {
+    padding: 0.8rem;
+    border-bottom: 1px solid #eee;
+  }
+
+  tr:nth-child(even) { background: #f8fafc; }
+  tr:hover { background: #eff6ff; }
+
+  .quiz-container {
+    background: linear-gradient(135deg, #f8fafc 0%, #fff 100%);
+    padding: 1.5rem;
+    border-radius: 10px;
+    border: 2px solid var(--accent);
+  }
+
+  .quiz-header {
+    background: var(--primary);
+    color: white;
+    padding: 1.2rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .quiz-header h3 {
+    color: white;
+    margin: 0 0 0.5rem 0;
+  }
+
+  .progress-bar {
+    background: rgba(255,255,255,0.2);
+    height: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+  }
+
+  .progress-fill {
+    background: var(--secondary);
+    height: 100%;
+    width: 0%;
+    transition: width 0.4s ease;
+  }
+
+  .quiz-stats {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .stat {
+    background: rgba(255,255,255,0.1);
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    font-size: 0.9rem;
+  }
+
+  .stat strong { color: var(--secondary); }
+
+  .quiz-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    padding: 0.5rem;
+    background: #f0f7ff;
+    border-radius: 8px;
+  }
+
+  .quiz-tab {
+    background: white;
+    border: 2px solid var(--accent);
+    color: var(--accent);
+    padding: 0.5rem 0.8rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.8rem;
+    transition: all 0.3s;
+    flex: 1;
+    min-width: 90px;
+    text-align: center;
+  }
+
+  .quiz-tab:hover {
+    background: var(--accent);
+    color: white;
+  }
+
+  .quiz-tab.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+  }
+
+  .quiz-section {
+    display: none;
+  }
+
+  .quiz-section.active {
+    display: block;
+    animation: fadeIn 0.4s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .pregunta {
+    margin-bottom: 1.5rem;
+    padding: 1.2rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    border-left: 4px solid var(--accent);
+    transition: all 0.3s;
+  }
+
+  .pregunta.answered {
+    border-left-color: var(--secondary);
+  }
+
+  .pregunta-num {
+    display: inline-block;
+    background: var(--accent);
+    color: white;
+    padding: 0.2rem 0.7rem;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    margin-right: 0.5rem;
+  }
+
+  .pregunta-tipo {
+    display: inline-block;
+    background: var(--secondary);
+    color: var(--dark);
+    padding: 0.2rem 0.7rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    margin-left: 0.3rem;
+    font-weight: bold;
+  }
+
+  .pregunta p { 
+    font-weight: bold; 
+    color: var(--primary); 
+    margin: 0.8rem 0;
+    text-align: left;
+  }
+
+  .opciones { display: flex; flex-direction: column; gap: 0.5rem; }
+
+  .opcion {
+    padding: 0.7rem 1rem;
+    background: #f8fafc;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+  }
+
+  .opcion:hover:not(.disabled) {
+    border-color: var(--accent);
+    background: #eff6ff;
+  }
+
+  .opcion.disabled {
+    cursor: not-allowed;
+    opacity: 0.85;
+  }
+
+  .opcion.correcta {
+    background: #d1fae5;
+    border-color: var(--success);
+    color: var(--success);
+    font-weight: bold;
+  }
+
+  .opcion.incorrecta {
+    background: #fee2e2;
+    border-color: var(--danger);
+    color: var(--danger);
+  }
+
+  .opcion.correcta::after {
+    content: ' ✓';
+    font-weight: bold;
+  }
+
+  .opcion.incorrecta::after {
+    content: ' ✗';
+    font-weight: bold;
+  }
+
+  .explicacion {
+    margin-top: 0.8rem;
+    padding: 0.8rem;
+    background: #eff6ff;
+    border-left: 3px solid var(--accent);
+    border-radius: 0 6px 6px 0;
+    font-size: 0.9rem;
+    display: none;
+    font-style: italic;
+  }
+
+  .explicacion.visible {
+    display: block;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .resultado-final {
+    margin-top: 2rem;
+    padding: 2rem;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    color: white;
+    border-radius: 12px;
+    text-align: center;
+    display: none;
+  }
+
+  .resultado-final.visible {
+    display: block;
+    animation: fadeIn 0.5s ease;
+  }
+
+  .resultado-final h3 {
+    color: var(--secondary);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .puntaje-final {
+    font-size: 3rem;
+    font-weight: bold;
+    color: var(--secondary);
+    margin: 1rem 0;
+  }
+
+  .desglose-temas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+    text-align: left;
+  }
+
+  .desglose-item {
+    background: rgba(255,255,255,0.1);
+    padding: 1rem;
+    border-radius: 8px;
+  }
+
+  .desglose-item h4 {
+    color: var(--secondary);
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+  }
+
+  .mini-bar {
+    background: rgba(255,255,255,0.2);
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+  }
+
+  .mini-bar-fill {
+    background: var(--secondary);
+    height: 100%;
+    transition: width 0.6s ease;
+  }
+
+  button {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 1rem;
+    transition: all 0.3s;
+  }
+
+  button:hover {
+    background: var(--secondary);
+    color: var(--dark);
+    transform: translateY(-2px);
+  }
+
+  .btn-reset {
+    background: var(--danger);
+    margin-left: 0.5rem;
+  }
+
+  .btn-reset:hover {
+    background: #991b1b;
+    color: white;
+  }
+
+  .acordeon-item {
+    margin-bottom: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .acordeon-header {
+    background: var(--accent);
+    color: white;
+    padding: 1rem;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.3s;
+  }
+
+  .acordeon-header:hover { background: var(--primary); }
+
+  .acordeon-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    background: white;
+  }
+
+  .acordeon-content.active {
+    max-height: 2000px;
+    padding: 1rem;
+  }
+
+  .flecha { transition: transform 0.3s; }
+  .acordeon-header.active .flecha { transform: rotate(180deg); }
+
+  footer {
+    background: var(--dark);
+    color: var(--light);
+    text-align: center;
+    padding: 2rem 1rem;
+    margin-top: 2rem;
+  }
+
+  footer p { margin-bottom: 0.5rem; }
+
+  @media (max-width: 768px) {
+    header h1 { font-size: 1.8rem; }
+    section { padding: 1.2rem; }
+    section h2 { font-size: 1.5rem; }
+    nav a { font-size: 0.75rem; padding: 0.5rem 0.6rem; }
+    .quiz-tab { font-size: 0.7rem; padding: 0.4rem 0.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>⚖️ Derecho Procesal Civil</h1>
+  <p>Código General del Proceso (Ley 1564 de 2012) · Guía Didáctica Interactiva</p>
+</header>
+
+<nav>
+  <ul>
+    <li><a href="#tema1">1. Principios</a></li>
+    <li><a href="#tema2">2. Sujetos</a></li>
+    <li><a href="#tema3">3. Competencia</a></li>
+    <li><a href="#tema4">4. Demanda</a></li>
+    <li><a href="#tema5">5. Calificación</a></li>
+    <li><a href="#tema6">6. Notificaciones</a></li>
+    <li><a href="#tema7">7. Contestación</a></li>
+    <li><a href="#tema8">8. Prescripción</a></li>
+    <li><a href="#tema9">9. Tipos</a></li>
+    <li><a href="#tema10">10. Recursos</a></li>
+    <li><a href="#tema11">11. Costas</a></li>
+    <li><a href="#quiz">Quiz (40)</a></li>
+  </ul>
+</nav>
+
+<main>
+
+  <section>
+    <h2> Introducción</h2>
+    <p>Bienvenido a esta guía interactiva sobre el <strong>Código General del Proceso (CGP - Ley 1564 de 2012)</strong>. Este código regula la actividad procesal en los asuntos civiles, comerciales, de familia y agrarios, estableciendo los principios, sujetos, procedimientos y mecanismos de impugnación que rigen el proceso civil colombiano.</p>
+    <div class="alerta">
+      <strong>💡 Cómo usar esta guía:</strong> Haz clic en las tarjetas para ver detalles, despliega los acordeones para información adicional y prueba tus conocimientos con el quiz de 40 preguntas al final.
+    </div>
+  </section>
+
+  <!-- TEMA 1: PRINCIPIOS -->
+  <section id="tema1">
+    <h2>1. Ámbito de Aplicación y Principios Generales (Art. 1 CGP)</h2>
+    <p>El CGP regula la actividad procesal y establece los principios fundamentales que orientan todo el proceso civil colombiano.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">CGP - PRINCIPIOS</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Tutela Efectiva</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Derecho Sustancial</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Oralidad</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Gratuidad</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Principios Fundamentales</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon"></div>
+        <h4>Ámbito de Aplicación</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Regula asuntos <strong>civiles, comerciales, de familia y agrarios</strong>.</p>
+          <p><strong>Carácter residual:</strong> se aplica a todas las jurisdicciones en lo no regulado por sus leyes especiales (laboral, contencioso-administrativo).</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">️</div>
+        <h4>Tutela Jurisdiccional Efectiva</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Garantía del debido proceso en un <strong>plazo razonable</strong>. Acceso efectivo a la justicia.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Prevalencia del Derecho Sustancial</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Las formas procesales son un <strong>instrumento</strong> para la efectividad de los derechos sustanciales.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🎤</div>
+        <h4>Inmediación, Concentración y Oralidad</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>El proceso se desarrolla predominantemente mediante <strong>audiencias orales</strong> con presencia directa del juez en la práctica de pruebas.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="cita">
+      <strong>"Las formas procesales son instrumento para la efectividad de los derechos sustanciales"</strong> — Art. 2 CGP
+    </div>
+  </section>
+
+  <!-- TEMA 2: SUJETOS -->
+  <section id="tema2">
+    <h2>2. Sujetos Procesales y Partes</h2>
+    <p>El proceso civil involucra diversos sujetos con capacidades y legitimaciones específicas.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">SUJETOS PROCESALES</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Parte Formal</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Demandante/Demandado</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Parte Material</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Titular del derecho</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Juez</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Director del proceso</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3> Capacidad Procesal</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">👤</div>
+        <h4>Capacidad para ser Parte</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p><em>Legitimatio ad processum</em>: Personas naturales, jurídicas, patrimonios autónomos y el concebido.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🎭</div>
+        <h4>Capacidad para Comparecer</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Ejercicio directo de derechos procesales o a través de <strong>representantes legales</strong> o <strong>apoderados judiciales</strong> con derecho de postulación.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>🔗 Litisconsorcio</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Tipo</th>
+          <th>Características</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Necesario</strong></td>
+          <td>La relación jurídica exige decisión uniforme; la sentencia no puede dictarse sin integración completa</td>
+        </tr>
+        <tr>
+          <td><strong>Facultativo</strong></td>
+          <td>Acumulación libre de pretensiones; los consortes son litigantes independientes</td>
+        </tr>
+        <tr>
+          <td><strong>Cuasinecesario</strong></td>
+          <td>La sentencia extiende sus efectos a un tercero legitimado, pero su comparecencia no es indispensable</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- TEMA 3: COMPETENCIA -->
+  <section id="tema3">
+    <h2>3. Jurisdicción y Competencia</h2>
+    <p>La jurisdicción es la potestad general del Estado para administrar justicia; la competencia es su medida o límite atribuida a un órgano específico.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">FACTORES DE COMPETENCIA</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Objetivo</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Materia y Cuantía</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Subjetivo</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Calidad de las partes</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Territorial</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Fueros</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Funcional</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Grados e instancias</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Factores de Competencia</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🎯</div>
+        <h4>Factor Objetivo</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Atiende a la <strong>materia</strong> (naturaleza del asunto) y a la <strong>cuantía</strong> (mínima, menor y mayor).</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">👥</div>
+        <h4>Factor Subjetivo</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Calidad de las personas que son parte (Estados extranjeros, agentes diplomáticos, entidades públicas).</p>
+          <p><strong>IMPRORROGABLE</strong></p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📍</div>
+        <h4>Factor Territorial</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Lugar donde debe tramitarse el proceso mediante fueros: personal (domicilio), real (ubicación de bienes), contractual (lugar de cumplimiento).</p>
+          <p><strong>PRORROGABLE</strong></p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🏛️</div>
+        <h4>Factor Funcional</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Distribución vertical por grados e instancias: jueces municipales, del circuito, tribunales, Corte Suprema.</p>
+          <p><strong>IMPRORROGABLE</strong></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="alerta">
+      <strong>️ Regla clave (Art. 16 CGP):</strong> Los factores <strong>subjetivo y funcional son improrrogables</strong>; su violación genera nulidad. Los factores territorial y de cuantía son prorrogables si no se impugnan oportunamente.
+    </div>
+  </section>
+
+  <!-- TEMA 4: DEMANDA -->
+  <section id="tema4">
+    <h2>4. La Demanda: Requisitos y Elaboración (Art. 82 CGP)</h2>
+    <p>La demanda es el acto procesal que inicia el proceso y debe cumplir requisitos formales y de fondo.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">LA DEMANDA</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Requisitos Formales</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Presupuestos</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Anexos</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Requisitos Formales (Art. 82 CGP y Ley 2213/2022)</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">👨‍⚖️</div>
+        <h4>Designación del Juez</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Designación del juez competente y datos de las partes (nombre, identificación, domicilio).</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🎯</div>
+        <h4>Pretensiones</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Expresadas con <strong>precisión y claridad</strong>, clasificadas y separadas (principales y subsidiarias).</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📝</div>
+        <h4>Hechos</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Debidamente <strong>determinados, clasificados y numerados</strong> de forma cronológica.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Fundamentos de Derecho</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Normas sustanciales y procesales aplicables al caso.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">💰</div>
+        <h4>Cuantía y Juramento</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Determinación de la cuantía y <strong>juramento estimatorio</strong> cuando se reclame indemnización, frutos o mejoras.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📧</div>
+        <h4>Medios Digitales</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Canales digitales y correos electrónicos para notificaciones. <strong>Envío simultáneo</strong> de copia al demandado.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>📐 Estructura Práctica de una Demanda</h3>
+    <div class="alerta">
+      <strong>📌 Orden recomendado:</strong>
+      <ol style="margin-top: 0.5rem; padding-left: 1.5rem;">
+        <li>Encabezado y dirigido (Señor Juez competente)</li>
+        <li>Identificación de las partes</li>
+        <li>Pretensiones (principales y subsidiarias)</li>
+        <li>Hechos (cronológicos, numerados, concretos)</li>
+        <li>Fundamentos de derecho</li>
+        <li>Pruebas</li>
+        <li>Juramento estimatorio / Cuantía / Competencia</li>
+        <li>Anexos y medios digitales</li>
+        <li>Notificaciones</li>
+        <li>Firma y postulación</li>
+      </ol>
+    </div>
+
+    <h3>📎 Anexos de la Demanda (Art. 84 CGP)</h3>
+    <ul>
+      <li>Poder conferido al apoderado</li>
+      <li>Pruebas de existencia y representación legal de personas jurídicas</li>
+      <li>Pruebas documentales en poder del demandante</li>
+    </ul>
+  </section>
+
+  <!-- TEMA 5: CALIFICACIÓN -->
+  <section id="tema5">
+    <h2>5. Calificación Judicial de la Demanda</h2>
+    <p>El juez debe verificar el cumplimiento de requisitos antes de admitir la demanda.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">CALIFICACIÓN</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Admisión</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Inadmisión</div>
+            <div class="linea"></div>
+            <div class="nodo sub">5 días subsanar</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Rechazo</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Decisiones del Juez</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">✅</div>
+        <h4>Admisión</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>El juez verifica requisitos formales y de fondo, admite la demanda, ordena el traslado y notifica al demandado.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚠️</div>
+        <h4>Inadmisión (Art. 90 CGP)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Procede por 7 causales: falta de requisitos formales, omisión de anexos, indebida acumulación, incapacidad, falta de derecho de postulación, falta de juramento o no acreditar conciliación.</p>
+          <p><strong>Plazo de 5 días</strong> para subsanar.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon"></div>
+        <h4>Rechazo de Plano</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Procede por falta de jurisdicción o competencia, cuando la pretensión ha <strong>caducado</strong>, o cuando no se subsanan los defectos en 5 días.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEMA 6: NOTIFICACIONES -->
+  <section id="tema6">
+    <h2>6. Régimen de Notificaciones y Validez Procesal</h2>
+    <p>Las notificaciones son esenciales para la validez del proceso y el derecho de defensa.</p>
+
+    <h3>📋 Clases de Notificaciones</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Tipo</th>
+          <th>Aplicación</th>
+          <th>Características</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Personal</strong></td>
+          <td>Auto admisorio y mandamiento ejecutivo</td>
+          <td>Vía mensaje de datos al correo. Se entiende surtida 2 días hábiles después del envío</td>
+        </tr>
+        <tr>
+          <td><strong>Por Aviso</strong></td>
+          <td>Subsidiaria de la personal</td>
+          <td>Surtida al finalizar el día siguiente a su entrega</td>
+        </tr>
+        <tr>
+          <td><strong>Por Estado</strong></td>
+          <td>Autos y sentencias que no exijan personal</td>
+          <td>Publicación electrónica al día siguiente</td>
+        </tr>
+        <tr>
+          <td><strong>En Estrados</strong></td>
+          <td>Providencias verbales en audiencias</td>
+          <td>Notificadas inmediatamente a asistentes y ausentes</td>
+        </tr>
+        <tr>
+          <td><strong>Conducta Concluyente</strong></td>
+          <td>Cuando se manifiesta conocer la decisión</td>
+          <td>Por otorgar poder, interponer recursos o nulidades</td>
+        </tr>
+        <tr>
+          <td><strong>Emplazamiento</strong></td>
+          <td>Paradero ignorado del demandado</td>
+          <td>Publicación en Registro Nacional; 15 días para comparecer</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="alerta">
+      <strong>⚠️ Nulidad insubsanable:</strong> La falta o indebida notificación del auto admisorio o mandamiento de pago genera nulidad insubsanable (salvo saneamiento por conducta concluyente o convalidación).
+    </div>
+  </section>
+
+  <!-- TEMA 7: CONTESTACIÓN -->
+  <section id="tema7">
+    <h2>7. Actitudes del Demandado y Contestación (Art. 96 CGP)</h2>
+    <p>El demandado tiene múltiples opciones al recibir la demanda.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">ACTITUDES DEL DEMANDADO</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Contestación</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Allanamiento</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Reconvención</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Contumacia</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Actitudes Posibles</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">✍️</div>
+        <h4>Contestación</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Pronunciamiento expreso sobre cada hecho y pretensión: <strong>admitir, negar o no le consta</strong>, indicando las razones.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🤝</div>
+        <h4>Allanamiento (Art. 98)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Aceptación expresa e incondicional de las pretensiones y hechos. El juez dicta sentencia conforme a lo pedido, salvo fraude, colusión o simulación.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🔄</div>
+        <h4>Reconvención</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Formulación de <strong>pretensiones propias</strong> contra el demandante (contrademanda).</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🤫</div>
+        <h4>Contumacia (Art. 97)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>La omisión o respuestas evasivas hacen <strong>presumir ciertos los hechos</strong> susceptibles de confesión.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>⚔️ Excepciones</h3>
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>🛡️ Excepciones Previas (Art. 100 CGP)</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Atacan el procedimiento o los presupuestos procesales:</p>
+        <ul>
+          <li>Falta de competencia</li>
+          <li>Cláusula compromisoria</li>
+          <li>Ineptitud de la demanda</li>
+          <li>Pleito pendiente</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>⚔️ Excepciones de Mérito</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Introducen hechos impeditivos, modificativos o extintivos para destruir el derecho pretendido:</p>
+        <ul>
+          <li>Pago</li>
+          <li>Prescripción</li>
+          <li>Novación</li>
+          <li>Compensación</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEMA 8: PRESCRIPCIÓN -->
+  <section id="tema8">
+    <h2>8. Prescripción y Caducidad</h2>
+    <p>Institutos que extinguen derechos y acciones por el transcurso del tiempo.</p>
+
+    <h3>📋 Diferencias Clave</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Aspecto</th>
+          <th>Prescripción</th>
+          <th>Caducidad</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Objeto</strong></td>
+          <td>Extingue el derecho sustancial</td>
+          <td>Extingue la oportunidad de ejercer la acción</td>
+        </tr>
+        <tr>
+          <td><strong>Naturaleza</strong></td>
+          <td>Excepción de mérito (debe alegarse)</td>
+          <td>Opera de pleno derecho (declarada de oficio)</td>
+        </tr>
+        <tr>
+          <td><strong>Interrupción</strong></td>
+          <td>Por radicación de la demanda</td>
+          <td>Impedida si se notifica en 1 año</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>⏰ Regla del Año (Art. 94 CGP)</h3>
+    <div class="alerta">
+      <strong>📌 Interrupción de la prescripción:</strong> La radicación de la demanda interrumpe la prescripción e impide la caducidad si el auto admisorio se notifica al demandado dentro del <strong>término de 1 año</strong> contado desde el día siguiente a su notificación al demandante.
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si la demanda se radica el 1° de marzo de 2024 y se notifica al demandante el 5 de marzo, el auto admisorio debe notificarse al demandado antes del 5 de marzo de 2025 para que opere la interrupción.
+    </div>
+  </section>
+
+  <!-- TEMA 9: TIPOS DE PROCESOS -->
+  <section id="tema9">
+    <h2>9. Clasificación y Tipos de Procesos</h2>
+    <p>El CGP establece diversas clases de procesos según su naturaleza y finalidad.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">TIPOS DE PROCESOS</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Declarativos</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Verbal / Sumario</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Ejecutivos</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Títulos ejecutivos</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Liquidatorios</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Sucesiones</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Voluntarios</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Sin contención</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Tipos de Procesos</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📢</div>
+        <h4>Procesos Declarativos</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p><strong>Verbal (Mayor y Menor Cuantía):</strong> Dos audiencias (Inicial e Instrucción y Juzgamiento).</p>
+          <p><strong>Verbal Sumario (Mínima Cuantía):</strong> Una sola audiencia, trámite abreviado.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚡</div>
+        <h4>Procesos Ejecutivos</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Persiguen la ejecución coactiva de obligaciones claras, expresas y exigibles contenidas en <strong>títulos ejecutivos</strong>.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">💼</div>
+        <h4>Procesos Liquidatorios</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Sucesión por causa de muerte, liquidación de sociedades conyugales o mercantiles, insolvencia.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🤝</div>
+        <h4>Jurisdicción Voluntaria</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Solicitudes sin contención ni conflicto: licencias para enajenar bienes de incapaces, declaración de ausencia.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEMA 10: RECURSOS -->
+  <section id="tema10">
+    <h2>10. Medios de Impugnación y Recursos</h2>
+    <p>Los recursos son medios para impugnar las decisiones judiciales.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">RECURSOS</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Ordinarios</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Reposición, Apelación</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Extraordinarios</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Casación, Revisión</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Recursos Ordinarios</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🔄</div>
+        <h4>Reposición</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Procede contra autos para que el <strong>mismo juez</strong> los revoque, reforme, aclare o adicione.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⬆️</div>
+        <h4>Apelación</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Procede ante el <strong>superior jerárquico</strong> contra sentencias de primera instancia y autos interlocutorios señalados.</p>
+          <p><strong>Efectos:</strong> Suspensivo, Devolutivo y Diferido.</p>
+          <p><strong>Principio:</strong> No reformatio in pejus (no empeorar situación del apelante único).</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📝</div>
+        <h4>Súplica</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Procede contra autos del magistrado sustanciador en tribunales o Corte que habrían sido apelables en primera instancia.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📣</div>
+        <h4>Queja</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Procede cuando el inferior <strong>niega o rechaza</strong> los recursos de apelación o casación.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>🏛️ Recursos Extraordinarios</h3>
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>🏛️ Casación</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Procede ante la <strong>Sala Civil de la Corte Suprema</strong> contra sentencias de segunda instancia para:</p>
+        <ul>
+          <li>Unificar jurisprudencia</li>
+          <li>Reparar agravios</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>🔍 Revisión</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Vía extraordinaria contra <strong>sentencias ejecutoriadas</strong> (cosa juzgada) ante causales taxativas:</p>
+        <ul>
+          <li>Fraude</li>
+          <li>Prueba falsa</li>
+          <li>Indebida representación</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEMA 11: COSTAS -->
+  <section id="tema11">
+    <h2>11. Costas y Efectos de las Providencias</h2>
+    <p>Las costas procesales y los efectos de las decisiones judiciales cierran el ciclo procesal.</p>
+
+    <h3> Costas Procesales (Art. 365 CGP)</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">💸</div>
+        <h4>Integración</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p><strong>Gastos del proceso:</strong> honorarios de peritos, expensas.</p>
+          <p><strong>Agencias en derecho:</strong> fijadas por el juez conforme a tarifas del Consejo Superior de la Judicatura.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">️</div>
+        <h4>Condena en Costas</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Se condenan a la parte <strong>vencida</strong> en el juicio o a quien se le resuelvan desproporcionadamente recursos o incidentes.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3> Ejecutoria y Cosa Juzgada</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon"></div>
+        <h4>Ejecutoria (Art. 302 CGP)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Firmeza e intangibilidad de la providencia cuando no procedan o hayan vencido los términos de los recursos.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Cosa Juzgada</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Impide un nuevo juzgamiento entre las mismas partes, sobre el mismo objeto (<em>petitum</em>) y fundado en la misma causa (<em>causa petendi</em>).</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si Juan demanda a Pedro por $10 millones y pierde el juicio, Juan será condenado en costas, debiendo pagar los gastos del proceso y las agencias en derecho de Pedro.
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz">
+    <h2>🎯 Quiz Completo - 40 Preguntas</h2>
+    <p>Pon a prueba tus conocimientos sobre el Código General del Proceso.</p>
+
+    <div class="quiz-container">
+      <div class="quiz-header">
+        <h3>📊 Tu Progreso</h3>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="quiz-stats">
+          <div class="stat">Respondidas: <strong id="respondidas">0</strong>/40</div>
+          <div class="stat">Correctas: <strong id="correctas">0</strong></div>
+          <div class="stat">Incorrectas: <strong id="incorrectas">0</strong></div>
+          <div class="stat">Porcentaje: <strong id="porcentaje">0</strong>%</div>
+        </div>
+      </div>
+
+      <div class="quiz-tabs">
+        <div class="quiz-tab active" onclick="mostrarSeccion('s1', this)">T1 (3)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s2', this)">T2 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s3', this)">T3 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s4', this)">T4 (5)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s5', this)">T5 (3)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s6', this)">T6 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s7', this)">T7 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s8', this)">T8 (3)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s9', this)">T9 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s10', this)">T10 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s11', this)">T11 (2)</div>
+      </div>
+
+      <!-- SECCIÓN 1 -->
+      <div class="quiz-section active" id="s1">
+        <div class="pregunta" data-correcta="2" data-tema="1">
+          <span class="pregunta-num">1</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El CGP regula principalmente asuntos:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 1)">a) Penales y laborales</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">b) Contencioso-administrativos</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">c) Civiles, comerciales, de familia y agrarios</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">d) Constitucionales</div>
+          </div>
+          <div class="explicacion">El CGP regula la actividad procesal en asuntos civiles, comerciales, de familia y agrarios (Art. 1).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="1">
+          <span class="pregunta-num">2</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El principio de prevalencia del derecho sustancial significa que:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 2)">a) El derecho procesal prevalece sobre el sustancial</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">b) Las formas procesales son instrumento para la efectividad de los derechos sustanciales</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">c) Solo importa el resultado</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">d) Las formas no importan</div>
+          </div>
+          <div class="explicacion">Las formas procesales son instrumento para la efectividad de los derechos sustanciales (Art. 2 CGP).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="1">
+          <span class="pregunta-num">3</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El principio de inmediación exige:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 3)">a) Presencia directa del juez en la práctica de pruebas</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">b) Que el proceso sea escrito</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">c) Que las partes no asistan</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">d) Que el juez delegue funciones</div>
+          </div>
+          <div class="explicacion">La inmediación exige presencia directa del juez en la práctica de pruebas, en audiencias orales.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 2 -->
+      <div class="quiz-section" id="s2">
+        <div class="pregunta" data-correcta="2" data-tema="2">
+          <span class="pregunta-num">4</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La parte en sentido formal (procesal) es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 4)">a) El titular del derecho sustancial</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">b) El juez</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">c) Quien demanda o es demandado en el proceso</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">d) El testigo</div>
+          </div>
+          <div class="explicacion">La parte en sentido formal es quien demanda o es demandado en el proceso.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="2">
+          <span class="pregunta-num">5</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Tienen capacidad para ser parte:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 5)">a) Solo personas naturales</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">b) Solo personas jurídicas</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">c) Solo mayores de edad</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">d) Personas naturales, jurídicas, patrimonios autónomos y el concebido</div>
+          </div>
+          <div class="explicacion">Tienen capacidad para ser parte: personas naturales, jurídicas, patrimonios autónomos y el concebido.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="2">
+          <span class="pregunta-num">6</span><span class="pregunta-tipo">Conceptual</span>
+          <p>En el litisconsorcio necesario:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 6)">a) Los consortes son independientes</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">b) La sentencia exige decisión uniforme para todos los sujetos</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">c) Es opcional</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">d) Solo aplica en procesos ejecutivos</div>
+          </div>
+          <div class="explicacion">En el litisconsorcio necesario, la relación jurídica exige decisión uniforme; la sentencia no puede dictarse sin integración completa.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="2">
+          <span class="pregunta-num">7</span><span class="pregunta-tipo">Conceptual</span>
+          <p>En el litisconsorcio facultativo:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 7)">a) Los consortes son litigantes separados e independientes</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">b) La decisión debe ser uniforme</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">c) Es obligatorio</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">d) Solo aplica en procesos de familia</div>
+          </div>
+          <div class="explicacion">En el litisconsorcio facultativo, los consortes son considerados litigantes separados e independientes.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 3 -->
+      <div class="quiz-section" id="s3">
+        <div class="pregunta" data-correcta="2" data-tema="3">
+          <span class="pregunta-num">8</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La jurisdicción es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 8)">a) La medida de la competencia</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">b) El límite del juez</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">c) La potestad general del Estado para administrar justicia</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">d) La competencia del juez municipal</div>
+          </div>
+          <div class="explicacion">La jurisdicción es la potestad general del Estado para administrar justicia.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="3">
+          <span class="pregunta-num">9</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El factor funcional de competencia es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 9)">a) Prorrogable</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">b) Opcional</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">c) Solo aplicable en primera instancia</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">d) Improrrogable</div>
+          </div>
+          <div class="explicacion">El factor funcional (grados e instancias) es improrrogable (Art. 16 CGP).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="3">
+          <span class="pregunta-num">10</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El factor territorial de competencia es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 10)">a) Improrrogable</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">b) Prorrogable si no se impugna oportunamente</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">c) Siempre obligatorio</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">d) Solo aplicable en procesos ejecutivos</div>
+          </div>
+          <div class="explicacion">El factor territorial es prorrogable si no se impugna oportunamente mediante excepciones previas.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="3">
+          <span class="pregunta-num">11</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La cláusula general o residual (Art. 15 CGP) atribuye a la jurisdicción ordinaria civil:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 11)">a) Solo asuntos civiles</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">b) Todo asunto no atribuido expresamente a otra jurisdicción o especialidad</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">c) Solo asuntos comerciales</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">d) Solo asuntos de familia</div>
+          </div>
+          <div class="explicacion">La cláusula general atribuye a la jurisdicción ordinaria civil todo asunto no atribuido expresamente a otra jurisdicción.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 4 -->
+      <div class="quiz-section" id="s4">
+        <div class="pregunta" data-correcta="2" data-tema="4">
+          <span class="pregunta-num">12</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Las pretensiones en la demanda deben ser:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 12)">a) Implícitas</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">b) Verbales</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">c) Expresadas con precisión y claridad, clasificadas y separadas</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">d) Solo la principal</div>
+          </div>
+          <div class="explicacion">Las pretensiones deben expresarse con precisión y claridad, clasificadas y separadas (Art. 82 CGP).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="4">
+          <span class="pregunta-num">13</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los hechos en la demanda deben estar:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 13)">a) En desorden</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">b) Solo los favorables</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">c) Sin numeración</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">d) Debidamente determinados, clasificados y numerados</div>
+          </div>
+          <div class="explicacion">Los hechos deben estar debidamente determinados, clasificados y numerados.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="4">
+          <span class="pregunta-num">14</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El juramento estimatorio se exige cuando:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 14)">a) Siempre</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">b) Se reclama indemnización, frutos o mejoras</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">c) Nunca</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">d) Solo en procesos ejecutivos</div>
+          </div>
+          <div class="explicacion">El juramento estimatorio se exige cuando se reclama indemnización, frutos o mejoras.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="4">
+          <span class="pregunta-num">15</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La acreditación del envío simultáneo consiste en:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 15)">a) Enviar copia electrónica de la demanda al demandado al momento de su presentación</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">b) Notificar personalmente al demandado</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">c) Publicar en el diario oficial</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">d) Enviar por correo certificado</div>
+          </div>
+          <div class="explicacion">Se debe enviar copia electrónica de la demanda y anexos al demandado al momento de su presentación ante el juzgado.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="4">
+          <span class="pregunta-num">16</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los presupuestos sustanciales de la demanda incluyen:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 16)">a) Solo la firma</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">b) Solo los anexos</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">c) Legitimación en la causa, interés sustancial e idoneidad de la pretensión</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">d) Solo la cuantía</div>
+          </div>
+          <div class="explicacion">Los presupuestos sustanciales son: legitimación en la causa, interés sustancial e inmediato para obrar, e idoneidad de la pretensión.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 5 -->
+      <div class="quiz-section" id="s5">
+        <div class="pregunta" data-correcta="1" data-tema="5">
+          <span class="pregunta-num">17</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La inadmisión de la demanda concede un plazo de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 17)">a) 3 días</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">b) 5 días para subsanar</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">c) 10 días</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">d) 15 días</div>
+          </div>
+          <div class="explicacion">Se concede un plazo imperativo de 5 días para subsanar los defectos indicados (Art. 90 CGP).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="5">
+          <span class="pregunta-num">18</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El rechazo de plano procede cuando:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 18)">a) Falta un anexo</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">b) Hay errores formales subsanables</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">c) Falta jurisdicción o la pretensión ha caducado</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">d) Falta el juramento estimatorio</div>
+          </div>
+          <div class="explicacion">El rechazo de plano procede por falta de jurisdicción/competencia o cuando la pretensión ha caducado.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="5">
+          <span class="pregunta-num">19</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Si no se subsanan los defectos en 5 días:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 19)">a) Se admite la demanda</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">b) Se concede plazo adicional</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">c) Se rechaza de plano</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">d) Se archiva sin más trámite</div>
+          </div>
+          <div class="explicacion">Si no se subsanan los defectos en 5 días, se rechaza de plano la demanda.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 6 -->
+      <div class="quiz-section" id="s6">
+        <div class="pregunta" data-correcta="3" data-tema="6">
+          <span class="pregunta-num">20</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La notificación personal del auto admisorio se entiende surtida:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 20)">a) Inmediatamente</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">b) Al día siguiente</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">c) 3 días después</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">d) 2 días hábiles después del envío al correo</div>
+          </div>
+          <div class="explicacion">La notificación personal por mensaje de datos se entiende surtida 2 días hábiles después del envío (Art. 291 CGP y Ley 2213/2022).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="6">
+          <span class="pregunta-num">21</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La notificación por estado procede para:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 21)">a) El auto admisorio</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">b) Autos y sentencias que no exijan notificación personal</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">c) El mandamiento ejecutivo</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">d) Todas las providencias</div>
+          </div>
+          <div class="explicacion">La notificación por estado procede para providencias que no exijan notificación personal.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="6">
+          <span class="pregunta-num">22</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El emplazamiento procede cuando:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 22)">a) El demandado se niega a recibir</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">b) El demandado está en el exterior</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">c) Se ignora el paradero del demandado</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">d) El demandado es menor de edad</div>
+          </div>
+          <div class="explicacion">El emplazamiento procede cuando se ignora el paradero del demandado (Art. 293 CGP).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="6">
+          <span class="pregunta-num">23</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La falta de notificación del auto admisorio genera:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 23)">a) Nulidad insubsanable</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">b) Nulidad subsanable</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">c) Irregularidad leve</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">d) Ninguna consecuencia</div>
+          </div>
+          <div class="explicacion">La falta o indebida notificación del auto admisorio genera nulidad insubsanable (salvo saneamiento por conducta concluyente).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 7 -->
+      <div class="quiz-section" id="s7">
+        <div class="pregunta" data-correcta="1" data-tema="7">
+          <span class="pregunta-num">24</span><span class="pregunta-tipo">Conceptual</span>
+          <p>En la contestación, el demandado debe pronunciarse sobre:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 24)">a) Solo las pretensiones</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">b) Cada hecho y pretensión (admitir, negar o no le consta)</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">c) Solo los hechos</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">d) Solo el derecho</div>
+          </div>
+          <div class="explicacion">El demandado debe pronunciarse expresamente sobre cada hecho y pretensión (Art. 96 CGP).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="7">
+          <span class="pregunta-num">25</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El allanamiento a la demanda (Art. 98) es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 25)">a) Negativa de los hechos</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">b) Formulación de excepciones</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">c) Aceptación expresa e incondicional de las pretensiones y hechos</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">d) Silencio del demandado</div>
+          </div>
+          <div class="explicacion">El allanamiento es la aceptación expresa e incondicional de las pretensiones y hechos.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="7">
+          <span class="pregunta-num">26</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La contumacia o falta de contestación (Art. 97) produce:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 26)">a) Presunción de certeza de los hechos susceptibles de confesión</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">b) Allanamiento automático</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">c) Rechazo de la demanda</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">d) Nulidad del proceso</div>
+          </div>
+          <div class="explicacion">La contumacia hace presumir ciertos los hechos susceptibles de confesión de la demanda.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="7">
+          <span class="pregunta-num">27</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Las excepciones de mérito introducen:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 27)">a) Defectos de procedimiento</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">b) Falta de competencia</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">c) Ineptitud de la demanda</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">d) Hechos impeditivos, modificativos o extintivos (pago, prescripción, novación)</div>
+          </div>
+          <div class="explicacion">Las excepciones de mérito introducen hechos impeditivos, modificativos o extintivos para destruir el derecho pretendido.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 8 -->
+      <div class="quiz-section" id="s8">
+        <div class="pregunta" data-correcta="1" data-tema="8">
+          <span class="pregunta-num">28</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La prescripción sustancial:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 28)">a) Opera de pleno derecho</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">b) Extingue el derecho sustancial y debe ser alegada por la parte</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">c) Es declarada de oficio</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">d) No puede interrumpirse</div>
+          </div>
+          <div class="explicacion">La prescripción sustancial extingue el derecho y es una excepción de mérito que debe ser alegada.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="8">
+          <span class="pregunta-num">29</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La caducidad procesal:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 29)">a) Debe ser alegada por la parte</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">b) Solo opera en procesos ejecutivos</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">c) Opera de pleno derecho y debe ser declarada de oficio</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">d) Nunca opera</div>
+          </div>
+          <div class="explicacion">La caducidad opera de pleno derecho y debe ser declarada de oficio por el juez.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="8">
+          <span class="pregunta-num">30</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La radicación de la demanda interrumpe la prescripción si el auto admisorio se notifica al demandado dentro de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 30)">a) 1 año desde la notificación al demandante</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">b) 6 meses</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">c) 2 años</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">d) 3 meses</div>
+          </div>
+          <div class="explicacion">La interrupción opera si el auto admisorio se notifica al demandado dentro de 1 año desde la notificación al demandante (Art. 94 CGP).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 9 -->
+      <div class="quiz-section" id="s9">
+        <div class="pregunta" data-correcta="2" data-tema="9">
+          <span class="pregunta-num">31</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El proceso verbal de mayor cuantía se estructura en:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 31)">a) Una sola audiencia</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">b) Tres audiencias</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">c) Dos audiencias (Inicial y de Instrucción y Juzgamiento)</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">d) Solo escrito</div>
+          </div>
+          <div class="explicacion">El proceso verbal de mayor cuantía tiene dos audiencias: Inicial (Art. 372) y de Instrucción y Juzgamiento (Art. 373).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="9">
+          <span class="pregunta-num">32</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El proceso verbal sumario (mínima cuantía) se tramita en:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 32)">a) Dos audiencias</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">b) Tres audiencias</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">c) Solo escrito</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">d) Una sola audiencia</div>
+          </div>
+          <div class="explicacion">El verbal sumario se tramita en una sola audiencia con traslado de 10 días.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="9">
+          <span class="pregunta-num">33</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los procesos ejecutivos persiguen:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 33)">a) Declarar un derecho</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">b) La ejecución coactiva de obligaciones claras, expresas y exigibles</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">c) Liquidar una sociedad</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">d) Declarar la ausencia</div>
+          </div>
+          <div class="explicacion">Los procesos ejecutivos persiguen la ejecución coactiva de obligaciones contenidas en títulos ejecutivos.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="9">
+          <span class="pregunta-num">34</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los procesos de jurisdicción voluntaria se caracterizan por:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 34)">a) No existir contención ni conflicto entre partes</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">b) Tener demandante y demandado</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">c) Ser siempre orales</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">d) Requerir pruebas testimoniales</div>
+          </div>
+          <div class="explicacion">En la jurisdicción voluntaria no existe contención ni conflicto entre partes.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 10 -->
+      <div class="quiz-section" id="s10">
+        <div class="pregunta" data-correcta="2" data-tema="10">
+          <span class="pregunta-num">35</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El recurso de reposición procede contra:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 35)">a) Sentencias</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">b) Autos del superior</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">c) Autos para que el mismo juez los revoque, reforme, aclare o adicione</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">d) Sentencias de segunda instancia</div>
+          </div>
+          <div class="explicacion">La reposición procede contra autos para que el mismo juez los revoque, reforme, aclare o adicione.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="10">
+          <span class="pregunta-num">36</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El principio de no reformatio in pejus significa que:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 36)">a) El superior siempre reforma</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">b) El superior puede empeorar la situación</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">c) No hay límites para el superior</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">d) El superior no puede empeorar la situación del apelante único</div>
+          </div>
+          <div class="explicacion">El superior no puede empeorar la situación del apelante único (no reformatio in pejus).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="10">
+          <span class="pregunta-num">37</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La casación procede ante:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 37)">a) El Tribunal Superior</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">b) La Sala Civil de la Corte Suprema</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">c) El Consejo de Estado</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">d) La Corte Constitucional</div>
+          </div>
+          <div class="explicacion">La casación procede ante la Sala Civil de la Corte Suprema contra sentencias de segunda instancia.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="10">
+          <span class="pregunta-num">38</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La revisión procede contra:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 38)">a) Sentencias ejecutoriadas (cosa juzgada) por causales taxativas</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">b) Autos interlocutorios</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">c) Providencias de trámite</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">d) Cualquier providencia</div>
+          </div>
+          <div class="explicacion">La revisión es vía extraordinaria contra sentencias ejecutoriadas por causales taxativas (fraude, prueba falsa, indebida representación).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 11 -->
+      <div class="quiz-section" id="s11">
+        <div class="pregunta" data-correcta="1" data-tema="11">
+          <span class="pregunta-num">39</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Las costas procesales incluyen:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 39)">a) Solo honorarios del juez</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">b) Gastos del proceso y agencias en derecho</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">c) Solo agencias en derecho</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">d) Solo gastos de notificación</div>
+          </div>
+          <div class="explicacion">Las costas incluyen gastos del proceso (honorarios de peritos, expensas) y agencias en derecho (Art. 365 CGP).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="11">
+          <span class="pregunta-num">40</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La cosa juzgada impide:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 40)">a) La ejecución de la sentencia</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">b) La interposición de recursos</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">c) Un nuevo juzgamiento entre las mismas partes, sobre el mismo objeto y causa</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">d) La notificación de la sentencia</div>
+          </div>
+          <div class="explicacion">La cosa juzgada impide un nuevo juzgamiento entre las mismas partes, sobre el mismo objeto (petitum) y causa (causa petendi).</div>
+        </div>
+      </div>
+
+      <div class="resultado-final" id="resultadoFinal">
+        <h3>🏆 Resultado Final</h3>
+        <div class="puntaje-final" id="puntajeFinal">0/40</div>
+        <p id="mensajeFinal"></p>
+        <div class="desglose-temas" id="desgloseTemas"></div>
+        <button onclick="reiniciarQuiz()" class="btn-reset">🔄 Reiniciar Quiz</button>
+      </div>
+
+      <div style="text-align: center; margin-top: 1.5rem;">
+        <button onclick="verResultadoFinal()">📊 Ver Resultado Final</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>⚖️ Guía Didáctica - Código General del Proceso</p>
+  <p>Ley 1564 de 2012 · Derecho Procesal Civil Colombiano</p>
+  <p style="margin-top: 1rem; opacity: 0.7;">© 2026 - Material educativo interactivo</p>
+</footer>
+
+<script>
+  function toggleAcordeon(header) {
+    header.classList.toggle('active');
+    const content = header.nextElementSibling;
+    content.classList.toggle('active');
+  }
+
+  let respuestas = {};
+  const totalPreguntas = 40;
+
+  function mostrarSeccion(id, tab) {
+    document.querySelectorAll('.quiz-section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.quiz-tab').forEach(t => t.classList.remove('active'));
+    
+    document.getElementById(id).classList.add('active');
+    tab.classList.add('active');
+  }
+
+  function seleccionar(opcion, preguntaNum) {
+    if (respuestas[preguntaNum] !== undefined) return;
+
+    const pregunta = opcion.closest('.pregunta');
+    const opciones = pregunta.querySelectorAll('.opcion');
+    const correcta = parseInt(pregunta.dataset.correcta);
+    const tema = parseInt(pregunta.dataset.tema);
+    const seleccionada = Array.from(opciones).indexOf(opcion);
+    const explicacion = pregunta.querySelector('.explicacion');
+
+    opciones.forEach(o => o.classList.add('disabled'));
+
+    if (seleccionada === correcta) {
+      opcion.classList.add('correcta');
+      respuestas[preguntaNum] = { correcta: true, tema: tema };
+    } else {
+      opcion.classList.add('incorrecta');
+      opciones[correcta].classList.add('correcta');
+      respuestas[preguntaNum] = { correcta: false, tema: tema };
+    }
+
+    explicacion.classList.add('visible');
+    pregunta.classList.add('answered');
+    actualizarEstadisticas();
+  }
+
+  function actualizarEstadisticas() {
+    const total = Object.keys(respuestas).length;
+    const correctas = Object.values(respuestas).filter(r => r.correcta).length;
+    const incorrectas = total - correctas;
+    const porcentaje = total > 0 ? Math.round((correctas / total) * 100) : 0;
+
+    document.getElementById('respondidas').textContent = total;
+    document.getElementById('correctas').textContent = correctas;
+    document.getElementById('incorrectas').textContent = incorrectas;
+    document.getElementById('porcentaje').textContent = porcentaje;
+
+    const progreso = (total / totalPreguntas) * 100;
+    document.getElementById('progressFill').style.width = progreso + '%';
+  }
+
+  function verResultadoFinal() {
+    const total = Object.keys(respuestas).length;
+    
+    if (total < totalPreguntas) {
+      alert(`⚠️ Aún te faltan ${totalPreguntas - total} preguntas por responder.`);
+      return;
+    }
+
+    const correctas = Object.values(respuestas).filter(r => r.correcta).length;
+    const porcentaje = Math.round((correctas / totalPreguntas) * 100);
+
+    const resultadoFinal = document.getElementById('resultadoFinal');
+    resultadoFinal.classList.add('visible');
+
+    document.getElementById('puntajeFinal').textContent = `${correctas}/${totalPreguntas}`;
+
+    let mensaje = '';
+    if (porcentaje === 100) mensaje = ' ¡PERFECTO! Dominas el Derecho Procesal Civil.';
+    else if (porcentaje >= 90) mensaje = '🌟 ¡Excelente! Dominio sobresaliente.';
+    else if (porcentaje >= 75) mensaje = '✅ ¡Muy bien! Buen dominio.';
+    else if (porcentaje >= 60) mensaje = '📚 Aceptable. Repasa los temas donde fallaste.';
+    else if (porcentaje >= 40) mensaje = '📖 Necesitas reforzar varios conceptos.';
+    else mensaje = '🔍 Es necesario estudiar nuevamente todos los temas.';
+
+    document.getElementById('mensajeFinal').textContent = mensaje;
+
+    const temas = {
+      1: { nombre: 'T1: Principios', total: 3, correctas: 0 },
+      2: { nombre: 'T2: Sujetos', total: 4, correctas: 0 },
+      3: { nombre: 'T3: Competencia', total: 4, correctas: 0 },
+      4: { nombre: 'T4: Demanda', total: 5, correctas: 0 },
+      5: { nombre: 'T5: Calificación', total: 3, correctas: 0 },
+      6: { nombre: 'T6: Notificaciones', total: 4, correctas: 0 },
+      7: { nombre: 'T7: Contestación', total: 4, correctas: 0 },
+      8: { nombre: 'T8: Prescripción', total: 3, correctas: 0 },
+      9: { nombre: 'T9: Tipos de Procesos', total: 4, correctas: 0 },
+      10: { nombre: 'T10: Recursos', total: 4, correctas: 0 },
+      11: { nombre: 'T11: Costas', total: 2, correctas: 0 }
+    };
+
+    Object.values(respuestas).forEach(r => {
+      if (r.correcta) temas[r.tema].correctas++;
+    });
+
+    const desgloseHTML = Object.values(temas).map(t => {
+      const pct = Math.round((t.correctas / t.total) * 100);
+      return `
+        <div class="desglose-item">
+          <h4>${t.nombre}</h4>
+          <p>${t.correctas}/${t.total} (${pct}%)</p>
+          <div class="mini-bar">
+            <div class="mini-bar-fill" style="width: ${pct}%"></div>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    document.getElementById('desgloseTemas').innerHTML = desgloseHTML;
+    resultadoFinal.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  function reiniciarQuiz() {
+    if (!confirm('¿Reiniciar el quiz?')) return;
+
+    respuestas = {};
+
+    document.querySelectorAll('.opcion').forEach(o => o.classList.remove('correcta', 'incorrecta', 'disabled'));
+    document.querySelectorAll('.explicacion').forEach(e => e.classList.remove('visible'));
+    document.querySelectorAll('.pregunta').forEach(p => p.classList.remove('answered'));
+    document.getElementById('resultadoFinal').classList.remove('visible');
+
+    actualizarEstadisticas();
+    mostrarSeccion('s1', document.querySelector('.quiz-tab'));
+    document.getElementById('quiz').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  document.querySelectorAll('nav a').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+</script>
+
+</body>
+</html>
