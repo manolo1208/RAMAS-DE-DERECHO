@@ -1,0 +1,2273 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parte Especial del Código Penal - Tipos Penales Emblemáticos</title>
+<style>
+  :root {
+    --primary: #7f1d1d;
+    --secondary: #fbbf24;
+    --accent: #991b1b;
+    --light: #fef3f2;
+    --dark: #1a202c;
+    --success: #38a169;
+    --warning: #d69e2e;
+    --danger: #c53030;
+    --card-bg: #ffffff;
+    --shadow: 0 4px 15px rgba(0,0,0,0.08);
+    --shadow-hover: 0 8px 25px rgba(0,0,0,0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    background: var(--light);
+    color: var(--dark);
+    line-height: 1.7;
+  }
+
+  header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    color: white;
+    padding: 2rem 1rem;
+    text-align: center;
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::before {
+    content: '️';
+    position: absolute;
+    font-size: 15rem;
+    opacity: 0.05;
+    top: -30px;
+    right: -30px;
+  }
+
+  header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: 2px;
+  }
+
+  header p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    font-style: italic;
+  }
+
+  nav {
+    background: var(--dark);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow);
+  }
+
+  nav ul {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0.5rem;
+  }
+
+  nav a {
+    color: var(--light);
+    text-decoration: none;
+    padding: 0.7rem 1rem;
+    margin: 0.2rem;
+    border-radius: 5px;
+    font-size: 0.85rem;
+    transition: all 0.3s;
+    display: block;
+  }
+
+  nav a:hover {
+    background: var(--secondary);
+    color: var(--dark);
+    transform: translateY(-2px);
+  }
+
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+  }
+
+  section {
+    background: var(--card-bg);
+    margin-bottom: 2.5rem;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    border-left: 5px solid var(--secondary);
+    scroll-margin-top: 80px;
+  }
+
+  section h2 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--secondary);
+  }
+
+  section h3 {
+    color: var(--accent);
+    font-size: 1.4rem;
+    margin: 1.5rem 0 0.8rem;
+  }
+
+  section h4 {
+    color: var(--primary);
+    font-size: 1.15rem;
+    margin: 1rem 0 0.5rem;
+  }
+
+  p { margin-bottom: 1rem; text-align: justify; }
+
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.2rem;
+    margin: 1.5rem 0;
+  }
+
+  .card {
+    background: linear-gradient(135deg, #fff 0%, #f9f6ef 100%);
+    border: 2px solid var(--secondary);
+    border-radius: 10px;
+    padding: 1.2rem;
+    transition: all 0.3s;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--primary);
+  }
+
+  .card .icon {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .card h4 {
+    text-align: center;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+  }
+
+  .card .detail {
+    display: none;
+    margin-top: 0.8rem;
+    padding-top: 0.8rem;
+    border-top: 1px dashed var(--secondary);
+    font-size: 0.95rem;
+  }
+
+  .card.active .detail { display: block; }
+
+  .card .hint {
+    text-align: center;
+    color: var(--accent);
+    font-size: 0.85rem;
+    font-style: italic;
+  }
+
+  .mapa-container {
+    background: #fdfbf5;
+    border: 2px dashed var(--secondary);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    overflow-x: auto;
+  }
+
+  .mapa {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 600px;
+  }
+
+  .nodo {
+    background: var(--primary);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+    font-weight: bold;
+    text-align: center;
+    min-width: 180px;
+    box-shadow: var(--shadow);
+  }
+
+  .nodo.central {
+    background: linear-gradient(135deg, var(--secondary), #e0b888);
+    color: var(--dark);
+    font-size: 1.2rem;
+    padding: 1rem 2rem;
+  }
+
+  .nodo.sub {
+    background: var(--accent);
+    font-size: 0.95rem;
+  }
+
+  .linea {
+    width: 3px;
+    height: 25px;
+    background: var(--secondary);
+  }
+
+  .linea-h {
+    height: 3px;
+    background: var(--secondary);
+    width: 80%;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .rama {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 1rem;
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  .rama-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    min-width: 140px;
+  }
+
+  .ejemplo {
+    background: #e6f7ee;
+    border-left: 4px solid var(--success);
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .ejemplo strong { color: var(--success); }
+
+  .alerta {
+    background: #fff8e1;
+    border-left: 4px solid var(--warning);
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .alerta strong { color: var(--warning); }
+
+  .cita {
+    background: #f0f7ff;
+    border-left: 4px solid var(--accent);
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+    color: var(--primary);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    font-size: 0.9rem;
+  }
+
+  th {
+    background: var(--primary);
+    color: white;
+    padding: 0.8rem;
+    text-align: left;
+  }
+
+  td {
+    padding: 0.8rem;
+    border-bottom: 1px solid #eee;
+  }
+
+  tr:nth-child(even) { background: #f9f6ef; }
+  tr:hover { background: #f0ead6; }
+
+  .quiz-container {
+    background: linear-gradient(135deg, #f7f4ed 0%, #fff 100%);
+    padding: 1.5rem;
+    border-radius: 10px;
+    border: 2px solid var(--accent);
+  }
+
+  .quiz-header {
+    background: var(--primary);
+    color: white;
+    padding: 1.2rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .quiz-header h3 {
+    color: white;
+    margin: 0 0 0.5rem 0;
+  }
+
+  .progress-bar {
+    background: rgba(255,255,255,0.2);
+    height: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+  }
+
+  .progress-fill {
+    background: var(--secondary);
+    height: 100%;
+    width: 0%;
+    transition: width 0.4s ease;
+  }
+
+  .quiz-stats {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .stat {
+    background: rgba(255,255,255,0.1);
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    font-size: 0.9rem;
+  }
+
+  .stat strong { color: var(--secondary); }
+
+  .quiz-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    padding: 0.5rem;
+    background: #f0ead6;
+    border-radius: 8px;
+  }
+
+  .quiz-tab {
+    background: white;
+    border: 2px solid var(--accent);
+    color: var(--accent);
+    padding: 0.5rem 0.8rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.8rem;
+    transition: all 0.3s;
+    flex: 1;
+    min-width: 90px;
+    text-align: center;
+  }
+
+  .quiz-tab:hover {
+    background: var(--accent);
+    color: white;
+  }
+
+  .quiz-tab.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+  }
+
+  .quiz-section {
+    display: none;
+  }
+
+  .quiz-section.active {
+    display: block;
+    animation: fadeIn 0.4s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .pregunta {
+    margin-bottom: 1.5rem;
+    padding: 1.2rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    border-left: 4px solid var(--accent);
+    transition: all 0.3s;
+  }
+
+  .pregunta.answered {
+    border-left-color: var(--secondary);
+  }
+
+  .pregunta-num {
+    display: inline-block;
+    background: var(--accent);
+    color: white;
+    padding: 0.2rem 0.7rem;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    margin-right: 0.5rem;
+  }
+
+  .pregunta-tipo {
+    display: inline-block;
+    background: var(--secondary);
+    color: var(--dark);
+    padding: 0.2rem 0.7rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    margin-left: 0.3rem;
+    font-weight: bold;
+  }
+
+  .pregunta p { 
+    font-weight: bold; 
+    color: var(--primary); 
+    margin: 0.8rem 0;
+    text-align: left;
+  }
+
+  .opciones { display: flex; flex-direction: column; gap: 0.5rem; }
+
+  .opcion {
+    padding: 0.7rem 1rem;
+    background: #f9f6ef;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+  }
+
+  .opcion:hover:not(.disabled) {
+    border-color: var(--accent);
+    background: #e8f0f7;
+  }
+
+  .opcion.disabled {
+    cursor: not-allowed;
+    opacity: 0.85;
+  }
+
+  .opcion.correcta {
+    background: #c6f6d5;
+    border-color: var(--success);
+    color: var(--success);
+    font-weight: bold;
+  }
+
+  .opcion.incorrecta {
+    background: #fed7d7;
+    border-color: var(--danger);
+    color: var(--danger);
+  }
+
+  .opcion.correcta::after {
+    content: ' ✓';
+    font-weight: bold;
+  }
+
+  .opcion.incorrecta::after {
+    content: ' ✗';
+    font-weight: bold;
+  }
+
+  .explicacion {
+    margin-top: 0.8rem;
+    padding: 0.8rem;
+    background: #f0f7ff;
+    border-left: 3px solid var(--accent);
+    border-radius: 0 6px 6px 0;
+    font-size: 0.9rem;
+    display: none;
+    font-style: italic;
+  }
+
+  .explicacion.visible {
+    display: block;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .resultado-final {
+    margin-top: 2rem;
+    padding: 2rem;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    color: white;
+    border-radius: 12px;
+    text-align: center;
+    display: none;
+  }
+
+  .resultado-final.visible {
+    display: block;
+    animation: fadeIn 0.5s ease;
+  }
+
+  .resultado-final h3 {
+    color: var(--secondary);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .puntaje-final {
+    font-size: 3rem;
+    font-weight: bold;
+    color: var(--secondary);
+    margin: 1rem 0;
+  }
+
+  .desglose-temas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+    text-align: left;
+  }
+
+  .desglose-item {
+    background: rgba(255,255,255,0.1);
+    padding: 1rem;
+    border-radius: 8px;
+  }
+
+  .desglose-item h4 {
+    color: var(--secondary);
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+  }
+
+  .mini-bar {
+    background: rgba(255,255,255,0.2);
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+  }
+
+  .mini-bar-fill {
+    background: var(--secondary);
+    height: 100%;
+    transition: width 0.6s ease;
+  }
+
+  button {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 1rem;
+    transition: all 0.3s;
+  }
+
+  button:hover {
+    background: var(--secondary);
+    color: var(--dark);
+    transform: translateY(-2px);
+  }
+
+  .btn-reset {
+    background: var(--danger);
+    margin-left: 0.5rem;
+  }
+
+  .btn-reset:hover {
+    background: #9b2c2c;
+    color: white;
+  }
+
+  .acordeon-item {
+    margin-bottom: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .acordeon-header {
+    background: var(--accent);
+    color: white;
+    padding: 1rem;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.3s;
+  }
+
+  .acordeon-header:hover { background: var(--primary); }
+
+  .acordeon-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    background: white;
+  }
+
+  .acordeon-content.active {
+    max-height: 2000px;
+    padding: 1rem;
+  }
+
+  .flecha { transition: transform 0.3s; }
+  .acordeon-header.active .flecha { transform: rotate(180deg); }
+
+  footer {
+    background: var(--dark);
+    color: var(--light);
+    text-align: center;
+    padding: 2rem 1rem;
+    margin-top: 2rem;
+  }
+
+  footer p { margin-bottom: 0.5rem; }
+
+  @media (max-width: 768px) {
+    header h1 { font-size: 1.8rem; }
+    section { padding: 1.2rem; }
+    section h2 { font-size: 1.5rem; }
+    nav a { font-size: 0.75rem; padding: 0.5rem 0.6rem; }
+    .quiz-tab { font-size: 0.7rem; padding: 0.4rem 0.5rem; }
+    table { font-size: 0.8rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>⚔️ Parte Especial - Tipos Penales Emblemáticos</h1>
+  <p>Código Penal Colombiano (Ley 599/2000) · Guía Didáctica Interactiva</p>
+</header>
+
+<nav>
+  <ul>
+    <li><a href="#tema1">1. Clasificación</a></li>
+    <li><a href="#tema2">2. Elementos</a></li>
+    <li><a href="#tema3">3. Homicidio</a></li>
+    <li><a href="#tema4">4. Hurto</a></li>
+    <li><a href="#tema5">5. Peculado</a></li>
+    <li><a href="#tema6">6. Extorsión</a></li>
+    <li><a href="#tema7">7. Acceso Carnal</a></li>
+    <li><a href="#tema8">8. Comparativa</a></li>
+    <li><a href="#quiz">Quiz (40)</a></li>
+  </ul>
+</nav>
+
+<main>
+
+  <section>
+    <h2>📚 Introducción</h2>
+    <p>Bienvenido a esta guía interactiva sobre la <strong>Parte Especial del Código Penal Colombiano</strong>. Aquí aprenderás a descomponer dogmáticamente los tipos penales más emblemáticos: homicidio, hurto, peculado, extorsión y acceso carnal violento, identificando sus elementos estructurales, agravantes y atenuantes.</p>
+    <div class="alerta">
+      <strong>💡 Cómo usar esta guía:</strong> Haz clic en las tarjetas para ver detalles, despliega los acordeones para información adicional y prueba tus conocimientos con el quiz de 40 preguntas al final.
+    </div>
+  </section>
+
+  <!-- TEMA 1: CLASIFICACIÓN ESTRUCTURAL -->
+  <section id="tema1">
+    <h2>1. Clasificación Estructural de los Tipos Penales</h2>
+    <p>La doctrina penal diferencia tres estructuras formales según la relación existente entre las normas.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">TIPOS PENALES</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Básico</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Matriz original</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Autónomo</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Delito nuevo</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Subordinado</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Agravante/Atenuante</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Las Tres Estructuras</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🧱</div>
+        <h4>Tipo Básico (Fundamental)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Es la <strong>matriz o "molde original"</strong> que describe una conducta humana de manera completa e independiente.</p>
+          <p><strong>Ejemplo:</strong> Homicidio simple (Art. 103): "El que matare a otro..."</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon"></div>
+        <h4>Tipo Autónomo</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Surge al añadir elementos especiales (motivaciones o circunstancias únicas) que crean un <strong>delito completamente nuevo e independiente</strong>.</p>
+          <p><strong>Ejemplos:</strong> Homicidio por piedad (Art. 106); Feminicidio (Art. 104A).</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🔗</div>
+        <h4>Tipo Subordinado (Complementado)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Norma accesoria que <strong>no existe de forma autónoma</strong>; requiere "amarrarse" al tipo básico para modificar la pena.</p>
+          <ul>
+            <li><strong>Agravantes:</strong> aumentan la sanción</li>
+            <li><strong>Atenuantes:</strong> disminuyen la sanción</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo comparativo:</strong> El <em>homicidio simple</em> (Art. 103) es el tipo básico. El <em>homicidio por piedad</em> (Art. 106) es un tipo autónomo atenuado. El <em>homicidio agravado</em> (Art. 104) es un tipo subordinado que se "amarra" al básico para aumentar la pena.
+    </div>
+  </section>
+
+  <!-- TEMA 2: ELEMENTOS DE DESCOMPOSICIÓN -->
+  <section id="tema2">
+    <h2>2. Elementos de Descomposición del Tipo Penal</h2>
+    <p>Cada tipo penal se descompone en componentes dogmáticos esenciales que permiten su análisis sistemático.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">ELEMENTOS DEL TIPO</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Sujetos</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Verbo Rector</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Objeto</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Bien Jurídico</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Subjetivo</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Los 7 Elementos Esenciales</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">👤</div>
+        <h4>Sujeto Activo</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Quien ejecuta la conducta.</p>
+          <ul>
+            <li><strong>Común:</strong> "El que" (cualquiera)</li>
+            <li><strong>Calificado:</strong> exige condición jurídica (ej: "servidor público")</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🎯</div>
+        <h4>Sujeto Pasivo</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Titular del bien jurídico lesionado o puesto en peligro.</p>
+          <p>Puede ser persona física, jurídica, la sociedad o el Estado.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚡</div>
+        <h4>Verbo Rector</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>La acción u omisión principal prohibida (matar, apoderar, apropiarse).</p>
+          <ul>
+            <li><strong>Simple:</strong> un solo verbo</li>
+            <li><strong>Compuesto/mixto:</strong> varios verbos alternativos</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📦</div>
+        <h4>Objeto Material</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>La persona o cosa sobre la que recae físicamente la acción.</p>
+          <ul>
+            <li><strong>Personal:</strong> cuerpo de la víctima</li>
+            <li><strong>Real:</strong> cosa mueble</li>
+            <li><strong>Inmaterial:</strong> bienes inmateriales</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🛡️</div>
+        <h4>Bien Jurídico Tutelado</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>El interés o valor protegido por el Estado.</p>
+          <p>Ejemplos: la vida, el patrimonio, la administración pública, la libertad sexual.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🧠</div>
+        <h4>Aspecto Subjetivo</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Modalidad con la que actúa el agente:</p>
+          <ul>
+            <li><strong>Dolo:</strong> conocimiento y voluntad</li>
+            <li><strong>Culpa:</strong> infracción al deber de cuidado</li>
+            <li><strong>Preterintención:</strong> dolo inicial + resultado culposo</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🔍</div>
+        <h4>Elementos Descriptivos y Normativos</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <ul>
+            <li><strong>Descriptivos:</strong> se perciben con los sentidos ("matar", "cosa")</li>
+            <li><strong>Normativos:</strong> exigen juicio de valoración ("ajena", "servidor público")</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong> Ejemplo:</strong> En el hurto (Art. 239), "apoderarse" es el verbo rector, "cosa mueble" es el objeto material, "ajena" es un elemento normativo (requiere valoración jurídica de propiedad), y el patrimonio económico es el bien jurídico tutelado.
+    </div>
+  </section>
+
+  <!-- TEMA 3: HOMICIDIO -->
+  <section id="tema3">
+    <h2>3. Homicidio (Título I: Delitos contra la Vida)</h2>
+    <p>El homicidio es el delito contra la vida humana independiente, con múltiples modalidades según las circunstancias.</p>
+
+    <h3>🗺️ Mapa Conceptual del Homicidio</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">HOMICIDIO</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Básico (103)</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Simple</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Agravado (104)</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Circunstancias</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Atenuado (106)</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Piedad</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3> Tipo Básico (Art. 103 C.P.)</h3>
+    <div class="cita">
+      <strong>"El que matare a otro..."</strong> — Art. 103 Código Penal
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Elemento</th>
+          <th>Descripción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Sujeto Activo</strong></td>
+          <td>Común ("El que")</td>
+        </tr>
+        <tr>
+          <td><strong>Sujeto Pasivo</strong></td>
+          <td>Común ("a otro" – persona humana viva)</td>
+        </tr>
+        <tr>
+          <td><strong>Verbo Rector</strong></td>
+          <td>Simple ("matare")</td>
+        </tr>
+        <tr>
+          <td><strong>Objeto Material</strong></td>
+          <td>Personal (el cuerpo humano de la víctima)</td>
+        </tr>
+        <tr>
+          <td><strong>Bien Jurídico</strong></td>
+          <td>La vida humana independiente</td>
+        </tr>
+        <tr>
+          <td><strong>Elemento Subjetivo</strong></td>
+          <td>Dolo (conocimiento y voluntad de causar la muerte)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>️ Circunstancias de Agravación (Art. 104 C.P.)</h3>
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>🔺 Agravantes del Homicidio</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <ul>
+          <li><strong>Parricidio:</strong> en cónyuge, ascendientes, descendientes o parientes</li>
+          <li><strong>Facilitación de otro delito:</strong> para preparar, facilitar o consumar otra conducta punible o asegurar impunidad</li>
+          <li><strong>Medio catastrófico:</strong> veneno, incendio, explosión (peligro común)</li>
+          <li><strong>Motivos especiales:</strong> precio, promesa remuneratoria, ánimo de lucro o motivo abyecto/fútil</li>
+          <li><strong>Sevicia:</strong> aumento deliberado e inhumano del dolor de la víctima</li>
+          <li><strong>Indefensión:</strong> colocando a la víctima en situación de indefensión o inferioridad</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>️ Tipos Atenuados</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">😤</div>
+        <h4>Ira o Intenso Dolor</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Circunstancia genérica de atenuación (Art. 57 C.P.).</p>
+          <p>El agente actúa bajo un estado emocional intenso que disminuye su capacidad de autodeterminación.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🕊️</div>
+        <h4>Homicidio por Piedad (Art. 106)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p><strong>Tipo autónomo atenuado.</strong></p>
+          <p>Matar a otro por piedad para poner fin a intensos dolores de lesión o enfermedad incurable.</p>
+          <p>Requiere que la víctima haya solicitado seriamente ser liberada del sufrimiento.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong> Ejemplo:</strong> Si A mata a B envenenando su comida, se configura el homicidio agravado por "medio catastrófico" (Art. 104). Si A mata a B porque este le suplicó acabar con sus dolores terminales, se configura el homicidio por piedad (Art. 106), con pena atenuada.
+    </div>
+  </section>
+
+  <!-- TEMA 4: HURTO -->
+  <section id="tema4">
+    <h2>4. Hurto (Título VII: Delitos contra el Patrimonio)</h2>
+    <p>El hurto es el apoderamiento de una cosa mueble ajena, con ánimo de lucro y sin violencia sobre las personas.</p>
+
+    <h3>🗺️ Mapa Conceptual del Hurto</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">HURTO</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Básico (239)</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Calificado (240)</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Agravado (241)</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Atenuado (242)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3> Tipo Básico (Art. 239 C.P.)</h3>
+    <div class="cita">
+      <strong>"El que se apodere de una cosa mueble ajena..."</strong> — Art. 239 Código Penal
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Elemento</th>
+          <th>Descripción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Sujeto Activo</strong></td>
+          <td>Común ("El que")</td>
+        </tr>
+        <tr>
+          <td><strong>Sujeto Pasivo</strong></td>
+          <td>Persona natural o jurídica titular del bien</td>
+        </tr>
+        <tr>
+          <td><strong>Verbo Rector</strong></td>
+          <td>Simple ("se apodere")</td>
+        </tr>
+        <tr>
+          <td><strong>Objeto Material</strong></td>
+          <td>Real ("cosa mueble ajena")</td>
+        </tr>
+        <tr>
+          <td><strong>Bien Jurídico</strong></td>
+          <td>El patrimonio económico</td>
+        </tr>
+        <tr>
+          <td><strong>Elemento Subjetivo</strong></td>
+          <td>Dolo + propósito de obtener provecho para sí o para otro</td>
+        </tr>
+        <tr>
+          <td><strong>Elemento Normativo</strong></td>
+          <td>"Ajena" (requiere valoración jurídica de propiedad)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>️ Circunstancias de Agravación</h3>
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>🔺 Hurto Calificado (Art. 240 C.P.)</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <ul>
+          <li>Con violencia sobre las personas o las cosas</li>
+          <li>Mediante escala, llave falsa, ganzúa</li>
+          <li>En casa habitada</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>🔺 Hurto Agravado (Art. 241 C.P.)</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <ul>
+          <li>Sobre equipaje de viajeros en terminales/aeropuertos o en hoteles</li>
+          <li>Aprovechando la confianza depositada por el dueño</li>
+          <li>Aprovechando la calamidad pública</li>
+          <li>Sobre bienes del patrimonio cultural o de uso público</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>🕊️ Circunstancias de Atenuación (Art. 242 C.P.)</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⏱️</div>
+        <h4>Hurto de Uso</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Apoderamiento con el fin de usar la cosa y restituirla en un término no mayor a 24 horas.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🤝</div>
+        <h4>Hurto entre Socios</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Comisión entre socios, comuneros, copropietarios o herederos sobre cosa común.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si A toma el celular de B en un bar y huye, comete hurto simple (Art. 239). Si A rompe la ventana de una casa para entrar y llevarse la televisión, comete hurto calificado (Art. 240) por "llave falsa" o "escala". Si A toma la bicicleta de B para usarla una hora y la devuelve, comete hurto de uso (Art. 242), con pena atenuada.
+    </div>
+  </section>
+
+  <!-- TEMA 5: PECULADO -->
+  <section id="tema5">
+    <h2>5. Peculado por Apropiación (Título XV: Delitos contra la Administración Pública)</h2>
+    <p>El peculado es el delito cometido por servidores públicos que se apropian de bienes del Estado.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">PECULADO</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Apropiación (397)</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Agravado (399A)</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Atenuado (401)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3> Tipo Básico (Art. 397 C.P.)</h3>
+    <div class="cita">
+      <strong>"El servidor público que se apropie en provecho suyo o de un tercero de bienes del Estado..."</strong> — Art. 397 Código Penal
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Elemento</th>
+          <th>Descripción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Sujeto Activo</strong></td>
+          <td>Calificado/Especial: "Servidor público" con administración, tenencia o custodia del bien por razón de sus funciones</td>
+        </tr>
+        <tr>
+          <td><strong>Sujeto Pasivo</strong></td>
+          <td>El Estado – Administración Pública</td>
+        </tr>
+        <tr>
+          <td><strong>Verbo Rector</strong></td>
+          <td>Simple ("se apropie")</td>
+        </tr>
+        <tr>
+          <td><strong>Objeto Material</strong></td>
+          <td>Real/Patrimonial: bienes del Estado o de particulares en administración</td>
+        </tr>
+        <tr>
+          <td><strong>Bien Jurídico</strong></td>
+          <td>La administración pública (probidad y patrimonio estatal)</td>
+        </tr>
+        <tr>
+          <td><strong>Elemento Subjetivo</strong></td>
+          <td>Dolo</td>
+        </tr>
+        <tr>
+          <td><strong>Elementos Normativos</strong></td>
+          <td>"Servidor público", "por razón de sus funciones", "bienes del Estado"</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>️ Agravante y Atenuante</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon"></div>
+        <h4>Agravante (Art. 399A)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Cuando la conducta recaiga sobre <strong>recursos destinados a la seguridad social integral</strong>, la pena se agrava de una tercera parte a la mitad.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">💰</div>
+        <h4>Atenuante (Art. 401)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p><strong>Reintegro o reparación:</strong></p>
+          <ul>
+            <li>Si antes de iniciarse la investigación reintegra lo apropiado: <strong>disminución de la mitad</strong></li>
+            <li>Si lo hace antes de la sentencia de primera instancia: <strong>disminución de una tercera parte</strong></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Un funcionario público que administra fondos de una entidad estatal y se apropia de $100 millones para uso personal comete peculado por apropiación (Art. 397). Si esos fondos eran de seguridad social, la pena se agrava (Art. 399A). Si reintegra el dinero antes de la investigación, la pena se reduce a la mitad (Art. 401).
+    </div>
+  </section>
+
+  <!-- TEMA 6: EXTORSIÓN -->
+  <section id="tema6">
+    <h2>6. Extorsión (Título VII: Delitos contra la Libertad y el Patrimonio)</h2>
+    <p>La extorsión es un delito pluriofensivo que atenta contra la libertad individual y el patrimonio económico.</p>
+
+    <h3>️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">EXTORSIÓN</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Básico (244)</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Agravado (245)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Tipo Básico (Art. 244 C.P.)</h3>
+    <div class="cita">
+      <strong>"El que constriña a otro a hacer, tolerar u omitir alguna cosa..."</strong> — Art. 244 Código Penal
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Elemento</th>
+          <th>Descripción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Sujeto Activo</strong></td>
+          <td>Común ("El que")</td>
+        </tr>
+        <tr>
+          <td><strong>Sujeto Pasivo</strong></td>
+          <td>La persona constreñida</td>
+        </tr>
+        <tr>
+          <td><strong>Verbo Rector</strong></td>
+          <td>Simple ("constriña")</td>
+        </tr>
+        <tr>
+          <td><strong>Objeto Material</strong></td>
+          <td>Personal y patrimonial</td>
+        </tr>
+        <tr>
+          <td><strong>Bien Jurídico</strong></td>
+          <td>Pluriofensivo: libertad individual y patrimonio económico</td>
+        </tr>
+        <tr>
+          <td><strong>Elemento Subjetivo</strong></td>
+          <td>Dolo + propósito de obtener provecho ilícito</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>⚠️ Circunstancias de Agravación (Art. 245 C.P.)</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">💣</div>
+        <h4>Amenaza de Peligro Común</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Si el constreñimiento consiste en amenaza de peligro común o calamidad.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">👮</div>
+        <h4>Por Servidor Público</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Si se comete por servidor público o con fines terroristas.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">💼</div>
+        <h4>Daño Económico Grave</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Si se afecta gravemente la actividad económica o profesional de la víctima.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si A llama a B y le exige pagar $50 millones bajo amenaza de secuestrar a su hijo, comete extorsión (Art. 244). Si A es un servidor público que usa su cargo para extorsionar, la pena se agrava (Art. 245).
+    </div>
+  </section>
+
+  <!-- TEMA 7: ACCESO CARNAL VIOLENTO -->
+  <section id="tema7">
+    <h2>7. Acceso Carnal Violento (Título IV: Delitos contra la Libertad Sexual)</h2>
+    <p>El acceso carnal violento es el delito sexual más grave, que atenta contra la libertad e integridad sexual de las personas.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">ACCESO CARNAL VIOLENTO</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Básico (205)</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Agravado (211)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Tipo Básico (Art. 205 C.P.)</h3>
+    <div class="cita">
+      <strong>"El que realice acceso carnal con otra persona mediante violencia..."</strong> — Art. 205 Código Penal
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Elemento</th>
+          <th>Descripción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Sujeto Activo</strong></td>
+          <td>Común ("El que")</td>
+        </tr>
+        <tr>
+          <td><strong>Sujeto Pasivo</strong></td>
+          <td>Común ("otra persona")</td>
+        </tr>
+        <tr>
+          <td><strong>Verbo Rector</strong></td>
+          <td>Compuesto ("realice acceso carnal mediante violencia")</td>
+        </tr>
+        <tr>
+          <td><strong>Objeto Material</strong></td>
+          <td>Personal</td>
+        </tr>
+        <tr>
+          <td><strong>Bien Jurídico</strong></td>
+          <td>La libertad e integridad sexual</td>
+        </tr>
+        <tr>
+          <td><strong>Elemento Subjetivo</strong></td>
+          <td>Dolo</td>
+        </tr>
+        <tr>
+          <td><strong>Elementos Normativos</strong></td>
+          <td>"Acceso carnal", "violencia"</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>️ Circunstancias de Agravación (Art. 211 C.P.)</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon"></div>
+        <h4>Coparticipación</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Con el concurso de otra u otras personas.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">‍👩‍</div>
+        <h4>Posición de Autoridad</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Si el responsable tiene posición de autoridad, parentesco o especial confianza con la víctima.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon"></div>
+        <h4>Contagio o Embarazo</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Si se produce contagio de enfermedad de transmisión sexual o embarazo.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">👶</div>
+        <h4>Vulnerabilidad</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Sobre persona en situación de vulnerabilidad o menor de edad.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si A violenta sexualmente a B, comete acceso carnal violento (Art. 205). Si A es el padre de B, la pena se agrava por "posición de parentesco" (Art. 211). Si A y C actúan conjuntamente contra B, se agrava por "coparticipación".
+    </div>
+  </section>
+
+  <!-- TEMA 8: TABLA COMPARATIVA -->
+  <section id="tema8">
+    <h2>8. Tabla Comparativa Resumen</h2>
+    <p>Comparación sistemática de los tipos penales emblemáticos analizados.</p>
+
+    <h3> Cuadro Comparativo</h3>
+    <div style="overflow-x: auto;">
+      <table>
+        <thead>
+          <tr>
+            <th>Tipo Penal</th>
+            <th>Artículo</th>
+            <th>Verbo Rector</th>
+            <th>Sujeto Activo</th>
+            <th>Bien Jurídico</th>
+            <th>Agravantes Principales</th>
+            <th>Atenuantes Principales</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Homicidio</strong></td>
+            <td>Art. 103</td>
+            <td>Matar</td>
+            <td>Común</td>
+            <td>Vida humana</td>
+            <td>Sevicia, precio, parricidio, indefensión</td>
+            <td>Ira o intenso dolor (Art. 57), piedad (Art. 106)</td>
+          </tr>
+          <tr>
+            <td><strong>Hurto</strong></td>
+            <td>Art. 239</td>
+            <td>Apoderarse</td>
+            <td>Común</td>
+            <td>Patrimonio económico</td>
+            <td>Violencia, confianza, lugar despoblado</td>
+            <td>Hurto de uso (Art. 242), restitución &lt; 24 h</td>
+          </tr>
+          <tr>
+            <td><strong>Peculado</strong></td>
+            <td>Art. 397</td>
+            <td>Apropiarse</td>
+            <td>Calificado (Servidor público)</td>
+            <td>Administración pública</td>
+            <td>Sobre recursos de seguridad social (Art. 399A)</td>
+            <td>Reintegro antes del proceso (Art. 401)</td>
+          </tr>
+          <tr>
+            <td><strong>Extorsión</strong></td>
+            <td>Art. 244</td>
+            <td>Constreñir</td>
+            <td>Común</td>
+            <td>Libertad y patrimonio</td>
+            <td>Fines terroristas, daño económico, servidor público</td>
+            <td>Reparación del daño previo a sentencia</td>
+          </tr>
+          <tr>
+            <td><strong>Acceso Carnal</strong></td>
+            <td>Art. 205</td>
+            <td>Acceder carnalmente</td>
+            <td>Común</td>
+            <td>Libertad e integridad sexual</td>
+            <td>Coparticipación, parentesco, enfermedad, embarazo</td>
+            <td>—</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>🔍 Claves de Diferenciación</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🔑</div>
+        <h4>Hurto vs. Peculado</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p><strong>Diferencia clave:</strong> El sujeto activo.</p>
+          <ul>
+            <li><strong>Hurto:</strong> sujeto activo común (cualquiera)</li>
+            <li><strong>Peculado:</strong> sujeto activo calificado (servidor público con administración del bien)</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🔑</div>
+        <h4>Extorsión vs. Hurto con Violencia</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p><strong>Diferencia clave:</strong> La constreñimiento vs. el apoderamiento directo.</p>
+          <ul>
+            <li><strong>Extorsión:</strong> constriñe a la víctima a entregar</li>
+            <li><strong>Hurto con violencia:</strong> apodera directamente con fuerza</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon"></div>
+        <h4>Homicidio Simple vs. por Piedad</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p><strong>Diferencia clave:</strong> La motivación.</p>
+          <ul>
+            <li><strong>Simple:</strong> cualquier motivación</li>
+            <li><strong>Por piedad:</strong> poner fin a intensos dolores de enfermedad incurable, con solicitud seria de la víctima</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <h3>📝 Caso Práctico Integrador</h3>
+    <div class="alerta">
+      <strong>🎯 Caso:</strong> Un funcionario público de un hospital (A) se apropia de medicamentos destinados a pacientes de cáncer (bienes del Estado). Posteriormente, amenaza a un testigo (B) para que no denuncie, exigiéndole que guarde silencio bajo amenaza de hacerle daño a su familia.
+      <br><br>
+      <strong>📋 Análisis:</strong>
+      <ul>
+        <li><strong>Contra A:</strong> Peculado por apropiación (Art. 397) agravado por tratarse de recursos de seguridad social (Art. 399A)</li>
+        <li><strong>Contra A (segunda conducta):</strong> Extorsión (Art. 244) por constreñir a B</li>
+        <li><strong>Concurso:</strong> Concurso real de delitos (varias acciones independientes)</li>
+      </ul>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo final:</strong> La descomposición dogmática permite identificar con precisión cada elemento del tipo penal, facilitando la subsunción del caso concreto y la correcta aplicación de agravantes o atenuantes.
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz">
+    <h2>🎯 Quiz Completo - 40 Preguntas</h2>
+    <p>Pon a prueba tus conocimientos sobre la Parte Especial del Código Penal.</p>
+
+    <div class="quiz-container">
+      <div class="quiz-header">
+        <h3>📊 Tu Progreso</h3>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="quiz-stats">
+          <div class="stat">Respondidas: <strong id="respondidas">0</strong>/40</div>
+          <div class="stat">Correctas: <strong id="correctas">0</strong></div>
+          <div class="stat">Incorrectas: <strong id="incorrectas">0</strong></div>
+          <div class="stat">Porcentaje: <strong id="porcentaje">0</strong>%</div>
+        </div>
+      </div>
+
+      <div class="quiz-tabs">
+        <div class="quiz-tab active" onclick="mostrarSeccion('s1', this)">T1 (5)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s2', this)">T2 (5)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s3', this)">T3 (6)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s4', this)">T4 (6)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s5', this)">T5 (5)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s6', this)">T6 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s7', this)">T7 (5)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s8', this)">T8 (4)</div>
+      </div>
+
+      <!-- SECCIÓN 1 -->
+      <div class="quiz-section active" id="s1">
+        <div class="pregunta" data-correcta="1" data-tema="1">
+          <span class="pregunta-num">1</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El tipo básico o fundamental es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 1)">a) Una norma accesoria que modifica la pena</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">b) La matriz o molde original que describe una conducta de manera completa e independiente</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">c) Un delito con elementos especiales que crea un nuevo tipo</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">d) Una circunstancia atenuante</div>
+          </div>
+          <div class="explicacion">El tipo básico es la matriz o "molde original" que describe una conducta humana de manera completa e independiente (ej: homicidio simple, Art. 103).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="1">
+          <span class="pregunta-num">2</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El tipo autónomo se caracteriza por:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 2)">a) Ser una norma accesoria</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">b) Requerir amarrarse al tipo básico</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">c) Crear un delito completamente nuevo e independiente al añadir elementos especiales</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">d) Solo modificar la pena</div>
+          </div>
+          <div class="explicacion">El tipo autónomo surge al añadir elementos especiales que crean un delito completamente nuevo e independiente (ej: homicidio por piedad, feminicidio).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="1">
+          <span class="pregunta-num">3</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El tipo subordinado o complementado:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 3)">a) No existe de forma autónoma y requiere amarrarse al tipo básico para modificar la pena</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">b) Es independiente del tipo básico</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">c) Crea un delito nuevo</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">d) Solo aplica a delitos culposos</div>
+          </div>
+          <div class="explicacion">El tipo subordinado es una norma accesoria que no existe de forma autónoma; requiere "amarrarse" al tipo básico para modificar la pena mediante agravantes o atenuantes.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="1">
+          <span class="pregunta-num">4</span><span class="pregunta-tipo">Clasificación</span>
+          <p>El homicidio por piedad (Art. 106) es un tipo:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 4)">a) Básico</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">b) Subordinado agravado</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">c) Subordinado atenuado</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">d) Autónomo atenuado</div>
+          </div>
+          <div class="explicacion">El homicidio por piedad es un tipo autónomo atenuado, pues crea un delito nuevo e independiente con pena menor.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="1">
+          <span class="pregunta-num">5</span><span class="pregunta-tipo">Clasificación</span>
+          <p>El artículo 104 (homicidio agravado) es un tipo:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 5)">a) Autónomo</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">b) Subordinado agravado</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">c) Básico</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">d) Atenuado</div>
+          </div>
+          <div class="explicacion">El Art. 104 es un tipo subordinado agravado que se "amarrar" al básico (Art. 103) para aumentar la pena.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 2 -->
+      <div class="quiz-section" id="s2">
+        <div class="pregunta" data-correcta="2" data-tema="2">
+          <span class="pregunta-num">6</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El verbo rector es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 6)">a) El bien jurídico protegido</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">b) El sujeto que ejecuta la conducta</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">c) La acción u omisión principal prohibida</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">d) El objeto material del delito</div>
+          </div>
+          <div class="explicacion">El verbo rector es la acción u omisión principal prohibida (matar, apoderar, apropiarse).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="2">
+          <span class="pregunta-num">7</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los elementos normativos del tipo penal:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 7)">a) Exigen un juicio de valoración jurídica o ética</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">b) Se perciben con los sentidos</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">c) Son siempre objetivos</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">d) No requieren interpretación</div>
+          </div>
+          <div class="explicacion">Los elementos normativos exigen un juicio de valoración jurídica o ética (ej: "ajena", "servidor público").</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="2">
+          <span class="pregunta-num">8</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El bien jurídico tutelado es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 8)">a) La persona que comete el delito</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">b) El objeto físico del delito</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">c) El verbo rector</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">d) El interés o valor protegido por el Estado</div>
+          </div>
+          <div class="explicacion">El bien jurídico tutelado es el interés o valor protegido por el Estado (vida, patrimonio, administración pública, etc.).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="2">
+          <span class="pregunta-num">9</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El sujeto activo calificado o especial:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 9)">a) Puede ser cualquier persona</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">b) Exige una condición jurídica específica (ej: servidor público)</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">c) Es siempre el Estado</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">d) Es la víctima del delito</div>
+          </div>
+          <div class="explicacion">El sujeto activo calificado exige una condición jurídica específica, como "servidor público" en el peculado.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="2">
+          <span class="pregunta-num">10</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El aspecto subjetivo del tipo penal incluye:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 10)">a) Solo el dolo</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">b) Solo la culpa</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">c) Dolo, culpa o preterintención, además de ánimos o propósitos especiales</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">d) Solo elementos normativos</div>
+          </div>
+          <div class="explicacion">El aspecto subjetivo incluye dolo, culpa o preterintención, además de ánimos o propósitos especiales del agente.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 3: HOMICIDIO -->
+      <div class="quiz-section" id="s3">
+        <div class="pregunta" data-correcta="1" data-tema="3">
+          <span class="pregunta-num">11</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El bien jurídico tutelado en el homicidio es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 11)">a) El patrimonio</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">b) La vida humana independiente</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">c) La libertad sexual</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">d) La administración pública</div>
+          </div>
+          <div class="explicacion">El bien jurídico tutelado en el homicidio es la vida humana independiente.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="3">
+          <span class="pregunta-num">12</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La sevicia como agravante del homicidio consiste en:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 12)">a) Aumento deliberado e inhumano del dolor de la víctima</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">b) Matar por precio</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">c) Matar a un familiar</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">d) Usar veneno</div>
+          </div>
+          <div class="explicacion">La sevicia es el aumento deliberado e inhumano del dolor de la víctima (Art. 104).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="3">
+          <span class="pregunta-num">13</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El homicidio por piedad (Art. 106) requiere:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 13)">a) Matar por precio</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">b) Matar a un familiar</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">c) Matar por piedad para poner fin a intensos dolores de lesión o enfermedad incurable</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">d) Matar con sevicia</div>
+          </div>
+          <div class="explicacion">El homicidio por piedad requiere matar a otro por piedad para poner fin a intensos dolores de lesión o enfermedad incurable.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="3">
+          <span class="pregunta-num">14</span><span class="pregunta-tipo">Clasificación</span>
+          <p>Matar usando veneno configura el homicidio agravado por:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 14)">a) Parricidio</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">b) Precio</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">c) Sevicia</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">d) Medio catastrófico o de peligro común</div>
+          </div>
+          <div class="explicacion">Matar por veneno, incendio o explosión configura el homicidio agravado por medio catastrófico o de peligro común (Art. 104).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="3">
+          <span class="pregunta-num">15</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El parricidio es el homicidio agravado cometido en:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 15)">a) Cualquier persona</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">b) Cónyuge, ascendientes, descendientes o parientes</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">c) Servidores públicos</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">d) Menores de edad únicamente</div>
+          </div>
+          <div class="explicacion">El parricidio es el homicidio agravado cometido en cónyuge, ascendientes, descendientes o parientes.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="3">
+          <span class="pregunta-num">16</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El elemento subjetivo del homicidio simple es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 16)">a) Dolo (conocimiento y voluntad de causar la muerte)</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">b) Culpa</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">c) Preterintención</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">d) Animus lucrandi</div>
+          </div>
+          <div class="explicacion">El homicidio simple requiere dolo: conocimiento y voluntad de causar la muerte.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 4: HURTO -->
+      <div class="quiz-section" id="s4">
+        <div class="pregunta" data-correcta="2" data-tema="4">
+          <span class="pregunta-num">17</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El bien jurídico tutelado en el hurto es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 17)">a) La vida</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">b) La libertad</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">c) El patrimonio económico</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">d) La administración pública</div>
+          </div>
+          <div class="explicacion">El bien jurídico tutelado en el hurto es el patrimonio económico.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="4">
+          <span class="pregunta-num">18</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El verbo rector del hurto es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 18)">a) Matar</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">b) Apoderarse</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">c) Constreñir</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">d) Apropiarse</div>
+          </div>
+          <div class="explicacion">El verbo rector del hurto es "apoderarse" (Art. 239).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="4">
+          <span class="pregunta-num">19</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La palabra "ajena" en el tipo de hurto es un elemento:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 19)">a) Normativo (requiere valoración jurídica de propiedad)</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">b) Descriptivo</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">c) Subjetivo</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">d) Objetivo material</div>
+          </div>
+          <div class="explicacion">"Ajena" es un elemento normativo porque requiere valoración jurídica de propiedad.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="4">
+          <span class="pregunta-num">20</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El hurto de uso (Art. 242) se configura cuando:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 20)">a) Se usa violencia</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">b) Se comete entre extraños</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">c) Se apropia definitivamente</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">d) El apoderamiento es con el fin de usar la cosa y restituirla en no más de 24 horas</div>
+          </div>
+          <div class="explicacion">El hurto de uso se configura cuando el apoderamiento es con el fin de usar la cosa y restituirla en un término no mayor a 24 horas.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="4">
+          <span class="pregunta-num">21</span><span class="pregunta-tipo">Clasificación</span>
+          <p>El hurto cometido aprovechando la calamidad pública es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 21)">a) Hurto simple</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">b) Hurto agravado (Art. 241)</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">c) Hurto de uso</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">d) Hurto entre socios</div>
+          </div>
+          <div class="explicacion">El hurto aprovechando la calamidad pública es una circunstancia de agravación del Art. 241.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="4">
+          <span class="pregunta-num">22</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El elemento subjetivo especial del hurto es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 22)">a) Ánimo de matar</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">b) Ánimo de constreñir</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">c) Propósito de obtener provecho para sí o para otro</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">d) Ánimo de lucrar</div>
+          </div>
+          <div class="explicacion">El hurto requiere dolo más el elemento subjetivo especial: propósito de obtener provecho para sí o para otro.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 5: PECULADO -->
+      <div class="quiz-section" id="s5">
+        <div class="pregunta" data-correcta="0" data-tema="5">
+          <span class="pregunta-num">23</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El sujeto activo del peculado por apropiación es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 23)">a) Calificado: servidor público con administración, tenencia o custodia del bien</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">b) Común: cualquier persona</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">c) Solo el presidente</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">d) Solo militares</div>
+          </div>
+          <div class="explicacion">El peculado requiere sujeto activo calificado: servidor público con administración, tenencia o custodia del bien por razón de sus funciones.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="5">
+          <span class="pregunta-num">24</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El bien jurídico tutelado en el peculado es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 24)">a) El patrimonio privado</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">b) La administración pública (probidad y patrimonio estatal)</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">c) La libertad individual</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">d) La vida</div>
+          </div>
+          <div class="explicacion">El peculado tutela la administración pública, específicamente la probidad y el patrimonio estatal.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="5">
+          <span class="pregunta-num">25</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El peculado se agrava cuando recae sobre:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 25)">a) Bienes culturales</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">b) Bienes de particulares</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">c) Recursos destinados a la seguridad social integral</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">d) Bienes muebles comunes</div>
+          </div>
+          <div class="explicacion">El peculado se agrava (Art. 399A) cuando recae sobre recursos destinados a la seguridad social integral.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="5">
+          <span class="pregunta-num">26</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El reintegro de lo apropiado antes de iniciarse la investigación:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 26)">a) Extingue la acción penal</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">b) No tiene efecto</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">c) Disminuye la pena en una tercera parte</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">d) Disminuye la pena en la mitad</div>
+          </div>
+          <div class="explicacion">Si el agente reintegra lo apropiado antes de iniciarse la investigación, la pena se disminuye en la mitad (Art. 401).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="5">
+          <span class="pregunta-num">27</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La diferencia principal entre hurto y peculado es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 27)">a) El bien jurídico</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">b) El sujeto activo (común vs. servidor público)</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">c) El verbo rector</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">d) El objeto material</div>
+          </div>
+          <div class="explicacion">La diferencia principal es el sujeto activo: en el hurto es común, en el peculado es calificado (servidor público).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 6: EXTORSIÓN -->
+      <div class="quiz-section" id="s6">
+        <div class="pregunta" data-correcta="2" data-tema="6">
+          <span class="pregunta-num">28</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La extorsión es un delito:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 28)">a) Uniofensivo</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">b) Solo contra el patrimonio</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">c) Pluriofensivo (libertad individual y patrimonio)</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">d) Solo contra la libertad</div>
+          </div>
+          <div class="explicacion">La extorsión es un delito pluriofensivo que ampara la libertad individual y el patrimonio económico.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="6">
+          <span class="pregunta-num">29</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El verbo rector de la extorsión es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 29)">a) Constreñir</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">b) Apoderarse</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">c) Matar</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">d) Apropiarse</div>
+          </div>
+          <div class="explicacion">El verbo rector de la extorsión es "constreñir" (Art. 244).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="6">
+          <span class="pregunta-num">30</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La extorsión se agrava cuando se comete:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 30)">a) Entre familiares</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">b) Por servidor público o con fines terroristas</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">c) Sin violencia</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">d) Con restitución</div>
+          </div>
+          <div class="explicacion">La extorsión se agrava (Art. 245) cuando se comete por servidor público o con fines terroristas.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="6">
+          <span class="pregunta-num">31</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El elemento subjetivo especial de la extorsión es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 31)">a) Ánimo de matar</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">b) Ánimo de lucro</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">c) Ánimo de piedad</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">d) Propósito de obtener provecho ilícito</div>
+          </div>
+          <div class="explicacion">La extorsión requiere dolo más el propósito de obtener provecho ilícito.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 7: ACCESO CARNAL -->
+      <div class="quiz-section" id="s7">
+        <div class="pregunta" data-correcta="2" data-tema="7">
+          <span class="pregunta-num">32</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El bien jurídico tutelado en el acceso carnal violento es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 32)">a) El patrimonio</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">b) La vida</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">c) La libertad e integridad sexual</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">d) La administración pública</div>
+          </div>
+          <div class="explicacion">El acceso carnal violento tutela la libertad e integridad sexual.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="7">
+          <span class="pregunta-num">33</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El verbo rector del acceso carnal violento es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 33)">a) Compuesto: "realice acceso carnal mediante violencia"</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">b) Simple: "matar"</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">c) Simple: "apoderarse"</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">d) Simple: "constreñir"</div>
+          </div>
+          <div class="explicacion">El verbo rector es compuesto: "realice acceso carnal mediante violencia".</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="7">
+          <span class="pregunta-num">34</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El acceso carnal violento se agrava por coparticipación cuando:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 34)">a) Lo comete una sola persona</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">b) Se comete con el concurso de otra u otras personas</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">c) La víctima es mayor de edad</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">d) No hay violencia</div>
+          </div>
+          <div class="explicacion">El acceso carnal violento se agrava (Art. 211) cuando se comete con el concurso de otra u otras personas.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="7">
+          <span class="pregunta-num">35</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El acceso carnal violento se agrava cuando la víctima es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 35)">a) Mayor de edad en pleno uso de sus facultades</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">b) Un servidor público</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">c) El autor del delito</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">d) Persona en situación de vulnerabilidad o menor de edad</div>
+          </div>
+          <div class="explicacion">El acceso carnal violento se agrava cuando se comete sobre persona en situación de vulnerabilidad o menor de edad.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="7">
+          <span class="pregunta-num">36</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Si el acceso carnal violento produce contagio de ETS o embarazo:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 36)">a) Se configura un delito diferente</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">b) No tiene relevancia jurídica</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">c) Se agrava la pena (Art. 211)</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">d) Se atenúa la pena</div>
+          </div>
+          <div class="explicacion">Si se produce contagio de enfermedad de transmisión sexual o embarazo, la pena se agrava (Art. 211).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 8: COMPARATIVA -->
+      <div class="quiz-section" id="s8">
+        <div class="pregunta" data-correcta="1" data-tema="8">
+          <span class="pregunta-num">37</span><span class="pregunta-tipo">Comparación</span>
+          <p>La diferencia principal entre hurto y peculado es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 37)">a) El bien jurídico</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">b) El sujeto activo (común vs. servidor público)</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">c) El verbo rector</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">d) El objeto material</div>
+          </div>
+          <div class="explicacion">La diferencia principal es el sujeto activo: en el hurto es común, en el peculado es calificado (servidor público).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="8">
+          <span class="pregunta-num">38</span><span class="pregunta-tipo">Comparación</span>
+          <p>La diferencia entre extorsión y hurto con violencia es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 38)">a) La extorsión constriñe a la víctima a entregar; el hurto con violencia apodera directamente</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">b) No hay diferencia</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">c) El hurto es más grave</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">d) La extorsión no requiere dolo</div>
+          </div>
+          <div class="explicacion">En la extorsión se constriñe a la víctima a entregar; en el hurto con violencia se apodera directamente con fuerza.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="8">
+          <span class="pregunta-num">39</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Si un funcionario público se apropia de medicamentos del hospital donde trabaja, comete:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 39)">a) Hurto</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">b) Extorsión</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">c) Peculado por apropiación</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">d) Acceso carnal</div>
+          </div>
+          <div class="explicacion">Un funcionario público que se apropia de bienes del Estado comete peculado por apropiación (Art. 397).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="8">
+          <span class="pregunta-num">40</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Si A mata a B porque este le suplicó acabar con sus dolores terminales de cáncer, se configura:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 40)">a) Homicidio simple</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">b) Homicidio agravado</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">c) Homicidio culposo</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">d) Homicidio por piedad (tipo autónomo atenuado)</div>
+          </div>
+          <div class="explicacion">Matar por piedad para poner fin a intensos dolores de enfermedad incurable configura el homicidio por piedad (Art. 106), tipo autónomo atenuado.</div>
+        </div>
+      </div>
+
+      <div class="resultado-final" id="resultadoFinal">
+        <h3>🏆 Resultado Final</h3>
+        <div class="puntaje-final" id="puntajeFinal">0/40</div>
+        <p id="mensajeFinal"></p>
+        <div class="desglose-temas" id="desgloseTemas"></div>
+        <button onclick="reiniciarQuiz()" class="btn-reset"> Reiniciar Quiz</button>
+      </div>
+
+      <div style="text-align: center; margin-top: 1.5rem;">
+        <button onclick="verResultadoFinal()">📊 Ver Resultado Final</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>️ Guía Didáctica - Parte Especial del Código Penal Colombiano</p>
+  <p>Tipos Penales Emblemáticos · Ley 599 de 2000</p>
+  <p style="margin-top: 1rem; opacity: 0.7;">© 2026 - Material educativo interactivo</p>
+</footer>
+
+<script>
+  function toggleAcordeon(header) {
+    header.classList.toggle('active');
+    const content = header.nextElementSibling;
+    content.classList.toggle('active');
+  }
+
+  let respuestas = {};
+  const totalPreguntas = 40;
+
+  function mostrarSeccion(id, tab) {
+    document.querySelectorAll('.quiz-section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.quiz-tab').forEach(t => t.classList.remove('active'));
+    
+    document.getElementById(id).classList.add('active');
+    tab.classList.add('active');
+  }
+
+  function seleccionar(opcion, preguntaNum) {
+    if (respuestas[preguntaNum] !== undefined) return;
+
+    const pregunta = opcion.closest('.pregunta');
+    const opciones = pregunta.querySelectorAll('.opcion');
+    const correcta = parseInt(pregunta.dataset.correcta);
+    const tema = parseInt(pregunta.dataset.tema);
+    const seleccionada = Array.from(opciones).indexOf(opcion);
+    const explicacion = pregunta.querySelector('.explicacion');
+
+    opciones.forEach(o => o.classList.add('disabled'));
+
+    if (seleccionada === correcta) {
+      opcion.classList.add('correcta');
+      respuestas[preguntaNum] = { correcta: true, tema: tema };
+    } else {
+      opcion.classList.add('incorrecta');
+      opciones[correcta].classList.add('correcta');
+      respuestas[preguntaNum] = { correcta: false, tema: tema };
+    }
+
+    explicacion.classList.add('visible');
+    pregunta.classList.add('answered');
+    actualizarEstadisticas();
+  }
+
+  function actualizarEstadisticas() {
+    const total = Object.keys(respuestas).length;
+    const correctas = Object.values(respuestas).filter(r => r.correcta).length;
+    const incorrectas = total - correctas;
+    const porcentaje = total > 0 ? Math.round((correctas / total) * 100) : 0;
+
+    document.getElementById('respondidas').textContent = total;
+    document.getElementById('correctas').textContent = correctas;
+    document.getElementById('incorrectas').textContent = incorrectas;
+    document.getElementById('porcentaje').textContent = porcentaje;
+
+    const progreso = (total / totalPreguntas) * 100;
+    document.getElementById('progressFill').style.width = progreso + '%';
+  }
+
+  function verResultadoFinal() {
+    const total = Object.keys(respuestas).length;
+    
+    if (total < totalPreguntas) {
+      alert(`️ Aún te faltan ${totalPreguntas - total} preguntas por responder.`);
+      return;
+    }
+
+    const correctas = Object.values(respuestas).filter(r => r.correcta).length;
+    const porcentaje = Math.round((correctas / totalPreguntas) * 100);
+
+    const resultadoFinal = document.getElementById('resultadoFinal');
+    resultadoFinal.classList.add('visible');
+
+    document.getElementById('puntajeFinal').textContent = `${correctas}/${totalPreguntas}`;
+
+    let mensaje = '';
+    if (porcentaje === 100) mensaje = '🏆 ¡PERFECTO! Dominas la Parte Especial del Código Penal.';
+    else if (porcentaje >= 90) mensaje = ' ¡Excelente! Dominio sobresaliente.';
+    else if (porcentaje >= 75) mensaje = '✅ ¡Muy bien! Buen dominio.';
+    else if (porcentaje >= 60) mensaje = '📚 Aceptable. Repasa los temas donde fallaste.';
+    else if (porcentaje >= 40) mensaje = '📖 Necesitas reforzar varios conceptos.';
+    else mensaje = '🔍 Es necesario estudiar nuevamente todos los temas.';
+
+    document.getElementById('mensajeFinal').textContent = mensaje;
+
+    const temas = {
+      1: { nombre: 'T1: Clasificación', total: 5, correctas: 0 },
+      2: { nombre: 'T2: Elementos', total: 5, correctas: 0 },
+      3: { nombre: 'T3: Homicidio', total: 6, correctas: 0 },
+      4: { nombre: 'T4: Hurto', total: 6, correctas: 0 },
+      5: { nombre: 'T5: Peculado', total: 5, correctas: 0 },
+      6: { nombre: 'T6: Extorsión', total: 4, correctas: 0 },
+      7: { nombre: 'T7: Acceso Carnal', total: 5, correctas: 0 },
+      8: { nombre: 'T8: Comparativa', total: 4, correctas: 0 }
+    };
+
+    Object.values(respuestas).forEach(r => {
+      if (r.correcta) temas[r.tema].correctas++;
+    });
+
+    const desgloseHTML = Object.values(temas).map(t => {
+      const pct = Math.round((t.correctas / t.total) * 100);
+      return `
+        <div class="desglose-item">
+          <h4>${t.nombre}</h4>
+          <p>${t.correctas}/${t.total} (${pct}%)</p>
+          <div class="mini-bar">
+            <div class="mini-bar-fill" style="width: ${pct}%"></div>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    document.getElementById('desgloseTemas').innerHTML = desgloseHTML;
+    resultadoFinal.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  function reiniciarQuiz() {
+    if (!confirm('¿Reiniciar el quiz?')) return;
+
+    respuestas = {};
+
+    document.querySelectorAll('.opcion').forEach(o => o.classList.remove('correcta', 'incorrecta', 'disabled'));
+    document.querySelectorAll('.explicacion').forEach(e => e.classList.remove('visible'));
+    document.querySelectorAll('.pregunta').forEach(p => p.classList.remove('answered'));
+    document.getElementById('resultadoFinal').classList.remove('visible');
+
+    actualizarEstadisticas();
+    mostrarSeccion('s1', document.querySelector('.quiz-tab'));
+    document.getElementById('quiz').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  document.querySelectorAll('nav a').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+</script>
+
+</body>
+</html>
