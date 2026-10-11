@@ -1,0 +1,2256 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>De la Sucesión por Causa de Muerte - Libro III del Código Civil</title>
+<style>
+  :root {
+    --primary: #4a3060;
+    --secondary: #c9a961;
+    --accent: #6b4e8c;
+    --light: #f5f1e8;
+    --dark: #1a202c;
+    --success: #38a169;
+    --warning: #d69e2e;
+    --danger: #c53030;
+    --card-bg: #ffffff;
+    --shadow: 0 4px 15px rgba(0,0,0,0.08);
+    --shadow-hover: 0 8px 25px rgba(0,0,0,0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    background: var(--light);
+    color: var(--dark);
+    line-height: 1.7;
+  }
+
+  header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    color: white;
+    padding: 2rem 1rem;
+    text-align: center;
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::before {
+    content: '📜';
+    position: absolute;
+    font-size: 15rem;
+    opacity: 0.05;
+    top: -30px;
+    right: -30px;
+  }
+
+  header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: 2px;
+  }
+
+  header p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    font-style: italic;
+  }
+
+  nav {
+    background: var(--dark);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow);
+  }
+
+  nav ul {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0.5rem;
+  }
+
+  nav a {
+    color: var(--light);
+    text-decoration: none;
+    padding: 0.7rem 1rem;
+    margin: 0.2rem;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    transition: all 0.3s;
+    display: block;
+  }
+
+  nav a:hover {
+    background: var(--secondary);
+    color: var(--dark);
+    transform: translateY(-2px);
+  }
+
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+  }
+
+  section {
+    background: var(--card-bg);
+    margin-bottom: 2.5rem;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    border-left: 5px solid var(--secondary);
+    scroll-margin-top: 80px;
+  }
+
+  section h2 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--secondary);
+  }
+
+  section h3 {
+    color: var(--accent);
+    font-size: 1.4rem;
+    margin: 1.5rem 0 0.8rem;
+  }
+
+  section h4 {
+    color: var(--primary);
+    font-size: 1.15rem;
+    margin: 1rem 0 0.5rem;
+  }
+
+  p { margin-bottom: 1rem; text-align: justify; }
+
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.2rem;
+    margin: 1.5rem 0;
+  }
+
+  .card {
+    background: linear-gradient(135deg, #fff 0%, #f9f6ef 100%);
+    border: 2px solid var(--secondary);
+    border-radius: 10px;
+    padding: 1.2rem;
+    transition: all 0.3s;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--primary);
+  }
+
+  .card .icon {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .card h4 {
+    text-align: center;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+  }
+
+  .card .detail {
+    display: none;
+    margin-top: 0.8rem;
+    padding-top: 0.8rem;
+    border-top: 1px dashed var(--secondary);
+    font-size: 0.95rem;
+  }
+
+  .card.active .detail { display: block; }
+
+  .card .hint {
+    text-align: center;
+    color: var(--accent);
+    font-size: 0.85rem;
+    font-style: italic;
+  }
+
+  .mapa-container {
+    background: #fdfbf5;
+    border: 2px dashed var(--secondary);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    overflow-x: auto;
+  }
+
+  .mapa {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 600px;
+  }
+
+  .nodo {
+    background: var(--primary);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+    font-weight: bold;
+    text-align: center;
+    min-width: 180px;
+    box-shadow: var(--shadow);
+  }
+
+  .nodo.central {
+    background: linear-gradient(135deg, var(--secondary), #e0b888);
+    color: var(--dark);
+    font-size: 1.2rem;
+    padding: 1rem 2rem;
+  }
+
+  .nodo.sub {
+    background: var(--accent);
+    font-size: 0.95rem;
+  }
+
+  .linea {
+    width: 3px;
+    height: 25px;
+    background: var(--secondary);
+  }
+
+  .linea-h {
+    height: 3px;
+    background: var(--secondary);
+    width: 80%;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .rama {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 1rem;
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  .rama-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    min-width: 140px;
+  }
+
+  .ejemplo {
+    background: #e6f7ee;
+    border-left: 4px solid var(--success);
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .ejemplo strong { color: var(--success); }
+
+  .alerta {
+    background: #fff8e1;
+    border-left: 4px solid var(--warning);
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .alerta strong { color: var(--warning); }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+
+  th {
+    background: var(--primary);
+    color: white;
+    padding: 0.8rem;
+    text-align: left;
+  }
+
+  td {
+    padding: 0.8rem;
+    border-bottom: 1px solid #eee;
+  }
+
+  tr:nth-child(even) { background: #f9f6ef; }
+  tr:hover { background: #f0ead6; }
+
+  .quiz-container {
+    background: linear-gradient(135deg, #f7f4ed 0%, #fff 100%);
+    padding: 1.5rem;
+    border-radius: 10px;
+    border: 2px solid var(--accent);
+  }
+
+  .quiz-header {
+    background: var(--primary);
+    color: white;
+    padding: 1.2rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .quiz-header h3 {
+    color: white;
+    margin: 0 0 0.5rem 0;
+  }
+
+  .progress-bar {
+    background: rgba(255,255,255,0.2);
+    height: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+  }
+
+  .progress-fill {
+    background: var(--secondary);
+    height: 100%;
+    width: 0%;
+    transition: width 0.4s ease;
+  }
+
+  .quiz-stats {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .stat {
+    background: rgba(255,255,255,0.1);
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    font-size: 0.9rem;
+  }
+
+  .stat strong { color: var(--secondary); }
+
+  .quiz-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    padding: 0.5rem;
+    background: #f0ead6;
+    border-radius: 8px;
+  }
+
+  .quiz-tab {
+    background: white;
+    border: 2px solid var(--accent);
+    color: var(--accent);
+    padding: 0.5rem 0.8rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.85rem;
+    transition: all 0.3s;
+    flex: 1;
+    min-width: 100px;
+    text-align: center;
+  }
+
+  .quiz-tab:hover {
+    background: var(--accent);
+    color: white;
+  }
+
+  .quiz-tab.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+  }
+
+  .quiz-section {
+    display: none;
+  }
+
+  .quiz-section.active {
+    display: block;
+    animation: fadeIn 0.4s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .pregunta {
+    margin-bottom: 1.5rem;
+    padding: 1.2rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    border-left: 4px solid var(--accent);
+    transition: all 0.3s;
+  }
+
+  .pregunta.answered {
+    border-left-color: var(--secondary);
+  }
+
+  .pregunta-num {
+    display: inline-block;
+    background: var(--accent);
+    color: white;
+    padding: 0.2rem 0.7rem;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    margin-right: 0.5rem;
+  }
+
+  .pregunta-tipo {
+    display: inline-block;
+    background: var(--secondary);
+    color: var(--dark);
+    padding: 0.2rem 0.7rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    margin-left: 0.3rem;
+    font-weight: bold;
+  }
+
+  .pregunta p { 
+    font-weight: bold; 
+    color: var(--primary); 
+    margin: 0.8rem 0;
+    text-align: left;
+  }
+
+  .opciones { display: flex; flex-direction: column; gap: 0.5rem; }
+
+  .opcion {
+    padding: 0.7rem 1rem;
+    background: #f9f6ef;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+  }
+
+  .opcion:hover:not(.disabled) {
+    border-color: var(--accent);
+    background: #e8f0f7;
+  }
+
+  .opcion.disabled {
+    cursor: not-allowed;
+    opacity: 0.85;
+  }
+
+  .opcion.correcta {
+    background: #c6f6d5;
+    border-color: var(--success);
+    color: var(--success);
+    font-weight: bold;
+  }
+
+  .opcion.incorrecta {
+    background: #fed7d7;
+    border-color: var(--danger);
+    color: var(--danger);
+  }
+
+  .opcion.correcta::after {
+    content: ' ✓';
+    font-weight: bold;
+  }
+
+  .opcion.incorrecta::after {
+    content: ' ✗';
+    font-weight: bold;
+  }
+
+  .explicacion {
+    margin-top: 0.8rem;
+    padding: 0.8rem;
+    background: #f0f7ff;
+    border-left: 3px solid var(--accent);
+    border-radius: 0 6px 6px 0;
+    font-size: 0.9rem;
+    display: none;
+    font-style: italic;
+  }
+
+  .explicacion.visible {
+    display: block;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .resultado-final {
+    margin-top: 2rem;
+    padding: 2rem;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    color: white;
+    border-radius: 12px;
+    text-align: center;
+    display: none;
+  }
+
+  .resultado-final.visible {
+    display: block;
+    animation: fadeIn 0.5s ease;
+  }
+
+  .resultado-final h3 {
+    color: var(--secondary);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .puntaje-final {
+    font-size: 3rem;
+    font-weight: bold;
+    color: var(--secondary);
+    margin: 1rem 0;
+  }
+
+  .desglose-temas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+    text-align: left;
+  }
+
+  .desglose-item {
+    background: rgba(255,255,255,0.1);
+    padding: 1rem;
+    border-radius: 8px;
+  }
+
+  .desglose-item h4 {
+    color: var(--secondary);
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+  }
+
+  .mini-bar {
+    background: rgba(255,255,255,0.2);
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+  }
+
+  .mini-bar-fill {
+    background: var(--secondary);
+    height: 100%;
+    transition: width 0.6s ease;
+  }
+
+  button {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 1rem;
+    transition: all 0.3s;
+  }
+
+  button:hover {
+    background: var(--secondary);
+    color: var(--dark);
+    transform: translateY(-2px);
+  }
+
+  .btn-reset {
+    background: var(--danger);
+    margin-left: 0.5rem;
+  }
+
+  .btn-reset:hover {
+    background: #9b2c2c;
+    color: white;
+  }
+
+  .acordeon-item {
+    margin-bottom: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .acordeon-header {
+    background: var(--accent);
+    color: white;
+    padding: 1rem;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.3s;
+  }
+
+  .acordeon-header:hover { background: var(--primary); }
+
+  .acordeon-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    background: white;
+  }
+
+  .acordeon-content.active {
+    max-height: 2000px;
+    padding: 1rem;
+  }
+
+  .flecha { transition: transform 0.3s; }
+  .acordeon-header.active .flecha { transform: rotate(180deg); }
+
+  footer {
+    background: var(--dark);
+    color: var(--light);
+    text-align: center;
+    padding: 2rem 1rem;
+    margin-top: 2rem;
+  }
+
+  footer p { margin-bottom: 0.5rem; }
+
+  @media (max-width: 768px) {
+    header h1 { font-size: 1.8rem; }
+    section { padding: 1.2rem; }
+    section h2 { font-size: 1.5rem; }
+    nav a { font-size: 0.8rem; padding: 0.5rem 0.7rem; }
+    .quiz-tab { font-size: 0.75rem; padding: 0.4rem 0.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>📜 De la Sucesión por Causa de Muerte</h1>
+  <p>Libro III del Código Civil Colombiano · Guía Didáctica Interactiva</p>
+</header>
+
+<nav>
+  <ul>
+    <li><a href="#tema1">1. Definiciones</a></li>
+    <li><a href="#tema2">2. Intestada</a></li>
+    <li><a href="#tema3">3. Testamento</a></li>
+    <li><a href="#tema4">4. Asignaciones</a></li>
+    <li><a href="#tema5">5. Forzosas</a></li>
+    <li><a href="#tema6">6. Revocación</a></li>
+    <li><a href="#tema7">7. Aceptación</a></li>
+    <li><a href="#tema8">8. Albaceas</a></li>
+    <li><a href="#tema9">9. Partición</a></li>
+    <li><a href="#tema10">10. Donaciones</a></li>
+    <li><a href="#quiz">Quiz (40)</a></li>
+  </ul>
+</nav>
+
+<main>
+
+  <section>
+    <h2>📚 Introducción</h2>
+    <p>Bienvenido a esta guía interactiva sobre el <strong>Libro Tercero del Código Civil Colombiano</strong>, titulado <em>"De la sucesión por causa de muerte y de las donaciones entre vivos"</em>. Este libro regula la transmisión del patrimonio tras el fallecimiento, los testamentos, las asignaciones hereditarias, las legítimas, la partición de bienes y las donaciones.</p>
+    <div class="alerta">
+      <strong>💡 Cómo usar esta guía:</strong> Haz clic en las tarjetas para ver detalles, despliega los acordeones para información adicional y prueba tus conocimientos con el quiz de 40 preguntas al final.
+    </div>
+  </section>
+
+  <!-- TEMA 1: DEFINICIONES -->
+  <section id="tema1">
+    <h2>1. Definiciones y Reglas Generales (Arts. 1008 a 1036)</h2>
+    <p>La sucesión por causa de muerte es el mecanismo jurídico mediante el cual se transmite el patrimonio de una persona fallecida a sus asignatarios.</p>
+
+    <h3>🗺️ Mapa Conceptual General</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">SUCESIÓN POR CAUSA DE MUERTE</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Testamentaria</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Por testamento</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Intestada</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Por la ley</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Mixta</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Ambas vías</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📦 Clases de Sucesión</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🏛️</div>
+        <h4>A Título Universal (Herencia)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Se sucede al difunto en <strong>todos sus bienes, derechos y obligaciones transmisibles</strong>, o en una cuota de ellos.</p>
+          <p>El asignatario se denomina <strong>heredero</strong>.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🎁</div>
+        <h4>A Título Singular (Legado)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Se sucede en una o más <strong>especies o cuerpos ciertos</strong>, o en especies indeterminadas de cierto género.</p>
+          <p>El asignatario se denomina <strong>legatario</strong>.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>🔑 Apertura y Delación</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🚪</div>
+        <h4>Apertura</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Se abre al momento de la <strong>muerte del causante</strong> en su último domicilio y se rige por la ley de este.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📢</div>
+        <h4>Delación</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Es el <strong>actual llamamiento</strong> que hace la ley a aceptar o repudiar la asignación en el momento del fallecimiento.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🔗</div>
+        <h4>Derecho de Transmisión</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Si el heredero o legatario fallece antes de aceptar o repudiar, <strong>transmite a sus herederos</strong> la facultad de hacerlo.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>💰 Acervo Hereditario y Bajas Generales</h3>
+    <div class="alerta">
+      <strong>⚠️ Fórmula del acervo líquido partible:</strong><br>
+      Acervo = Bienes - Costas de apertura - Deudas hereditarias - Impuestos - Alimentos forzosos - Porción conyugal
+    </div>
+
+    <h3>⚖️ Capacidad e Indignidad</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">✅</div>
+        <h4>Capacidad</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Es capaz de suceder toda persona natural existente o que se espera que exista al tiempo de abrirse la sucesión, o la persona jurídica constituida o por constituirse.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">❌</div>
+        <h4>Indignidad</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Sanción legal que excluye al asignatario por faltas graves contra el causante.</p>
+          <p><strong>Causales:</strong> homicidio, falta de socorro, fuerza o dolo en el testamento, ocultamiento del testamento, no denunciar el homicidio.</p>
+          <p>Requiere <strong>declaración judicial</strong>, se purga en 10 años.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si Juan fallece en Bogotá dejando bienes en varias ciudades, su sucesión se abre en Bogotá (último domicilio) y se rige por la ley colombiana.
+    </div>
+  </section>
+
+  <!-- TEMA 2: INTESTADA -->
+  <section id="tema2">
+    <h2>2. Sucesión Intestada o Abintestato (Arts. 1037 a 1054)</h2>
+    <p>La sucesión intestada opera cuando no hay testamento, o cuando este es ineficaz. La ley determina quiénes son los herederos según un orden preestablecido.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">ÓRDENES SUCESORALES</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">1° Hijos</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">2° Ascendientes + Cónyuge</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">3° Hermanos + Cónyuge</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">4° Sobrinos</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">5° ICBF</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>👥 Órdenes Sucesorales (Ley 29 de 1982)</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Orden</th>
+          <th>Herederos</th>
+          <th>Regla de distribución</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>1°</strong></td>
+          <td>Hijos (legítimos, extramatrimoniales, adoptivos)</td>
+          <td>Por cabezas, excluyen a los demás parientes</td>
+        </tr>
+        <tr>
+          <td><strong>2°</strong></td>
+          <td>Ascendientes del grado más próximo + cónyuge/compañero</td>
+          <td>Por cabezas entre todos</td>
+        </tr>
+        <tr>
+          <td><strong>3°</strong></td>
+          <td>Hermanos + cónyuge/compañero</td>
+          <td>Mitad para el cónyuge, mitad entre hermanos</td>
+        </tr>
+        <tr>
+          <td><strong>4°</strong></td>
+          <td>Sobrinos (hijos de hermanos)</td>
+          <td>Por cabezas o estirpes</td>
+        </tr>
+        <tr>
+          <td><strong>5°</strong></td>
+          <td>Instituto Colombiano de Bienestar Familiar (ICBF)</td>
+          <td>A falta de todos los anteriores</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>🔁 Derecho de Representación</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🔁</div>
+        <h4>Representación</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Ficción legal en que se supone que una persona tiene el <strong>lugar, grado de parentesco y derechos hereditarios</strong> que tendría su padre o madre si este no quisiese o no pudiese suceder.</p>
+          <p><strong>Ejemplo:</strong> Si un hijo del causante ha fallecido, sus hijos (nietos del causante) heredan por representación la cuota que le habría correspondido a su padre.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Pedro fallece sin testamento dejando 3 hijos y a su esposa. Como es primer orden, los 4 heredan por cabezas (cada uno recibe 1/4).
+    </div>
+  </section>
+
+  <!-- TEMA 3: TESTAMENTO -->
+  <section id="tema3">
+    <h2>3. La Sucesión Testamentaria y el Testamento (Arts. 1055 a 1112)</h2>
+    <p>El testamento es el acto solemne mediante el cual una persona dispone de sus bienes para después de sus días.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">TESTAMENTO</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Solemnes</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Abierto / Cerrado</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Privilegiados</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Verbal / Militar / Marítimo</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📜 El Testamento</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📜</div>
+        <h4>Concepto</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Acto más o menos solemne en que una persona dispone del todo o de una parte de sus bienes para que tenga pleno efecto después de sus días.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🔄</div>
+        <h4>Características</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <ul>
+            <li>Acto <strong>individual</strong> de una sola persona</li>
+            <li><strong>Personalísimo</strong> e indelegable</li>
+            <li>Esencialmente <strong>revocable</strong></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Clases de Testamento</h3>
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📜 Testamentos Solemnes</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <h4>Testamento Abierto o Nuncupativo:</h4>
+        <p>El testador manifiesta sus disposiciones ante el <strong>notario y tres (3) testigos</strong>, o ante <strong>cinco (5) testigos</strong>.</p>
+        <h4>Testamento Cerrado:</h4>
+        <p>El testador presenta ante el <strong>notario y cinco (5) testigos</strong> una cubierta cerrada manifestando que en ella se contiene su testamento.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>⚡ Testamentos Privilegiados</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Sujetos a <strong>menos formalidades</strong> por circunstancias excepcionales:</p>
+        <ul>
+          <li><strong>Verbal:</strong> en peligro inminente de muerte</li>
+          <li><strong>Militar:</strong> en campaña o combate</li>
+          <li><strong>Marítimo:</strong> a bordo de un buque</li>
+        </ul>
+        <div class="alerta">
+          <strong>⚠️ Caducidad:</strong> Estos testamentos caducan si el testador sobrevive a la circunstancia de peligro dentro de los plazos legales.
+        </div>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Un soldado en zona de combate puede hacer testamento militar con menos formalidades. Si sobrevive al conflicto, el testamento caduca y debe hacer uno nuevo solemne.
+    </div>
+  </section>
+
+  <!-- TEMA 4: ASIGNACIONES TESTAMENTARIAS -->
+  <section id="tema4">
+    <h2>4. Asignaciones Testamentarias (Arts. 1113 a 1225)</h2>
+    <p>Las asignaciones testamentarias son las disposiciones que el testador hace en su testamento a favor de determinados asignatarios.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">ASIGNACIONES</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">A Título Universal</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Herederos</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">A Título Singular</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Legados</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Clases de Asignaciones</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🏛️</div>
+        <h4>A Título Universal</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Instituyen <strong>herederos</strong>: universales, de cuota o del remanente.</p>
+          <p>Responden por las deudas hereditarias a prorrata.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🎁</div>
+        <h4>A Título Singular (Legados)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Asignan cosas <strong>determinadas</strong> (especie) o <strong>indeterminadas de cierto género</strong>.</p>
+          <p>El legatario no responde por deudas.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>🔀 Modalidades y Derechos</h3>
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>⚙️ Modalidades de las Asignaciones</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <ul>
+          <li><strong>Puras y simples:</strong> sin condiciones</li>
+          <li><strong>Condicionales:</strong> sujetas a un evento futuro e incierto</li>
+          <li><strong>A día o plazo:</strong> sujetas a un evento futuro y cierto</li>
+          <li><strong>Modales:</strong> con una carga u objeto especial</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>🔗 Acrecimiento y Sustitución</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <h4>Acrecimiento:</h4>
+        <p>Aumento de la cuota de un asignatario cuando la cuota de otro colindante queda vacante y han sido llamados a un mismo objeto sin determinación de cuotas.</p>
+        <h4>Sustitución:</h4>
+        <p>Nombramiento de un asignatario que reemplace a otro:</p>
+        <ul>
+          <li><strong>Vulgar:</strong> en caso de que el asignatario falte</li>
+          <li><strong>Fideicomisaria:</strong> que pase a otro cumplida una condición</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo de sustitución vulgar:</strong> "Instituyo heredero a mi hijo Juan, y si este fallece antes que yo, a mi hijo Pedro". Pedro es el sustituto vulgar de Juan.
+    </div>
+  </section>
+
+  <!-- TEMA 5: ASIGNACIONES FORZOSAS -->
+  <section id="tema5">
+    <h2>5. Asignaciones Forzosas y Desheredamiento (Arts. 1226 a 1278)</h2>
+    <p>Las asignaciones forzosas son aquellas que el testador está obligado a hacer y que la ley suple si no las ha hecho.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">ASIGNACIONES FORZOSAS</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Alimentos</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Por ley</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Porción Conyugal</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Cónyuge supérstite</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Legítimas</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Descendientes / Ascendientes</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Las Tres Asignaciones Forzosas</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🍞</div>
+        <h4>Alimentos</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Los que se deben por ley a ciertas personas (descendientes, ascendientes, cónyuge, hermanos).</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">💍</div>
+        <h4>Porción Conyugal</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Cuota del patrimonio del difunto asignada al <strong>cónyuge o compañero permanente sobreviviente</strong> que carece de lo necesario para su congrua subsistencia.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Legítimas</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Cuota de los bienes de la masa hereditaria que la ley asigna rigurosamente a los <strong>legitimarios</strong> (descendientes y ascendientes).</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>📊 Distribución de la Masa Hereditaria</h3>
+    <div class="alerta">
+      <strong>⚠️ Régimen unificado (Ley 1934 de 2018):</strong><br>
+      • <strong>Mitad legitimaria (50%):</strong> se destina forzosamente a los legitimarios<br>
+      • <strong>Mitad de libre disposición (50%):</strong> el testador puede disponer libremente de ella
+    </div>
+
+    <h3>⚔️ Desheredamiento</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚔️</div>
+        <h4>Desheredamiento</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Disposición testamentaria por la que se priva a un <strong>legitimario</strong> de todo o parte de su legítima por causales expresas de la ley.</p>
+          <p><strong>Causales:</strong> injuria grave, falta de socorro, fuerza o dolo.</p>
+          <p>Requiere indicación probada en vida o en juicio posterior.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si una persona fallece dejando un patrimonio de $200 millones, la mitad ($100 millones) corresponde forzosamente a sus hijos (legítima), y la otra mitad ($100 millones) puede distribuirla libremente por testamento.
+    </div>
+  </section>
+
+  <!-- TEMA 6: REVOCACIÓN -->
+  <section id="tema6">
+    <h2>6. Revocación y Reforma del Testamento (Arts. 1279 a 1296)</h2>
+    <p>El testamento es esencialmente revocable, y la ley protege a los legitimarios mediante la acción de reforma.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">REVOCACIÓN Y REFORMA</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Revocación</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Por testamento posterior</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Reforma</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Acción de legitimarios</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>🔄 Revocación y Reforma</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🔄</div>
+        <h4>Revocación</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>El testamento es <strong>libremente revocable</strong> en todo o parte por un testamento posterior.</p>
+          <div class="alerta">
+            <strong>⚠️ Excepción:</strong> La revocación no invalida el reconocimiento de hijos extramatrimoniales efectuado en él.
+          </div>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Acción de Reforma</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Acción judicial conferida a los <strong>legitimarios o al cónyuge supérstite</strong> a quienes el testador no haya dejado lo que por ley les corresponde.</p>
+          <p>Tiene por objeto que se reforme el testamento y se les integre su asignación forzosa.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si un testador deja toda su herencia a un amigo y deshereda injustificadamente a sus hijos, estos pueden ejercer la acción de reforma para obtener su legítima.
+    </div>
+  </section>
+
+  <!-- TEMA 7: APERTURA Y ACEPTACIÓN -->
+  <section id="tema7">
+    <h2>7. Apertura, Aceptación, Repudiación e Inventario (Arts. 1297 a 1326)</h2>
+    <p>Una vez abierta la sucesión, los asignatarios deben decidir si aceptan o repudian la herencia o legado.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">ACEPTACIÓN / REPUDIACIÓN</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Expresa</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Toma título</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Tácita</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Acto de heredero</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Beneficio Inventario</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Limita responsabilidad</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Aceptación y Repudiación</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">✅</div>
+        <h4>Aceptación Expresa</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Tomando el <strong>título de heredero</strong> de manera expresa.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🤫</div>
+        <h4>Aceptación Tácita</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Ejecutando un acto que <strong>supone la intención de heredar</strong> y que no tendría derecho a hacer sino en calidad de heredero.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">❌</div>
+        <h4>Repudiación</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>El asignatario puede <strong>rechazar libremente</strong> la herencia o legado una vez deferida la asignación.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>🛡️ Beneficio de Inventario y Herencia Yacente</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🛡️</div>
+        <h4>Beneficio de Inventario</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Consiste en <strong>no hacer a los herederos responsables</strong> de las deudas hereditarias y testamentarias sino hasta concurrencia del valor total de los bienes heredados.</p>
+          <p>Protege el patrimonio personal del heredero.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⏳</div>
+        <h4>Herencia Yacente</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Declaración judicial cuando pasados <strong>15 días</strong> de la apertura no se ha aceptado la herencia ni hay albacea con tenencia de bienes.</p>
+          <p>Se nombra un <strong>curador de la herencia yacente</strong>.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si Juan hereda bienes por $100 millones pero la herencia tiene deudas por $150 millones, aceptando con beneficio de inventario solo responderá hasta $100 millones, protegiendo su patrimonio personal.
+    </div>
+  </section>
+
+  <!-- TEMA 8: ALBACEAS -->
+  <section id="tema8">
+    <h2>8. Ejecutores Testamentarios o Albaceas (Arts. 1327 a 1376)</h2>
+    <p>El albacea es la persona encargada por el testador de cumplir sus últimas voluntades.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">ALBACEA</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Simple</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Sin tenencia</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Con tenencia</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Administra bienes</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Fiduciario</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Encargos confidenciales</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>👤 El Albacea</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">👤</div>
+        <h4>Concepto</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Ejecutor testamentario a quien el testador encarga el <strong>cumplimiento de sus disposiciones</strong>.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📋</div>
+        <h4>Funciones</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <ul>
+            <li>Velar por la seguridad de los bienes</li>
+            <li>Pagar deudas y legados</li>
+            <li>Rendir cuentas al finalizar su gestión</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🔐</div>
+        <h4>Albacea Fiduciario</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Encargado de invertir <strong>cuantías secretas</strong> en encargos confidenciales autorizados por la ley.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Doña María nombra albacea a su abogado de confianza para que se encargue de cumplir su testamento, pagar las deudas y distribuir los legados a sus beneficiarios.
+    </div>
+  </section>
+
+  <!-- TEMA 9: PARTICIÓN -->
+  <section id="tema9">
+    <h2>9. Partición de Bienes y Deudas Hereditarias (Arts. 1377 a 1442)</h2>
+    <p>La partición es el proceso mediante el cual se divide la herencia entre los coasignatarios.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">PARTICIÓN</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Por testador</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">De común acuerdo</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Por partidor</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Partición de Bienes</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📋</div>
+        <h4>Principio General</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p><strong>Ningún coasignatario es obligado a permanecer en la indivisión.</strong></p>
+          <p>La partición puede efectuarla el testador, los herederos de común acuerdo, o un partidor designado.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">💰</div>
+        <h4>Hijuela de Deudas</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Regula la liquidación de la sociedad conyugal/patrimonial, la rescisión de la partición por lesión enorme o nulidad, y el saneamiento de la evicción entre coherederos.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>💳 Pago de Deudas Hereditarias</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">💳</div>
+        <h4>Deudas Hereditarias</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Se dividen entre los herederos <strong>a prorrata de sus cuotas hereditarias</strong>.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🛡️</div>
+        <h4>Beneficio de Separación</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Facultad de los <strong>acreedores hereditarios y testamentarios</strong> de pedir que no se confundan los bienes del difunto con los del heredero.</p>
+          <p>Permite pagarse de forma preferente con los bienes del difunto.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si tres herederos reciben la herencia en partes iguales (1/3 cada uno), también responderán por las deudas en la misma proporción (1/3 cada uno).
+    </div>
+  </section>
+
+  <!-- TEMA 10: DONACIONES -->
+  <section id="tema10">
+    <h2>10. De las Donaciones entre Vivos (Arts. 1443 a 1493)</h2>
+    <p>La donación entre vivos es un contrato por el cual una persona transfiere gratuita e irrevocablemente una parte de sus bienes a otra.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">DONACIÓN ENTRE VIVOS</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Puras y Simples</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Condicionales</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Modales</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Remuneratorias</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>🎁 La Donación</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🎁</div>
+        <h4>Concepto</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Contrato por el cual una persona transfiere <strong>gratuita e irrevocablemente</strong> una parte de sus bienes a otra persona que la acepta.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📜</div>
+        <h4>Insinuación</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Autorización <strong>notarial o judicial</strong> requerida para donaciones que superen la cuantía fijada por la ley (más de <strong>50 salarios mínimos legales mensuales</strong>).</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>🔄 Revocación y Rescisión</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">😠</div>
+        <h4>Revocación por Ingratitud</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>La donación es genéricamente <strong>irrevocable</strong>, pero se puede revocar por <strong>ingratitud</strong> del donatario.</p>
+          <p><strong>Causales:</strong> atentados graves o injuria contra el donante.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Rescisión</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Se puede rescindir por <strong>violaciones al régimen de asignaciones forzosas</strong> (cuando afecta las legítimas de los herederos).</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si una persona dona un inmueble valorado en 100 salarios mínimos a un amigo, debe insinuar la donación ante notario o juez, ya que supera el límite de 50 salarios mínimos.
+    </div>
+  </section>
+
+  <!-- QUIZ 40 PREGUNTAS -->
+  <section id="quiz">
+    <h2>🎯 Quiz Completo - 40 Preguntas</h2>
+    <p>Pon a prueba tus conocimientos con este quiz exhaustivo. Las preguntas están organizadas por tema. Recibirás retroalimentación inmediata y al final verás tu desempeño desglosado por tema.</p>
+
+    <div class="quiz-container">
+      <div class="quiz-header">
+        <h3>📊 Tu Progreso</h3>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="quiz-stats">
+          <div class="stat">Respondidas: <strong id="respondidas">0</strong>/40</div>
+          <div class="stat">Correctas: <strong id="correctas">0</strong></div>
+          <div class="stat">Incorrectas: <strong id="incorrectas">0</strong></div>
+          <div class="stat">Porcentaje: <strong id="porcentaje">0</strong>%</div>
+        </div>
+      </div>
+
+      <div class="quiz-tabs">
+        <div class="quiz-tab active" onclick="mostrarSeccion('seccion1', this)">T1 (5)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('seccion2', this)">T2 (5)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('seccion3', this)">T3 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('seccion4', this)">T4 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('seccion5', this)">T5 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('seccion6', this)">T6 (3)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('seccion7', this)">T7 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('seccion8', this)">T8 (3)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('seccion9', this)">T9 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('seccion10', this)">T10 (4)</div>
+      </div>
+
+      <!-- SECCIÓN 1: DEFINICIONES -->
+      <div class="quiz-section active" id="seccion1">
+        <div class="pregunta" data-correcta="0" data-tema="1">
+          <span class="pregunta-num">1</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La sucesión a título universal se denomina:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 1)">a) Herencia</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">b) Legado</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">c) Donación</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">d) Testamento</div>
+          </div>
+          <div class="explicacion">La sucesión a título universal (herencia) sucede al difunto en todos sus bienes, derechos y obligaciones transmisibles.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="1">
+          <span class="pregunta-num">2</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El asignatario a título singular se denomina:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 2)">a) Heredero</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">b) Legatario</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">c) Albacea</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">d) Legitimario</div>
+          </div>
+          <div class="explicacion">El asignatario a título singular (legado) se denomina legatario y recibe especies o cuerpos ciertos.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="1">
+          <span class="pregunta-num">3</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La sucesión se abre:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 3)">a) Al leerse el testamento</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">b) Al inscribirse la defunción</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">c) Al momento de la muerte del causante en su último domicilio</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">d) Al partirse los bienes</div>
+          </div>
+          <div class="explicacion">La sucesión se abre al momento de la muerte del causante en su último domicilio y se rige por la ley de este.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="1">
+          <span class="pregunta-num">4</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La indignidad para suceder requiere:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 4)">a) Solo la voluntad del testador</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">b) Acuerdo de los herederos</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">c) Decisión notarial</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">d) Declaración judicial</div>
+          </div>
+          <div class="explicacion">La indignidad requiere declaración judicial y se purga en 10 años de posesión.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="1">
+          <span class="pregunta-num">5</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Para determinar el acervo líquido partible se deben deducir:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 5)">a) Costas, deudas, impuestos, alimentos forzosos y porción conyugal</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">b) Solo las deudas</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">c) Solo los impuestos</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">d) Nada, es el total de bienes</div>
+          </div>
+          <div class="explicacion">Las bajas generales son: costas de apertura, deudas hereditarias, impuestos, alimentos forzosos y porción conyugal.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 2: INTESTADA -->
+      <div class="quiz-section" id="seccion2">
+        <div class="pregunta" data-correcta="1" data-tema="2">
+          <span class="pregunta-num">6</span><span class="pregunta-tipo">Clasificación</span>
+          <p>En el primer orden sucesoral heredan:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 6)">a) Los ascendientes</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">b) Los hijos</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">c) Los hermanos</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">d) El cónyuge</div>
+          </div>
+          <div class="explicacion">El primer orden sucesoral corresponde a los hijos (legítimos, extramatrimoniales o adoptivos).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="2">
+          <span class="pregunta-num">7</span><span class="pregunta-tipo">Clasificación</span>
+          <p>En el tercer orden sucesoral, la herencia se divide:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 7)">a) Todo para el cónyuge</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">b) Todo para los hermanos</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">c) Mitad para el cónyuge y mitad entre los hermanos</div>
+            <div class="opcion" opcion="d" onclick="seleccionar(this, 7)">d) En partes iguales entre todos</div>
+          </div>
+          <div class="explicacion">En el tercer orden, la herencia se divide en dos partes: una mitad para el cónyuge/compañero y la otra mitad entre los hermanos.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="2">
+          <span class="pregunta-num">8</span><span class="pregunta-tipo">Conceptual</span>
+          <p>A falta de todos los herederos de los órdenes anteriores, la herencia corresponde a:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 8)">a) El Estado</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">b) La alcaldía municipal</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">c) Los amigos del causante</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">d) El Instituto Colombiano de Bienestar Familiar (ICBF)</div>
+          </div>
+          <div class="explicacion">En quinto orden, a falta de todos los anteriores, la herencia corresponde al ICBF.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="2">
+          <span class="pregunta-num">9</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El derecho de representación es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 9)">a) Una ficción legal donde una persona ocupa el lugar de su padre o madre</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">b) La designación de un abogado para el proceso sucesoral</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">c) La representación del cónyuge en la sucesión</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">d) La actuación del albacea</div>
+          </div>
+          <div class="explicacion">La representación es una ficción legal en que se supone que una persona tiene el lugar y derechos que tendría su padre o madre si no quisiese o no pudiese suceder.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="2">
+          <span class="pregunta-num">10</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Si Pedro fallece sin testamento dejando 3 hijos y su esposa, heredan:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 10)">a) Solo los hijos</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">b) Los 4 por cabezas (cada uno 1/4)</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">c) Solo la esposa</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">d) Los hijos reciben 2/3 y la esposa 1/3</div>
+          </div>
+          <div class="explicacion">En el primer orden, los hijos excluyen a los demás parientes, pero la Ley 29 de 1982 establece que en el primer orden heredan los hijos por cabezas. El cónyuge o compañero permanente tiene derecho a la porción conyugal (usufructo).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 3: TESTAMENTO -->
+      <div class="quiz-section" id="seccion3">
+        <div class="pregunta" data-correcta="2" data-tema="3">
+          <span class="pregunta-num">11</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El testamento es un acto:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 11)">a) Colectivo y delegable</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">b) Irrevocable</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">c) Individual, personalísimo e indelegable</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">d) Solo entre cónyuges</div>
+          </div>
+          <div class="explicacion">El testamento es un acto individual de una sola persona, personalísimo e indelegable, y esencialmente revocable.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="3">
+          <span class="pregunta-num">12</span><span class="pregunta-tipo">Clasificación</span>
+          <p>El testamento abierto o nuncupativo se otorga ante:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 12)">a) Notario y tres testigos, o ante cinco testigos</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">b) Solo ante notario</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">c) Solo ante dos testigos</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">d) Ante el juez</div>
+          </div>
+          <div class="explicacion">El testamento abierto se otorga ante el notario y tres testigos, o ante cinco testigos.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="3">
+          <span class="pregunta-num">13</span><span class="pregunta-tipo">Clasificación</span>
+          <p>El testamento cerrado se presenta ante:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 13)">a) Notario y tres testigos</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">b) Solo ante notario</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">c) Juez y dos testigos</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">d) Notario y cinco testigos</div>
+          </div>
+          <div class="explicacion">El testamento cerrado se presenta ante el notario y cinco testigos en una cubierta cerrada.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="3">
+          <span class="pregunta-num">14</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los testamentos privilegiados caducan si:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 14)">a) El testador cambia de opinión</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">b) El testador sobrevive a la circunstancia de peligro dentro de los plazos legales</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">c) Pasan 5 años</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">d) Nunca caducan</div>
+          </div>
+          <div class="explicacion">Los testamentos privilegiados (verbal, militar, marítimo) caducan si el testador sobrevive a la circunstancia de peligro.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 4: ASIGNACIONES -->
+      <div class="quiz-section" id="seccion4">
+        <div class="pregunta" data-correcta="2" data-tema="4">
+          <span class="pregunta-num">15</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Las asignaciones a título universal instituyen:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 15)">a) Legatarios</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">b) Albaceas</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">c) Herederos</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">d) Legitimarios</div>
+          </div>
+          <div class="explicacion">Las asignaciones a título universal instituyen herederos (universales, de cuota o del remanente).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="4">
+          <span class="pregunta-num">16</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los legados son asignaciones:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 16)">a) A título singular</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">b) A título universal</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">c) Forzosas</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">d) Intestadas</div>
+          </div>
+          <div class="explicacion">Los legados son asignaciones a título singular que asignan cosas determinadas o de cierto género.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="4">
+          <span class="pregunta-num">17</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El acrecimiento es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 17)">a) La reducción de una cuota hereditaria</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">b) La sustitución de un heredero</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">c) La revocación de un legado</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">d) El aumento de la cuota de un asignatario cuando la de otro queda vacante</div>
+          </div>
+          <div class="explicacion">El acrecimiento es el aumento de la cuota de un asignatario cuando la cuota de otro colindante queda vacante.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="4">
+          <span class="pregunta-num">18</span><span class="pregunta-tipo">Clasificación</span>
+          <p>La sustitución fideicomisaria ocurre cuando:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 18)">a) Un heredero falta antes de aceptar</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">b) Un asignatario pasa a otro cumplida una condición</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">c) El testador revoca el testamento</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">d) El albacea renuncia</div>
+          </div>
+          <div class="explicacion">La sustitución fideicomisaria es aquella en la que un asignatario pasa a otro cumplida una condición.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 5: ASIGNACIONES FORZOSAS -->
+      <div class="quiz-section" id="seccion5">
+        <div class="pregunta" data-correcta="2" data-tema="5">
+          <span class="pregunta-num">19</span><span class="pregunta-tipo">Clasificación</span>
+          <p>¿Cuál de las siguientes NO es una asignación forzosa?</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 19)">a) Los alimentos</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">b) La porción conyugal</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">c) Las legítimas</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">d) Los legados</div>
+          </div>
+          <div class="explicacion">Las asignaciones forzosas son: alimentos, porción conyugal y legítimas. Los legados son asignaciones voluntarias.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="5">
+          <span class="pregunta-num">20</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La porción conyugal se asigna a:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 20)">a) El cónyuge o compañero permanente sobreviviente que carece de lo necesario para su congrua subsistencia</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">b) Todos los cónyuges</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">c) Los hijos menores</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">d) Los ascendientes</div>
+          </div>
+          <div class="explicacion">La porción conyugal se asigna al cónyuge o compañero permanente sobreviviente que carece de lo necesario para su congrua subsistencia.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="5">
+          <span class="pregunta-num">21</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Según la Ley 1934 de 2018, la mitad de libre disposición corresponde a:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 21)">a) Los legitimarios</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">b) El cónyuge</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">c) Los acreedores</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">d) Lo que el testador puede disponer libremente</div>
+          </div>
+          <div class="explicacion">Tras la Ley 1934 de 2018, la mitad de los bienes es de libre disposición del testador.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="5">
+          <span class="pregunta-num">22</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El desheredamiento priva al legitimario de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 22)">a) Los alimentos</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">b) Todo o parte de su legítima</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">c) La porción conyugal</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">d) La herencia intestada</div>
+          </div>
+          <div class="explicacion">El desheredamiento priva al legitimario de todo o parte de su legítima por causales expresas de la ley.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 6: REVOCACIÓN -->
+      <div class="quiz-section" id="seccion6">
+        <div class="pregunta" data-correcta="2" data-tema="6">
+          <span class="pregunta-num">23</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El testamento es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 23)">a) Irrevocable</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">b) Solo revocable por los herederos</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">c) Libremente revocable en todo o parte por un testamento posterior</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">d) Revocable solo con autorización judicial</div>
+          </div>
+          <div class="explicacion">El testamento es libremente revocable en todo o parte por un testamento posterior.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="6">
+          <span class="pregunta-num">24</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La revocación del testamento:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 24)">a) No invalida el reconocimiento de hijos extramatrimoniales efectuado en él</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">b) Invalida todo lo dispuesto</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">c) Solo es válida si hay acuerdo de herederos</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">d) Requiere sentencia judicial</div>
+          </div>
+          <div class="explicacion">La revocación del testamento no invalida el reconocimiento de hijos extramatrimoniales efectuado en él.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="6">
+          <span class="pregunta-num">25</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La acción de reforma del testamento corresponde a:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 25)">a) Los acreedores</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">b) El albacea</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">c) Los legatarios</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">d) Los legitimarios o el cónyuge supérstite</div>
+          </div>
+          <div class="explicacion">La acción de reforma corresponde a los legitimarios o al cónyuge supérstite a quienes el testador no haya dejado lo que por ley les corresponde.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 7: APERTURA Y ACEPTACIÓN -->
+      <div class="quiz-section" id="seccion7">
+        <div class="pregunta" data-correcta="1" data-tema="7">
+          <span class="pregunta-num">26</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La aceptación expresa de la herencia se hace:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 26)">a) Vendiendo los bienes</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">b) Tomando el título de heredero</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">c) Repudiando los legados</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">d) Nombrando albacea</div>
+          </div>
+          <div class="explicacion">La aceptación expresa se hace tomando el título de heredero.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="7">
+          <span class="pregunta-num">27</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La aceptación tácita ocurre cuando:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 27)">a) Se repudia expresamente</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">b) Se guarda silencio</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">c) Se ejecuta un acto que supone la intención de heredar</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">d) Se nombra albacea</div>
+          </div>
+          <div class="explicacion">La aceptación tácita se da ejecutando un acto que supone la intención de heredar.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="7">
+          <span class="pregunta-num">28</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El beneficio de inventario consiste en:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 28)">a) No hacer al heredero responsable de las deudas sino hasta concurrencia del valor de los bienes heredados</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">b) Pagar todas las deudas sin límite</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">c) Repudiar la herencia</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">d) Aceptar solo los bienes</div>
+          </div>
+          <div class="explicacion">El beneficio de inventario limita la responsabilidad del heredero hasta el valor total de los bienes heredados.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="7">
+          <span class="pregunta-num">29</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La herencia yacente se declara cuando:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 29)">a) El testador no tiene bienes</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">b) No hay albacea</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">c) Pasan 30 días sin aceptación</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">d) Pasados 15 días de la apertura no se ha aceptado la herencia ni hay albacea con tenencia de bienes</div>
+          </div>
+          <div class="explicacion">La herencia yacente se declara cuando pasados 15 días de la apertura no se ha aceptado la herencia ni hay albacea con tenencia de bienes.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 8: ALBACEAS -->
+      <div class="quiz-section" id="seccion8">
+        <div class="pregunta" data-correcta="1" data-tema="8">
+          <span class="pregunta-num">30</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El albacea es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 30)">a) El heredero universal</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">b) El ejecutor testamentario a quien el testador encarga el cumplimiento de sus disposiciones</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">c) El legatario principal</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">d) El juez de la sucesión</div>
+          </div>
+          <div class="explicacion">El albacea es el ejecutor testamentario a quien el testador encarga el cumplimiento de sus disposiciones.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="8">
+          <span class="pregunta-num">31</span><span class="pregunta-tipo">Clasificación</span>
+          <p>El albacea fiduciario se encarga de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 31)">a) Partir los bienes</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">b) Pagar las deudas</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">c) Invertir cuantías secretas en encargos confidenciales</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">d) Representar a los herederos</div>
+          </div>
+          <div class="explicacion">El albacea fiduciario se encarga de invertir cuantías secretas en encargos confidenciales autorizados por la ley.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="8">
+          <span class="pregunta-num">32</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Las funciones del albacea incluyen:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 32)">a) Velar por la seguridad de los bienes, pagar deudas y legados, y rendir cuentas</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">b) Solo pagar deudas</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">c) Solo repartir bienes</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">d) Solo rendir cuentas</div>
+          </div>
+          <div class="explicacion">El albacea debe velar por la seguridad de los bienes, pagar deudas y legados, y rendir cuentas al finalizar su gestión.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 9: PARTICIÓN -->
+      <div class="quiz-section" id="seccion9">
+        <div class="pregunta" data-correcta="3" data-tema="9">
+          <span class="pregunta-num">33</span><span class="pregunta-tipo">Conceptual</span>
+          <p>En la partición de bienes:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 33)">a) Los coasignatarios deben permanecer en indivisión</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">b) Solo puede hacerla el juez</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">c) Solo puede hacerla el testador</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">d) Ningún coasignatario es obligado a permanecer en la indivisión</div>
+          </div>
+          <div class="explicacion">Ningún coasignatario es obligado a permanecer en la indivisión; la partición puede hacerla el testador, los herederos de común acuerdo o un partidor.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="9">
+          <span class="pregunta-num">34</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Las deudas hereditarias se dividen:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 34)">a) En partes iguales</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">b) A prorrata de las cuotas hereditarias</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">c) Solo las paga el heredero mayor</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">d) Las paga el albacea</div>
+          </div>
+          <div class="explicacion">Las deudas hereditarias se dividen entre los herederos a prorrata de sus cuotas hereditarias.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="9">
+          <span class="pregunta-num">35</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El beneficio de separación es una facultad de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 35)">a) Los herederos</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">b) El albacea</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">c) Los acreedores hereditarios y testamentarios</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">d) El testador</div>
+          </div>
+          <div class="explicacion">El beneficio de separación es facultad de los acreedores hereditarios y testamentarios para pedir que no se confundan los bienes del difunto con los del heredero.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="9">
+          <span class="pregunta-num">36</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Si tres herederos reciben la herencia en partes iguales, las deudas:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 36)">a) Se dividen en partes iguales (1/3 cada uno)</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">b) Las paga el mayor</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">c) Las paga el albacea</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">d) No se pagan</div>
+          </div>
+          <div class="explicacion">Si los herederos reciben partes iguales, las deudas se dividen a prorrata, es decir, en partes iguales (1/3 cada uno).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 10: DONACIONES -->
+      <div class="quiz-section" id="seccion10">
+        <div class="pregunta" data-correcta="1" data-tema="10">
+          <span class="pregunta-num">37</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La donación entre vivos es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 37)">a) Un testamento anticipado</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">b) Un contrato por el cual se transfiere gratuita e irrevocablemente una parte de los bienes</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">c) Una asignación forzosa</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">d) Una sucesión intestada</div>
+          </div>
+          <div class="explicacion">La donación entre vivos es un contrato por el cual una persona transfiere gratuita e irrevocablemente una parte de sus bienes a otra.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="10">
+          <span class="pregunta-num">38</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La insinuación de la donación es requerida cuando supera:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 38)">a) 10 salarios mínimos</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">b) 25 salarios mínimos</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">c) 50 salarios mínimos legales mensuales</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">d) 100 salarios mínimos</div>
+          </div>
+          <div class="explicacion">La insinuación es requerida para donaciones que superen los 50 salarios mínimos legales mensuales.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="10">
+          <span class="pregunta-num">39</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La donación puede revocarse por:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 39)">a) Ingratitud del donatario</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">b) Voluntad del donante</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">c) Decisión judicial sin causal</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">d) Nunca es revocable</div>
+          </div>
+          <div class="explicacion">La donación es genéricamente irrevocable, pero se puede revocar por ingratitud del donatario (atentados graves o injuria contra el donante).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="10">
+          <span class="pregunta-num">40</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La donación puede rescindirse por:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 40)">a) Voluntad del donante</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">b) Decisión del donatario</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">c) Falta de insinuación únicamente</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">d) Violaciones al régimen de asignaciones forzosas</div>
+          </div>
+          <div class="explicacion">La donación puede rescindirse por violaciones al régimen de asignaciones forzosas (cuando afecta las legítimas).</div>
+        </div>
+      </div>
+
+      <div class="resultado-final" id="resultadoFinal">
+        <h3>🏆 Resultado Final</h3>
+        <div class="puntaje-final" id="puntajeFinal">0/40</div>
+        <p id="mensajeFinal"></p>
+        <div class="desglose-temas" id="desgloseTemas"></div>
+        <button onclick="reiniciarQuiz()" class="btn-reset">🔄 Reiniciar Quiz</button>
+      </div>
+
+      <div style="text-align: center; margin-top: 1.5rem;">
+        <button onclick="verResultadoFinal()">📊 Ver Resultado Final</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>📜 Guía Didáctica - Libro III del Código Civil Colombiano</p>
+  <p>"De la Sucesión por Causa de Muerte y de las Donaciones entre Vivos" · Arts. 1008 a 1493</p>
+  <p style="margin-top: 1rem; opacity: 0.7;">© 2026 - Material educativo interactivo</p>
+</footer>
+
+<script>
+  function toggleAcordeon(header) {
+    header.classList.toggle('active');
+    const content = header.nextElementSibling;
+    content.classList.toggle('active');
+  }
+
+  let respuestas = {};
+  const totalPreguntas = 40;
+
+  function mostrarSeccion(id, tab) {
+    document.querySelectorAll('.quiz-section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.quiz-tab').forEach(t => t.classList.remove('active'));
+    
+    document.getElementById(id).classList.add('active');
+    tab.classList.add('active');
+  }
+
+  function seleccionar(opcion, preguntaNum) {
+    if (respuestas[preguntaNum] !== undefined) return;
+
+    const pregunta = opcion.closest('.pregunta');
+    const opciones = pregunta.querySelectorAll('.opcion');
+    const correcta = parseInt(pregunta.dataset.correcta);
+    const tema = parseInt(pregunta.dataset.tema);
+    const seleccionada = Array.from(opciones).indexOf(opcion);
+    const explicacion = pregunta.querySelector('.explicacion');
+
+    opciones.forEach(o => o.classList.add('disabled'));
+
+    if (seleccionada === correcta) {
+      opcion.classList.add('correcta');
+      respuestas[preguntaNum] = { correcta: true, tema: tema };
+    } else {
+      opcion.classList.add('incorrecta');
+      opciones[correcta].classList.add('correcta');
+      respuestas[preguntaNum] = { correcta: false, tema: tema };
+    }
+
+    explicacion.classList.add('visible');
+    pregunta.classList.add('answered');
+    actualizarEstadisticas();
+  }
+
+  function actualizarEstadisticas() {
+    const total = Object.keys(respuestas).length;
+    const correctas = Object.values(respuestas).filter(r => r.correcta).length;
+    const incorrectas = total - correctas;
+    const porcentaje = total > 0 ? Math.round((correctas / total) * 100) : 0;
+
+    document.getElementById('respondidas').textContent = total;
+    document.getElementById('correctas').textContent = correctas;
+    document.getElementById('incorrectas').textContent = incorrectas;
+    document.getElementById('porcentaje').textContent = porcentaje;
+
+    const progreso = (total / totalPreguntas) * 100;
+    document.getElementById('progressFill').style.width = progreso + '%';
+  }
+
+  function verResultadoFinal() {
+    const total = Object.keys(respuestas).length;
+    
+    if (total < totalPreguntas) {
+      alert(`⚠️ Aún te faltan ${totalPreguntas - total} preguntas por responder. ¡Completa todas las preguntas primero!`);
+      return;
+    }
+
+    const correctas = Object.values(respuestas).filter(r => r.correcta).length;
+    const porcentaje = Math.round((correctas / totalPreguntas) * 100);
+
+    const resultadoFinal = document.getElementById('resultadoFinal');
+    resultadoFinal.classList.add('visible');
+
+    document.getElementById('puntajeFinal').textContent = `${correctas}/${totalPreguntas}`;
+
+    let mensaje = '';
+    if (porcentaje === 100) {
+      mensaje = '🏆 ¡PERFECTO! Dominas completamente la Sucesión por Causa de Muerte.';
+    } else if (porcentaje >= 90) {
+      mensaje = '🌟 ¡Excelente! Tienes un dominio sobresaliente del tema.';
+    } else if (porcentaje >= 75) {
+      mensaje = '✅ ¡Muy bien! Buen dominio del tema, con algunos puntos por reforzar.';
+    } else if (porcentaje >= 60) {
+      mensaje = '📚 Aceptable. Te recomendamos repasar los temas donde fallaste.';
+    } else if (porcentaje >= 40) {
+      mensaje = '📖 Necesitas reforzar varios conceptos. Revisa los temas con detenimiento.';
+    } else {
+      mensaje = '🔍 Es necesario estudiar nuevamente todos los temas. ¡No te desanimes!';
+    }
+
+    document.getElementById('mensajeFinal').textContent = mensaje;
+
+    const temas = {
+      1: { nombre: 'T1: Definiciones', total: 5, correctas: 0 },
+      2: { nombre: 'T2: Intestada', total: 5, correctas: 0 },
+      3: { nombre: 'T3: Testamento', total: 4, correctas: 0 },
+      4: { nombre: 'T4: Asignaciones', total: 4, correctas: 0 },
+      5: { nombre: 'T5: Forzosas', total: 4, correctas: 0 },
+      6: { nombre: 'T6: Revocación', total: 3, correctas: 0 },
+      7: { nombre: 'T7: Aceptación', total: 4, correctas: 0 },
+      8: { nombre: 'T8: Albaceas', total: 3, correctas: 0 },
+      9: { nombre: 'T9: Partición', total: 4, correctas: 0 },
+      10: { nombre: 'T10: Donaciones', total: 4, correctas: 0 }
+    };
+
+    Object.values(respuestas).forEach(r => {
+      if (r.correcta) temas[r.tema].correctas++;
+    });
+
+    const desgloseHTML = Object.values(temas).map(t => {
+      const pct = Math.round((t.correctas / t.total) * 100);
+      return `
+        <div class="desglose-item">
+          <h4>${t.nombre}</h4>
+          <p>${t.correctas}/${t.total} (${pct}%)</p>
+          <div class="mini-bar">
+            <div class="mini-bar-fill" style="width: ${pct}%"></div>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    document.getElementById('desgloseTemas').innerHTML = desgloseHTML;
+
+    resultadoFinal.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  function reiniciarQuiz() {
+    if (!confirm('¿Estás seguro de reiniciar el quiz? Se perderán todas tus respuestas.')) return;
+
+    respuestas = {};
+
+    document.querySelectorAll('.opcion').forEach(o => {
+      o.classList.remove('correcta', 'incorrecta', 'disabled');
+    });
+
+    document.querySelectorAll('.explicacion').forEach(e => {
+      e.classList.remove('visible');
+    });
+
+    document.querySelectorAll('.pregunta').forEach(p => {
+      p.classList.remove('answered');
+    });
+
+    document.getElementById('resultadoFinal').classList.remove('visible');
+
+    actualizarEstadisticas();
+
+    mostrarSeccion('seccion1', document.querySelector('.quiz-tab'));
+    document.getElementById('quiz').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  document.querySelectorAll('nav a').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
