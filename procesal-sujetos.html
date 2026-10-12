@@ -1,0 +1,2186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sujetos del Proceso - Libro Primero del CGP</title>
+<style>
+  :root {
+    --primary: #1e3a8a;
+    --secondary: #f59e0b;
+    --accent: #2563eb;
+    --light: #eff6ff;
+    --dark: #1e293b;
+    --success: #059669;
+    --warning: #d97706;
+    --danger: #dc2626;
+    --card-bg: #ffffff;
+    --shadow: 0 4px 15px rgba(0,0,0,0.08);
+    --shadow-hover: 0 8px 25px rgba(0,0,0,0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    background: var(--light);
+    color: var(--dark);
+    line-height: 1.7;
+  }
+
+  header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    color: white;
+    padding: 2rem 1rem;
+    text-align: center;
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::before {
+    content: '⚖️';
+    position: absolute;
+    font-size: 15rem;
+    opacity: 0.05;
+    top: -30px;
+    right: -30px;
+  }
+
+  header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: 2px;
+  }
+
+  header p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    font-style: italic;
+  }
+
+  nav {
+    background: var(--dark);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow);
+  }
+
+  nav ul {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0.5rem;
+  }
+
+  nav a {
+    color: var(--light);
+    text-decoration: none;
+    padding: 0.7rem 1rem;
+    margin: 0.2rem;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    transition: all 0.3s;
+    display: block;
+  }
+
+  nav a:hover {
+    background: var(--secondary);
+    color: var(--dark);
+    transform: translateY(-2px);
+  }
+
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+  }
+
+  section {
+    background: var(--card-bg);
+    margin-bottom: 2.5rem;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    border-left: 5px solid var(--secondary);
+    scroll-margin-top: 80px;
+  }
+
+  section h2 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--secondary);
+  }
+
+  section h3 {
+    color: var(--accent);
+    font-size: 1.4rem;
+    margin: 1.5rem 0 0.8rem;
+  }
+
+  section h4 {
+    color: var(--primary);
+    font-size: 1.15rem;
+    margin: 1rem 0 0.5rem;
+  }
+
+  p { margin-bottom: 1rem; text-align: justify; }
+
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.2rem;
+    margin: 1.5rem 0;
+  }
+
+  .card {
+    background: linear-gradient(135deg, #fff 0%, #f0f7ff 100%);
+    border: 2px solid var(--secondary);
+    border-radius: 10px;
+    padding: 1.2rem;
+    transition: all 0.3s;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--primary);
+  }
+
+  .card .icon {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .card h4 {
+    text-align: center;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+  }
+
+  .card .detail {
+    display: none;
+    margin-top: 0.8rem;
+    padding-top: 0.8rem;
+    border-top: 1px dashed var(--secondary);
+    font-size: 0.95rem;
+  }
+
+  .card.active .detail { display: block; }
+
+  .card .hint {
+    text-align: center;
+    color: var(--accent);
+    font-size: 0.85rem;
+    font-style: italic;
+  }
+
+  .mapa-container {
+    background: #f8fafc;
+    border: 2px dashed var(--secondary);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    overflow-x: auto;
+  }
+
+  .mapa {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 600px;
+  }
+
+  .nodo {
+    background: var(--primary);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+    font-weight: bold;
+    text-align: center;
+    min-width: 180px;
+    box-shadow: var(--shadow);
+  }
+
+  .nodo.central {
+    background: linear-gradient(135deg, var(--secondary), #fbbf24);
+    color: var(--dark);
+    font-size: 1.2rem;
+    padding: 1rem 2rem;
+  }
+
+  .nodo.sub {
+    background: var(--accent);
+    font-size: 0.95rem;
+  }
+
+  .linea {
+    width: 3px;
+    height: 25px;
+    background: var(--secondary);
+  }
+
+  .linea-h {
+    height: 3px;
+    background: var(--secondary);
+    width: 80%;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .rama {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 1rem;
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  .rama-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    min-width: 140px;
+  }
+
+  .ejemplo {
+    background: #ecfdf5;
+    border-left: 4px solid var(--success);
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .ejemplo strong { color: var(--success); }
+
+  .alerta {
+    background: #fffbeb;
+    border-left: 4px solid var(--warning);
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .alerta strong { color: var(--warning); }
+
+  .cita {
+    background: #eff6ff;
+    border-left: 4px solid var(--accent);
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+    color: var(--primary);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    font-size: 0.9rem;
+  }
+
+  th {
+    background: var(--primary);
+    color: white;
+    padding: 0.8rem;
+    text-align: left;
+  }
+
+  td {
+    padding: 0.8rem;
+    border-bottom: 1px solid #eee;
+  }
+
+  tr:nth-child(even) { background: #f8fafc; }
+  tr:hover { background: #eff6ff; }
+
+  .quiz-container {
+    background: linear-gradient(135deg, #f8fafc 0%, #fff 100%);
+    padding: 1.5rem;
+    border-radius: 10px;
+    border: 2px solid var(--accent);
+  }
+
+  .quiz-header {
+    background: var(--primary);
+    color: white;
+    padding: 1.2rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .quiz-header h3 {
+    color: white;
+    margin: 0 0 0.5rem 0;
+  }
+
+  .progress-bar {
+    background: rgba(255,255,255,0.2);
+    height: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+  }
+
+  .progress-fill {
+    background: var(--secondary);
+    height: 100%;
+    width: 0%;
+    transition: width 0.4s ease;
+  }
+
+  .quiz-stats {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .stat {
+    background: rgba(255,255,255,0.1);
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    font-size: 0.9rem;
+  }
+
+  .stat strong { color: var(--secondary); }
+
+  .quiz-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    padding: 0.5rem;
+    background: #f0f7ff;
+    border-radius: 8px;
+  }
+
+  .quiz-tab {
+    background: white;
+    border: 2px solid var(--accent);
+    color: var(--accent);
+    padding: 0.5rem 0.8rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.75rem;
+    transition: all 0.3s;
+    flex: 1;
+    min-width: 80px;
+    text-align: center;
+  }
+
+  .quiz-tab:hover {
+    background: var(--accent);
+    color: white;
+  }
+
+  .quiz-tab.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+  }
+
+  .quiz-section {
+    display: none;
+  }
+
+  .quiz-section.active {
+    display: block;
+    animation: fadeIn 0.4s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .pregunta {
+    margin-bottom: 1.5rem;
+    padding: 1.2rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    border-left: 4px solid var(--accent);
+    transition: all 0.3s;
+  }
+
+  .pregunta.answered {
+    border-left-color: var(--secondary);
+  }
+
+  .pregunta-num {
+    display: inline-block;
+    background: var(--accent);
+    color: white;
+    padding: 0.2rem 0.7rem;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    margin-right: 0.5rem;
+  }
+
+  .pregunta-tipo {
+    display: inline-block;
+    background: var(--secondary);
+    color: var(--dark);
+    padding: 0.2rem 0.7rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    margin-left: 0.3rem;
+    font-weight: bold;
+  }
+
+  .pregunta p { 
+    font-weight: bold; 
+    color: var(--primary); 
+    margin: 0.8rem 0;
+    text-align: left;
+  }
+
+  .opciones { display: flex; flex-direction: column; gap: 0.5rem; }
+
+  .opcion {
+    padding: 0.7rem 1rem;
+    background: #f8fafc;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+  }
+
+  .opcion:hover:not(.disabled) {
+    border-color: var(--accent);
+    background: #eff6ff;
+  }
+
+  .opcion.disabled {
+    cursor: not-allowed;
+    opacity: 0.85;
+  }
+
+  .opcion.correcta {
+    background: #d1fae5;
+    border-color: var(--success);
+    color: var(--success);
+    font-weight: bold;
+  }
+
+  .opcion.incorrecta {
+    background: #fee2e2;
+    border-color: var(--danger);
+    color: var(--danger);
+  }
+
+  .opcion.correcta::after {
+    content: ' ✓';
+    font-weight: bold;
+  }
+
+  .opcion.incorrecta::after {
+    content: ' ';
+    font-weight: bold;
+  }
+
+  .explicacion {
+    margin-top: 0.8rem;
+    padding: 0.8rem;
+    background: #eff6ff;
+    border-left: 3px solid var(--accent);
+    border-radius: 0 6px 6px 0;
+    font-size: 0.9rem;
+    display: none;
+    font-style: italic;
+  }
+
+  .explicacion.visible {
+    display: block;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .resultado-final {
+    margin-top: 2rem;
+    padding: 2rem;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    color: white;
+    border-radius: 12px;
+    text-align: center;
+    display: none;
+  }
+
+  .resultado-final.visible {
+    display: block;
+    animation: fadeIn 0.5s ease;
+  }
+
+  .resultado-final h3 {
+    color: var(--secondary);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .puntaje-final {
+    font-size: 3rem;
+    font-weight: bold;
+    color: var(--secondary);
+    margin: 1rem 0;
+  }
+
+  .desglose-temas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+    text-align: left;
+  }
+
+  .desglose-item {
+    background: rgba(255,255,255,0.1);
+    padding: 1rem;
+    border-radius: 8px;
+  }
+
+  .desglose-item h4 {
+    color: var(--secondary);
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+  }
+
+  .mini-bar {
+    background: rgba(255,255,255,0.2);
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+  }
+
+  .mini-bar-fill {
+    background: var(--secondary);
+    height: 100%;
+    transition: width 0.6s ease;
+  }
+
+  button {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 1rem;
+    transition: all 0.3s;
+  }
+
+  button:hover {
+    background: var(--secondary);
+    color: var(--dark);
+    transform: translateY(-2px);
+  }
+
+  .btn-reset {
+    background: var(--danger);
+    margin-left: 0.5rem;
+  }
+
+  .btn-reset:hover {
+    background: #991b1b;
+    color: white;
+  }
+
+  .acordeon-item {
+    margin-bottom: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .acordeon-header {
+    background: var(--accent);
+    color: white;
+    padding: 1rem;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.3s;
+  }
+
+  .acordeon-header:hover { background: var(--primary); }
+
+  .acordeon-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    background: white;
+  }
+
+  .acordeon-content.active {
+    max-height: 2000px;
+    padding: 1rem;
+  }
+
+  .flecha { transition: transform 0.3s; }
+  .acordeon-header.active .flecha { transform: rotate(180deg); }
+
+  footer {
+    background: var(--dark);
+    color: var(--light);
+    text-align: center;
+    padding: 2rem 1rem;
+    margin-top: 2rem;
+  }
+
+  footer p { margin-bottom: 0.5rem; }
+
+  @media (max-width: 768px) {
+    header h1 { font-size: 1.8rem; }
+    section { padding: 1.2rem; }
+    section h2 { font-size: 1.5rem; }
+    nav a { font-size: 0.7rem; padding: 0.4rem 0.5rem; }
+    .quiz-tab { font-size: 0.65rem; padding: 0.3rem 0.4rem; }
+    table { font-size: 0.8rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>⚖️ Sujetos del Proceso</h1>
+  <p>Libro Primero del Código General del Proceso (Arts. 15 a 81) · Guía Didáctica Interactiva</p>
+</header>
+
+<nav>
+  <ul>
+    <li><a href="#tema1">1. Competencia</a></li>
+    <li><a href="#tema2">2. Comisión</a></li>
+    <li><a href="#tema3">3. Jueces</a></li>
+    <li><a href="#tema4">4. Min. Público</a></li>
+    <li><a href="#tema5">5. Auxiliares</a></li>
+    <li><a href="#tema6">6. Capacidad</a></li>
+    <li><a href="#tema7">7. Litisconsorcio</a></li>
+    <li><a href="#tema8">8. Terceros</a></li>
+    <li><a href="#tema9">9. Apoderados</a></li>
+    <li><a href="#tema10">10. Deberes</a></li>
+    <li><a href="#quiz">Quiz (40)</a></li>
+  </ul>
+</nav>
+
+<main>
+
+  <section>
+    <h2>📚 Introducción</h2>
+    <p>Bienvenido a esta guía interactiva sobre el <strong>Libro Primero del Código General del Proceso (CGP)</strong>, titulado "Sujetos del Proceso". Este libro regula los órganos judiciales, sus auxiliares, las partes, representantes, apoderados y terceros que intervienen en el proceso civil colombiano.</p>
+    <div class="alerta">
+      <strong>💡 Cómo usar esta guía:</strong> Haz clic en las tarjetas para ver detalles, despliega los acordeones para información adicional y prueba tus conocimientos con el quiz de 40 preguntas al final.
+    </div>
+  </section>
+
+  <!-- TEMA 1: COMPETENCIA -->
+  <section id="tema1">
+    <h2>1. Jurisdicción y Competencia (Arts. 15 a 34)</h2>
+    <p>La competencia es la medida o límite de la jurisdicción atribuida a un órgano específico para conocer de un asunto determinado.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">COMPETENCIA</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Objetivo</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Materia y Cuantía</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Subjetivo</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Calidad de las partes</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Territorial</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Fueros</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Funcional</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Grados e instancias</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Cláusula General o Residual (Art. 15)</h3>
+    <div class="cita">
+      <strong>"Corresponde a la jurisdicción ordinaria el conocimiento de todo asunto no atribuido expresamente a otra jurisdicción."</strong> — Art. 15 CGP
+    </div>
+
+    <h3>🔍 Factores de Competencia (Arts. 23 a 29)</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🎯</div>
+        <h4>Factor Objetivo</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Atiende a la <strong>materia</strong> (naturaleza del asunto) y a la <strong>cuantía</strong> (mínima, menor y mayor).</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">👥</div>
+        <h4>Factor Subjetivo</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Calidad de las personas que son parte (Estados extranjeros, agentes diplomáticos, entidades públicas).</p>
+          <p><strong>IMPRORROGABLE</strong></p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📍</div>
+        <h4>Factor Territorial (Art. 28)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Fueros: general (domicilio del demandado), real (ubicación de bienes) y contractual (lugar de cumplimiento).</p>
+          <p><strong>PRORROGABLE</strong></p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🏛️</div>
+        <h4>Factor Funcional</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Distribución vertical por grados e instancias: jueces municipales, del circuito, tribunales, Corte Suprema.</p>
+          <p><strong>IMPRORROGABLE</strong></p>
+        </div>
+      </div>
+    </div>
+
+    <h3>⚖️ Prorrogabilidad e Improrrogabilidad (Art. 16)</h3>
+    <div class="alerta">
+      <strong>📌 Regla fundamental:</strong>
+      <ul>
+        <li><strong>Improrrogables:</strong> Factores subjetivo y funcional (su inobservancia genera nulidad)</li>
+        <li><strong>Prorrogables:</strong> Factores territorial y de cuantía (si no se alegan oportunamente)</li>
+      </ul>
+    </div>
+
+    <h3>📊 Distribución por Cuantía y Materia (Arts. 17 a 22)</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Juez</th>
+          <th>Cuantía</th>
+          <th>Instancia</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Municipal</strong></td>
+          <td>Mínima cuantía</td>
+          <td>Única instancia</td>
+        </tr>
+        <tr>
+          <td><strong>Municipal</strong></td>
+          <td>Menor cuantía</td>
+          <td>Primera instancia</td>
+        </tr>
+        <tr>
+          <td><strong>Civil del Circuito</strong></td>
+          <td>Mayor cuantía</td>
+          <td>Primera instancia</td>
+        </tr>
+        <tr>
+          <td><strong>Civil del Circuito</strong></td>
+          <td>Menor cuantía</td>
+          <td>Impugnaciones especiales</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si un asunto no está atribuido expresamente a la jurisdicción contencioso-administrativa, laboral o constitucional, corresponde a la jurisdicción ordinaria en su especialidad civil (cláusula residual del Art. 15).
+    </div>
+  </section>
+
+  <!-- TEMA 2: COMISIÓN -->
+  <section id="tema2">
+    <h2>2. Comisión (Arts. 37 a 41)</h2>
+    <p>La comisión es el mecanismo mediante el cual un juez delega la práctica de pruebas o diligencias a otro juez o autoridad.</p>
+
+    <h3>️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">COMISIÓN</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Comitente</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Juez del proceso</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Comisionado</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Juez local o autoridad</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Regla General (Art. 37)</h3>
+    <div class="alerta">
+      <strong>📌 La comisión solo procede para:</strong>
+      <ul>
+        <li>Práctica de pruebas (cuando corresponda según el Art. 171)</li>
+        <li>Diligencias fuera de la sede judicial</li>
+        <li>Secuestro y entrega de bienes</li>
+      </ul>
+      <p><strong>NO se comisiona</strong> para medidas cautelares extraprocesales.</p>
+    </div>
+
+    <h3>🔍 Sujetos de la Comisión (Arts. 38 a 41)</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Comitente</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>El <strong>juez del proceso</strong> que ordena la comisión.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📋</div>
+        <h4>Comisionado</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>El <strong>juez o autoridad administrativa local</strong> que ejecuta la comisión.</p>
+          <p>Se prevé el auxilio por <strong>videoconferencia</strong> o medios tecnológicos.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si el juez del proceso está en Bogotá pero debe practicarse una inspección judicial en Medellín, comisiona al juez civil del circuito de Medellín para que practique la diligencia.
+    </div>
+  </section>
+
+  <!-- TEMA 3: DEBERES Y PODERES DE LOS JUECES -->
+  <section id="tema3">
+    <h2>3. Deberes y Poderes de los Jueces (Arts. 42 a 44)</h2>
+    <p>El juez es el director del proceso y tiene deberes y poderes específicos para garantizar su correcto desarrollo.</p>
+
+    <h3>📋 Deberes del Juez (Art. 42)</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon"></div>
+        <h4>Dirección del Proceso</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Dirigir el proceso y velar por su <strong>celeridad</strong>.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Igualdad Real</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Hacer efectiva la <strong>igualdad real de las partes</strong>.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🛡️</div>
+        <h4>Prevención del Fraude</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Prevenir el <strong>fraude procesal</strong> o actos contrarios a la buena fe.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>⚡ Poderes de Ordenación e Instrucción (Art. 43)</h3>
+    <div class="alerta">
+      <strong>📌 Poderes del juez:</strong>
+      <ul>
+        <li>Resolver recursos oportunamente</li>
+        <li>Decretar pruebas de oficio</li>
+        <li>Rechazar peticiones notoriamente improcedentes</li>
+        <li>Sanear el proceso</li>
+      </ul>
+    </div>
+
+    <h3>⚠️ Poderes Correccionales (Art. 44)</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon"></div>
+        <h4>Sanciones</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Imponer <strong>multas o arrestos</strong> por faltas al respeto a la administración de justicia.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong> Ejemplo:</strong> Si una parte presenta una petición notoriamente improcedente solo para dilatar el proceso, el juez puede rechazarla de plano e imponer una multa por temeridad (Art. 43 y 44 CGP).
+    </div>
+  </section>
+
+  <!-- TEMA 4: MINISTERIO PÚBLICO -->
+  <section id="tema4">
+    <h2>4. Ministerio Público (Arts. 45 y 46)</h2>
+    <p>El Ministerio Público actúa como sujeto procesal especial con amplias facultades para proteger el interés público.</p>
+
+    <h3>📋 Intervención (Art. 45)</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">️</div>
+        <h4>Ante quién actúa</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Ante la <strong>Corte Suprema, Tribunales y Jueces</strong> a través de:</p>
+          <ul>
+            <li>Procuradores Delegados</li>
+            <li>Procuradores Judiciales</li>
+            <li>Personeros Municipales</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <h3>⚡ Facultades (Art. 46)</h3>
+    <div class="alerta">
+      <strong>📌 El Ministerio Público puede:</strong>
+      <ul>
+        <li>Interponer recursos</li>
+        <li>Pedir y controvertir pruebas</li>
+        <li>Solicitar nulidades</li>
+        <li>Promover medidas cautelares</li>
+      </ul>
+      <p>Todo en cumplimiento de sus funciones constitucionales.</p>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> En un proceso de nulidad de matrimonio donde hay menores de edad involucrados, el Ministerio Público (Personero Municipal) interviene para proteger los derechos de los menores, puede pedir pruebas y interponer recursos.
+    </div>
+  </section>
+
+  <!-- TEMA 5: AUXILIARES DE LA JUSTICIA -->
+  <section id="tema5">
+    <h2>5. Auxiliares de la Justicia (Arts. 47 a 52)</h2>
+    <p>Los auxiliares de la justicia son personas idóneas que colaboran con el juez en el desarrollo del proceso.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">AUXILIARES DE JUSTICIA</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Peritos</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Secuestres</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Liquidadores</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Curadores ad litem</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Naturaleza del Cargo (Art. 47)</h3>
+    <div class="alerta">
+      <strong> Características:</strong>
+      <ul>
+        <li>Son <strong>oficios públicos ocasionales</strong></li>
+        <li>Desempeñados por personas <strong>idóneas</strong></li>
+        <li>De <strong>conducta intachable</strong></li>
+        <li>Registrados en <strong>listas oficiales</strong></li>
+      </ul>
+    </div>
+
+    <h3>🔍 Designación, Posesión y Honorarios (Arts. 48 a 52)</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📋</div>
+        <h4>Designación</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Reglas de <strong>rotación</strong> para garantizar imparcialidad.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">️</div>
+        <h4>Excusas e Impedimentos</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Régimen de <strong>excusas e impedimentos</strong> similar al de los jueces.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">💰</div>
+        <h4>Honorarios</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Fijación de <strong>honorarios</strong> según arancel y complejidad del cargo.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong> Ejemplo:</strong> En un proceso de insolvencia, el juez designa un liquidador de la lista oficial de auxiliares de justicia. El liquidador debe ser persona idónea, de conducta intachable, y recibirá honorarios según el arancel judicial.
+    </div>
+  </section>
+
+  <!-- TEMA 6: CAPACIDAD Y REPRESENTACIÓN -->
+  <section id="tema6">
+    <h2>6. Capacidad y Representación (Arts. 53 a 59)</h2>
+    <p>La capacidad procesal determina quiénes pueden ser parte en un proceso y cómo comparecen.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">CAPACIDAD PROCESAL</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Para ser parte</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Art. 53</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Para comparecer</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Art. 54</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Representación</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Arts. 55-59</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Capacidad para ser Parte (Art. 53)</h3>
+    <div class="alerta">
+      <strong>📌 Tienen capacidad para ser parte:</strong>
+      <ul>
+        <li>Personas naturales</li>
+        <li>Personas jurídicas</li>
+        <li>Patrimonios autónomos</li>
+        <li>El concebido (nasciturus)</li>
+        <li>Los demás que determine la ley</li>
+      </ul>
+    </div>
+
+    <h3>⚡ Comparecencia al Proceso (Art. 54)</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">✅</div>
+        <h4>Capaces</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Quienes pueden <strong>disponer libremente de sus derechos</strong> comparecen por sí mismos.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">👨‍👩‍👧</div>
+        <h4>Incapaces</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Los incapaces actúan por sus <strong>representantes legales</strong> (padres, tutores, curadores).</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>🔍 Agencia Oficiosa Procesal (Art. 55)</h3>
+    <div class="alerta">
+      <strong>📌 Concepto:</strong> Posibilidad de promover demanda a favor de quien no se halla en condiciones de hacerlo, prestando <strong>caución para la ratificación</strong>.
+    </div>
+
+    <h3>📋 Curaduría ad litem y Sucesión Procesal (Arts. 57 a 59)</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">️</div>
+        <h4>Curaduría ad litem</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Representación judicial de <strong>ausentes e indeterminados</strong>.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🔄</div>
+        <h4>Sucesión Procesal</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Reemplazo procesal en caso de <strong>muerte o extinción</strong> de la persona jurídica.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si un menor de edad es demandado, comparece al proceso a través de sus padres (representantes legales). Si no tiene representantes o estos tienen conflicto de intereses, el juez nombra un curador ad litem.
+    </div>
+  </section>
+
+  <!-- TEMA 7: LITISCONSORCIO -->
+  <section id="tema7">
+    <h2>7. Litisconsortes y Otras Partes (Arts. 60 a 62)</h2>
+    <p>El litisconsorcio es la pluralidad de partes en un mismo proceso.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">LITISCONSORCIO</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Facultativo</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Art. 60</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Necesario</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Art. 61</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Cuasinecesario</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Art. 62</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Tipos de Litisconsorcio</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Tipo</th>
+          <th>Características</th>
+          <th>Artículo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Facultativo</strong></td>
+          <td>Acumulación libre de pretensiones independientes. Los consortes son litigantes separados.</td>
+          <td>Art. 60</td>
+        </tr>
+        <tr>
+          <td><strong>Necesario</strong></td>
+          <td>La relación sustancial es una e indivisible. Exige sentencia uniforme e integración obligatoria del contradictorio.</td>
+          <td>Art. 61</td>
+        </tr>
+        <tr>
+          <td><strong>Cuasinecesario</strong></td>
+          <td>Los efectos de la sentencia se extienden al sujeto, pero su presencia inicial no es indispensable.</td>
+          <td>Art. 62</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo de litisconsorcio necesario:</strong> En un proceso de división de cosa común, todos los copropietarios deben ser parte del proceso. La sentencia debe ser uniforme para todos y no puede dictarse válidamente sin la integración completa del contradictorio.
+    </div>
+  </section>
+
+  <!-- TEMA 8: TERCEROS -->
+  <section id="tema8">
+    <h2>8. Terceros (Arts. 63 a 72)</h2>
+    <p>Los terceros son personas que intervienen en el proceso sin ser demandante ni demandado inicial.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">TERCEROS</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Excluyente</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Art. 63</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Coadyuvante</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Art. 64</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Garante</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Arts. 65-66</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Poseedor</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Art. 67</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Clases de Intervención de Terceros</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚔️</div>
+        <h4>Intervención Excluyente (Art. 63)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Pretensión <strong>propia e independiente</strong> frente a demandante y demandado.</p>
+          <p>El tercero claims el bien o derecho en disputa para sí.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🤝</div>
+        <h4>Coadyuvancia (Art. 64)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Intervención de un tercero con <strong>interés accesorio</strong> para apoyar las pretensiones de una de las partes.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🛡️</div>
+        <h4>Llamamiento en Garantía (Arts. 65-66)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Vinculación de quien por <strong>ley o contrato</strong> deba indemnizar el perjuicio derivado de la sentencia.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon"></div>
+        <h4>Llamamiento al Poseedor/Tenedor (Art. 67)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p><em>Laudatio autoris</em>: indicación del verdadero poseedor o propietario.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Llamamiento de Oficio (Art. 68)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Vinculación ordenada por el juez cuando advierta indicios de <strong>colusión o fraude procesal</strong>.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo de intervención excluyente:</strong> Si A demanda a B por la propiedad de un inmueble, pero C interviene alegando que el inmueble es suyo (no de A ni de B), C es un tercero interviniente excluyente.
+    </div>
+  </section>
+
+  <!-- TEMA 9: APODERADOS -->
+  <section id="tema9">
+    <h2>9. Apoderados (Arts. 73 a 77)</h2>
+    <p>Los apoderados son los representantes judiciales de las partes en el proceso.</p>
+
+    <h3>📋 Derecho de Postulación (Art. 73)</h3>
+    <div class="alerta">
+      <strong>📌 Regla general:</strong> Las partes deben comparecer mediante <strong>abogado inscrito</strong> en tarjeta profesional, salvo excepciones legales (procesos de mínima cuantía, acciones de tutela, etc.).
+    </div>
+
+    <h3>🔍 Tipos de Poderes (Art. 74)</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon"></div>
+        <h4>Poder General</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Concedido para <strong>toda clase de procesos</strong>.</p>
+          <p>Requiere <strong>escritura pública</strong>.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📄</div>
+        <h4>Poder Especial</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Concedido por <strong>documento privado o mensaje de datos</strong>.</p>
+          <p>Para <strong>asuntos concretos y determinados</strong>.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>⚡ Sustitución, Terminación y Facultades (Arts. 75 a 77)</h3>
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>🔄 Sustitución del Apoderado</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>El apoderado puede sustituir su poder en otro abogado, manteniendo la responsabilidad frente al poderdante.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>⏹️ Terminación del Poder</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Causales de terminación:</p>
+        <ul>
+          <li>Revocación por el poderdante</li>
+          <li>Renuncia del apoderado</li>
+          <li>Muerte o incapacidad del apoderado o poderdante</li>
+          <li>Terminación del proceso</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>⚡ Facultades Especiales</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>El apoderado necesita facultades especiales para:</p>
+        <ul>
+          <li>Conciliar</li>
+          <li>Recibir pagos</li>
+          <li>Desistir de la demanda</li>
+          <li>Reasumir el poder</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si A otorga poder general a su abogado B mediante escritura pública, B puede representar a A en todos los procesos judiciales. Si A solo quiere que B lo represente en un proceso específico, otorga poder especial por documento privado.
+    </div>
+  </section>
+
+  <!-- TEMA 10: DEBERES Y RESPONSABILIDADES -->
+  <section id="tema10">
+    <h2>10. Deberes y Responsabilidades de las Partes y Apoderados (Arts. 78 a 81)</h2>
+    <p>Las partes y sus apoderados tienen deberes procesales y pueden ser sancionados por su incumplimiento.</p>
+
+    <h3>📋 Deberes Procesales (Art. 78)</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🤝</div>
+        <h4>Lealtad y Buena Fe</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Proceder con <strong>lealtad, probidad y buena fe</strong>.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚠️</div>
+        <h4>Abstención de Temeridad</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Abstenerse de actuar con <strong>temeridad</strong> (alegar hechos falsos, interponer recursos infundados).</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🔍</div>
+        <h4>Colaboración Probatoria</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Prestar <strong>colaboración en la práctica probatoria</strong>.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>⚠️ Temeridad o Mala Fe (Art. 79)</h3>
+    <div class="alerta">
+      <strong>📌 Presunciones legales de actuación temeraria:</strong>
+      <ul>
+        <li>Alegar hechos falsos</li>
+        <li>Interponer recursos infundados</li>
+        <li>Ocultar pruebas</li>
+        <li>Actuar con propósito dilatorio</li>
+      </ul>
+    </div>
+
+    <h3>💰 Responsabilidad Patrimonial y Condenas (Arts. 80 y 81)</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">💸</div>
+        <h4>Costas</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Condena en <strong>costas procesales</strong> a la parte vencida o temeraria.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Indemnización de Perjuicios</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Indemnización por daños causados con actuaciones temerarias o de mala fe.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">💰</div>
+        <h4>Multas</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Multas de <strong>10 a 50 SMLMV</strong> impuestas solidariamente a apoderados y poderdantes por actos desacertados o de mala fe.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si A demanda a B alegando hechos completamente falsos y presenta documentos adulterados, el juez puede: (1) rechazar la demanda, (2) condenar a A en costas, (3) imponer multa de hasta 50 SMLMV, y (4) ordenar indemnización de perjuicios a B.
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz">
+    <h2>🎯 Quiz Completo - 40 Preguntas</h2>
+    <p>Pon a prueba tus conocimientos sobre los Sujetos del Proceso.</p>
+
+    <div class="quiz-container">
+      <div class="quiz-header">
+        <h3>📊 Tu Progreso</h3>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="quiz-stats">
+          <div class="stat">Respondidas: <strong id="respondidas">0</strong>/40</div>
+          <div class="stat">Correctas: <strong id="correctas">0</strong></div>
+          <div class="stat">Incorrectas: <strong id="incorrectas">0</strong></div>
+          <div class="stat">Porcentaje: <strong id="porcentaje">0</strong>%</div>
+        </div>
+      </div>
+
+      <div class="quiz-tabs">
+        <div class="quiz-tab active" onclick="mostrarSeccion('s1', this)">T1 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s2', this)">T2 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s3', this)">T3 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s4', this)">T4 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s5', this)">T5 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s6', this)">T6 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s7', this)">T7 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s8', this)">T8 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s9', this)">T9 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s10', this)">T10 (4)</div>
+      </div>
+
+      <!-- SECCIÓN 1: COMPETENCIA -->
+      <div class="quiz-section active" id="s1">
+        <div class="pregunta" data-correcta="2" data-tema="1">
+          <span class="pregunta-num">1</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La cláusula general o residual (Art. 15 CGP) establece que:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 1)">a) Solo los jueces civiles conocen todos los asuntos</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">b) La Corte Suprema conoce todo asunto no atribuido a otra jurisdicción</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">c) Corresponde a la jurisdicción ordinaria el conocimiento de todo asunto no atribuido expresamente a otra jurisdicción</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">d) Los jueces municipales conocen todo asunto</div>
+          </div>
+          <div class="explicacion">La cláusula general (Art. 15 CGP) atribuye a la jurisdicción ordinaria todo asunto no atribuido expresamente a otra jurisdicción.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="1">
+          <span class="pregunta-num">2</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los factores de competencia improrrogables son:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 2)">a) Territorial y de cuantía</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">b) Subjetivo y funcional</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">c) Objetivo y territorial</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">d) Funcional y objetivo</div>
+          </div>
+          <div class="explicacion">Los factores subjetivo y funcional son improrrogables; su inobservancia genera nulidad (Art. 16 CGP).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="1">
+          <span class="pregunta-num">3</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El factor territorial de competencia (Art. 28) incluye los fueros:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 3)">a) General, real y contractual</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">b) Solo el general</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">c) Solo el real</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">d) Solo el contractual</div>
+          </div>
+          <div class="explicacion">El factor territorial incluye fueros: general (domicilio del demandado), real (ubicación de bienes) y contractual (lugar de cumplimiento).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="1">
+          <span class="pregunta-num">4</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los jueces municipales conocen en única instancia los asuntos de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 4)">a) Mayor cuantía</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">b) Menor cuantía</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">c) Cualquier cuantía</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">d) Mínima cuantía</div>
+          </div>
+          <div class="explicacion">Los jueces municipales conocen de mínima cuantía en única instancia y de menor cuantía en primera instancia (Arts. 17-22 CGP).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 2: COMISIÓN -->
+      <div class="quiz-section" id="s2">
+        <div class="pregunta" data-correcta="2" data-tema="2">
+          <span class="pregunta-num">5</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La comisión (Art. 37 CGP) procede para:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 5)">a) Medidas cautelares extraprocesales</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">b) Decidir el fondo del asunto</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">c) Práctica de pruebas, diligencias fuera de la sede, secuestro y entrega de bienes</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">d) Impugnar sentencias</div>
+          </div>
+          <div class="explicacion">La comisión solo procede para práctica de pruebas, diligencias fuera de la sede judicial, o secuestro y entrega de bienes (Art. 37 CGP).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="2">
+          <span class="pregunta-num">6</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El comitente es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 6)">a) El juez del proceso que ordena la comisión</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">b) El juez local que ejecuta la comisión</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">c) La parte demandante</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">d) El auxiliar de justicia</div>
+          </div>
+          <div class="explicacion">El comitente es el juez del proceso que ordena la comisión; el comisionado es quien la ejecuta.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="2">
+          <span class="pregunta-num">7</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El comisionado puede ser:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 7)">a) Solo otro juez</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">b) Juez o autoridad administrativa local</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">c) Solo un notario</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">d) Solo un perito</div>
+          </div>
+          <div class="explicacion">El comisionado puede ser juez o autoridad administrativa local (Arts. 38-41 CGP).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="2">
+          <span class="pregunta-num">8</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Para la práctica de comisiones se prevé el auxilio mediante:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 8)">a) Solo correo certificado</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">b) Solo telegrama</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">c) Solo teléfono</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">d) Videoconferencia o medios tecnológicos</div>
+          </div>
+          <div class="explicacion">Se prevé el auxilio por videoconferencia o medios tecnológicos para la práctica de comisiones.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 3: JUECES -->
+      <div class="quiz-section" id="s3">
+        <div class="pregunta" data-correcta="1" data-tema="3">
+          <span class="pregunta-num">9</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los deberes del juez (Art. 42 CGP) incluyen:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 9)">a) Solo dirigir el proceso</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">b) Dirigir el proceso, velar por la celeridad, hacer efectiva la igualdad real y prevenir el fraude procesal</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">c) Solo imponer multas</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">d) Solo decretar pruebas</div>
+          </div>
+          <div class="explicacion">El juez debe dirigir el proceso, velar por la celeridad, presidir audiencias, hacer efectiva la igualdad real de las partes y prevenir el fraude procesal (Art. 42 CGP).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="3">
+          <span class="pregunta-num">10</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los poderes de ordenación e instrucción (Art. 43 CGP) permiten al juez:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 10)">a) Decretar pruebas de oficio y rechazar peticiones notoriamente improcedentes</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">b) Solo resolver recursos</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">c) Solo imponer multas</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">d) Solo sanear el proceso</div>
+          </div>
+          <div class="explicacion">El juez puede resolver recursos oportunamente, decretar pruebas de oficio, rechazar peticiones notoriamente improcedentes y sanear el proceso (Art. 43 CGP).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="3">
+          <span class="pregunta-num">11</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los poderes correccionales (Art. 44 CGP) permiten al juez:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 11)">a) Solo dirigir audiencias</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">b) Solo decretar pruebas</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">c) Imponer sanciones, multas o arrestos por faltas al respeto a la administración de justicia</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">d) Solo resolver recursos</div>
+          </div>
+          <div class="explicacion">Los poderes correccionales permiten imponer sanciones, multas o arrestos por faltas al respeto a la administración de justicia o entorpecimiento de diligencias (Art. 44 CGP).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="3">
+          <span class="pregunta-num">12</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Si una parte presenta una petición notoriamente improcedente solo para dilatar el proceso, el juez puede:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 12)">a) Solo ignorarla</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">b) Aceptarla obligatoriamente</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">c) Solo amonestar verbalmente</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">d) Rechazarla de plano e imponer multa por temeridad</div>
+          </div>
+          <div class="explicacion">El juez puede rechazar peticiones notoriamente improcedentes e imponer multas por temeridad (Arts. 43 y 44 CGP).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 4: MINISTERIO PÚBLICO -->
+      <div class="quiz-section" id="s4">
+        <div class="pregunta" data-correcta="1" data-tema="4">
+          <span class="pregunta-num">13</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El Ministerio Público actúa ante:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 13)">a) Solo la Corte Suprema</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">b) Corte Suprema, Tribunales y Jueces</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">c) Solo los jueces municipales</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">d) Solo los tribunales</div>
+          </div>
+          <div class="explicacion">El Ministerio Público actúa ante la Corte Suprema, Tribunales y Jueces a través de Procuradores Delegados, Judiciales o Personeros Municipales (Art. 45 CGP).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="4">
+          <span class="pregunta-num">14</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Las facultades del Ministerio Público (Art. 46 CGP) incluyen:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 14)">a) Interponer recursos, pedir y controvertir pruebas, solicitar nulidades y promover medidas cautelares</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">b) Solo interponer recursos</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">c) Solo pedir pruebas</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">d) Solo solicitar nulidades</div>
+          </div>
+          <div class="explicacion">El Ministerio Público tiene amplias facultades: interponer recursos, pedir y controvertir pruebas, solicitar nulidades y promover medidas cautelares (Art. 46 CGP).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="4">
+          <span class="pregunta-num">15</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El Ministerio Público interviene como:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 15)">a) Parte demandante</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">b) Parte demandada</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">c) Sujeto procesal especial</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">d) Testigo</div>
+          </div>
+          <div class="explicacion">El Ministerio Público interviene como sujeto procesal especial con amplias facultades (Art. 46 CGP).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="4">
+          <span class="pregunta-num">16</span><span class="pregunta-tipo">Aplicación</span>
+          <p>En un proceso de nulidad de matrimonio con menores de edad involucrados, el Ministerio Público:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 16)">a) No puede intervenir</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">b) Solo observa</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">c) Solo presenta pruebas</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">d) Interviene para proteger los derechos de los menores, puede pedir pruebas e interponer recursos</div>
+          </div>
+          <div class="explicacion">El Ministerio Público interviene para proteger derechos constitucionales (como los de menores), con facultades amplias de petición probatoria e impugnación.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 5: AUXILIARES -->
+      <div class="quiz-section" id="s5">
+        <div class="pregunta" data-correcta="2" data-tema="5">
+          <span class="pregunta-num">17</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los auxiliares de la justicia son:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 17)">a) Funcionarios públicos de carrera</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">b) Empleados del juez</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">c) Oficios públicos ocasionales desempeñados por personas idóneas</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">d) Abogados de las partes</div>
+          </div>
+          <div class="explicacion">Los auxiliares de la justicia son oficios públicos ocasionales desempeñados por personas idóneas, de conducta intachable y registradas en listas oficiales (Art. 47 CGP).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="5">
+          <span class="pregunta-num">18</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Son auxiliares de la justicia:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 18)">a) Peritos, secuestres, liquidadores y curadores ad litem</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">b) Solo los peritos</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">c) Solo los abogados</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">d) Solo los notarios</div>
+          </div>
+          <div class="explicacion">Son auxiliares de la justicia: peritos, secuestres, liquidadores, curadores ad litem y demás que determine la ley (Art. 47 CGP).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="5">
+          <span class="pregunta-num">19</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La designación de auxiliares de justicia sigue reglas de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 19)">a) Libre elección del juez</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">b) Rotación para garantizar imparcialidad</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">c) Sorteo aleatorio</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">d) Antigüedad</div>
+          </div>
+          <div class="explicacion">La designación sigue reglas de rotación para garantizar imparcialidad (Arts. 48-52 CGP).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="5">
+          <span class="pregunta-num">20</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los honorarios de los auxiliares de justicia se fijan según:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 20)">a) Libre negociación</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">b) Solo el juez decide</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">c) Solo las partes deciden</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">d) Arancel judicial y complejidad del cargo</div>
+          </div>
+          <div class="explicacion">Los honorarios se fijan según arancel judicial y complejidad del cargo (Arts. 48-52 CGP).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 6: CAPACIDAD -->
+      <div class="quiz-section" id="s6">
+        <div class="pregunta" data-correcta="1" data-tema="6">
+          <span class="pregunta-num">21</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Tienen capacidad para ser parte (Art. 53 CGP):</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 21)">a) Solo personas naturales mayores de edad</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">b) Personas naturales, jurídicas, patrimonios autónomos, el concebido y los demás que determine la ley</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">c) Solo personas jurídicas</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">d) Solo quienes tengan abogado</div>
+          </div>
+          <div class="explicacion">Tienen capacidad para ser parte: personas naturales, jurídicas, patrimonios autónomos, el concebido (nasciturus) y los demás que determine la ley (Art. 53 CGP).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="6">
+          <span class="pregunta-num">22</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La capacidad para comparecer al proceso (Art. 54 CGP) la tienen:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 22)">a) Quienes pueden disponer libremente de sus derechos</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">b) Solo los mayores de 21 años</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">c) Solo los abogados</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">d) Solo las personas jurídicas</div>
+          </div>
+          <div class="explicacion">Tienen capacidad para comparecer quienes pueden disponer libremente de sus derechos. Los incapaces actúan por sus representantes legales (Art. 54 CGP).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="6">
+          <span class="pregunta-num">23</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La agencia oficiosa procesal (Art. 55 CGP) permite:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 23)">a) Que cualquiera demande sin poder</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">b) Que el juez nombre abogado de oficio</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">c) Promover demanda a favor de quien no se halla en condiciones de hacerlo, prestando caución para la ratificación</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">d) Que el Ministerio Público demande</div>
+          </div>
+          <div class="explicacion">La agencia oficiosa permite promover demanda a favor de quien no se halla en condiciones de hacerlo, prestando caución para la ratificación (Art. 55 CGP).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="6">
+          <span class="pregunta-num">24</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La curaduría ad litem (Arts. 57-59 CGP) es para:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 24)">a) Representar al demandante</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">b) Representar al demandado</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">c) Representar al Ministerio Público</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">d) Representación judicial de ausentes e indeterminados</div>
+          </div>
+          <div class="explicacion">La curaduría ad litem es para la representación judicial de ausentes e indeterminados (Arts. 57-59 CGP).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 7: LITISCONSORCIO -->
+      <div class="quiz-section" id="s7">
+        <div class="pregunta" data-correcta="1" data-tema="7">
+          <span class="pregunta-num">25</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El litisconsorcio facultativo (Art. 60 CGP) permite:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 25)">a) Solo una parte en el proceso</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">b) Acumulación libre de pretensiones independientes; los consortes son litigantes separados</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">c) Solo pretensiones conexas</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">d) Solo pretensiones idénticas</div>
+          </div>
+          <div class="explicacion">El litisconsorcio facultativo permite la acumulación libre de pretensiones independientes. Los consortes son considerados litigantes separados (Art. 60 CGP).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="7">
+          <span class="pregunta-num">26</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El litisconsorcio necesario (Art. 61 CGP) exige:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 26)">a) Sentencia uniforme para todos e integración obligatoria del contradictorio</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">b) Solo la presencia de uno de los consortes</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">c) Solo pretensiones independientes</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">d) Solo la voluntad de las partes</div>
+          </div>
+          <div class="explicacion">El litisconsorcio necesario exige sentencia uniforme para todos y la integración obligatoria del contradictorio (Art. 61 CGP).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="7">
+          <span class="pregunta-num">27</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El litisconsorcio cuasinecesario (Art. 62 CGP) se caracteriza porque:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 27)">a) Es obligatorio</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">b) Es facultativo</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">c) Los efectos de la sentencia se extienden al sujeto, pero su presencia inicial no es indispensable</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">d) No produce efectos</div>
+          </div>
+          <div class="explicacion">En el litisconsorcio cuasinecesario, los efectos de la sentencia se extienden al sujeto, pero su presencia inicial no es indispensable para la validez del fallo (Art. 62 CGP).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="7">
+          <span class="pregunta-num">28</span><span class="pregunta-tipo">Aplicación</span>
+          <p>En un proceso de división de cosa común con 5 copropietarios, el litisconsorcio es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 28)">a) Facultativo</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">b) Cuasinecesario</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">c) Inexistente</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">d) Necesario (todos deben ser parte)</div>
+          </div>
+          <div class="explicacion">En la división de cosa común, todos los copropietarios deben ser parte del proceso (litisconsorcio necesario) porque la relación sustancial es una e indivisible.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 8: TERCEROS -->
+      <div class="quiz-section" id="s8">
+        <div class="pregunta" data-correcta="2" data-tema="8">
+          <span class="pregunta-num">29</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La intervención excluyente (Art. 63 CGP) se caracteriza porque el tercero:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 29)">a) Apoya a una de las partes</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">b) Solo observa el proceso</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">c) Tiene pretensión propia e independiente frente a demandante y demandado</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">d) Es llamado por el juez</div>
+          </div>
+          <div class="explicacion">La intervención excluyente se caracteriza porque el tercero tiene pretensión propia e independiente frente a demandante y demandado (Art. 63 CGP).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="8">
+          <span class="pregunta-num">30</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La coadyuvancia (Art. 64 CGP) es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 30)">a) Intervención de un tercero con interés accesorio para apoyar las pretensiones de una de las partes</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">b) Intervención con pretensión propia</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">c) Llamamiento en garantía</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">d) Llamamiento de oficio</div>
+          </div>
+          <div class="explicacion">La coadyuvancia es la intervención de un tercero con interés accesorio para apoyar las pretensiones de una de las partes (Art. 64 CGP).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="8">
+          <span class="pregunta-num">31</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El llamamiento en garantía (Arts. 65-66 CGP) vincula a:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 31)">a) Cualquier tercero</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">b) Quien por ley o contrato deba indemnizar el perjuicio derivado de la sentencia</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">c) Solo al codeudor</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">d) Solo al fiador</div>
+          </div>
+          <div class="explicacion">El llamamiento en garantía vincula a quien por ley o contrato deba indemnizar el perjuicio derivado de la sentencia (Arts. 65-66 CGP).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="8">
+          <span class="pregunta-num">32</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El llamamiento de oficio (Art. 68 CGP) lo ordena el juez cuando:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 32)">a) Lo solicita una parte</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">b) Lo solicita el Ministerio Público</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">c) Hay terceros interesados</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">d) Advierta indicios de colusión o fraude procesal</div>
+          </div>
+          <div class="explicacion">El llamamiento de oficio lo ordena el juez cuando advierta indicios de colusión o fraude procesal (Art. 68 CGP).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 9: APODERADOS -->
+      <div class="quiz-section" id="s9">
+        <div class="pregunta" data-correcta="1" data-tema="9">
+          <span class="pregunta-num">33</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El derecho de postulación (Art. 73 CGP) exige:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 33)">a) Comparecer personalmente</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">b) Comparecer mediante abogado inscrito, salvo excepciones legales</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">c) Comparecer mediante cualquier persona</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">d) No requiere representante</div>
+          </div>
+          <div class="explicacion">El derecho de postulación exige comparecer mediante abogado inscrito en tarjeta profesional, salvo excepciones legales (Art. 73 CGP).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="9">
+          <span class="pregunta-num">34</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El poder general (Art. 74 CGP) requiere:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 34)">a) Escritura pública</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">b) Documento privado</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">c) Mensaje de datos</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">d) Verbal</div>
+          </div>
+          <div class="explicacion">El poder general se concede para toda clase de procesos mediante escritura pública (Art. 74 CGP).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="9">
+          <span class="pregunta-num">35</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El poder especial (Art. 74 CGP) se concede para:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 35)">a) Toda clase de procesos</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">b) Solo procesos penales</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">c) Asuntos concretos y determinados</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">d) Solo procesos de familia</div>
+          </div>
+          <div class="explicacion">El poder especial se concede por documento privado o mensaje de datos para asuntos concretos y determinados (Art. 74 CGP).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="9">
+          <span class="pregunta-num">36</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El apoderado necesita facultades especiales para:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 36)">a) Presentar la demanda</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">b) Contestar la demanda</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">c) Interponer recursos</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">d) Conciliar, recibir pagos, desistir o reasumir el poder</div>
+          </div>
+          <div class="explicacion">El apoderado necesita facultades especiales para conciliar, recibir pagos, desistir de la demanda o reasumir el poder (Arts. 75-77 CGP).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 10: DEBERES -->
+      <div class="quiz-section" id="s10">
+        <div class="pregunta" data-correcta="1" data-tema="10">
+          <span class="pregunta-num">37</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los deberes procesales (Art. 78 CGP) incluyen:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 37)">a) Solo comparecer a las audiencias</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">b) Proceder con lealtad, probidad, buena fe, abstenerse de temeridad y prestar colaboración probatoria</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">c) Solo pagar las costas</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">d) Solo presentar pruebas</div>
+          </div>
+          <div class="explicacion">Los deberes procesales incluyen proceder con lealtad, probidad, buena fe, abstenerse de temeridad y prestar colaboración en la práctica probatoria (Art. 78 CGP).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="10">
+          <span class="pregunta-num">38</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Constituyen presunciones de temeridad (Art. 79 CGP):</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 38)">a) Alegar hechos falsos e interponer recursos infundados</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">b) Solo no comparecer a audiencias</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">c) Solo no pagar costas</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">d) Solo presentar pruebas tardías</div>
+          </div>
+          <div class="explicacion">Constituyen presunciones de temeridad: alegar hechos falsos, interponer recursos infundados, ocultar pruebas, actuar con propósito dilatorio (Art. 79 CGP).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="10">
+          <span class="pregunta-num">39</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Las multas por temeridad o mala fe (Art. 81 CGP) son de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 39)">a) 1 a 5 SMLMV</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">b) 5 a 10 SMLMV</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">c) 10 a 50 SMLMV</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">d) 50 a 100 SMLMV</div>
+          </div>
+          <div class="explicacion">Las multas por temeridad o mala fe son de 10 a 50 SMLMV, impuestas solidariamente a apoderados y poderdantes (Art. 81 CGP).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="10">
+          <span class="pregunta-num">40</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Si A demanda a B alegando hechos completamente falsos y presenta documentos adulterados, el juez puede:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 40)">a) Solo rechazar la demanda</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">b) Solo amonestar verbalmente</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">c) Solo imponer costas</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">d) Rechazar la demanda, condenar en costas, imponer multa hasta 50 SMLMV y ordenar indemnización de perjuicios</div>
+          </div>
+          <div class="explicacion">El juez puede rechazar la demanda, condenar en costas, imponer multa de hasta 50 SMLMV y ordenar indemnización de perjuicios por actuación temeraria y de mala fe (Arts. 79-81 CGP).</div>
+        </div>
+      </div>
+
+      <div class="resultado-final" id="resultadoFinal">
+        <h3>🏆 Resultado Final</h3>
+        <div class="puntaje-final" id="puntajeFinal">0/40</div>
+        <p id="mensajeFinal"></p>
+        <div class="desglose-temas" id="desgloseTemas"></div>
+        <button onclick="reiniciarQuiz()" class="btn-reset">🔄 Reiniciar Quiz</button>
+      </div>
+
+      <div style="text-align: center; margin-top: 1.5rem;">
+        <button onclick="verResultadoFinal()">📊 Ver Resultado Final</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>⚖️ Guía Didáctica - Sujetos del Proceso</p>
+  <p>Libro Primero del Código General del Proceso · Arts. 15 a 81</p>
+  <p style="margin-top: 1rem; opacity: 0.7;">© 2026 - Material educativo interactivo</p>
+</footer>
+
+<script>
+  function toggleAcordeon(header) {
+    header.classList.toggle('active');
+    const content = header.nextElementSibling;
+    content.classList.toggle('active');
+  }
+
+  let respuestas = {};
+  const totalPreguntas = 40;
+
+  function mostrarSeccion(id, tab) {
+    document.querySelectorAll('.quiz-section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.quiz-tab').forEach(t => t.classList.remove('active'));
+    
+    document.getElementById(id).classList.add('active');
+    tab.classList.add('active');
+  }
+
+  function seleccionar(opcion, preguntaNum) {
+    if (respuestas[preguntaNum] !== undefined) return;
+
+    const pregunta = opcion.closest('.pregunta');
+    const opciones = pregunta.querySelectorAll('.opcion');
+    const correcta = parseInt(pregunta.dataset.correcta);
+    const tema = parseInt(pregunta.dataset.tema);
+    const seleccionada = Array.from(opciones).indexOf(opcion);
+    const explicacion = pregunta.querySelector('.explicacion');
+
+    opciones.forEach(o => o.classList.add('disabled'));
+
+    if (seleccionada === correcta) {
+      opcion.classList.add('correcta');
+      respuestas[preguntaNum] = { correcta: true, tema: tema };
+    } else {
+      opcion.classList.add('incorrecta');
+      opciones[correcta].classList.add('correcta');
+      respuestas[preguntaNum] = { correcta: false, tema: tema };
+    }
+
+    explicacion.classList.add('visible');
+    pregunta.classList.add('answered');
+    actualizarEstadisticas();
+  }
+
+  function actualizarEstadisticas() {
+    const total = Object.keys(respuestas).length;
+    const correctas = Object.values(respuestas).filter(r => r.correcta).length;
+    const incorrectas = total - correctas;
+    const porcentaje = total > 0 ? Math.round((correctas / total) * 100) : 0;
+
+    document.getElementById('respondidas').textContent = total;
+    document.getElementById('correctas').textContent = correctas;
+    document.getElementById('incorrectas').textContent = incorrectas;
+    document.getElementById('porcentaje').textContent = porcentaje;
+
+    const progreso = (total / totalPreguntas) * 100;
+    document.getElementById('progressFill').style.width = progreso + '%';
+  }
+
+  function verResultadoFinal() {
+    const total = Object.keys(respuestas).length;
+    
+    if (total < totalPreguntas) {
+      alert(`⚠️ Aún te faltan ${totalPreguntas - total} preguntas por responder.`);
+      return;
+    }
+
+    const correctas = Object.values(respuestas).filter(r => r.correcta).length;
+    const porcentaje = Math.round((correctas / totalPreguntas) * 100);
+
+    const resultadoFinal = document.getElementById('resultadoFinal');
+    resultadoFinal.classList.add('visible');
+
+    document.getElementById('puntajeFinal').textContent = `${correctas}/${totalPreguntas}`;
+
+    let mensaje = '';
+    if (porcentaje === 100) mensaje = ' ¡PERFECTO! Dominas los Sujetos del Proceso.';
+    else if (porcentaje >= 90) mensaje = '🌟 ¡Excelente! Dominio sobresaliente.';
+    else if (porcentaje >= 75) mensaje = '✅ ¡Muy bien! Buen dominio.';
+    else if (porcentaje >= 60) mensaje = '📚 Aceptable. Repasa los temas donde fallaste.';
+    else if (porcentaje >= 40) mensaje = ' Necesitas reforzar varios conceptos.';
+    else mensaje = '🔍 Es necesario estudiar nuevamente todos los temas.';
+
+    document.getElementById('mensajeFinal').textContent = mensaje;
+
+    const temas = {
+      1: { nombre: 'T1: Competencia', total: 4, correctas: 0 },
+      2: { nombre: 'T2: Comisión', total: 4, correctas: 0 },
+      3: { nombre: 'T3: Jueces', total: 4, correctas: 0 },
+      4: { nombre: 'T4: Min. Público', total: 4, correctas: 0 },
+      5: { nombre: 'T5: Auxiliares', total: 4, correctas: 0 },
+      6: { nombre: 'T6: Capacidad', total: 4, correctas: 0 },
+      7: { nombre: 'T7: Litisconsorcio', total: 4, correctas: 0 },
+      8: { nombre: 'T8: Terceros', total: 4, correctas: 0 },
+      9: { nombre: 'T9: Apoderados', total: 4, correctas: 0 },
+      10: { nombre: 'T10: Deberes', total: 4, correctas: 0 }
+    };
+
+    Object.values(respuestas).forEach(r => {
+      if (r.correcta) temas[r.tema].correctas++;
+    });
+
+    const desgloseHTML = Object.values(temas).map(t => {
+      const pct = Math.round((t.correctas / t.total) * 100);
+      return `
+        <div class="desglose-item">
+          <h4>${t.nombre}</h4>
+          <p>${t.correctas}/${t.total} (${pct}%)</p>
+          <div class="mini-bar">
+            <div class="mini-bar-fill" style="width: ${pct}%"></div>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    document.getElementById('desgloseTemas').innerHTML = desgloseHTML;
+    resultadoFinal.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  function reiniciarQuiz() {
+    if (!confirm('¿Reiniciar el quiz?')) return;
+
+    respuestas = {};
+
+    document.querySelectorAll('.opcion').forEach(o => o.classList.remove('correcta', 'incorrecta', 'disabled'));
+    document.querySelectorAll('.explicacion').forEach(e => e.classList.remove('visible'));
+    document.querySelectorAll('.pregunta').forEach(p => p.classList.remove('answered'));
+    document.getElementById('resultadoFinal').classList.remove('visible');
+
+    actualizarEstadisticas();
+    mostrarSeccion('s1', document.querySelector('.quiz-tab'));
+    document.getElementById('quiz').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  document.querySelectorAll('nav a').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+</script>
+
+</body>
+</html>
