@@ -1,0 +1,2160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Procesos Ejecutivos, de Liquidación y Jurisdicción Voluntaria - CGP</title>
+<style>
+  :root {
+    --primary: #1e3a8a;
+    --secondary: #f59e0b;
+    --accent: #2563eb;
+    --light: #eff6ff;
+    --dark: #1e293b;
+    --success: #059669;
+    --warning: #d97706;
+    --danger: #dc2626;
+    --card-bg: #ffffff;
+    --shadow: 0 4px 15px rgba(0,0,0,0.08);
+    --shadow-hover: 0 8px 25px rgba(0,0,0,0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    background: var(--light);
+    color: var(--dark);
+    line-height: 1.7;
+  }
+
+  header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    color: white;
+    padding: 2rem 1rem;
+    text-align: center;
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::before {
+    content: '️';
+    position: absolute;
+    font-size: 15rem;
+    opacity: 0.05;
+    top: -30px;
+    right: -30px;
+  }
+
+  header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: 2px;
+  }
+
+  header p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    font-style: italic;
+  }
+
+  nav {
+    background: var(--dark);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow);
+  }
+
+  nav ul {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0.5rem;
+  }
+
+  nav a {
+    color: var(--light);
+    text-decoration: none;
+    padding: 0.7rem 1rem;
+    margin: 0.2rem;
+    border-radius: 5px;
+    font-size: 0.75rem;
+    transition: all 0.3s;
+    display: block;
+  }
+
+  nav a:hover {
+    background: var(--secondary);
+    color: var(--dark);
+    transform: translateY(-2px);
+  }
+
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+  }
+
+  section {
+    background: var(--card-bg);
+    margin-bottom: 2.5rem;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    border-left: 5px solid var(--secondary);
+    scroll-margin-top: 80px;
+  }
+
+  section h2 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--secondary);
+  }
+
+  section h3 {
+    color: var(--accent);
+    font-size: 1.4rem;
+    margin: 1.5rem 0 0.8rem;
+  }
+
+  section h4 {
+    color: var(--primary);
+    font-size: 1.15rem;
+    margin: 1rem 0 0.5rem;
+  }
+
+  p { margin-bottom: 1rem; text-align: justify; }
+
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.2rem;
+    margin: 1.5rem 0;
+  }
+
+  .card {
+    background: linear-gradient(135deg, #fff 0%, #f0f7ff 100%);
+    border: 2px solid var(--secondary);
+    border-radius: 10px;
+    padding: 1.2rem;
+    transition: all 0.3s;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--primary);
+  }
+
+  .card .icon {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .card h4 {
+    text-align: center;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+  }
+
+  .card .detail {
+    display: none;
+    margin-top: 0.8rem;
+    padding-top: 0.8rem;
+    border-top: 1px dashed var(--secondary);
+    font-size: 0.95rem;
+  }
+
+  .card.active .detail { display: block; }
+
+  .card .hint {
+    text-align: center;
+    color: var(--accent);
+    font-size: 0.85rem;
+    font-style: italic;
+  }
+
+  .mapa-container {
+    background: #f8fafc;
+    border: 2px dashed var(--secondary);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    overflow-x: auto;
+  }
+
+  .mapa {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 600px;
+  }
+
+  .nodo {
+    background: var(--primary);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+    font-weight: bold;
+    text-align: center;
+    min-width: 180px;
+    box-shadow: var(--shadow);
+  }
+
+  .nodo.central {
+    background: linear-gradient(135deg, var(--secondary), #fbbf24);
+    color: var(--dark);
+    font-size: 1.2rem;
+    padding: 1rem 2rem;
+  }
+
+  .nodo.sub {
+    background: var(--accent);
+    font-size: 0.95rem;
+  }
+
+  .linea {
+    width: 3px;
+    height: 25px;
+    background: var(--secondary);
+  }
+
+  .linea-h {
+    height: 3px;
+    background: var(--secondary);
+    width: 80%;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .rama {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 1rem;
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  .rama-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    min-width: 140px;
+  }
+
+  .ejemplo {
+    background: #ecfdf5;
+    border-left: 4px solid var(--success);
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .ejemplo strong { color: var(--success); }
+
+  .alerta {
+    background: #fffbeb;
+    border-left: 4px solid var(--warning);
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .alerta strong { color: var(--warning); }
+
+  .cita {
+    background: #eff6ff;
+    border-left: 4px solid var(--accent);
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+    color: var(--primary);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    font-size: 0.9rem;
+  }
+
+  th {
+    background: var(--primary);
+    color: white;
+    padding: 0.8rem;
+    text-align: left;
+  }
+
+  td {
+    padding: 0.8rem;
+    border-bottom: 1px solid #eee;
+  }
+
+  tr:nth-child(even) { background: #f8fafc; }
+  tr:hover { background: #eff6ff; }
+
+  .quiz-container {
+    background: linear-gradient(135deg, #f8fafc 0%, #fff 100%);
+    padding: 1.5rem;
+    border-radius: 10px;
+    border: 2px solid var(--accent);
+  }
+
+  .quiz-header {
+    background: var(--primary);
+    color: white;
+    padding: 1.2rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .quiz-header h3 {
+    color: white;
+    margin: 0 0 0.5rem 0;
+  }
+
+  .progress-bar {
+    background: rgba(255,255,255,0.2);
+    height: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+  }
+
+  .progress-fill {
+    background: var(--secondary);
+    height: 100%;
+    width: 0%;
+    transition: width 0.4s ease;
+  }
+
+  .quiz-stats {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .stat {
+    background: rgba(255,255,255,0.1);
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    font-size: 0.9rem;
+  }
+
+  .stat strong { color: var(--secondary); }
+
+  .quiz-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    padding: 0.5rem;
+    background: #f0f7ff;
+    border-radius: 8px;
+  }
+
+  .quiz-tab {
+    background: white;
+    border: 2px solid var(--accent);
+    color: var(--accent);
+    padding: 0.5rem 0.8rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.7rem;
+    transition: all 0.3s;
+    flex: 1;
+    min-width: 70px;
+    text-align: center;
+  }
+
+  .quiz-tab:hover {
+    background: var(--accent);
+    color: white;
+  }
+
+  .quiz-tab.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+  }
+
+  .quiz-section {
+    display: none;
+  }
+
+  .quiz-section.active {
+    display: block;
+    animation: fadeIn 0.4s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .pregunta {
+    margin-bottom: 1.5rem;
+    padding: 1.2rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    border-left: 4px solid var(--accent);
+    transition: all 0.3s;
+  }
+
+  .pregunta.answered {
+    border-left-color: var(--secondary);
+  }
+
+  .pregunta-num {
+    display: inline-block;
+    background: var(--accent);
+    color: white;
+    padding: 0.2rem 0.7rem;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    margin-right: 0.5rem;
+  }
+
+  .pregunta-tipo {
+    display: inline-block;
+    background: var(--secondary);
+    color: var(--dark);
+    padding: 0.2rem 0.7rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    margin-left: 0.3rem;
+    font-weight: bold;
+  }
+
+  .pregunta p { 
+    font-weight: bold; 
+    color: var(--primary); 
+    margin: 0.8rem 0;
+    text-align: left;
+  }
+
+  .opciones { display: flex; flex-direction: column; gap: 0.5rem; }
+
+  .opcion {
+    padding: 0.7rem 1rem;
+    background: #f8fafc;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+  }
+
+  .opcion:hover:not(.disabled) {
+    border-color: var(--accent);
+    background: #eff6ff;
+  }
+
+  .opcion.disabled {
+    cursor: not-allowed;
+    opacity: 0.85;
+  }
+
+  .opcion.correcta {
+    background: #d1fae5;
+    border-color: var(--success);
+    color: var(--success);
+    font-weight: bold;
+  }
+
+  .opcion.incorrecta {
+    background: #fee2e2;
+    border-color: var(--danger);
+    color: var(--danger);
+  }
+
+  .opcion.correcta::after {
+    content: ' ✓';
+    font-weight: bold;
+  }
+
+  .opcion.incorrecta::after {
+    content: ' ✗';
+    font-weight: bold;
+  }
+
+  .explicacion {
+    margin-top: 0.8rem;
+    padding: 0.8rem;
+    background: #eff6ff;
+    border-left: 3px solid var(--accent);
+    border-radius: 0 6px 6px 0;
+    font-size: 0.9rem;
+    display: none;
+    font-style: italic;
+  }
+
+  .explicacion.visible {
+    display: block;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .resultado-final {
+    margin-top: 2rem;
+    padding: 2rem;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    color: white;
+    border-radius: 12px;
+    text-align: center;
+    display: none;
+  }
+
+  .resultado-final.visible {
+    display: block;
+    animation: fadeIn 0.5s ease;
+  }
+
+  .resultado-final h3 {
+    color: var(--secondary);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .puntaje-final {
+    font-size: 3rem;
+    font-weight: bold;
+    color: var(--secondary);
+    margin: 1rem 0;
+  }
+
+  .desglose-temas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+    text-align: left;
+  }
+
+  .desglose-item {
+    background: rgba(255,255,255,0.1);
+    padding: 1rem;
+    border-radius: 8px;
+  }
+
+  .desglose-item h4 {
+    color: var(--secondary);
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+  }
+
+  .mini-bar {
+    background: rgba(255,255,255,0.2);
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+  }
+
+  .mini-bar-fill {
+    background: var(--secondary);
+    height: 100%;
+    transition: width 0.6s ease;
+  }
+
+  button {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 1rem;
+    transition: all 0.3s;
+  }
+
+  button:hover {
+    background: var(--secondary);
+    color: var(--dark);
+    transform: translateY(-2px);
+  }
+
+  .btn-reset {
+    background: var(--danger);
+    margin-left: 0.5rem;
+  }
+
+  .btn-reset:hover {
+    background: #991b1b;
+    color: white;
+  }
+
+  .acordeon-item {
+    margin-bottom: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .acordeon-header {
+    background: var(--accent);
+    color: white;
+    padding: 1rem;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.3s;
+  }
+
+  .acordeon-header:hover { background: var(--primary); }
+
+  .acordeon-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    background: white;
+  }
+
+  .acordeon-content.active {
+    max-height: 2000px;
+    padding: 1rem;
+  }
+
+  .flecha { transition: transform 0.3s; }
+  .acordeon-header.active .flecha { transform: rotate(180deg); }
+
+  footer {
+    background: var(--dark);
+    color: var(--light);
+    text-align: center;
+    padding: 2rem 1rem;
+    margin-top: 2rem;
+  }
+
+  footer p { margin-bottom: 0.5rem; }
+
+  @media (max-width: 768px) {
+    header h1 { font-size: 1.8rem; }
+    section { padding: 1.2rem; }
+    section h2 { font-size: 1.5rem; }
+    nav a { font-size: 0.65rem; padding: 0.4rem 0.5rem; }
+    .quiz-tab { font-size: 0.6rem; padding: 0.3rem 0.4rem; }
+    table { font-size: 0.8rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>⚖️ Procesos Ejecutivos, de Liquidación y Jurisdicción Voluntaria</h1>
+  <p>Libro Tercero del Código General del Proceso (Arts. 422 a 587) · Guía Didáctica Interactiva</p>
+</header>
+
+<nav>
+  <ul>
+    <li><a href="#tema1">1. Proceso Ejecutivo</a></li>
+    <li><a href="#tema2">2. Títulos Ejecutivos</a></li>
+    <li><a href="#tema3">3. Liquidación</a></li>
+    <li><a href="#tema4">4. Remate</a></li>
+    <li><a href="#tema5">5. Sucesión</a></li>
+    <li><a href="#tema6">6. Sociedades</a></li>
+    <li><a href="#tema7">7. Insolvencia</a></li>
+    <li><a href="#tema8">8. Jurisdicción Voluntaria</a></li>
+    <li><a href="#tema9">9. Principios</a></li>
+    <li><a href="#quiz">Quiz (40)</a></li>
+  </ul>
+</nav>
+
+<main>
+
+  <section>
+    <h2>📚 Introducción</h2>
+    <p>Bienvenido a esta guía interactiva sobre el <strong>Libro Tercero del Código General del Proceso (CGP)</strong>, que regula los procesos ejecutivos, de liquidación (sucesiones, sociedades, insolvencia) y de jurisdicción voluntaria. Estos procesos constituyen los mecanismos mediante los cuales el Estado satisface obligaciones ciertas, liquida patrimonios y tutela derechos sin controversia.</p>
+    <div class="alerta">
+      <strong> Cómo usar esta guía:</strong> Haz clic en las tarjetas para ver detalles, despliega los acordeones para información adicional y prueba tus conocimientos con el quiz de 40 preguntas al final.
+    </div>
+  </section>
+
+  <!-- TEMA 1: PROCESO EJECUTIVO -->
+  <section id="tema1">
+    <h2>1. El Proceso Ejecutivo (Arts. 422 a 472 CGP)</h2>
+    <p>El proceso ejecutivo constituye la herramienta institucional mediante la cual el Estado satisface de manera compulsiva una acreencia cuya existencia previa ha sido dotada de certidumbre legal.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">PROCESO EJECUTIVO</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Título Ejecutivo</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Mandamiento de Pago</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Embargo y Secuestro</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Remate</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Características Fundamentales</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚡</div>
+        <h4>Celeridad</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>No busca discutir la titularidad del derecho, sino hacer efectiva la prestación incorporada en un título ejecutivo.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🔒</div>
+        <h4>Certeza Previa</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Presupone la plena certeza del derecho invocado, preconstituida en un documento formal.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Coerción Estatal</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Materializa el poder de coerción de la jurisdicción para forzar el cumplimiento mediante afectación patrimonial.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="cita">
+      <strong>"El proceso ejecutivo no busca discutir la titularidad del derecho sustancial, sino hacer efectiva la prestación incorporada en un documento formal denominado título ejecutivo."</strong>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si A tiene un pagaré firmado por B por $50 millones vencido, puede iniciar proceso ejecutivo para cobrar coactivamente la deuda, sin necesidad de probar la existencia de la obligación (ya está preconstituida en el título).
+    </div>
+  </section>
+
+  <!-- TEMA 2: TÍTULOS EJECUTIVOS -->
+  <section id="tema2">
+    <h2>2. Títulos Ejecutivos y sus Requisitos</h2>
+    <p>El título ejecutivo es el documento formal que preconstituye plena prueba de la obligación y permite despachar mandamiento de pago sin debate probatorio previo.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">TÍTULO EJECUTIVO</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Clara</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Identificación plena</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Expresa</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Consta explícitamente</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Exigible</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Vencida o cumplida</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3> Requisitos del Título Ejecutivo</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Requisito</th>
+          <th>Descripción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Obligación Clara</strong></td>
+          <td>Plenamente identificada en sus elementos subjetivos (acreedor y deudor) y objetivos (objeto de la prestación)</td>
+        </tr>
+        <tr>
+          <td><strong>Obligación Expresa</strong></td>
+          <td>Consta de manera explícita y patente en el texto del documento, sin necesidad de presunciones o inferencias</td>
+        </tr>
+        <tr>
+          <td><strong>Obligación Exigible</strong></td>
+          <td>No está sujeta a plazo o condición pendiente, o el término se ha vencido/la condición se ha cumplido</td>
+        </tr>
+        <tr>
+          <td><strong>Origen Documental Auténtico</strong></td>
+          <td>Conforme al art. 297 Ley 1437/2011: sentencias ejecutoriadas, actos administrativos, contratos, actas de conciliación, etc.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>📜 Tipología de Títulos Ejecutivos (Art. 297 Ley 1437/2011)</h3>
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>⚖️ Títulos Judiciales</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <ul>
+          <li>Sentencias ejecutoriadas dictadas por la jurisdicción ordinaria o contencioso-administrativa</li>
+          <li>Decisiones en firme dictadas en mecanismos alternativos de solución de conflictos (laudos arbitrales)</li>
+          <li>Actas de conciliación debidamente aprobadas por el juez o tramitadas en centros autorizados</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>🏛️ Títulos Administrativos</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <ul>
+          <li>Actos administrativos en firme que impongan obligaciones claras, expresas y exigibles</li>
+          <li>Liquidaciones de contratos estatales o actos contractuales definitivos con deudas dinerarias</li>
+          <li>Resoluciones de autoridades competentes con fuerza ejecutiva</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📄 Títulos Privados</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <ul>
+          <li>Pagarés, letras de cambio, cheques y otros títulos valores</li>
+          <li>Contratos con firma reconocida o autenticada</li>
+          <li>Documentos privados con firma auténtica que contengan obligación clara, expresa y exigible</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="alerta">
+      <strong>📌 Presunción de legalidad y fuerza ejecutoria:</strong> Los actos administrativos gozan de presunción de legalidad (Art. 88 Ley 1437/2011) y fuerza ejecutoria (Art. 89), permitiendo su ejecución sin previa homologación judicial.
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Una sentencia de segunda instancia que condena al pago de $100 millones constituye título ejecutivo. El acreedor puede iniciar proceso ejecutivo presentando copia auténtica de la sentencia, sin necesidad de probar nuevamente la obligación.
+    </div>
+  </section>
+
+  <!-- TEMA 3: LIQUIDACIÓN DEL CRÉDITO -->
+  <section id="tema3">
+    <h2>3. Liquidación del Crédito y Costas (Arts. 446-447 CGP)</h2>
+    <p>La liquidación del crédito involucra la consolidación matemática de los componentes esenciales del pago coercitivo.</p>
+
+    <h3>📊 Componentes de la Liquidación</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">💰</div>
+        <h4>Capital</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>La suma líquida y principal reclamada contenida en el título ejecutivo.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📈</div>
+        <h4>Intereses</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Cálculo de rendimientos moratorios o remuneratorios causados conforme a tasas legales o convencionales hasta la fecha de pago efectivo.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Costas</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Gastos procesales y agencias en derecho tasadas judicialmente en razón del trámite impulsado.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Procedimiento de Liquidación</h3>
+    <div class="alerta">
+      <strong>📌 Etapas:</strong>
+      <ol style="margin-top: 0.5rem; padding-left: 1.5rem;">
+        <li><strong>Elaboración:</strong> La secretaría del despacho elabora la liquidación</li>
+        <li><strong>Traslado:</strong> Se traslada a las partes para formular objeciones sobre errores numéricos o expensas no documentadas</li>
+        <li><strong>Aprobación:</strong> Auto interlocutorio aprobatorio del juzgador</li>
+        <li><strong>Ejecución:</strong> Una vez en firme, constituye título ejecutivo para cobro forzado</li>
+      </ol>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si el título ejecutivo condena al pago de $50 millones, la liquidación incluirá: capital ($50M) + intereses moratorios causados desde la mora hasta el pago + costas del proceso (honorarios de abogado de la parte vencedora, gastos de copias, etc.).
+    </div>
+  </section>
+
+  <!-- TEMA 4: REMATE DE BIENES -->
+  <section id="tema4">
+    <h2>4. Remate de Bienes y Pago al Acreedor (Arts. 448-461 CGP)</h2>
+    <p>La fase de realización o remate de bienes materializa el poder de coerción de la jurisdicción, convirtiendo el patrimonio del deudor en dinero líquido.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">REMATE DE BIENES</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Embargo</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Secuestro</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Avalúo</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Remate</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Pago</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Etapas del Remate</h3>
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>🔒 Embargo</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Medida cautelar que afecta bienes del deudor para garantizar el pago. Puede ser de bienes muebles o inmuebles.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📦 Secuestro</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Despojo material de la tenencia de los bienes para entregarlos a un auxiliar de la justicia (secuestre) mientras se realiza la adjudicación.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>💵 Avalúo</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Determinación del valor comercial de los bienes embargados mediante perito avalúador o acuerdo de las partes.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>️ Remate en Subasta Pública</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Venta forzada de los bienes al mejor postor en subasta pública abierta a terceros licitadores.</p>
+      </div>
+    </div>
+
+    <h3>📊 Comparativa: Ejecución Ordinaria vs. Adjudicación Especial</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Criterio</th>
+          <th>Ejecución Ordinaria</th>
+          <th>Adjudicación Especial</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Destino de bienes</strong></td>
+          <td>Venta forzada en subasta pública</td>
+          <td>Asignación directa al acreedor privilegiado</td>
+        </tr>
+        <tr>
+          <td><strong>Mecanismo</strong></td>
+          <td>Conversión previa en liquidez dineraria</td>
+          <td>Transferencia directa del dominio</td>
+        </tr>
+        <tr>
+          <td><strong>Participación</strong></td>
+          <td>Abierta a postores públicos</td>
+          <td>Restringida a partes vinculadas al gravamen</td>
+        </tr>
+        <tr>
+          <td><strong>Procedimiento</strong></td>
+          <td>Embargo, secuestro, avalúo, licitación</td>
+          <td>Adjudicación directa previa tasación</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si B tiene un inmueble gravado con hipoteca a favor de C, y A ejecuta a B por otra deuda, C debe ser citado como acreedor con garantía real. C puede solicitar la adjudicación especial del inmueble en lugar del remate en subasta pública.
+    </div>
+  </section>
+
+  <!-- TEMA 5: SUCESIÓN -->
+  <section id="tema5">
+    <h2>5. Proceso de Sucesión (Arts. 473-522 CGP)</h2>
+    <p>El proceso de sucesión representa el trámite liquidatorio por excelencia ante el fallecimiento de una persona natural.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">SUCESIÓN</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Apertura</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Inventario y Avalúo</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Pago de Pasivo</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Partición</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Medidas Preparatorias y Cautelares</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🔒</div>
+        <h4>Guarda y Aposición de Sellos</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Diligencia judicial cautelar destinada a custodiar de manera inmediata los bienes muebles y documentos del causante bajo precinto oficial.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📦</div>
+        <h4>Secuestro de Bienes</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Medida que despoja materialmente la tenencia de los bienes de la masa sucesoral para entregarlos a un secuestre mientras se realiza la adjudicación.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">️</div>
+        <h4>Herencia Yacente</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Instituto procesal aplicable cuando, transcurrido el término legal tras la apertura, ningún heredero ha aceptado la herencia ni existe albacea con tenencia de bienes. Se designa curador para administrar la masa.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>⚖️ Factores de Competencia en Sucesiones</h3>
+    <div class="alerta">
+      <strong>📌 Factores determinantes:</strong>
+      <ol style="margin-top: 0.5rem; padding-left: 1.5rem;">
+        <li><strong>Factor Territorial:</strong> Último domicilio del causante o asiento principal de sus negocios</li>
+        <li><strong>Factor Objetivo:</strong> Cuantía del haber hereditario (mínima, menor o mayor cuantía)</li>
+        <li><strong>Factor de Conexión:</strong> Opera como vis atractiva procesal, atrayendo al foro del proceso sucesoral principal la totalidad de reclamaciones, incidentes y juicios acumulados conexos</li>
+      </ol>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si Juan fallece en Bogotá con bienes en Medellín y Cartagena, la sucesión se abre en Bogotá (último domicilio). El factor de conexión atrae al juez de Bogotá todas las reclamaciones sobre los bienes en otras ciudades, evitando pronunciamientos contradictorios.
+    </div>
+  </section>
+
+  <!-- TEMA 6: SOCIEDADES -->
+  <section id="tema6">
+    <h2>6. Liquidación de Sociedades (Arts. 523-537 CGP)</h2>
+    <p>La liquidación de sociedades conyugales, patrimoniales y comerciales opera tras la verificación de causales legales de disolución.</p>
+
+    <h3>📋 Liquidación de Sociedad Conyugal/Patrimonial</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">💍</div>
+        <h4>Causales</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Divorcio, separación de bienes, nulidad del matrimonio o muerte de uno de los cónyuges.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📊</div>
+        <h4>Etapas</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <ol>
+            <li>Delimitación de bienes sociales</li>
+            <li>Restitución de haber propio o recompensas</li>
+            <li>Cancelación de pasivos sociales</li>
+            <li>Adjudicación equitativa del remanente</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <h3>🏢 Liquidación de Sociedades Comerciales</h3>
+    <div class="alerta">
+      <strong>📌 Causales de disolución:</strong>
+      <ul>
+        <li>Vencimiento del término previsto en el contrato social</li>
+        <li>Imposibilidad de desarrollar el objeto social</li>
+        <li>Reducción de socios a uno solo (salvo excepciones)</li>
+        <li>Disolución anticipada por decisión de los socios</li>
+        <li>Declaratoria judicial de nulidad</li>
+      </ul>
+    </div>
+
+    <h3>👔 Rol de los Liquidadores</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Naturaleza</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Ostentan la calidad procesal de <strong>auxiliares de la justicia</strong> cuando son designados judicialmente.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon"></div>
+        <h4>Funciones</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <ul>
+            <li>Representación legal de la entidad en liquidación</li>
+            <li>Custodia de la masa patrimonial</li>
+            <li>Realización de activos</li>
+            <li>Extinción gradual del pasivo social</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si una sociedad comercial se disuelve por vencimiento del término, se nombra liquidador quien inventaría los activos, paga las deudas según prelación legal y distribuye el remanente entre los socios según su participación.
+    </div>
+  </section>
+
+  <!-- TEMA 7: INSOLVENCIA -->
+  <section id="tema7">
+    <h2>7. Insolvencia de Persona Natural No Comerciante (Arts. 538-576 CGP)</h2>
+    <p>El régimen de insolvencia se estructura sobre cinco componentes dogmáticos fundamentales para personas naturales no comerciantes en estado de cesación de pagos.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">INSOLVENCIA</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Negociación</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Convalidación</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Liquidación</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Componentes del Régimen</h3>
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>1️⃣ Disposiciones Generales</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Exigen la calidad de persona natural no comerciante y la configuración objetiva del <strong>estado de cesación de pagos</strong>: situación de iliquidez o imposibilidad estructural del deudor para atender oportunamente sus acreencias.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>2️ Negociación de Deudas</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Etapa conciliatoria promovida ante centros de conciliación o notarías para lograr un acuerdo de pago reestructurado con los acreedores.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>3️⃣ Convalidación del Acuerdo Privado</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Trámite judicial encaminado a dotar de validez general y fuerza ejecutiva a los acuerdos de pago pactados privadamente entre el deudor y una mayoría cualificada de acreedores.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>4️⃣ Liquidación Patrimonial</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Procedimiento judicial de adjudicación forzosa al que se acude ante el fracaso o incumplimiento de la negociación de deudas. Se entregan los bienes embargables del deudor a los acreedores.</p>
+      </div>
+    </div>
+
+    <h3>️ Efectos sobre Acciones Ejecutivas Individuales</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Dimensión</th>
+          <th>Régimen Individual</th>
+          <th>Régimen Universal de Insolvencia</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Principio Rector</strong></td>
+          <td>Prioridad temporal (prior in tempore, potior in jure)</td>
+          <td>Universalidad e igualdad de acreedores (par condicio creditorum)</td>
+        </tr>
+        <tr>
+          <td><strong>Curso de Procesos</strong></td>
+          <td>Continuación e impulso autónomo</td>
+          <td>Suspensión inmediata de ejecuciones en curso</td>
+        </tr>
+        <tr>
+          <td><strong>Radicación de Créditos</strong></td>
+          <td>Reclamación aislada ante juez ejecutante</td>
+          <td>Incorporación forzosa de todos los acreedores</td>
+        </tr>
+        <tr>
+          <td><strong>Medidas Cautelares</strong></td>
+          <td>Subsistencia exclusiva para acreedor demandante</td>
+          <td>Afectación e integración a la masa universal</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="ejemplo">
+      <strong> Ejemplo:</strong> Si A tiene 5 acreedores y no puede pagar, puede iniciar negociación de deudas. Si logra acuerdo con el 60% de los acreedores, puede solicitar convalidación judicial. Si fracasa, se abre liquidación patrimonial donde todos los bienes se distribuyen proporcionalmente entre todos los acreedores.
+    </div>
+  </section>
+
+  <!-- TEMA 8: JURISDICCIÓN VOLUNTARIA -->
+  <section id="tema8">
+    <h2>8. Procesos de Jurisdicción Voluntaria (Arts. 577-587 CGP)</h2>
+    <p>Los procesos de jurisdicción voluntaria se distinguen sustancialmente de la jurisdicción contenciosa por la ausencia de litigio o controversia entre partes intervinientes.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">JURISDICCIÓN VOLUNTARIA</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Sin Controversia</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Homologación</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Protección</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Características Fundamentales</h3>
+    <div class="alerta">
+      <strong>📌 Diferencias con jurisdicción contenciosa:</strong>
+      <ul>
+        <li><strong>Ausencia de litigio:</strong> No hay controversia entre partes</li>
+        <li><strong>Función del juez:</strong> No actúa como árbitro, sino como órgano de protección y control de legalidad</li>
+        <li><strong>Poderes del juez:</strong> Ostenta acentuados poderes de instrucción e iniciativa oficiosa</li>
+        <li><strong>Finalidad:</strong> Homologar, tutelar o legitimar situaciones jurídicas de relevancia civil</li>
+      </ul>
+    </div>
+
+    <h3>🔍 Presupuestos Procesales Esenciales</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Competencia</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Determinada expresamente por el factor funcional y territorial consagrado en la norma procesal aplicable para trámites no contenciosos.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">👤</div>
+        <h4>Capacidad para ser Parte</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Aptitud legal de los interesados para figurar como promovientes del trámite o beneficiarios de la declaración judicial.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🎯</div>
+        <h4>Legitimación en la Causa</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Exigencia de un interés jurídico directo y protegido por el ordenamiento para solicitar la declaración, autorización o designación judicial.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3> Trámites Especiales de Jurisdicción Voluntaria</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Trámite</th>
+          <th>Objeto</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Licencia judicial</strong></td>
+          <td>Para enajenar o gravar bienes de incapaces</td>
+        </tr>
+        <tr>
+          <td><strong>Declaración de ausencia</strong></td>
+          <td>Para proteger bienes de persona desaparecida</td>
+        </tr>
+        <tr>
+          <td><strong>Adopción de medidas de apoyo</strong></td>
+          <td>Para personas con discapacidad</td>
+        </tr>
+        <tr>
+          <td><strong>Reconocimiento de guarda o curaduría</strong></td>
+          <td>Para protección de incapaces</td>
+        </tr>
+        <tr>
+          <td><strong>Autorización de actos patrimoniales</strong></td>
+          <td>De conservación o disposición de sujetos de especial protección</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>🛡️ Órganos de Control y Protección</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🏛️</div>
+        <h4>Ministerio Público</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Interviene como garante del ordenamiento jurídico, del debido proceso y del interés público abstracto en las diligencias voluntarias.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">‍👩‍👧</div>
+        <h4>Defensor de Familia</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Asume la representación y defensa obligatoria de los derechos fundamentales e intereses patrimoniales de niños, niñas y adolescentes.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Curadores ad litem</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Abogados designados por el juez para asumir la representación procesal técnica de ausentes o incapaces que carezcan de representante legal.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si los padres de un menor quieren vender un inmueble que le pertenece, deben solicitar licencia judicial. El juez, con concepto del Defensor de Familia, autoriza la venta si es en beneficio del menor.
+    </div>
+  </section>
+
+  <!-- TEMA 9: PRINCIPIOS Y GARANTÍAS -->
+  <section id="tema9">
+    <h2>9. Principios Rectores y Garantías Procesales</h2>
+    <p>El debido proceso constituye el eje vertebrador e insustituible de la totalidad de las actuaciones normadas en el ordenamiento jurídico.</p>
+
+    <h3>📋 Principios Rectores (Art. 3° Ley 1437/2011)</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Principio</th>
+          <th>Definición</th>
+          <th>Aplicación</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Debido Proceso y Contradicción</strong></td>
+          <td>Garantía constitucional que exige adelantar actuaciones conforme a normas preexistentes, con plena garantía de representación y defensa</td>
+          <td>Posibilita formulación de excepciones, objeción a inventarios, intervención de curadores ad litem</td>
+        </tr>
+        <tr>
+          <td><strong>Igualdad Sustancial</strong></td>
+          <td>Trato y protección idénticos a los intervinientes, con protección especial a quienes se hallen en debilidad manifiesta</td>
+          <td>Fundamenta participación equitativa de acreedores (par condicio) y atención prioritaria de incapaces</td>
+        </tr>
+        <tr>
+          <td><strong>Buena Fe y Lealtad</strong></td>
+          <td>Presunción de comportamiento leal y obligación de actuar con rectitud, honestidad y fidelidad</td>
+          <td>Sanciona maniobras dilatorias, ocultación de activos, afirmaciones temerarias</td>
+        </tr>
+        <tr>
+          <td><strong>Eficacia, Economía y Celeridad</strong></td>
+          <td>Deber de impulsar oficiosamente los trámites, optimizar el uso del tiempo y evitar dilaciones</td>
+          <td>Facilita adopción de tecnologías, acumulación procesal y pronta adjudicación de bienes</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>️ Derechos y Deberes de los Particulares</h3>
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>✅ Derechos (Art. 5 Ley 1437/2011)</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <ul>
+          <li>Presentar peticiones sin necesidad de apoderado</li>
+          <li>Conocer el estado de las actuaciones</li>
+          <li>Obtener respuesta oportuna</li>
+          <li>Recibir trato digno</li>
+          <li>Relacionarse mediante medios tecnológicos</li>
+          <li>Utilizar sistemas de autenticación digital</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>⚠️ Deberes (Art. 6 Ley 1437/2011)</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <ul>
+          <li>Acatar la Constitución y las leyes</li>
+          <li>Actuar conforme a la buena fe</li>
+          <li>Abstenerse de emplear maniobras dilatorias</li>
+          <li>No aportar documentos falsos ni hacer afirmaciones temerarias</li>
+          <li>Observar trato respetuoso hacia los servidores públicos</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> En un proceso de insolvencia, el principio de igualdad sustancial (par condicio creditorum) garantiza que todos los acreedores reciban trato equitativo en la distribución de los bienes del deudor, sin privilegios injustificados.
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz">
+    <h2>🎯 Quiz Completo - 40 Preguntas</h2>
+    <p>Pon a prueba tus conocimientos sobre Procesos Ejecutivos, de Liquidación y Jurisdicción Voluntaria.</p>
+
+    <div class="quiz-container">
+      <div class="quiz-header">
+        <h3>📊 Tu Progreso</h3>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="quiz-stats">
+          <div class="stat">Respondidas: <strong id="respondidas">0</strong>/40</div>
+          <div class="stat">Correctas: <strong id="correctas">0</strong></div>
+          <div class="stat">Incorrectas: <strong id="incorrectas">0</strong></div>
+          <div class="stat">Porcentaje: <strong id="porcentaje">0</strong>%</div>
+        </div>
+      </div>
+
+      <div class="quiz-tabs">
+        <div class="quiz-tab active" onclick="mostrarSeccion('s1', this)">T1 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s2', this)">T2 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s3', this)">T3 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s4', this)">T4 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s5', this)">T5 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s6', this)">T6 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s7', this)">T7 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s8', this)">T8 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s9', this)">T9 (4)</div>
+      </div>
+
+      <!-- SECCIÓN 1: PROCESO EJECUTIVO -->
+      <div class="quiz-section active" id="s1">
+        <div class="pregunta" data-correcta="2" data-tema="1">
+          <span class="pregunta-num">1</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El proceso ejecutivo se diferencia del proceso de conocimiento porque:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 1)">a) Busca declarar la existencia de una relación jurídica incierta</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">b) Requiere debate probatorio previo sobre la existencia de la acreencia</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">c) Presupone la plena certeza del derecho invocado y hace efectiva la prestación</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">d) Solo aplica a obligaciones naturales</div>
+          </div>
+          <div class="explicacion">El proceso ejecutivo presupone la plena certeza del derecho invocado y hace efectiva la prestación, sin debatir la titularidad del derecho.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="1">
+          <span class="pregunta-num">2</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El título ejecutivo permite al juez:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 2)">a) Iniciar debate probatorio sobre la existencia de la obligación</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">b) Despachar mandamiento de pago sin necesidad de debate probatorio previo</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">c) Solo notificar al deudor</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">d) Archivar el proceso</div>
+          </div>
+          <div class="explicacion">El título ejecutivo preconstituye plena prueba de la obligación, permitiendo despachar mandamiento de pago sin debate probatorio previo.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="1">
+          <span class="pregunta-num">3</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La fuerza ejecutiva de los actos administrativos se fundamenta en:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 3)">a) La presunción de legalidad y fuerza ejecutoria (Arts. 88-89 Ley 1437/2011)</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">b) Solo la voluntad del funcionario</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">c) La aprobación judicial previa</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">d) El consentimiento del administrado</div>
+          </div>
+          <div class="explicacion">La fuerza ejecutiva se fundamenta en la presunción de legalidad (Art. 88) y fuerza ejecutoria (Art. 89) de los actos administrativos en firme.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="1">
+          <span class="pregunta-num">4</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El proceso ejecutivo materializa:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 4)">a) El derecho de defensa</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">b) El principio de oralidad</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">c) El derecho de contradicción</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">d) El poder de coerción de la jurisdicción</div>
+          </div>
+          <div class="explicacion">El proceso ejecutivo materializa el poder de coerción de la jurisdicción para forzar el cumplimiento mediante afectación patrimonial.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 2: TÍTULOS EJECUTIVOS -->
+      <div class="quiz-section" id="s2">
+        <div class="pregunta" data-correcta="2" data-tema="2">
+          <span class="pregunta-num">5</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los requisitos del título ejecutivo son:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 5)">a) Solo que esté firmado</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">b) Solo que sea público</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">c) Obligación clara, expresa, exigible y de origen documental auténtico</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">d) Solo que contenga una suma de dinero</div>
+          </div>
+          <div class="explicacion">El título ejecutivo requiere obligación clara, expresa, exigible y de origen documental auténtico.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="2">
+          <span class="pregunta-num">6</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La obligación "clara" significa que:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 6)">a) Está plenamente identificada en sus elementos subjetivos y objetivos</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">b) Está escrita en lenguaje sencillo</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">c) No tiene condiciones</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">d) Está firmada por testigos</div>
+          </div>
+          <div class="explicacion">La obligación clara está plenamente identificada en sus elementos subjetivos (acreedor y deudor) y objetivos (objeto de la prestación).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="2">
+          <span class="pregunta-num">7</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La obligación "exigible" significa que:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 7)">a) Está documentada</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">b) No está sujeta a plazo o condición pendiente, o el término se ha vencido</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">c) Está firmada</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">d) Está registrada</div>
+          </div>
+          <div class="explicacion">La obligación exigible no está sujeta a plazo o condición pendiente, o habiéndose pactado un término, este se ha vencido.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="2">
+          <span class="pregunta-num">8</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Constituyen títulos ejecutivos según el Art. 297 Ley 1437/2011:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 8)">a) Solo sentencias judiciales</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">b) Solo contratos privados</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">c) Solo actos administrativos</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">d) Sentencias ejecutoriadas, actos administrativos, contratos, actas de conciliación y laudos arbitrales</div>
+          </div>
+          <div class="explicacion">El Art. 297 Ley 1437/2011 establece una tipología cerrada que incluye sentencias, actos administrativos, contratos, actas de conciliación y laudos arbitrales.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 3: LIQUIDACIÓN -->
+      <div class="quiz-section" id="s3">
+        <div class="pregunta" data-correcta="1" data-tema="3">
+          <span class="pregunta-num">9</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los componentes de la liquidación del crédito son:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 9)">a) Solo el capital</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">b) Capital, intereses y costas</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">c) Solo intereses</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">d) Solo costas</div>
+          </div>
+          <div class="explicacion">La liquidación del crédito involucra capital, intereses (moratorios o remuneratorios) y costas procesales.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="3">
+          <span class="pregunta-num">10</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La liquidación del crédito es elaborada por:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 10)">a) La secretaría del despacho</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">b) El juez directamente</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">c) El acreedor</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">d) El deudor</div>
+          </div>
+          <div class="explicacion">La liquidación del crédito es elaborada por la secretaría del despacho.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="3">
+          <span class="pregunta-num">11</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Una vez en firme la liquidación, se constituye:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 11)">a) Una simple recomendación</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">b) Un acto administrativo</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">c) Un título ejecutivo judicial ejecutable</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">d) Una sentencia de segunda instancia</div>
+          </div>
+          <div class="explicacion">Una vez en firme, la liquidación constituye título ejecutivo judicial ejecutable a través del cobro forzado.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="3">
+          <span class="pregunta-num">12</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Las agencias en derecho corresponden a:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 12)">a) Gastos de copias</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">b) Honorarios de peritos</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">c) Impuestos de timbre</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">d) Honorarios del abogado apoderado de la parte vencedora</div>
+          </div>
+          <div class="explicacion">Las agencias en derecho corresponden a los honorarios del abogado apoderado de la parte vencedora, fijados según tarifas del Consejo Superior de la Judicatura.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 4: REMATE -->
+      <div class="quiz-section" id="s4">
+        <div class="pregunta" data-correcta="2" data-tema="4">
+          <span class="pregunta-num">13</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La diferencia entre ejecución ordinaria y adjudicación especial es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 13)">a) No hay diferencia</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">b) La ejecución ordinaria es más rápida</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">c) La ejecución ordinaria requiere subasta pública; la adjudicación especial asigna directamente al acreedor privilegiado</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">d) La adjudicación especial solo aplica a bienes muebles</div>
+          </div>
+          <div class="explicacion">En la ejecución ordinaria el bien se vende en subasta pública; en la adjudicación especial se asigna directamente al acreedor con garantía real.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="4">
+          <span class="pregunta-num">14</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Cuando sobre bienes embargados pesan gravámenes prendarios o hipotecarios, se requiere:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 14)">a) Citación forzosa de dichos acreedores con garantía real</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">b) Solo notificar al deudor</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">c) Cancelar los gravámenes</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">d) Ignorar los gravámenes</div>
+          </div>
+          <div class="explicacion">Cuando hay gravámenes reales, se exige la citación forzosa de dichos acreedores para respetar la prelación legal de créditos.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="4">
+          <span class="pregunta-num">15</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El secuestro en el proceso ejecutivo consiste en:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 15)">a) Venta de bienes</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">b) Despojo material de la tenencia para entregarlos a un auxiliar de justicia</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">c) Avalúo de bienes</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">d) Pago al acreedor</div>
+          </div>
+          <div class="explicacion">El secuestro despoja materialmente la tenencia de los bienes para entregarlos a un auxiliar de justicia (secuestre) mientras se realiza la adjudicación.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="4">
+          <span class="pregunta-num">16</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El cobro coactivo fiscal (Art. 90 Ley 1437/2011) permite:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 16)">a) Solo multas únicas</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">b) Solo embargos</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">c) Solo notificaciones</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">d) Imponer multas sucesivas mientras persista la rebeldía</div>
+          </div>
+          <div class="explicacion">El Art. 90 Ley 1437/2011 faculta a la autoridad para imponer multas sucesivas mientras la persona se mantenga en rebeldía al cumplimiento de obligaciones no dinerarias.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 5: SUCESIÓN -->
+      <div class="quiz-section" id="s5">
+        <div class="pregunta" data-correcta="1" data-tema="5">
+          <span class="pregunta-num">17</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La herencia yacente se declara cuando:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 17)">a) Hay herederos que aceptan</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">b) Transcurrido el término legal, ningún heredero ha aceptado ni existe albacea con tenencia</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">c) El causante tiene deudas</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">d) Hay testamento</div>
+          </div>
+          <div class="explicacion">La herencia yacente se declara cuando, transcurrido el término legal, ningún heredero ha aceptado la herencia ni existe albacea con tenencia de bienes.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="5">
+          <span class="pregunta-num">18</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El factor de conexión en sucesiones opera como:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 18)">a) Vis atractiva procesal que atrae al foro principal la totalidad de reclamaciones conexas</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">b) Factor de rechazo de competencia</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">c) Factor de acumulación de procesos</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">d) Factor de suspensión del proceso</div>
+          </div>
+          <div class="explicacion">El factor de conexión opera como vis atractiva procesal, atrayendo al foro del proceso sucesoral principal la totalidad de reclamaciones, incidentes y juicios acumulados conexos.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="5">
+          <span class="pregunta-num">19</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La guarda y aposición de sellos es una medida:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 19)">a) De pago</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">b) De partición</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">c) Cautelar para custodiar bienes muebles y documentos del causante</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">d) De adjudicación</div>
+          </div>
+          <div class="explicacion">La guarda y aposición de sellos es diligencia judicial cautelar destinada a custodiar de manera inmediata los bienes muebles y documentos del causante bajo precinto oficial.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="5">
+          <span class="pregunta-num">20</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El factor territorial en sucesiones se determina por:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 20)">a) El lugar de nacimiento del causante</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">b) El lugar de muerte</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">c) El lugar donde están los bienes</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">d) El último domicilio del causante o asiento principal de sus negocios</div>
+          </div>
+          <div class="explicacion">El factor territorial se determina por el último domicilio del causante o el asiento principal de sus negocios.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 6: SOCIEDADES -->
+      <div class="quiz-section" id="s6">
+        <div class="pregunta" data-correcta="1" data-tema="6">
+          <span class="pregunta-num">21</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La liquidación de sociedad conyugal procede por:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 21)">a) Solo muerte</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">b) Divorcio, separación de bienes, nulidad del matrimonio o muerte</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">c) Solo divorcio</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">d) Solo separación de hecho</div>
+          </div>
+          <div class="explicacion">La liquidación de sociedad conyugal procede por divorcio, separación de bienes, nulidad del matrimonio o muerte de uno de los cónyuges.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="6">
+          <span class="pregunta-num">22</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los liquidadores de sociedades comerciales designados judicialmente ostentan la calidad de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 22)">a) Auxiliares de la justicia</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">b) Partes procesales</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">c) Testigos</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">d) Peritos</div>
+          </div>
+          <div class="explicacion">Los liquidadores ostentan la calidad procesal de auxiliares de la justicia cuando son designados judicialmente.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="6">
+          <span class="pregunta-num">23</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Las funciones de los liquidadores incluyen:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 23)">a) Solo representar legalmente</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">b) Solo custodiar bienes</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">c) Representación legal, custodia de masa patrimonial, realización de activos y extinción del pasivo</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">d) Solo pagar deudas</div>
+          </div>
+          <div class="explicacion">Los liquidadores asumen representación legal, custodia de la masa patrimonial, realización de activos y extinción gradual del pasivo social.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="6">
+          <span class="pregunta-num">24</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La liquidación de sociedad conyugal impone:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 24)">a) Solo división por mitad</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">b) Solo pago de deudas</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">c) Solo adjudicación al marido</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">d) Delimitación de bienes, restitución de haber propio, cancelación de pasivos y adjudicación equitativa</div>
+          </div>
+          <div class="explicacion">La liquidación impone delimitación de bienes sociales, restitución de haber propio o recompensas, cancelación de pasivos y adjudicación equitativa del remanente.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 7: INSOLVENCIA -->
+      <div class="quiz-section" id="s7">
+        <div class="pregunta" data-correcta="1" data-tema="7">
+          <span class="pregunta-num">25</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El estado de cesación de pagos se define como:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 25)">a) Quiebra declarada judicialmente</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">b) Situación objetiva de iliquidez o imposibilidad estructural del deudor para atender oportunamente sus acreencias</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">c) Falta de bienes</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">d) Negativa a pagar</div>
+          </div>
+          <div class="explicacion">El estado de cesación de pagos es la situación objetiva de iliquidez o imposibilidad estructural del deudor para atender oportunamente sus acreencias.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="7">
+          <span class="pregunta-num">26</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La negociación de deudas se promueve ante:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 26)">a) Centros de conciliación o notarías</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">b) Solo juzgados</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">c) Solo la Fiscalía</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">d) Solo el Ministerio Público</div>
+          </div>
+          <div class="explicacion">La negociación de deudas se promueve ante centros de conciliación o notarías para lograr acuerdo de pago reestructurado.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="7">
+          <span class="pregunta-num">27</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El principio par condicio creditorum significa:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 27)">a) Prioridad del primer acreedor</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">b) Exclusión de acreedores menores</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">c) Igualdad de acreedores en el régimen universal</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">d) Preferencia del Estado</div>
+          </div>
+          <div class="explicacion">El par condicio creditorum es el principio de igualdad de acreedores que rige el régimen universal de insolvencia.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="7">
+          <span class="pregunta-num">28</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La apertura del régimen de insolvencia produce:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 28)">a) Continuación de ejecuciones individuales</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">b) Prioridad para el primer acreedor</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">c) Exclusión de acreedores quirografarios</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">d) Suspensión inmediata de ejecuciones en curso y prohibición de iniciar nuevos juicios</div>
+          </div>
+          <div class="explicacion">La apertura del régimen de insolvencia produce suspensión inmediata de ejecuciones en curso y prohibición de iniciar nuevos juicios individuales.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 8: JURISDICCIÓN VOLUNTARIA -->
+      <div class="quiz-section" id="s8">
+        <div class="pregunta" data-correcta="1" data-tema="8">
+          <span class="pregunta-num">29</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La jurisdicción voluntaria se diferencia de la contenciosa porque:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 29)">a) Hay litigio entre partes</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">b) No hay litigio o controversia entre partes intervinientes</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">c) El juez actúa como árbitro</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">d) Requiere demanda y contestación</div>
+          </div>
+          <div class="explicacion">La jurisdicción voluntaria se distingue por la ausencia de litigio o controversia entre partes; el juez no actúa como árbitro sino como órgano de protección.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="8">
+          <span class="pregunta-num">30</span><span class="pregunta-tipo">Conceptual</span>
+          <p>En jurisdicción voluntaria, el juez ostenta:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 30)">a) Acentuados poderes de instrucción e iniciativa oficiosa</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">b) Solo poderes de decisión</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">c) Poderes limitados</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">d) Solo poderes sancionatorios</div>
+          </div>
+          <div class="explicacion">En jurisdicción voluntaria, el juez ostenta acentuados poderes de instrucción e iniciativa oficiosa, pudiendo decretar pruebas no solicitadas.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="8">
+          <span class="pregunta-num">31</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los presupuestos procesales esenciales en jurisdicción voluntaria son:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 31)">a) Solo competencia</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">b) Solo capacidad</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">c) Competencia, capacidad para ser parte y legitimación en la causa</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">d) Solo legitimación</div>
+          </div>
+          <div class="explicacion">Los tres presupuestos procesales esenciales son: competencia, capacidad para ser parte y legitimación en la causa.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="8">
+          <span class="pregunta-num">32</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El Defensor de Familia interviene en jurisdicción voluntaria para:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 32)">a) Representar al Estado</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">b) Representar al Ministerio Público</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">c) Representar a los acreedores</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">d) Asumir la representación y defensa de derechos de niños, niñas y adolescentes</div>
+          </div>
+          <div class="explicacion">El Defensor de Familia asume la representación y defensa obligatoria de los derechos fundamentales e intereses patrimoniales de niños, niñas y adolescentes.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 9: PRINCIPIOS -->
+      <div class="quiz-section" id="s9">
+        <div class="pregunta" data-correcta="1" data-tema="9">
+          <span class="pregunta-num">33</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El principio de debido proceso y contradicción posibilita:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 33)">a) Solo la presentación de demanda</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">b) Formulación de excepciones, objeción a inventarios e intervención de curadores ad litem</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">c) Solo la notificación</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">d) Solo la apelación</div>
+          </div>
+          <div class="explicacion">El debido proceso y contradicción posibilita la formulación de excepciones, objeción a inventarios y la intervención garantista de curadores ad litem.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="9">
+          <span class="pregunta-num">34</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El principio de igualdad sustancial fundamenta:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 34)">a) La participación equitativa de acreedores y atención prioritaria de incapaces</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">b) Solo la igualdad ante la ley</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">c) Solo la no discriminación</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">d) Solo la igualdad procesal</div>
+          </div>
+          <div class="explicacion">La igualdad sustancial fundamenta la participación equitativa de acreedores (par condicio) y la atención prioritaria del Defensor de Familia e incapaces.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="9">
+          <span class="pregunta-num">35</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El principio de buena fe y lealtad procesal sanciona:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 35)">a) Solo la temeridad</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">b) Solo la mora</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">c) Maniobras dilatorias, ocultación de activos y afirmaciones temerarias</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">d) Solo la falsedad documental</div>
+          </div>
+          <div class="explicacion">La buena fe y lealtad procesal sanciona maniobras dilatorias, ocultación de activos en liquidaciones y aportación de afirmaciones temerarias.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="9">
+          <span class="pregunta-num">36</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los derechos de los particulares (Art. 5 Ley 1437/2011) incluyen:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 36)">a) Solo presentar peticiones</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">b) Solo conocer el estado de actuaciones</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">c) Solo obtener respuesta oportuna</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">d) Presentar peticiones sin apoderado, conocer actuaciones, obtener respuesta, trato digno y usar medios tecnológicos</div>
+          </div>
+          <div class="explicacion">Los derechos incluyen presentar peticiones sin apoderado, conocer el estado de actuaciones, obtener respuesta oportuna, recibir trato digno y utilizar medios tecnológicos.</div>
+        </div>
+      </div>
+
+      <div class="resultado-final" id="resultadoFinal">
+        <h3>🏆 Resultado Final</h3>
+        <div class="puntaje-final" id="puntajeFinal">0/40</div>
+        <p id="mensajeFinal"></p>
+        <div class="desglose-temas" id="desgloseTemas"></div>
+        <button onclick="reiniciarQuiz()" class="btn-reset">🔄 Reiniciar Quiz</button>
+      </div>
+
+      <div style="text-align: center; margin-top: 1.5rem;">
+        <button onclick="verResultadoFinal()">📊 Ver Resultado Final</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>⚖️ Guía Didáctica - Procesos Ejecutivos, de Liquidación y Jurisdicción Voluntaria</p>
+  <p>Libro Tercero del Código General del Proceso · Arts. 422 a 587</p>
+  <p style="margin-top: 1rem; opacity: 0.7;">© 2026 - Material educativo interactivo</p>
+</footer>
+
+<script>
+  function toggleAcordeon(header) {
+    header.classList.toggle('active');
+    const content = header.nextElementSibling;
+    content.classList.toggle('active');
+  }
+
+  let respuestas = {};
+  const totalPreguntas = 40;
+
+  function mostrarSeccion(id, tab) {
+    document.querySelectorAll('.quiz-section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.quiz-tab').forEach(t => t.classList.remove('active'));
+    
+    document.getElementById(id).classList.add('active');
+    tab.classList.add('active');
+  }
+
+  function seleccionar(opcion, preguntaNum) {
+    if (respuestas[preguntaNum] !== undefined) return;
+
+    const pregunta = opcion.closest('.pregunta');
+    const opciones = pregunta.querySelectorAll('.opcion');
+    const correcta = parseInt(pregunta.dataset.correcta);
+    const tema = parseInt(pregunta.dataset.tema);
+    const seleccionada = Array.from(opciones).indexOf(opcion);
+    const explicacion = pregunta.querySelector('.explicacion');
+
+    opciones.forEach(o => o.classList.add('disabled'));
+
+    if (seleccionada === correcta) {
+      opcion.classList.add('correcta');
+      respuestas[preguntaNum] = { correcta: true, tema: tema };
+    } else {
+      opcion.classList.add('incorrecta');
+      opciones[correcta].classList.add('correcta');
+      respuestas[preguntaNum] = { correcta: false, tema: tema };
+    }
+
+    explicacion.classList.add('visible');
+    pregunta.classList.add('answered');
+    actualizarEstadisticas();
+  }
+
+  function actualizarEstadisticas() {
+    const total = Object.keys(respuestas).length;
+    const correctas = Object.values(respuestas).filter(r => r.correcta).length;
+    const incorrectas = total - correctas;
+    const porcentaje = total > 0 ? Math.round((correctas / total) * 100) : 0;
+
+    document.getElementById('respondidas').textContent = total;
+    document.getElementById('correctas').textContent = correctas;
+    document.getElementById('incorrectas').textContent = incorrectas;
+    document.getElementById('porcentaje').textContent = porcentaje;
+
+    const progreso = (total / totalPreguntas) * 100;
+    document.getElementById('progressFill').style.width = progreso + '%';
+  }
+
+  function verResultadoFinal() {
+    const total = Object.keys(respuestas).length;
+    
+    if (total < totalPreguntas) {
+      alert(`⚠️ Aún te faltan ${totalPreguntas - total} preguntas por responder.`);
+      return;
+    }
+
+    const correctas = Object.values(respuestas).filter(r => r.correcta).length;
+    const porcentaje = Math.round((correctas / totalPreguntas) * 100);
+
+    const resultadoFinal = document.getElementById('resultadoFinal');
+    resultadoFinal.classList.add('visible');
+
+    document.getElementById('puntajeFinal').textContent = `${correctas}/${totalPreguntas}`;
+
+    let mensaje = '';
+    if (porcentaje === 100) mensaje = '🏆 ¡PERFECTO! Dominas los Procesos Ejecutivos, de Liquidación y Jurisdicción Voluntaria.';
+    else if (porcentaje >= 90) mensaje = '🌟 ¡Excelente! Dominio sobresaliente.';
+    else if (porcentaje >= 75) mensaje = '✅ ¡Muy bien! Buen dominio.';
+    else if (porcentaje >= 60) mensaje = ' Aceptable. Repasa los temas donde fallaste.';
+    else if (porcentaje >= 40) mensaje = '📖 Necesitas reforzar varios conceptos.';
+    else mensaje = '🔍 Es necesario estudiar nuevamente todos los temas.';
+
+    document.getElementById('mensajeFinal').textContent = mensaje;
+
+    const temas = {
+      1: { nombre: 'T1: Proceso Ejecutivo', total: 4, correctas: 0 },
+      2: { nombre: 'T2: Títulos Ejecutivos', total: 4, correctas: 0 },
+      3: { nombre: 'T3: Liquidación', total: 4, correctas: 0 },
+      4: { nombre: 'T4: Remate', total: 4, correctas: 0 },
+      5: { nombre: 'T5: Sucesión', total: 4, correctas: 0 },
+      6: { nombre: 'T6: Sociedades', total: 4, correctas: 0 },
+      7: { nombre: 'T7: Insolvencia', total: 4, correctas: 0 },
+      8: { nombre: 'T8: Jurisdicción Voluntaria', total: 4, correctas: 0 },
+      9: { nombre: 'T9: Principios', total: 4, correctas: 0 }
+    };
+
+    Object.values(respuestas).forEach(r => {
+      if (r.correcta) temas[r.tema].correctas++;
+    });
+
+    const desgloseHTML = Object.values(temas).map(t => {
+      const pct = Math.round((t.correctas / t.total) * 100);
+      return `
+        <div class="desglose-item">
+          <h4>${t.nombre}</h4>
+          <p>${t.correctas}/${t.total} (${pct}%)</p>
+          <div class="mini-bar">
+            <div class="mini-bar-fill" style="width: ${pct}%"></div>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    document.getElementById('desgloseTemas').innerHTML = desgloseHTML;
+    resultadoFinal.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  function reiniciarQuiz() {
+    if (!confirm('¿Reiniciar el quiz?')) return;
+
+    respuestas = {};
+
+    document.querySelectorAll('.opcion').forEach(o => o.classList.remove('correcta', 'incorrecta', 'disabled'));
+    document.querySelectorAll('.explicacion').forEach(e => e.classList.remove('visible'));
+    document.querySelectorAll('.pregunta').forEach(p => p.classList.remove('answered'));
+    document.getElementById('resultadoFinal').classList.remove('visible');
+
+    actualizarEstadisticas();
+    mostrarSeccion('s1', document.querySelector('.quiz-tab'));
+    document.getElementById('quiz').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  document.querySelectorAll('nav a').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+</script>
+
+</body>
+</html>
