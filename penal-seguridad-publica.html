@@ -1,0 +1,2010 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Delitos contra la Seguridad Pública y el Medio Ambiente - Código Penal</title>
+<style>
+  :root {
+    --primary: #7f1d1d;
+    --secondary: #fbbf24;
+    --accent: #991b1b;
+    --light: #fef3f2;
+    --dark: #1a202c;
+    --success: #38a169;
+    --warning: #d69e2e;
+    --danger: #c53030;
+    --card-bg: #ffffff;
+    --shadow: 0 4px 15px rgba(0,0,0,0.08);
+    --shadow-hover: 0 8px 25px rgba(0,0,0,0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    background: var(--light);
+    color: var(--dark);
+    line-height: 1.7;
+  }
+
+  header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    color: white;
+    padding: 2rem 1rem;
+    text-align: center;
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::before {
+    content: '⚖️';
+    position: absolute;
+    font-size: 15rem;
+    opacity: 0.05;
+    top: -30px;
+    right: -30px;
+  }
+
+  header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: 2px;
+  }
+
+  header p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    font-style: italic;
+  }
+
+  nav {
+    background: var(--dark);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow);
+  }
+
+  nav ul {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0.5rem;
+  }
+
+  nav a {
+    color: var(--light);
+    text-decoration: none;
+    padding: 0.7rem 1rem;
+    margin: 0.2rem;
+    border-radius: 5px;
+    font-size: 0.75rem;
+    transition: all 0.3s;
+    display: block;
+  }
+
+  nav a:hover {
+    background: var(--secondary);
+    color: var(--dark);
+    transform: translateY(-2px);
+  }
+
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+  }
+
+  section {
+    background: var(--card-bg);
+    margin-bottom: 2.5rem;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    border-left: 5px solid var(--secondary);
+    scroll-margin-top: 80px;
+  }
+
+  section h2 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--secondary);
+  }
+
+  section h3 {
+    color: var(--accent);
+    font-size: 1.4rem;
+    margin: 1.5rem 0 0.8rem;
+  }
+
+  section h4 {
+    color: var(--primary);
+    font-size: 1.15rem;
+    margin: 1rem 0 0.5rem;
+  }
+
+  p { margin-bottom: 1rem; text-align: justify; }
+
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.2rem;
+    margin: 1.5rem 0;
+  }
+
+  .card {
+    background: linear-gradient(135deg, #fff 0%, #f9f6ef 100%);
+    border: 2px solid var(--secondary);
+    border-radius: 10px;
+    padding: 1.2rem;
+    transition: all 0.3s;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--primary);
+  }
+
+  .card .icon {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .card h4 {
+    text-align: center;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+  }
+
+  .card .detail {
+    display: none;
+    margin-top: 0.8rem;
+    padding-top: 0.8rem;
+    border-top: 1px dashed var(--secondary);
+    font-size: 0.95rem;
+  }
+
+  .card.active .detail { display: block; }
+
+  .card .hint {
+    text-align: center;
+    color: var(--accent);
+    font-size: 0.85rem;
+    font-style: italic;
+  }
+
+  .mapa-container {
+    background: #fdfbf5;
+    border: 2px dashed var(--secondary);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    overflow-x: auto;
+  }
+
+  .mapa {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 600px;
+  }
+
+  .nodo {
+    background: var(--primary);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+    font-weight: bold;
+    text-align: center;
+    min-width: 180px;
+    box-shadow: var(--shadow);
+  }
+
+  .nodo.central {
+    background: linear-gradient(135deg, var(--secondary), #e0b888);
+    color: var(--dark);
+    font-size: 1.2rem;
+    padding: 1rem 2rem;
+  }
+
+  .nodo.sub {
+    background: var(--accent);
+    font-size: 0.95rem;
+  }
+
+  .linea {
+    width: 3px;
+    height: 25px;
+    background: var(--secondary);
+  }
+
+  .linea-h {
+    height: 3px;
+    background: var(--secondary);
+    width: 80%;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .rama {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 1rem;
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  .rama-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    min-width: 140px;
+  }
+
+  .ejemplo {
+    background: #e6f7ee;
+    border-left: 4px solid var(--success);
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .ejemplo strong { color: var(--success); }
+
+  .alerta {
+    background: #fff8e1;
+    border-left: 4px solid var(--warning);
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .alerta strong { color: var(--warning); }
+
+  .cita {
+    background: #f0f7ff;
+    border-left: 4px solid var(--accent);
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+    color: var(--primary);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    font-size: 0.9rem;
+  }
+
+  th {
+    background: var(--primary);
+    color: white;
+    padding: 0.8rem;
+    text-align: left;
+  }
+
+  td {
+    padding: 0.8rem;
+    border-bottom: 1px solid #eee;
+  }
+
+  tr:nth-child(even) { background: #f9f6ef; }
+  tr:hover { background: #f0ead6; }
+
+  .quiz-container {
+    background: linear-gradient(135deg, #f7f4ed 0%, #fff 100%);
+    padding: 1.5rem;
+    border-radius: 10px;
+    border: 2px solid var(--accent);
+  }
+
+  .quiz-header {
+    background: var(--primary);
+    color: white;
+    padding: 1.2rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .quiz-header h3 {
+    color: white;
+    margin: 0 0 0.5rem 0;
+  }
+
+  .progress-bar {
+    background: rgba(255,255,255,0.2);
+    height: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+  }
+
+  .progress-fill {
+    background: var(--secondary);
+    height: 100%;
+    width: 0%;
+    transition: width 0.4s ease;
+  }
+
+  .quiz-stats {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .stat {
+    background: rgba(255,255,255,0.1);
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    font-size: 0.9rem;
+  }
+
+  .stat strong { color: var(--secondary); }
+
+  .quiz-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    padding: 0.5rem;
+    background: #f0ead6;
+    border-radius: 8px;
+  }
+
+  .quiz-tab {
+    background: white;
+    border: 2px solid var(--accent);
+    color: var(--accent);
+    padding: 0.5rem 0.8rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.75rem;
+    transition: all 0.3s;
+    flex: 1;
+    min-width: 80px;
+    text-align: center;
+  }
+
+  .quiz-tab:hover {
+    background: var(--accent);
+    color: white;
+  }
+
+  .quiz-tab.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+  }
+
+  .quiz-section {
+    display: none;
+  }
+
+  .quiz-section.active {
+    display: block;
+    animation: fadeIn 0.4s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .pregunta {
+    margin-bottom: 1.5rem;
+    padding: 1.2rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    border-left: 4px solid var(--accent);
+    transition: all 0.3s;
+  }
+
+  .pregunta.answered {
+    border-left-color: var(--secondary);
+  }
+
+  .pregunta-num {
+    display: inline-block;
+    background: var(--accent);
+    color: white;
+    padding: 0.2rem 0.7rem;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    margin-right: 0.5rem;
+  }
+
+  .pregunta-tipo {
+    display: inline-block;
+    background: var(--secondary);
+    color: var(--dark);
+    padding: 0.2rem 0.7rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    margin-left: 0.3rem;
+    font-weight: bold;
+  }
+
+  .pregunta p { 
+    font-weight: bold; 
+    color: var(--primary); 
+    margin: 0.8rem 0;
+    text-align: left;
+  }
+
+  .opciones { display: flex; flex-direction: column; gap: 0.5rem; }
+
+  .opcion {
+    padding: 0.7rem 1rem;
+    background: #f9f6ef;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+  }
+
+  .opcion:hover:not(.disabled) {
+    border-color: var(--accent);
+    background: #e8f0f7;
+  }
+
+  .opcion.disabled {
+    cursor: not-allowed;
+    opacity: 0.85;
+  }
+
+  .opcion.correcta {
+    background: #c6f6d5;
+    border-color: var(--success);
+    color: var(--success);
+    font-weight: bold;
+  }
+
+  .opcion.incorrecta {
+    background: #fed7d7;
+    border-color: var(--danger);
+    color: var(--danger);
+  }
+
+  .opcion.correcta::after {
+    content: ' ✓';
+    font-weight: bold;
+  }
+
+  .opcion.incorrecta::after {
+    content: ' ✗';
+    font-weight: bold;
+  }
+
+  .explicacion {
+    margin-top: 0.8rem;
+    padding: 0.8rem;
+    background: #f0f7ff;
+    border-left: 3px solid var(--accent);
+    border-radius: 0 6px 6px 0;
+    font-size: 0.9rem;
+    display: none;
+    font-style: italic;
+  }
+
+  .explicacion.visible {
+    display: block;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .resultado-final {
+    margin-top: 2rem;
+    padding: 2rem;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    color: white;
+    border-radius: 12px;
+    text-align: center;
+    display: none;
+  }
+
+  .resultado-final.visible {
+    display: block;
+    animation: fadeIn 0.5s ease;
+  }
+
+  .resultado-final h3 {
+    color: var(--secondary);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .puntaje-final {
+    font-size: 3rem;
+    font-weight: bold;
+    color: var(--secondary);
+    margin: 1rem 0;
+  }
+
+  .desglose-temas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+    text-align: left;
+  }
+
+  .desglose-item {
+    background: rgba(255,255,255,0.1);
+    padding: 1rem;
+    border-radius: 8px;
+  }
+
+  .desglose-item h4 {
+    color: var(--secondary);
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+  }
+
+  .mini-bar {
+    background: rgba(255,255,255,0.2);
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+  }
+
+  .mini-bar-fill {
+    background: var(--secondary);
+    height: 100%;
+    transition: width 0.6s ease;
+  }
+
+  button {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 1rem;
+    transition: all 0.3s;
+  }
+
+  button:hover {
+    background: var(--secondary);
+    color: var(--dark);
+    transform: translateY(-2px);
+  }
+
+  .btn-reset {
+    background: var(--danger);
+    margin-left: 0.5rem;
+  }
+
+  .btn-reset:hover {
+    background: #9b2c2c;
+    color: white;
+  }
+
+  .acordeon-item {
+    margin-bottom: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .acordeon-header {
+    background: var(--accent);
+    color: white;
+    padding: 1rem;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.3s;
+  }
+
+  .acordeon-header:hover { background: var(--primary); }
+
+  .acordeon-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    background: white;
+  }
+
+  .acordeon-content.active {
+    max-height: 2000px;
+    padding: 1rem;
+  }
+
+  .flecha { transition: transform 0.3s; }
+  .acordeon-header.active .flecha { transform: rotate(180deg); }
+
+  footer {
+    background: var(--dark);
+    color: var(--light);
+    text-align: center;
+    padding: 2rem 1rem;
+    margin-top: 2rem;
+  }
+
+  footer p { margin-bottom: 0.5rem; }
+
+  @media (max-width: 768px) {
+    header h1 { font-size: 1.8rem; }
+    section { padding: 1.2rem; }
+    section h2 { font-size: 1.5rem; }
+    nav a { font-size: 0.65rem; padding: 0.4rem 0.5rem; }
+    .quiz-tab { font-size: 0.65rem; padding: 0.3rem 0.4rem; }
+    table { font-size: 0.8rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>️ Delitos contra la Seguridad Pública y el Medio Ambiente</h1>
+  <p>Código Penal Colombiano (Ley 599/2000) · Guía Didáctica Interactiva 8</p>
+</header>
+
+<nav>
+  <ul>
+    <li><a href="#tema1">1. Terrorismo</a></li>
+    <li><a href="#tema2">2. Estupefacientes</a></li>
+    <li><a href="#tema3">3. Armas</a></li>
+    <li><a href="#tema4">4. Salud Pública</a></li>
+    <li><a href="#tema5">5. Medio Ambiente I</a></li>
+    <li><a href="#tema6">6. Medio Ambiente II</a></li>
+    <li><a href="#tema7">7. Seguridad Vial</a></li>
+    <li><a href="#tema8">8. Comparativa</a></li>
+    <li><a href="#quiz">Quiz (40)</a></li>
+  </ul>
+</nav>
+
+<main>
+
+  <section>
+    <h2>📚 Introducción</h2>
+    <p>Bienvenido a la <strong>Guía 8 de la Parte Especial</strong>. Aquí estudiaremos los delitos contra la seguridad pública (terrorismo, financiación del terrorismo, tráfico de estupefacientes, tráfico de armas) y los delitos contra el medio ambiente y los recursos naturales, que protegen bienes jurídicos colectivos y difusos.</p>
+    <div class="alerta">
+      <strong>💡 Cómo usar esta guía:</strong> Haz clic en las tarjetas para ver detalles, despliega los acordeones para información adicional y prueba tus conocimientos con el quiz de 40 preguntas al final.
+    </div>
+  </section>
+
+  <!-- TEMA 1: TERRORISMO -->
+  <section id="tema1">
+    <h2>1. Terrorismo y Financiación del Terrorismo (Arts. 343 y 345 C.P.)</h2>
+    <p>Delitos contra la seguridad pública que buscan proteger a la población y las instituciones de actos de violencia destinados a generar terror o subvertir el orden constitucional.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">TERRORISMO</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Terrorismo (343)</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Actos de violencia</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Financiación (345)</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Recursos económicos</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Terrorismo (Art. 343 C.P.)</h3>
+    <div class="cita">
+      <strong>"El que, con el fin de promover o mantener el estado de zozobra o terror en la población o en un sector de ella, induzca, promueva, organice, financie, reclute o entrene..."</strong> — Art. 343 Código Penal
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Elemento</th>
+          <th>Descripción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Sujeto Activo</strong></td>
+          <td>Cualquier persona (común)</td>
+        </tr>
+        <tr>
+          <td><strong>Verbo Rector</strong></td>
+          <td>Compuesto: inducir, promover, organizar, financiar, reclutar, entrenar</td>
+        </tr>
+        <tr>
+          <td><strong>Objeto Material</strong></td>
+          <td>Personas o bienes (población civil, infraestructura)</td>
+        </tr>
+        <tr>
+          <td><strong>Bien Jurídico</strong></td>
+          <td>La seguridad pública y la paz social</td>
+        </tr>
+        <tr>
+          <td><strong>Elemento Subjetivo</strong></td>
+          <td>Dolo + fin especial (generar zozobra o terror)</td>
+        </tr>
+        <tr>
+          <td><strong>Pena</strong></td>
+          <td>Prisión de 15 a 25 años</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>📋 Financiación del Terrorismo (Art. 345 C.P.)</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon"></div>
+        <h4>Concepto</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>El que <strong>financie, administre, recaude o suministre fondos</strong> o recursos económicos para la realización de actividades terroristas o para grupos armados organizados.</p>
+          <p><strong>Pena:</strong> prisión de 10 a 15 años.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚠️</div>
+        <h4>Elemento Clave</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>No es necesario que el agente participe directamente en el acto terrorista; basta con que <strong>apoye económicamente</strong> la estructura o los actos.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong> Ejemplo:</strong> Si A coloca una bomba en un centro comercial con el fin de generar pánico en la población, comete terrorismo (Art. 343). Si B, sin participar en la colocación de la bomba, envía dinero a A sabiendo que lo usará para actos terroristas, B comete financiación del terrorismo (Art. 345).
+    </div>
+  </section>
+
+  <!-- TEMA 2: ESTUPEFACIENTES -->
+  <section id="tema2">
+    <h2>2. Tráfico, Fabricación o Porte de Estupefacientes (Art. 376 C.P.)</h2>
+    <p>Delito contra la salud pública y la seguridad colectiva que sanciona el comercio y la tenencia de drogas ilícitas.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">ESTUPEFACIENTES</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Tráfico</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Fabricación</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Porte</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Concierto</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3> Tipo Básico (Art. 376 C.P.)</h3>
+    <div class="cita">
+      <strong>"El que, sin autorización, promueva, organice, financie, dirija, trafique, comercialice, adquiera, suministre, transporte, transforme, elabore, fabrique o posea sustancias narcóticas..."</strong> — Art. 376 Código Penal
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Elemento</th>
+          <th>Descripción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Sujeto Activo</strong></td>
+          <td>Cualquier persona (común)</td>
+        </tr>
+        <tr>
+          <td><strong>Verbo Rector</strong></td>
+          <td>Múltiple: traficar, fabricar, portar, poseer, transportar, etc.</td>
+        </tr>
+        <tr>
+          <td><strong>Objeto Material</strong></td>
+          <td>Sustancias narcóticas, psicotrópicas o sintéticas</td>
+        </tr>
+        <tr>
+          <td><strong>Bien Jurídico</strong></td>
+          <td>La salud pública y la seguridad colectiva</td>
+        </tr>
+        <tr>
+          <td><strong>Elemento Subjetivo</strong></td>
+          <td>Dolo</td>
+        </tr>
+        <tr>
+          <td><strong>Pena</strong></td>
+          <td>Prisión de 10 a 25 años (agravada según cantidad y rol)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>⚠️ Circunstancias de Agravación (Art. 377 C.P.)</h3>
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span> Agravantes del Tráfico de Estupefacientes</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <ul>
+          <li>Cuando la cantidad de sustancia supere los umbrales legales (cantidades máximas portadas)</li>
+          <li>Cuando el agente sea <strong>servidor público</strong></li>
+          <li>Cuando se utilicen <strong>menores de edad</strong> o personas en situación de discapacidad</li>
+          <li>Cuando la sustancia se introduzca o extraiga del país (tráfico internacional)</li>
+          <li>Cuando se realice en <strong>instituciones educativas</strong> o centros de reclusión</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si A cultiva 500 plantas de marihuana en su finca con el fin de procesarlas y venderlas, comete tráfico y fabricación de estupefacientes (Art. 376). Si A transporta 2 kilos de cocaína en un vehículo, comete tráfico agravado por la cantidad.
+    </div>
+  </section>
+
+  <!-- TEMA 3: ARMAS -->
+  <section id="tema3">
+    <h2>3. Tráfico de Armas y Explosivos (Art. 365 C.P.)</h2>
+    <p>Delito contra la seguridad pública que sanciona el comercio ilegal de armas, municiones y explosivos.</p>
+
+    <h3>📋 Tipo Básico (Art. 365 C.P.)</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🔫</div>
+        <h4>Concepto</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>El que <strong>fabrique, trafique, porte o comercialice</strong> armas de fuego, municiones, explosivos o accesorios sin autorización legal.</p>
+          <p><strong>Pena:</strong> prisión de 6 a 12 años.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚠️</div>
+        <h4>Elemento Clave</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Requiere que la conducta se realice <strong>sin autorización</strong> de la autoridad competente (Indumil, Ministerio de Defensa).</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>🔍 Diferencia entre Porte y Tráfico</h3>
+    <div class="alerta">
+      <strong>⚖️ Diferencia clave:</strong>
+      <ul>
+        <li><strong>Porte ilegal:</strong> Llevar un arma de fuego sobre la persona sin autorización (delito de peligro).</li>
+        <li><strong>Tráfico:</strong> Comercializar, vender, comprar o distribuir armas (actividad mercantil ilegal).</li>
+        <li><strong>Fabricación:</strong> Producir armas o municiones sin licencia.</li>
+      </ul>
+    </div>
+
+    <div class="ejemplo">
+      <strong> Ejemplo:</strong> Si A compra 10 rifles de asalto en el mercado negro para venderlos a grupos al margen de la ley, comete tráfico de armas (Art. 365). Si A lleva una pistola en su cinturón sin permiso de porte, comete porte ilegal de armas (Ley 2565 de 2026 / Art. 365).
+    </div>
+  </section>
+
+  <!-- TEMA 4: SALUD PÚBLICA -->
+  <section id="tema4">
+    <h2>4. Delitos contra la Salud Pública (Arts. 372 a 375 C.P.)</h2>
+    <p>Delitos que protegen la salud colectiva de la población frente a sustancias nocivas, epidemias y prácticas peligrosas.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">SALUD PÚBLICA</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Sustancias Nocivas</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Art. 372</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Epidemias</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Art. 373</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Agua Potable</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Art. 374</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Fabricación, Tráfico y Suministro de Sustancias Nocivas (Art. 372 C.P.)</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Elemento</th>
+          <th>Descripción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Verbo Rector</strong></td>
+          <td>Fabricar, traficar, suministrar sustancias nocivas para la salud</td>
+        </tr>
+        <tr>
+          <td><strong>Objeto Material</strong></td>
+          <td>Alimentos, medicamentos, sustancias químicas adulteradas o nocivas</td>
+        </tr>
+        <tr>
+          <td><strong>Bien Jurídico</strong></td>
+          <td>La salud pública</td>
+        </tr>
+        <tr>
+          <td><strong>Pena</strong></td>
+          <td>Prisión de 4 a 10 años</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>📋 Propagación de Enfermedad (Art. 373 C.P.)</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🦠</div>
+        <h4>Concepto</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>El que <strong>propague una enfermedad</strong> peligrosa para las personas, animales o plantas.</p>
+          <p><strong>Pena:</strong> prisión de 2 a 6 años.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">💧</div>
+        <h4>Contaminación de Agua Potable (Art. 374)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>El que <strong>contamine aguas</strong> destinadas al consumo público o de uso agrícola/industrial.</p>
+          <p><strong>Pena:</strong> prisión de 2 a 6 años.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si A fabrica y vende medicamentos falsificados que contienen sustancias tóxicas, comete fabricación y tráfico de sustancias nocivas (Art. 372). Si A vierte desechos tóxicos en el río que abastece de agua a un municipio, comete contaminación de agua potable (Art. 374).
+    </div>
+  </section>
+
+  <!-- TEMA 5: MEDIO AMBIENTE I -->
+  <section id="tema5">
+    <h2>5. Delitos contra el Medio Ambiente - Contaminación (Arts. 328 a 330 C.P.)</h2>
+    <p>Delitos que protegen los ecosistemas, el aire, el agua y el suelo frente a la contaminación y el daño ambiental.</p>
+
+    <h3>📋 Contaminación Atmosférica, Hídrica y del Suelo (Art. 328 C.P.)</h3>
+    <div class="cita">
+      <strong>"El que emita, vierta, deposite, libere, introduzca o extraiga gases, humos, polvos, material particulado, olores, radiaciones, descargas eléctricas, desechos o residuos..."</strong> — Art. 328 Código Penal
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Elemento</th>
+          <th>Descripción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Verbo Rector</strong></td>
+          <td>Emitir, verter, depositar, liberar, introducir o extraer contaminantes</td>
+        </tr>
+        <tr>
+          <td><strong>Objeto Material</strong></td>
+          <td>Aire, agua, suelo, subsuelo</td>
+        </tr>
+        <tr>
+          <td><strong>Bien Jurídico</strong></td>
+          <td>El medio ambiente y los recursos naturales</td>
+        </tr>
+        <tr>
+          <td><strong>Elemento Subjetivo</strong></td>
+          <td>Dolo o culpa (existe modalidad culposa, Art. 329)</td>
+        </tr>
+        <tr>
+          <td><strong>Pena</strong></td>
+          <td>Prisión de 2 a 8 años y multa</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>📋 Tráfico de Residuos Peligrosos (Art. 328A C.P.)</h3>
+    <div class="alerta">
+      <strong> Concepto:</strong> El que importe, exporte, transporte, almacene, deposite, comercialice o disponga de residuos o desechos peligrosos sin cumplir las normas ambientales.
+      <br><br>
+      <strong>Pena:</strong> prisión de 4 a 10 años.
+    </div>
+
+    <div class="ejemplo">
+      <strong> Ejemplo:</strong> Si una fábrica vierte mercurio directamente a un río sin tratamiento, comete contaminación hídrica (Art. 328). Si A transporta basura tóxica desde otro país y la entierra en un bosque colombiano, comete tráfico de residuos peligrosos (Art. 328A).
+    </div>
+  </section>
+
+  <!-- TEMA 6: MEDIO AMBIENTE II -->
+  <section id="tema6">
+    <h2>6. Delitos contra los Recursos Naturales (Arts. 331 a 339 C.P.)</h2>
+    <p>Delitos que protegen la flora, la fauna, los recursos minerales y los ecosistemas estratégicos.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">RECURSOS NATURALES</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Daño en Recursos</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Art. 331</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Explotación Ilícita</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Art. 338</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Caza y Pesca</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Arts. 332-333</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Daño en Recursos Naturales (Art. 331 C.P.)</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🌳</div>
+        <h4>Concepto</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>El que, sin autorización o en desacuerdo con la obtenida, <strong>cause daño a los recursos naturales</strong> o a bienes de uso público.</p>
+          <p><strong>Pena:</strong> prisión de 4 a 12 años.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⛏️</div>
+        <h4>Explotación Ilícita (Art. 338)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>El que realice actividades de <strong>exploración o explotación de yacimientos minerales</strong> u otros recursos naturales sin autorización.</p>
+          <p><strong>Pena:</strong> prisión de 4 a 12 años.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Caza y Pesca Ilegal (Arts. 332 y 333 C.P.)</h3>
+    <div class="alerta">
+      <strong>📌 Conductas típicas:</strong>
+      <ul>
+        <li><strong>Caza ilegal:</strong> Cazar especies vedadas, en épocas de veda, o con métodos prohibidos (dinamita, veneno).</li>
+        <li><strong>Pesca ilegal:</strong> Pescar con explosivos, venenos, o en épocas y zonas vedadas.</li>
+        <li><strong>Tráfico de especies:</strong> Comercializar flora o fauna silvestre protegida.</li>
+      </ul>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si A tala 50 hectáreas de bosque nativo en un páramo sin autorización, comete daño en recursos naturales (Art. 331). Si B extrae oro en un río usando mercurio sin título minero, comete explotación ilícita de yacimiento mineral (Art. 338).
+    </div>
+  </section>
+
+  <!-- TEMA 7: SEGURIDAD VIAL Y COLECTIVA -->
+  <section id="tema7">
+    <h2>7. Delitos contra la Seguridad Colectiva y Vial (Arts. 352, 353 C.P.)</h2>
+    <p>Delitos que protegen la seguridad de las personas en el transporte y la circulación vial.</p>
+
+    <h3> Piratería (Art. 352 C.P.)</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🏴☠️</div>
+        <h4>Concepto</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>El que, en aguas marítimas o fluviales, <strong>aprese, asalte o saquee</strong> una nave o aeronave.</p>
+          <p><strong>Pena:</strong> prisión de 8 a 15 años.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🚗</div>
+        <h4>Obstaculización de Vías (Art. 353)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>El que obstruya o entorpezca vías de comunicación terrestre, aérea o acuática, poniendo en peligro la seguridad de las personas.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3> Peliguridad y Seguridad Vial</h3>
+    <div class="alerta">
+      <strong>📌 Delitos de peligro:</strong>
+      <ul>
+        <li><strong>Peligro mediante sustancias peligrosas (Art. 350):</strong> Liberar sustancias que pongan en peligro la vida o integridad de las personas.</li>
+        <li><strong>Incendio (Art. 351):</strong> Provocar incendios que pongan en peligro bienes o personas.</li>
+        <li><strong>Inundación (Art. 351):</strong> Provocar inundaciones con el mismo fin.</li>
+      </ul>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si A intercepta un barco mercante en el Caribe colombiano y lo saquea, comete piratería (Art. 352). Si B bloquea una carretera nacional con troncos y piedras, poniendo en riesgo a los conductores, comete obstrucción de vías (Art. 353).
+    </div>
+  </section>
+
+  <!-- TEMA 8: COMPARATIVA -->
+  <section id="tema8">
+    <h2>8. Tabla Comparativa Resumen</h2>
+    <p>Comparación sistemática de los delitos contra la seguridad pública y el medio ambiente.</p>
+
+    <h3>📊 Cuadro Comparativo</h3>
+    <div style="overflow-x: auto;">
+      <table>
+        <thead>
+          <tr>
+            <th>Delito</th>
+            <th>Artículo</th>
+            <th>Bien Jurídico</th>
+            <th>Conducta Principal</th>
+            <th>Pena Base</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Terrorismo</strong></td>
+            <td>Art. 343</td>
+            <td>Seguridad pública</td>
+            <td>Inducir, organizar, financiar actos de terror</td>
+            <td>15 a 25 años</td>
+          </tr>
+          <tr>
+            <td><strong>Financiación terrorismo</strong></td>
+            <td>Art. 345</td>
+            <td>Seguridad pública</td>
+            <td>Administrar o suministrar fondos</td>
+            <td>10 a 15 años</td>
+          </tr>
+          <tr>
+            <td><strong>Tráfico estupefacientes</strong></td>
+            <td>Art. 376</td>
+            <td>Salud pública</td>
+            <td>Traficar, fabricar, poseer drogas</td>
+            <td>10 a 25 años</td>
+          </tr>
+          <tr>
+            <td><strong>Tráfico de armas</strong></td>
+            <td>Art. 365</td>
+            <td>Seguridad pública</td>
+            <td>Fabricar, traficar, portar armas</td>
+            <td>6 a 12 años</td>
+          </tr>
+          <tr>
+            <td><strong>Sustancias nocivas</strong></td>
+            <td>Art. 372</td>
+            <td>Salud pública</td>
+            <td>Fabricar o traficar sustancias nocivas</td>
+            <td>4 a 10 años</td>
+          </tr>
+          <tr>
+            <td><strong>Contaminación</strong></td>
+            <td>Art. 328</td>
+            <td>Medio ambiente</td>
+            <td>Verter contaminantes al aire, agua o suelo</td>
+            <td>2 a 8 años</td>
+          </tr>
+          <tr>
+            <td><strong>Explotación ilícita</strong></td>
+            <td>Art. 338</td>
+            <td>Recursos naturales</td>
+            <td>Explotar minerales sin autorización</td>
+            <td>4 a 12 años</td>
+          </tr>
+          <tr>
+            <td><strong>Piratería</strong></td>
+            <td>Art. 352</td>
+            <td>Seguridad colectiva</td>
+            <td>Asaltar naves en aguas marítimas/fluviales</td>
+            <td>8 a 15 años</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>🔍 Claves de Diferenciación</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🔑</div>
+        <h4>Terrorismo vs. Concierto para Delinquir</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <ul>
+            <li><strong>Terrorismo:</strong> busca generar zozobra o terror en la población</li>
+            <li><strong>Concierto:</strong> busca cometer delitos en general, sin necesariamente tener fin terrorista</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🔑</div>
+        <h4>Tráfico de Estupefacientes vs. Porte</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <ul>
+            <li><strong>Tráfico:</strong> comercio, distribución, transporte a gran escala</li>
+            <li><strong>Porte:</strong> llevar sobre la persona dosis por encima del máximo permitido (actividad personal)</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon"></div>
+        <h4>Contaminación vs. Daño en Recursos</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <ul>
+            <li><strong>Contaminación:</strong> verter sustancias nocivas al ambiente</li>
+            <li><strong>Daño en recursos:</strong> destruir o afectar directamente flora, fauna o ecosistemas</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <h3>🎯 Caso Práctico Integrador</h3>
+    <div class="alerta">
+      <strong>🎯 Caso complejo:</strong> Un grupo armado organiza el cultivo de 5 hectáreas de coca (A), la procesa en laboratorios clandestinos (B), la transporta en lanchas rápidas por el río (C), y usa las ganancias para comprar armas de guerra (D) con el fin de cometer atentados contra la fuerza pública (E).
+      <br><br>
+      <strong>📋 Análisis dogmático:</strong>
+      <ul>
+        <li><strong>A:</strong> Tráfico y fabricación de estupefacientes (Art. 376)</li>
+        <li><strong>B:</strong> Tráfico de estupefacientes + contaminación ambiental (si vierte precursores al río, Art. 328)</li>
+        <li><strong>C:</strong> Tráfico agravado (transporte)</li>
+        <li><strong>D:</strong> Tráfico de armas (Art. 365) + Financiación del terrorismo (Art. 345)</li>
+        <li><strong>E:</strong> Terrorismo (Art. 343) + Concierto para delinquir agravado (Art. 340A)</li>
+        <li><strong>Concurso:</strong> Concurso real de delitos (varias acciones independientes)</li>
+      </ul>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Reflexión final:</strong> Los delitos contra la seguridad pública y el medio ambiente protegen bienes jurídicos colectivos y difusos. A diferencia de los delitos tradicionales (que afectan a una víctima específica), estos delitos afectan a la comunidad en su conjunto, por lo que las penas son generalmente más severas y la acción penal es de oficio.
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz">
+    <h2>🎯 Quiz Completo - 40 Preguntas</h2>
+    <p>Pon a prueba tus conocimientos sobre Delitos contra la Seguridad Pública y el Medio Ambiente.</p>
+
+    <div class="quiz-container">
+      <div class="quiz-header">
+        <h3>📊 Tu Progreso</h3>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="quiz-stats">
+          <div class="stat">Respondidas: <strong id="respondidas">0</strong>/40</div>
+          <div class="stat">Correctas: <strong id="correctas">0</strong></div>
+          <div class="stat">Incorrectas: <strong id="incorrectas">0</strong></div>
+          <div class="stat">Porcentaje: <strong id="porcentaje">0</strong>%</div>
+        </div>
+      </div>
+
+      <div class="quiz-tabs">
+        <div class="quiz-tab active" onclick="mostrarSeccion('s1', this)">T1 (5)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s2', this)">T2 (5)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s3', this)">T3 (5)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s4', this)">T4 (5)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s5', this)">T5 (5)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s6', this)">T6 (5)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s7', this)">T7 (5)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s8', this)">T8 (5)</div>
+      </div>
+
+      <!-- SECCIÓN 1: TERRORISMO -->
+      <div class="quiz-section active" id="s1">
+        <div class="pregunta" data-correcta="2" data-tema="1">
+          <span class="pregunta-num">1</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El bien jurídico tutelado en el terrorismo es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 1)">a) La vida</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">b) El patrimonio</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">c) La seguridad pública y la paz social</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">d) La administración pública</div>
+          </div>
+          <div class="explicacion">El terrorismo tutela la seguridad pública y la paz social, al buscar generar zozobra o terror en la población.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="1">
+          <span class="pregunta-num">2</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El elemento subjetivo especial del terrorismo es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 2)">a) Ánimo de lucro</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">b) Fin de promover o mantener estado de zozobra o terror en la población</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">c) Intención de matar</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">d) Culpa grave</div>
+          </div>
+          <div class="explicacion">El terrorismo requiere el fin especial de promover o mantener estado de zozobra o terror en la población.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="1">
+          <span class="pregunta-num">3</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La financiación del terrorismo (Art. 345) se configura cuando:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 3)">a) Se administran, recaudan o suministran fondos para actividades terroristas</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">b) Se comete directamente el acto terrorista</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">c) Se porta un arma de fuego</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">d) Se comete un homicidio</div>
+          </div>
+          <div class="explicacion">La financiación del terrorismo se configura al administrar, recaudar o suministrar fondos para actividades terroristas.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="1">
+          <span class="pregunta-num">4</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La pena base del terrorismo es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 4)">a) 1 a 3 años</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">b) 4 a 8 años</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">c) 10 a 15 años</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">d) 15 a 25 años</div>
+          </div>
+          <div class="explicacion">El terrorismo tiene una pena base de prisión de 15 a 25 años (Art. 343).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="1">
+          <span class="pregunta-num">5</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Si A envía dinero a un grupo armado sabiendo que lo usará para comprar explosivos y cometer atentados, A comete:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 5)">a) Terrorismo</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">b) Concierto para delinquir</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">c) Financiación del terrorismo</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">d) Tráfico de armas</div>
+          </div>
+          <div class="explicacion">Suministrar fondos sabiendo que se usarán para actividades terroristas configura financiación del terrorismo (Art. 345).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 2: ESTUPEFACIENTES -->
+      <div class="quiz-section" id="s2">
+        <div class="pregunta" data-correcta="1" data-tema="2">
+          <span class="pregunta-num">6</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El bien jurídico tutelado en el tráfico de estupefacientes es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 6)">a) La seguridad pública</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">b) La salud pública y la seguridad colectiva</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">c) El patrimonio</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">d) La administración pública</div>
+          </div>
+          <div class="explicacion">El tráfico de estupefacientes tutela la salud pública y la seguridad colectiva.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="2">
+          <span class="pregunta-num">7</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El tráfico de estupefacientes se agrava cuando:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 7)">a) Se utilizan menores de edad o se realiza en instituciones educativas</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">b) La cantidad es mínima</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">c) El agente es particular</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">d) No hay violencia</div>
+          </div>
+          <div class="explicacion">El tráfico de estupefacientes se agrava cuando se utilizan menores, se realiza en instituciones educativas o el agente es servidor público.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="2">
+          <span class="pregunta-num">8</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La pena base del tráfico de estupefacientes es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 8)">a) 1 a 3 años</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">b) 4 a 8 años</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">c) 10 a 25 años</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">d) 15 a 30 años</div>
+          </div>
+          <div class="explicacion">El tráfico de estupefacientes tiene pena base de prisión de 10 a 25 años (Art. 376).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="2">
+          <span class="pregunta-num">9</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El verbo rector del tráfico de estupefacientes incluye:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 9)">a) Solo traficar</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">b) Solo fabricar</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">c) Solo poseer</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">d) Traficar, fabricar, poseer, transportar, transformar, entre otros</div>
+          </div>
+          <div class="explicacion">El Art. 376 tipifica múltiples verbos rectores: traficar, fabricar, poseer, transportar, transformar, elaborar, etc.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="2">
+          <span class="pregunta-num">10</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Si A cultiva 500 plantas de marihuana para procesarlas y venderlas, comete:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 10)">a) Daño en recursos naturales</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">b) Tráfico y fabricación de estupefacientes</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">c) Contaminación ambiental</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">d) Usurpación de tierras</div>
+          </div>
+          <div class="explicacion">Cultivar, procesar y vender drogas configura tráfico y fabricación de estupefacientes (Art. 376).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 3: ARMAS -->
+      <div class="quiz-section" id="s3">
+        <div class="pregunta" data-correcta="2" data-tema="3">
+          <span class="pregunta-num">11</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El tráfico de armas (Art. 365) sanciona:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 11)">a) Solo el porte de armas</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">b) Solo la fabricación</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">c) Fabricar, traficar, portar o comercializar armas sin autorización</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">d) Solo la tenencia legal</div>
+          </div>
+          <div class="explicacion">El Art. 365 sanciona fabricar, traficar, portar o comercializar armas de fuego, municiones o explosivos sin autorización.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="3">
+          <span class="pregunta-num">12</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La diferencia entre porte ilegal y tráfico de armas es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 12)">a) El porte es llevar el arma sobre la persona; el tráfico implica comercialización o distribución</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">b) No hay diferencia</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">c) El tráfico es menos grave</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">d) El porte solo aplica a militares</div>
+          </div>
+          <div class="explicacion">El porte ilegal es llevar el arma sobre la persona; el tráfico implica actividad de comercialización o distribución.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="3">
+          <span class="pregunta-num">13</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El tráfico de armas requiere que la conducta sea:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 13)">a) Con autorización</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">b) Sin autorización legal</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">c) Solo en zona de conflicto</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">d) Solo con armas de guerra</div>
+          </div>
+          <div class="explicacion">El delito requiere que la conducta se realice sin autorización de la autoridad competente.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="3">
+          <span class="pregunta-num">14</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El bien jurídico tutelado en el tráfico de armas es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 14)">a) La salud pública</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">b) El patrimonio</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">c) La administración pública</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">d) La seguridad pública</div>
+          </div>
+          <div class="explicacion">El tráfico de armas tutela la seguridad pública.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="3">
+          <span class="pregunta-num">15</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Si A compra 10 rifles de asalto en el mercado negro para venderlos, comete:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 15)">a) Porte ilegal</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">b) Terrorismo</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">c) Tráfico de armas</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">d) Concierto para delinquir</div>
+          </div>
+          <div class="explicacion">Comprar armas en el mercado negro para venderlas configura tráfico de armas (Art. 365).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 4: SALUD PÚBLICA -->
+      <div class="quiz-section" id="s4">
+        <div class="pregunta" data-correcta="1" data-tema="4">
+          <span class="pregunta-num">16</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La fabricación y tráfico de sustancias nocivas (Art. 372) protege:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 16)">a) El medio ambiente</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">b) La salud pública</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">c) La seguridad vial</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">d) El patrimonio</div>
+          </div>
+          <div class="explicacion">El Art. 372 tutela la salud pública frente a sustancias nocivas para las personas.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="4">
+          <span class="pregunta-num">17</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La propagación de enfermedad (Art. 373) sanciona:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 17)">a) Propagar una enfermedad peligrosa para personas, animales o plantas</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">b) Solo enfermedades humanas</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">c) Solo enfermedades animales</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">d) La falta de vacunación</div>
+          </div>
+          <div class="explicacion">El Art. 373 sanciona la propagación de enfermedades peligrosas para personas, animales o plantas.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="4">
+          <span class="pregunta-num">18</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La contaminación de agua potable (Art. 374) se configura cuando:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 18)">a) Se consume agua sin pagar</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">b) Se desperdicia agua</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">c) Se contamina agua destinada al consumo público o uso agrícola/industrial</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">d) Se corta el suministro de agua</div>
+          </div>
+          <div class="explicacion">La contaminación de agua potable se configura al contaminar aguas destinadas al consumo público o uso agrícola/industrial.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="4">
+          <span class="pregunta-num">19</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Fabricar y vender medicamentos falsificados con sustancias tóxicas configura:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 19)">a) Estafa</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">b) Fraude</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">c) Falsedad material</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">d) Fabricación y tráfico de sustancias nocivas</div>
+          </div>
+          <div class="explicacion">Fabricar y vender medicamentos con sustancias tóxicas configura fabricación y tráfico de sustancias nocivas (Art. 372).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="4">
+          <span class="pregunta-num">20</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Si A vierte desechos tóxicos en el río que abastece de agua a un municipio, comete:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 20)">a) Contaminación atmosférica</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">b) Contaminación de agua potable</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">c) Daño en recursos naturales</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">d) Tráfico de residuos</div>
+          </div>
+          <div class="explicacion">Verter desechos tóxicos en aguas de consumo público configura contaminación de agua potable (Art. 374).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 5: MEDIO AMBIENTE I -->
+      <div class="quiz-section" id="s5">
+        <div class="pregunta" data-correcta="2" data-tema="5">
+          <span class="pregunta-num">21</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La contaminación atmosférica, hídrica y del suelo (Art. 328) protege:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 21)">a) La salud pública únicamente</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">b) El patrimonio del Estado</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">c) El medio ambiente</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">d) La seguridad vial</div>
+          </div>
+          <div class="explicacion">El Art. 328 tutela el medio ambiente (aire, agua, suelo) frente a la contaminación.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="5">
+          <span class="pregunta-num">22</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El tráfico de residuos peligrosos (Art. 328A) sanciona:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 22)">a) Importar, exportar, transportar o disponer de residuos peligrosos sin cumplir normas ambientales</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">b) Solo botar basura en la calle</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">c) Solo reciclar sin permiso</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">d) Solo almacenar basura orgánica</div>
+          </div>
+          <div class="explicacion">El tráfico de residuos peligrosos sanciona importar, exportar, transportar o disponer de residuos peligrosos sin cumplir normas ambientales.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="5">
+          <span class="pregunta-num">23</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La contaminación ambiental puede ser:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 23)">a) Solo dolosa</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">b) Dolosa o culposa</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">c) Solo culposa</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">d) Ni dolosa ni culposa</div>
+          </div>
+          <div class="explicacion">La contaminación ambiental puede ser dolosa (Art. 328) o culposa (Art. 329).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="5">
+          <span class="pregunta-num">24</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Si una fábrica vierte mercurio directamente a un río, comete:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 24)">a) Tráfico de residuos</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">b) Daño en recursos naturales</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">c) Contaminación de agua potable</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">d) Contaminación hídrica (Art. 328)</div>
+          </div>
+          <div class="explicacion">Verter mercurio a un río configura contaminación hídrica (Art. 328).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="5">
+          <span class="pregunta-num">25</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Si A transporta basura tóxica desde otro país y la entierra en un bosque colombiano, comete:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 25)">a) Contrabando</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">b) Contaminación atmosférica</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">c) Tráfico de residuos peligrosos</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">d) Daño en recursos naturales</div>
+          </div>
+          <div class="explicacion">Importar y disponer de basura tóxica sin cumplir normas ambientales configura tráfico de residuos peligrosos (Art. 328A).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 6: MEDIO AMBIENTE II -->
+      <div class="quiz-section" id="s6">
+        <div class="pregunta" data-correcta="1" data-tema="6">
+          <span class="pregunta-num">26</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El daño en recursos naturales (Art. 331) sanciona:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 26)">a) Solo la tala de árboles</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">b) Causar daño a los recursos naturales o bienes de uso público sin autorización</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">c) Solo la caza ilegal</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">d) Solo la pesca ilegal</div>
+          </div>
+          <div class="explicacion">El Art. 331 sanciona causar daño a los recursos naturales o bienes de uso público sin autorización.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="6">
+          <span class="pregunta-num">27</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La explotación ilícita de yacimiento mineral (Art. 338) se configura cuando:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 27)">a) Se realiza exploración o explotación de minerales sin autorización</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">b) Se explota con autorización pero se contamina</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">c) Se explotan minerales en el exterior</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">d) Se comercializan minerales legalmente</div>
+          </div>
+          <div class="explicacion">La explotación ilícita se configura al realizar actividades de exploración o explotación de yacimientos minerales sin autorización.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="6">
+          <span class="pregunta-num">28</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La caza ilegal (Art. 332) se configura cuando:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 28)">a) Se caza con permiso</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">b) Se caza en temporada permitida</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">c) Se cazan especies vedadas, en épocas de veda o con métodos prohibidos</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">d) Se caza animales domésticos</div>
+          </div>
+          <div class="explicacion">La caza ilegal se configura al cazar especies vedadas, en épocas de veda o con métodos prohibidos.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="6">
+          <span class="pregunta-num">29</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El bien jurídico tutelado en los delitos contra los recursos naturales es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 29)">a) La salud pública</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">b) La seguridad pública</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">c) El patrimonio del Estado</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">d) El medio ambiente y los recursos naturales</div>
+          </div>
+          <div class="explicacion">Estos delitos tutelan el medio ambiente y los recursos naturales (flora, fauna, minerales).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="6">
+          <span class="pregunta-num">30</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Si A tala 50 hectáreas de bosque nativo en un páramo sin autorización, comete:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 30)">a) Usurpación de tierras</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">b) Daño en recursos naturales</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">c) Contaminación atmosférica</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">d) Tráfico de residuos</div>
+          </div>
+          <div class="explicacion">Talar bosque nativo sin autorización configura daño en recursos naturales (Art. 331).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 7: SEGURIDAD VIAL Y COLECTIVA -->
+      <div class="quiz-section" id="s7">
+        <div class="pregunta" data-correcta="2" data-tema="7">
+          <span class="pregunta-num">31</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La piratería (Art. 352) se configura cuando:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 31)">a) Se roba un carro</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">b) Se comete un homicidio en el mar</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">c) Se apresa, asalta o saquea una nave o aeronave en aguas marítimas o fluviales</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">d) Se contrabandea mercancía</div>
+          </div>
+          <div class="explicacion">La piratería se configura al apresar, asaltar o saquear una nave o aeronave en aguas marítimas o fluviales.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="7">
+          <span class="pregunta-num">32</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La obstrucción de vías (Art. 353) sanciona:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 32)">a) Obstruir o entorpecer vías de comunicación poniendo en peligro la seguridad</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">b) Solo bloquear carreteras en protesta pacífica</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">c) Solo dañar señales de tránsito</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">d) Solo estacionarse en doble fila</div>
+          </div>
+          <div class="explicacion">La obstrucción de vías sanciona obstruir o entorpecer vías de comunicación poniendo en peligro la seguridad de las personas.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="7">
+          <span class="pregunta-num">33</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El incendio doloso (Art. 351) tutela:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 33)">a) Solo el patrimonio</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">b) La seguridad colectiva</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">c) El medio ambiente</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">d) La salud pública</div>
+          </div>
+          <div class="explicacion">El incendio doloso tutela la seguridad colectiva, al poner en peligro bienes o personas.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="7">
+          <span class="pregunta-num">34</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La pena base de la piratería es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 34)">a) 1 a 3 años</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">b) 4 a 8 años</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">c) 6 a 10 años</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">d) 8 a 15 años</div>
+          </div>
+          <div class="explicacion">La piratería tiene pena base de prisión de 8 a 15 años (Art. 352).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="7">
+          <span class="pregunta-num">35</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Si A intercepta un barco mercante en el Caribe colombiano y lo saquea, comete:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 35)">a) Hurto agravado</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">b) Terrorismo</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">c) Piratería</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">d) Secuestro extorsivo</div>
+          </div>
+          <div class="explicacion">Asaltar y saquear una nave en aguas marítimas configura piratería (Art. 352).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 8: COMPARATIVA -->
+      <div class="quiz-section" id="s8">
+        <div class="pregunta" data-correcta="1" data-tema="8">
+          <span class="pregunta-num">36</span><span class="pregunta-tipo">Comparación</span>
+          <p>La diferencia entre terrorismo y concierto para delinquir es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 36)">a) No hay diferencia</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">b) El terrorismo busca generar zozobra o terror; el concierto busca cometer delitos en general</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">c) El concierto es más grave</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">d) El terrorismo solo aplica a extranjeros</div>
+          </div>
+          <div class="explicacion">El terrorismo busca generar zozobra o terror en la población; el concierto busca cometer delitos en general.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="8">
+          <span class="pregunta-num">37</span><span class="pregunta-tipo">Comparación</span>
+          <p>La diferencia entre tráfico y porte de estupefacientes es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 37)">a) El tráfico implica comercio/distribución; el porte es llevar sobre la persona</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">b) No hay diferencia</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">c) El porte es más grave</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">d) El tráfico solo aplica a drogas sintéticas</div>
+          </div>
+          <div class="explicacion">El tráfico implica comercio, distribución o transporte a gran escala; el porte es llevar la sustancia sobre la persona.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="8">
+          <span class="pregunta-num">38</span><span class="pregunta-tipo">Comparación</span>
+          <p>La diferencia entre contaminación y daño en recursos naturales es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 38)">a) No hay diferencia</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">b) La contaminación es más grave</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">c) La contaminación implica verter sustancias nocivas; el daño implica destruir o afectar directamente flora/fauna</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">d) El daño solo aplica al agua</div>
+          </div>
+          <div class="explicacion">La contaminación implica verter sustancias nocivas; el daño en recursos implica destruir o afectar directamente flora, fauna o ecosistemas.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="8">
+          <span class="pregunta-num">39</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Un grupo armado cultiva coca, la procesa, la transporta y usa las ganancias para comprar armas y cometer atentados. Esto configura:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 39)">a) Solo tráfico de estupefacientes</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">b) Solo terrorismo</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">c) Solo tráfico de armas</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">d) Concurso real de delitos (tráfico de estupefacientes, tráfico de armas, financiación y terrorismo)</div>
+          </div>
+          <div class="explicacion">Las múltiples conductas independientes configuran un concurso real de delitos.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="8">
+          <span class="pregunta-num">40</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los delitos contra la seguridad pública y el medio ambiente protegen:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 40)">a) Bienes jurídicos individuales</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">b) Bienes jurídicos colectivos y difusos</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">c) Solo el patrimonio del Estado</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">d) Solo la libertad individual</div>
+          </div>
+          <div class="explicacion">Estos delitos protegen bienes jurídicos colectivos y difusos (seguridad pública, salud pública, medio ambiente) que afectan a la comunidad en su conjunto.</div>
+        </div>
+      </div>
+
+      <div class="resultado-final" id="resultadoFinal">
+        <h3>🏆 Resultado Final</h3>
+        <div class="puntaje-final" id="puntajeFinal">0/40</div>
+        <p id="mensajeFinal"></p>
+        <div class="desglose-temas" id="desgloseTemas"></div>
+        <button onclick="reiniciarQuiz()" class="btn-reset">🔄 Reiniciar Quiz</button>
+      </div>
+
+      <div style="text-align: center; margin-top: 1.5rem;">
+        <button onclick="verResultadoFinal()">📊 Ver Resultado Final</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>⚖️ Guía Didáctica - Delitos contra la Seguridad Pública y el Medio Ambiente</p>
+  <p>Código Penal Colombiano · Ley 599 de 2000</p>
+  <p style="margin-top: 1rem; opacity: 0.7;">© 2026 - Material educativo interactivo</p>
+</footer>
+
+<script>
+  function toggleAcordeon(header) {
+    header.classList.toggle('active');
+    const content = header.nextElementSibling;
+    content.classList.toggle('active');
+  }
+
+  let respuestas = {};
+  const totalPreguntas = 40;
+
+  function mostrarSeccion(id, tab) {
+    document.querySelectorAll('.quiz-section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.quiz-tab').forEach(t => t.classList.remove('active'));
+    
+    document.getElementById(id).classList.add('active');
+    tab.classList.add('active');
+  }
+
+  function seleccionar(opcion, preguntaNum) {
+    if (respuestas[preguntaNum] !== undefined) return;
+
+    const pregunta = opcion.closest('.pregunta');
+    const opciones = pregunta.querySelectorAll('.opcion');
+    const correcta = parseInt(pregunta.dataset.correcta);
+    const tema = parseInt(pregunta.dataset.tema);
+    const seleccionada = Array.from(opciones).indexOf(opcion);
+    const explicacion = pregunta.querySelector('.explicacion');
+
+    opciones.forEach(o => o.classList.add('disabled'));
+
+    if (seleccionada === correcta) {
+      opcion.classList.add('correcta');
+      respuestas[preguntaNum] = { correcta: true, tema: tema };
+    } else {
+      opcion.classList.add('incorrecta');
+      opciones[correcta].classList.add('correcta');
+      respuestas[preguntaNum] = { correcta: false, tema: tema };
+    }
+
+    explicacion.classList.add('visible');
+    pregunta.classList.add('answered');
+    actualizarEstadisticas();
+  }
+
+  function actualizarEstadisticas() {
+    const total = Object.keys(respuestas).length;
+    const correctas = Object.values(respuestas).filter(r => r.correcta).length;
+    const incorrectas = total - correctas;
+    const porcentaje = total > 0 ? Math.round((correctas / total) * 100) : 0;
+
+    document.getElementById('respondidas').textContent = total;
+    document.getElementById('correctas').textContent = correctas;
+    document.getElementById('incorrectas').textContent = incorrectas;
+    document.getElementById('porcentaje').textContent = porcentaje;
+
+    const progreso = (total / totalPreguntas) * 100;
+    document.getElementById('progressFill').style.width = progreso + '%';
+  }
+
+  function verResultadoFinal() {
+    const total = Object.keys(respuestas).length;
+    
+    if (total < totalPreguntas) {
+      alert(`⚠️ Aún te faltan ${totalPreguntas - total} preguntas por responder.`);
+      return;
+    }
+
+    const correctas = Object.values(respuestas).filter(r => r.correcta).length;
+    const porcentaje = Math.round((correctas / totalPreguntas) * 100);
+
+    const resultadoFinal = document.getElementById('resultadoFinal');
+    resultadoFinal.classList.add('visible');
+
+    document.getElementById('puntajeFinal').textContent = `${correctas}/${totalPreguntas}`;
+
+    let mensaje = '';
+    if (porcentaje === 100) mensaje = '🏆 ¡PERFECTO! Dominas los Delitos contra la Seguridad Pública y el Medio Ambiente.';
+    else if (porcentaje >= 90) mensaje = '🌟 ¡Excelente! Dominio sobresaliente.';
+    else if (porcentaje >= 75) mensaje = '✅ ¡Muy bien! Buen dominio.';
+    else if (porcentaje >= 60) mensaje = '📚 Aceptable. Repasa los temas donde fallaste.';
+    else if (porcentaje >= 40) mensaje = ' Necesitas reforzar varios conceptos.';
+    else mensaje = '🔍 Es necesario estudiar nuevamente todos los temas.';
+
+    document.getElementById('mensajeFinal').textContent = mensaje;
+
+    const temas = {
+      1: { nombre: 'T1: Terrorismo', total: 5, correctas: 0 },
+      2: { nombre: 'T2: Estupefacientes', total: 5, correctas: 0 },
+      3: { nombre: 'T3: Armas', total: 5, correctas: 0 },
+      4: { nombre: 'T4: Salud Pública', total: 5, correctas: 0 },
+      5: { nombre: 'T5: Medio Ambiente I', total: 5, correctas: 0 },
+      6: { nombre: 'T6: Medio Ambiente II', total: 5, correctas: 0 },
+      7: { nombre: 'T7: Seguridad Vial', total: 5, correctas: 0 },
+      8: { nombre: 'T8: Comparativa', total: 5, correctas: 0 }
+    };
+
+    Object.values(respuestas).forEach(r => {
+      if (r.correcta) temas[r.tema].correctas++;
+    });
+
+    const desgloseHTML = Object.values(temas).map(t => {
+      const pct = Math.round((t.correctas / t.total) * 100);
+      return `
+        <div class="desglose-item">
+          <h4>${t.nombre}</h4>
+          <p>${t.correctas}/${t.total} (${pct}%)</p>
+          <div class="mini-bar">
+            <div class="mini-bar-fill" style="width: ${pct}%"></div>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    document.getElementById('desgloseTemas').innerHTML = desgloseHTML;
+    resultadoFinal.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  function reiniciarQuiz() {
+    if (!confirm('¿Reiniciar el quiz?')) return;
+
+    respuestas = {};
+
+    document.querySelectorAll('.opcion').forEach(o => o.classList.remove('correcta', 'incorrecta', 'disabled'));
+    document.querySelectorAll('.explicacion').forEach(e => e.classList.remove('visible'));
+    document.querySelectorAll('.pregunta').forEach(p => p.classList.remove('answered'));
+    document.getElementById('resultadoFinal').classList.remove('visible');
+
+    actualizarEstadisticas();
+    mostrarSeccion('s1', document.querySelector('.quiz-tab'));
+    document.getElementById('quiz').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  document.querySelectorAll('nav a').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+</script>
+
+</body>
+</html>
