@@ -1,0 +1,2489 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parte Especial del Código Penal - Tipos Penales Adicionales</title>
+<style>
+  :root {
+    --primary: #7f1d1d;
+    --secondary: #fbbf24;
+    --accent: #991b1b;
+    --light: #fef3f2;
+    --dark: #1a202c;
+    --success: #38a169;
+    --warning: #d69e2e;
+    --danger: #c53030;
+    --card-bg: #ffffff;
+    --shadow: 0 4px 15px rgba(0,0,0,0.08);
+    --shadow-hover: 0 8px 25px rgba(0,0,0,0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    background: var(--light);
+    color: var(--dark);
+    line-height: 1.7;
+  }
+
+  header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    color: white;
+    padding: 2rem 1rem;
+    text-align: center;
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::before {
+    content: '️';
+    position: absolute;
+    font-size: 15rem;
+    opacity: 0.05;
+    top: -30px;
+    right: -30px;
+  }
+
+  header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: 2px;
+  }
+
+  header p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    font-style: italic;
+  }
+
+  nav {
+    background: var(--dark);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow);
+  }
+
+  nav ul {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0.5rem;
+  }
+
+  nav a {
+    color: var(--light);
+    text-decoration: none;
+    padding: 0.7rem 1rem;
+    margin: 0.2rem;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    transition: all 0.3s;
+    display: block;
+  }
+
+  nav a:hover {
+    background: var(--secondary);
+    color: var(--dark);
+    transform: translateY(-2px);
+  }
+
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+  }
+
+  section {
+    background: var(--card-bg);
+    margin-bottom: 2.5rem;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    border-left: 5px solid var(--secondary);
+    scroll-margin-top: 80px;
+  }
+
+  section h2 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--secondary);
+  }
+
+  section h3 {
+    color: var(--accent);
+    font-size: 1.4rem;
+    margin: 1.5rem 0 0.8rem;
+  }
+
+  section h4 {
+    color: var(--primary);
+    font-size: 1.15rem;
+    margin: 1rem 0 0.5rem;
+  }
+
+  p { margin-bottom: 1rem; text-align: justify; }
+
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.2rem;
+    margin: 1.5rem 0;
+  }
+
+  .card {
+    background: linear-gradient(135deg, #fff 0%, #f9f6ef 100%);
+    border: 2px solid var(--secondary);
+    border-radius: 10px;
+    padding: 1.2rem;
+    transition: all 0.3s;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--primary);
+  }
+
+  .card .icon {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .card h4 {
+    text-align: center;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+  }
+
+  .card .detail {
+    display: none;
+    margin-top: 0.8rem;
+    padding-top: 0.8rem;
+    border-top: 1px dashed var(--secondary);
+    font-size: 0.95rem;
+  }
+
+  .card.active .detail { display: block; }
+
+  .card .hint {
+    text-align: center;
+    color: var(--accent);
+    font-size: 0.85rem;
+    font-style: italic;
+  }
+
+  .mapa-container {
+    background: #fdfbf5;
+    border: 2px dashed var(--secondary);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    overflow-x: auto;
+  }
+
+  .mapa {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 600px;
+  }
+
+  .nodo {
+    background: var(--primary);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+    font-weight: bold;
+    text-align: center;
+    min-width: 180px;
+    box-shadow: var(--shadow);
+  }
+
+  .nodo.central {
+    background: linear-gradient(135deg, var(--secondary), #e0b888);
+    color: var(--dark);
+    font-size: 1.2rem;
+    padding: 1rem 2rem;
+  }
+
+  .nodo.sub {
+    background: var(--accent);
+    font-size: 0.95rem;
+  }
+
+  .linea {
+    width: 3px;
+    height: 25px;
+    background: var(--secondary);
+  }
+
+  .linea-h {
+    height: 3px;
+    background: var(--secondary);
+    width: 80%;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .rama {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 1rem;
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  .rama-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    min-width: 140px;
+  }
+
+  .ejemplo {
+    background: #e6f7ee;
+    border-left: 4px solid var(--success);
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .ejemplo strong { color: var(--success); }
+
+  .alerta {
+    background: #fff8e1;
+    border-left: 4px solid var(--warning);
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .alerta strong { color: var(--warning); }
+
+  .cita {
+    background: #f0f7ff;
+    border-left: 4px solid var(--accent);
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+    color: var(--primary);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    font-size: 0.9rem;
+  }
+
+  th {
+    background: var(--primary);
+    color: white;
+    padding: 0.8rem;
+    text-align: left;
+  }
+
+  td {
+    padding: 0.8rem;
+    border-bottom: 1px solid #eee;
+  }
+
+  tr:nth-child(even) { background: #f9f6ef; }
+  tr:hover { background: #f0ead6; }
+
+  .quiz-container {
+    background: linear-gradient(135deg, #f7f4ed 0%, #fff 100%);
+    padding: 1.5rem;
+    border-radius: 10px;
+    border: 2px solid var(--accent);
+  }
+
+  .quiz-header {
+    background: var(--primary);
+    color: white;
+    padding: 1.2rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .quiz-header h3 {
+    color: white;
+    margin: 0 0 0.5rem 0;
+  }
+
+  .progress-bar {
+    background: rgba(255,255,255,0.2);
+    height: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+  }
+
+  .progress-fill {
+    background: var(--secondary);
+    height: 100%;
+    width: 0%;
+    transition: width 0.4s ease;
+  }
+
+  .quiz-stats {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .stat {
+    background: rgba(255,255,255,0.1);
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    font-size: 0.9rem;
+  }
+
+  .stat strong { color: var(--secondary); }
+
+  .quiz-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    padding: 0.5rem;
+    background: #f0ead6;
+    border-radius: 8px;
+  }
+
+  .quiz-tab {
+    background: white;
+    border: 2px solid var(--accent);
+    color: var(--accent);
+    padding: 0.5rem 0.8rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.75rem;
+    transition: all 0.3s;
+    flex: 1;
+    min-width: 80px;
+    text-align: center;
+  }
+
+  .quiz-tab:hover {
+    background: var(--accent);
+    color: white;
+  }
+
+  .quiz-tab.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+  }
+
+  .quiz-section {
+    display: none;
+  }
+
+  .quiz-section.active {
+    display: block;
+    animation: fadeIn 0.4s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .pregunta {
+    margin-bottom: 1.5rem;
+    padding: 1.2rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    border-left: 4px solid var(--accent);
+    transition: all 0.3s;
+  }
+
+  .pregunta.answered {
+    border-left-color: var(--secondary);
+  }
+
+  .pregunta-num {
+    display: inline-block;
+    background: var(--accent);
+    color: white;
+    padding: 0.2rem 0.7rem;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    margin-right: 0.5rem;
+  }
+
+  .pregunta-tipo {
+    display: inline-block;
+    background: var(--secondary);
+    color: var(--dark);
+    padding: 0.2rem 0.7rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    margin-left: 0.3rem;
+    font-weight: bold;
+  }
+
+  .pregunta p { 
+    font-weight: bold; 
+    color: var(--primary); 
+    margin: 0.8rem 0;
+    text-align: left;
+  }
+
+  .opciones { display: flex; flex-direction: column; gap: 0.5rem; }
+
+  .opcion {
+    padding: 0.7rem 1rem;
+    background: #f9f6ef;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+  }
+
+  .opcion:hover:not(.disabled) {
+    border-color: var(--accent);
+    background: #e8f0f7;
+  }
+
+  .opcion.disabled {
+    cursor: not-allowed;
+    opacity: 0.85;
+  }
+
+  .opcion.correcta {
+    background: #c6f6d5;
+    border-color: var(--success);
+    color: var(--success);
+    font-weight: bold;
+  }
+
+  .opcion.incorrecta {
+    background: #fed7d7;
+    border-color: var(--danger);
+    color: var(--danger);
+  }
+
+  .opcion.correcta::after {
+    content: ' ✓';
+    font-weight: bold;
+  }
+
+  .opcion.incorrecta::after {
+    content: ' ✗';
+    font-weight: bold;
+  }
+
+  .explicacion {
+    margin-top: 0.8rem;
+    padding: 0.8rem;
+    background: #f0f7ff;
+    border-left: 3px solid var(--accent);
+    border-radius: 0 6px 6px 0;
+    font-size: 0.9rem;
+    display: none;
+    font-style: italic;
+  }
+
+  .explicacion.visible {
+    display: block;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .resultado-final {
+    margin-top: 2rem;
+    padding: 2rem;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    color: white;
+    border-radius: 12px;
+    text-align: center;
+    display: none;
+  }
+
+  .resultado-final.visible {
+    display: block;
+    animation: fadeIn 0.5s ease;
+  }
+
+  .resultado-final h3 {
+    color: var(--secondary);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .puntaje-final {
+    font-size: 3rem;
+    font-weight: bold;
+    color: var(--secondary);
+    margin: 1rem 0;
+  }
+
+  .desglose-temas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+    text-align: left;
+  }
+
+  .desglose-item {
+    background: rgba(255,255,255,0.1);
+    padding: 1rem;
+    border-radius: 8px;
+  }
+
+  .desglose-item h4 {
+    color: var(--secondary);
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+  }
+
+  .mini-bar {
+    background: rgba(255,255,255,0.2);
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+  }
+
+  .mini-bar-fill {
+    background: var(--secondary);
+    height: 100%;
+    transition: width 0.6s ease;
+  }
+
+  button {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 1rem;
+    transition: all 0.3s;
+  }
+
+  button:hover {
+    background: var(--secondary);
+    color: var(--dark);
+    transform: translateY(-2px);
+  }
+
+  .btn-reset {
+    background: var(--danger);
+    margin-left: 0.5rem;
+  }
+
+  .btn-reset:hover {
+    background: #9b2c2c;
+    color: white;
+  }
+
+  .acordeon-item {
+    margin-bottom: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .acordeon-header {
+    background: var(--accent);
+    color: white;
+    padding: 1rem;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.3s;
+  }
+
+  .acordeon-header:hover { background: var(--primary); }
+
+  .acordeon-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    background: white;
+  }
+
+  .acordeon-content.active {
+    max-height: 2000px;
+    padding: 1rem;
+  }
+
+  .flecha { transition: transform 0.3s; }
+  .acordeon-header.active .flecha { transform: rotate(180deg); }
+
+  footer {
+    background: var(--dark);
+    color: var(--light);
+    text-align: center;
+    padding: 2rem 1rem;
+    margin-top: 2rem;
+  }
+
+  footer p { margin-bottom: 0.5rem; }
+
+  @media (max-width: 768px) {
+    header h1 { font-size: 1.8rem; }
+    section { padding: 1.2rem; }
+    section h2 { font-size: 1.5rem; }
+    nav a { font-size: 0.7rem; padding: 0.4rem 0.5rem; }
+    .quiz-tab { font-size: 0.65rem; padding: 0.3rem 0.4rem; }
+    table { font-size: 0.8rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>️ Parte Especial - Tipos Penales Adicionales</h1>
+  <p>Código Penal Colombiano (Ley 599/2000) · Guía Didáctica Interactiva II</p>
+</header>
+
+<nav>
+  <ul>
+    <li><a href="#tema1">1. Lesiones</a></li>
+    <li><a href="#tema2">2. Estafa</a></li>
+    <li><a href="#tema3">3. Abuso Confianza</a></li>
+    <li><a href="#tema4">4. Concierto</a></li>
+    <li><a href="#tema5">5. Secuestro</a></li>
+    <li><a href="#tema6">6. Cohecho</a></li>
+    <li><a href="#tema7">7. Prevaricato</a></li>
+    <li><a href="#tema8">8. Falsedad</a></li>
+    <li><a href="#tema9">9. Comparativa</a></li>
+    <li><a href="#quiz">Quiz (40)</a></li>
+  </ul>
+</nav>
+
+<main>
+
+  <section>
+    <h2> Introducción</h2>
+    <p>Bienvenido a la <strong>segunda parte</strong> de la guía sobre la Parte Especial del Código Penal Colombiano. Aquí estudiaremos 8 tipos penales adicionales de alta relevancia práctica: lesiones personales, estafa, abuso de confianza, concierto para delinquir, secuestro extorsivo, cohecho, prevaricato y falsedad ideológica.</p>
+    <div class="alerta">
+      <strong>💡 Cómo usar esta guía:</strong> Haz clic en las tarjetas para ver detalles, despliega los acordeones para información adicional y prueba tus conocimientos con el quiz de 40 preguntas al final.
+    </div>
+  </section>
+
+  <!-- TEMA 1: LESIONES -->
+  <section id="tema1">
+    <h2>1. Lesiones Personales (Arts. 111 a 121)</h2>
+    <p>Las lesiones personales son conductas que causan daño al cuerpo o a la salud de otra persona, sin llegar a privarla de la vida.</p>
+
+    <h3>️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">LESIONES PERSONALES</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Leves (112)</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Graves (111)</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Gravísimas (111)</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Culposas (118)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Tipo Básico - Lesiones Graves (Art. 111 C.P.)</h3>
+    <div class="cita">
+      <strong>"El que cause a otro una enfermedad o un daño físico o psíquico..."</strong> — Art. 111 Código Penal
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Elemento</th>
+          <th>Descripción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Sujeto Activo</strong></td>
+          <td>Común ("El que")</td>
+        </tr>
+        <tr>
+          <td><strong>Sujeto Pasivo</strong></td>
+          <td>Común ("a otro" - persona humana viva)</td>
+        </tr>
+        <tr>
+          <td><strong>Verbo Rector</strong></td>
+          <td>Simple ("causar" enfermedad, daño físico o psíquico)</td>
+        </tr>
+        <tr>
+          <td><strong>Objeto Material</strong></td>
+          <td>Personal (cuerpo o salud de la víctima)</td>
+        </tr>
+        <tr>
+          <td><strong>Bien Jurídico</strong></td>
+          <td>La integridad personal (cuerpo y salud)</td>
+        </tr>
+        <tr>
+          <td><strong>Elemento Subjetivo</strong></td>
+          <td>Dolo (también existe la modalidad culposa, Art. 118)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>📊 Clasificación de las Lesiones</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🩹</div>
+        <h4>Lesiones Leves (Art. 112)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Las que no producen enfermedad ni incapacidad para trabajar, o la producen por menos de 10 días.</p>
+          <p><strong>Pena:</strong> multa de 100 a 300 SMLMV.</p>
+          <p><strong>Procedibilidad:</strong> requiere querella del ofendido.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🏥</div>
+        <h4>Lesiones Graves (Art. 111)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Producen: enfermedad o incapacidad para trabajar por más de 30 días, perturbación funcional permanente de órgano o miembro, daño permanente en la salud, o grave perturbación mental.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚠️</div>
+        <h4>Lesiones Gravísimas (Art. 111)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Producen: deformidad física permanente, perturbación funcional permanente grave, o pérdida de un órgano o miembro.</p>
+          <p><strong>Pena:</strong> prisión de 4 a 10 años.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🎯</div>
+        <h4>Lesiones Culposas (Art. 118)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Cuando las lesiones se causan por culpa (infracción al deber objetivo de cuidado).</p>
+          <p><strong>Ejemplo típico:</strong> accidentes de tránsito.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>⚠️ Circunstancias de Agravación (Art. 113)</h3>
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>🔺 Agravantes de las Lesiones</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <ul>
+          <li>Con empleo de medios que signifiquen grave peligro para la vida</li>
+          <li>Con premeditación y alevosía</li>
+          <li>Con crueldad</li>
+          <li>Contra cónyuge, compañero permanente, ascendiente, descendiente, adoptante, adoptivo o hermano</li>
+          <li>Contra persona en situación de indefensión o inferioridad</li>
+          <li>Contra servidor público en ejercicio de sus funciones</li>
+          <li>Contra menor de edad, mujer embarazada o persona con discapacidad</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>🕊️ Circunstancias de Atenuación (Art. 115)</h3>
+    <div class="alerta">
+      <strong> Perdón del ofendido:</strong> En lesiones leves, el perdón del ofendido extingue la acción penal. En lesiones graves, el perdón puede reducir la pena hasta en la mitad.
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si A golpea a B causándole una fractura que requiere 45 días de incapacidad, comete lesiones graves (Art. 111). Si A golpea a su esposa B, se agrava la pena por ser contra cónyuge (Art. 113). Si A causa lesiones leves a B por un accidente de tránsito, comete lesiones culposas (Art. 118).
+    </div>
+  </section>
+
+  <!-- TEMA 2: ESTAFA -->
+  <section id="tema2">
+    <h2>2. Estafa (Art. 246 C.P.)</h2>
+    <p>La estafa es un delito contra el patrimonio que se comete mediante el engaño para obtener un provecho ilícito.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">ESTAFA</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Engaño</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Artificio/Inducción</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Error</div>
+            <div class="linea"></div>
+            <div class="nodo sub">De la víctima</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Disposición</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Acto patrimonial</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Perjuicio</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Económico</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3> Tipo Básico (Art. 246 C.P.)</h3>
+    <div class="cita">
+      <strong>"El que con ánimo de lucro y valiéndose de algún artificio o engaño, induzca a otro en error..."</strong> — Art. 246 Código Penal
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Elemento</th>
+          <th>Descripción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Sujeto Activo</strong></td>
+          <td>Común ("El que")</td>
+        </tr>
+        <tr>
+          <td><strong>Sujeto Pasivo</strong></td>
+          <td>La persona engañada (titular del patrimonio)</td>
+        </tr>
+        <tr>
+          <td><strong>Verbo Rector</strong></td>
+          <td>Compuesto ("inducir en error mediante artificio o engaño")</td>
+        </tr>
+        <tr>
+          <td><strong>Objeto Material</strong></td>
+          <td>Patrimonial (bienes, derechos, documentos)</td>
+        </tr>
+        <tr>
+          <td><strong>Bien Jurídico</strong></td>
+          <td>El patrimonio económico</td>
+        </tr>
+        <tr>
+          <td><strong>Elemento Subjetivo</strong></td>
+          <td>Dolo + ánimo de lucro</td>
+        </tr>
+        <tr>
+          <td><strong>Elemento Normativo</strong></td>
+          <td>"Artificio o engaño", "ánimo de lucro"</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>🔍 Estructura del Delito (Iter Criminis)</h3>
+    <div class="alerta">
+      <strong>📌 Secuencia obligatoria:</strong>
+      <ol style="margin-top: 0.5rem; padding-left: 1.5rem;">
+        <li><strong>Engaño del autor</strong> (artificio o maniobra fraudulenta)</li>
+        <li><strong>Error de la víctima</strong> (inducido por el engaño)</li>
+        <li><strong>Acto de disposición</strong> (la víctima entrega algo por el error)</li>
+        <li><strong>Perjuicio patrimonial</strong> (daño económico)</li>
+        <li><strong>Enriquecimiento del autor</strong> (ánimo de lucro)</li>
+      </ol>
+    </div>
+
+    <h3>⚠️ Circunstancias de Agravación (Art. 247 C.P.)</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon"></div>
+        <h4>Cuantía</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Cuando el perjuicio exceda de 1.000 SMLMV, la pena aumenta en la mitad.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">👥</div>
+        <h4>Colectividad</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Cuando la estafa se cometa contra una pluralidad indeterminada de personas.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📜</div>
+        <h4>Medios Especiales</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Uso de documentos falsos, simulación de nombre o calidad, o abuso de confianza.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si A vende a B un vehículo diciendo que es del año 2020 (siendo de 2010), induciéndolo en error para que pague un precio mayor, comete estafa. Si A usa documentos falsos para vender un inmueble que no le pertenece, comete estafa agravada.
+    </div>
+  </section>
+
+  <!-- TEMA 3: ABUSO DE CONFIANZA -->
+  <section id="tema3">
+    <h2>3. Abuso de Confianza (Art. 248 C.P.)</h2>
+    <p>El abuso de confianza es el delito que comete quien, en provecho suyo o de un tercero, se apropia de un bien mueble que le fue entregado en confianza.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">ABUSO DE CONFIANZA</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Entrega en confianza</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Apropiación</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Perjuicio</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3> Tipo Básico (Art. 248 C.P.)</h3>
+    <div class="cita">
+      <strong>"El que en provecho suyo o de un tercero, con perjuicio de alguien, se apropie de un bien mueble ajeno que le haya sido entregado..."</strong> — Art. 248 Código Penal
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Elemento</th>
+          <th>Descripción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Sujeto Activo</strong></td>
+          <td>Común (quien recibe el bien en confianza)</td>
+        </tr>
+        <tr>
+          <td><strong>Sujeto Pasivo</strong></td>
+          <td>El dueño o poseedor legítimo del bien</td>
+        </tr>
+        <tr>
+          <td><strong>Verbo Rector</strong></td>
+          <td>Simple ("apropiarse")</td>
+        </tr>
+        <tr>
+          <td><strong>Objeto Material</strong></td>
+          <td>Bien mueble ajeno entregado en confianza</td>
+        </tr>
+        <tr>
+          <td><strong>Bien Jurídico</strong></td>
+          <td>El patrimonio económico</td>
+        </tr>
+        <tr>
+          <td><strong>Elemento Subjetivo</strong></td>
+          <td>Dolo + ánimo de lucro</td>
+        </tr>
+        <tr>
+          <td><strong>Presupuesto</strong></td>
+          <td>Entrega previa del bien en virtud de confianza (depósito, comodato, arrendamiento, mandato)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>🔍 Diferencia con el Hurto</h3>
+    <div class="alerta">
+      <strong>⚖️ Diferencia clave:</strong>
+      <ul>
+        <li><strong>Hurto:</strong> el agente se apodera de un bien que NO le fue entregado (toma sin consentimiento)</li>
+        <li><strong>Abuso de confianza:</strong> el agente ya tiene la tenencia legítima del bien (le fue entregado) y luego se apropia indebidamente</li>
+      </ul>
+    </div>
+
+    <h3>️ Circunstancias de Agravación (Art. 249 C.P.)</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon"></div>
+        <h4>Cuantía Elevada</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Cuando el perjuicio exceda de 1.000 SMLMV.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">👔</div>
+        <h4>Abuso de Cargo</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Cuando el agente abuse de su cargo, profesión u oficio para cometer el delito.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon"></div>
+        <h4>Confianza Especial</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Cuando la confianza proviene de relaciones familiares, laborales o de amistad íntima.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si A le entrega su carro a B para que lo guarde en su garage (depósito), y B lo vende sin autorización, comete abuso de confianza. Si A deja su carro en la calle y B se lo lleva, comete hurto (no hubo entrega en confianza).
+    </div>
+  </section>
+
+  <!-- TEMA 4: CONCIERTO PARA DELINQUIR -->
+  <section id="tema4">
+    <h2>4. Concierto para Delinquir (Art. 340 C.P.)</h2>
+    <p>El concierto para delinquir es un delito contra el orden público que sanciona la asociación de varias personas para cometer delitos.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">CONCIERTO PARA DELINQUIR</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Simple (340)</div>
+            <div class="linea"></div>
+            <div class="nodo sub">2+ personas</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Agravado (340A)</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Organización</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Terrorismo (340B)</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Fines terroristas</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3> Tipo Básico (Art. 340 C.P.)</h3>
+    <div class="cita">
+      <strong>"Varias personas que se concierten para cometer delitos..."</strong> — Art. 340 Código Penal
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Elemento</th>
+          <th>Descripción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Sujeto Activo</strong></td>
+          <td>Plural (varias personas - mínimo 2)</td>
+        </tr>
+        <tr>
+          <td><strong>Sujeto Pasivo</strong></td>
+          <td>La sociedad (orden público)</td>
+        </tr>
+        <tr>
+          <td><strong>Verbo Rector</strong></td>
+          <td>Simple ("concertarse")</td>
+        </tr>
+        <tr>
+          <td><strong>Objeto Material</strong></td>
+          <td>Inmaterial (acuerdo criminal)</td>
+        </tr>
+        <tr>
+          <td><strong>Bien Jurídico</strong></td>
+          <td>El orden público y la seguridad ciudadana</td>
+        </tr>
+        <tr>
+          <td><strong>Elemento Subjetivo</strong></td>
+          <td>Dolo + propósito de cometer delitos</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>📊 Modalidades del Concierto</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🤝</div>
+        <h4>Concierto Simple (Art. 340)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Varias personas se conciertan para cometer delitos.</p>
+          <p><strong>Pena:</strong> prisión de 4 a 8 años y multa.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🏢</div>
+        <h4>Concierto Agravado (Art. 340A)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Cuando el concierto se refiere a delitos graves (homicidio, extorsión, secuestro, tráfico de drogas, etc.) o cuando la organización tiene estructura jerárquica.</p>
+          <p><strong>Pena:</strong> prisión de 6 a 12 años.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon"></div>
+        <h4>Concierto Terrorista (Art. 340B)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Cuando el concierto tiene fines terroristas o se vincula a organizaciones terroristas.</p>
+          <p><strong>Pena:</strong> prisión de 8 a 15 años.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>🔍 Diferencia con la Coautoría</h3>
+    <div class="alerta">
+      <strong>⚖️ Diferencia clave:</strong>
+      <ul>
+        <li><strong>Coautoría:</strong> varias personas ejecutan un delito específico (unidad de acción)</li>
+        <li><strong>Concierto:</strong> varias personas se asocian para cometer delitos en general (acuerdo previo, delito autónomo)</li>
+      </ul>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si A, B y C se reúnen para planear y ejecutar un robo a un banco, son coautores del hurto agravado. Si A, B, C, D y E forman una organización criminal para cometer robos, extorsiones y secuestros de manera sistemática, cometen concierto para delinquir agravado (Art. 340A).
+    </div>
+  </section>
+
+  <!-- TEMA 5: SECUESTRO -->
+  <section id="tema5">
+    <h2>5. Secuestro Simple y Extorsivo (Arts. 169 y 170 C.P.)</h2>
+    <p>El secuestro es un delito contra la libertad individual que consiste en privar a una persona de su libertad ambulatoria.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">SECUESTRO</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Simple (169)</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Privación de libertad</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Extorsivo (170)</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Con fin extorsivo</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Secuestro Simple (Art. 169 C.P.)</h3>
+    <div class="cita">
+      <strong>"El que prive a otro de su libertad..."</strong> — Art. 169 Código Penal
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Elemento</th>
+          <th>Descripción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Sujeto Activo</strong></td>
+          <td>Común</td>
+        </tr>
+        <tr>
+          <td><strong>Sujeto Pasivo</strong></td>
+          <td>La persona privada de su libertad</td>
+        </tr>
+        <tr>
+          <td><strong>Verbo Rector</strong></td>
+          <td>Simple ("privar de libertad")</td>
+        </tr>
+        <tr>
+          <td><strong>Objeto Material</strong></td>
+          <td>Personal (cuerpo de la víctima)</td>
+        </tr>
+        <tr>
+          <td><strong>Bien Jurídico</strong></td>
+          <td>La libertad individual</td>
+        </tr>
+        <tr>
+          <td><strong>Elemento Subjetivo</strong></td>
+          <td>Dolo</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>📋 Secuestro Extorsivo (Art. 170 C.P.)</h3>
+    <div class="alerta">
+      <strong>📌 Elemento diferencial:</strong> El secuestro extorsivo requiere un <strong>fin extorsivo</strong>: obtener provecho económico, exigir condiciones, o forzar a la víctima o a un tercero a hacer, tolerar u omitir algo.
+    </div>
+
+    <h3>⚠️ Circunstancias de Agravación (Art. 170 C.P.)</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⏱️</div>
+        <h4>Duración</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Cuando el secuestro se prolongue por más de 30 días.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">👶</div>
+        <h4>Víctimas Especiales</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Cuando la víctima sea menor de edad, adulto mayor, mujer embarazada o persona con discapacidad.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">👮</div>
+        <h4>Servidor Público</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Cuando la víctima sea servidor público en ejercicio de sus funciones.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">💀</div>
+        <h4>Resultado Grave</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Cuando se cause la muerte o lesiones graves a la víctima.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>️ Causales de Exención de Pena (Art. 170 inc. final)</h3>
+    <div class="alerta">
+      <strong>📌 Liberación voluntaria:</strong> Si el secuestrador libera voluntariamente a la víctima sin haber logrado su propósito y sin causarle lesiones, puede obtener exención o reducción de la pena.
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si A encierra a B en un sótano sin pedir nada a cambio, comete secuestro simple (Art. 169). Si A encierra a B y llama a su familia exigiendo $500 millones por su liberación, comete secuestro extorsivo (Art. 170). Si B es menor de 12 años, la pena se agrava.
+    </div>
+  </section>
+
+  <!-- TEMA 6: COHECHO -->
+  <section id="tema6">
+    <h2>6. Cohecho (Arts. 405 a 408 C.P.)</h2>
+    <p>El cohecho es un delito contra la administración pública que consiste en dar, ofrecer o recibir dádivas para que el servidor público realice, omita o retarde un acto propio de sus funciones.</p>
+
+    <h3>️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">COHECHO</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Propio (405)</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Acto legal</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Impropio (406)</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Acto contrario al deber</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Por dar/ofrecer (407)</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Particular</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Modalidades del Cohecho</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon"></div>
+        <h4>Cohecho Propio (Art. 405)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>El servidor público recibe dádivas para realizar un <strong>acto propio de sus funciones</strong> (acto legal).</p>
+          <p><strong>Sujeto activo:</strong> servidor público (delito especial).</p>
+          <p><strong>Pena:</strong> prisión de 4 a 8 años.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚠️</div>
+        <h4>Cohecho Impropio (Art. 406)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>El servidor público recibe dádivas para realizar un <strong>acto contrario a sus deberes</strong> o abstenerse de realizar uno.</p>
+          <p><strong>Pena:</strong> prisión de 5 a 10 años (más grave).</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon"></div>
+        <h4>Cohecho por Dar u Ofrecer (Art. 407)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>El particular que da u ofrece dádivas al servidor público.</p>
+          <p><strong>Sujeto activo:</strong> particular (cualquier persona).</p>
+          <p><strong>Pena:</strong> prisión de 2 a 5 años.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>🔍 Elementos Comunes</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Elemento</th>
+          <th>Descripción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Bien Jurídico</strong></td>
+          <td>La administración pública (probidad y decoro de la función pública)</td>
+        </tr>
+        <tr>
+          <td><strong>Verbo Rector</strong></td>
+          <td>"Recibir", "dar" u "ofrecer" dádivas, promesas o beneficios</td>
+        </tr>
+        <tr>
+          <td><strong>Elemento Subjetivo</strong></td>
+          <td>Dolo (conocimiento y voluntad del intercambio)</td>
+        </tr>
+        <tr>
+          <td><strong>Elemento Normativo</strong></td>
+          <td>"Servidor público", "acto propio de sus funciones", "dádiva"</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si un juez recibe $10 millones de un abogado para fallar a favor de su cliente en un caso legal (acto propio de sus funciones), comete cohecho propio (Art. 405). Si el juez recibe el dinero para absolver a un culpable (acto contrario a sus deberes), comete cohecho impropio (Art. 406). El abogado que ofrece el dinero comete cohecho por dar u ofrecer (Art. 407).
+    </div>
+  </section>
+
+  <!-- TEMA 7: PREVARICATO -->
+  <section id="tema7">
+    <h2>7. Prevaricato (Arts. 413 a 414 C.P.)</h2>
+    <p>El prevaricato es un delito contra la administración de justicia que comete el servidor público (juez, fiscal, etc.) que profiere una resolución contraria a la ley.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">PREVARICATO</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Por Acción (413)</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Resolución contraria a ley</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Por Omisión (414)</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Retardo injustificado</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Prevaricato por Acción (Art. 413 C.P.)</h3>
+    <div class="cita">
+      <strong>"El servidor público profiere resolución contraria a la ley..."</strong> — Art. 413 Código Penal
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Elemento</th>
+          <th>Descripción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Sujeto Activo</strong></td>
+          <td>Calificado: servidor público con función jurisdiccional o administrativa (juez, fiscal, etc.)</td>
+        </tr>
+        <tr>
+          <td><strong>Sujeto Pasivo</strong></td>
+          <td>La administración de justicia y el Estado</td>
+        </tr>
+        <tr>
+          <td><strong>Verbo Rector</strong></td>
+          <td>Simple ("proferir" resolución contraria a la ley)</td>
+        </tr>
+        <tr>
+          <td><strong>Objeto Material</strong></td>
+          <td>Inmaterial (la resolución judicial o administrativa)</td>
+        </tr>
+        <tr>
+          <td><strong>Bien Jurídico</strong></td>
+          <td>La administración de justicia</td>
+        </tr>
+        <tr>
+          <td><strong>Elemento Subjetivo</strong></td>
+          <td>Dolo (conocimiento de la contrariedad a la ley)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>📋 Prevaricato por Omisión (Art. 414 C.P.)</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⏸️</div>
+        <h4>Retardo Injustificado</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>El servidor público retarda injustificadamente la emisión de un acto propio de sus funciones.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🚫</div>
+        <h4>Negativa Injustificada</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>El servidor público se niega injustificadamente a emitir un acto propio de sus funciones.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>️ Circunstancias de Agravación</h3>
+    <div class="alerta">
+      <strong>📌 Agravantes:</strong>
+      <ul>
+        <li>Cuando la resolución contraria a la ley cause grave perjuicio patrimonial</li>
+        <li>Cuando se profiera en proceso penal y cause privación injusta de la libertad</li>
+        <li>Cuando medie dádiva o promesa remuneratoria (concurso con cohecho)</li>
+      </ul>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si un juez absuelve a un acusado sabiendo que es culpable y que las pruebas lo demuestran, comete prevaricato por acción (Art. 413). Si un juez se niega a emitir una tutela durante 6 meses sin justificación, comete prevaricato por omisión (Art. 414).
+    </div>
+  </section>
+
+  <!-- TEMA 8: FALSEDAD IDEOLÓGICA -->
+  <section id="tema8">
+    <h2>8. Falsedad Ideológica (Art. 289 C.P.)</h2>
+    <p>La falsedad ideológica es el delito que comete quien, en documento público o privado, inserta o hace insertar declaraciones falsas concernientes a un hecho que la ley exige que sea verdadero.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">FALSEDAD</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Material (286)</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Alteración del documento</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Ideológica (289)</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Contenido falso</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Personal (290)</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Suplantación</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Tipo Básico (Art. 289 C.P.)</h3>
+    <div class="cita">
+      <strong>"El que, en documento público o privado, inserte o haga insertar declaraciones falsas concernientes a un hecho que la ley exige que sea verdadero..."</strong> — Art. 289 Código Penal
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Elemento</th>
+          <th>Descripción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Sujeto Activo</strong></td>
+          <td>Común (cualquier persona que intervenga en la formación del documento)</td>
+        </tr>
+        <tr>
+          <td><strong>Sujeto Pasivo</strong></td>
+          <td>La fe pública y la administración de justicia</td>
+        </tr>
+        <tr>
+          <td><strong>Verbo Rector</strong></td>
+          <td>Compuesto ("insertar" o "hacer insertar" declaraciones falsas)</td>
+        </tr>
+        <tr>
+          <td><strong>Objeto Material</strong></td>
+          <td>Documento público o privado</td>
+        </tr>
+        <tr>
+          <td><strong>Bien Jurídico</strong></td>
+          <td>La fe pública</td>
+        </tr>
+        <tr>
+          <td><strong>Elemento Subjetivo</strong></td>
+          <td>Dolo</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3> Diferencia con Falsedad Material</h3>
+    <div class="alerta">
+      <strong>⚖️ Diferencia clave:</strong>
+      <ul>
+        <li><strong>Falsedad material (Art. 286):</strong> se altera el documento físicamente (tinta, firmas, sellos)</li>
+        <li><strong>Falsedad ideológica (Art. 289):</strong> el documento es auténtico en su forma, pero su <strong>contenido es falso</strong> (declaraciones mentirosas)</li>
+      </ul>
+    </div>
+
+    <h3> Falsedad Personal (Art. 290 C.P.)</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🎭</div>
+        <h4>Suplantación</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Fingir ser otra persona o atribuirse falsamente una calidad o condición para la celebración de un acto jurídico.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>⚠️ Circunstancias de Agravación (Art. 291 C.P.)</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon"></div>
+        <h4>Documento Público</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Cuando la falsedad recae sobre documento público, la pena es mayor que en documento privado.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">️</div>
+        <h4>Servidor Público</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Cuando el agente es servidor público en ejercicio de sus funciones.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">💰</div>
+        <h4>Perjuicio Patrimonial</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Cuando la falsedad causa grave perjuicio patrimonial a terceros.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si un notario inscribe en una escritura pública que un inmueble está libre de gravámenes sabiendo que tiene una hipoteca, comete falsedad ideológica en documento público (Art. 289 agravado). Si A se hace pasar por B para firmar un contrato, comete falsedad personal (Art. 290).
+    </div>
+  </section>
+
+  <!-- TEMA 9: TABLA COMPARATIVA -->
+  <section id="tema9">
+    <h2>9. Tabla Comparativa Resumen</h2>
+    <p>Comparación sistemática de los 8 tipos penales adicionales analizados.</p>
+
+    <h3>📊 Cuadro Comparativo</h3>
+    <div style="overflow-x: auto;">
+      <table>
+        <thead>
+          <tr>
+            <th>Tipo Penal</th>
+            <th>Artículo</th>
+            <th>Verbo Rector</th>
+            <th>Sujeto Activo</th>
+            <th>Bien Jurídico</th>
+            <th>Agravantes Principales</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Lesiones</strong></td>
+            <td>Arts. 111-121</td>
+            <td>Causar enfermedad/daño</td>
+            <td>Común</td>
+            <td>Integridad personal</td>
+            <td>Contra cónyuge, menor, servidor público</td>
+          </tr>
+          <tr>
+            <td><strong>Estafa</strong></td>
+            <td>Art. 246</td>
+            <td>Inducir en error</td>
+            <td>Común</td>
+            <td>Patrimonio económico</td>
+            <td>Cuantía, colectividad, documentos falsos</td>
+          </tr>
+          <tr>
+            <td><strong>Abuso de Confianza</strong></td>
+            <td>Art. 248</td>
+            <td>Apropiarse</td>
+            <td>Común (tenedor legítimo)</td>
+            <td>Patrimonio económico</td>
+            <td>Cuantía, abuso de cargo, confianza especial</td>
+          </tr>
+          <tr>
+            <td><strong>Concierto para Delinquir</strong></td>
+            <td>Art. 340</td>
+            <td>Concertarse</td>
+            <td>Plural (mínimo 2)</td>
+            <td>Orden público</td>
+            <td>Organización, fines terroristas</td>
+          </tr>
+          <tr>
+            <td><strong>Secuestro Extorsivo</strong></td>
+            <td>Art. 170</td>
+            <td>Privar de libertad</td>
+            <td>Común</td>
+            <td>Libertad individual</td>
+            <td>Duración, víctimas especiales, resultado grave</td>
+          </tr>
+          <tr>
+            <td><strong>Cohecho</strong></td>
+            <td>Arts. 405-407</td>
+            <td>Recibir/dar dádivas</td>
+            <td>Calificado (servidor público)</td>
+            <td>Administración pública</td>
+            <td>Acto contrario al deber (impropio)</td>
+          </tr>
+          <tr>
+            <td><strong>Prevaricato</strong></td>
+            <td>Arts. 413-414</td>
+            <td>Proferir/retardar</td>
+            <td>Calificado (juez/fiscal)</td>
+            <td>Administración de justicia</td>
+            <td>Privación de libertad, dádiva</td>
+          </tr>
+          <tr>
+            <td><strong>Falsedad Ideológica</strong></td>
+            <td>Art. 289</td>
+            <td>Insertar declaraciones falsas</td>
+            <td>Común</td>
+            <td>Fe pública</td>
+            <td>Documento público, servidor público</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>🔍 Claves de Diferenciación</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🔑</div>
+        <h4>Hurto vs. Estafa vs. Abuso de Confianza</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <ul>
+            <li><strong>Hurto:</strong> apoderamiento sin consentimiento</li>
+            <li><strong>Estafa:</strong> apoderamiento mediante engaño (la víctima entrega por error)</li>
+            <li><strong>Abuso de confianza:</strong> apoderamiento de bien ya entregado en confianza</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon"></div>
+        <h4>Cohecho vs. Prevaricato</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <ul>
+            <li><strong>Cohecho:</strong> intercambio de dádivas por un acto (corrupción)</li>
+            <li><strong>Prevaricato:</strong> resolución contraria a la ley (independiente de dádivas)</li>
+          </ul>
+          <p>Si hay dádiva + resolución contraria a ley: concurso de cohecho y prevaricato.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🔑</div>
+        <h4>Falsedad Material vs. Ideológica</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <ul>
+            <li><strong>Material:</strong> alteración física del documento (firma, sello)</li>
+            <li><strong>Ideológica:</strong> documento auténtico pero con contenido falso</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <h3> Caso Práctico Integrador</h3>
+    <div class="alerta">
+      <strong>🎯 Caso complejo:</strong> A (juez) recibe $50 millones de B (abogado) para absolver a C (acusado de homicidio). A profiere sentencia absolutoria sabiendo que C es culpable. B usó documentos falsos para acreditar su representación.
+      <br><br>
+      <strong>📋 Análisis dogmático:</strong>
+      <ul>
+        <li><strong>Contra A:</strong> Cohecho impropio (Art. 406) + Prevaricato por acción (Art. 413) → concurso real</li>
+        <li><strong>Contra B:</strong> Cohecho por dar (Art. 407) + Falsedad ideológica (Art. 289)</li>
+        <li><strong>Contra C:</strong> Si participó en el acuerdo, concierto para delinquir (Art. 340)</li>
+      </ul>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Reflexión final:</strong> La descomposición dogmática de los tipos penales permite identificar con precisión cada elemento, facilitando la subsunción del caso concreto, la correcta aplicación de agravantes o atenuantes, y la determinación del concurso de delitos cuando hay múltiples conductas.
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz">
+    <h2>🎯 Quiz Completo - 40 Preguntas</h2>
+    <p>Pon a prueba tus conocimientos sobre los tipos penales adicionales.</p>
+
+    <div class="quiz-container">
+      <div class="quiz-header">
+        <h3>📊 Tu Progreso</h3>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="quiz-stats">
+          <div class="stat">Respondidas: <strong id="respondidas">0</strong>/40</div>
+          <div class="stat">Correctas: <strong id="correctas">0</strong></div>
+          <div class="stat">Incorrectas: <strong id="incorrectas">0</strong></div>
+          <div class="stat">Porcentaje: <strong id="porcentaje">0</strong>%</div>
+        </div>
+      </div>
+
+      <div class="quiz-tabs">
+        <div class="quiz-tab active" onclick="mostrarSeccion('s1', this)">T1 (5)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s2', this)">T2 (5)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s3', this)">T3 (5)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s4', this)">T4 (5)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s5', this)">T5 (5)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s6', this)">T6 (5)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s7', this)">T7 (5)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s8', this)">T8 (5)</div>
+      </div>
+
+      <!-- SECCIÓN 1: LESIONES -->
+      <div class="quiz-section active" id="s1">
+        <div class="pregunta" data-correcta="2" data-tema="1">
+          <span class="pregunta-num">1</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El bien jurídico tutelado en las lesiones personales es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 1)">a) La vida</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">b) La libertad</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">c) La integridad personal (cuerpo y salud)</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">d) El patrimonio</div>
+          </div>
+          <div class="explicacion">Las lesiones personales tutelan la integridad personal, es decir, el cuerpo y la salud de la víctima.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="1">
+          <span class="pregunta-num">2</span><span class="pregunta-tipo">Clasificación</span>
+          <p>Las lesiones que producen incapacidad para trabajar por más de 30 días son:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 2)">a) Leves</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">b) Graves</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">c) Gravísimas</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">d) Culposas</div>
+          </div>
+          <div class="explicacion">Las lesiones graves son las que producen enfermedad o incapacidad para trabajar por más de 30 días (Art. 111).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="1">
+          <span class="pregunta-num">3</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Las lesiones culposas (Art. 118) se configuran cuando:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 3)">a) Las lesiones se causan por infracción al deber objetivo de cuidado</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">b) Hay intención de lesionar</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">c) Se produce la muerte</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">d) La víctima perdona al agresor</div>
+          </div>
+          <div class="explicacion">Las lesiones culposas se configuran cuando se causan por culpa (infracción al deber de cuidado), como en accidentes de tránsito.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="1">
+          <span class="pregunta-num">4</span><span class="pregunta-tipo">Clasificación</span>
+          <p>Las lesiones que producen deformidad física permanente son:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 4)">a) Leves</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">b) Graves</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">c) Culposas</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">d) Gravísimas</div>
+          </div>
+          <div class="explicacion">Las lesiones gravísimas producen deformidad física permanente, perturbación funcional permanente grave, o pérdida de un órgano.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="1">
+          <span class="pregunta-num">5</span><span class="pregunta-tipo">Conceptual</span>
+          <p>En lesiones leves, el perdón del ofendido:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 5)">a) No tiene efecto</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">b) Reduce la pena a la mitad</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">c) Extingue la acción penal</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">d) Solo aplica en lesiones graves</div>
+          </div>
+          <div class="explicacion">En lesiones leves, el perdón del ofendido extingue la acción penal (Art. 115).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 2: ESTAFA -->
+      <div class="quiz-section" id="s2">
+        <div class="pregunta" data-correcta="1" data-tema="2">
+          <span class="pregunta-num">6</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El elemento subjetivo especial de la estafa es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 6)">a) Ánimo de piedad</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">b) Ánimo de lucro</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">c) Ánimo de matar</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">d) Ánimo de constreñir</div>
+          </div>
+          <div class="explicacion">La estafa requiere dolo más el ánimo de lucro (propósito de obtener provecho económico).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="2">
+          <span class="pregunta-num">7</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La estructura del delito de estafa exige en primer lugar:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 7)">a) Engaño del autor mediante artificio o maniobra fraudulenta</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">b) Error espontáneo de la víctima</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">c) Apropiación directa</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">d) Violencia sobre la víctima</div>
+          </div>
+          <div class="explicacion">El primer elemento de la estafa es el engaño del autor mediante artificio o maniobra fraudulenta.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="2">
+          <span class="pregunta-num">8</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La estafa se agrava cuando:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 8)">a) El perjuicio es menor a 100 SMLMV</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">b) Se comete entre familiares</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">c) Se comete contra una pluralidad indeterminada de personas</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">d) La víctima perdona al autor</div>
+          </div>
+          <div class="explicacion">La estafa se agrava cuando se comete contra una pluralidad indeterminada de personas (Art. 247).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="2">
+          <span class="pregunta-num">9</span><span class="pregunta-tipo">Comparación</span>
+          <p>La diferencia entre hurto y estafa es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 9)">a) No hay diferencia</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">b) El hurto requiere violencia</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">c) La estafa es más grave siempre</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">d) En la estafa la víctima entrega el bien por error; en el hurto se apodera sin consentimiento</div>
+          </div>
+          <div class="explicacion">En la estafa la víctima entrega el bien inducida en error; en el hurto el agente se apodera sin consentimiento.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="2">
+          <span class="pregunta-num">10</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El verbo rector de la estafa es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 10)">a) Apoderarse</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">b) Inducir en error</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">c) Constreñir</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">d) Apropiarse</div>
+          </div>
+          <div class="explicacion">El verbo rector de la estafa es "inducir en error" mediante artificio o engaño.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 3: ABUSO DE CONFIANZA -->
+      <div class="quiz-section" id="s3">
+        <div class="pregunta" data-correcta="2" data-tema="3">
+          <span class="pregunta-num">11</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El presupuesto del abuso de confianza es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 11)">a) La violencia sobre la víctima</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">b) El engaño</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">c) La entrega previa del bien en virtud de confianza</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">d) La calidad de servidor público</div>
+          </div>
+          <div class="explicacion">El abuso de confianza requiere que el bien haya sido entregado previamente al agente en virtud de confianza.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="3">
+          <span class="pregunta-num">12</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La diferencia principal entre hurto y abuso de confianza es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 12)">a) En el abuso de confianza el agente ya tiene la tenencia legítima del bien</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">b) El hurto es más grave</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">c) El abuso de confianza solo aplica a inmuebles</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">d) No hay diferencia</div>
+          </div>
+          <div class="explicacion">En el abuso de confianza el agente ya tiene la tenencia legítima del bien; en el hurto se apodera sin haber recibido el bien.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="3">
+          <span class="pregunta-num">13</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El abuso de confianza se agrava cuando:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 13)">a) El bien es inmueble</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">b) El agente abusa de su cargo, profesión u oficio</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">c) La víctima es menor</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">d) Se usa violencia</div>
+          </div>
+          <div class="explicacion">El abuso de confianza se agrava cuando el agente abusa de su cargo, profesión u oficio (Art. 249).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="3">
+          <span class="pregunta-num">14</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Si A le entrega su carro a B para que lo guarde, y B lo vende, comete:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 14)">a) Hurto</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">b) Estafa</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">c) Peculado</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">d) Abuso de confianza</div>
+          </div>
+          <div class="explicacion">B ya tenía la tenencia legítima del carro (entregado en depósito) y se apropió indebidamente: abuso de confianza.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="3">
+          <span class="pregunta-num">15</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El bien jurídico tutelado en el abuso de confianza es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 15)">a) La fe pública</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">b) La libertad</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">c) El patrimonio económico</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">d) La administración pública</div>
+          </div>
+          <div class="explicacion">El abuso de confianza tutela el patrimonio económico, al igual que el hurto y la estafa.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 4: CONCIERTO -->
+      <div class="quiz-section" id="s4">
+        <div class="pregunta" data-correcta="1" data-tema="4">
+          <span class="pregunta-num">16</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El concierto para delinquir requiere mínimo:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 16)">a) 1 persona</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">b) 2 personas</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">c) 5 personas</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">d) 10 personas</div>
+          </div>
+          <div class="explicacion">El concierto para delinquir requiere la concertación de varias personas (mínimo 2) para cometer delitos.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="4">
+          <span class="pregunta-num">17</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El bien jurídico tutelado en el concierto para delinquir es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 17)">a) El orden público y la seguridad ciudadana</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">b) El patrimonio</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">c) La vida</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">d) La libertad</div>
+          </div>
+          <div class="explicacion">El concierto para delinquir tutela el orden público y la seguridad ciudadana.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="4">
+          <span class="pregunta-num">18</span><span class="pregunta-tipo">Comparación</span>
+          <p>La diferencia entre coautoría y concierto para delinquir es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 18)">a) No hay diferencia</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">b) La coautoría requiere más personas</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">c) La coautoría ejecuta un delito específico; el concierto es acuerdo para cometer delitos en general</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">d) El concierto solo aplica a delitos culposos</div>
+          </div>
+          <div class="explicacion">La coautoría ejecuta un delito específico; el concierto es un acuerdo previo para cometer delitos en general (delito autónomo).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="4">
+          <span class="pregunta-num">19</span><span class="pregunta-tipo">Clasificación</span>
+          <p>El concierto para delinquir agravado (Art. 340A) se configura cuando:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 19)">a) Hay solo 2 personas</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">b) Se comete un solo delito</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">c) Los participantes son familiares</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">d) Se refiere a delitos graves o hay estructura jerárquica</div>
+          </div>
+          <div class="explicacion">El concierto agravado se configura cuando se refiere a delitos graves o cuando la organización tiene estructura jerárquica.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="4">
+          <span class="pregunta-num">20</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El concierto terrorista (Art. 340B) requiere:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 20)">a) Solo 2 personas</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">b) Fines terroristas o vinculación a organizaciones terroristas</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">c) Uso de armas de fuego</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">d) Daño patrimonial</div>
+          </div>
+          <div class="explicacion">El concierto terrorista requiere que el concierto tenga fines terroristas o se vincule a organizaciones terroristas.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 5: SECUESTRO -->
+      <div class="quiz-section" id="s5">
+        <div class="pregunta" data-correcta="2" data-tema="5">
+          <span class="pregunta-num">21</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El bien jurídico tutelado en el secuestro es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 21)">a) El patrimonio</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">b) La vida</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">c) La libertad individual</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">d) La integridad personal</div>
+          </div>
+          <div class="explicacion">El secuestro tutela la libertad individual (libertad ambulatoria) de la víctima.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="5">
+          <span class="pregunta-num">22</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El secuestro extorsivo se diferencia del simple por:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 22)">a) Requerir un fin extorsivo (obtener provecho o exigir condiciones)</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">b) Ser más breve</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">c) No requerir dolo</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">d) Ser culposo</div>
+          </div>
+          <div class="explicacion">El secuestro extorsivo requiere un fin extorsivo: obtener provecho económico, exigir condiciones, o forzar a hacer/tolerar/omitir algo.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="5">
+          <span class="pregunta-num">23</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El secuestro se agrava cuando la víctima es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 23)">a) Mayor de 60 años sin más</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">b) Menor de edad, adulto mayor, mujer embarazada o persona con discapacidad</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">c) Servidor público retirado</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">d) Extranjero</div>
+          </div>
+          <div class="explicacion">El secuestro se agrava cuando la víctima es menor de edad, adulto mayor, mujer embarazada o persona con discapacidad.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="5">
+          <span class="pregunta-num">24</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La liberación voluntaria de la víctima sin lograr el propósito:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 24)">a) No tiene efecto jurídico</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">b) Aumenta la pena</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">c) Convierte el delito en secuestro simple</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">d) Puede generar exención o reducción de la pena</div>
+          </div>
+          <div class="explicacion">La liberación voluntaria sin haber logrado el propósito y sin causar lesiones puede generar exención o reducción de la pena.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="5">
+          <span class="pregunta-num">25</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El secuestro se agrava cuando dura más de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 25)">a) 10 días</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">b) 15 días</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">c) 30 días</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">d) 60 días</div>
+          </div>
+          <div class="explicacion">El secuestro se agrava cuando se prolonga por más de 30 días.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 6: COHECHO -->
+      <div class="quiz-section" id="s6">
+        <div class="pregunta" data-correcta="1" data-tema="6">
+          <span class="pregunta-num">26</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El sujeto activo del cohecho propio e impropio es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 26)">a) Cualquier persona</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">b) Servidor público</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">c) Solo jueces</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">d) Solo militares</div>
+          </div>
+          <div class="explicacion">El cohecho propio e impropio requiere sujeto activo calificado: servidor público.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="6">
+          <span class="pregunta-num">27</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El cohecho impropio (Art. 406) se diferencia del propio porque:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 27)">a) El servidor público recibe dádivas para realizar un acto contrario a sus deberes</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">b) El particular da la dádiva</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">c) No requiere dolo</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">d) Es culposo</div>
+          </div>
+          <div class="explicacion">El cohecho impropio se configura cuando el servidor público recibe dádivas para realizar un acto contrario a sus deberes.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="6">
+          <span class="pregunta-num">28</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El cohecho por dar u ofrecer (Art. 407) tiene como sujeto activo a:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 28)">a) Solo servidor público</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">b) Solo abogados</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">c) El particular que da u ofrece dádivas</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">d) Solo empresarios</div>
+          </div>
+          <div class="explicacion">El cohecho por dar u ofrecer tiene como sujeto activo al particular que da u ofrece dádivas al servidor público.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="6">
+          <span class="pregunta-num">29</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El bien jurídico tutelado en el cohecho es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 29)">a) El patrimonio</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">b) La libertad</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">c) La fe pública</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">d) La administración pública (probidad y decoro de la función pública)</div>
+          </div>
+          <div class="explicacion">El cohecho tutela la administración pública, específicamente la probidad y el decoro de la función pública.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="6">
+          <span class="pregunta-num">30</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El cohecho impropio es más grave que el propio porque:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 30)">a) Requiere más dádivas</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">b) Implica un acto contrario a los deberes del servidor público</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">c) Solo aplica a jueces</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">d) No requiere dolo</div>
+          </div>
+          <div class="explicacion">El cohecho impropio es más grave porque implica un acto contrario a los deberes del servidor público.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 7: PREVARICATO -->
+      <div class="quiz-section" id="s7">
+        <div class="pregunta" data-correcta="2" data-tema="7">
+          <span class="pregunta-num">31</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El sujeto activo del prevaricato es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 31)">a) Cualquier persona</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">b) Solo abogados</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">c) Servidor público con función jurisdiccional o administrativa</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">d) Solo militares</div>
+          </div>
+          <div class="explicacion">El prevaricato requiere sujeto activo calificado: servidor público con función jurisdiccional o administrativa (juez, fiscal, etc.).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="7">
+          <span class="pregunta-num">32</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El prevaricato por acción (Art. 413) se configura cuando:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 32)">a) El servidor público profiere resolución contraria a la ley</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">b) El servidor público retarda un acto</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">c) El particular da dádivas</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">d) El juez absuelve correctamente</div>
+          </div>
+          <div class="explicacion">El prevaricato por acción se configura cuando el servidor público profiere resolución contraria a la ley.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="7">
+          <span class="pregunta-num">33</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El prevaricato por omisión (Art. 414) se configura cuando:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 33)">a) Se profiere resolución contraria a la ley</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">b) Se retarda o niega injustificadamente un acto propio de las funciones</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">c) Se recibe dádiva</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">d) Se absuelve correctamente</div>
+          </div>
+          <div class="explicacion">El prevaricato por omisión se configura cuando el servidor público retarda o niega injustificadamente un acto propio de sus funciones.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="7">
+          <span class="pregunta-num">34</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El bien jurídico tutelado en el prevaricato es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 34)">a) El patrimonio</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">b) La libertad</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">c) La fe pública</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">d) La administración de justicia</div>
+          </div>
+          <div class="explicacion">El prevaricato tutela la administración de justicia.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="7">
+          <span class="pregunta-num">35</span><span class="pregunta-tipo">Comparación</span>
+          <p>Si un juez recibe dádivas y profiere resolución contraria a la ley, comete:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 35)">a) Solo cohecho</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">b) Solo prevaricato</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">c) Concurso de cohecho y prevaricato</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">d) Ningún delito</div>
+          </div>
+          <div class="explicacion">Cuando hay dádiva + resolución contraria a la ley, hay concurso de cohecho y prevaricato.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 8: FALSEDAD -->
+      <div class="quiz-section" id="s8">
+        <div class="pregunta" data-correcta="1" data-tema="8">
+          <span class="pregunta-num">36</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La falsedad ideológica se diferencia de la material porque:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 36)">a) Altera físicamente el documento</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">b) El documento es auténtico en su forma pero su contenido es falso</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">c) Solo aplica a documentos privados</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">d) No requiere dolo</div>
+          </div>
+          <div class="explicacion">En la falsedad ideológica el documento es auténtico en su forma, pero su contenido (declaraciones) es falso.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="8">
+          <span class="pregunta-num">37</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El bien jurídico tutelado en la falsedad ideológica es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 37)">a) La fe pública</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">b) El patrimonio</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">c) La libertad</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">d) La vida</div>
+          </div>
+          <div class="explicacion">La falsedad ideológica tutela la fe pública.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="8">
+          <span class="pregunta-num">38</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La falsedad personal (Art. 290) consiste en:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 38)">a) Alterar un documento público</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">b) Insertar declaraciones falsas</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">c) Fingir ser otra persona o atribuirse falsamente una calidad</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">d) Destruir un documento</div>
+          </div>
+          <div class="explicacion">La falsedad personal consiste en fingir ser otra persona o atribuirse falsamente una calidad o condición.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="8">
+          <span class="pregunta-num">39</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La falsedad ideológica se agrava cuando:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 39)">a) El documento es privado</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">b) No hay perjuicio</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">c) El agente es particular</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">d) El documento es público o el agente es servidor público</div>
+          </div>
+          <div class="explicacion">La falsedad ideológica se agrava cuando recae sobre documento público o cuando el agente es servidor público.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="8">
+          <span class="pregunta-num">40</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Si un notario inscribe en una escritura que un inmueble está libre de gravámenes sabiendo que tiene hipoteca, comete:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 40)">a) Falsedad material</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">b) Falsedad ideológica en documento público</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">c) Falsedad personal</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">d) Estafa</div>
+          </div>
+          <div class="explicacion">El documento (escritura) es auténtico en su forma, pero su contenido es falso: falsedad ideológica en documento público.</div>
+        </div>
+      </div>
+
+      <div class="resultado-final" id="resultadoFinal">
+        <h3>🏆 Resultado Final</h3>
+        <div class="puntaje-final" id="puntajeFinal">0/40</div>
+        <p id="mensajeFinal"></p>
+        <div class="desglose-temas" id="desgloseTemas"></div>
+        <button onclick="reiniciarQuiz()" class="btn-reset">🔄 Reiniciar Quiz</button>
+      </div>
+
+      <div style="text-align: center; margin-top: 1.5rem;">
+        <button onclick="verResultadoFinal()">📊 Ver Resultado Final</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>⚖️ Guía Didáctica - Parte Especial del Código Penal Colombiano (II)</p>
+  <p>Tipos Penales Adicionales · Ley 599 de 2000</p>
+  <p style="margin-top: 1rem; opacity: 0.7;">© 2026 - Material educativo interactivo</p>
+</footer>
+
+<script>
+  function toggleAcordeon(header) {
+    header.classList.toggle('active');
+    const content = header.nextElementSibling;
+    content.classList.toggle('active');
+  }
+
+  let respuestas = {};
+  const totalPreguntas = 40;
+
+  function mostrarSeccion(id, tab) {
+    document.querySelectorAll('.quiz-section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.quiz-tab').forEach(t => t.classList.remove('active'));
+    
+    document.getElementById(id).classList.add('active');
+    tab.classList.add('active');
+  }
+
+  function seleccionar(opcion, preguntaNum) {
+    if (respuestas[preguntaNum] !== undefined) return;
+
+    const pregunta = opcion.closest('.pregunta');
+    const opciones = pregunta.querySelectorAll('.opcion');
+    const correcta = parseInt(pregunta.dataset.correcta);
+    const tema = parseInt(pregunta.dataset.tema);
+    const seleccionada = Array.from(opciones).indexOf(opcion);
+    const explicacion = pregunta.querySelector('.explicacion');
+
+    opciones.forEach(o => o.classList.add('disabled'));
+
+    if (seleccionada === correcta) {
+      opcion.classList.add('correcta');
+      respuestas[preguntaNum] = { correcta: true, tema: tema };
+    } else {
+      opcion.classList.add('incorrecta');
+      opciones[correcta].classList.add('correcta');
+      respuestas[preguntaNum] = { correcta: false, tema: tema };
+    }
+
+    explicacion.classList.add('visible');
+    pregunta.classList.add('answered');
+    actualizarEstadisticas();
+  }
+
+  function actualizarEstadisticas() {
+    const total = Object.keys(respuestas).length;
+    const correctas = Object.values(respuestas).filter(r => r.correcta).length;
+    const incorrectas = total - correctas;
+    const porcentaje = total > 0 ? Math.round((correctas / total) * 100) : 0;
+
+    document.getElementById('respondidas').textContent = total;
+    document.getElementById('correctas').textContent = correctas;
+    document.getElementById('incorrectas').textContent = incorrectas;
+    document.getElementById('porcentaje').textContent = porcentaje;
+
+    const progreso = (total / totalPreguntas) * 100;
+    document.getElementById('progressFill').style.width = progreso + '%';
+  }
+
+  function verResultadoFinal() {
+    const total = Object.keys(respuestas).length;
+    
+    if (total < totalPreguntas) {
+      alert(`⚠️ Aún te faltan ${totalPreguntas - total} preguntas por responder.`);
+      return;
+    }
+
+    const correctas = Object.values(respuestas).filter(r => r.correcta).length;
+    const porcentaje = Math.round((correctas / totalPreguntas) * 100);
+
+    const resultadoFinal = document.getElementById('resultadoFinal');
+    resultadoFinal.classList.add('visible');
+
+    document.getElementById('puntajeFinal').textContent = `${correctas}/${totalPreguntas}`;
+
+    let mensaje = '';
+    if (porcentaje === 100) mensaje = ' ¡PERFECTO! Dominas los Tipos Penales Adicionales.';
+    else if (porcentaje >= 90) mensaje = ' ¡Excelente! Dominio sobresaliente.';
+    else if (porcentaje >= 75) mensaje = '✅ ¡Muy bien! Buen dominio.';
+    else if (porcentaje >= 60) mensaje = '📚 Aceptable. Repasa los temas donde fallaste.';
+    else if (porcentaje >= 40) mensaje = ' Necesitas reforzar varios conceptos.';
+    else mensaje = '🔍 Es necesario estudiar nuevamente todos los temas.';
+
+    document.getElementById('mensajeFinal').textContent = mensaje;
+
+    const temas = {
+      1: { nombre: 'T1: Lesiones', total: 5, correctas: 0 },
+      2: { nombre: 'T2: Estafa', total: 5, correctas: 0 },
+      3: { nombre: 'T3: Abuso Confianza', total: 5, correctas: 0 },
+      4: { nombre: 'T4: Concierto', total: 5, correctas: 0 },
+      5: { nombre: 'T5: Secuestro', total: 5, correctas: 0 },
+      6: { nombre: 'T6: Cohecho', total: 5, correctas: 0 },
+      7: { nombre: 'T7: Prevaricato', total: 5, correctas: 0 },
+      8: { nombre: 'T8: Falsedad', total: 5, correctas: 0 }
+    };
+
+    Object.values(respuestas).forEach(r => {
+      if (r.correcta) temas[r.tema].correctas++;
+    });
+
+    const desgloseHTML = Object.values(temas).map(t => {
+      const pct = Math.round((t.correctas / t.total) * 100);
+      return `
+        <div class="desglose-item">
+          <h4>${t.nombre}</h4>
+          <p>${t.correctas}/${t.total} (${pct}%)</p>
+          <div class="mini-bar">
+            <div class="mini-bar-fill" style="width: ${pct}%"></div>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    document.getElementById('desgloseTemas').innerHTML = desgloseHTML;
+    resultadoFinal.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  function reiniciarQuiz() {
+    if (!confirm('¿Reiniciar el quiz?')) return;
+
+    respuestas = {};
+
+    document.querySelectorAll('.opcion').forEach(o => o.classList.remove('correcta', 'incorrecta', 'disabled'));
+    document.querySelectorAll('.explicacion').forEach(e => e.classList.remove('visible'));
+    document.querySelectorAll('.pregunta').forEach(p => p.classList.remove('answered'));
+    document.getElementById('resultadoFinal').classList.remove('visible');
+
+    actualizarEstadisticas();
+    mostrarSeccion('s1', document.querySelector('.quiz-tab'));
+    document.getElementById('quiz').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  document.querySelectorAll('nav a').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+</script>
+
+</body>
+</html>
