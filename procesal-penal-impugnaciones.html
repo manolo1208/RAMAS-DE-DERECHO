@@ -1,0 +1,2488 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Impugnaciones, Nulidades y Garantías - Ley 600 de 2000</title>
+<style>
+  :root {
+    --primary: #7f1d1d;
+    --secondary: #fbbf24;
+    --accent: #991b1b;
+    --light: #fef3f2;
+    --dark: #1a202c;
+    --success: #38a169;
+    --warning: #d69e2e;
+    --danger: #c53030;
+    --card-bg: #ffffff;
+    --shadow: 0 4px 15px rgba(0,0,0,0.08);
+    --shadow-hover: 0 8px 25px rgba(0,0,0,0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    background: var(--light);
+    color: var(--dark);
+    line-height: 1.7;
+  }
+
+  header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    color: white;
+    padding: 2rem 1rem;
+    text-align: center;
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::before {
+    content: '⚖️';
+    position: absolute;
+    font-size: 15rem;
+    opacity: 0.05;
+    top: -30px;
+    right: -30px;
+  }
+
+  header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: 2px;
+  }
+
+  header p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    font-style: italic;
+  }
+
+  nav {
+    background: var(--dark);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow);
+  }
+
+  nav ul {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0.5rem;
+  }
+
+  nav a {
+    color: var(--light);
+    text-decoration: none;
+    padding: 0.7rem 1rem;
+    margin: 0.2rem;
+    border-radius: 5px;
+    font-size: 0.7rem;
+    transition: all 0.3s;
+    display: block;
+  }
+
+  nav a:hover {
+    background: var(--secondary);
+    color: var(--dark);
+    transform: translateY(-2px);
+  }
+
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+  }
+
+  section {
+    background: var(--card-bg);
+    margin-bottom: 2.5rem;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    border-left: 5px solid var(--secondary);
+    scroll-margin-top: 80px;
+  }
+
+  section h2 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--secondary);
+  }
+
+  section h3 {
+    color: var(--accent);
+    font-size: 1.4rem;
+    margin: 1.5rem 0 0.8rem;
+  }
+
+  section h4 {
+    color: var(--primary);
+    font-size: 1.15rem;
+    margin: 1rem 0 0.5rem;
+  }
+
+  p { margin-bottom: 1rem; text-align: justify; }
+
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.2rem;
+    margin: 1.5rem 0;
+  }
+
+  .card {
+    background: linear-gradient(135deg, #fff 0%, #f9f6ef 100%);
+    border: 2px solid var(--secondary);
+    border-radius: 10px;
+    padding: 1.2rem;
+    transition: all 0.3s;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--primary);
+  }
+
+  .card .icon {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .card h4 {
+    text-align: center;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+  }
+
+  .card .detail {
+    display: none;
+    margin-top: 0.8rem;
+    padding-top: 0.8rem;
+    border-top: 1px dashed var(--secondary);
+    font-size: 0.95rem;
+  }
+
+  .card.active .detail { display: block; }
+
+  .card .hint {
+    text-align: center;
+    color: var(--accent);
+    font-size: 0.85rem;
+    font-style: italic;
+  }
+
+  .mapa-container {
+    background: #fdfbf5;
+    border: 2px dashed var(--secondary);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    overflow-x: auto;
+  }
+
+  .mapa {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 600px;
+  }
+
+  .nodo {
+    background: var(--primary);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+    font-weight: bold;
+    text-align: center;
+    min-width: 180px;
+    box-shadow: var(--shadow);
+  }
+
+  .nodo.central {
+    background: linear-gradient(135deg, var(--secondary), #e0b888);
+    color: var(--dark);
+    font-size: 1.2rem;
+    padding: 1rem 2rem;
+  }
+
+  .nodo.sub {
+    background: var(--accent);
+    font-size: 0.95rem;
+  }
+
+  .linea {
+    width: 3px;
+    height: 25px;
+    background: var(--secondary);
+  }
+
+  .linea-h {
+    height: 3px;
+    background: var(--secondary);
+    width: 80%;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .rama {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 1rem;
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  .rama-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    min-width: 140px;
+  }
+
+  .ejemplo {
+    background: #e6f7ee;
+    border-left: 4px solid var(--success);
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .ejemplo strong { color: var(--success); }
+
+  .alerta {
+    background: #fff8e1;
+    border-left: 4px solid var(--warning);
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .alerta strong { color: var(--warning); }
+
+  .cita {
+    background: #f0f7ff;
+    border-left: 4px solid var(--accent);
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+    color: var(--primary);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    font-size: 0.9rem;
+  }
+
+  th {
+    background: var(--primary);
+    color: white;
+    padding: 0.8rem;
+    text-align: left;
+  }
+
+  td {
+    padding: 0.8rem;
+    border-bottom: 1px solid #eee;
+  }
+
+  tr:nth-child(even) { background: #f9f6ef; }
+  tr:hover { background: #f0ead6; }
+
+  .quiz-container {
+    background: linear-gradient(135deg, #f7f4ed 0%, #fff 100%);
+    padding: 1.5rem;
+    border-radius: 10px;
+    border: 2px solid var(--accent);
+  }
+
+  .quiz-header {
+    background: var(--primary);
+    color: white;
+    padding: 1.2rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .quiz-header h3 {
+    color: white;
+    margin: 0 0 0.5rem 0;
+  }
+
+  .progress-bar {
+    background: rgba(255,255,255,0.2);
+    height: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+  }
+
+  .progress-fill {
+    background: var(--secondary);
+    height: 100%;
+    width: 0%;
+    transition: width 0.4s ease;
+  }
+
+  .quiz-stats {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .stat {
+    background: rgba(255,255,255,0.1);
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    font-size: 0.9rem;
+  }
+
+  .stat strong { color: var(--secondary); }
+
+  .quiz-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    padding: 0.5rem;
+    background: #f0ead6;
+    border-radius: 8px;
+  }
+
+  .quiz-tab {
+    background: white;
+    border: 2px solid var(--accent);
+    color: var(--accent);
+    padding: 0.5rem 0.8rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.7rem;
+    transition: all 0.3s;
+    flex: 1;
+    min-width: 70px;
+    text-align: center;
+  }
+
+  .quiz-tab:hover {
+    background: var(--accent);
+    color: white;
+  }
+
+  .quiz-tab.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+  }
+
+  .quiz-section {
+    display: none;
+  }
+
+  .quiz-section.active {
+    display: block;
+    animation: fadeIn 0.4s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .pregunta {
+    margin-bottom: 1.5rem;
+    padding: 1.2rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    border-left: 4px solid var(--accent);
+    transition: all 0.3s;
+  }
+
+  .pregunta.answered {
+    border-left-color: var(--secondary);
+  }
+
+  .pregunta-num {
+    display: inline-block;
+    background: var(--accent);
+    color: white;
+    padding: 0.2rem 0.7rem;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    margin-right: 0.5rem;
+  }
+
+  .pregunta-tipo {
+    display: inline-block;
+    background: var(--secondary);
+    color: var(--dark);
+    padding: 0.2rem 0.7rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    margin-left: 0.3rem;
+    font-weight: bold;
+  }
+
+  .pregunta p { 
+    font-weight: bold; 
+    color: var(--primary); 
+    margin: 0.8rem 0;
+    text-align: left;
+  }
+
+  .opciones { display: flex; flex-direction: column; gap: 0.5rem; }
+
+  .opcion {
+    padding: 0.7rem 1rem;
+    background: #f9f6ef;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+  }
+
+  .opcion:hover:not(.disabled) {
+    border-color: var(--accent);
+    background: #e8f0f7;
+  }
+
+  .opcion.disabled {
+    cursor: not-allowed;
+    opacity: 0.85;
+  }
+
+  .opcion.correcta {
+    background: #c6f6d5;
+    border-color: var(--success);
+    color: var(--success);
+    font-weight: bold;
+  }
+
+  .opcion.incorrecta {
+    background: #fed7d7;
+    border-color: var(--danger);
+    color: var(--danger);
+  }
+
+  .opcion.correcta::after {
+    content: ' ✓';
+    font-weight: bold;
+  }
+
+  .opcion.incorrecta::after {
+    content: ' ✗';
+    font-weight: bold;
+  }
+
+  .explicacion {
+    margin-top: 0.8rem;
+    padding: 0.8rem;
+    background: #f0f7ff;
+    border-left: 3px solid var(--accent);
+    border-radius: 0 6px 6px 0;
+    font-size: 0.9rem;
+    display: none;
+    font-style: italic;
+  }
+
+  .explicacion.visible {
+    display: block;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .resultado-final {
+    margin-top: 2rem;
+    padding: 2rem;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    color: white;
+    border-radius: 12px;
+    text-align: center;
+    display: none;
+  }
+
+  .resultado-final.visible {
+    display: block;
+    animation: fadeIn 0.5s ease;
+  }
+
+  .resultado-final h3 {
+    color: var(--secondary);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .puntaje-final {
+    font-size: 3rem;
+    font-weight: bold;
+    color: var(--secondary);
+    margin: 1rem 0;
+  }
+
+  .desglose-temas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+    text-align: left;
+  }
+
+  .desglose-item {
+    background: rgba(255,255,255,0.1);
+    padding: 1rem;
+    border-radius: 8px;
+  }
+
+  .desglose-item h4 {
+    color: var(--secondary);
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+  }
+
+  .mini-bar {
+    background: rgba(255,255,255,0.2);
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+  }
+
+  .mini-bar-fill {
+    background: var(--secondary);
+    height: 100%;
+    transition: width 0.6s ease;
+  }
+
+  button {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 1rem;
+    transition: all 0.3s;
+  }
+
+  button:hover {
+    background: var(--secondary);
+    color: var(--dark);
+    transform: translateY(-2px);
+  }
+
+  .btn-reset {
+    background: var(--danger);
+    margin-left: 0.5rem;
+  }
+
+  .btn-reset:hover {
+    background: #9b2c2c;
+    color: white;
+  }
+
+  .acordeon-item {
+    margin-bottom: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .acordeon-header {
+    background: var(--accent);
+    color: white;
+    padding: 1rem;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.3s;
+  }
+
+  .acordeon-header:hover { background: var(--primary); }
+
+  .acordeon-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    background: white;
+  }
+
+  .acordeon-content.active {
+    max-height: 2000px;
+    padding: 1rem;
+  }
+
+  .flecha { transition: transform 0.3s; }
+  .acordeon-header.active .flecha { transform: rotate(180deg); }
+
+  footer {
+    background: var(--dark);
+    color: var(--light);
+    text-align: center;
+    padding: 2rem 1rem;
+    margin-top: 2rem;
+  }
+
+  footer p { margin-bottom: 0.5rem; }
+
+  @media (max-width: 768px) {
+    header h1 { font-size: 1.8rem; }
+    section { padding: 1.2rem; }
+    section h2 { font-size: 1.5rem; }
+    nav a { font-size: 0.6rem; padding: 0.3rem 0.4rem; }
+    .quiz-tab { font-size: 0.6rem; padding: 0.3rem 0.4rem; }
+    table { font-size: 0.8rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>⚖️ Impugnaciones, Nulidades y Garantías</h1>
+  <p>Ley 600 de 2000 · Sistema Inquisitivo Mitogado · Guía Didáctica Interactiva</p>
+</header>
+
+<nav>
+  <ul>
+    <li><a href="#tema1">1. Reposición</a></li>
+    <li><a href="#tema2">2. Apelación</a></li>
+    <li><a href="#tema3">3. Queja</a></li>
+    <li><a href="#tema4">4. Nulidades</a></li>
+    <li><a href="#tema5">5. Casación</a></li>
+    <li><a href="#tema6">6. Revisión</a></li>
+    <li><a href="#tema7">7. Comparativa</a></li>
+    <li><a href="#tema8">8. Control Legal</a></li>
+    <li><a href="#tema9">9. Normas Rectoras</a></li>
+    <li><a href="#tema10">10. Tutela</a></li>
+    <li><a href="#quiz">Quiz (40)</a></li>
+  </ul>
+</nav>
+
+<main>
+
+  <section>
+    <h2>📚 Introducción</h2>
+    <p>Bienvenido a esta guía interactiva sobre el <strong>régimen de impugnaciones, nulidades y garantías constitucionales en la Ley 600 de 2000</strong> (sistema inquisitivo mitogado). Aquí estudiarás los recursos ordinarios (reposición, apelación, queja), las nulidades procesales, los recursos extraordinarios (casación y revisión), el control de legalidad del Artículo 392, las normas rectoras y la acción de tutela en el proceso penal.</p>
+    <div class="alerta">
+      <strong>⚠️ Nota importante:</strong> Esta guía corresponde a la <strong>Ley 600 de 2000</strong> (sistema inquisitivo mitogado), que fue reemplazada por la <strong>Ley 906 de 2004</strong> (sistema acusatorio). Su estudio es relevante para procesos en tránsito y para comprender la evolución del derecho procesal penal colombiano.
+      <br><br>
+      <strong>💡 Cómo usar esta guía:</strong> Haz clic en las tarjetas para ver detalles, despliega los acordeones para información adicional y prueba tus conocimientos con el quiz de 40 preguntas al final.
+    </div>
+  </section>
+
+  <!-- TEMA 1: REPOSICIÓN -->
+  <section id="tema1">
+    <h2>1. Recurso de Reposición (Arts. 185, 189, 190)</h2>
+    <p>El recurso de reposición procede ordinariamente contra las providencias de sustanciación que deban notificarse, contra las providencias interlocutorias proferidas en primera o única instancia, y contra aquellas decisiones que declaren la prescripción de la acción o de la pena en segunda instancia cuando dicha materia no haya sido objeto de impugnación previa.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">REPOSICIÓN</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Mismo Funcionario</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Reexamen</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Providencias</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Sustanciación/Interlocutorias</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Excepciones</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Puntos nuevos</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Procedimiento de Interposición</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon"></div>
+        <h4>Por Escrito</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Vencido el término de ejecutoria, la secretaría deja el expediente a disposición del recurrente por <strong>2 días</strong> para su sustentación. Luego, <strong>2 días adicionales</strong> en traslado común a los demás sujetos procesales. El funcionario resuelve en los <strong>3 días siguientes</strong>.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🎤</div>
+        <h4>En Audiencia</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Se formula y sustenta <strong>oralmente</strong> de manera inmediata, y se resuelve en el acto tras escuchar las intervenciones de las demás partes presentes.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>⚠️ Regla de Inimpugnabilidad y Excepciones (Art. 190)</h3>
+    <div class="alerta">
+      <strong>📌 Regla general:</strong> La providencia que decide el recurso de reposición <strong>no es susceptible de recurso alguno</strong>.
+      <br><br>
+      <strong>Excepciones taxativas:</strong>
+      <ol style="margin-top: 0.5rem; padding-left: 1.5rem;">
+        <li><strong>Puntos Nuevos:</strong> Cuando la providencia que resuelve la reposición contenga aspectos o decisiones que no fueron abordados en la resolución inicial.</li>
+        <li><strong>Interés Jurídico Superviviente:</strong> Cuando, como consecuencia directa de la modificación o adición de la decisión inicial al resolver la reposición, alguno de los sujetos procesales adquiera por primera vez un interés jurídico para recurrir.</li>
+      </ol>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si el Fiscal resuelve la reposición manteniendo la negativa de una prueba pero añade un argumento nuevo sobre la extemporaneidad de la solicitud, la defensa puede apelar esta nueva razón por ser un "punto nuevo" no decidido en la resolución inicial.
+    </div>
+  </section>
+
+  <!-- TEMA 2: APELACIÓN -->
+  <section id="tema2">
+    <h2>2. Recurso de Apelación y sus Efectos (Arts. 185, 191-194, 200-204)</h2>
+    <p>El recurso de apelación procede de manera general contra las sentencias y las providencias interlocutorias proferidas en primera instancia, garantizando la doble instancia.</p>
+
+    <h3>️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">APELACIÓN</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Suspensivo</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Suspende todo</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Diferido</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Suspende solo lo apelado</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Devolutivo</div>
+            <div class="linea"></div>
+            <div class="nodo sub">No suspende nada</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📊 Los Tres Efectos de la Apelación (Art. 193)</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Efecto</th>
+          <th>Providencias Aplicables</th>
+          <th>Impacto</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Suspensivo</strong></td>
+          <td>Sentencia penal, auto que corrige error aritmético, auto que decreta nulidad en juzgamiento, preclusión total, resolución inhibitoria, calificación de la investigación</td>
+          <td>Suspende la competencia del inferior y la ejecución de la decisión hasta que decida la segunda instancia</td>
+        </tr>
+        <tr>
+          <td><strong>Diferido</strong></td>
+          <td>Denegación de prueba, preclusión parcial, desembargo, entrega de bienes con oposición, revocatoria de parte civil o medidas cautelares reales</td>
+          <td>Suspende solo el cumplimiento de la providencia apelada (excepto libertad), pero el proceso continúa ante el inferior</td>
+        </tr>
+        <tr>
+          <td><strong>Devolutivo</strong></td>
+          <td>Todas las demás providencias interlocutorias</td>
+          <td>No suspende el cumplimiento ni detiene el curso de la actuación procesal</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>⏰ Términos de Decisión en Segunda Instancia</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📋</div>
+        <h4>Providencias Interlocutorias</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p><strong>10 días</strong> (Art. 200)</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Sentencias</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p><strong>15 días</strong> (Art. 201)</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🔓</div>
+        <h4>Detención Preventiva o Libertad</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p><strong>5 días</strong> perentorios (Art. 202)</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>️ Non Reformatio in Peius (Arts. 18, 204)</h3>
+    <div class="cita">
+      <strong>"Cuando se trate de sentencia condenatoria, si el procesado actúa como apelante único (o su defensor), el superior no podrá en ningún caso agravar la sanción impuesta."</strong>
+    </div>
+
+    <div class="alerta">
+      <strong>📌 Protección extendida:</strong> Idéntica prohibición protege a la parte civil y al tercero civilmente responsable cuando recurren en calidad de apelantes únicos.
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si A es condenado a 6 años y apela solicitando absolución, el Tribunal NO puede aumentar la pena a 8 años aunque encuentre una agravante omitida. Esto violaría la prohibición de reformatio in peius.
+    </div>
+  </section>
+
+  <!-- TEMA 3: QUEJA -->
+  <section id="tema3">
+    <h2>3. Recurso de Queja (Arts. 195-198)</h2>
+    <p>El recurso de queja es un mecanismo subsidiario cuya finalidad es someter a revisión del superior jerárquico la decisión del inferior que deniega de manera injustificada o improcedente la concesión del recurso de apelación.</p>
+
+    <h3>🗺️ Mapa Conceptual del Trámite</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">QUEJA</div>
+        <div class="linea"></div>
+        <div class="nodo">Denegación de Apelación</div>
+        <div class="linea"></div>
+        <div class="nodo">Interposición de Queja</div>
+        <div class="linea"></div>
+        <div class="nodo">Compulsa de Copias (1 día)</div>
+        <div class="linea"></div>
+        <div class="nodo">Sustentación ante Superior (3 días)</div>
+        <div class="linea"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Fundada</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Concede apelación</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Infundada</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Rechaza y devuelve</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Trámite Paso a Paso</h3>
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>1️⃣ Denegación del Recurso de Apelación por el Inferior</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>El juez de primera instancia niega la concesión del recurso de apelación.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>2️⃣ Interposición de Queja y Solicitud de Copias</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Dentro del término de ejecutoria, el recurrente interpone la queja y solicita copias.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>3️⃣ Compulsa de Copias por Secretaría</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Término perentorio: <strong>1 día</strong> (Art. 196).</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>4️⃣ Remisión de Copias al Superior e Inserción</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Las copias se remiten al superior jerárquico para su decisión.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>5️ Sustentación del Recurso ante el Superior</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Término: <strong>3 días</strong> tras el recibo de las copias.</p>
+        <p>Si no se sustenta: <strong>Desechamiento del Recurso</strong>.</p>
+        <p>Si se sustenta: <strong>Decisión de Plano por el Superior</strong>.</p>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong> Ejemplo:</strong> Si el juez de primera instancia niega la apelación contra un auto interlocutorio, el defensor interpone queja dentro del término de ejecutoria. La secretaría tiene 1 día para compulsionar copias. El defensor tiene 3 días tras recibir las copias para sustentar la queja ante el superior. Si el superior la declara fundada, concede la apelación; si la declara infundada, rechaza la queja y devuelve la actuación.
+    </div>
+  </section>
+
+  <!-- TEMA 4: NULIDADES -->
+  <section id="tema4">
+    <h2>4. Nulidades Procesales e Inexistencia (Arts. 305-310)</h2>
+    <p>La ineficacia de los actos procesales opera como la máxima sanción que el ordenamiento jurídico penal impone a las actuaciones viciadas por la inobservancia de las formas sustanciales.</p>
+
+    <h3>️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">INEFICACIA PROCESAL</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Inexistencia</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Art. 305</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Nulidad</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Art. 306</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Inexistencia Procesal (Art. 305)</h3>
+    <div class="alerta">
+      <strong>📌 Opera ipso iure:</strong> Respecto de aquellas diligencias practicadas con la asistencia e intervención personal del procesado en las que <strong>no haya participado efectivamente su abogado defensor</strong> (técnico o de oficio).
+      <br><br>
+      <strong>Efecto:</strong> El acto inexistente carece de idoneidad legal, no produce efecto jurídico alguno y no requiere de pronunciamiento motivado de nulidad.
+    </div>
+
+    <h3>⚠️ Causales Taxativas de Nulidad (Art. 306)</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Falta de Competencia</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Cuando la actuación es adelantada por un juzgador desprovisto de jurisdicción, o desatendiendo los factores funcional, subjetivo o de conexidad.</p>
+          <p><strong>Excepción:</strong> Durante las etapas de investigación previa e instrucción, la falta de competencia por el factor territorial NO genera nulidad.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🚫</div>
+        <h4>Irregularidades Sustanciales</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Se configura al quebrantar las formas fijadas por la ley para la validez de las etapas del juicio, alterando la estructura orgánica del procedimiento o desconociendo términos perentorios esenciales.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🛡️</div>
+        <h4>Violación del Derecho a la Defensa</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Se presenta ante cualquier restricción, supresión o cercenamiento del derecho de defensa técnica o material a lo largo de la actuación penal.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3> Principios Rectores de la Invalidez (Art. 310)</h3>
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>🔧 Instrumentalidad de las Formas</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>No se declarará la invalidez de un acto cuando este, a pesar de la irregularidad, haya cumplido la finalidad procesal para la cual estaba destinado, siempre que no se margine ni conculque el derecho de defensa.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📊 Trascendencia y Demostración del Perjuicio</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>La parte que invoque una nulidad debe demostrar razonadamente de qué manera la irregularidad sustancial afectó sus garantías fundamentales o alteró las bases de la instrucción y el juzgamiento.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>🤝 Protección y No Convalidación por Conducta Propia</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>No está legitimado para solicitar la nulidad el sujeto procesal que haya coadyuvado con su conducta a la realización del acto irregular, salvo que la falencia consista en la falta absoluta de defensa técnica.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>✅ Convalidación</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Los actos irregulares se consolidan y validan por el consentimiento expreso o tácito del sujeto perjudicado, siempre que no se violen mínimos constitucionales inderogables.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>🔙 Residualidad</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>La nulidad solo procede cuando no exista ningún otro mecanismo procesal idóneo dentro del trámite para subsanar la irregularidad.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📋 Taxatividad</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Ninguna autoridad podrá decretar nulidades por causales distintas a las fijadas expresamente en el estatuto procesal (Art. 306).</p>
+      </div>
+    </div>
+
+    <h3>⏰ Oportunidad y Requisitos Formales (Arts. 308-309)</h3>
+    <div class="alerta">
+      <strong>📌 Oportunidad Procesal (Art. 308):</strong> Las nulidades pueden invocarse en <strong>cualquier estado o fase</strong> de la actuación. No obstante, en la etapa del juicio, la <strong>audiencia preparatoria (Art. 401)</strong> se consolida como el hito preclusivo y obligatorio para sanear las nulidades originadas durante la investigación previa e instrucción.
+      <br><br>
+      <strong>📌 Exigencias Formales (Art. 309):</strong> El peticionario debe:
+      <ul>
+        <li>Especificar la <strong>causal taxativa</strong> invocada</li>
+        <li>Exponer con precisión los <strong>fundamentos fácticos y jurídicos</strong></li>
+        <li>Demostrar la <strong>trascendencia</strong> de la falencia</li>
+      </ul>
+      <p><strong>Prohibición:</strong> Formular nuevas solicitudes sobre la misma materia, salvo que se funden en causales distintas o hechos sobrevinientes, o se sustenten en el libelo de casación.</p>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo de inexistencia:</strong> Si se rinde la indagatoria del procesado sin la presencia de su abogado defensor, la diligencia es jurídicamente inexistente (Art. 305), sin necesidad de declaración judicial motivada de nulidad.
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo de convalidación:</strong> Si el defensor participa activamente en un acta de inspección judicial y la suscribe sin objeciones, no puede luego solicitar la nulidad por un formalismo no sustancial (principio de protección y convalidación, Art. 310).
+    </div>
+  </section>
+
+  <!-- TEMA 5: CASACIÓN -->
+  <section id="tema5">
+    <h2>5. Recurso Extraordinario de Casación (Arts. 205-218)</h2>
+    <p>La casación penal constituye un instrumento superior de cierre del ordenamiento procesal que juzga la legalidad y constitucionalidad de la sentencia de segunda instancia.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">CASACIÓN</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Procedencia</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Sentencias 2ª instancia</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Causales</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Taxativas</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Competencia</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Corte Suprema</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Procedencia y Cuantía Punitiva (Art. 205)</h3>
+    <div class="alerta">
+      <strong>📌 Regla general:</strong> Procede contra sentencias proferidas en segunda instancia por los Tribunales Superiores de Distrito Judicial y el Tribunal Penal Militar en procesos por delitos con pena privativa de la libertad cuyo <strong>límite máximo exceda de 8 años de prisión</strong>.
+      <br><br>
+      <strong>Extensión:</strong> La casación se extiende de pleno derecho a los delitos conexos de menor sanción.
+    </div>
+
+    <h3>⚡ Casación Discrecional (Art. 205 inc. final)</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🎯</div>
+        <h4>Excepcionalidad</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>La Sala de Casación Penal de la Corte Suprema puede admitir excepcionalmente la demanda contra delitos con penas inferiores a 8 años.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Criterios</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <ul>
+            <li>Indispensable para el desarrollo de la jurisprudencia</li>
+            <li>Protección de derechos y garantías fundamentales</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <h3>🔍 Causales Taxativas de Casación (Art. 207)</h3>
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>1️⃣ Violación de Norma Sustancial</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Por vía directa (prescindiendo del debate probatorio) o indirecta (derivada de error de hecho por falso juicio de existencia, identidad o raciocinio; o error de derecho por falso juicio de legalidad o convicción en la apreciación probatoria).</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>2️⃣ Inconsonancia</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Falta de congruencia entre la acusación (o su equivalente) y la sentencia.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>3️⃣ Nulidad</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Haberse dictado la sentencia en un juicio viciado por causales del Artículo 306.</p>
+      </div>
+    </div>
+
+    <h3>⏰ Trámite y Exigencia Constitucional</h3>
+    <div class="alerta">
+      <strong>📌 Sintonía Constitucional (Sentencia C-252 de 2001):</strong> Los incisos 1° y 2° del Artículo 210 fueron declarados INEXEQUIBLES. En consecuencia:
+      <ul>
+        <li>Se eliminó la retención de los autos originales en el Tribunal</li>
+        <li>Se eliminó la remisión acelerada de copias al juez de ejecución antes de formalizar la demanda</li>
+        <li>La demanda debe interponerse y sustentarse por escrito dentro de los <strong>30 días siguientes</strong> a la ejecutoria de la sentencia de segunda instancia</li>
+      </ul>
+    </div>
+
+    <h3>📊 Trámite Posterior a la Demanda</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Etapa</th>
+          <th>Término</th>
+          <th>Artículo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Traslado a no demandantes</strong></td>
+          <td>15 días</td>
+          <td>Art. 211</td>
+        </tr>
+        <tr>
+          <td><strong>Concepto del Procurador Delegado</strong></td>
+          <td>20 días (obligatorio)</td>
+          <td>Art. 213</td>
+        </tr>
+        <tr>
+          <td><strong>Decisión de la Corte</strong></td>
+          <td>Sin término fijo</td>
+          <td>Art. 215</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>🛡️ Principio de No Agravación (Art. 215)</h3>
+    <div class="cita">
+      <strong>"En sentencia condenatoria, cuando el procesado actúe como demandante único, la Corte no podrá en ningún caso agravar la pena impuesta."</strong>
+    </div>
+
+    <h3>⚡ Casación de Oficio (Art. 216)</h3>
+    <div class="alerta">
+      <strong> Facultad y deber de la Corte:</strong> Superar los defectos formales del libelo para casar de oficio la sentencia cuando advierta:
+      <ul>
+        <li>Violaciones ostensibles a las garantías fundamentales</li>
+        <li>La prescripción de la acción</li>
+      </ul>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si la Corte Suprema, al estudiar una demanda de casación técnicamente defectuosa, advierte que la acción penal se encontraba prescrita antes de dictarse la sentencia de segunda instancia, debe aplicar la casación de oficio (Art. 216) para declarar la prescripción y casar el fallo.
+    </div>
+  </section>
+
+  <!-- TEMA 6: REVISIÓN -->
+  <section id="tema6">
+    <h2>6. Acción Extraordinaria de Revisión (Arts. 220-228)</h2>
+    <p>Es una acción autónoma destinada a remover la autoridad de la cosa juzgada de sentencias condenatorias ejecutoriadas (y excepcionalmente preclusiones, cesaciones o absoluciones).</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">REVISIÓN</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Contra Cosa Juzgada</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Causales Taxativas</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Efectos Rescisorios</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Causales Taxativas (Art. 220)</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">1️⃣</div>
+        <h4>Condena Múltiple por Delito Individual</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Condena o medida de seguridad impuesta a dos o más personas por un delito que solo pudo ser cometido por una o por un número menor de las sentenciadas.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">2️</div>
+        <h4>Proceso que no podía iniciarse</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Condena dictada en proceso que no podía iniciarse o proseguirse por prescripción, falta de querella u otra causal de extinción de la acción penal.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">3️⃣</div>
+        <h4>Hechos o Pruebas Nuevas</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Aparición de hechos nuevos o pruebas sobrevinientes no conocidas en los debates del juicio, que establezcan la inocencia o inimputabilidad del condenado.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">4️⃣</div>
+        <h4>Delito del Juez o Tercero</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Demostración, mediante sentencia firme, de que el fallo fue determinado por conducta típica (delito) del juez o de un tercero.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">5️⃣</div>
+        <h4>Prueba Falsa</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Demostración, mediante sentencia firme, de que la condena se fundamentó en prueba falsa.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">6️⃣</div>
+        <h4>Cambio Jurisprudencial Favorable</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Cambio jurisprudencial favorable emitido por la Corte Suprema de Justicia que afecte el criterio sustancial del fallo.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>⚠️ Extensión a Preclusiones, Cesaciones y Absoluciones</h3>
+    <div class="alerta">
+      <strong>📌 Las causales 4ª y 5ª</strong> (delito del juez/tercero o prueba falsa) aplican también contra <strong>preclusiones, cesaciones y absoluciones</strong> (inciso final del Art. 220).
+    </div>
+
+    <h3>⚙️ Trámite Probatorio y Efectos Rescisorios (Arts. 222-227)</h3>
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📋 Admisión y Apertura a Pruebas</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Admitida la demanda por la autoridad competente (Corte Suprema o Tribunales, Arts. 75 y 76), se solicita el expediente original y se abre a pruebas por <strong>15 días</strong> para solicitud y <strong>30 días</strong> para práctica (Art. 224).</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>⚖️ Traslado de Alegatos</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Vencido el traslado de alegatos por <strong>15 días</strong> (Art. 225), la Sala decide.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>🔄 Efectos Rescisorios (Art. 227)</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>De prosperar:</p>
+        <ul>
+          <li>Anula el fallo atacado</li>
+          <li>Otorga libertad provisional caucionada</li>
+          <li>Devuelve la actuación a otro despacho de igual categoría para rehacer el trámite</li>
+          <li>O dicta directamente fallo de reemplazo cuando la causal implique la extinción de la acción penal o la aplicación del cambio jurisprudencial favorable</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong> Ejemplo:</strong> Si A fue condenado por homicidio basándose en el testimonio de B, y años después B es condenado en firme por falso testimonio respecto a esa declaración, A puede interponer acción de revisión por la causal 5ª (prueba falsa). Si prospera, se anula la condena y se devuelve el caso a otro despacho para nuevo juicio.
+    </div>
+  </section>
+
+  <!-- TEMA 7: COMPARATIVA CASACIÓN VS REVISIÓN -->
+  <section id="tema7">
+    <h2>7. Comparativa: Casación vs. Revisión</h2>
+    <p>Aunque ambos son mecanismos extraordinarios de impugnación, presentan diferencias fundamentales en su naturaleza, procedencia y efectos.</p>
+
+    <h3>📊 Tabla Comparativa</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Criterio</th>
+          <th>Casación</th>
+          <th>Revisión</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Naturaleza</strong></td>
+          <td>Recurso extraordinario dentro del proceso principal</td>
+          <td>Acción autónoma e independiente que genera un nuevo proceso</td>
+        </tr>
+        <tr>
+          <td><strong>Estado del fallo</strong></td>
+          <td>Contra sentencias de 2ª instancia <strong>no ejecutoriadas</strong></td>
+          <td>Contra <strong>sentencias ejecutoriadas</strong> (cosa juzgada)</td>
+        </tr>
+        <tr>
+          <td><strong>Plazo</strong></td>
+          <td>30 días siguientes a la ejecutoria formal (Art. 210, modificado por C-252/01)</td>
+          <td>En cualquier tiempo, con posterioridad a la ejecutoria (Art. 220)</td>
+        </tr>
+        <tr>
+          <td><strong>Competencia</strong></td>
+          <td>Exclusiva de la Sala de Casación Penal de la Corte Suprema</td>
+          <td>Corte Suprema o Tribunales Superiores según quien emitió el fallo</td>
+        </tr>
+        <tr>
+          <td><strong>Causales</strong></td>
+          <td>Violación de norma sustancial, inconsonancia, nulidad</td>
+          <td>Hechos/pruebas nuevas, falsedad, delito del juez, cambio jurisprudencial</td>
+        </tr>
+        <tr>
+          <td><strong>Efecto a no recurrentes</strong></td>
+          <td>Se extiende de pleno derecho (Art. 229)</td>
+          <td>Se extiende a no accionantes en idéntica situación (Art. 229)</td>
+        </tr>
+        <tr>
+          <td><strong>Desistimiento</strong></td>
+          <td>Antes de que la Sala emita decisión (Art. 230)</td>
+          <td>En cualquier estado antes del fallo rescisorio (Art. 230)</td>
+        </tr>
+        <tr>
+          <td><strong>Compatibilidad</strong></td>
+          <td colspan="2">Son compatibles entre sí, siempre que no se funden en los mismos hechos. La revisión se resuelve después de fallada la casación (Art. 231).</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>️ Regla de Compatibilidad (Art. 231)</h3>
+    <div class="alerta">
+      <strong>📌 Mandato legal expreso:</strong> El fallo de revisión solo puede dictarse <strong>una vez resuelta la casación</strong>.
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si A interpone casación contra su condena de segunda instancia, y simultáneamente su defensor radica una acción de revisión basada en pruebas nuevas sobrevinientes, ambos trámites son compatibles (por fundarse en situaciones fácticas diversas). Sin embargo, el fallo de revisión solo podrá proferirse una vez se haya resuelto la casación.
+    </div>
+  </section>
+
+  <!-- TEMA 8: CONTROL DE LEGALIDAD -->
+  <section id="tema8">
+    <h2>8. Control de Legalidad de Medidas de Aseguramiento (Art. 392)</h2>
+    <p>El Artículo 392 consagra un mecanismo de control jurisdiccional extraordinario diseñado para someter la autonomía instructiva de la Fiscalía General de la Nación al escrutinio formal y material del Juez de Conocimiento.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">CONTROL DE LEGALIDAD</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Contrapeso Judicial</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Errores Probatorios</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Condición Ineludible</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>⚖️ Contrapeso Judicial a la Autonomía Fiscal</h3>
+    <div class="alerta">
+      <strong>📌 Finalidad:</strong> Durante la instrucción, el Fiscal ejerce atribuciones de restricción de la libertad y afectación patrimonial. El control de legalidad opera como un <strong>dique de contención jurisdiccional</strong> para evitar abusos o valoraciones arbitrarias en la prueba mínima exigida para asegurar.
+    </div>
+
+    <h3>🔍 Causales Específicas de Legalidad Material (Errores Probatorios)</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">❌</div>
+        <h4>Supresión o Suposición Probatoria</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Cuando se supone una prueba inexistente o se deja de valorar erradamente una prueba determinante que obra en el sumario.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon"></div>
+        <h4>Distorsión del Contenido Probatorio</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Cuando se altera la inferencia lógica en la construcción de los indicios de responsabilidad o se viola la sana crítica.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon"></div>
+        <h4>Ilicitud Probatoria</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Cuando la prueba mínima de aseguramiento fue practicada o incorporada vulnerando los requisitos condicionantes de su validez constitucional o legal.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>⚠️ Condición Ineludible de Procedencia (Parágrafo 3° del Art. 392)</h3>
+    <div class="cita">
+      <strong>"Reconocido el error sólo procederá el control cuando desaparezca la prueba mínima para asegurar."</strong>
+    </div>
+
+    <div class="alerta">
+      <strong>📌 Implicación:</strong> La demostración de la falencia probatoria <strong>no revoca la medida</strong> si, a pesar del yerro reconocido, subsisten en el sumario otros elementos probatorios independientes que sostengan válidamente los dos indicios graves de responsabilidad.
+    </div>
+
+    <h3> Trámite y Ausencia de Recursos</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Etapa</th>
+          <th>Detalle</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Solicitud</strong></td>
+          <td>Ante el Fiscal por el procesado, su defensor o el Ministerio Público</td>
+        </tr>
+        <tr>
+          <td><strong>Remisión</strong></td>
+          <td>El Fiscal remite copias al Juez de Conocimiento (previa repartición)</td>
+        </tr>
+        <tr>
+          <td><strong>Traslado</strong></td>
+          <td>5 días comunes (si no se desecha de plano)</td>
+        </tr>
+        <tr>
+          <td><strong>Decisión</strong></td>
+          <td>5 días siguientes al traslado</td>
+        </tr>
+        <tr>
+          <td><strong>Recursos</strong></td>
+          <td><strong>No admite ningún recurso</strong></td>
+        </tr>
+        <tr>
+          <td><strong>Efecto en el proceso</strong></td>
+          <td>No suspende la ejecución de la medida ni el curso del proceso</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si la defensa demuestra que el Fiscal valoró erradamente un testimonio para imponer medida de aseguramiento, pero en el expediente persisten otros dos testimonios directos no afectados por el yerro, el Juez de Conocimiento NO revocará la medida porque subsiste la prueba mínima legal exigida (dos indicios graves de responsabilidad).
+    </div>
+  </section>
+
+  <!-- TEMA 9: NORMAS RECTORAS -->
+  <section id="tema9">
+    <h2>9. Normas Rectoras Integradoras (Arts. 1-24)</h2>
+    <p>El Título Preliminar de la Ley 600 de 2000 constituye el bloque dogmático de mayor jerarquía dentro del estatuto procesal. Sus disposiciones no son meros enunciados programáticos, sino normas obligatorias de prevalencia absoluta (Art. 24).</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">NORMAS RECTORAS</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Dignidad Humana</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Legalidad</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Defensa</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Investigación Integral</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Prevalencia</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3> Principios Rectores Integradores</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Artículo</th>
+          <th>Principio</th>
+          <th>Contenido Esencial</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Art. 1</strong></td>
+          <td>Dignidad Humana</td>
+          <td>Tratamiento con respeto debido a la condición humana de todos los sujetos procesales</td>
+        </tr>
+        <tr>
+          <td><strong>Art. 2</strong></td>
+          <td>Integración</td>
+          <td>Incorpora garantías constitucionales y tratados internacionales de DDHH (Nota: expresión "sin perjuicio del art. 94" declarada INEXEQUIBLE por C-760/01)</td>
+        </tr>
+        <tr>
+          <td><strong>Art. 6</strong></td>
+          <td>Legalidad y Favorabilidad</td>
+          <td>Nadie será juzgado sino conforme a la ley procesal vigente. La ley permisiva o favorable prevalece sobre la restrictiva, aun cuando sea posterior</td>
+        </tr>
+        <tr>
+          <td><strong>Art. 7</strong></td>
+          <td>Presunción de Inocencia e In Dubio Pro Reo</td>
+          <td>Toda persona se presume inocente hasta sentencia condenatoria en firme. Toda duda insuperable se resuelve a favor del procesado</td>
+        </tr>
+        <tr>
+          <td><strong>Art. 8</strong></td>
+          <td>Defensa Integral</td>
+          <td>Garantía ininterrumpida, técnica y material en todas las fases del proceso</td>
+        </tr>
+        <tr>
+          <td><strong>Arts. 11-12</strong></td>
+          <td>Juez Natural, Autonomía e Independencia</td>
+          <td>Prohibición de juzgamiento por autoridades ad hoc. Independencia absoluta frente a insinuaciones o exigencias de superiores</td>
+        </tr>
+        <tr>
+          <td><strong>Art. 13</strong></td>
+          <td>Contradicción y Motivación</td>
+          <td>Derecho a aportar y controvertir pruebas. Obligación de motivar razonadamente toda decisión que afecte derechos fundamentales</td>
+        </tr>
+        <tr>
+          <td><strong>Art. 16</strong></td>
+          <td>Prevalencia del Derecho Sustancial</td>
+          <td>Prevalencia de la verdad real y material sobre el formalismo instrumental</td>
+        </tr>
+        <tr>
+          <td><strong>Art. 20</strong></td>
+          <td>Investigación Integral</td>
+          <td>Deber estricto del funcionario judicial de averiguar con igual celo tanto lo favorable como lo desfavorable a los intereses del imputado</td>
+        </tr>
+        <tr>
+          <td><strong>Art. 24</strong></td>
+          <td>Prevalencia de las Normas Rectoras</td>
+          <td>Aplican con fuerza vinculante superior sobre cualquier otra disposición del código y rigen como marco hermenéutico obligatorio</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>⚡ Prevalencia Absoluta (Art. 24)</h3>
+    <div class="cita">
+      <strong>"Las Normas Rectoras del Título Preliminar son obligatorias, prevalecen de manera absoluta sobre cualquier otra disposición del código y sirven como marco hermenéutico obligatorio."</strong>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si existe un conflicto interpretativo entre una norma procedimental sobre notificaciones del Libro I y el principio de contradicción consagrado en el Título Preliminar, debe resolverse aplicando el Artículo 24 (Prevalencia), que establece que las Normas Rectoras prevalecen de manera absoluta.
+    </div>
+  </section>
+
+  <!-- TEMA 10: ACCIÓN DE TUTELA -->
+  <section id="tema10">
+    <h2>10. Acción de Tutela en el Proceso Penal</h2>
+    <p>La Acción de Tutela (Art. 86 Constitucional) procede de manera excepcional y subsidiaria contra providencias o actuaciones judiciales dentro del proceso penal cuando se configuran vías de hecho o defectos sustanciales que vulneren garantías procesales insubsanables.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">ACCIÓN DE TUTELA</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Excepcional</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Subsidiaria</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Vías de Hecho</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>⚠️ Criterios de Procedibilidad Excepcional</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🏛️</div>
+        <h4>Defecto Orgánico</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>La decisión es adoptada por un funcionario <strong>absolutamente carente de competencia</strong>.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📋</div>
+        <h4>Defecto Procedimental Absoluto</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>El juez actúa <strong>completamente al margen</strong> del procedimiento establecido por la ley.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🔍</div>
+        <h4>Defecto Fáctico</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Omisión o valoración <strong>arbitraria e irracional</strong> del acervo probatorio aportado.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">️</div>
+        <h4>Defecto Sustancial o Material</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>La decisión se fundamenta en normas <strong>inexistentes, inconstitucionales</strong> o con una interpretación irrazonable.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🚨</div>
+        <h4>Violación Directa de la Constitución</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Se vulneran de manera ostensible garantías como el derecho a la defensa, la presunción de inocencia o la libertad personal <strong>sin haber agotado los correctivos ordinarios</strong>.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>🔒 Requisito de Subsidiariedad e Inminencia</h3>
+    <div class="alerta">
+      <strong>📌 Debe demostrarse:</strong>
+      <ul>
+        <li><strong>Agotamiento previo</strong> de todos los medios ordinarios y extraordinarios de defensa (recursos de apelación, reposición o nulidades)</li>
+        <li>O acreditar la presencia de un <strong>perjuicio irremediable</strong> que justifique el amparo constitucional transitorio</li>
+      </ul>
+    </div>
+
+    <h3>📜 Principio de Subsidiariedad en la Ley 600 de 2000</h3>
+    <div class="cita">
+      <strong>"El estatuto de la Ley 600 de 2000 estructura un sistema comprensivo de salvaguardas internas: los recursos ordinarios, el incidente de nulidad, el control de legalidad del Artículo 392 y las acciones extraordinarias de casación y revisión. La Acción de Tutela contra providencias judiciales solo resulta procedente cuando se demuestre la ineficacia de los medios intraprocesales, la amenaza de un perjuicio irremediable, o la configuración de una vía de hecho."</strong>
+    </div>
+
+    <h3> Nota sobre el Habeas Corpus</h3>
+    <div class="alerta">
+      <strong>⚠️ Importante:</strong> Los Artículos 382 a 389 de la Ley 600 de 2000, que regulaban procesalmente el Habeas Corpus, fueron declarados <strong>INEXEQUIBLES</strong> por la Corte Constitucional mediante la <strong>Sentencia C-620 de 2001</strong>, por considerar que dicha garantía fundamental requería de una regulación exclusiva mediante Ley Estatutaria (posteriormente expedida mediante la <strong>Ley Estatutaria 1095 de 2006</strong> en desarrollo del artículo 30 superior).
+      <br><br>
+      No obstante, la vigencia del derecho fundamental a la libertad personal y la procedencia de la acción amparada en la Carta Política se mantuvieron incólumes de manera directa.
+    </div>
+
+    <div class="ejemplo">
+      <strong> Ejemplo de improcedencia:</strong> Si A interpone Acción de Tutela contra la resolución de acusación alegando indebida valoración probatoria, sin haber formulado el recurso de apelación ni el control de legalidad del Art. 392, la tutela es improcedente por vulnerar el principio de subsidiariedad.
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo de procedencia:</strong> Si el juez de la causa niega sistemáticamente el derecho de defensa técnica del procesado (defecto orgánico/procedimental absoluto) y agotados todos los recursos ordinarios persiste la vulneración, procede la Acción de Tutela como mecanismo residual de protección constitucional.
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz">
+    <h2>🎯 Quiz Completo - 40 Preguntas</h2>
+    <p>Pon a prueba tus conocimientos sobre Impugnaciones, Nulidades y Garantías Constitucionales en la Ley 600 de 2000.</p>
+
+    <div class="quiz-container">
+      <div class="quiz-header">
+        <h3> Tu Progreso</h3>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="quiz-stats">
+          <div class="stat">Respondidas: <strong id="respondidas">0</strong>/40</div>
+          <div class="stat">Correctas: <strong id="correctas">0</strong></div>
+          <div class="stat">Incorrectas: <strong id="incorrectas">0</strong></div>
+          <div class="stat">Porcentaje: <strong id="porcentaje">0</strong>%</div>
+        </div>
+      </div>
+
+      <div class="quiz-tabs">
+        <div class="quiz-tab active" onclick="mostrarSeccion('s1', this)">T1 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s2', this)">T2 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s3', this)">T3 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s4', this)">T4 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s5', this)">T5 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s6', this)">T6 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s7', this)">T7 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s8', this)">T8 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s9', this)">T9 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s10', this)">T10 (4)</div>
+      </div>
+
+      <!-- SECCIÓN 1: REPOSICIÓN -->
+      <div class="quiz-section active" id="s1">
+        <div class="pregunta" data-correcta="1" data-tema="1">
+          <span class="pregunta-num">1</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El recurso de reposición procede contra:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 1)">a) Solo sentencias</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">b) Providencias de sustanciación que deban notificarse, interlocutorias de primera/única instancia, y prescripción en segunda instancia no impugnada</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">c) Solo autos de sustanciación</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">d) Todas las providencias</div>
+          </div>
+          <div class="explicacion">El recurso de reposición procede contra providencias de sustanciación que deban notificarse, interlocutorias de primera o única instancia, y decisiones que declaren prescripción en segunda instancia cuando no hayan sido impugnadas (Art. 189).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="1">
+          <span class="pregunta-num">2</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La providencia que decide el recurso de reposición:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 2)">a) No es susceptible de recurso alguno, salvo excepciones taxativas</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">b) Siempre es apelable</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">c) Solo es impugnable por queja</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">d) Puede ser objeto de casación</div>
+          </div>
+          <div class="explicacion">La providencia que decide la reposición no es susceptible de recurso alguno, salvo excepciones taxativas: puntos nuevos o interés jurídico superviviente (Art. 190).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="1">
+          <span class="pregunta-num">3</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Si la reposición se interpone por escrito como impugnación única, el término para su sustentación es de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 3)">a) 1 día</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">b) 3 días</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">c) 2 días</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">d) 5 días</div>
+          </div>
+          <div class="explicacion">Vencido el término de ejecutoria, la secretaría deja el expediente a disposición del recurrente por 2 días para su sustentación (Art. 189).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="1">
+          <span class="pregunta-num">4</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Las excepciones a la inimpugnabilidad de la decisión de reposición son:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 4)">a) Puntos nuevos e interés jurídico superviviente</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">b) Solo puntos nuevos</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">c) Solo interés jurídico superviviente</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">d) Ninguna excepción</div>
+          </div>
+          <div class="explicacion">Las excepciones taxativas son: (1) Puntos Nuevos no decididos en la resolución inicial, y (2) Interés Jurídico Superviviente de algún sujeto procesal (div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 2: APELACIÓN -->
+      <div class="quiz-section" id="s2">
+        <div class="pregunta" data-correcta="1" data-tema="2">
+          <span class="pregunta-num">5</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El efecto suspensivo de la apelación:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 5)">a) No suspende nada</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">b) Suspende la competencia del inferior y la ejecución de la decisión hasta que decida la segunda instancia</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">c) Solo suspende la ejecución</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">d) Solo suspende la competencia</div>
+          </div>
+          <div class="explicacion">El efecto suspensivo suspende la competencia del funcionario de primera instancia desde que se profiere el auto que concede el recurso hasta que regresa el cuaderno original, y suspende de manera absoluta la ejecución de la providencia apelada (Art. 193).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="2">
+          <span class="pregunta-num">6</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El efecto diferido:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 6)">a) Suspende únicamente el cumplimiento de la providencia apelada (excepto libertad), pero el proceso continúa ante el inferior</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">b) Suspende todo el proceso</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">c) No suspende nada</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">d) Solo suspende la libertad</div>
+          </div>
+          <div class="explicacion">El efecto diferido suspende únicamente el cumplimiento de la providencia apelada (excepto en lo relativo a la libertad de las personas, que se cumple inmediatamente), pero el proceso continúa ante el inferior en todo lo que no dependa de la decisión impugnada (Art. 193).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="2">
+          <span class="pregunta-num">7</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El término para decidir recursos contra providencias interlocutorias en segunda instancia es de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 7)">a) 5 días</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">b) 15 días</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">c) 10 días</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">d) 20 días</div>
+          </div>
+          <div class="explicacion">Los recursos contra providencias interlocutorias se resuelven en 10 días (Art. 200).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="2">
+          <span class="pregunta-num">8</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El principio non reformatio in peius protege:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 8)">a) Solo al procesado</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">b) Solo a la parte civil</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">c) Solo al tercero civilmente responsable</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">d) Al procesado, parte civil y tercero civilmente responsable cuando actúan como apelantes únicos</div>
+          </div>
+          <div class="explicacion">La prohibición de reformatio in peius protege al procesado, la parte civil y el tercero civilmente responsable cuando recurren en calidad de apelantes únicos (Arts. 18 y 204).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 3: QUEJA -->
+      <div class="quiz-section" id="s3">
+        <div class="pregunta" data-correcta="1" data-tema="3">
+          <span class="pregunta-num">9</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El recurso de queja procede cuando:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 9)">a) Se deniega la reposición</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">b) El inferior deniega de manera injustificada o improcedente la concesión del recurso de apelación</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">c) Se niega la casación</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">d) Se niega la revisión</div>
+          </div>
+          <div class="explicacion">La queja procede cuando el funcionario de primera instancia deniega de manera injustificada o improcedente la concesión del recurso de apelación (Arts. 195-198).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="3">
+          <span class="pregunta-num">10</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El término perentorio para que la secretaría compulsar las copias en la queja es de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 10)">a) 1 día</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">b) 2 días</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">c) 3 días</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">d) 5 días</div>
+          </div>
+          <div class="explicacion">El término perentorio e improrrogable fijado por la ley es de 1 día (Art. 196).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="3">
+          <span class="pregunta-num">11</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El término para sustentar la queja ante el superior es de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="selectar(this, 11)">a) 1 día</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">b) 2 días</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">c) 3 días tras el recibo de copias</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">d) 5 días</div>
+          </div>
+          <div class="explicacion">El recurrente sustenta la queja dentro de los 3 días siguientes al recibo de las copias.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="3">
+          <span class="pregunta-num">12</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Si el superior declara fundada la queja:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 12)">a) Archiva el caso</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">b) Condena al inferior</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">c) Remite a la Corte Suprema</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">d) Concede la apelación, determina el efecto y comunica al inferior</div>
+          </div>
+          <div class="explicacion">Si declara fundada la queja, el superior concede la apelación, determina el efecto y comunica al inferior.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 4: NULIDADES -->
+      <div class="quiz-section" id="s4">
+        <div class="pregunta" data-correcta="1" data-tema="4">
+          <span class="pregunta-num">13</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La inexistencia procesal (Art. 305) opera cuando:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 13)">a) Hay falta de competencia</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">b) No participa efectivamente el abogado defensor en diligencias con asistencia del procesado</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">c) Se viola el derecho de defensa</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">d) Hay irregularidades sustanciales</div>
+          </div>
+          <div class="explicacion">La inexistencia procesal opera ipso iure respecto de diligencias practicadas con la asistencia del procesado en las que no haya participado efectivamente su abogado defensor (Art. 305).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="4">
+          <span class="pregunta-num">14</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Durante la fase de investigación, la falta de competencia por el factor territorial:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 14)">a) No genera nulidad</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">b) Siempre genera nulidad</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">c) Solo genera nulidad si es grave</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">d) Genera inexistencia</div>
+          </div>
+          <div class="explicacion">Durante las etapas de investigación previa e instrucción, la falta de competencia por el factor territorial NO genera nulidad del proceso (numeral 1 del Art. 306).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="4">
+          <span class="pregunta-num">15</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El principio de instrumentalidad de las formas establece que:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 15)">a) Siempre se declaran nulidades</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">b) Las formas son irrelevantes</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">c) No se declarará la invalidez cuando el acto haya cumplido su finalidad procesal sin conculcar la defensa</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">d) Solo aplica en segunda instancia</div>
+          </div>
+          <div class="explicacion">No se declarará la invalidez de un acto cuando este, a pesar de la irregularidad, haya cumplido la finalidad procesal para la cual estaba destinado, siempre que no se margine ni conculque el derecho de defensa (numeral 1 del Art. 310).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="4">
+          <span class="pregunta-num">16</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Las nulidades pueden invocarse:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 16)">a) Solo en primera instancia</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">b) Solo en la audiencia preparatoria</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">c) Solo antes de la sentencia</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">d) En cualquier estado o fase de la actuación</div>
+          </div>
+          <div class="explicacion">Las nulidades pueden invocarse en cualquier estado o fase de la actuación (Art. 308).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 5: CASACIÓN -->
+      <div class="quiz-section" id="s5">
+        <div class="pregunta" data-correcta="1" data-tema="5">
+          <span class="pregunta-num">17</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La casación ordinaria procede contra sentencias de segunda instancia por delitos con pena máxima:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 17)">a) Superior a 4 años</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">b) Superior a 8 años</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">c) Superior a 10 años</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">d) Superior a 15 años</div>
+          </div>
+          <div class="explicacion">La casación ordinaria procede contra sentencias de segunda instancia por delitos con pena privativa de la libertad cuyo límite máximo exceda de 8 años de prisión (Art. 205).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="5">
+          <span class="pregunta-num">18</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El término para interponer la demanda de casación es de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 18)">a) 30 días siguientes a la ejecutoria de la sentencia de segunda instancia</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">b) 15 días</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">c) 60 días</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">d) 10 días</div>
+          </div>
+          <div class="explicacion">El plazo perentorio es de 30 días siguientes a la ejecutoria de la sentencia de segunda instancia (Art. 210, modificado por C-252/01).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="5">
+          <span class="pregunta-num">19</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La casación de oficio (Art. 216) procede cuando la Corte advierte:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 19)">a) Solo errores formales</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">b) Solo defectos de procedimiento</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">c) Violaciones ostensibles a garantías fundamentales o prescripción de la acción</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">d) Solo inconsonancia</div>
+          </div>
+          <div class="explicacion">La Corte ostenta la facultad y el deber de casar de oficio cuando advierta violaciones ostensibles a las garantías fundamentales o la prescripción de la acción (Art. 216).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="5">
+          <span class="pregunta-num">20</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El concepto del Procurador Delegado en lo Penal en casación es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 20)">a) Opcional</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">b) Solo vinculante</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">c) Solo orientativo</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">d) Obligatorio</div>
+          </div>
+          <div class="explicacion">El concepto del Procurador Delegado en lo Penal es obligatorio (Art. 213).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 6: REVISIÓN -->
+      <div class="quiz-section" id="s6">
+        <div class="pregunta" data-correcta="1" data-tema="6">
+          <span class="pregunta-num">21</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La acción de revisión procede contra:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 21)">a) Solo sentencias de primera instancia</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">b) Sentencias ejecutoriadas (cosa juzgada)</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">c) Autos interlocutorios</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">d) Providencias de sustanciación</div>
+          </div>
+          <div class="explicacion">La revisión procede exclusivamente contra sentencias ejecutoriadas (cosa juzgada) (Art. 220).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="6">
+          <span class="pregunta-num">22</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La causal de revisión por "hechos o pruebas nuevas" requiere que:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 22)">a) Establezcan la inocencia o inimputabilidad del condenado</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">b) Solo sean relevantes</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">c) Solo sean documentales</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">d) Solo sean testimoniales</div>
+          </div>
+          <div class="explicacion">La causal 3ª requiere la aparición de hechos nuevos o pruebas sobrevinientes no conocidas en los debates del juicio, que establezcan la inocencia o inimputabilidad del condenado (Art. 220).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="6">
+          <span class="pregunta-num">23</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Las causales 4ª y 5ª de revisión (delito del juez/tercero o prueba falsa) aplican también contra:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 23)">a) Solo sentencias condenatorias</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">b) Solo absoluciones</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">c) Preclusiones, cesaciones y absoluciones</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">d) Solo autos interlocutorios</div>
+          </div>
+          <div class="explicacion">Las causales 4ª y 5ª aplican también contra preclusiones, cesaciones y absoluciones (inciso final del Art. 220).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="6">
+          <span class="pregunta-num">24</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Si prospera la revisión, el fallo atacado:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 24)">a) Se mantiene</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">b) Se modifica parcialmente</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">c) Se confirma</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">d) Se anula y se otorga libertad provisional caucionada</div>
+          </div>
+          <div class="explicacion">De prosperar la revisión, se anula el fallo atacado, se otorga libertad provisional caucionada y se devuelve la actuación a otro despacho de igual categoría (Art. 227).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 7: COMPARATIVA -->
+      <div class="quiz-section" id="s7">
+        <div class="pregunta" data-correcta="1" data-tema="7">
+          <span class="pregunta-num">25</span><span class="pregunta-tipo">Comparación</span>
+          <p>La diferencia fundamental entre casación y revisión es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 25)">a) No hay diferencia</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">b) La casación es recurso contra sentencias no ejecutoriadas; la revisión es acción autónoma contra sentencias ejecutoriadas</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">c) La revisión es más rápida</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">d) La casación solo aplica en civil</div>
+          </div>
+          <div class="explicacion">La casación es recurso extraordinario contra sentencias de 2ª instancia no ejecutoriadas; la revisión es acción autónoma contra sentencias ejecutoriadas (cosa juzgada).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="7">
+          <span class="pregunta-num">26</span><span class="pregunta-tipo">Comparación</span>
+          <p>Respecto a la compatibilidad entre casación y revisión:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 26)">a) Son compatibles siempre que no se funden en los mismos hechos, y la revisión se resuelve después de la casación</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">b) Son incompatibles</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">c) Solo aplica la casación</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">d) Solo aplica la revisión</div>
+          </div>
+          <div class="explicacion">Son compatibles entre sí, siempre que no se funden en los mismos hechos. La revisión se resuelve después de fallada la casación (Art. 231).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="7">
+          <span class="pregunta-num">27</span><span class="pregunta-tipo">Comparación</span>
+          <p>El plazo de interposición de la revisión es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 27)">a) 30 días</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">b) 60 días</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">c) En cualquier tiempo</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">d) 1 año</div>
+          </div>
+          <div class="explicacion">La revisión puede interponerse en cualquier tiempo, con posterioridad a la ejecutoria de la sentencia o providencia (Art. 220).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="7">
+          <span class="pregunta-num">28</span><span class="pregunta-tipo">Comparación</span>
+          <p>La competencia para la casación es exclusiva de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 28)">a) Los Tribunales Superiores</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">b) El Consejo de Estado</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">c) La Corte Constitucional</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">d) La Sala de Casación Penal de la Corte Suprema de Justicia</div>
+          </div>
+          <div class="explicacion">La casación penal es competencia exclusiva de la Sala de Casación Penal de la Corte Suprema de Justicia.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 8: CONTROL DE LEGALIDAD -->
+      <div class="quiz-section" id="s8">
+        <div class="pregunta" data-correcta="1" data-tema="8">
+          <span class="pregunta-num">29</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El control de legalidad del Art. 392 opera como:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 29)">a) Recurso ordinario</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">b) Mecanismo de contrapeso judicial a la autonomía fiscal</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">c) Acción de tutela</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">d) Recurso de queja</div>
+          </div>
+          <div class="explicacion">El Art. 392 consagra un mecanismo de control jurisdiccional extraordinario diseñado para someter la autonomía instructiva de la Fiscalía al escrutinio del Juez de Conocimiento.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="8">
+          <span class="pregunta-num">30</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La condición ineludible para que proceda el control de legalidad es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 30)">a) Que desaparezca la prueba mínima para asegurar</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">b) Que haya error probatorio</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">c) Que lo solicite la defensa</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">d) Que el Fiscal lo autorice</div>
+          </div>
+          <div class="explicacion">El parágrafo 3° del Art. 392 exige: "Reconocido el error sólo procederá el control cuando desaparezca la prueba mínima para asegurar".</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="8">
+          <span class="pregunta-num">31</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Las decisiones del Juez de Conocimiento en el control de legalidad:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 31)">a) Son apelables</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">b) Son susceptibles de reposición</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">c) No admiten recurso alguno</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">d) Son susceptibles de queja</div>
+          </div>
+          <div class="explicacion">Las decisiones tomadas por el Juez de Conocimiento en este control no admiten ningún recurso (inciso final del Art. 392).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="8">
+          <span class="pregunta-num">32</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El trámite del control de legalidad:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 32)">a) Suspende la medida</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">b) Suspende el proceso</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">c) Suspende la ejecución</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">d) No suspende la ejecución de la medida ni el curso del proceso</div>
+          </div>
+          <div class="explicacion">El trámite no suspende la ejecución de la providencia atacada ni el curso de la actuación (inciso 4° del Art. 392).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 9: NORMAS RECTORAS -->
+      <div class="quiz-section" id="s9">
+        <div class="pregunta" data-correcta="1" data-tema="9">
+          <span class="pregunta-num">33</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El principio de Investigación Integral (Art. 20) obliga al funcionario a:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 33)">a) Solo investigar lo desfavorable al imputado</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">b) Averiguar con igual celo tanto lo favorable como lo desfavorable a los intereses del imputado</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">c) Solo investigar lo favorable</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">d) Delegar la investigación a la defensa</div>
+          </div>
+          <div class="explicacion">El Art. 20 impone el deber estricto de averiguar con igual celo tanto lo favorable como lo desfavorable a los intereses del imputado.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="9">
+          <span class="pregunta-num">34</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El principio de Legalidad y Favorabilidad (Art. 6) establece que:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 34)">a) La ley procesal de efectos sustanciales permisiva o favorable prevalece sobre la restrictiva, aun cuando sea posterior</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">b) Siempre se aplica la ley más reciente</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">c) Siempre se aplica la ley más antigua</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">d) El juez decide cuál aplicar</div>
+          </div>
+          <div class="explicacion">La ley procesal de efectos sustanciales permisiva o favorable prevalece de manera absoluta sobre la restrictiva o desfavorable, aun cuando sea posterior (Art. 6).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="9">
+          <span class="pregunta-num">35</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El principio de Prevalencia de las Normas Rectoras (Art. 24) establece que:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 35)">a) Son orientativas</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">b) Solo aplican en primera instancia</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">c) Prevalecen de manera absoluta sobre cualquier otra disposición del código</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">d) Solo aplican en casación</div>
+          </div>
+          <div class="explicacion">Las Normas Rectoras del Título Preliminar son obligatorias, prevalecen de manera absoluta sobre cualquier otra disposición del código y sirven como marco hermenéutico obligatorio (Art. 24).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="9">
+          <span class="pregunta-num">36</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La expresión "sin perjuicio del art. 94" del Art. 2 fue declarada:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 36)">a) Exequible</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">b) Condicionada</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">c) Vigente</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">d) INEXEQUIBLE por la Sentencia C-760 de 2001</div>
+          </div>
+          <div class="explicacion">La expresión "sin perjuicio del art. 94" fue declarada INEXEQUIBLE por la Corte Constitucional mediante Sentencia C-760 de 2001.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 10: TUTELA -->
+      <div class="quiz-section" id="s10">
+        <div class="pregunta" data-correcta="1" data-tema="10">
+          <span class="pregunta-num">37</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La Acción de Tutela contra providencias judiciales en la Ley 600 de 2000 procede:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 37)">a) Siempre</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">b) De manera excepcional y subsidiaria cuando se demuestre ineficacia de medios intraprocesales o vías de hecho</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">c) Nunca</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">d) Solo en primera instancia</div>
+          </div>
+          <div class="explicacion">La Acción de Tutela solo resulta procedente cuando se demuestre la ineficacia de los medios intraprocesales, la amenaza de un perjuicio irremediable, o la configuración de una vía de hecho.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="10">
+          <span class="pregunta-num">38</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El defecto fáctico en la tutela contra providencias judiciales se configura cuando:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 38)">a) Hay omisión o valoración arbitraria e irracional del acervo probatorio</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">b) El juez es incompetente</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">c) No se motiva la decisión</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">d) Se aplica norma inconstitucional</div>
+          </div>
+          <div class="explicacion">El defecto fáctico consiste en la omisión o valoración arbitraria e irracional del acervo probatorio aportado.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="10">
+          <span class="pregunta-num">39</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los Artículos 382 a 389 de la Ley 600 de 2000 sobre Habeas Corpus fueron declarados:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 39)">a) Exequibles</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">b) Vigentes</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">c) INEXEQUIBLES por la Sentencia C-620 de 2001</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">d) Condicionados</div>
+          </div>
+          <div class="explicacion">Los Arts. 382-389 fueron declarados INEXEQUIBLES por la Corte Constitucional mediante Sentencia C-620 de 2001, por requerir regulación mediante Ley Estatutaria (Ley 1095 de 2006).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="10">
+          <span class="pregunta-num">40</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El requisito de subsidiariedad de la tutela exige:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 40)">a) Solo agotar la reposición</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">b) Solo agotar la apelación</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">c) Solo agotar la casación</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">d) Agotamiento previo de todos los medios ordinarios y extraordinarios de defensa, o acreditar perjuicio irremediable</div>
+          </div>
+          <div class="explicacion">Debe demostrarse el agotamiento previo de todos los medios ordinarios y extraordinarios de defensa (recursos de apelación, reposición o nulidades) o acreditar la presencia de un perjuicio irremediable.</div>
+        </div>
+      </div>
+
+      <div class="resultado-final" id="resultadoFinal">
+        <h3>🏆 Resultado Final</h3>
+        <div class="puntaje-final" id="puntajeFinal">0/40</div>
+        <p id="mensajeFinal"></p>
+        <div class="desglose-temas" id="desgloseTemas"></div>
+        <button onclick="reiniciarQuiz()" class="btn-reset">🔄 Reiniciar Quiz</button>
+      </div>
+
+      <div style="text-align: center; margin-top: 1.5rem;">
+        <button onclick="verResultadoFinal()">📊 Ver Resultado Final</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>️ Guía Didáctica - Impugnaciones, Nulidades y Garantías</p>
+  <p>Ley 600 de 2000 · Sistema Inquisitivo Mitogado</p>
+  <p style="margin-top: 1rem; opacity: 0.7;">© 2026 - Material educativo interactivo</p>
+</footer>
+
+<script>
+  function toggleAcordeon(header) {
+    header.classList.toggle('active');
+    const content = header.nextElementSibling;
+    content.classList.toggle('active');
+  }
+
+  let respuestas = {};
+  const totalPreguntas = 40;
+
+  function mostrarSeccion(id, tab) {
+    document.querySelectorAll('.quiz-section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.quiz-tab').forEach(t => t.classList.remove('active'));
+    
+    document.getElementById(id).classList.add('active');
+    tab.classList.add('active');
+  }
+
+  function seleccionar(opcion, preguntaNum) {
+    if (respuestas[preguntaNum] !== undefined) return;
+
+    const pregunta = opcion.closest('.pregunta');
+    const opciones = pregunta.querySelectorAll('.opcion');
+    const correcta = parseInt(pregunta.dataset.correcta);
+    const tema = parseInt(pregunta.dataset.tema);
+    const seleccionada = Array.from(opciones).indexOf(opcion);
+    const explicacion = pregunta.querySelector('.explicacion');
+
+    opciones.forEach(o => o.classList.add('disabled'));
+
+    if (seleccionada === correcta) {
+      opcion.classList.add('correcta');
+      respuestas[preguntaNum] = { correcta: true, tema: tema };
+    } else {
+      opcion.classList.add('incorrecta');
+      opciones[correcta].classList.add('correcta');
+      respuestas[preguntaNum] = { correcta: false, tema: tema };
+    }
+
+    explicacion.classList.add('visible');
+    pregunta.classList.add('answered');
+    actualizarEstadisticas();
+  }
+
+  function actualizarEstadisticas() {
+    const total = Object.keys(respuestas).length;
+    const correctas = Object.values(respuestas).filter(r => r.correcta).length;
+    const incorrectas = total - correctas;
+    const porcentaje = total > 0 ? Math.round((correctas / total) * 100) : 0;
+
+    document.getElementById('respondidas').textContent = total;
+    document.getElementById('correctas').textContent = correctas;
+    document.getElementById('incorrectas').textContent = incorrectas;
+    document.getElementById('porcentaje').textContent = porcentaje;
+
+    const progreso = (total / totalPreguntas) * 100;
+    document.getElementById('progressFill').style.width = progreso + '%';
+  }
+
+  function verResultadoFinal() {
+    const total = Object.keys(respuestas).length;
+    
+    if (total < totalPreguntas) {
+      alert(`⚠️ Aún te faltan ${totalPreguntas - total} preguntas por responder.`);
+      return;
+    }
+
+    const correctas = Object.values(respuestas).filter(r => r.correcta).length;
+    const porcentaje = Math.round((correctas / totalPreguntas) * 100);
+
+    const resultadoFinal = document.getElementById('resultadoFinal');
+    resultadoFinal.classList.add('visible');
+
+    document.getElementById('puntajeFinal').textContent = `${correctas}/${totalPreguntas}`;
+
+    let mensaje = '';
+    if (porcentaje === 100) mensaje = '🏆 ¡PERFECTO! Dominas las Impugnaciones, Nulidades y Garantías de la Ley 600 de 2000.';
+    else if (porcentaje >= 90) mensaje = '🌟 ¡Excelente! Dominio sobresaliente.';
+    else if (porcentaje >= 75) mensaje = '✅ ¡Muy bien! Buen dominio.';
+    else if (porcentaje >= 60) mensaje = '📚 Aceptable. Repasa los temas donde fallaste.';
+    else if (porcentaje >= 40) mensaje = '📖 Necesitas reforzar varios conceptos.';
+    else mensaje = '🔍 Es necesario estudiar nuevamente todos los temas.';
+
+    document.getElementById('mensajeFinal').textContent = mensaje;
+
+    const temas = {
+      1: { nombre: 'T1: Reposición', total: 4, correctas: 0 },
+      2: { nombre: 'T2: Apelación', total: 4, correctas: 0 },
+      3: { nombre: 'T3: Queja', total: 4, correctas: 0 },
+      4: { nombre: 'T4: Nulidades', total: 4, correctas: 0 },
+      5: { nombre: 'T5: Casación', total: 4, correctas: 0 },
+      6: { nombre: 'T6: Revisión', total: 4, correctas: 0 },
+      7: { nombre: 'T7: Comparativa', total: 4, correctas: 0 },
+      8: { nombre: 'T8: Control Legalidad', total: 4, correctas: 0 },
+      9: { nombre: 'T9: Normas Rectoras', total: 4, correctas: 0 },
+      10: { nombre: 'T10: Tutela', total: 4, correctas: 0 }
+    };
+
+    Object.values(respuestas).forEach(r => {
+      if (r.correcta) temas[r.tema].correctas++;
+    });
+
+    const desgloseHTML = Object.values(temas).map(t => {
+      const pct = Math.round((t.correctas / t.total) * 100);
+      return `
+        <div class="desglose-item">
+          <h4>${t.nombre}</h4>
+          <p>${t.correctas}/${t.total} (${pct}%)</p>
+          <div class="mini-bar">
+            <div class="mini-bar-fill" style="width: ${pct}%"></div>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    document.getElementById('desgloseTemas').innerHTML = desgloseHTML;
+    resultadoFinal.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  function reiniciarQuiz() {
+    if (!confirm('¿Reiniciar el quiz?')) return;
+
+    respuestas = {};
+
+    document.querySelectorAll('.opcion').forEach(o => o.classList.remove('correcta', 'incorrecta', 'disabled'));
+    document.querySelectorAll('.explicacion').forEach(e => e.classList.remove('visible'));
+    document.querySelectorAll('.pregunta').forEach(p => p.classList.remove('answered'));
+    document.getElementById('resultadoFinal').classList.remove('visible');
+
+    actualizarEstadisticas();
+    mostrarSeccion('s1', document.querySelector('.quiz-tab'));
+    document.getElementById('quiz').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  document.querySelectorAll('nav a').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+</script>
+
+</body>
+</html>
