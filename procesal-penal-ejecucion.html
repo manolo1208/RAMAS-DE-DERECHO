@@ -1,0 +1,1800 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ejecución de Penas y Medidas de Seguridad - Ley 906 de 2004</title>
+<style>
+  :root {
+    --primary: #7f1d1d;
+    --secondary: #fbbf24;
+    --accent: #991b1b;
+    --light: #fef3f2;
+    --dark: #1a202c;
+    --success: #38a169;
+    --warning: #d69e2e;
+    --danger: #c53030;
+    --card-bg: #ffffff;
+    --shadow: 0 4px 15px rgba(0,0,0,0.08);
+    --shadow-hover: 0 8px 25px rgba(0,0,0,0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    background: var(--light);
+    color: var(--dark);
+    line-height: 1.7;
+  }
+
+  header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    color: white;
+    padding: 2rem 1rem;
+    text-align: center;
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::before {
+    content: '⚖️';
+    position: absolute;
+    font-size: 15rem;
+    opacity: 0.05;
+    top: -30px;
+    right: -30px;
+  }
+
+  header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: 2px;
+  }
+
+  header p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    font-style: italic;
+  }
+
+  nav {
+    background: var(--dark);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow);
+  }
+
+  nav ul {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0.5rem;
+  }
+
+  nav a {
+    color: var(--light);
+    text-decoration: none;
+    padding: 0.7rem 1rem;
+    margin: 0.2rem;
+    border-radius: 5px;
+    font-size: 0.7rem;
+    transition: all 0.3s;
+    display: block;
+  }
+
+  nav a:hover {
+    background: var(--secondary);
+    color: var(--dark);
+    transform: translateY(-2px);
+  }
+
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+  }
+
+  section {
+    background: var(--card-bg);
+    margin-bottom: 2.5rem;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    border-left: 5px solid var(--secondary);
+    scroll-margin-top: 80px;
+  }
+
+  section h2 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--secondary);
+  }
+
+  section h3 {
+    color: var(--accent);
+    font-size: 1.4rem;
+    margin: 1.5rem 0 0.8rem;
+  }
+
+  section h4 {
+    color: var(--primary);
+    font-size: 1.15rem;
+    margin: 1rem 0 0.5rem;
+  }
+
+  p { margin-bottom: 1rem; text-align: justify; }
+
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.2rem;
+    margin: 1.5rem 0;
+  }
+
+  .card {
+    background: linear-gradient(135deg, #fff 0%, #f9f6ef 100%);
+    border: 2px solid var(--secondary);
+    border-radius: 10px;
+    padding: 1.2rem;
+    transition: all 0.3s;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--primary);
+  }
+
+  .card .icon {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .card h4 {
+    text-align: center;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+  }
+
+  .card .detail {
+    display: none;
+    margin-top: 0.8rem;
+    padding-top: 0.8rem;
+    border-top: 1px dashed var(--secondary);
+    font-size: 0.95rem;
+  }
+
+  .card.active .detail { display: block; }
+
+  .card .hint {
+    text-align: center;
+    color: var(--accent);
+    font-size: 0.85rem;
+    font-style: italic;
+  }
+
+  .mapa-container {
+    background: #fdfbf5;
+    border: 2px dashed var(--secondary);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    overflow-x: auto;
+  }
+
+  .mapa {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 600px;
+  }
+
+  .nodo {
+    background: var(--primary);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+    font-weight: bold;
+    text-align: center;
+    min-width: 180px;
+    box-shadow: var(--shadow);
+  }
+
+  .nodo.central {
+    background: linear-gradient(135deg, var(--secondary), #e0b888);
+    color: var(--dark);
+    font-size: 1.2rem;
+    padding: 1rem 2rem;
+  }
+
+  .nodo.sub {
+    background: var(--accent);
+    font-size: 0.95rem;
+  }
+
+  .linea {
+    width: 3px;
+    height: 25px;
+    background: var(--secondary);
+  }
+
+  .linea-h {
+    height: 3px;
+    background: var(--secondary);
+    width: 80%;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .rama {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 1rem;
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  .rama-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    min-width: 140px;
+  }
+
+  .ejemplo {
+    background: #e6f7ee;
+    border-left: 4px solid var(--success);
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .ejemplo strong { color: var(--success); }
+
+  .alerta {
+    background: #fff8e1;
+    border-left: 4px solid var(--warning);
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .alerta strong { color: var(--warning); }
+
+  .cita {
+    background: #f0f7ff;
+    border-left: 4px solid var(--accent);
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+    color: var(--primary);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    font-size: 0.9rem;
+  }
+
+  th {
+    background: var(--primary);
+    color: white;
+    padding: 0.8rem;
+    text-align: left;
+  }
+
+  td {
+    padding: 0.8rem;
+    border-bottom: 1px solid #eee;
+  }
+
+  tr:nth-child(even) { background: #f9f6ef; }
+  tr:hover { background: #f0ead6; }
+
+  .quiz-container {
+    background: linear-gradient(135deg, #f7f4ed 0%, #fff 100%);
+    padding: 1.5rem;
+    border-radius: 10px;
+    border: 2px solid var(--accent);
+  }
+
+  .quiz-header {
+    background: var(--primary);
+    color: white;
+    padding: 1.2rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .quiz-header h3 {
+    color: white;
+    margin: 0 0 0.5rem 0;
+  }
+
+  .progress-bar {
+    background: rgba(255,255,255,0.2);
+    height: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+  }
+
+  .progress-fill {
+    background: var(--secondary);
+    height: 100%;
+    width: 0%;
+    transition: width 0.4s ease;
+  }
+
+  .quiz-stats {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .stat {
+    background: rgba(255,255,255,0.1);
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    font-size: 0.9rem;
+  }
+
+  .stat strong { color: var(--secondary); }
+
+  .quiz-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    padding: 0.5rem;
+    background: #f0ead6;
+    border-radius: 8px;
+  }
+
+  .quiz-tab {
+    background: white;
+    border: 2px solid var(--accent);
+    color: var(--accent);
+    padding: 0.5rem 0.8rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.7rem;
+    transition: all 0.3s;
+    flex: 1;
+    min-width: 70px;
+    text-align: center;
+  }
+
+  .quiz-tab:hover {
+    background: var(--accent);
+    color: white;
+  }
+
+  .quiz-tab.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+  }
+
+  .quiz-section {
+    display: none;
+  }
+
+  .quiz-section.active {
+    display: block;
+    animation: fadeIn 0.4s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .pregunta {
+    margin-bottom: 1.5rem;
+    padding: 1.2rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    border-left: 4px solid var(--accent);
+    transition: all 0.3s;
+  }
+
+  .pregunta.answered {
+    border-left-color: var(--secondary);
+  }
+
+  .pregunta-num {
+    display: inline-block;
+    background: var(--accent);
+    color: white;
+    padding: 0.2rem 0.7rem;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    margin-right: 0.5rem;
+  }
+
+  .pregunta-tipo {
+    display: inline-block;
+    background: var(--secondary);
+    color: var(--dark);
+    padding: 0.2rem 0.7rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    margin-left: 0.3rem;
+    font-weight: bold;
+  }
+
+  .pregunta p { 
+    font-weight: bold; 
+    color: var(--primary); 
+    margin: 0.8rem 0;
+    text-align: left;
+  }
+
+  .opciones { display: flex; flex-direction: column; gap: 0.5rem; }
+
+  .opcion {
+    padding: 0.7rem 1rem;
+    background: #f9f6ef;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+  }
+
+  .opcion:hover:not(.disabled) {
+    border-color: var(--accent);
+    background: #e8f0f7;
+  }
+
+  .opcion.disabled {
+    cursor: not-allowed;
+    opacity: 0.85;
+  }
+
+  .opcion.correcta {
+    background: #c6f6d5;
+    border-color: var(--success);
+    color: var(--success);
+    font-weight: bold;
+  }
+
+  .opcion.incorrecta {
+    background: #fed7d7;
+    border-color: var(--danger);
+    color: var(--danger);
+  }
+
+  .opcion.correcta::after {
+    content: ' ✓';
+    font-weight: bold;
+  }
+
+  .opcion.incorrecta::after {
+    content: ' ✗';
+    font-weight: bold;
+  }
+
+  .explicacion {
+    margin-top: 0.8rem;
+    padding: 0.8rem;
+    background: #f0f7ff;
+    border-left: 3px solid var(--accent);
+    border-radius: 0 6px 6px 0;
+    font-size: 0.9rem;
+    display: none;
+    font-style: italic;
+  }
+
+  .explicacion.visible {
+    display: block;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .resultado-final {
+    margin-top: 2rem;
+    padding: 2rem;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    color: white;
+    border-radius: 12px;
+    text-align: center;
+    display: none;
+  }
+
+  .resultado-final.visible {
+    display: block;
+    animation: fadeIn 0.5s ease;
+  }
+
+  .resultado-final h3 {
+    color: var(--secondary);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .puntaje-final {
+    font-size: 3rem;
+    font-weight: bold;
+    color: var(--secondary);
+    margin: 1rem 0;
+  }
+
+  .desglose-temas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+    text-align: left;
+  }
+
+  .desglose-item {
+    background: rgba(255,255,255,0.1);
+    padding: 1rem;
+    border-radius: 8px;
+  }
+
+  .desglose-item h4 {
+    color: var(--secondary);
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+  }
+
+  .mini-bar {
+    background: rgba(255,255,255,0.2);
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+  }
+
+  .mini-bar-fill {
+    background: var(--secondary);
+    height: 100%;
+    transition: width 0.6s ease;
+  }
+
+  button {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 1rem;
+    transition: all 0.3s;
+  }
+
+  button:hover {
+    background: var(--secondary);
+    color: var(--dark);
+    transform: translateY(-2px);
+  }
+
+  .btn-reset {
+    background: var(--danger);
+    margin-left: 0.5rem;
+  }
+
+  .btn-reset:hover {
+    background: #9b2c2c;
+    color: white;
+  }
+
+  .acordeon-item {
+    margin-bottom: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .acordeon-header {
+    background: var(--accent);
+    color: white;
+    padding: 1rem;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.3s;
+  }
+
+  .acordeon-header:hover { background: var(--primary); }
+
+  .acordeon-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    background: white;
+  }
+
+  .acordeon-content.active {
+    max-height: 2000px;
+    padding: 1rem;
+  }
+
+  .flecha { transition: transform 0.3s; }
+  .acordeon-header.active .flecha { transform: rotate(180deg); }
+
+  footer {
+    background: var(--dark);
+    color: var(--light);
+    text-align: center;
+    padding: 2rem 1rem;
+    margin-top: 2rem;
+  }
+
+  footer p { margin-bottom: 0.5rem; }
+
+  @media (max-width: 768px) {
+    header h1 { font-size: 1.8rem; }
+    section { padding: 1.2rem; }
+    section h2 { font-size: 1.5rem; }
+    nav a { font-size: 0.6rem; padding: 0.3rem 0.4rem; }
+    .quiz-tab { font-size: 0.6rem; padding: 0.3rem 0.4rem; }
+    table { font-size: 0.8rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>⚖️ Ejecución de Penas y Medidas de Seguridad</h1>
+  <p>Libro Cuarto de la Ley 906 de 2004 · Guía Didáctica Interactiva</p>
+</header>
+
+<nav>
+  <ul>
+    <li><a href="#tema1">1. Ejecución Penas</a></li>
+    <li><a href="#tema2">2. Med. Seguridad</a></li>
+    <li><a href="#tema3">3. Lib. Condicional</a></li>
+    <li><a href="#tema4">4. Susp. Condicional</a></li>
+    <li><a href="#tema5">5. Disp. Comunes</a></li>
+    <li><a href="#tema6">6. Rehabilitación</a></li>
+    <li><a href="#tema7">7. Redención</a></li>
+    <li><a href="#quiz">Quiz (40)</a></li>
+  </ul>
+</nav>
+
+<main>
+
+  <section>
+    <h2>📚 Introducción</h2>
+    <p>Bienvenido a esta guía interactiva sobre el <strong>Libro Cuarto de la Ley 906 de 2004</strong> (Código de Procedimiento Penal Colombiano). Aquí estudiarás la ejecución de penas y medidas de seguridad, la libertad condicional, la suspensión condicional de la pena, la rehabilitación y la redención de pena por trabajo, estudio y enseñanza.</p>
+    <div class="alerta">
+      <strong>💡 Cómo usar esta guía:</strong> Haz clic en las tarjetas para ver detalles, despliega los acordeones para información adicional y prueba tus conocimientos con el quiz de 40 preguntas al final.
+    </div>
+  </section>
+
+  <!-- TEMA 1: EJECUCIÓN DE PENAS -->
+  <section id="tema1">
+    <h2>1. Ejecución de Penas (Arts. 459-464)</h2>
+    <p>La ejecución de la sanción impuesta en sentencia firme corresponde a las autoridades penitenciarias bajo el control del Juez de Ejecución de Penas y Medidas de Seguridad.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">EJECUCIÓN DE PENAS</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Juez de Ejecución</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Acumulación</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Sustitución</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Penas Accesorias</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Aspectos Fundamentales</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">‍⚖️</div>
+        <h4>Juez de Ejecución</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Controla la ejecución de la sanción. Se priorizan la atención psicosocial, la <strong>justicia terapéutica y la justicia restaurativa</strong>.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon"></div>
+        <h4>Acumulación Jurídica (Art. 460)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Aplica cuando los delitos conexos o varias condenas se hayan fallado independientemente. La primera pena impuesta se abonará a la sanción global.</p>
+          <p><strong>No procede</strong> respecto de delitos cometidos tras el fallo o durante la privación de la libertad.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🔄</div>
+        <h4>Sustitución (Art. 461)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>El juez puede ordenar la sustitución de la ejecución de la pena en los mismos supuestos y condiciones previstos para la detención preventiva, previa constitución de caución.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚠️</div>
+        <h4>Penas Accesorias (Arts. 462-464)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <ul>
+            <li>Inhabilitación de derechos y funciones públicas</li>
+            <li>Pérdida de empleo</li>
+            <li>Expulsión de extranjeros</li>
+            <li>Prohibición de porte de armas o conducción</li>
+            <li>Privación de la patria potestad</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si A fue condenado a 5 años por hurto y posteriormente a 3 años por estafa (delitos conexos fallados independientemente), el Juez de Ejecución acumulará las penas. La primera pena impuesta se abonará a la sanción global.
+    </div>
+  </section>
+
+  <!-- TEMA 2: MEDIDAS DE SEGURIDAD -->
+  <section id="tema2">
+    <h2>2. Ejecución de Medidas de Seguridad (Arts. 465-470)</h2>
+    <p>Las medidas de seguridad se aplican a los inimputables y su ejecución tiene características especiales de tratamiento y control.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">MEDIDAS DE SEGURIDAD</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Internación</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Libertad Vigilada</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Modificación/Cesación</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Comunidades Indígenas</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Modalidades de Ejecución</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🏥</div>
+        <h4>Internación (Arts. 465-466)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>El tratamiento de inimputables por trastorno mental se adscribe al <strong>Sistema General de Seguridad Social en Salud</strong>.</p>
+          <p>Se coordina su internación en centros psiquiátricos o su entrega bajo custodia familiar con caución y acta de compromiso.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">👁️</div>
+        <h4>Libertad Vigilada (Art. 467)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Se comunica a las autoridades de policía para ejercer el control de las obligaciones impuestas en el Código Penal.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🔄</div>
+        <h4>Modificación y Cesación (Arts. 468-469)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>El juez puede suspender condicionalmente, sustituir o declarar la cesación de la medida previo <strong>dictamen del perito médico oficial</strong>.</p>
+          <p>La <strong>revocatoria</strong> procede si se incumplen los compromisos o el peritaje médico señala su necesidad.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🏹</div>
+        <h4>Comunidades Indígenas (Art. 470)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Las medidas aplicables a inimputables por diversidad sociocultural se ejecutan en coordinación con la <strong>máxima autoridad indígena</strong> de la respectiva comunidad.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si A es declarado inimputable por trastorno mental y se le impone medida de seguridad de internación, será tratado en un centro psiquiátrico adscrito al SGSSS. Cada 6 meses, un perito médico oficial evaluará su estado para determinar si procede la cesación o modificación de la medida.
+    </div>
+  </section>
+
+  <!-- TEMA 3: LIBERTAD CONDICIONAL -->
+  <section id="tema3">
+    <h2>3. Libertad Condicional (Arts. 471-473)</h2>
+    <p>La libertad condicional es un mecanismo sustitutivo de la pena que permite al condenado cumplir el resto de su sanción en libertad, bajo ciertas obligaciones.</p>
+
+    <h3>📋 Solicitud y Requisitos (Art. 471)</h3>
+    <div class="alerta">
+      <strong>📌 Documentos requeridos:</strong>
+      <ul>
+        <li>Resolución favorable del consejo de disciplina o del director del establecimiento carcelario</li>
+        <li>Copia de la cartilla biográfica</li>
+        <li>Soportes correspondientes</li>
+        <li><strong>Pago previo de la pena de multa</strong> (requisito imprescindible si se impuso)</li>
+      </ul>
+    </div>
+
+    <h3>⚖️ Decisión Judicial y Cómputo (Art. 472)</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">👨‍⚖️</div>
+        <h4>Decisión del Juez</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>El juez resuelve en un plazo de <strong>8 días</strong> mediante auto motivado imponiendo obligaciones garantizadas por caución.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⏱️</div>
+        <h4>Cómputo de Redención</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>La redención de pena por trabajo o estudio se computa como <strong>tiempo efectivamente cumplido</strong>.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>🚫 Revocatoria (Art. 473)</h3>
+    <div class="alerta">
+      <strong>📌 Causales de revocatoria:</strong>
+      <ul>
+        <li>Decretada por el juez, de oficio o a petición de los encargados de la vigilancia</li>
+        <li>Si se comprueba la <strong>violación de las obligaciones asumidas</strong></li>
+      </ul>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si B ha cumplido 3/5 partes de su pena de 10 años, tiene buen comportamiento carcelario y pagó la multa accesoria, puede solicitar libertad condicional. El juez tiene 8 días para resolver y, si la concede, le impone obligaciones como no cambiar de domicilio sin aviso y presentarse mensualmente ante el juez de ejecución.
+    </div>
+  </section>
+
+  <!-- TEMA 4: SUSPENSIÓN CONDICIONAL -->
+  <section id="tema4">
+    <h2>4. Suspensión Condicional de la Ejecución de la Pena (Arts. 474-476)</h2>
+    <p>La suspensión condicional permite al condenado no cumplir la pena privativa de la libertad en un establecimiento carcelario, siempre que cumpla ciertas condiciones durante un periodo de prueba.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">SUSPENSIÓN CONDICIONAL</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Procedencia</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Art. 474</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Incumplimiento</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Arts. 475-476</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Procedencia y Reparación a Víctimas (Art. 474)</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">✅</div>
+        <h4>Requisitos</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Cumplimiento de los requisitos del Código Penal y fijación de un plazo para <strong>indemnizar los daños del delito</strong>.</p>
+          <p>Excepción: si existen bienes cautelados que aseguren el pago.</p>
+          <p>El pago de la multa es obligatorio salvo excepciones legales.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚠️</div>
+        <h4>Efectos por Incumplimiento</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>La falta de reparación injustificada motiva la <strong>ejecución inmediata de la pena de prisión</strong>.</p>
+          <p>Transcurrido el periodo de prueba y declarada la extinción de la condena, se dispone la devolución de la caución.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong> Ejemplo:</strong> Si C es condenado a 2 años de prisión por lesiones personales (pena que permite suspensión condicional), el juez puede suspender la ejecución de la pena por 3 años, condicionándolo a reparar integralmente a la víctima. Si C no repara sin justa causa, se ejecuta inmediatamente la pena de prisión.
+    </div>
+  </section>
+
+  <!-- TEMA 5: DISPOSICIONES COMUNES -->
+  <section id="tema5">
+    <h2>5. Disposiciones Comunes (Arts. 477-479)</h2>
+    <p>Reglas procedimentales aplicables tanto a la libertad condicional como a la suspensión condicional de la pena.</p>
+
+    <h3>📊 Cuadro Comparativo de Trámites</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Instituto</th>
+          <th>Artículo</th>
+          <th>Regla Procesal</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Negación o Revocatoria</strong></td>
+          <td>Art. 477</td>
+          <td>Traslado por 3 días al condenado para presentar explicaciones. Se resuelve por auto motivado dentro de los 10 días siguientes.</td>
+        </tr>
+        <tr>
+          <td><strong>Recursos</strong></td>
+          <td>Art. 478</td>
+          <td>Las decisiones sobre mecanismos sustitutivos o rehabilitación son <strong>apelables ante el juez que profirió la condena</strong> en primera o única instancia.</td>
+        </tr>
+        <tr>
+          <td><strong>Prórroga de Pago</strong></td>
+          <td>Art. 479</td>
+          <td>Si demuestra imposibilidad de pago en el plazo fijado, el juez puede conceder una prórroga por una sola vez y, de forma excepcional, un segundo plazo.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si el Juez de Ejecución de Penas niega la libertad condicional a D, D tiene 3 días para presentar explicaciones. El juez debe resolver mediante auto motivado dentro de los 10 días siguientes. Contra esa decisión, D puede interponer recurso de apelación ante el juez que lo condenó en primera instancia.
+    </div>
+  </section>
+
+  <!-- TEMA 6: REHABILITACIÓN -->
+  <section id="tema6">
+    <h2>6. De la Rehabilitación (Arts. 480-483)</h2>
+    <p>La rehabilitación es el mecanismo mediante el cual se restablecen los derechos y funciones públicas al condenado una vez cumplida la pena.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">REHABILITACIÓN</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Concesión</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Arts. 480-481</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Trámite</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Arts. 482-483</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Concesión y Anexos (Arts. 480-481)</h3>
+    <div class="alerta">
+      <strong>📌 Competencia:</strong> Corresponde al <strong>Juez de Ejecución de Penas</strong> restablecer los derechos y funciones públicas.
+      <br><br>
+      <strong>Documentos requeridos:</strong>
+      <ul>
+        <li>Copias de las sentencias</li>
+        <li>Cartilla biográfica</li>
+        <li>Al menos <strong>dos declaraciones de honorabilidad</strong> sobre la conducta posterior</li>
+        <li>Certificado de conducta del periodo de prueba</li>
+        <li>Comprobación del pago de perjuicios</li>
+      </ul>
+    </div>
+
+    <h3> Trámite y Comunicaciones (Arts. 480, 482-483)</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📢</div>
+        <h4>Publicación</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>La decisión se publica en la <strong>Gaceta Oficial departamental</strong>.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⏳</div>
+        <h4>Término de Prueba</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Se abre un término de prueba hasta por <strong>10 días</strong> para verificación.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📨</div>
+        <h4>Notificaciones</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Se notifica a la <strong>Registraduría Nacional</strong> y demás organismos pertinentes.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong> Ejemplo:</strong> Si E cumplió su pena de 5 años por peculado y fue inhabilitado para el ejercicio de derechos y funciones públicas, puede solicitar la rehabilitación al Juez de Ejecución de Penas adjuntando dos declaraciones de honorabilidad y el certificado de pago de perjuicios. Si el juez la concede, se publica en la Gaceta Oficial y se notifica a la Registraduría para que E pueda volver a ejercer cargos públicos.
+    </div>
+  </section>
+
+  <!-- TEMA 7: REDENCIÓN DE PENA -->
+  <section id="tema7">
+    <h2>7. Redención de Pena por Trabajo, Estudio y Enseñanza</h2>
+    <p>La redención de pena es un beneficio que permite al condenado disminuir el tiempo de cumplimiento de la pena privativa de la libertad mediante actividades productivas o formativas.</p>
+
+    <h3>📋 Cómputo de Beneficios</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">👨‍⚖️</div>
+        <h4>Competencia</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Concedido por el <strong>Juez de Ejecución de Penas</strong>.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📖</div>
+        <h4>Reglamentación</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Se rige de conformidad con la reglamentación del <strong>Código Penitenciario y Carcelario</strong>.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>⚖️ Principios de la Redención</h3>
+    <div class="alerta">
+      <strong>📌 Actividades que redimen pena:</strong>
+      <ul>
+        <li><strong>Trabajo:</strong> Labores productivas dentro o fuera del establecimiento carcelario.</li>
+        <li><strong>Estudio:</strong> Educación formal (primaria, secundaria, técnica, tecnológica o universitaria).</li>
+        <li><strong>Enseñanza:</strong> Actividades de docencia o capacitación a otros reclusos.</li>
+      </ul>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si F está condenado a 10 años de prisión y trabaja en el taller de carpintería de la cárcel, por cada 2 días de trabajo redime 1 día de pena. Si además estudia la primaria, por cada semestre aprobado redime una porción adicional de la pena, según lo reglamente el Código Penitenciario.
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz">
+    <h2>🎯 Quiz Completo - 40 Preguntas</h2>
+    <p>Pon a prueba tus conocimientos sobre la Ejecución de Penas y Medidas de Seguridad.</p>
+
+    <div class="quiz-container">
+      <div class="quiz-header">
+        <h3>📊 Tu Progreso</h3>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="quiz-stats">
+          <div class="stat">Respondidas: <strong id="respondidas">0</strong>/40</div>
+          <div class="stat">Correctas: <strong id="correctas">0</strong></div>
+          <div class="stat">Incorrectas: <strong id="incorrectas">0</strong></div>
+          <div class="stat">Porcentaje: <strong id="porcentaje">0</strong>%</div>
+        </div>
+      </div>
+
+      <div class="quiz-tabs">
+        <div class="quiz-tab active" onclick="mostrarSeccion('s1', this)">T1 (6)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s2', this)">T2 (6)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s3', this)">T3 (6)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s4', this)">T4 (5)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s5', this)">T5 (5)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s6', this)">T6 (6)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s7', this)">T7 (6)</div>
+      </div>
+
+      <!-- SECCIÓN 1: EJECUCIÓN DE PENAS -->
+      <div class="quiz-section active" id="s1">
+        <div class="pregunta" data-correcta="1" data-tema="1">
+          <span class="pregunta-num">1</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La ejecución de la sanción impuesta en sentencia firme corresponde a:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 1)">a) La Fiscalía General de la Nación</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">b) Las autoridades penitenciarias bajo el control del Juez de Ejecución de Penas</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">c) El Ministerio Público</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">d) El juez de conocimiento</div>
+          </div>
+          <div class="explicacion">La ejecución de la sanción corresponde a las autoridades penitenciarias bajo el control del Juez de Ejecución de Penas y Medidas de Seguridad (Art. 459).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="1">
+          <span class="pregunta-num">2</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La acumulación jurídica de penas (Art. 460) NO procede respecto de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 2)">a) Delitos cometidos tras el fallo de primera/única instancia o durante la privación de la libertad</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">b) Delitos conexos fallados independientemente</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">c) Varias condenas falladas independientemente</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">d) Delitos cometidos antes del fallo</div>
+          </div>
+          <div class="explicacion">No procede la acumulación respecto de delitos cometidos tras el fallo de primera/única instancia o durante la privación de la libertad (Art. 460).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="1">
+          <span class="pregunta-num">3</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La sustitución de la ejecución de la pena (Art. 461) requiere:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 3)">a) Solo la voluntad del condenado</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">b) Solo la aprobación del director de la cárcel</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">c) Previa constitución de caución y los mismos supuestos de la detención preventiva</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">d) Solo el pago de la multa</div>
+          </div>
+          <div class="explicacion">El juez puede ordenar la sustitución de la ejecución de la pena en los mismos supuestos y condiciones previstos para la detención preventiva, previa constitución de caución (Art. 461).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="1">
+          <span class="pregunta-num">4</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Son penas accesorias (Arts. 462-464):</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 4)">a) Solo la prisión</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">b) Solo la multa</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">c) Solo el arresto</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">d) Inhabilitación de derechos, pérdida de empleo, expulsión de extranjeros, prohibición de porte de armas</div>
+          </div>
+          <div class="explicacion">Las penas accesorias incluyen inhabilitación de derechos y funciones públicas, pérdida de empleo, expulsión de extranjeros, prohibición de porte de armas o conducción y privación de la patria potestad.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="1">
+          <span class="pregunta-num">5</span><span class="pregunta-tipo">Conceptual</span>
+          <p>En la ejecución de penas se priorizan:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 5)">a) Solo la retribución</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">b) La atención psicosocial, la justicia terapéutica y la justicia restaurativa</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">c) Solo el castigo físico</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">d) Solo el aislamiento</div>
+          </div>
+          <div class="explicacion">Se priorizan la atención psicosocial, la justicia terapéutica y la justicia restaurativa en la ejecución de penas.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="1">
+          <span class="pregunta-num">6</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El Ministerio Público en la ejecución de penas está facultado para:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 6)">a) Intervenir e interponer recursos</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">b) Solo observar</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">c) Solo solicitar la libertad</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">d) Solo imponer sanciones</div>
+          </div>
+          <div class="explicacion">El Ministerio Público está facultado para intervenir e interponer recursos en la ejecución de penas.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 2: MEDIDAS DE SEGURIDAD -->
+      <div class="quiz-section" id="s2">
+        <div class="pregunta" data-correcta="2" data-tema="2">
+          <span class="pregunta-num">7</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El tratamiento de inimputables por trastorno mental se adscribe al:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 7)">a) Sistema Penitenciario Nacional</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">b) Ministerio de Justicia</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">c) Sistema General de Seguridad Social en Salud</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">d) Fiscalía General de la Nación</div>
+          </div>
+          <div class="explicacion">El tratamiento de inimputables por trastorno mental se adscribe al Sistema General de Seguridad Social en Salud (Arts. 465-466).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="2">
+          <span class="pregunta-num">8</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La libertad vigilada (Art. 467) se comunica a:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 8)">a) Las autoridades de policía para ejercer el control de las obligaciones</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">b) La Fiscalía General</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">c) El Ministerio Público</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">d) La Defensoría del Pueblo</div>
+          </div>
+          <div class="explicacion">La libertad vigilada se comunica a las autoridades de policía para ejercer el control de las obligaciones impuestas en el Código Penal.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="2">
+          <span class="pregunta-num">9</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La modificación, suspensión o cesación de la medida de seguridad requiere:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 9)">a) Solo la voluntad del juez</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">b) Dictamen del perito médico oficial</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">c) Solo la solicitud del condenado</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">d) Solo la aprobación de la familia</div>
+          </div>
+          <div class="explicacion">El juez puede suspender condicionalmente, sustituir o declarar la cesación de la medida previo dictamen del perito médico oficial (Arts. 468-469).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="2">
+          <span class="pregunta-num">10</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La revocatoria de la medida de seguridad procede si:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 10)">a) El condenado se porta bien</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">b) El perito médico dice que está curado</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">c) La familia lo solicita</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">d) Se incumplen los compromisos o el peritaje médico señala su necesidad</div>
+          </div>
+          <div class="explicacion">La revocatoria procede si se incumplen los compromisos o el peritaje médico señala su necesidad (Art. 469).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="2">
+          <span class="pregunta-num">11</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Las medidas aplicables a inimputables por diversidad sociocultural se ejecutan en coordinación con:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 11)">a) La Fiscalía General</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">b) El Ministerio del Interior</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">c) La máxima autoridad indígena de la respectiva comunidad</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">d) La Defensoría del Pueblo</div>
+          </div>
+          <div class="explicacion">Las medidas aplicables a inimputables por diversidad sociocultural se ejecutan en coordinación con la máxima autoridad indígena de la respectiva comunidad (Art. 470).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="2">
+          <span class="pregunta-num">12</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La internación de inimputables puede coordinarse con:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 12)">a) Entrega bajo custodia familiar con caución y acta de compromiso</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">b) Solo centros psiquiátricos</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">c) Solo establecimientos carcelarios</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">d) Solo hospitales generales</div>
+          </div>
+          <div class="explicacion">Se coordina su internación en centros psiquiátricos o su entrega bajo custodia familiar con caución y acta de compromiso (Arts. 465-466).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 3: LIBERTAD CONDICIONAL -->
+      <div class="quiz-section" id="s3">
+        <div class="pregunta" data-correcta="1" data-tema="3">
+          <span class="pregunta-num">13</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Para solicitar la libertad condicional (Art. 471), el condenado debe acompañar:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 13)">a) Solo la cartilla biográfica</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">b) Resolución favorable del consejo de disciplina, cartilla biográfica y soportes</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">c) Solo el concepto del director de la cárcel</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">d) Solo el pago de la multa</div>
+          </div>
+          <div class="explicacion">El condenado debe acompañar la resolución favorable del consejo de disciplina o del director del establecimiento carcelario, copia de la cartilla biográfica y los soportes correspondientes.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="3">
+          <span class="pregunta-num">14</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Si se impuso pena de multa, para la libertad condicional se requiere:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 14)">a) Su pago previo como requisito imprescindible</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">b) Solo su solicitud de prórroga</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">c) No es requisito</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">d) Solo su reconocimiento de deuda</div>
+          </div>
+          <div class="explicacion">Si se impuso pena de multa, su pago previo es requisito imprescindible para la libertad condicional (Art. 471).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="3">
+          <span class="pregunta-num">15</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El juez resuelve la libertad condicional en un plazo de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 15)">a) 5 días</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">b) 15 días</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">c) 8 días</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">d) 30 días</div>
+          </div>
+          <div class="explicacion">El juez resuelve en un plazo de 8 días mediante auto motivado imponiendo obligaciones garantizadas por caución (Art. 472).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="3">
+          <span class="pregunta-num">16</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La redención de pena por trabajo o estudio se computa como:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 16)">a) Tiempo doble</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">b) Tiempo triple</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">c) No se computa</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">d) Tiempo efectivamente cumplido</div>
+          </div>
+          <div class="explicacion">La redención de pena por trabajo o estudio se computa como tiempo efectivamente cumplido (Art. 472).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="3">
+          <span class="pregunta-num">17</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La revocatoria de la libertad condicional (Art. 473) procede si:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 17)">a) El condenado solicita salir del país</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">b) Se comprueba la violación de las obligaciones asumidas</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">c) El condenado cambia de domicilio</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">d) El condenado se casa</div>
+          </div>
+          <div class="explicacion">La revocatoria es decretada por el juez si se comprueba la violación de las obligaciones asumidas (Art. 473).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="3">
+          <span class="pregunta-num">18</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Las obligaciones de la libertad condicional son garantizadas por:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 18)">a) Caución</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">b) Solo la palabra del condenado</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">c) Solo la firma de un familiar</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">d) No requieren garantía</div>
+          </div>
+          <div class="explicacion">El juez impone obligaciones garantizadas por caución (Art. 472).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 4: SUSPENSIÓN CONDICIONAL -->
+      <div class="quiz-section" id="s4">
+        <div class="pregunta" data-correcta="2" data-tema="4">
+          <span class="pregunta-num">19</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La suspensión condicional de la pena exige (Art. 474):</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 19)">a) Solo el pago de la multa</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">b) Solo la buena conducta</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">c) El cumplimiento de los requisitos del Código Penal y la fijación de un plazo para indemnizar los daños</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">d) Solo la aprobación de la víctima</div>
+          </div>
+          <div class="explicacion">Se exige el cumplimiento de los requisitos del Código Penal y la fijación de un plazo para indemnizar los daños del delito (Art. 474).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="4">
+          <span class="pregunta-num">20</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La falta de reparación injustificada en la suspensión condicional motiva:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 20)">a) La ejecución inmediata de la pena de prisión</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">b) Solo una amonestación</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">c) La prórroga automática</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">d) La libertad inmediata</div>
+          </div>
+          <div class="explicacion">La falta de reparación injustificada motiva la ejecución inmediata de la pena de prisión (Arts. 475-476).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="4">
+          <span class="pregunta-num">21</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Transcurrido el periodo de prueba y declarada la extinción de la condena en la suspensión condicional, se dispone:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 21)">a) El pago de una nueva multa</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">b) La devolución de la caución</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">c) La prisión preventiva</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">d) La expulsión del país</div>
+          </div>
+          <div class="explicacion">Transcurrido el periodo de prueba y declarada la extinción de la condena, se dispone la devolución de la caución (Arts. 475-476).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="4">
+          <span class="pregunta-num">22</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El pago de la multa en la suspensión condicional es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 22)">a) Opcional</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">b) Solo si el juez lo ordena</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">c) Solo si la víctima lo exige</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">d) Obligatorio salvo excepciones legales</div>
+          </div>
+          <div class="explicacion">El pago de la multa es obligatorio salvo excepciones legales (Art. 474).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="4">
+          <span class="pregunta-num">23</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La excepción al requisito de indemnizar los daños en la suspensión condicional es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 23)">a) Que el condenado sea pobre</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">b) Que la víctima no lo exija</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">c) Que existan bienes cautelados que aseguren el pago</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">d) Que el delito sea leve</div>
+          </div>
+          <div class="explicacion">Se exige la indemnización salvo que existan bienes cautelados que aseguren el pago (Art. 474).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 5: DISPOSICIONES COMUNES -->
+      <div class="quiz-section" id="s5">
+        <div class="pregunta" data-correcta="1" data-tema="5">
+          <span class="pregunta-num">24</span><span class="pregunta-tipo">Conceptual</span>
+          <p>En el procedimiento para negación o revocatoria (Art. 477), se otorga traslado al condenado por:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 24)">a) 5 días</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">b) 3 días</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">c) 10 días</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">d) 15 días</div>
+          </div>
+          <div class="explicacion">Se otorga traslado por 3 días al condenado para presentar explicaciones (Art. 477).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="5">
+          <span class="pregunta-num">25</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El auto motivado de negación o revocatoria se resuelve dentro de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 25)">a) 10 días siguientes</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">b) 5 días siguientes</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">c) 15 días siguientes</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">d) 30 días siguientes</div>
+          </div>
+          <div class="explicacion">Se resuelve por auto motivado dentro de los 10 días siguientes (Art. 477).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="5">
+          <span class="pregunta-num">26</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Las decisiones sobre mecanismos sustitutivos son apelables ante:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 26)">a) La Corte Suprema de Justicia</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">b) El Tribunal Superior</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">c) El juez que profirió la condena en primera o única instancia</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">d) El Consejo Superior de la Judicatura</div>
+          </div>
+          <div class="explicacion">Las decisiones son apelables ante el juez que profirió la condena en primera o única instancia (Art. 478).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="5">
+          <span class="pregunta-num">27</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Si el condenado demuestra imposibilidad de pago en el plazo fijado (Art. 479), el juez puede:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 27)">a) Condonar la deuda</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">b) Ejecutar bienes inmediatamente</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">c) Negar la solicitud</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">d) Conceder una prórroga por una sola vez y, excepcionalmente, un segundo plazo</div>
+          </div>
+          <div class="explicacion">El juez puede conceder una prórroga por una sola vez y, de forma excepcional, un segundo plazo (Art. 479).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="5">
+          <span class="pregunta-num">28</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El traslado para presentar explicaciones en la revocatoria es de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 28)">a) 5 días</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">b) 3 días</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">c) 10 días</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">d) 15 días</div>
+          </div>
+          <div class="explicacion">Se otorga traslado por 3 días al condenado para presentar explicaciones (Art. 477).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 6: REHABILITACIÓN -->
+      <div class="quiz-section" id="s6">
+        <div class="pregunta" data-correcta="2" data-tema="6">
+          <span class="pregunta-num">29</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La rehabilitación corresponde concederla al:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 29)">a) Presidente de la República</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">b) Tribunal Superior</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">c) Juez de Ejecución de Penas</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">d) Ministerio Público</div>
+          </div>
+          <div class="explicacion">Corresponde al Juez de Ejecución de Penas restablecer los derechos y funciones públicas (Arts. 480-481).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="6">
+          <span class="pregunta-num">30</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Para la rehabilitación se exigen al menos:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 30)">a) Dos declaraciones de honorabilidad sobre la conducta posterior</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">b) Una declaración del presidente</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">c) Tres certificados médicos</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">d) Cinco testimonios de vecinos</div>
+          </div>
+          <div class="explicacion">Se exigen al menos dos declaraciones de honorabilidad sobre la conducta posterior (Arts. 480-481).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="6">
+          <span class="pregunta-num">31</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La decisión de rehabilitación se publica en:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 31)">a) El Diario Oficial</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">b) La Gaceta Oficial departamental</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">c) El periódico de mayor circulación</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">d) La página web de la Fiscalía</div>
+          </div>
+          <div class="explicacion">La decisión se publica en la Gaceta Oficial departamental (Arts. 480, 482-483).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="6">
+          <span class="pregunta-num">32</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El término de prueba para la rehabilitación es de hasta:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 32)">a) 5 días</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">b) 15 días</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">c) 20 días</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">d) 10 días</div>
+          </div>
+          <div class="explicacion">Se abre un término de prueba hasta por 10 días para verificación (Arts. 480, 482-483).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="6">
+          <span class="pregunta-num">33</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Para la rehabilitación se debe comprobar:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 33)">a) Solo el pago de la multa</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">b) Solo la buena conducta</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">c) El pago de perjuicios</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">d) Solo la cartilla biográfica</div>
+          </div>
+          <div class="explicacion">Se exige la comprobación del pago de perjuicios, entre otros requisitos (Arts. 480-481).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="6">
+          <span class="pregunta-num">34</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La rehabilitación notifica a:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 34)">a) La Registraduría Nacional y demás organismos pertinentes</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">b) Solo al condenado</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">c) Solo a la Fiscalía</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">d) Solo al Ministerio Público</div>
+          </div>
+          <div class="explicacion">Se notifica a la Registraduría Nacional y demás organismos pertinentes (Arts. 480, 482-483).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 7: REDENCIÓN DE PENA -->
+      <div class="quiz-section" id="s7">
+        <div class="pregunta" data-correcta="1" data-tema="7">
+          <span class="pregunta-num">35</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La redención de pena por trabajo, estudio y enseñanza es concedida por:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 35)">a) El director de la cárcel</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">b) El Juez de Ejecución de Penas</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">c) La Fiscalía General</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">d) El Ministerio Público</div>
+          </div>
+          <div class="explicacion">La redención de pena es concedida por el Juez de Ejecución de Penas de conformidad con la reglamentación del Código Penitenciario y Carcelario.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="7">
+          <span class="pregunta-num">36</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La redención de pena se rige por la reglamentación del:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 36)">a) Código Penitenciario y Carcelario</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">b) Código Civil</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">c) Código de Comercio</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">d) Código Disciplinario</div>
+          </div>
+          <div class="explicacion">La redención de pena se rige por la reglamentación del Código Penitenciario y Carcelario.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="7">
+          <span class="pregunta-num">37</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Son actividades que redimen pena:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 37)">a) Solo el trabajo</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">b) Solo el estudio</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">c) Trabajo, estudio y enseñanza</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">d) Solo la enseñanza</div>
+          </div>
+          <div class="explicacion">La redención de pena procede por trabajo, estudio y enseñanza.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="7">
+          <span class="pregunta-num">38</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El objetivo principal de la redención de pena es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 38)">a) Castigar al condenado</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">b) Generar ingresos para el Estado</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">c) Mantener al condenado ocupado</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">d) Disminuir el tiempo de cumplimiento de la pena mediante actividades productivas o formativas</div>
+          </div>
+          <div class="explicacion">La redención de pena permite al condenado disminuir el tiempo de cumplimiento de la pena privativa de la libertad mediante actividades productivas o formativas.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="7">
+          <span class="pregunta-num">39</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La redención de pena por estudio aplica a:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 39)">a) Solo educación primaria</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">b) Educación formal (primaria, secundaria, técnica, tecnológica o universitaria)</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">c) Solo educación universitaria</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">d) Solo cursos informales</div>
+          </div>
+          <div class="explicacion">La redención por estudio aplica a la educación formal: primaria, secundaria, técnica, tecnológica o universitaria.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="7">
+          <span class="pregunta-num">40</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La redención de pena por enseñanza se refiere a:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 40)">a) Actividades de docencia o capacitación a otros reclusos</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">b) Enseñar en universidades externas</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">c) Dar clases a niños en la calle</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">d) Enseñar en colegios públicos</div>
+          </div>
+          <div class="explicacion">La redención por enseñanza se refiere a actividades de docencia o capacitación a otros reclusos dentro del establecimiento carcelario.</div>
+        </div>
+      </div>
+
+      <div class="resultado-final" id="resultadoFinal">
+        <h3>🏆 Resultado Final</h3>
+        <div class="puntaje-final" id="puntajeFinal">0/40</div>
+        <p id="mensajeFinal"></p>
+        <div class="desglose-temas" id="desgloseTemas"></div>
+        <button onclick="reiniciarQuiz()" class="btn-reset">🔄 Reiniciar Quiz</button>
+      </div>
+
+      <div style="text-align: center; margin-top: 1.5rem;">
+        <button onclick="verResultadoFinal()">📊 Ver Resultado Final</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>⚖️ Guía Didáctica - Ejecución de Penas y Medidas de Seguridad</p>
+  <p>Libro Cuarto de la Ley 906 de 2004 · Código de Procedimiento Penal</p>
+  <p style="margin-top: 1rem; opacity: 0.7;">© 2026 - Material educativo interactivo</p>
+</footer>
+
+<script>
+  function toggleAcordeon(header) {
+    header.classList.toggle('active');
+    const content = header.nextElementSibling;
+    content.classList.toggle('active');
+  }
+
+  let respuestas = {};
+  const totalPreguntas = 40;
+
+  function mostrarSeccion(id, tab) {
+    document.querySelectorAll('.quiz-section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.quiz-tab').forEach(t => t.classList.remove('active'));
+    
+    document.getElementById(id).classList.add('active');
+    tab.classList.add('active');
+  }
+
+  function seleccionar(opcion, preguntaNum) {
+    if (respuestas[preguntaNum] !== undefined) return;
+
+    const pregunta = opcion.closest('.pregunta');
+    const opciones = pregunta.querySelectorAll('.opcion');
+    const correcta = parseInt(pregunta.dataset.correcta);
+    const tema = parseInt(pregunta.dataset.tema);
+    const seleccionada = Array.from(opciones).indexOf(opcion);
+    const explicacion = pregunta.querySelector('.explicacion');
+
+    opciones.forEach(o => o.classList.add('disabled'));
+
+    if (seleccionada === correcta) {
+      opcion.classList.add('correcta');
+      respuestas[preguntaNum] = { correcta: true, tema: tema };
+    } else {
+      opcion.classList.add('incorrecta');
+      opciones[correcta].classList.add('correcta');
+      respuestas[preguntaNum] = { correcta: false, tema: tema };
+    }
+
+    explicacion.classList.add('visible');
+    pregunta.classList.add('answered');
+    actualizarEstadisticas();
+  }
+
+  function actualizarEstadisticas() {
+    const total = Object.keys(respuestas).length;
+    const correctas = Object.values(respuestas).filter(r => r.correcta).length;
+    const incorrectas = total - correctas;
+    const porcentaje = total > 0 ? Math.round((correctas / total) * 100) : 0;
+
+    document.getElementById('respondidas').textContent = total;
+    document.getElementById('correctas').textContent = correctas;
+    document.getElementById('incorrectas').textContent = incorrectas;
+    document.getElementById('porcentaje').textContent = porcentaje;
+
+    const progreso = (total / totalPreguntas) * 100;
+    document.getElementById('progressFill').style.width = progreso + '%';
+  }
+
+  function verResultadoFinal() {
+    const total = Object.keys(respuestas).length;
+    
+    if (total < totalPreguntas) {
+      alert(`⚠️ Aún te faltan ${totalPreguntas - total} preguntas por responder.`);
+      return;
+    }
+
+    const correctas = Object.values(respuestas).filter(r => r.correcta).length;
+    const porcentaje = Math.round((correctas / totalPreguntas) * 100);
+
+    const resultadoFinal = document.getElementById('resultadoFinal');
+    resultadoFinal.classList.add('visible');
+
+    document.getElementById('puntajeFinal').textContent = `${correctas}/${totalPreguntas}`;
+
+    let mensaje = '';
+    if (porcentaje === 100) mensaje = ' ¡PERFECTO! Dominas la Ejecución de Penas y Medidas de Seguridad.';
+    else if (porcentaje >= 90) mensaje = '🌟 ¡Excelente! Dominio sobresaliente.';
+    else if (porcentaje >= 75) mensaje = '✅ ¡Muy bien! Buen dominio.';
+    else if (porcentaje >= 60) mensaje = '📚 Aceptable. Repasa los temas donde fallaste.';
+    else if (porcentaje >= 40) mensaje = '📖 Necesitas reforzar varios conceptos.';
+    else mensaje = '🔍 Es necesario estudiar nuevamente todos los temas.';
+
+    document.getElementById('mensajeFinal').textContent = mensaje;
+
+    const temas = {
+      1: { nombre: 'T1: Ejecución de Penas', total: 6, correctas: 0 },
+      2: { nombre: 'T2: Medidas de Seguridad', total: 6, correctas: 0 },
+      3: { nombre: 'T3: Libertad Condicional', total: 6, correctas: 0 },
+      4: { nombre: 'T4: Suspensión Condicional', total: 5, correctas: 0 },
+      5: { nombre: 'T5: Disp. Comunes', total: 5, correctas: 0 },
+      6: { nombre: 'T6: Rehabilitación', total: 6, correctas: 0 },
+      7: { nombre: 'T7: Redención de Pena', total: 6, correctas: 0 }
+    };
+
+    Object.values(respuestas).forEach(r => {
+      if (r.correcta) temas[r.tema].correctas++;
+    });
+
+    const desgloseHTML = Object.values(temas).map(t => {
+      const pct = Math.round((t.correctas / t.total) * 100);
+      return `
+        <div class="desglose-item">
+          <h4>${t.nombre}</h4>
+          <p>${t.correctas}/${t.total} (${pct}%)</p>
+          <div class="mini-bar">
+            <div class="mini-bar-fill" style="width: ${pct}%"></div>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    document.getElementById('desgloseTemas').innerHTML = desgloseHTML;
+    resultadoFinal.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  function reiniciarQuiz() {
+    if (!confirm('¿Reiniciar el quiz?')) return;
+
+    respuestas = {};
+
+    document.querySelectorAll('.opcion').forEach(o => o.classList.remove('correcta', 'incorrecta', 'disabled'));
+    document.querySelectorAll('.explicacion').forEach(e => e.classList.remove('visible'));
+    document.querySelectorAll('.pregunta').forEach(p => p.classList.remove('answered'));
+    document.getElementById('resultadoFinal').classList.remove('visible');
+
+    actualizarEstadisticas();
+    mostrarSeccion('s1', document.querySelector('.quiz-tab'));
+    document.getElementById('quiz').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  document.querySelectorAll('nav a').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+</script>
+
+</body>
+</html>
