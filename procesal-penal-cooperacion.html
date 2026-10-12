@@ -1,0 +1,2148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cooperación Internacional, Justicia Restaurativa e Implementación - Ley 906 de 2004</title>
+<style>
+  :root {
+    --primary: #7f1d1d;
+    --secondary: #fbbf24;
+    --accent: #991b1b;
+    --light: #fef3f2;
+    --dark: #1a202c;
+    --success: #38a169;
+    --warning: #d69e2e;
+    --danger: #c53030;
+    --card-bg: #ffffff;
+    --shadow: 0 4px 15px rgba(0,0,0,0.08);
+    --shadow-hover: 0 8px 25px rgba(0,0,0,0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    background: var(--light);
+    color: var(--dark);
+    line-height: 1.7;
+  }
+
+  header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    color: white;
+    padding: 2rem 1rem;
+    text-align: center;
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::before {
+    content: '️';
+    position: absolute;
+    font-size: 15rem;
+    opacity: 0.05;
+    top: -30px;
+    right: -30px;
+  }
+
+  header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: 2px;
+  }
+
+  header p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    font-style: italic;
+  }
+
+  nav {
+    background: var(--dark);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow);
+  }
+
+  nav ul {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0.5rem;
+  }
+
+  nav a {
+    color: var(--light);
+    text-decoration: none;
+    padding: 0.7rem 1rem;
+    margin: 0.2rem;
+    border-radius: 5px;
+    font-size: 0.7rem;
+    transition: all 0.3s;
+    display: block;
+  }
+
+  nav a:hover {
+    background: var(--secondary);
+    color: var(--dark);
+    transform: translateY(-2px);
+  }
+
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+  }
+
+  section {
+    background: var(--card-bg);
+    margin-bottom: 2.5rem;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    border-left: 5px solid var(--secondary);
+    scroll-margin-top: 80px;
+  }
+
+  section h2 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--secondary);
+  }
+
+  section h3 {
+    color: var(--accent);
+    font-size: 1.4rem;
+    margin: 1.5rem 0 0.8rem;
+  }
+
+  section h4 {
+    color: var(--primary);
+    font-size: 1.15rem;
+    margin: 1rem 0 0.5rem;
+  }
+
+  p { margin-bottom: 1rem; text-align: justify; }
+
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.2rem;
+    margin: 1.5rem 0;
+  }
+
+  .card {
+    background: linear-gradient(135deg, #fff 0%, #f9f6ef 100%);
+    border: 2px solid var(--secondary);
+    border-radius: 10px;
+    padding: 1.2rem;
+    transition: all 0.3s;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--primary);
+  }
+
+  .card .icon {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .card h4 {
+    text-align: center;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+  }
+
+  .card .detail {
+    display: none;
+    margin-top: 0.8rem;
+    padding-top: 0.8rem;
+    border-top: 1px dashed var(--secondary);
+    font-size: 0.95rem;
+  }
+
+  .card.active .detail { display: block; }
+
+  .card .hint {
+    text-align: center;
+    color: var(--accent);
+    font-size: 0.85rem;
+    font-style: italic;
+  }
+
+  .mapa-container {
+    background: #fdfbf5;
+    border: 2px dashed var(--secondary);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    overflow-x: auto;
+  }
+
+  .mapa {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 600px;
+  }
+
+  .nodo {
+    background: var(--primary);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+    font-weight: bold;
+    text-align: center;
+    min-width: 180px;
+    box-shadow: var(--shadow);
+  }
+
+  .nodo.central {
+    background: linear-gradient(135deg, var(--secondary), #e0b888);
+    color: var(--dark);
+    font-size: 1.2rem;
+    padding: 1rem 2rem;
+  }
+
+  .nodo.sub {
+    background: var(--accent);
+    font-size: 0.95rem;
+  }
+
+  .linea {
+    width: 3px;
+    height: 25px;
+    background: var(--secondary);
+  }
+
+  .linea-h {
+    height: 3px;
+    background: var(--secondary);
+    width: 80%;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .rama {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 1rem;
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  .rama-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    min-width: 140px;
+  }
+
+  .ejemplo {
+    background: #e6f7ee;
+    border-left: 4px solid var(--success);
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .ejemplo strong { color: var(--success); }
+
+  .alerta {
+    background: #fff8e1;
+    border-left: 4px solid var(--warning);
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .alerta strong { color: var(--warning); }
+
+  .cita {
+    background: #f0f7ff;
+    border-left: 4px solid var(--accent);
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+    color: var(--primary);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    font-size: 0.9rem;
+  }
+
+  th {
+    background: var(--primary);
+    color: white;
+    padding: 0.8rem;
+    text-align: left;
+  }
+
+  td {
+    padding: 0.8rem;
+    border-bottom: 1px solid #eee;
+  }
+
+  tr:nth-child(even) { background: #f9f6ef; }
+  tr:hover { background: #f0ead6; }
+
+  .quiz-container {
+    background: linear-gradient(135deg, #f7f4ed 0%, #fff 100%);
+    padding: 1.5rem;
+    border-radius: 10px;
+    border: 2px solid var(--accent);
+  }
+
+  .quiz-header {
+    background: var(--primary);
+    color: white;
+    padding: 1.2rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .quiz-header h3 {
+    color: white;
+    margin: 0 0 0.5rem 0;
+  }
+
+  .progress-bar {
+    background: rgba(255,255,255,0.2);
+    height: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+  }
+
+  .progress-fill {
+    background: var(--secondary);
+    height: 100%;
+    width: 0%;
+    transition: width 0.4s ease;
+  }
+
+  .quiz-stats {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .stat {
+    background: rgba(255,255,255,0.1);
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    font-size: 0.9rem;
+  }
+
+  .stat strong { color: var(--secondary); }
+
+  .quiz-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    padding: 0.5rem;
+    background: #f0ead6;
+    border-radius: 8px;
+  }
+
+  .quiz-tab {
+    background: white;
+    border: 2px solid var(--accent);
+    color: var(--accent);
+    padding: 0.5rem 0.8rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.7rem;
+    transition: all 0.3s;
+    flex: 1;
+    min-width: 70px;
+    text-align: center;
+  }
+
+  .quiz-tab:hover {
+    background: var(--accent);
+    color: white;
+  }
+
+  .quiz-tab.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+  }
+
+  .quiz-section {
+    display: none;
+  }
+
+  .quiz-section.active {
+    display: block;
+    animation: fadeIn 0.4s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .pregunta {
+    margin-bottom: 1.5rem;
+    padding: 1.2rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    border-left: 4px solid var(--accent);
+    transition: all 0.3s;
+  }
+
+  .pregunta.answered {
+    border-left-color: var(--secondary);
+  }
+
+  .pregunta-num {
+    display: inline-block;
+    background: var(--accent);
+    color: white;
+    padding: 0.2rem 0.7rem;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    margin-right: 0.5rem;
+  }
+
+  .pregunta-tipo {
+    display: inline-block;
+    background: var(--secondary);
+    color: var(--dark);
+    padding: 0.2rem 0.7rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    margin-left: 0.3rem;
+    font-weight: bold;
+  }
+
+  .pregunta p { 
+    font-weight: bold; 
+    color: var(--primary); 
+    margin: 0.8rem 0;
+    text-align: left;
+  }
+
+  .opciones { display: flex; flex-direction: column; gap: 0.5rem; }
+
+  .opcion {
+    padding: 0.7rem 1rem;
+    background: #f9f6ef;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+  }
+
+  .opcion:hover:not(.disabled) {
+    border-color: var(--accent);
+    background: #e8f0f7;
+  }
+
+  .opcion.disabled {
+    cursor: not-allowed;
+    opacity: 0.85;
+  }
+
+  .opcion.correcta {
+    background: #c6f6d5;
+    border-color: var(--success);
+    color: var(--success);
+    font-weight: bold;
+  }
+
+  .opcion.incorrecta {
+    background: #fed7d7;
+    border-color: var(--danger);
+    color: var(--danger);
+  }
+
+  .opcion.correcta::after {
+    content: ' ✓';
+    font-weight: bold;
+  }
+
+  .opcion.incorrecta::after {
+    content: ' ✗';
+    font-weight: bold;
+  }
+
+  .explicacion {
+    margin-top: 0.8rem;
+    padding: 0.8rem;
+    background: #f0f7ff;
+    border-left: 3px solid var(--accent);
+    border-radius: 0 6px 6px 0;
+    font-size: 0.9rem;
+    display: none;
+    font-style: italic;
+  }
+
+  .explicacion.visible {
+    display: block;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .resultado-final {
+    margin-top: 2rem;
+    padding: 2rem;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    color: white;
+    border-radius: 12px;
+    text-align: center;
+    display: none;
+  }
+
+  .resultado-final.visible {
+    display: block;
+    animation: fadeIn 0.5s ease;
+  }
+
+  .resultado-final h3 {
+    color: var(--secondary);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .puntaje-final {
+    font-size: 3rem;
+    font-weight: bold;
+    color: var(--secondary);
+    margin: 1rem 0;
+  }
+
+  .desglose-temas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+    text-align: left;
+  }
+
+  .desglose-item {
+    background: rgba(255,255,255,0.1);
+    padding: 1rem;
+    border-radius: 8px;
+  }
+
+  .desglose-item h4 {
+    color: var(--secondary);
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+  }
+
+  .mini-bar {
+    background: rgba(255,255,255,0.2);
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+  }
+
+  .mini-bar-fill {
+    background: var(--secondary);
+    height: 100%;
+    transition: width 0.6s ease;
+  }
+
+  button {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 1rem;
+    transition: all 0.3s;
+  }
+
+  button:hover {
+    background: var(--secondary);
+    color: var(--dark);
+    transform: translateY(-2px);
+  }
+
+  .btn-reset {
+    background: var(--danger);
+    margin-left: 0.5rem;
+  }
+
+  .btn-reset:hover {
+    background: #9b2c2c;
+    color: white;
+  }
+
+  .acordeon-item {
+    margin-bottom: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .acordeon-header {
+    background: var(--accent);
+    color: white;
+    padding: 1rem;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.3s;
+  }
+
+  .acordeon-header:hover { background: var(--primary); }
+
+  .acordeon-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    background: white;
+  }
+
+  .acordeon-content.active {
+    max-height: 2000px;
+    padding: 1rem;
+  }
+
+  .flecha { transition: transform 0.3s; }
+  .acordeon-header.active .flecha { transform: rotate(180deg); }
+
+  footer {
+    background: var(--dark);
+    color: var(--light);
+    text-align: center;
+    padding: 2rem 1rem;
+    margin-top: 2rem;
+  }
+
+  footer p { margin-bottom: 0.5rem; }
+
+  @media (max-width: 768px) {
+    header h1 { font-size: 1.8rem; }
+    section { padding: 1.2rem; }
+    section h2 { font-size: 1.5rem; }
+    nav a { font-size: 0.6rem; padding: 0.3rem 0.4rem; }
+    .quiz-tab { font-size: 0.6rem; padding: 0.3rem 0.4rem; }
+    table { font-size: 0.8rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>️ Cooperación Internacional, Justicia Restaurativa e Implementación</h1>
+  <p>Libros V, VI y VII de la Ley 906 de 2004 · Guía Didáctica Interactiva</p>
+</header>
+
+<nav>
+  <ul>
+    <li><a href="#tema1">1. Asistencia Judicial</a></li>
+    <li><a href="#tema2">2. Extradición</a></li>
+    <li><a href="#tema3">3. Sentencias Ext.</a></li>
+    <li><a href="#tema4">4. Justicia Rest.</a></li>
+    <li><a href="#tema5">5. Conciliación</a></li>
+    <li><a href="#tema6">6. Mediación</a></li>
+    <li><a href="#tema7">7. Implementación</a></li>
+    <li><a href="#tema8">8. Transición</a></li>
+    <li><a href="#tema9">9. Vigencia</a></li>
+    <li><a href="#quiz">Quiz (40)</a></li>
+  </ul>
+</nav>
+
+<main>
+
+  <section>
+    <h2> Introducción</h2>
+    <p>Bienvenido a esta guía interactiva sobre los <strong>Libros Quinto, Sexto y Séptimo de la Ley 906 de 2004</strong> (Código de Procedimiento Penal Colombiano). Aquí estudiarás la cooperación internacional en materia probatoria, la extradición, la ejecución de sentencias extranjeras, la justicia restaurativa (conciliación y mediación), y el régimen de implementación gradual del sistema acusatorio.</p>
+    <div class="alerta">
+      <strong>💡 Cómo usar esta guía:</strong> Haz clic en las tarjetas para ver detalles, despliega los acordeones para información adicional y prueba tus conocimientos con el quiz de 40 preguntas al final.
+    </div>
+  </section>
+
+  <!-- TEMA 1: ASISTENCIA JUDICIAL INTERNACIONAL -->
+  <section id="tema1">
+    <h2>1. Cooperación Internacional en Materia Probatoria (Arts. 484-489)</h2>
+    <p>La cooperación internacional permite a las autoridades colombianas solicitar y recibir asistencia judicial de otros países para la investigación y juzgamiento de delitos.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">COOPERACIÓN INTERNACIONAL</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Asistencia Judicial</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Notificación Roja</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Traslado Testigos</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Delitos Transnacionales</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Principios Generales</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🌐</div>
+        <h4>Canal Diplomático</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Las autoridades investigativas y judiciales tramitan la asistencia judicial por conducto del <strong>Ministerio de Relaciones Exteriores</strong>.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🔴</div>
+        <h4>Notificación Roja (Interpol)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Tiene <strong>eficacia inmediata</strong> para poner al retenido a disposición de la Fiscalía General de la Nación.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon"></div>
+        <h4>Solicitudes al Exterior</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Jueces, fiscales y jefes de policía judicial pueden solicitar directamente o por conductos oficiales elementos probatorios o diligencias en el extranjero.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon"></div>
+        <h4>Traslado de Testigos y Peritos</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Agotados los medios técnicos (videoconferencias), se puede solicitar la <strong>presencia física</strong> de testigos o peritos en el juicio oral.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>⚠️ Delitos Transnacionales y Límites</h3>
+    <div class="alerta">
+      <strong> La Fiscalía puede:</strong>
+      <ul>
+        <li>Conformar <strong>comisiones internacionales e interinstitucionales</strong> para investigar delitos transnacionales</li>
+        <li>Suscribir <strong>acuerdos de cooperación</strong> con homólogos extranjeros</li>
+        <li>Prestar asistencia <strong>aun cuando la conducta no esté tipificada</strong> en la legislación interna, salvo si resulta contraria a la Constitución</li>
+      </ul>
+    </div>
+
+    <h3> Medidas sobre Bienes</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">️</div>
+        <h4>Ejecución de Órdenes Extranjeras</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Es procedente ejecutar en Colombia órdenes de <strong>extinción de dominio o comiso</strong> emitidas por autoridades extranjeras competentes, previa decisión del juez de conocimiento.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si la Fiscalía colombiana investiga una red de narcotráfico que opera en Colombia y Perú, puede solicitar a las autoridades peruanas, por conducto del Ministerio de Relaciones Exteriores, la práctica de interceptaciones telefónicas y el traslado de testigos para declarar en el juicio oral en Colombia.
+    </div>
+  </section>
+
+  <!-- TEMA 2: EXTRADICIÓN -->
+  <section id="tema2">
+    <h2>2. La Extradición (Arts. 490-514)</h2>
+    <p>La extradición es el procedimiento mediante el cual un Estado entrega a una persona acusada o condenada por un delito a otro Estado que la reclama para su juzgamiento o cumplimiento de pena.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">EXTRADICIÓN</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Prohibiciones</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Requisitos</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Trámite</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Simplificada</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>🚫 Fundamento y Prohibiciones</h3>
+    <div class="alerta">
+      <strong>📌 La extradición se rige por tratados públicos y subsidiariamente por la ley. NO procede:</strong>
+      <ul>
+        <li>Por <strong>delitos políticos</strong></li>
+        <li>Por hechos cometidos por <strong>colombianos por nacimiento antes del 17 de diciembre de 1997</strong></li>
+      </ul>
+    </div>
+
+    <h3>⚖️ Facultad del Gobierno y Concepto Judicial</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🏛️</div>
+        <h4>Gobierno Nacional</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Corresponde al Gobierno Nacional (por conducto del Ministerio del Interior y de Justicia) <strong>ofrecer o conceder</strong> la extradición.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Corte Suprema de Justicia</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Se requiere <strong>concepto previo y favorable</strong> de la Sala de Casación Penal de la Corte Suprema de Justicia.</p>
+          <p>El concepto <strong>obliga al Gobierno si es negativo</strong>.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Requisitos y Condiciones de Concesión</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Requisito</th>
+          <th>Descripción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Doble incriminación</strong></td>
+          <td>La conducta debe ser delito tanto en Colombia como en el Estado requirente</td>
+        </tr>
+        <tr>
+          <td><strong>Pena mínima</strong></td>
+          <td>Sanción privativa de la libertad no inferior a 4 años en Colombia</td>
+        </tr>
+        <tr>
+          <td><strong>Prohibición de pena de muerte</strong></td>
+          <td>No se extradita si el requirente puede imponer pena de muerte</td>
+        </tr>
+        <tr>
+          <td><strong>Prohibición de prisión perpetua</strong></td>
+          <td>No se extradita si el requirente puede imponer prisión perpetua</td>
+        </tr>
+        <tr>
+          <td><strong>Prohibición de confiscación</strong></td>
+          <td>No se extradita si conlleva confiscación de bienes</td>
+        </tr>
+        <tr>
+          <td><strong>Tratos dignos</strong></td>
+          <td>No se extradita si puede recibir tratos crueles o degradantes</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>️ Trámite Procedimental</h3>
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>1️⃣ Solicitud Diplomática</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Presentación de documentos por vía diplomática con todos los anexos requeridos.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>2️⃣ Revisión Ministerial</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Estudio del Ministerio del Interior y de Justicia para verificar el cumplimiento de requisitos.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>3️ Concepto de la Corte Suprema</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>La Sala de Casación Penal de la Corte Suprema de Justicia emite concepto motivado sobre la procedencia de la extradición.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>4️⃣ Captura Preventiva</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Orden de captura expedida por el Fiscal General de la Nación.</p>
+        <p><strong>Causal de libertad:</strong> Si el Estado requirente no formaliza la petición en 60 días.</p>
+      </div>
+    </div>
+
+    <h3>⚡ Extradición Simplificada</h3>
+    <div class="alerta">
+      <strong>📌 Procedimiento especial:</strong>
+      <ul>
+        <li>El requerido, con el aval de su defensor y del Ministerio Público, puede <strong>renunciar al trámite ordinario</strong></li>
+        <li>Solicita que la Corte Suprema emita concepto de plano dentro de los <strong>20 días siguientes</strong></li>
+        <li>Agiliza el proceso cuando el extraditable acepta su entrega</li>
+      </ul>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si Estados Unidos solicita la extradición de un colombiano por narcotráfico (delito con pena superior a 4 años en Colombia), el Gobierno Nacional recibe la solicitud diplomática, el Ministerio del Interior la revisa, la Corte Suprema emite concepto favorable, y el Fiscal General ordena la captura. Si el requerido acepta la extradición simplificada, la Corte decide en 20 días.
+    </div>
+  </section>
+
+  <!-- TEMA 3: SENTENCIAS EXTRANJERAS -->
+  <section id="tema3">
+    <h2>3. Sentencias Extranjeras (Arts. 515-517)</h2>
+    <p>Colombia puede ejecutar sentencias penales proferidas en el exterior bajo ciertas condiciones y mediante el trámite de exequátur.</p>
+
+    <h3>📋 Ejecución en Colombia</h3>
+    <div class="alerta">
+      <strong>📌 Requisitos para la ejecución:</strong>
+      <ul>
+        <li>Procede a <strong>petición diplomática</strong> sobre sentencias en firme</li>
+        <li>Que no se opongan a la Constitución o tratados internacionales</li>
+        <li>Que <strong>no exista proceso o condena en Colombia</strong> por los mismos hechos (principio non bis in idem)</li>
+      </ul>
+    </div>
+
+    <h3>⚖️ Trámite de Exequátur</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📨</div>
+        <h4>Remisión Diplomática</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>La solicitud se tramita ante el <strong>Ministerio de Relaciones Exteriores</strong> (Cancillería).</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🏛️</div>
+        <h4>Decisión Judicial</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Corresponde a la <strong>Sala Penal de la Corte Suprema de Justicia</strong> decidir sobre la ejecución del fallo.</p>
+          <p><strong>Sin nuevo juzgamiento:</strong> No se realiza un nuevo juicio en Colombia.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si un colombiano es condenado en España por estafa y regresa a Colombia, las autoridades españolas pueden solicitar la ejecución de la sentencia en Colombia. La Corte Suprema de Justicia, mediante trámite de exequátur, decide si la sentencia se ejecuta en territorio colombiano, sin realizar un nuevo juicio.
+    </div>
+  </section>
+
+  <!-- TEMA 4: JUSTICIA RESTAURATIVA - GENERALIDADES -->
+  <section id="tema4">
+    <h2>4. Justicia Restaurativa - Disposiciones Generales (Arts. 518-521)</h2>
+    <p>La justicia restaurativa es un enfoque que busca reparar el daño causado por el delito mediante la participación activa de la víctima y el infractor.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">JUSTICIA RESTAURATIVA</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Reparación</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Restitución</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Reintegración</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3> Concepto y Resultado Restaurativo</h3>
+    <div class="cita">
+      <strong>"Proceso donde la víctima y el procesado participan conjuntamente de forma activa para resolver las consecuencias del delito, buscando la reparación, restitución y reintegración comunitaria."</strong>
+    </div>
+
+    <h3>⚖️ Reglas Garantistas Fundamentales</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🆓</div>
+        <h4>Consentimiento Libre y Voluntario</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Requisito esencial. Es <strong>retirable en cualquier momento</strong> por cualquiera de las partes.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Proporcionalidad</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Las obligaciones asumidas deben ser <strong>proporcionales</strong> al daño causado y a la capacidad del infractor.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🛡️</div>
+        <h4>No Autoincriminación</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p><strong>La participación del procesado NO puede usarse como admisión de culpabilidad.</strong></p>
+          <p>El incumplimiento NO puede fundamentar condena o agravación.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>🔧 Mecanismos Aplicables</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Mecanismo</th>
+          <th>Momento de Aplicación</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Conciliación preprocesal</strong></td>
+          <td>Antes del ejercicio de la acción penal (delitos querellables)</td>
+        </tr>
+        <tr>
+          <td><strong>Conciliación en incidente de reparación</strong></td>
+          <td>Durante el incidente de reparación integral</td>
+        </tr>
+        <tr>
+          <td><strong>Mediación</strong></td>
+          <td>Desde la imputación hasta antes del juicio oral</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="ejemplo">
+      <strong> Ejemplo:</strong> En un caso de lesiones personales culposas por accidente de tránsito, la víctima y el responsable pueden acudir a un proceso de justicia restaurativa. El responsable se compromete a reparar los daños y la víctima acepta el acuerdo. Este acuerdo NO implica que el responsable admita culpabilidad penal, pero sí asume la obligación de reparar.
+    </div>
+  </section>
+
+  <!-- TEMA 5: CONCILIACIÓN PREPROCESAL -->
+  <section id="tema5">
+    <h2>5. Conciliación Preprocesal (Art. 522)</h2>
+    <p>La conciliación preprocesal es un requisito de procedibilidad obligatorio para ejercer la acción penal en delitos querellables.</p>
+
+    <h3>📋 Requisitos de Procedibilidad</h3>
+    <div class="alerta">
+      <strong> Características esenciales:</strong>
+      <ul>
+        <li>Se surte <strong>obligatoriamente antes</strong> del ejercicio de la acción penal</li>
+        <li>Aplica únicamente en <strong>delitos querellables</strong></li>
+        <li>Se realiza ante el <strong>fiscal, centro de conciliación o conciliador reconocido</strong></li>
+      </ul>
+    </div>
+
+    <h3>⚠️ Consecuencias de la Inasistencia</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🚫</div>
+        <h4>Inasistencia del Querellante</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>La inasistencia injustificada del querellante produce el <strong>desistimiento de la pretensión</strong>.</p>
+          <p>Se entiende que renuncia a perseguir penalmente el hecho.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚡</div>
+        <h4>Inasistencia del Querellado</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>La inasistencia injustificada del querellado motiva el <strong>inicio formal de la persecución penal</strong>.</p>
+          <p>El fiscal puede ejercer la acción penal directamente.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>🎯 Delitos Querellables Sujeto a Conciliación</h3>
+    <div class="alerta">
+      <strong> Ejemplos de delitos querellables:</strong>
+      <ul>
+        <li>Lesiones personales leves</li>
+        <li>Injuria y calumnia</li>
+        <li>Estafa de menor cuantía</li>
+        <li>Hurto de menor cuantía</li>
+        <li>Abuso de confianza</li>
+        <li>Daño en bien ajeno</li>
+      </ul>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si A comete lesiones leves contra B (delito querellable), B debe acudir primero a conciliación preprocesal. Si A no asiste injustificadamente, B puede presentar querella directamente ante la Fiscalía. Si B no asiste, se entiende que desiste de su pretensión.
+    </div>
+  </section>
+
+  <!-- TEMA 6: MEDIACIÓN -->
+  <section id="tema6">
+    <h2>6. Mediación (Arts. 523-527)</h2>
+    <p>La mediación es un mecanismo de justicia restaurativa donde un tercero neutral facilita el diálogo entre víctima y procesado.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">MEDIACIÓN</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Facilitador Neutral</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Diálogo Directo</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Acuerdo Vinculante</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3> Naturaleza y Facilitador</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon"></div>
+        <h4>Tercero Neutral</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Particular o servidor público designado según el <strong>manual de la Fiscalía</strong>.</p>
+          <p>Facilita el diálogo directo entre víctima y procesado.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">💬</div>
+        <h4>Confrontación de Puntos de Vista</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>El mediador no impone soluciones, sino que facilita que las partes encuentren un acuerdo mutuamente aceptable.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>⚖️ Procedencia</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Tipo de Delito</th>
+          <th>Momento de Aplicación</th>
+          <th>Finalidad</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Penas ≤ 5 años</strong> (perseguibles de oficio)</td>
+          <td>Desde la formulación de imputación hasta antes del juicio oral</td>
+          <td>Resolver el conflicto y acordar reparación</td>
+        </tr>
+        <tr>
+          <td><strong>Penas > 5 años</strong></td>
+          <td>Cualquier momento procesal</td>
+          <td>Acordar beneficios de dosificación o cumplimiento penitenciario</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>🎯 Efectos Procesales</h3>
+    <div class="alerta">
+      <strong> La decisión de someterse a mediación:</strong>
+      <ul>
+        <li>Tiene <strong>carácter vinculante</strong></li>
+        <li><strong>Excluye la acción civil</strong> y el incidente de reparación integral</li>
+        <li>El informe del mediador es valorado para:
+          <ul>
+            <li>Otorgar beneficios</li>
+            <li>Seleccionar medidas de coerción</li>
+            <li>Graduar la pena</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> En un caso de hurto simple (pena ≤ 5 años), después de la formulación de imputación, la víctima y el procesado pueden acudir a mediación. Si llegan a un acuerdo de reparación (devolución del bien o indemnización), ese acuerdo es vinculante y excluye la acción civil. El informe del mediador será valorado por el juez para graduar la pena.
+    </div>
+  </section>
+
+  <!-- TEMA 7: IMPLEMENTACIÓN GRADUAL -->
+  <section id="tema7">
+    <h2>7. Régimen de Implementación (Arts. 528-530)</h2>
+    <p>La implementación del sistema penal acusatorio en Colombia fue un proceso gradual y planificado que se desarrolló entre 2005 y 2008.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">IMPLEMENTACIÓN</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Entes Directores</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Fases Territoriales</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Cronograma</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>🏛️ Entes Directores</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Consejo Superior de la Judicatura</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Dirigió la implementación desde el ámbito judicial, coordinando la adaptación de los despachos judiciales al nuevo sistema.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🔍</div>
+        <h4>Fiscalía General de la Nación</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Dirigió la implementación desde el ámbito investigativo, adaptando sus estructuras al nuevo modelo acusatorio.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3> Cronograma Territorial (2005-2008)</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Fase</th>
+          <th>Fecha de Inicio</th>
+          <th>Distritos Judiciales</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Fase 1</strong></td>
+          <td>1° de enero de 2005</td>
+          <td>Bogotá, Armenia, Manizales y Pereira</td>
+        </tr>
+        <tr>
+          <td><strong>Fase 2</strong></td>
+          <td>1° de julio de 2005</td>
+          <td>Distritos adicionales seleccionados</td>
+        </tr>
+        <tr>
+          <td><strong>Fase 3</strong></td>
+          <td>1° de enero de 2006</td>
+          <td>Mayor cobertura territorial</td>
+        </tr>
+        <tr>
+          <td><strong>Fase 4</strong></td>
+          <td>1° de enero de 2008</td>
+          <td>Totalidad de distritos judiciales del país</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="ejemplo">
+      <strong> Ejemplo:</strong> Un delito cometido en Bogotá el 15 de enero de 2005 se juzga bajo el sistema acusatorio (Ley 906/2004), mientras que un delito cometido en una ciudad no cubierta hasta julio de 2005 se juzga bajo el sistema anterior (Ley 600/2000) hasta que entre en vigencia el nuevo sistema en ese distrito.
+    </div>
+  </section>
+
+  <!-- TEMA 8: RÉGIMEN DE TRANSICIÓN -->
+  <section id="tema8">
+    <h2>8. Régimen de Transición (Arts. 531-532)</h2>
+    <p>El régimen de transición estableció los mecanismos para pasar del sistema inquisitivo (Ley 600/2000) al sistema acusatorio (Ley 906/2004).</p>
+
+    <h3>📋 Descongestión y Reorganización</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📁</div>
+        <h4>Liquidación de Expedientes</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Procesos de liquidación de expedientes bajo la <strong>Ley 600 de 2000</strong> (sistema anterior).</p>
+          <p>Se debían resolver los procesos en trámite antes de la transición.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🔄</div>
+        <h4>Reconversión de Personal</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Transformación y traslado de plantas de personal y despachos judiciales entre:</p>
+          <ul>
+            <li>Fiscalía General de la Nación</li>
+            <li>Rama Judicial</li>
+            <li>Defensoría del Pueblo</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <h3>⚖️ Principios de la Transición</h3>
+    <div class="alerta">
+      <strong>📌 Objetivos del régimen de transición:</strong>
+      <ul>
+        <li><strong>Descongestión:</strong> Liquidar expedientes del sistema anterior</li>
+        <li><strong>Reorganización:</strong> Adaptar estructuras al nuevo modelo</li>
+        <li><strong>Capacitación:</strong> Formar funcionarios en el sistema acusatorio</li>
+        <li><strong>Continuidad:</strong> Garantizar la prestación del servicio de justicia</li>
+      </ul>
+    </div>
+
+    <h3>️ Adaptación Institucional</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Entidad</th>
+          <th>Cambios Principales</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Fiscalía General</strong></td>
+          <td>Asumió la investigación y acusación (antes compartida con el juez)</td>
+        </tr>
+        <tr>
+          <td><strong>Rama Judicial</strong></td>
+          <td>Creación de Jueces de Control de Garantías y de Conocimiento</td>
+        </tr>
+        <tr>
+          <td><strong>Defensoría del Pueblo</strong></td>
+          <td>Fortalecimiento de la defensa técnica</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Durante la transición, los jueces penales del sistema anterior (Ley 600/2000) debían liquidar sus expedientes pendientes, mientras se creaban nuevos cargos de Jueces de Control de Garantías y Jueces de Conocimiento para el sistema acusatorio.
+    </div>
+  </section>
+
+  <!-- TEMA 9: DISPOSICIONES FINALES -->
+  <section id="tema9">
+    <h2>9. Disposiciones Finales y Vigencia (Art. 533)</h2>
+    <p>El artículo 533 establece las reglas de vigencia y aplicación temporal de la Ley 906 de 2004.</p>
+
+    <h3>📋 Vigencia y Aplicación Temporal</h3>
+    <div class="alerta">
+      <strong>📌 Regla fundamental:</strong>
+      <ul>
+        <li><strong>Rigor procesal exclusivo</strong> para delitos cometidos con posterioridad al <strong>1 de enero de 2005</strong></li>
+        <li>Se mantiene transitoriamente la <strong>Ley 600 de 2000</strong> para juzgamientos con fuero ante la Corte Suprema de Justicia</li>
+      </ul>
+    </div>
+
+    <h3>⚖️ Principio de Aplicación Temporal</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon"></div>
+        <h4>Delitos Posteriores al 1° de Enero de 2005</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Se juzgan bajo la <strong>Ley 906 de 2004</strong> (sistema acusatorio).</p>
+          <p>Aplicación estricta del nuevo código procesal.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📜</div>
+        <h4>Delitos Anteriores al 1° de Enero de 2005</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Se juzgan bajo la <strong>Ley 600 de 2000</strong> (sistema inquisitivo).</p>
+          <p>Salvo excepción de fuero ante la Corte Suprema.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🏛️</div>
+        <h4>Excepción de Fuero</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Los juzgamientos con <strong>fuero ante la Corte Suprema de Justicia</strong> mantienen transitoriamente la Ley 600 de 2000, independientemente de la fecha del delito.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>🔍 Criterio Temporal Clave</h3>
+    <div class="cita">
+      <strong>"La ley procesal se aplica a los delitos cometidos con posterioridad a su entrada en vigencia, salvo las excepciones legales expresas."</strong>
+    </div>
+
+    <div class="alerta">
+      <strong> Importancia del criterio temporal:</strong>
+      <ul>
+        <li>Garantiza la <strong>seguridad jurídica</strong> de los procesados</li>
+        <li>Evita la <strong>retroactividad</strong> de la ley procesal más gravosa</li>
+        <li>Permite la <strong>transición ordenada</strong> entre sistemas procesales</li>
+      </ul>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si A cometió un homicidio el 15 de diciembre de 2004, su proceso se rige por la Ley 600 de 2000 (sistema inquisitivo). Si B cometió el mismo delito el 15 de enero de 2005, su proceso se rige por la Ley 906 de 2004 (sistema acusatorio). La fecha del delito determina la ley aplicable.
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz">
+    <h2>🎯 Quiz Completo - 40 Preguntas</h2>
+    <p>Pon a prueba tus conocimientos sobre Cooperación Internacional, Justicia Restaurativa e Implementación de la Ley 906 de 2004.</p>
+
+    <div class="quiz-container">
+      <div class="quiz-header">
+        <h3>📊 Tu Progreso</h3>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="quiz-stats">
+          <div class="stat">Respondidas: <strong id="respondidas">0</strong>/40</div>
+          <div class="stat">Correctas: <strong id="correctas">0</strong></div>
+          <div class="stat">Incorrectas: <strong id="incorrectas">0</strong></div>
+          <div class="stat">Porcentaje: <strong id="porcentaje">0</strong>%</div>
+        </div>
+      </div>
+
+      <div class="quiz-tabs">
+        <div class="quiz-tab active" onclick="mostrarSeccion('s1', this)">T1 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s2', this)">T2 (5)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s3', this)">T3 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s4', this)">T4 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s5', this)">T5 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s6', this)">T6 (5)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s7', this)">T7 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s8', this)">T8 (5)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s9', this)">T9 (5)</div>
+      </div>
+
+      <!-- SECCIÓN 1: ASISTENCIA JUDICIAL -->
+      <div class="quiz-section active" id="s1">
+        <div class="pregunta" data-correcta="2" data-tema="1">
+          <span class="pregunta-num">1</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La asistencia judicial internacional se tramita por conducto de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 1)">a) La Fiscalía General directamente</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">b) La Corte Suprema de Justicia</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">c) El Ministerio de Relaciones Exteriores</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">d) La Defensoría del Pueblo</div>
+          </div>
+          <div class="explicacion">Las autoridades investigativas y judiciales tramitan la asistencia judicial por conducto del Ministerio de Relaciones Exteriores (Art. 484).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="1">
+          <span class="pregunta-num">2</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La notificación roja de Interpol tiene:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 2)">a) Eficacia diferida</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">b) Eficacia inmediata para poner al retenido a disposición de la Fiscalía</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">c) Solo valor informativo</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">d) Requiere validación judicial previa</div>
+          </div>
+          <div class="explicacion">La notificación roja a través de Interpol tiene eficacia inmediata para poner al retenido a disposición de la Fiscalía General de la Nación.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="1">
+          <span class="pregunta-num">3</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Se presta asistencia internacional aun cuando la conducta no esté tipificada en la legislación interna, salvo si:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 3)">a) Resulta contraria a la Constitución</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">b) Es un delito menor</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">c) No hay tratado vigente</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">d) El solicitante es un país no aliado</div>
+          </div>
+          <div class="explicacion">Se presta asistencia aunque la conducta no esté tipificada en la legislación interna, salvo que sea contraria a los valores constitucionales (Art. 487).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="1">
+          <span class="pregunta-num">4</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Es procedente ejecutar en Colombia órdenes de extinción de dominio o comiso emitidas por autoridades extranjeras:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 4)">a) Automáticamente</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">b) Solo con tratado vigente</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">c) Solo si el delito es grave</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">d) Previa decisión del juez de conocimiento</div>
+          </div>
+          <div class="explicacion">Es procedente ejecutar en Colombia decisiones de extinción de dominio o comiso emitidas por autoridades extranjeras competentes, previa decisión del juez de conocimiento (Art. 489).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 2: EXTRADICIÓN -->
+      <div class="quiz-section" id="s2">
+        <div class="pregunta" data-correcta="1" data-tema="2">
+          <span class="pregunta-num">5</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La extradición NO procede por:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 5)">a) Delitos comunes</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">b) Delitos políticos</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">c) Delitos contra la humanidad</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">d) Delitos de narcotráfico</div>
+          </div>
+          <div class="explicacion">La extradición no procede por delitos políticos ni por hechos cometidos por colombianos por nacimiento antes del 17 de diciembre de 1997 (Art. 490).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="2">
+          <span class="pregunta-num">6</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Corresponde al Gobierno Nacional ofrecer o conceder la extradición por conducto del:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 6)">a) Ministerio del Interior y de Justicia</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">b) Ministerio de Relaciones Exteriores únicamente</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">c) Fiscalía General de la Nación</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">d) Corte Suprema de Justicia</div>
+          </div>
+          <div class="explicacion">Corresponde al Gobierno Nacional, por conducto del Ministerio del Interior y de Justicia, ofrecer o conceder la extradición (Art. 491).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="2">
+          <span class="pregunta-num">7</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El concepto de la Sala de Casación Penal de la Corte Suprema de Justicia sobre la extradición:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 7)">a) Es solo orientativo</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">b) Puede ser ignorado por el Gobierno</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">c) Obliga al Gobierno si es negativo</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">d) Solo aplica en delitos graves</div>
+          </div>
+          <div class="explicacion">Se requiere concepto previo y favorable de la Sala de Casación Penal de la Corte Suprema de Justicia, el cual obliga al Gobierno si resulta negativo (Art. 492).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="2">
+          <span class="pregunta-num">8</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El principio de doble incriminación exige que:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 8)">a) El delito sea grave en ambos países</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">b) Haya tratado vigente entre ambos países</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">c) La pena sea igual en ambos países</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">d) La conducta sea delito tanto en Colombia como en el Estado requirente</div>
+          </div>
+          <div class="explicacion">El principio de doble incriminación exige que la conducta sea delito tanto en Colombia como en el Estado que solicita la extradición (Art. 493).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="2">
+          <span class="pregunta-num">9</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La extradición simplificada permite que:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 9)">a) Se omita el concepto de la Corte Suprema</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">b) El requerido renuncie al trámite ordinario y la Corte decida en 20 días</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">c) Se extradite sin requisitos</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">d) El Gobierno decida directamente</div>
+          </div>
+          <div class="explicacion">En la extradición simplificada, el requerido, con aval de su defensor y del Ministerio Público, puede renunciar al trámite ordinario y solicitar que la Corte Suprema emita concepto de plano en 20 días (Art. 508).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 3: SENTENCIAS EXTRANJERAS -->
+      <div class="quiz-section" id="s3">
+        <div class="pregunta" data-correcta="2" data-tema="3">
+          <span class="pregunta-num">10</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La ejecución de sentencias extranjeras en Colombia procede cuando:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 10)">a) La sentencia es de cualquier país</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">b) Solo hay tratado vigente</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">c) No exista proceso o condena en Colombia por los mismos hechos</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">d) El condenado es colombiano</div>
+          </div>
+          <div class="explicacion">Procede la ejecución de sentencias extranjeras cuando no exista proceso o condena en Colombia por los mismos hechos (principio non bis in idem) (Art. 515).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="3">
+          <span class="pregunta-num">11</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El trámite de exequátur de sentencias extranjeras corresponde a:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 11)">a) La Sala Penal de la Corte Suprema de Justicia</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">b) El Ministerio de Relaciones Exteriores</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">c) El Tribunal Superior del distrito</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">d) La Fiscalía General de la Nación</div>
+          </div>
+          <div class="explicacion">Corresponde a la Sala Penal de la Corte Suprema de Justicia decidir sobre la ejecución del fallo extranjero sin realizar un nuevo juzgamiento (Art. 516).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="3">
+          <span class="pregunta-num">12</span><span class="pregunta-tipo">Conceptual</span>
+          <p>En el trámite de exequátur, la Corte Suprema de Justicia:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 12)">a) Realiza un nuevo juicio</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">b) Decide sobre la ejecución sin realizar nuevo juzgamiento</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">c) Solo valida la sentencia</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">d) Modifica la pena impuesta</div>
+          </div>
+          <div class="explicacion">La Corte Suprema decide sobre la ejecución del fallo sin realizar un nuevo juzgamiento en el país (Art. 516).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="3">
+          <span class="pregunta-num">13</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La solicitud de ejecución de sentencia extranjera se presenta por:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 13)">a) Vía judicial directa</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">b) Vía consular</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">c) Vía administrativa</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">d) Petición diplomática</div>
+          </div>
+          <div class="explicacion">La ejecución de sentencias extranjeras procede a petición diplomática sobre sentencias en firme (Art. 515).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 4: JUSTICIA RESTAURATIVA -->
+      <div class="quiz-section" id="s4">
+        <div class="pregunta" data-correcta="1" data-tema="4">
+          <span class="pregunta-num">14</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La justicia restaurativa busca:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 14)">a) Solo castigar al infractor</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">b) La reparación, restitución y reintegración comunitaria</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">c) Solo indemnizar a la víctima</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">d) Solo rehabilitar al delincuente</div>
+          </div>
+          <div class="explicacion">La justicia restaurativa busca la reparación, restitución y reintegración comunitaria mediante la participación conjunta de víctima e infractor (Art. 518).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="4">
+          <span class="pregunta-num">15</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La participación del procesado en justicia restaurativa:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 15)">a) No puede usarse como admisión de culpabilidad</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">b) Equivale a confesión</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">c) Es prueba de cargo</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">d) Obliga a aceptar la responsabilidad</div>
+          </div>
+          <div class="explicacion">La participación del procesado no puede usarse como admisión de culpabilidad, ni el incumplimiento como fundamento de condena o agravación (Art. 520).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="4">
+          <span class="pregunta-num">16</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El consentimiento para participar en justicia restaurativa es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 16)">a) Obligatorio e irrevocable</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">b) Solo necesario al inicio</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">c) Libre, voluntario y retirable en cualquier momento</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">d) Solo requiere aprobación judicial</div>
+          </div>
+          <div class="explicacion">Se requiere consentimiento libre y voluntario, que es retirable en cualquier momento (Art. 520).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="4">
+          <span class="pregunta-num">17</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Son mecanismos de justicia restaurativa:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 17)">a) Solo la conciliación</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">b) Solo la mediación</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">c) Solo el arbitramento</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">d) Conciliación preprocesal, conciliación en incidente de reparación y mediación</div>
+          </div>
+          <div class="explicacion">Los mecanismos aplicables son: conciliación preprocesal, conciliación en el incidente de reparación integral y la mediación (Art. 521).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 5: CONCILIACIÓN PREPROCESAL -->
+      <div class="quiz-section" id="s5">
+        <div class="pregunta" data-correcta="1" data-tema="5">
+          <span class="pregunta-num">18</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La conciliación preprocesal es requisito de procedibilidad en:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 18)">a) Todos los delitos</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">b) Delitos querellables</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">c) Delitos graves</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">d) Delitos contra la administración pública</div>
+          </div>
+          <div class="explicacion">La conciliación preprocesal es requisito de procedibilidad obligatorio en delitos querellables (Art. 522).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="5">
+          <span class="pregunta-num">19</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Si el querellante no asiste injustificadamente a la conciliación preprocesal:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 19)">a) Se entiende desistimiento de la pretensión</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">b) Se inicia la acción penal</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">c) Se suspende el proceso</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">d) No tiene consecuencias</div>
+          </div>
+          <div class="explicacion">La inasistencia injustificada del querellante produce el desistimiento de la pretensión (Art. 522).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="5">
+          <span class="pregunta-num">20</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Si el querellado no asiste injustificadamente a la conciliación preprocesal:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 20)">a) Se archiva el caso</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">b) Se impone multa</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">c) Se motiva el inicio formal de la persecución penal</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">d) Se declara la prescripción</div>
+          </div>
+          <div class="explicacion">La inasistencia injustificada del querellado motiva el inicio formal de la persecución penal (Art. 522).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="5">
+          <span class="pregunta-num">21</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La conciliación preprocesal se surte ante:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 21)">a) Solo el juez</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">b) Solo la Fiscalía</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">c) Solo centros de conciliación privados</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">d) El fiscal, centro de conciliación o conciliador reconocido</div>
+          </div>
+          <div class="explicacion">La conciliación preprocesal se surte ante el fiscal, centro de conciliación o conciliador reconocido (Art. 522).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 6: MEDIACIÓN -->
+      <div class="quiz-section" id="s6">
+        <div class="pregunta" data-correcta="1" data-tema="6">
+          <span class="pregunta-num">22</span><span class="pregunta-tipo">Conceptual</span>
+          <p>En la mediación penal, el facilitador es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 22)">a) El juez del caso</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">b) Un tercero neutral (particular o servidor público)</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">c) El fiscal</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">d) El defensor del procesado</div>
+          </div>
+          <div class="explicacion">Un tercero neutral (particular o servidor público designado según el manual de la Fiscalía) facilita el diálogo directo entre la víctima y el procesado (Art. 523).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="6">
+          <span class="pregunta-num">23</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La mediación procede desde la formulación de imputación hasta antes del juicio oral en delitos con pena mínima:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 23)">a) No superior a 5 años de prisión</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">b) No superior a 2 años de prisión</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">c) No superior a 10 años de prisión</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">d) Sin límite de pena</div>
+          </div>
+          <div class="explicacion">La mediación procede en delitos perseguibles de oficio cuyo mínimo de pena no exceda de 5 años (Art. 524).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="6">
+          <span class="pregunta-num">24</span><span class="pregunta-tipo">Conceptual</span>
+          <p>En delitos con penas superiores a 5 años, la mediación sirve para:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 24)">a) Extinguir la acción penal</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">b) Suspender el proceso</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">c) Acordar beneficios de dosificación o cumplimiento penitenciario</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">d) Absolver al procesado</div>
+          </div>
+          <div class="explicacion">En delitos con penas superiores a 5 años, la mediación sirve para acordar beneficios en la dosificación o cumplimiento de la sanción (Art. 525).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="6">
+          <span class="pregunta-num">25</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La decisión de someterse a mediación tiene efectos:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 25)">a) Solo orientativos</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">b) Solo para la víctima</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">c) Solo para el procesado</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">d) Vinculantes y excluye la acción civil y el incidente de reparación integral</div>
+          </div>
+          <div class="explicacion">La decisión de someterse a mediación tiene efectos vinculantes y excluye la acción civil y el incidente de reparación integral (Art. 526).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="6">
+          <span class="pregunta-num">26</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El informe del mediador es valorado para:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 26)">a) Solo determinar la culpabilidad</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">b) Otorgar beneficios, seleccionar medidas de coerción o graduar la pena</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">c) Solo imponer la pena máxima</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">d) Solo archivar el caso</div>
+          </div>
+          <div class="explicacion">El informe del mediador es valorado para otorgar beneficios, seleccionar medidas de coerción o graduar la pena (Art. 527).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 7: IMPLEMENTACIÓN -->
+      <div class="quiz-section" id="s7">
+        <div class="pregunta" data-correcta="2" data-tema="7">
+          <span class="pregunta-num">27</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La implementación del sistema acusatorio fue dirigida por:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 27)">a) Solo la Fiscalía General</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">b) Solo la Corte Suprema</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">c) El Consejo Superior de la Judicatura y la Fiscalía General de la Nación</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">d) El Ministerio del Interior</div>
+          </div>
+          <div class="explicacion">La implantación del sistema oral acusatorio fue dirigida por el Consejo Superior de la Judicatura y la Fiscalía General de la Nación (Art. 528).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="7">
+          <span class="pregunta-num">28</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La primera fase de implementación territorial comenzó el:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 28)">a) 1° de enero de 2005</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">b) 1° de julio de 2005</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">c) 1° de enero de 2006</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">d) 1° de enero de 2008</div>
+          </div>
+          <explicacion>La implementación comenzó el 1° de enero de 2005 en Bogotá, Armenia, Manizales y Pereira (Art. 529).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="7">
+          <span class="pregunta-num">29</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La implementación se completó en la totalidad de distritos judiciales el:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 29)">a) 1° de enero de 2006</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">b) 1° de enero de 2008</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">c) 1° de julio de 2008</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">d) 1° de enero de 2010</div>
+          </div>
+          <div class="explicacion">La implementación se completó el 1° de enero de 2008 en la totalidad de distritos judiciales del país (Art. 530).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="7">
+          <span class="pregunta-num">30</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los distritos judiciales de la primera fase (2005) fueron:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 30)">a) Bogotá, Medellín, Cali y Barranquilla</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">b) Bogotá, Cali, Medellín y Cartagena</div>
+            <div class="opcion" onclick="seleccioning(this, 30)">c) Bogotá, Medellín, Cali y Bucaramanga</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">d) Bogotá, Armenia, Manizales y Pereira</div>
+          </div>
+          <div class="explicacion">La primera fase comenzó en Bogotá, Armenia, Manizales y Pereira (Art. 529).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 8: RÉGIMEN DE TRANSICIÓN -->
+      <div class="quiz-section" id="s8">
+        <div class="pregunta" data-correcta="1" data-tema="8">
+          <span class="pregunta-num">31</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El régimen de transición incluyó procesos de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 31)">a) Solo liquidación de expedientes</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">b) Liquidación de expedientes y reconversión de personal</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">c) Solo traslado de personal</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">d) Solo creación de nuevos cargos</div>
+          </div>
+          <div_explicacion>El régimen de transición incluyó liquidación de expedientes bajo la Ley 600 de 2000 y reconversión/traslado de plantas de personal (Arts. 531-532).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="8">
+          <span class="pregunta-num">32</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La descongestión de expedientes se realizó bajo:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 32)">a) La Ley 600 de 2000</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">b) La Ley 906 de 2004</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">c) La Ley 599 de 2000</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">d) La Constitución Política</div>
+          </div>
+          <div class="explicacion">Los procesos de liquidación de expedientes se realizaron bajo la Ley 600 de 2000 (sistema anterior) (Art. 531).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="8">
+          <span class="pregunta-num">33</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La reconversión de personal involucró a:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 33)">a) Solo la Fiscalía</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">b) Solo la Rama Judicial</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">c) Fiscalía, Rama Judicial y Defensoría del Pueblo</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">d) Solo la Defensoría del Pueblo</div>
+          </div>
+          <div class="explicacion">La reconversión involucró traslado de plantas de personal entre la Fiscalía, la Rama Judicial y la Defensoría del Pueblo (Art. 532).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="8">
+          <span class="pregunta-num">34</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El objetivo principal del régimen de transición fue:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 34)">a) Mantener el sistema anterior</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">b) Crear nuevos delitos</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">c) Eliminar la Fiscalía</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">d) Adaptar las estructuras al modelo acusatorio</div>
+          </div>
+          <div class="explicacion">El objetivo fue transformar y trasladar plantas de personal y despachos judiciales para responder al modelo acusatorio (Art. 532).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="8">
+          <span class="pregunta-num">35</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La Ley 600 de 2000 correspondía al sistema:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 35)">a) Acusatorio</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">b) Inquisitivo</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">c) Mixto</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">d) Consensual</div>
+          </div>
+          <div class="explicacion">La Ley 600 de 2000 correspondía al sistema inquisitivo (escrito), que fue reemplazado por el sistema acusatorio (oral) de la Ley 906 de 2004.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 9: DISPOSICIONES FINALES -->
+      <div class="quiz-section" id="s9">
+        <div class="pregunta" data-correcta="2" data-tema="9">
+          <span class="pregunta-num">36</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La Ley 906 de 2004 aplica estrictamente a delitos cometidos:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 36)">a) Antes del 1° de enero de 2005</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">b) Después del 1° de enero de 2008</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">c) Con posterioridad al 1° de enero de 2005</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">d) En cualquier fecha</div>
+          </div>
+          <div class="explicacion">La Ley 906 de 2004 aplica rigor procesal exclusivo para delitos cometidos con posterioridad al 1° de enero de 2005 (Art. 533).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="9">
+          <span class="pregunta-num">37</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Para delitos cometidos antes del 1° de enero de 2005, se mantiene transitoriamente:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 37)">a) La Ley 600 de 2000</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">b) La Ley 906 de 2004</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">c) El Código de Procedimiento Penal anterior</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">d) La Constitución Política</div>
+          </div>
+          <div class="explicacion">Se mantiene transitoriamente la Ley 600 de 2000 para delitos cometidos antes del 1° de enero de 2005 (Art. 533).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="9">
+          <span class="pregunta-num">38</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La excepción para juzgamientos con fuero ante la Corte Suprema de Justicia:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 38)">a) Aplica la Ley 906 de 2004 siempre</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">b) Mantiene la Ley 600 de 2000 transitoriamente</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">c) No tiene regulación especial</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">d) Aplica el derecho consuetudinario</div>
+          </div>
+          <div class="explicacion">Se mantiene transitoriamente la Ley 600 de 2000 para juzgamientos con fuero ante la Corte Suprema de Justicia (Art. 533).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="9">
+          <span class="pregunta-num">39</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El criterio temporal para determinar la ley aplicable es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 39)">a) La fecha de la captura</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">b) La fecha de la denuncia</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">c) La fecha de la imputación</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">d) La fecha de comisión del delito</div>
+          </div>
+          <div class="explicacion">El criterio temporal es la fecha de comisión del delito: posterior al 1° de enero de 2005 aplica Ley 906/2004; anterior aplica Ley 600/2000.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="9">
+          <span class="pregunta-num">40</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La fecha clave que marca la entrada en vigencia del sistema acusatorio es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 40)">a) 1° de enero de 2004</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">b) 1° de julio de 2004</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">c) 1° de enero de 2005</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">d) 1° de enero de 2008</div>
+          </div>
+          <div class="explicacion">El 1° de enero de 2005 es la fecha clave: delitos cometidos después de esta fecha se juzgan bajo la Ley 906 de 2004 (sistema acusatorio).</div>
+        </div>
+      </div>
+
+      <div class="resultado-final" id="resultadoFinal">
+        <h3>🏆 Resultado Final</h3>
+        <div class="puntaje-final" id="puntajeFinal">0/40</div>
+        <p id="mensajeFinal"></p>
+        <div class="desglose-temas" id="desgloseTemas"></div>
+        <button onclick="reiniciarQuiz()" class="btn-reset">🔄 Reiniciar Quiz</button>
+      </div>
+
+      <div style="text-align: center; margin-top: 1.5rem;">
+        <button onclick="verResultadoFinal()">📊 Ver Resultado Final</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>⚖️ Guía Didáctica - Libros V, VI y VII de la Ley 906 de 2004</p>
+  <p>Cooperación Internacional, Justicia Restaurativa e Implementación</p>
+  <p style="margin-top: 1rem; opacity: 0.7;">© 2026 - Material educativo interactivo</p>
+</footer>
+
+<script>
+  function toggleAcordeon(header) {
+    header.classList.toggle('active');
+    const content = header.nextElementSibling;
+    content.classList.toggle('active');
+  }
+
+  let respuestas = {};
+  const totalPreguntas = 40;
+
+  function mostrarSeccion(id, tab) {
+    document.querySelectorAll('.quiz-section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.quiz-tab').forEach(t => t.classList.remove('active'));
+    
+    document.getElementById(id).classList.add('active');
+    tab.classList.add('active');
+  }
+
+  function seleccionar(opcion, preguntaNum) {
+    if (respuestas[preguntaNum] !== undefined) return;
+
+    const pregunta = opcion.closest('.pregunta');
+    const opciones = pregunta.querySelectorAll('.opcion');
+    const correcta = parseInt(pregunta.dataset.correcta);
+    const tema = parseInt(pregunta.dataset.tema);
+    const seleccionada = Array.from(opciones).indexOf(opcion);
+    const explicacion = pregunta.querySelector('.explicacion');
+
+    opciones.forEach(o => o.classList.add('disabled'));
+
+    if (seleccionada === correcta) {
+      opcion.classList.add('correcta');
+      respuestas[preguntaNum] = { correcta: true, tema: tema };
+    } else {
+      opcion.classList.add('incorrecta');
+      opciones[correcta].classList.add('correcta');
+      respuestas[preguntaNum] = { correcta: false, tema: tema };
+    }
+
+    explicacion.classList.add('visible');
+    pregunta.classList.add('answered');
+    actualizarEstadisticas();
+  }
+
+  function actualizarEstadisticas() {
+    const total = Object.keys(respuestas).length;
+    const correctas = Object.values(respuestas).filter(r => r.correcta).length;
+    const incorrectas = total - correctas;
+    const porcentaje = total > 0 ? Math.round((correctas / total) * 100) : 0;
+
+    document.getElementById('respondidas').textContent = total;
+    document.getElementById('correctas').textContent = correctas;
+    document.getElementById('incorrectas').textContent = incorrectas;
+    document.getElementById('porcentaje').textContent = porcentaje;
+
+    const progreso = (total / totalPreguntas) * 100;
+    document.getElementById('progressFill').style.width = progreso + '%';
+  }
+
+  function verResultadoFinal() {
+    const total = Object.keys(respuestas).length;
+    
+    if (total < totalPreguntas) {
+      alert(`⚠️ Aún te faltan ${totalPreguntas - total} preguntas por responder.`);
+      return;
+    }
+
+    const correctas = Object.values(respuestas).filter(r => r.correcta).length;
+    const porcentaje = Math.round((correctas / totalPreguntas) * 100);
+
+    const resultadoFinal = document.getElementById('resultadoFinal');
+    resultadoFinal.classList.add('visible');
+
+    document.getElementById('puntajeFinal').textContent = `${correctas}/${totalPreguntas}`;
+
+    let mensaje = '';
+    if (porcentaje === 100) mensaje = '🏆 ¡PERFECTO! Dominas los Libros V, VI y VII de la Ley 906 de 2004.';
+    else if (porcentaje >= 90) mensaje = '🌟 ¡Excelente! Dominio sobresaliente.';
+    else if (porcentaje >= 75) mensaje = '✅ ¡Muy bien! Buen dominio.';
+    else if (porcentaje >= 60) mensaje = '📚 Aceptable. Repasa los temas donde fallaste.';
+    else if (porcentaje >= 40) mensaje = ' Necesitas reforzar varios conceptos.';
+    else mensaje = '🔍 Es necesario estudiar nuevamente todos los temas.';
+
+    document.getElementById('mensajeFinal').textContent = mensaje;
+
+    const temas = {
+      1: { nombre: 'T1: Asistencia Judicial', total: 4, correctas: 0 },
+      2: { nombre: 'T2: Extradición', total: 5, correctas: 0 },
+      3: { nombre: 'T3: Sentencias Extranjeras', total: 4, correctas: 0 },
+      4: { nombre: 'T4: Justicia Restaurativa', total: 4, correctas: 0 },
+      5: { nombre: 'T5: Conciliación', total: 4, correctas: 0 },
+      6: { nombre: 'T6: Mediación', total: 5, correctas: 0 },
+      7: { nombre: 'T7: Implementación', total: 4, correctas: 0 },
+      8: { nombre: 'T8: Transición', total: 5, correctas: 0 },
+      9: { nombre: 'T9: Vigencia', total: 5, correctas: 0 }
+    };
+
+    Object.values(respuestas).forEach(r => {
+      if (r.correcta) temas[r.tema].correctas++;
+    });
+
+    const desgloseHTML = Object.values(temas).map(t => {
+      const pct = Math.round((t.correctas / t.total) * 100);
+      return `
+        <div class="desglose-item">
+          <h4>${t.nombre}</h4>
+          <p>${t.correctas}/${t.total} (${pct}%)</p>
+          <div class="mini-bar">
+            <div class="mini-bar-fill" style="width: ${pct}%"></div>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    document.getElementById('desgloseTemas').innerHTML = desgloseHTML;
+    resultadoFinal.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  function reiniciarQuiz() {
+    if (!confirm('¿Reiniciar el quiz?')) return;
+
+    respuestas = {};
+
+    document.querySelectorAll('.opcion').forEach(o => o.classList.remove('correcta', 'incorrecta', 'disabled'));
+    document.querySelectorAll('.explicacion').forEach(e => e.classList.remove('visible'));
+    document.querySelectorAll('.pregunta').forEach(p => p.classList.remove('answered'));
+    document.getElementById('resultadoFinal').classList.remove('visible');
+
+    actualizarEstadisticas();
+    mostrarSeccion('s1', document.querySelector('.quiz-tab'));
+    document.getElementById('quiz').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  document.querySelectorAll('nav a').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+</script>
+
+</body>
+</html>
