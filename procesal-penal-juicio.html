@@ -1,0 +1,2337 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Juicio Oral - Libro Tercero Ley 906 de 2004</title>
+<style>
+  :root {
+    --primary: #7f1d1d;
+    --secondary: #fbbf24;
+    --accent: #991b1b;
+    --light: #fef3f2;
+    --dark: #1a202c;
+    --success: #38a169;
+    --warning: #d69e2e;
+    --danger: #c53030;
+    --card-bg: #ffffff;
+    --shadow: 0 4px 15px rgba(0,0,0,0.08);
+    --shadow-hover: 0 8px 25px rgba(0,0,0,0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    background: var(--light);
+    color: var(--dark);
+    line-height: 1.7;
+  }
+
+  header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    color: white;
+    padding: 2rem 1rem;
+    text-align: center;
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::before {
+    content: '⚖️';
+    position: absolute;
+    font-size: 15rem;
+    opacity: 0.05;
+    top: -30px;
+    right: -30px;
+  }
+
+  header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: 2px;
+  }
+
+  header p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    font-style: italic;
+  }
+
+  nav {
+    background: var(--dark);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow);
+  }
+
+  nav ul {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0.5rem;
+  }
+
+  nav a {
+    color: var(--light);
+    text-decoration: none;
+    padding: 0.7rem 1rem;
+    margin: 0.2rem;
+    border-radius: 5px;
+    font-size: 0.7rem;
+    transition: all 0.3s;
+    display: block;
+  }
+
+  nav a:hover {
+    background: var(--secondary);
+    color: var(--dark);
+    transform: translateY(-2px);
+  }
+
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+  }
+
+  section {
+    background: var(--card-bg);
+    margin-bottom: 2.5rem;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    border-left: 5px solid var(--secondary);
+    scroll-margin-top: 80px;
+  }
+
+  section h2 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--secondary);
+  }
+
+  section h3 {
+    color: var(--accent);
+    font-size: 1.4rem;
+    margin: 1.5rem 0 0.8rem;
+  }
+
+  section h4 {
+    color: var(--primary);
+    font-size: 1.15rem;
+    margin: 1rem 0 0.5rem;
+  }
+
+  p { margin-bottom: 1rem; text-align: justify; }
+
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.2rem;
+    margin: 1.5rem 0;
+  }
+
+  .card {
+    background: linear-gradient(135deg, #fff 0%, #f9f6ef 100%);
+    border: 2px solid var(--secondary);
+    border-radius: 10px;
+    padding: 1.2rem;
+    transition: all 0.3s;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--primary);
+  }
+
+  .card .icon {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .card h4 {
+    text-align: center;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+  }
+
+  .card .detail {
+    display: none;
+    margin-top: 0.8rem;
+    padding-top: 0.8rem;
+    border-top: 1px dashed var(--secondary);
+    font-size: 0.95rem;
+  }
+
+  .card.active .detail { display: block; }
+
+  .card .hint {
+    text-align: center;
+    color: var(--accent);
+    font-size: 0.85rem;
+    font-style: italic;
+  }
+
+  .mapa-container {
+    background: #fdfbf5;
+    border: 2px dashed var(--secondary);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    overflow-x: auto;
+  }
+
+  .mapa {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 600px;
+  }
+
+  .nodo {
+    background: var(--primary);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+    font-weight: bold;
+    text-align: center;
+    min-width: 180px;
+    box-shadow: var(--shadow);
+  }
+
+  .nodo.central {
+    background: linear-gradient(135deg, var(--secondary), #e0b888);
+    color: var(--dark);
+    font-size: 1.2rem;
+    padding: 1rem 2rem;
+  }
+
+  .nodo.sub {
+    background: var(--accent);
+    font-size: 0.95rem;
+  }
+
+  .linea {
+    width: 3px;
+    height: 25px;
+    background: var(--secondary);
+  }
+
+  .linea-h {
+    height: 3px;
+    background: var(--secondary);
+    width: 80%;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .rama {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 1rem;
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  .rama-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    min-width: 140px;
+  }
+
+  .ejemplo {
+    background: #e6f7ee;
+    border-left: 4px solid var(--success);
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .ejemplo strong { color: var(--success); }
+
+  .alerta {
+    background: #fff8e1;
+    border-left: 4px solid var(--warning);
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .alerta strong { color: var(--warning); }
+
+  .cita {
+    background: #f0f7ff;
+    border-left: 4px solid var(--accent);
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+    color: var(--primary);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    font-size: 0.9rem;
+  }
+
+  th {
+    background: var(--primary);
+    color: white;
+    padding: 0.8rem;
+    text-align: left;
+  }
+
+  td {
+    padding: 0.8rem;
+    border-bottom: 1px solid #eee;
+  }
+
+  tr:nth-child(even) { background: #f9f6ef; }
+  tr:hover { background: #f0ead6; }
+
+  .quiz-container {
+    background: linear-gradient(135deg, #f7f4ed 0%, #fff 100%);
+    padding: 1.5rem;
+    border-radius: 10px;
+    border: 2px solid var(--accent);
+  }
+
+  .quiz-header {
+    background: var(--primary);
+    color: white;
+    padding: 1.2rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .quiz-header h3 {
+    color: white;
+    margin: 0 0 0.5rem 0;
+  }
+
+  .progress-bar {
+    background: rgba(255,255,255,0.2);
+    height: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+  }
+
+  .progress-fill {
+    background: var(--secondary);
+    height: 100%;
+    width: 0%;
+    transition: width 0.4s ease;
+  }
+
+  .quiz-stats {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .stat {
+    background: rgba(255,255,255,0.1);
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    font-size: 0.9rem;
+  }
+
+  .stat strong { color: var(--secondary); }
+
+  .quiz-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    padding: 0.5rem;
+    background: #f0ead6;
+    border-radius: 8px;
+  }
+
+  .quiz-tab {
+    background: white;
+    border: 2px solid var(--accent);
+    color: var(--accent);
+    padding: 0.5rem 0.8rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.7rem;
+    transition: all 0.3s;
+    flex: 1;
+    min-width: 70px;
+    text-align: center;
+  }
+
+  .quiz-tab:hover {
+    background: var(--accent);
+    color: white;
+  }
+
+  .quiz-tab.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+  }
+
+  .quiz-section {
+    display: none;
+  }
+
+  .quiz-section.active {
+    display: block;
+    animation: fadeIn 0.4s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .pregunta {
+    margin-bottom: 1.5rem;
+    padding: 1.2rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    border-left: 4px solid var(--accent);
+    transition: all 0.3s;
+  }
+
+  .pregunta.answered {
+    border-left-color: var(--secondary);
+  }
+
+  .pregunta-num {
+    display: inline-block;
+    background: var(--accent);
+    color: white;
+    padding: 0.2rem 0.7rem;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    margin-right: 0.5rem;
+  }
+
+  .pregunta-tipo {
+    display: inline-block;
+    background: var(--secondary);
+    color: var(--dark);
+    padding: 0.2rem 0.7rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    margin-left: 0.3rem;
+    font-weight: bold;
+  }
+
+  .pregunta p { 
+    font-weight: bold; 
+    color: var(--primary); 
+    margin: 0.8rem 0;
+    text-align: left;
+  }
+
+  .opciones { display: flex; flex-direction: column; gap: 0.5rem; }
+
+  .opcion {
+    padding: 0.7rem 1rem;
+    background: #f9f6ef;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+  }
+
+  .opcion:hover:not(.disabled) {
+    border-color: var(--accent);
+    background: #e8f0f7;
+  }
+
+  .opcion.disabled {
+    cursor: not-allowed;
+    opacity: 0.85;
+  }
+
+  .opcion.correcta {
+    background: #c6f6d5;
+    border-color: var(--success);
+    color: var(--success);
+    font-weight: bold;
+  }
+
+  .opcion.incorrecta {
+    background: #fed7d7;
+    border-color: var(--danger);
+    color: var(--danger);
+  }
+
+  .opcion.correcta::after {
+    content: ' ✓';
+    font-weight: bold;
+  }
+
+  .opcion.incorrecta::after {
+    content: ' ✗';
+    font-weight: bold;
+  }
+
+  .explicacion {
+    margin-top: 0.8rem;
+    padding: 0.8rem;
+    background: #f0f7ff;
+    border-left: 3px solid var(--accent);
+    border-radius: 0 6px 6px 0;
+    font-size: 0.9rem;
+    display: none;
+    font-style: italic;
+  }
+
+  .explicacion.visible {
+    display: block;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .resultado-final {
+    margin-top: 2rem;
+    padding: 2rem;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    color: white;
+    border-radius: 12px;
+    text-align: center;
+    display: none;
+  }
+
+  .resultado-final.visible {
+    display: block;
+    animation: fadeIn 0.5s ease;
+  }
+
+  .resultado-final h3 {
+    color: var(--secondary);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .puntaje-final {
+    font-size: 3rem;
+    font-weight: bold;
+    color: var(--secondary);
+    margin: 1rem 0;
+  }
+
+  .desglose-temas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+    text-align: left;
+  }
+
+  .desglose-item {
+    background: rgba(255,255,255,0.1);
+    padding: 1rem;
+    border-radius: 8px;
+  }
+
+  .desglose-item h4 {
+    color: var(--secondary);
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+  }
+
+  .mini-bar {
+    background: rgba(255,255,255,0.2);
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+  }
+
+  .mini-bar-fill {
+    background: var(--secondary);
+    height: 100%;
+    transition: width 0.6s ease;
+  }
+
+  button {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 1rem;
+    transition: all 0.3s;
+  }
+
+  button:hover {
+    background: var(--secondary);
+    color: var(--dark);
+    transform: translateY(-2px);
+  }
+
+  .btn-reset {
+    background: var(--danger);
+    margin-left: 0.5rem;
+  }
+
+  .btn-reset:hover {
+    background: #9b2c2c;
+    color: white;
+  }
+
+  .acordeon-item {
+    margin-bottom: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .acordeon-header {
+    background: var(--accent);
+    color: white;
+    padding: 1rem;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.3s;
+  }
+
+  .acordeon-header:hover { background: var(--primary); }
+
+  .acordeon-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    background: white;
+  }
+
+  .acordeon-content.active {
+    max-height: 2000px;
+    padding: 1rem;
+  }
+
+  .flecha { transition: transform 0.3s; }
+  .acordeon-header.active .flecha { transform: rotate(180deg); }
+
+  footer {
+    background: var(--dark);
+    color: var(--light);
+    text-align: center;
+    padding: 2rem 1rem;
+    margin-top: 2rem;
+  }
+
+  footer p { margin-bottom: 0.5rem; }
+
+  @media (max-width: 768px) {
+    header h1 { font-size: 1.8rem; }
+    section { padding: 1.2rem; }
+    section h2 { font-size: 1.5rem; }
+    nav a { font-size: 0.6rem; padding: 0.3rem 0.4rem; }
+    .quiz-tab { font-size: 0.6rem; padding: 0.3rem 0.4rem; }
+    table { font-size: 0.8rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>️ Juicio Oral - Libro Tercero Ley 906/2004</h1>
+  <p>Código de Procedimiento Penal Colombiano · Guía Didáctica Interactiva</p>
+</header>
+
+<nav>
+  <ul>
+    <li><a href="#tema1">1. Acusación</a></li>
+    <li><a href="#tema2">2. Preacuerdos</a></li>
+    <li><a href="#tema3">3. Preparatoria</a></li>
+    <li><a href="#tema4">4. Juicio Oral</a></li>
+    <li><a href="#tema5">5. Pruebas</a></li>
+    <li><a href="#tema6">6. Alegatos</a></li>
+    <li><a href="#tema7">7. Fallo</a></li>
+    <li><a href="#tema8">8. Suspensión</a></li>
+    <li><a href="#tema9">9. Nulidades</a></li>
+    <li><a href="#quiz">Quiz (40)</a></li>
+  </ul>
+</nav>
+
+<main>
+
+  <section>
+    <h2>📚 Introducción</h2>
+    <p>Bienvenido a esta guía interactiva sobre el <strong>Libro Tercero de la Ley 906 de 2004</strong> (Código de Procedimiento Penal Colombiano). Aquí estudiarás la acusación, los preacuerdos y negociaciones, la audiencia preparatoria, el juicio oral, las pruebas, los alegatos, el fallo, la suspensión de audiencias y las nulidades procesales.</p>
+    <div class="alerta">
+      <strong>💡 Cómo usar esta guía:</strong> Haz clic en las tarjetas para ver detalles, despliega los acordeones para información adicional y prueba tus conocimientos con el quiz de 40 preguntas al final.
+    </div>
+  </section>
+
+  <!-- TEMA 1: ACUSACIÓN -->
+  <section id="tema1">
+    <h2>1. De la Acusación (Arts. 336-347)</h2>
+    <p>La acusación es el acto formal mediante el cual la Fiscalía presenta ante el juez de conocimiento los cargos contra el imputado, solicitando su juzgamiento.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">ACUSACIÓN</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Requisitos Formales</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Audiencia</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Descubrimiento</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Requisitos Formales (Arts. 336-337)</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📝</div>
+        <h4>Presentación del Escrito</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Se presenta ante el juez de conocimiento cuando existen motivos para afirmar, con <strong>probabilidad de verdad</strong>, que la conducta existió y el imputado es autor o partícipe.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📄</div>
+        <h4>Contenido de la Acusación</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <ul>
+            <li>Individualización del acusado</li>
+            <li>Relación clara y sucinta de los hechos jurídicamente relevantes</li>
+            <li>Relación de bienes para comiso</li>
+            <li>Anexo de descubrimiento probatorio</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🔍</div>
+        <h4>Anexo de Descubrimiento</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Relación de testigos, peritos, documentos y elementos favorables al procesado que la Fiscalía hará valer en el juicio oral.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>⚖️ Audiencia de Formulación de Acusación (Arts. 338-343)</h3>
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📋 Trámite y Saneamiento (Arts. 338-339)</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>El juez otorga traslado del escrito a las partes para formular:</p>
+        <ul>
+          <li>Impedimentos y recusaciones</li>
+          <li>Incompetencias</li>
+          <li>Nulidades</li>
+          <li>Observaciones formales para que la Fiscalía aclare, adicione o corrija</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>👥 Intervención y Protección (Arts. 339-342)</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Las víctimas intervienen para:</p>
+        <ul>
+          <li>Pronunciarse sobre el escrito de acusación</li>
+          <li>Solicitar medidas de protección para su seguridad o la de los testigos</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📅 Fijación de la Preparatoria (Art. 343)</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Se fija fecha para la audiencia preparatoria dentro de un plazo <strong>no inferior a 15 ni superior a 30 días</strong>.</p>
+      </div>
+    </div>
+
+    <h3>🔍 Descubrimiento de Elementos Probatorios (Arts. 344-347)</h3>
+    <div class="alerta">
+      <strong>📌 Reglas del descubrimiento:</strong>
+      <ul>
+        <li>Las partes entregan copia y exhiben los elementos de convicción que harán valer en el juicio oral</li>
+        <li><strong>Exclusiones:</strong> Conversaciones abogado-cliente o secretos de Estado</li>
+        <li><strong>Sanción:</strong> La prueba no descubierta oportunamente NO podrá aducirse ni practicarse en el juicio</li>
+        <li><strong>Exposiciones previas:</strong> Permitidas únicamente con fines de impugnación de credibilidad durante el contrainterrogatorio</li>
+      </ul>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si la Fiscalía tiene un testigo clave pero no lo incluye en el anexo de descubrimiento, ese testigo NO podrá declarar en el juicio oral. La sanción es el rechazo de la prueba no descubierta.
+    </div>
+  </section>
+
+  <!-- TEMA 2: PREACUERDOS -->
+  <section id="tema2">
+    <h2>2. Preacuerdos y Negociaciones (Arts. 348-354)</h2>
+    <p>Los preacuerdos buscan humanizar la justicia, lograr una pronta solución del conflicto y la reparación integral a la víctima.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">PREACUERDOS</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Antes de Acusación</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Hasta 1/2 de rebaja</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Después de Acusación</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Hasta 1/3 de rebaja</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>️ Improcedencia (Art. 349)</h3>
+    <div class="alerta">
+      <strong> No procede acuerdo cuando:</strong>
+      <ul>
+        <li>No se reintegre por lo menos el <strong>50% del incremento patrimonial fruto del delito</strong></li>
+        <li>No se asegure el recaudo del remanente</li>
+      </ul>
+    </div>
+
+    <h3>📊 Momentos Procesales y Reducciones Punitivas</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Momento</th>
+          <th>Rebaja Máxima</th>
+          <th>Artículo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Desde la imputación hasta antes del escrito de acusación</strong></td>
+          <td>Hasta la mitad (1/2) de la pena</td>
+          <td>Arts. 350-351</td>
+        </tr>
+        <tr>
+          <td><strong>Desde la acusación hasta antes del interrogatorio en el juicio</strong></td>
+          <td>Una tercera parte (1/3) de la pena</td>
+          <td>Art. 352</td>
+        </tr>
+        <tr>
+          <td><strong>Aceptación de cargos en el juicio oral</strong></td>
+          <td>Una sexta parte (1/6) de la pena</td>
+          <td>Art. 370</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3> Control y Validez (Arts. 351-354)</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">️</div>
+        <h4>Obligación del Juez</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Los preacuerdos obligan al juez de conocimiento <strong>salvo que vulneren garantías fundamentales</strong>.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">👥</div>
+        <h4>Derechos de la Víctima</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>La víctima debe ser <strong>oída e informada</strong> sobre la negociación antes de su aprobación.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Posibilidades de Negociación</h3>
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>🎯 Degradación del Delito</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Se puede preacordar la degradación del delito a una figura menos grave (ej: de homicidio doloso a homicidio culposo).</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>️ Eliminación de Agravantes o Cargos</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Se pueden eliminar circunstancias de agravación o cargos específicos a cambio de la aceptación de otros.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>✅ Aceptación Simple</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>El acusado acepta todos los cargos a cambio de la rebaja de pena correspondiente al momento procesal.</p>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si A es acusado de homicidio simple (pena 13-25 años) y acepta cargos antes de la acusación, puede obtener rebaja hasta la mitad. Si la pena sería 20 años, podría quedar en 10 años. Si acepta después de la acusación pero antes del interrogatorio, la rebaja es de 1/3 (quedaría en ~13 años).
+    </div>
+  </section>
+
+  <!-- TEMA 3: AUDIENCIA PREPARATORIA -->
+  <section id="tema3">
+    <h2>3. Audiencia Preparatoria (Arts. 355-364)</h2>
+    <p>La audiencia preparatoria es el filtro procesal donde se depuran los elementos que llegarán al juicio oral.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">AUDIENCIA PREPARATORIA</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Instalación</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Descubrimiento</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Stipulaciones</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Decretos</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3> Instalación e Iter Procesal (Arts. 355-356)</h3>
+    <div class="alerta">
+      <strong>📌 Presencia obligatoria:</strong>
+      <ul>
+        <li>Juez de conocimiento</li>
+        <li>Fiscal</li>
+        <li>Defensor</li>
+      </ul>
+    </div>
+
+    <h3>🔍 Desarrollo de la Audiencia</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">✅</div>
+        <h4>Verificación del Descubrimiento</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Se verifica el cumplimiento del descubrimiento probatorio por todas las partes.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🔍</div>
+        <h4>Descubrimiento de la Defensa</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>La defensa hace su descubrimiento probatorio, presentando los elementos que hará valer en el juicio.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon"></div>
+        <h4>Enunciación de Pruebas</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Se enuncian la totalidad de pruebas a practicar en el juicio oral.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🤝</div>
+        <h4>Stipulaciones Probatorias</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Acuerdos sobre hechos no controvertidos que no requieren prueba en el juicio.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>⚖️ Solicitudes y Decretos Probatorios (Arts. 357-360)</h3>
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span> Criterios de Admisibilidad</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Las partes argumentan la:</p>
+        <ul>
+          <li><strong>Pertinencia:</strong> Relación con los hechos materia de juicio</li>
+          <li><strong>Conducencia:</strong> Idoneidad del medio probatorio para demostrar el hecho</li>
+          <li><strong>Utilidad:</strong> Aporte sustantivo al esclarecimiento de los hechos</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>🚫 Causales de Exclusión, Rechazo e Inadmisibilidad</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Se debate la exclusión de pruebas:</p>
+        <ul>
+          <li>Ilegales (obtenidas con violación de derechos fundamentales)</li>
+          <li>Impertinentes (sin relación con los hechos)</li>
+          <li>Superfluas (innecesarias o redundantes)</li>
+          <li>Repetitivas (ya aportadas por otros medios)</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>⏸️ Suspensión (Art. 363)</h3>
+    <div class="alerta">
+      <strong>📌 Solo procede por:</strong>
+      <ul>
+        <li>Trámite de la apelación concedida en efecto suspensivo contra autos que deciden sobre pruebas</li>
+        <li>Fuerza mayor o caso fortuito</li>
+      </ul>
+      <p>Se señala fecha para la audiencia del juicio oral a realizarse dentro de los <strong>30 días siguientes</strong>.</p>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> En la audiencia preparatoria, la Fiscalía solicita declarar 10 testigos, pero la defensa objeta 3 por impertinentes. El juez decide admitir 7 testigos y excluir 3. Las partes también stipulan que el acusado estaba en el lugar de los hechos, por lo que ese hecho no requiere prueba en el juicio.
+    </div>
+  </section>
+
+  <!-- TEMA 4: JUICIO ORAL -->
+  <section id="tema4">
+    <h2>4. El Juicio Oral (Arts. 366-453)</h2>
+    <p>El juicio oral es el escenario central del sistema acusatorio donde se practican las pruebas y se decide sobre la responsabilidad del acusado.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">JUICIO ORAL</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Instalación</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Teoría del Caso</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Práctica de Pruebas</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Alegatos</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Fallo</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Instalación y Alegación Inicial (Arts. 366-370)</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Instalación</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>El juez instala la audiencia y advierte los derechos al procesado.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🗣️</div>
+        <h4>Declaración de Inocencia o Culpabilidad</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>El juez interroga al procesado sobre su declaración de inocencia o culpabilidad.</p>
+          <p><strong>Si acepta la culpa:</strong> Rebaja de una sexta parte (1/6) de la pena.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>🎯 Presentación del Caso - Teoría del Caso (Art. 371)</h3>
+    <div class="alerta">
+      <strong> Exposición narrativa, jurídica y probatoria de la hipótesis procesal:</strong>
+      <ul>
+        <li><strong>Obligatoria para la Fiscalía:</strong> Debe presentar su teoría del caso</li>
+        <li><strong>Optativa para la defensa:</strong> Puede presentar su propia teoría o limitarse a controvertir la de la Fiscalía</li>
+      </ul>
+    </div>
+
+    <h3> Principios Rectores del Juicio Oral</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">👁️</div>
+        <h4>Inmediación</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>El juez debe percibir directamente las pruebas y los debates.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚔️</div>
+        <h4>Contradicción</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Las partes pueden controvertir todas las pruebas y argumentos.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon"></div>
+        <h4>Concentración</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>El juicio debe ser continuo y sin interrupciones injustificadas.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🔓</div>
+        <h4>Libertad Probatoria</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Admisión de todos los medios probatorios legalmente obtenidos.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📢</div>
+        <h4>Publicidad</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>El juicio es público, salvo excepciones motivadas.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>⚖️ Estándar de Prueba para Condenar</h3>
+    <div class="cita">
+      <strong>"La convicción para condenar exige conocimiento más allá de toda duda razonable."</strong> — Art. 382 Ley 906/2004
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> En el juicio oral por homicidio, la Fiscalía presenta su teoría del caso: "A mató a B por venganza". Luego presenta testigos, peritos y pruebas documentales. La defensa presenta su teoría: "A actuó en legítima defensa". Al final, el juez debe decidir si la Fiscalía probó su caso "más allá de toda duda razonable".
+    </div>
+  </section>
+
+  <!-- TEMA 5: PRÁCTICA DE PRUEBAS -->
+  <section id="tema5">
+    <h2>5. Práctica de la Prueba (Arts. 372-441)</h2>
+    <p>El juicio oral es el escenario donde se practican todas las pruebas admitidas en la audiencia preparatoria.</p>
+
+    <h3> Tipos de Pruebas en el Juicio Oral</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Tipo de Prueba</th>
+          <th>Artículos</th>
+          <th>Características Principales</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Testimonial</strong></td>
+          <td>Arts. 383-404</td>
+          <td>Interrogatorio directo y contrainterrogatorio</td>
+        </tr>
+        <tr>
+          <td><strong>Pericial</strong></td>
+          <td>Arts. 405-423</td>
+          <td>Dictamen técnico/científico con interrogatorio oral</td>
+        </tr>
+        <tr>
+          <td><strong>Documental</strong></td>
+          <td>Arts. 424-434</td>
+          <td>Regla de la mejor evidencia (original salvo excepciones)</td>
+        </tr>
+        <tr>
+          <td><strong>Inspección Judicial</strong></td>
+          <td>Arts. 435-436</td>
+          <td>Excepcional, fuera de la sala de audiencia</td>
+        </tr>
+        <tr>
+          <td><strong>De Referencia</strong></td>
+          <td>Arts. 437-441</td>
+          <td>Excepcionalísima, no puede ser única base de condena</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>🎤 Prueba Testimonial (Arts. 383-404)</h3>
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>️ Interrogatorio Directo</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Realizado por la parte que presenta al testigo:</p>
+        <ul>
+          <li>Preguntas <strong>abiertas</strong></li>
+          <li><strong>Prohibidas:</strong> preguntas sugestivas, capciosas o confusas</li>
+          <li>Objetivo: Construir la versión del testigo</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>⚔️ Contrainterrogatorio</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Realizado por la parte contraria:</p>
+        <ul>
+          <li>Orientado a la <strong>confrontación</strong></li>
+          <li><strong>Se permiten:</strong> preguntas sugestivas</li>
+          <li>Objetivo: Desacreditar la credibilidad o precisión del testigo</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>🚫 Excepciones al Deber de Declarar</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>No están obligados a declarar:</p>
+        <ul>
+          <li>Parientes dentro del cuarto grado de consanguinidad, segundo de afinidad o primero civil</li>
+          <li>Quienes tengan secreto profesional (abogados, médicos, sacerdotes)</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>🔬 Prueba Pericial (Arts. 405-423)</h3>
+    <div class="alerta">
+      <strong>📌 Requisitos:</strong>
+      <ul>
+        <li>Procedencia técnica/científica</li>
+        <li>Presentación del informe pericial previo como base</li>
+        <li>Interrogatorio y contrainterrogatorio oral del perito en audiencia pública</li>
+        <li>Reglas para evaluar prueba novel o publicaciones científicas</li>
+      </ul>
+    </div>
+
+    <h3>📄 Prueba Documental (Arts. 424-434)</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon"></div>
+        <h4>Noción Amplia</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Comprende todo objeto mueble representativo o declarativo, incluyendo mensajes de datos.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">✅</div>
+        <h4>Autenticación</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Requiere autenticación por quien lo recolectó o elaboró.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon"></div>
+        <h4>Regla de la Mejor Evidencia</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Exigencia del documento original salvo excepciones justificadas (pérdida, destrucción, imposibilidad de presentación).</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>🔍 Prueba de Referencia (Arts. 437-441)</h3>
+    <div class="alerta">
+      <strong>⚠️ Admisión excepcionalísima:</strong>
+      <ul>
+        <li>Muerte del declarante</li>
+        <li>Secuestro</li>
+        <li>Enfermedad grave</li>
+        <li>Pérdida de memoria</li>
+        <li>Menores víctimas de delitos sexuales</li>
+      </ul>
+      <p><strong>Prohibición absoluta:</strong> Nadie puede ser condenado exclusivamente con fundamento en pruebas de referencia.</p>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo de prueba de referencia:</strong> Si el testigo presencial de un homicidio fallece antes del juicio, su declaración rendida ante la Fiscalía durante la investigación puede admitirse como prueba de referencia, pero NO puede ser la única base para condenar al acusado.
+    </div>
+  </section>
+
+  <!-- TEMA 6: ALEGATOS -->
+  <section id="tema6">
+    <h2>6. Alegatos de las Partes e Intervinientes (Arts. 442-445)</h2>
+    <p>Los alegatos de conclusión son la oportunidad final para que las partes presenten sus argumentos antes de la decisión del juez.</p>
+
+    <h3>⚡ Absolución Perentoria (Art. 442)</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🚫</div>
+        <h4>Solicitud Inmediata</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>La Fiscalía o la defensa pueden solicitar la absolución perentoria si los hechos son <strong>ostensiblemente atípicos</strong>.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Decisión del Juez</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>El juez puede absolver inmediatamente si considera que no se configuró el tipo penal o existe causal de ausencia de responsabilidad.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>🎯 Turnos de Conclusión (Art. 443)</h3>
+    <div class="alerta">
+      <strong>📌 Orden de intervención:</strong>
+      <ol style="margin-top: 0.5rem; padding-left: 1.5rem;">
+        <li><strong>Fiscalía</strong> (acusador)</li>
+        <li><strong>Representación de víctimas</strong></li>
+        <li><strong>Ministerio Público</strong></li>
+        <li><strong>Defensa</strong> (siempre tiene el último turno de intervención y derecho a réplica)</li>
+      </ol>
+    </div>
+
+    <h3>📊 Contenido de los Alegatos</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Parte</th>
+          <th>Objetivo Principal</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Fiscalía</strong></td>
+          <td>Demostrar la responsabilidad del acusado más allá de toda duda razonable</td>
+        </tr>
+        <tr>
+          <td><strong>Víctimas</strong></td>
+          <td>Reiterar el daño sufrido y solicitar condena/reparación</td>
+        </tr>
+        <tr>
+          <td><strong>Ministerio Público</strong></td>
+          <td>Velar por el respeto al orden jurídico y derechos fundamentales</td>
+        </tr>
+        <tr>
+          <td><strong>Defensa</strong></td>
+          <td>Desvirtuar la acusación y solicitar absolución</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> En los alegatos finales, la Fiscalía argumenta: "Las pruebas demuestran más allá de toda duda razonable que A mató a B con dolo". La defensa responde: "Las pruebas son insuficientes y existe duda razonable sobre la autoría de A". El juez debe decidir basándose en estos argumentos y las pruebas practicadas.
+    </div>
+  </section>
+
+  <!-- TEMA 7: FALLO -->
+  <section id="tema7">
+    <h2>7. Decisión o Sentido del Fallo (Arts. 446-453)</h2>
+    <p>Tras los alegatos, el juez delibera y emite su decisión sobre la responsabilidad del acusado.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">FALLO</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Receso</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Máx. 2 horas</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Sentido del Fallo</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Absolutorio/Condenatorio</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Individualización</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Si es condenatorio</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>⏰ Receso y Emisión del Fallo</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⏱️</div>
+        <h4>Receso Máximo</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>El juez dispone de un receso máximo de <strong>2 horas</strong> para deliberar y emitir el sentido del fallo.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon"></div>
+        <h4>Emisión Oral</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>El sentido del fallo (absolutorio o condenatorio) se emite <strong>oralmente</strong> en audiencia pública.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>⚖️ Audiencia de Individualización de Pena (Art. 447)</h3>
+    <div class="alerta">
+      <strong>📌 Si el fallo es condenatorio:</strong>
+      <ol style="margin-top: 0.5rem; padding-left: 1.5rem;">
+        <li>Se otorga la palabra a las partes sobre:
+          <ul>
+            <li>Antecedentes del condenado</li>
+            <li>Condiciones personales del imputado</li>
+            <li>Subrogados penales (sustitución de pena, libertad condicional, etc.)</li>
+          </ul>
+        </li>
+        <li>El juez dicta la <strong>sentencia escrita dentro de los 15 días siguientes</strong></li>
+      </ol>
+    </div>
+
+    <h3>🎯 Principio de Congruencia (Art. 448)</h3>
+    <div class="cita">
+      <strong>"No se puede condenar por hechos o delitos que no consten en la acusación."</strong> — Art. 448 Ley 906/2004
+    </div>
+
+    <div class="alerta">
+      <strong>📌 Implicaciones del principio de congruencia:</strong>
+      <ul>
+        <li>El juez solo puede condenar por los hechos descritos en el escrito de acusación</li>
+        <li>No puede modificar la calificación jurídica a una más grave sin dar oportunidad de defensa</li>
+        <li>Garantiza el derecho de defensa y la previsibilidad del proceso</li>
+      </ul>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si la Fiscalía acusa a A por homicidio simple, el juez NO puede condenarlo por homicidio agravado (con sevicia) si esa circunstancia no fue incluida en la acusación. Hacerlo violaría el principio de congruencia y el derecho de defensa.
+    </div>
+  </section>
+
+  <!-- TEMA 8: SUSPENSIÓN -->
+  <section id="tema8">
+    <h2>8. Suspensión de la Audiencia del Juicio Oral (Art. 454)</h2>
+    <p>El juicio oral debe ser continuo y sin interrupciones, pero la ley prevé causales excepcionales de suspensión.</p>
+
+    <h3> Principio de Concentración</h3>
+    <div class="alerta">
+      <strong>📌 Regla general:</strong> El juicio oral debe ser <strong>continuo y sin interrupciones</strong> para garantizar la inmediación y la frescura de la prueba.
+    </div>
+
+    <h3>️ Causales de Suspensión</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon"></div>
+        <h4>Situaciones Sobrevinientes</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Solo procede por situaciones sobrevinientes de <strong>manifiesta gravedad</strong>:</p>
+          <ul>
+            <li>Enfermedad grave del juez, fiscal, defensor o acusado</li>
+            <li>Fuerza mayor o caso fortuito</li>
+            <li>Muerte de algún interviniente</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <h3> Regla de Repetición</h3>
+    <div class="cita">
+      <strong>"Si la suspensión afecta la memoria del juez sobre las pruebas practicadas o si se produce un cambio de juez, el juicio oral se repetirá íntegramente."</strong>
+    </div>
+
+    <div class="alerta">
+      <strong>📌 Casos de repetición obligatoria:</strong>
+      <ul>
+        <li>Cuando la suspensión es tan prolongada que afecta la memoria del juez sobre las pruebas</li>
+        <li>Cuando hay cambio de juez (por muerte, enfermedad, impedimento, etc.)</li>
+      </ul>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si el juez sufre un infarto durante el juicio oral y debe ser reemplazado, el nuevo juez NO puede continuar el juicio desde donde quedó. Debe repetirse íntegramente porque el nuevo juez no presenció las pruebas ya practicadas (violación al principio de inmediación).
+    </div>
+  </section>
+
+  <!-- TEMA 9: NULIDADES Y PRUEBA ILÍCITA -->
+  <section id="tema9">
+    <h2>9. Ineficacia de los Actos Procesales y Prueba Ilícita (Arts. 455-458)</h2>
+    <p>El ordenamiento establece mecanismos para sancionar las violaciones al debido proceso y garantizar la pureza de la prueba.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">INEFICACIA PROCESAL</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Prueba Ilícita</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Art. 455</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Nulidades</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Arts. 456-458</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>🚫 Cláusula de Exclusión y Prueba Ilícita (Art. 455)</h3>
+    <div class="alerta">
+      <strong>📌 Regla general:</strong> Toda prueba obtenida con violación de derechos fundamentales es <strong>nula de pleno derecho</strong>.
+    </div>
+
+    <h3>🔍 Criterios de Atenuación</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🔀</div>
+        <h4>Fuente Independiente</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>La prueba derivada de una ilícita puede admitirse si se habría obtenido por una fuente independiente legal.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon"></div>
+        <h4>Descubrimiento Inevitable</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>La prueba derivada puede admitirse si se habría descubierto inevitablemente por medios legales.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🔗</div>
+        <h4>Vínculo Atenuado</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>La prueba derivada puede admitirse si el vínculo causal con la prueba ilícita original es muy débil o remoto.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>⚠️ Causales de Nulidad (Arts. 456-458)</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Causal</th>
+          <th>Descripción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Incompetencia del juez</strong></td>
+          <td>Por fuero o por ser juez especializado no competente</td>
+        </tr>
+        <tr>
+          <td><strong>Violación de garantías fundamentales</strong></td>
+          <td>Del debido proceso o derecho de defensa</td>
+        </tr>
+        <tr>
+          <td><strong>Violación del principio de congruencia</strong></td>
+          <td>Condena por hechos no acusados</td>
+        </tr>
+        <tr>
+          <td><strong>Prueba ilícita no excluida</strong></td>
+          <td>Utilización de prueba obtenida con violación de derechos fundamentales</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3> Principio de Taxatividad</h3>
+    <div class="cita">
+      <strong>"Las nulidades procesales solo pueden ser declaradas por las causales taxativamente previstas en la ley."</strong>
+    </div>
+
+    <div class="alerta">
+      <strong>📌 Implicaciones:</strong>
+      <ul>
+        <li>No se pueden crear nulidades por analogía</li>
+        <li>Solo proceden las nulidades expresamente previstas en los Arts. 456-458</li>
+        <li>Garantiza la seguridad jurídica y la previsibilidad del proceso</li>
+      </ul>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo de prueba ilícita:</strong> Si la policía allana una casa sin orden judicial y encuentra drogas, esa prueba es ilícita y debe ser excluida (nula de pleno derecho). Si basada en esa información ilegal obtienen una confesión del acusado, esa confesión también es "fruto del árbol ponzoñoso" y debe excluirse, salvo que aplique alguna atenuación (fuente independiente, descubrimiento inevitable o vínculo atenuado).
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz">
+    <h2>🎯 Quiz Completo - 40 Preguntas</h2>
+    <p>Pon a prueba tus conocimientos sobre el Libro Tercero de la Ley 906 de 2004.</p>
+
+    <div class="quiz-container">
+      <div class="quiz-header">
+        <h3> Tu Progreso</h3>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="quiz-stats">
+          <div class="stat">Respondidas: <strong id="respondidas">0</strong>/40</div>
+          <div class="stat">Correctas: <strong id="correctas">0</strong></div>
+          <div class="stat">Incorrectas: <strong id="incorrectas">0</strong></div>
+          <div class="stat">Porcentaje: <strong id="porcentaje">0</strong>%</div>
+        </div>
+      </div>
+
+      <div class="quiz-tabs">
+        <div class="quiz-tab active" onclick="mostrarSeccion('s1', this)">T1 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s2', this)">T2 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s3', this)">T3 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s4', this)">T4 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s5', this)">T5 (5)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s6', this)">T6 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s7', this)">T7 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s8', this)">T8 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s9', this)">T9 (7)</div>
+      </div>
+
+      <!-- SECCIÓN 1: ACUSACIÓN -->
+      <div class="quiz-section active" id="s1">
+        <div class="pregunta" data-correcta="2" data-tema="1">
+          <span class="pregunta-num">1</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El escrito de acusación se presenta cuando existe:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 1)">a) Certeza absoluta de la responsabilidad</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">b) Sospecha razonable</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">c) Probabilidad de verdad de que la conducta existió y el imputado es autor o partícipe</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">d) Confesión del acusado</div>
+          </div>
+          <div class="explicacion">La acusación se presenta cuando de los elementos probatorios existen motivos para afirmar, con probabilidad de verdad, que la conducta existió y el imputado es autor o partícipe (Art. 336).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="1">
+          <span class="pregunta-num">2</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El anexo de descubrimiento probatorio debe incluir:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 2)">a) Solo testigos de la Fiscalía</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">b) Relación de testigos, peritos, documentos y elementos favorables al procesado</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">c) Solo pruebas documentales</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">d) Solo peritos</div>
+          </div>
+          <div class="explicacion">El anexo de descubrimiento debe incluir la relación de testigos, peritos, documentos y elementos favorables al procesado (Art. 337).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="1">
+          <span class="pregunta-num">3</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La audiencia de formulación de acusación tiene por objeto:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 3)">a) Formular impedimentos, recusaciones, incompetencias, nulidades u observaciones formales</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">b) Practicar pruebas</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">c) Dictar sentencia</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">d) Negociar preacuerdos</div>
+          </div>
+          <div class="explicacion">En la audiencia de acusación se otorga traslado para formular impedimentos, recusaciones, incompetencias, nulidades u observaciones formales (Arts. 338-339).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="1">
+          <span class="pregunta-num">4</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La sanción por no descubrir oportunamente una prueba es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 4)">a) Multa al fiscal</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">b) Nulidad del proceso</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">c) Amonestación</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">d) No podrá aducirse ni practicarse en el juicio</div>
+          </div>
+          <div class="explicacion">La prueba no descubierta oportunamente no podrá aducirse ni practicarse en el juicio (sanción de rechazo) (Art. 346).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 2: PREACUERDOS -->
+      <div class="quiz-section" id="s2">
+        <div class="pregunta" data-correcta="1" data-tema="2">
+          <span class="pregunta-num">5</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los preacuerdos NO proceden cuando:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 5)">a) El acusado se declara culpable</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">b) No se reintegra por lo menos el 50% del incremento patrimonial fruto del delito</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">c) La víctima está de acuerdo</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">d) El fiscal lo solicita</div>
+          </div>
+          <div class="explicacion">No procede acuerdo cuando no se reintegre por lo menos el 50% del incremento patrimonial fruto del delito y se asegure el recaudo del remanente (Art. 349).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="2">
+          <span class="pregunta-num">6</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Si el acusado acepta cargos desde la imputación hasta antes del escrito de acusación, la rebaja máxima es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 6)">a) Hasta la mitad (1/2) de la pena</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">b) Una tercera parte (1/3)</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">c) Una sexta parte (1/6)</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">d) No hay rebaja</div>
+          </div>
+          <div class="explicacion">Desde la imputación hasta antes del escrito de acusación, la rebaja es hasta la mitad (1/2) de la pena (Arts. 350-351).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="2">
+          <span class="pregunta-num">7</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Si el acusado acepta cargos desde la acusación hasta antes del interrogatorio en el juicio, la rebaja es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 7)">a) La mitad (1/2)</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">b) Una sexta parte (1/6)</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">c) Una tercera parte (1/3)</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">d) No hay rebaja</div>
+          </div>
+          <div class="explicacion">Desde la acusación hasta antes del interrogatorio en el juicio, la rebaja es de una tercera parte (1/3) (Art. 352).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="2">
+          <span class="pregunta-num">8</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los preacuerdos obligan al juez salvo que:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 8)">a) La víctima no esté de acuerdo</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">b) El fiscal cambie de opinión</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">c) El acusado se arrepienta</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">d) Vulneren garantías fundamentales</div>
+          </div>
+          <div class="explicacion">Los preacuerdos obligan al juez de conocimiento salvo que vulneren garantías fundamentales (Arts. 351-354).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 3: PREPARATORIA -->
+      <div class="quiz-section" id="s3">
+        <div class="pregunta" data-correcta="1" data-tema="3">
+          <span class="pregunta-num">9</span><span class="pregunta-tipo">Conceptual</span>
+          <p>En la audiencia preparatoria deben estar presentes obligatoriamente:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 9)">a) Solo el juez y el fiscal</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">b) Juez, fiscal y defensor</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">c) Solo el juez</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">d) Juez, fiscal, defensor y víctima</div>
+          </div>
+          <div class="explicacion">En la audiencia preparatoria es obligatoria la presencia del juez, fiscal y defensor (Arts. 355-356).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="3">
+          <span class="pregunta-num">10</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Las estipulaciones probatorias son:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 10)">a) Acuerdos sobre hechos no controvertidos que no requieren prueba en el juicio</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">b) Pruebas periciales</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">c) Testimonios anticipados</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">d) Documentos públicos</div>
+          </div>
+          <div class="explicacion">Las estipulaciones probatorias son acuerdos sobre hechos no controvertidos que no requieren prueba en el juicio (Art. 356).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="3">
+          <span class="pregunta-num">11</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los criterios para admitir o excluir pruebas son:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 11)">a) Solo la pertinencia</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">b) Solo la conducencia</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">c) Pertinencia, conducencia y utilidad</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">d) Solo la utilidad</div>
+          </div>
+          <div class="explicacion">Las partes argumentan la pertinencia, conducencia y utilidad de sus pruebas (Arts. 357-360).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="3">
+          <span class="pregunta-num">12</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La audiencia preparatoria puede suspenderse solo por:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 12)">a) Solicitud de la defensa</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">b) Solicitud de la Fiscalía</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">c) Ausencia de la víctima</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">d) Trámite de apelación en efecto suspensivo o fuerza mayor/caso fortuito</div>
+          </div>
+          <div class="explicacion">La suspensión solo procede por trámite de apelación en efecto suspensivo contra autos sobre pruebas, o por fuerza mayor/caso fortuito (Art. 363).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 4: JUICIO ORAL -->
+      <div class="quiz-section" id="s4">
+        <div class="pregunta" data-correcta="1" data-tema="4">
+          <span class="pregunta-num">13</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Si el acusado acepta su culpabilidad al inicio del juicio oral, la rebaja es de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 13)">a) La mitad (1/2)</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">b) Una sexta parte (1/6)</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">c) Una tercera parte (1/3)</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">d) No hay rebaja</div>
+          </div>
+          <div class="explicacion">Si el acusado acepta la culpa al inicio del juicio oral, la rebaja es de una sexta parte (1/6) de la pena (Art. 370).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="4">
+          <span class="pregunta-num">14</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La teoría del caso es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 14)">a) Exposición narrativa, jurídica y probatoria de la hipótesis procesal</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">b) Solo la versión de la Fiscalía</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">c) Solo la versión de la defensa</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">d) El resumen del juez</div>
+          </div>
+          <div class="explicacion">La teoría del caso es la exposición narrativa, jurídica y probatoria de la hipótesis procesal. Es obligatoria para la Fiscalía y optativa para la defensa (Art. 371).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="4">
+          <span class="pregunta-num">15</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los principios rectores del juicio oral son:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 15)">a) Solo oralidad y publicidad</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">b) Solo inmediación y contradicción</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">c) Inmediación, contradicción, concentración, libertad probatoria y publicidad</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">d) Solo celeridad y economía</div>
+          </div>
+          <div class="explicacion">Los principios rectores son: inmediación, contradicción, concentración, libertad probatoria y publicidad (Arts. 372-382).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="4">
+          <span class="pregunta-num">16</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El estándar de prueba para condenar es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 16)">a) Preponderancia de la evidencia</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">b) Sospecha razonable</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">c) Certeza absoluta</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">d) Más allá de toda duda razonable</div>
+          </div>
+          <div class="explicacion">La convicción para condenar exige conocimiento más allá de toda duda razonable (Art. 382).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 5: PRUEBAS -->
+      <div class="quiz-section" id="s5">
+        <div class="pregunta" data-correcta="1" data-tema="5">
+          <span class="pregunta-num">17</span><span class="pregunta-tipo">Conceptual</span>
+          <p>En el interrogatorio directo están prohibidas las preguntas:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 17)">a) Abiertas</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">b) Sugestivas, capciosas o confusas</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">c) Claras</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">d) Directas</div>
+          </div>
+          <div class="explicacion">En el interrogatorio directo están prohibidas las preguntas sugestivas, capciosas o confusas (Arts. 383-404).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="5">
+          <span class="pregunta-num">18</span><span class="pregunta-tipo">Conceptual</span>
+          <p>En el contrainterrogatorio:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 18)">a) Se permiten preguntas sugestivas</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">b) No se permiten preguntas sugestivas</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">c) Solo se permiten preguntas abiertas</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">d) No se permite interrogar al testigo</div>
+          </div>
+          <div class="explicacion">En el contrainterrogatorio se permiten preguntas sugestivas, orientadas a la confrontación (Arts. 383-404).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="5">
+          <span class="pregunta-num">19</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La regla de la mejor evidencia exige:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 19)">a) Presentar copias simples</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">b) Presentar testimonios orales</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">c) Presentar el documento original salvo excepciones justificadas</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">d) Presentar fotografías del documento</div>
+          </div>
+          <div class="explicacion">La regla de la mejor evidencia exige la presentación del documento original salvo excepciones justificadas (Arts. 424-434).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="5">
+          <span class="pregunta-num">20</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La prueba de referencia:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 20)">a) Es la prueba principal en el juicio</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">b) Siempre es admisible</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">c) Puede ser única base de condena</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">d) Es excepcional y nadie puede ser condenado exclusivamente con base en ella</div>
+          </div>
+          <div class="explicacion">La prueba de referencia es de admisión excepcionalísima y nadie puede ser condenado exclusivamente con fundamento en pruebas de referencia (Arts. 437-441).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="5">
+          <span class="pregunta-num">21</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La inspección judicial fuera de la sala de audiencia es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 21)">a) La regla general</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">b) De carácter excepcional</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">c) Obligatoria en todos los casos</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">d) Prohibida</div>
+          </div>
+          <div class="explicacion">La inspección judicial fuera de la sala de audiencia es de carácter excepcional, cuando sea imposible exhibir la evidencia por otros medios técnicos (Arts. 435-436).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 6: ALEGATOS -->
+      <div class="quiz-section" id="s6">
+        <div class="pregunta" data-correcta="2" data-tema="6">
+          <span class="pregunta-num">22</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La absolución perentoria puede ser solicitada cuando:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 22)">a) El acusado se declara culpable</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">b) La víctima retira la acusación</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">c) Los hechos son ostensiblemente atípicos</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">d) El fiscal lo solicita sin justificación</div>
+          </div>
+          <div class="explicacion">La absolución perentoria procede cuando los hechos son ostensiblemente atípicos (Art. 442).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="6">
+          <span class="pregunta-num">23</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El orden de intervención en los alegatos de conclusión es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 23)">a) Fiscalía, víctimas, Ministerio Público, defensa (con derecho a réplica)</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">b) Defensa, Fiscalía, víctimas, Ministerio Público</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">c) Ministerio Público, Fiscalía, defensa, víctimas</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">d) Víctimas, Fiscalía, defensa, Ministerio Público</div>
+          </div>
+          <div class="explicacion">El orden es: Fiscalía, representación de víctimas, Ministerio Público y la defensa, quien siempre tiene el último turno y derecho a réplica (Art. 443).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="6">
+          <span class="pregunta-num">24</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La defensa siempre tiene:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 24)">a) El primer turno de intervención</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">b) El último turno de intervención y derecho a réplica</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">c) Solo derecho a observar</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">d) Turno aleatorio</div>
+          </div>
+          <div class="explicacion">La defensa siempre tiene el último turno de intervención y derecho a réplica (Art. 443).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="6">
+          <span class="pregunta-num">25</span><span class="pregunta-tipo">Conceptual</span>
+          <p>En los alegatos, la Fiscalía debe demostrar:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 25)">a) Solo que existió el hecho</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">b) Solo que el acusado estuvo en el lugar</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">c) Que existe sospecha razonable</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">d) La responsabilidad del acusado más allá de toda duda razonable</div>
+          </div>
+          <div class="explicacion">La Fiscalía debe demostrar la responsabilidad del acusado más allá de toda duda razonable.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 7: FALLO -->
+      <div class="quiz-section" id="s7">
+        <div class="pregunta" data-correcta="1" data-tema="7">
+          <span class="pregunta-num">26</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El receso máximo para deliberar y emitir el sentido del fallo es de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 26)">a) 1 hora</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">b) 2 horas</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">c) 4 horas</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">d) 24 horas</div>
+          </div>
+          <div class="explicacion">Tras los alegatos, el juez dispone de un receso máximo de 2 horas para deliberar y emitir el sentido del fallo (Art. 446).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="7">
+          <span class="pregunta-num">27</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El sentido del fallo se emite:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 27)">a) Oralmente en audiencia pública</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">b) Por escrito en privado</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">c) Por correo electrónico</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">d) En audiencia cerrada</div>
+          </div>
+          <div class="explicacion">El sentido del fallo (absolutorio o condenatorio) se emite oralmente en audiencia pública (Art. 446).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="7">
+          <span class="pregunta-num">28</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Si el fallo es condenatorio, la sentencia escrita debe dictarse dentro de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 28)">a) 5 días</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">b) 10 días</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">c) 15 días</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">d) 30 días</div>
+          </div>
+          <div class="explicacion">Si el fallo es condenatorio, el juez debe dictar la sentencia escrita dentro de los 15 días siguientes (Art. 447).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="7">
+          <span class="pregunta-num">29</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El principio de congruencia establece que:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 29)">a) El juez puede condenar por cualquier delito</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">b) La Fiscalía puede modificar la acusación en cualquier momento</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">c) La defensa puede cambiar su teoría del caso</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">d) No se puede condenar por hechos o delitos que no consten en la acusación</div>
+          </div>
+          <div class="explicacion">El principio de congruencia (Art. 448) establece que no se puede condenar por hechos o delitos que no consten en la acusación.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 8: SUSPENSIÓN -->
+      <div class="quiz-section" id="s8">
+        <div class="pregunta" data-correcta="1" data-tema="8">
+          <span class="pregunta-num">30</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El principio de concentración exige que el juicio oral sea:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 30)">a) Interrumpido frecuentemente</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">b) Continuo y sin interrupciones</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">c) Solo de un día</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">d) Con pausas obligatorias cada hora</div>
+          </div>
+          <div class="explicacion">El principio de concentración exige que el juicio oral sea continuo y sin interrupciones (Art. 454).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="8">
+          <span class="pregunta-num">31</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La suspensión del juicio oral solo procede por:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 31)">a) Situaciones sobrevinientes de manifiesta gravedad</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">b) Solicitud de cualquiera de las partes</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">c) Decisión unilateral del juez</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">d) Ausencia de la víctima</div>
+          </div>
+          <div class="explicacion">La suspensión solo procede por situaciones sobrevinientes de manifiesta gravedad (Art. 454).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="8">
+          <span class="pregunta-num">32</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Si hay cambio de juez durante el juicio oral:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 32)">a) El nuevo juez continúa desde donde quedó</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">b) Se suspende indefinidamente</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">c) El juicio oral se repetirá íntegramente</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">d) Se anula el proceso</div>
+          </div>
+          <div class="explicacion">Si se produce un cambio de juez, el juicio oral se repetirá íntegramente (Art. 454).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="8">
+          <span class="pregunta-num">33</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La repetición del juicio oral también procede cuando:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 33)">a) La Fiscalía lo solicita</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">b) La defensa lo solicita</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">c) La víctima lo solicita</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">d) La suspensión afecta la memoria del juez sobre las pruebas practicadas</div>
+          </div>
+          <div class="explicacion">La repetición procede si la suspensión afecta la memoria del juez sobre las pruebas practicadas o si hay cambio de juez.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 9: NULIDADES -->
+      <div class="quiz-section" id="s9">
+        <div class="pregunta" data-correcta="1" data-tema="9">
+          <span class="pregunta-num">34</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Toda prueba obtenida con violación de derechos fundamentales es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 34)">a) Válida si es relevante</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">b) Nula de pleno derecho</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">c) Válida con restricción</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">d) Solo impugnable</div>
+          </div>
+          <div class="explicacion">Toda prueba obtenida con violación de derechos fundamentales es nula de pleno derecho (Art. 455).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="9">
+          <span class="pregunta-num">35</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El criterio de "fuente independiente" permite:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 35)">a) Admitir prueba derivada de una ilícita si se habría obtenido por una fuente independiente legal</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">b) Excluir toda prueba derivada</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">c) Admitir toda prueba sin restricción</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">d) Solo aplicar en casos civiles</div>
+          </div>
+          <div class="explicacion">La fuente independiente permite admitir prueba derivada de una ilícita si se habría obtenido por una fuente independiente legal (Art. 455).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="9">
+          <span class="pregunta-num">36</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El "descubrimiento inevitable" opera cuando:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 36)">a) La prueba se obtuvo ilegalmente</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">b) La prueba es irrelevante</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">c) La prueba derivada se habría descubierto inevitablemente por medios legales</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">d) La prueba fue obtenida por la defensa</div>
+          </div>
+          <div class="explicacion">El descubrimiento inevitable permite admitir prueba derivada si se habría descubierto inevitablemente por medios legales (Art. 455).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="9">
+          <span class="pregunta-num">37</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Son causales de nulidad:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 37)">a) Solo la incompetencia del juez</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">b) Solo la violación del derecho de defensa</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">c) Solo la prueba ilícita</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">d) Incompetencia del juez, violación de garantías fundamentales, violación del principio de congruencia y prueba ilícita no excluida</div>
+          </div>
+          <div class="explicacion">Las causales de nulidad incluyen: incompetencia del juez, violación de garantías fundamentales, violación del principio de congruencia y prueba ilícita no excluida (Arts. 456-458).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="9">
+          <span class="pregunta-num">38</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El principio de taxatividad en las nulidades significa que:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 38)">a) Se pueden crear nulidades por analogía</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">b) Solo pueden ser declaradas por las causales taxativamente previstas en la ley</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">c) El juez tiene discrecionalidad absoluta</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">d) Las partes pueden crear nulidades</div>
+          </div>
+          <div class="explicacion">El principio de taxatividad establece que las nulidades solo pueden ser declaradas por las causales taxativamente previstas en la ley.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="9">
+          <span class="pregunta-num">39</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Si la policía allana una casa sin orden judicial y encuentra drogas:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 39)">a) La prueba es ilícita y debe ser excluida</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">b) La prueba es válida por ser relevante</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">c) La prueba es válida si el juez lo autoriza después</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">d) La prueba es válida si la Fiscalía lo justifica</div>
+          </div>
+          <div class="explicacion">La prueba obtenida con violación de derechos fundamentales (allanamiento sin orden judicial) es nula de pleno derecho y debe ser excluida (Art. 455).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="9">
+          <span class="pregunta-num">40</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La "fruto del árbol ponzoñoso" se refiere a:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 40)">a) Prueba obtenida legalmente</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">b) Prueba pericial</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">c) Prueba derivada de una prueba ilícita</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">d) Prueba documental</div>
+          </div>
+          <div class="explicacion">La teoría del "fruto del árbol ponzoñoso" se refiere a la prueba derivada de una prueba ilícita, que también debe ser excluida salvo que aplique alguna atenuación.</div>
+        </div>
+      </div>
+
+      <div class="resultado-final" id="resultadoFinal">
+        <h3>🏆 Resultado Final</h3>
+        <div class="puntaje-final" id="puntajeFinal">0/40</div>
+        <p id="mensajeFinal"></p>
+        <div class="desglose-temas" id="desgloseTemas"></div>
+        <button onclick="reiniciarQuiz()" class="btn-reset">🔄 Reiniciar Quiz</button>
+      </div>
+
+      <div style="text-align: center; margin-top: 1.5rem;">
+        <button onclick="verResultadoFinal()">📊 Ver Resultado Final</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>️ Guía Didáctica - Libro Tercero Ley 906 de 2004</p>
+  <p>Juicio Oral · Código de Procedimiento Penal Colombiano</p>
+  <p style="margin-top: 1rem; opacity: 0.7;">© 2026 - Material educativo interactivo</p>
+</footer>
+
+<script>
+  function toggleAcordeon(header) {
+    header.classList.toggle('active');
+    const content = header.nextElementSibling;
+    content.classList.toggle('active');
+  }
+
+  let respuestas = {};
+  const totalPreguntas = 40;
+
+  function mostrarSeccion(id, tab) {
+    document.querySelectorAll('.quiz-section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.quiz-tab').forEach(t => t.classList.remove('active'));
+    
+    document.getElementById(id).classList.add('active');
+    tab.classList.add('active');
+  }
+
+  function seleccionar(opcion, preguntaNum) {
+    if (respuestas[preguntaNum] !== undefined) return;
+
+    const pregunta = opcion.closest('.pregunta');
+    const opciones = pregunta.querySelectorAll('.opcion');
+    const correcta = parseInt(pregunta.dataset.correcta);
+    const tema = parseInt(pregunta.dataset.tema);
+    const seleccionada = Array.from(opciones).indexOf(opcion);
+    const explicacion = pregunta.querySelector('.explicacion');
+
+    opciones.forEach(o => o.classList.add('disabled'));
+
+    if (seleccionada === correcta) {
+      opcion.classList.add('correcta');
+      respuestas[preguntaNum] = { correcta: true, tema: tema };
+    } else {
+      opcion.classList.add('incorrecta');
+      opciones[correcta].classList.add('correcta');
+      respuestas[preguntaNum] = { correcta: false, tema: tema };
+    }
+
+    explicacion.classList.add('visible');
+    pregunta.classList.add('answered');
+    actualizarEstadisticas();
+  }
+
+  function actualizarEstadisticas() {
+    const total = Object.keys(respuestas).length;
+    const correctas = Object.values(respuestas).filter(r => r.correcta).length;
+    const incorrectas = total - correctas;
+    const porcentaje = total > 0 ? Math.round((correctas / total) * 100) : 0;
+
+    document.getElementById('respondidas').textContent = total;
+    document.getElementById('correctas').textContent = correctas;
+    document.getElementById('incorrectas').textContent = incorrectas;
+    document.getElementById('porcentaje').textContent = porcentaje;
+
+    const progreso = (total / totalPreguntas) * 100;
+    document.getElementById('progressFill').style.width = progreso + '%';
+  }
+
+  function verResultadoFinal() {
+    const total = Object.keys(respuestas).length;
+    
+    if (total < totalPreguntas) {
+      alert(`⚠️ Aún te faltan ${totalPreguntas - total} preguntas por responder.`);
+      return;
+    }
+
+    const correctas = Object.values(respuestas).filter(r => r.correcta).length;
+    const porcentaje = Math.round((correctas / totalPreguntas) * 100);
+
+    const resultadoFinal = document.getElementById('resultadoFinal');
+    resultadoFinal.classList.add('visible');
+
+    document.getElementById('puntajeFinal').textContent = `${correctas}/${totalPreguntas}`;
+
+    let mensaje = '';
+    if (porcentaje === 100) mensaje = '🏆 ¡PERFECTO! Dominas el Libro Tercero de la Ley 906 de 2004.';
+    else if (porcentaje >= 90) mensaje = '🌟 ¡Excelente! Dominio sobresaliente.';
+    else if (porcentaje >= 75) mensaje = '✅ ¡Muy bien! Buen dominio.';
+    else if (porcentaje >= 60) mensaje = '📚 Aceptable. Repasa los temas donde fallaste.';
+    else if (porcentaje >= 40) mensaje = '📖 Necesitas reforzar varios conceptos.';
+    else mensaje = '🔍 Es necesario estudiar nuevamente todos los temas.';
+
+    document.getElementById('mensajeFinal').textContent = mensaje;
+
+    const temas = {
+      1: { nombre: 'T1: Acusación', total: 4, correctas: 0 },
+      2: { nombre: 'T2: Preacuerdos', total: 4, correctas: 0 },
+      3: { nombre: 'T3: Preparatoria', total: 4, correctas: 0 },
+      4: { nombre: 'T4: Juicio Oral', total: 4, correctas: 0 },
+      5: { nombre: 'T5: Pruebas', total: 5, correctas: 0 },
+      6: { nombre: 'T6: Alegatos', total: 4, correctas: 0 },
+      7: { nombre: 'T7: Fallo', total: 4, correctas: 0 },
+      8: { nombre: 'T8: Suspensión', total: 4, correctas: 0 },
+      9: { nombre: 'T9: Nulidades', total: 7, correctas: 0 }
+    };
+
+    Object.values(respuestas).forEach(r => {
+      if (r.correcta) temas[r.tema].correctas++;
+    });
+
+    const desgloseHTML = Object.values(temas).map(t => {
+      const pct = Math.round((t.correctas / t.total) * 100);
+      return `
+        <div class="desglose-item">
+          <h4>${t.nombre}</h4>
+          <p>${t.correctas}/${t.total} (${pct}%)</p>
+          <div class="mini-bar">
+            <div class="mini-bar-fill" style="width: ${pct}%"></div>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    document.getElementById('desgloseTemas').innerHTML = desgloseHTML;
+    resultadoFinal.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  function reiniciarQuiz() {
+    if (!confirm('¿Reiniciar el quiz?')) return;
+
+    respuestas = {};
+
+    document.querySelectorAll('.opcion').forEach(o => o.classList.remove('correcta', 'incorrecta', 'disabled'));
+    document.querySelectorAll('.explicacion').forEach(e => e.classList.remove('visible'));
+    document.querySelectorAll('.pregunta').forEach(p => p.classList.remove('answered'));
+    document.getElementById('resultadoFinal').classList.remove('visible');
+
+    actualizarEstadisticas();
+    mostrarSeccion('s1', document.querySelector('.quiz-tab'));
+    document.getElementById('quiz').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  document.querySelectorAll('nav a').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+</script>
+
+</body>
+</html>
