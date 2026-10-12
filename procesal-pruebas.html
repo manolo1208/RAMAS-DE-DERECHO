@@ -1,0 +1,2319 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Régimen Probatorio - Sección Tercera del CGP</title>
+<style>
+  :root {
+    --primary: #1e3a8a;
+    --secondary: #f59e0b;
+    --accent: #2563eb;
+    --light: #eff6ff;
+    --dark: #1e293b;
+    --success: #059669;
+    --warning: #d97706;
+    --danger: #dc2626;
+    --card-bg: #ffffff;
+    --shadow: 0 4px 15px rgba(0,0,0,0.08);
+    --shadow-hover: 0 8px 25px rgba(0,0,0,0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    background: var(--light);
+    color: var(--dark);
+    line-height: 1.7;
+  }
+
+  header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    color: white;
+    padding: 2rem 1rem;
+    text-align: center;
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::before {
+    content: '⚖️';
+    position: absolute;
+    font-size: 15rem;
+    opacity: 0.05;
+    top: -30px;
+    right: -30px;
+  }
+
+  header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: 2px;
+  }
+
+  header p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    font-style: italic;
+  }
+
+  nav {
+    background: var(--dark);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow);
+  }
+
+  nav ul {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0.5rem;
+  }
+
+  nav a {
+    color: var(--light);
+    text-decoration: none;
+    padding: 0.7rem 1rem;
+    margin: 0.2rem;
+    border-radius: 5px;
+    font-size: 0.7rem;
+    transition: all 0.3s;
+    display: block;
+  }
+
+  nav a:hover {
+    background: var(--secondary);
+    color: var(--dark);
+    transform: translateY(-2px);
+  }
+
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+  }
+
+  section {
+    background: var(--card-bg);
+    margin-bottom: 2.5rem;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    border-left: 5px solid var(--secondary);
+    scroll-margin-top: 80px;
+  }
+
+  section h2 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--secondary);
+  }
+
+  section h3 {
+    color: var(--accent);
+    font-size: 1.4rem;
+    margin: 1.5rem 0 0.8rem;
+  }
+
+  section h4 {
+    color: var(--primary);
+    font-size: 1.15rem;
+    margin: 1rem 0 0.5rem;
+  }
+
+  p { margin-bottom: 1rem; text-align: justify; }
+
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.2rem;
+    margin: 1.5rem 0;
+  }
+
+  .card {
+    background: linear-gradient(135deg, #fff 0%, #f0f7ff 100%);
+    border: 2px solid var(--secondary);
+    border-radius: 10px;
+    padding: 1.2rem;
+    transition: all 0.3s;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--primary);
+  }
+
+  .card .icon {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .card h4 {
+    text-align: center;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+  }
+
+  .card .detail {
+    display: none;
+    margin-top: 0.8rem;
+    padding-top: 0.8rem;
+    border-top: 1px dashed var(--secondary);
+    font-size: 0.95rem;
+  }
+
+  .card.active .detail { display: block; }
+
+  .card .hint {
+    text-align: center;
+    color: var(--accent);
+    font-size: 0.85rem;
+    font-style: italic;
+  }
+
+  .mapa-container {
+    background: #f8fafc;
+    border: 2px dashed var(--secondary);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    overflow-x: auto;
+  }
+
+  .mapa {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 600px;
+  }
+
+  .nodo {
+    background: var(--primary);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+    font-weight: bold;
+    text-align: center;
+    min-width: 180px;
+    box-shadow: var(--shadow);
+  }
+
+  .nodo.central {
+    background: linear-gradient(135deg, var(--secondary), #fbbf24);
+    color: var(--dark);
+    font-size: 1.2rem;
+    padding: 1rem 2rem;
+  }
+
+  .nodo.sub {
+    background: var(--accent);
+    font-size: 0.95rem;
+  }
+
+  .linea {
+    width: 3px;
+    height: 25px;
+    background: var(--secondary);
+  }
+
+  .linea-h {
+    height: 3px;
+    background: var(--secondary);
+    width: 80%;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .rama {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 1rem;
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  .rama-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    min-width: 140px;
+  }
+
+  .ejemplo {
+    background: #ecfdf5;
+    border-left: 4px solid var(--success);
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .ejemplo strong { color: var(--success); }
+
+  .alerta {
+    background: #fffbeb;
+    border-left: 4px solid var(--warning);
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .alerta strong { color: var(--warning); }
+
+  .cita {
+    background: #eff6ff;
+    border-left: 4px solid var(--accent);
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+    color: var(--primary);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    font-size: 0.9rem;
+  }
+
+  th {
+    background: var(--primary);
+    color: white;
+    padding: 0.8rem;
+    text-align: left;
+  }
+
+  td {
+    padding: 0.8rem;
+    border-bottom: 1px solid #eee;
+  }
+
+  tr:nth-child(even) { background: #f8fafc; }
+  tr:hover { background: #eff6ff; }
+
+  .quiz-container {
+    background: linear-gradient(135deg, #f8fafc 0%, #fff 100%);
+    padding: 1.5rem;
+    border-radius: 10px;
+    border: 2px solid var(--accent);
+  }
+
+  .quiz-header {
+    background: var(--primary);
+    color: white;
+    padding: 1.2rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .quiz-header h3 {
+    color: white;
+    margin: 0 0 0.5rem 0;
+  }
+
+  .progress-bar {
+    background: rgba(255,255,255,0.2);
+    height: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+  }
+
+  .progress-fill {
+    background: var(--secondary);
+    height: 100%;
+    width: 0%;
+    transition: width 0.4s ease;
+  }
+
+  .quiz-stats {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .stat {
+    background: rgba(255,255,255,0.1);
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    font-size: 0.9rem;
+  }
+
+  .stat strong { color: var(--secondary); }
+
+  .quiz-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    padding: 0.5rem;
+    background: #f0f7ff;
+    border-radius: 8px;
+  }
+
+  .quiz-tab {
+    background: white;
+    border: 2px solid var(--accent);
+    color: var(--accent);
+    padding: 0.5rem 0.8rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.7rem;
+    transition: all 0.3s;
+    flex: 1;
+    min-width: 70px;
+    text-align: center;
+  }
+
+  .quiz-tab:hover {
+    background: var(--accent);
+    color: white;
+  }
+
+  .quiz-tab.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+  }
+
+  .quiz-section {
+    display: none;
+  }
+
+  .quiz-section.active {
+    display: block;
+    animation: fadeIn 0.4s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .pregunta {
+    margin-bottom: 1.5rem;
+    padding: 1.2rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    border-left: 4px solid var(--accent);
+    transition: all 0.3s;
+  }
+
+  .pregunta.answered {
+    border-left-color: var(--secondary);
+  }
+
+  .pregunta-num {
+    display: inline-block;
+    background: var(--accent);
+    color: white;
+    padding: 0.2rem 0.7rem;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    margin-right: 0.5rem;
+  }
+
+  .pregunta-tipo {
+    display: inline-block;
+    background: var(--secondary);
+    color: var(--dark);
+    padding: 0.2rem 0.7rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    margin-left: 0.3rem;
+    font-weight: bold;
+  }
+
+  .pregunta p { 
+    font-weight: bold; 
+    color: var(--primary); 
+    margin: 0.8rem 0;
+    text-align: left;
+  }
+
+  .opciones { display: flex; flex-direction: column; gap: 0.5rem; }
+
+  .opcion {
+    padding: 0.7rem 1rem;
+    background: #f8fafc;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+  }
+
+  .opcion:hover:not(.disabled) {
+    border-color: var(--accent);
+    background: #eff6ff;
+  }
+
+  .opcion.disabled {
+    cursor: not-allowed;
+    opacity: 0.85;
+  }
+
+  .opcion.correcta {
+    background: #d1fae5;
+    border-color: var(--success);
+    color: var(--success);
+    font-weight: bold;
+  }
+
+  .opcion.incorrecta {
+    background: #fee2e2;
+    border-color: var(--danger);
+    color: var(--danger);
+  }
+
+  .opcion.correcta::after {
+    content: ' ✓';
+    font-weight: bold;
+  }
+
+  .opcion.incorrecta::after {
+    content: ' ✗';
+    font-weight: bold;
+  }
+
+  .explicacion {
+    margin-top: 0.8rem;
+    padding: 0.8rem;
+    background: #eff6ff;
+    border-left: 3px solid var(--accent);
+    border-radius: 0 6px 6px 0;
+    font-size: 0.9rem;
+    display: none;
+    font-style: italic;
+  }
+
+  .explicacion.visible {
+    display: block;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .resultado-final {
+    margin-top: 2rem;
+    padding: 2rem;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    color: white;
+    border-radius: 12px;
+    text-align: center;
+    display: none;
+  }
+
+  .resultado-final.visible {
+    display: block;
+    animation: fadeIn 0.5s ease;
+  }
+
+  .resultado-final h3 {
+    color: var(--secondary);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .puntaje-final {
+    font-size: 3rem;
+    font-weight: bold;
+    color: var(--secondary);
+    margin: 1rem 0;
+  }
+
+  .desglose-temas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+    text-align: left;
+  }
+
+  .desglose-item {
+    background: rgba(255,255,255,0.1);
+    padding: 1rem;
+    border-radius: 8px;
+  }
+
+  .desglose-item h4 {
+    color: var(--secondary);
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+  }
+
+  .mini-bar {
+    background: rgba(255,255,255,0.2);
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+  }
+
+  .mini-bar-fill {
+    background: var(--secondary);
+    height: 100%;
+    transition: width 0.6s ease;
+  }
+
+  button {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 1rem;
+    transition: all 0.3s;
+  }
+
+  button:hover {
+    background: var(--secondary);
+    color: var(--dark);
+    transform: translateY(-2px);
+  }
+
+  .btn-reset {
+    background: var(--danger);
+    margin-left: 0.5rem;
+  }
+
+  .btn-reset:hover {
+    background: #991b1b;
+    color: white;
+  }
+
+  .acordeon-item {
+    margin-bottom: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .acordeon-header {
+    background: var(--accent);
+    color: white;
+    padding: 1rem;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.3s;
+  }
+
+  .acordeon-header:hover { background: var(--primary); }
+
+  .acordeon-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    background: white;
+  }
+
+  .acordeon-content.active {
+    max-height: 2000px;
+    padding: 1rem;
+  }
+
+  .flecha { transition: transform 0.3s; }
+  .acordeon-header.active .flecha { transform: rotate(180deg); }
+
+  footer {
+    background: var(--dark);
+    color: var(--light);
+    text-align: center;
+    padding: 2rem 1rem;
+    margin-top: 2rem;
+  }
+
+  footer p { margin-bottom: 0.5rem; }
+
+  @media (max-width: 768px) {
+    header h1 { font-size: 1.8rem; }
+    section { padding: 1.2rem; }
+    section h2 { font-size: 1.5rem; }
+    nav a { font-size: 0.6rem; padding: 0.3rem 0.4rem; }
+    .quiz-tab { font-size: 0.6rem; padding: 0.3rem 0.4rem; }
+    table { font-size: 0.8rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🔍 Régimen Probatorio</h1>
+  <p>Sección Tercera del Código General del Proceso (Arts. 164 a 277) · Guía Didáctica Interactiva</p>
+</header>
+
+<nav>
+  <ul>
+    <li><a href="#tema1">1. Generalidades</a></li>
+    <li><a href="#tema2">2. Extraprocesales</a></li>
+    <li><a href="#tema3">3. Confesión</a></li>
+    <li><a href="#tema4">4. Juramento</a></li>
+    <li><a href="#tema5">5. Testimonial</a></li>
+    <li><a href="#tema6">6. Pericial</a></li>
+    <li><a href="#tema7">7. Inspección</a></li>
+    <li><a href="#tema8">8. Indicios</a></li>
+    <li><a href="#tema9">9. Documentos</a></li>
+    <li><a href="#tema10">10. Informes</a></li>
+    <li><a href="#quiz">Quiz (40)</a></li>
+  </ul>
+</nav>
+
+<main>
+
+  <section>
+    <h2>📚 Introducción</h2>
+    <p>Bienvenido a esta guía interactiva sobre el <strong>Régimen Probatorio del Código General del Proceso (CGP)</strong>. Este régimen constituye el eje ontológico y teleológico sobre el cual se edifica la función jurisdiccional, operando como el vehículo procesal insustituible para el esclarecimiento de la verdad procesal y la materialización del derecho sustancial.</p>
+    <div class="alerta">
+      <strong> Cómo usar esta guía:</strong> Haz clic en las tarjetas para ver detalles, despliega los acordeones para información adicional y prueba tus conocimientos con el quiz de 40 preguntas al final.
+    </div>
+  </section>
+
+  <!-- TEMA 1: DISPOSICIONES GENERALES -->
+  <section id="tema1">
+    <h2>1. Disposiciones Generales (Arts. 164 a 182 CGP)</h2>
+    <p>El régimen probatorio establece los principios, medios y reglas generales que rigen la actividad probatoria en el proceso civil colombiano.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">RÉGIMEN PROBATORIO</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Medios de Prueba</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Carga de la Prueba</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Apreciación</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Sana Crítica</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Principios Fundamentales</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Necesidad de la Prueba (Art. 164)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Toda decisión judicial debe fundarse en pruebas <strong>regular y oportunamente allegadas</strong>.</p>
+          <p>Es <strong>nula de pleno derecho</strong> la prueba obtenida con violación del debido proceso.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon"></div>
+        <h4>Medios de Prueba (Art. 165)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Declaración de parte, confesión, juramento, testimonio, dictamen pericial, inspección judicial, documentos, indicios, informes y <strong>cualquier otro medio útil</strong> para el convencimiento del juez.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🎯</div>
+        <h4>Carga de la Prueba (Art. 167)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Incumbe a las partes probar el supuesto de hecho de las normas que invocan.</p>
+          <p><strong>Distribución dinámica:</strong> el juez puede distribuir la carga a la parte que se encuentre en mejor posición para aportar la prueba.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🔍</div>
+        <h4>Rechazo de Plano (Art. 168)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>El juez rechazará motivadamente las pruebas <strong>ilícitas, impertinentes, inconducentes o superfluas</strong>.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚡</div>
+        <h4>Decreto Oficioso (Art. 170)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>El juez debe decretar pruebas de oficio para <strong>esclarecer los hechos</strong>.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">👁️</div>
+        <h4>Inmediación (Art. 171)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>El juez debe practicar las pruebas <strong>personalmente</strong>, salvo comisiones excepcionales o uso de medios tecnológicos.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>📜 Apreciación según la Sana Crítica (Art. 176)</h3>
+    <div class="alerta">
+      <strong>📌 Regla fundamental:</strong> Las pruebas se aprecian en conjunto indicando <strong>razonadamente el mérito asignado a cada una</strong>, conforme a las reglas de la lógica, la ciencia y las máximas de la experiencia.
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si en un proceso de responsabilidad contractual el demandante aporta un contrato, testigos y un peritaje, el juez debe apreciar todas las pruebas en conjunto, indicando razonadamente el mérito que asigna a cada una para llegar a su convicción.
+    </div>
+  </section>
+
+  <!-- TEMA 2: PRUEBAS EXTRAPROCESALES -->
+  <section id="tema2">
+    <h2>2. Pruebas Extraprocesales (Arts. 183 a 190 CGP)</h2>
+    <p>Las pruebas extraprocesales son actuaciones de carácter preventivo aducidas antes del inicio de un proceso judicial o administrativo.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">PRUEBAS EXTRAPROCESALES</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Función Preventiva</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Contradictorio</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Incorporación</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Reglas Generales (Art. 183)</h3>
+    <div class="alerta">
+      <strong>📌 Requisitos:</strong>
+      <ul>
+        <li>Practicadas <strong>antes del proceso</strong></li>
+        <li>Con <strong>citación personal</strong> de la contraparte</li>
+        <li>Con no menos de <strong>5 días de antelación</strong></li>
+      </ul>
+    </div>
+
+    <h3>🔍 Tipos de Pruebas Extraprocesales</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🗣️</div>
+        <h4>Interrogatorio de Parte (Art. 184)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Permite interrogar a la contraparte <strong>antes del litigio</strong> para asegurar su versión.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">👁️</div>
+        <h4>Inspección Anticipada (Art. 189)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Inspecciones o peritajes sobre personas, lugares o documentos que <strong>puedan alterarse</strong> con el tiempo.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">👥</div>
+        <h4>Testimonios Anticipados (Arts. 187-188)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Para fines probatorios o sin citación previa como prueba sumaria (sujetos a <strong>ratificación</strong> en el proceso).</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>️ Incorporación al Proceso Principal</h3>
+    <div class="alerta">
+      <strong>📌 Para que una prueba extraprocesal tenga plena validez:</strong>
+      <ul>
+        <li>Si se practicó <strong>con citación</strong> de la contraparte: conserva su mérito probatorio directo</li>
+        <li>Si se practicó <strong>sin citación</strong>: requiere ratificación o puesta en conocimiento de la parte contra quien se aduce</li>
+        <li>Debe presentarse junto con la <strong>demanda o contestación</strong></li>
+      </ul>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si A sabe que un testigo clave está gravemente enfermo y puede morir antes del proceso, puede solicitar un testimonio anticipado citando a B con 5 días de antelación. Si el testigo fallece, el testimonio se incorpora al proceso cuando A presente la demanda.
+    </div>
+  </section>
+
+  <!-- TEMA 3: CONFESIÓN -->
+  <section id="tema3">
+    <h2>3. Declaración de Parte y Confesión (Arts. 191 a 207 CGP)</h2>
+    <p>La confesión es el acto procesal mediante el cual una parte acepta hechos que le producen consecuencias jurídicas desfavorables.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">CONFESIÓN</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Requisitos</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Art. 191</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Efectos</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Fijación de hechos</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Inasistencia</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Art. 205</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Requisitos de Validez (Art. 191)</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">✅</div>
+        <h4>Capacidad</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Capacidad jurídica plena del confesante.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🔓</div>
+        <h4>Poder Dispositivo</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Libre disposición del derecho sobre el cual recae la manifestación.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🆓</div>
+        <h4>Espontaneidad</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Debe ser consciente, espontánea y libre de coacción, violencia o inducción engañosa.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon"></div>
+        <h4>Hechos Personales</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Debe recaer sobre hechos personales que produzcan <strong>consecuencias adversas</strong> al confesante.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>⚠️ Confesión de Litisconsortes y Apoderados</h3>
+    <div class="alerta">
+      <strong> Reglas especiales:</strong>
+      <ul>
+        <li><strong>Litisconsortes necesarios (Art. 192):</strong> La confesión no realizada por la totalidad vale solo como testimonio de tercero.</li>
+        <li><strong>Apoderados (Art. 193):</strong> Valdrá la confesión de apoderado si fue <strong>facultado para ello</strong>.</li>
+        <li><strong>Entidades públicas (Art. 195):</strong> No vale la confesión de representantes; en su lugar, se solicita un <strong>informe escrito bajo juramento</strong>.</li>
+      </ul>
+    </div>
+
+    <h3> Consecuencias de la Inasistencia (Art. 205)</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">️</div>
+        <h4>Presunción de Certeza</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>La inasistencia al interrogatorio genera la <strong>presunción de certeza</strong> sobre los hechos susceptibles de confesión.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🔍</div>
+        <h4>Indicio Grave</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Si las preguntas no son asertivas, genera <strong>indicio grave</strong> en contra del inasistente.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong> Ejemplo:</strong> Si A demanda a B por incumplimiento contractual y B es citado a interrogatorio de parte pero no asiste sin justa causa, los hechos susceptibles de confesión se tienen por ciertos (Art. 205 CGP).
+    </div>
+  </section>
+
+  <!-- TEMA 4: JURAMENTO -->
+  <section id="tema4">
+    <h2>4. Juramento Estimatorio (Art. 206 CGP)</h2>
+    <p>El juramento estimatorio es un mecanismo solemne de fijación cuantitativa de derechos en el ordenamiento procesal.</p>
+
+    <h3>📋 Concepto y Modalidades</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">💰</div>
+        <h4>Juramento Estimatorio</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Instrumento de fijación cuantitativa de un derecho o crédito dinerario.</p>
+          <p><strong>Requisito obligatorio</strong> para reclamar indemnizaciones, frutos o mejoras.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">️</div>
+        <h4>Juramento Deferido</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>La ley o la autoridad judicial defiere a la manifestación jurada de una de las partes la estimación o prueba de un hecho ante la <strong>imposibilidad o carencia de otros medios probatorios</strong>.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>⚠️ Objeción y Tacha</h3>
+    <div class="alerta">
+      <strong>📌 El juramento estimatorio no es absoluto:</strong>
+      <ul>
+        <li>La contraparte puede <strong>objetar</strong> la estimación cuando la considere desproporcionada, infundada o fraudulenta</li>
+        <li>La objeción formal <strong>interrumpe la fijación automática</strong> del monto</li>
+        <li>Impone a quien pretende la suma la <strong>carga probatoria</strong> de demostrar objetivamente la cuantía</li>
+      </ul>
+    </div>
+
+    <h3>💸 Mecánica Sancionatoria</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Situación</th>
+          <th>Sanción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Sobreestimación excesiva</strong> (excede en más del 50% lo probado)</td>
+          <td>Multa del 10% de la diferencia</td>
+        </tr>
+        <tr>
+          <td><strong>Carencia total de prueba</strong> del perjuicio</td>
+          <td>Multa del 5%</td>
+        </tr>
+        <tr>
+          <td><strong>Afirmaciones falsas, temerarias o fraudulentas</strong></td>
+          <td>Persecución penal por falso testimonio o fraude procesal + sanciones disciplinarias</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si A reclama $100 millones en perjuicios bajo juramento estimatorio, pero solo logra probar $40 millones, la estimación excede en más del 50% lo probado. A será condenado al pago de una multa del 10% de la diferencia ($60 millones × 10% = $6 millones).
+    </div>
+  </section>
+
+  <!-- TEMA 5: TESTIMONIAL -->
+  <section id="tema5">
+    <h2>5. Declaración de Terceros - Prueba Testimonial (Arts. 208 a 225 CGP)</h2>
+    <p>La prueba testimonial es un medio de convicción de carácter histórico sustancial para la reconstrucción fáctica del proceso.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">PRUEBA TESTIMONIAL</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Deber de Testimoniar</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Inhabilidades</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Interrogatorio</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Contradicción</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3> Deber y Excepciones de Testimoniar (Arts. 208-209)</h3>
+    <div class="alerta">
+      <strong> Regla general:</strong> Toda persona tiene el deber de rendir testimonio cuando sea legalmente requerida.
+      <br><br>
+      <strong>Excepciones (amparo por secreto):</strong>
+      <ul>
+        <li>Abogados (secreto profesional)</li>
+        <li>Médicos (secreto médico)</li>
+        <li>Ministros del culto (secreto de confesión)</li>
+      </ul>
+    </div>
+
+    <h3>🚫 Inhabilidades y Tachas</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🚫</div>
+        <h4>Inhabilidades Absolutas</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Privación total de la capacidad legal o física para rendir testimonio.</p>
+          <p>Ejemplo: alteración mental grave o trastorno psíquico severo.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚠️</div>
+        <h4>Inhabilidades Relativas</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Circunstancias temporales que afectan la percepción o fidelidad en el caso concreto.</p>
+          <p>Ejemplo: inmadurez sensorial por minoría de edad extrema.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🔍</div>
+        <h4>Tachas por Sospecha</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Factores subjetivos que afectan el mérito persuasivo sin anular la validez.</p>
+          <p>Ejemplo: parentesco, dependencia económica, enemistad grave, interés directo.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>🎤 Técnica del Interrogatorio (Arts. 211-224)</h3>
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>1️⃣ Interrogatorio Directo</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>La parte que solicitó la prueba interroga oralmente al testigo sobre los hechos específicos materia de investigación.</p>
+        <p><strong>Prohibición:</strong> preguntas sugestivas en el examen directo.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>2️⃣ Contrainterrogatorio</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>La contraparte formula preguntas dirigidas a refutar, precisar o desacreditar la versión o la imparcialidad del testigo.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>3️⃣ Intervención de la Autoridad</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>El juez o magistrado podrá interrogar al testigo en cualquier momento para aclarar vacíos o profundizar sobre la verdad real de los hechos.</p>
+      </div>
+    </div>
+
+    <div class="alerta">
+      <strong> Límite:</strong> Máximo <strong>dos testigos</strong> por cada hecho controvertido.
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> En un proceso por accidente de tránsito, A presenta a C como testigo presencial. A interroga directamente a C sobre lo que vio. Luego, el abogado de B realiza el contrainterrogatorio para refutar la versión. Finalmente, el juez puede hacer preguntas aclaratorias.
+    </div>
+  </section>
+
+  <!-- TEMA 6: PERICIAL -->
+  <section id="tema6">
+    <h2>6. Prueba Pericial (Arts. 226 a 235 CGP)</h2>
+    <p>La prueba pericial suministra al juzgador máximas de experiencia especializada y conocimientos en ciencias, artes, técnicas u oficios.</p>
+
+    <h3>️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">PRUEBA PERICIAL</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">De Parte</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Art. 227</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">De Oficio</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Art. 227</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Contradicción</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Art. 228</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Procedencia (Arts. 226-227)</h3>
+    <div class="alerta">
+      <strong> Procede para:</strong> Verificar hechos que exijan <strong>conocimientos científicos, técnicos o artísticos</strong>.
+      <br><br>
+      <strong>NO es admisible sobre puntos de derecho.</strong>
+      <br><br>
+      <strong>Aportación:</strong> Las partes deben aportarlo directamente con la demanda o contestación.
+    </div>
+
+    <h3>⚖️ Comparativa: Pericial de Parte vs. De Oficio</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Criterio</th>
+          <th>De Parte</th>
+          <th>De Oficio</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Procedencia</strong></td>
+          <td>Iniciativa de las partes</td>
+          <td>Decretada por el juez</td>
+        </tr>
+        <tr>
+          <td><strong>Incorporación</strong></td>
+          <td>Con demanda o contestación</td>
+          <td>Mediante auto interlocutorio</td>
+        </tr>
+        <tr>
+          <td><strong>Contradicción</strong></td>
+          <td>Contrainterrogatorio en audiencia</td>
+          <td>Aclaraciones, adiciones o tacha</td>
+        </tr>
+        <tr>
+          <td><strong>Honorarios</strong></td>
+          <td>Sufragados por la parte</td>
+          <td>Fijados judicialmente</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>🔍 Contradicción del Dictamen (Art. 228)</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">❓</div>
+        <h4>Observaciones y Aclaración</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Formulación de objeciones técnicas en audiencia para que el perito explique lagunas, métodos o inconsistencias.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon"></div>
+        <h4>Dictamen Contradictorio</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>La parte contraria puede presentar otro peritaje que desacredite las conclusiones del primero.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🚫</div>
+        <h4>Tacha del Perito</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Impugnación por falta de idoneidad, imparcialidad o existencia de conflictos de interés.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong> Ejemplo:</strong> En un proceso por daños estructurales en un edificio, A aporta un dictamen pericial de un ingeniero civil que concluye que los daños son graves. B puede contradecirlo presentando otro dictamen de un ingeniero diferente, o tachando al perito de A por tener relación laboral con B.
+    </div>
+  </section>
+
+  <!-- TEMA 7: INSPECCIÓN JUDICIAL -->
+  <section id="tema7">
+    <h2>7. Inspección Judicial (Arts. 236 a 239 CGP)</h2>
+    <p>La inspección judicial es el medio de prueba que efectiviza de manera directa el principio de inmediación procesal.</p>
+
+    <h3>📋 Concepto y Características</h3>
+    <div class="cita">
+      <strong>"Examen, reconocimiento y percepción sensorial que el juez o los miembros del tribunal realizan directamente sobre lugares, personas, cosas o documentos relevantes para el litigio."</strong>
+    </div>
+
+    <h3>⚠️ Regla de Subsidiaridad Estricta (Art. 236)</h3>
+    <div class="alerta">
+      <strong>📌 La inspección judicial solo procede cuando:</strong>
+      <ul>
+        <li>Sea <strong>imposible</strong> verificar los hechos por medio de fotografías, videos, peritajes u otros medios probatorios</li>
+        <li>La percepción sensorial personal e ininterrumpida del juzgador resulte <strong>insustituible</strong></li>
+      </ul>
+      <p>Tiene carácter <strong>excepcionalísimo y subsidiario</strong>.</p>
+    </div>
+
+    <h3>🔍 Poderes del Juez durante la Inspección</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚡</div>
+        <h4>Poder de Coerción</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Faculta al juzgador para remover físicamente cualquier obstáculo u oposición irrazonable.</p>
+          <p>Puede imponer <strong>multas</strong>, requerir auxilio de la fuerza pública o sancionar la rebeldía.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📝</div>
+        <h4>Poder de Documentación</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Facultad para fijar y registrar la diligencia en <strong>actas detalladas, planos, fotografías, grabaciones de audio y vídeo</strong> o cualquier soporte tecnológico.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>🚫 Oposición y Sanción (Art. 238)</h3>
+    <div class="alerta">
+      <strong>⚠️ Consecuencias de impedir la inspección:</strong>
+      <ul>
+        <li>Multa de <strong>5 a 10 SMLMV</strong></li>
+        <li><strong>Presunción de certeza</strong> de los hechos que se pretendían demostrar</li>
+      </ul>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> En un proceso por linderos entre dos predios, si las fotografías y planos no son suficientes para determinar el límite exacto, el juez puede decretar inspección judicial para percibir directamente el estado de los linderos. Si una de las partes impide el acceso al predio, se le impone multa y se presumen ciertos los hechos que la otra parte pretendía demostrar.
+    </div>
+  </section>
+
+  <!-- TEMA 8: INDICIOS -->
+  <section id="tema8">
+    <h2>8. Indicios (Arts. 240 a 242 CGP)</h2>
+    <p>La prueba indiciaria o indirecta constituye un mecanismo de juzgamiento crítico fundado en la inferencia lógica e inductiva.</p>
+
+    <h3>🗺️ Mapa Conceptual: Estructura Trilógica</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">HECHO INDICADOR (Probado)</div>
+        <div class="linea"></div>
+        <div class="nodo">INFERENCIA LÓGICA / SANA CRÍTICA</div>
+        <div class="linea"></div>
+        <div class="nodo">HECHO INDICADO (Demostrado)</div>
+        <div class="linea"></div>
+        <div class="nodo sub">⚠️ Contraindicio puede anular la inferencia</div>
+      </div>
+    </div>
+
+    <h3>📋 Elementos de la Prueba Indiciaria</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">1️⃣</div>
+        <h4>Hecho Indicador</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Acontecimiento fáctico básico, secundario y <strong>debidamente acreditado</strong> dentro del expediente por medios de prueba directos.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🔗</div>
+        <h4>Inferencia Lógica</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Razonamiento abstracto formulado por el juez, aplicando pautas de la <strong>sana crítica, la ciencia o las máximas probables de la experiencia</strong>.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🎯</div>
+        <h4>Hecho Indicado</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Circunstancia o hecho definitivo materia del litigio cuya existencia se logra demostrar mediante la conclusión deductiva.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon"></div>
+        <h4>Contraindicio</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Acontecimiento fáctico comprobado que <strong>destruye, debilita o neutraliza</strong> la inferencia lógica deducida del hecho indicador.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>✅ Requisitos para la Eficacia Probatoria Plena</h3>
+    <div class="alerta">
+      <strong>📌 Atributos concurrentes:</strong>
+      <ul>
+        <li><strong>Pluralidad:</strong> Debe existir una pluralidad de hechos indicadores que conduzcan a la misma conclusión (salvo excepciones legales).</li>
+        <li><strong>Precisión y Unicidad:</strong> Los indicios deben ser graves y conducir de manera unívoca al hecho indicado.</li>
+        <li><strong>Concordancia:</strong> Los diferentes indicios deben encajar armónicamente entre sí, sin presentar fisuras ni contraindicios.</li>
+      </ul>
+    </div>
+
+    <h3>🎭 Conducta Procesal como Fuente de Indicios</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🚫</div>
+        <h4>Obstrucción Probatoria</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Obstrucción al decreto y práctica de pruebas.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon"></div>
+        <h4>Falta de Respuesta</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Falta de respuesta a los requerimientos de la autoridad.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📄</div>
+        <h4>Omisión de Exhibición</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Omisión inmotivada de exhibir documentos.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">❌</div>
+        <h4>Entorpecimiento</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Entorpecimiento de inspecciones o falsedad manifestada.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si en un proceso por daños, A presenta: (1) fotografías del daño, (2) testimonio de un vecino que vio a B cerca del lugar, y (3) un peritaje que concluye que los daños son compatibles con la conducta de B, el juez puede inferir por indicios que B causó los daños, siempre que no exista un contraindicio que destruya la inferencia.
+    </div>
+  </section>
+
+  <!-- TEMA 9: DOCUMENTOS -->
+  <section id="tema9">
+    <h2>9. Documentos (Arts. 243 a 274 CGP)</h2>
+    <p>El documento representa la fijación material, física o electrónica del pensamiento humano, de decisiones jurídicas o de la memoria histórica.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">DOCUMENTOS</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Públicos</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Privados</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Electrónicos</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Impugnación</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Concepto y Autenticidad (Arts. 243-244)</h3>
+    <div class="alerta">
+      <strong>📌 Concepto amplio:</strong> Comprende todo objeto mueble representativo o declarativo, incluyendo <strong>mensajes de datos</strong>.
+      <br><br>
+      <strong>Presunción:</strong> Se presumen auténticos todos los documentos aportados.
+    </div>
+
+    <h3>📄 Clasificación de Documentos</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">️</div>
+        <h4>Documentos Públicos</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Expedidos por servidores públicos en ejercicio de sus funciones o con su intervención.</p>
+          <p>Gozan de <strong>presunción de legalidad</strong> mientras no hayan sido anulados.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📝</div>
+        <h4>Documentos Privados</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Elaborados por particulares sin intervención de funcionario público.</p>
+          <p>Conservan mérito probatorio cuando su autenticidad haya sido acreditada o se presuma legalmente.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">💻</div>
+        <h4>Mensajes de Datos (Art. 247)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Se valoran en el <strong>formato que fueron generados o recibidos</strong>.</p>
+          <p>Principio de <strong>equivalencia funcional</strong>: misma validez que documentos en papel.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>⚔️ Mecanismos de Impugnación (Arts. 269-272)</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Mecanismo</th>
+          <th>Procede contra</th>
+          <th>Alegación</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Tacha de Falsedad</strong></td>
+          <td>Documentos públicos o privados</td>
+          <td>Falsedad material (alteración, adulteración) o ideológica</td>
+        </tr>
+        <tr>
+          <td><strong>Desconocimiento</strong></td>
+          <td>Documentos privados sin firma o de autoría no constatada</td>
+          <td>Obliga a la parte que lo presentó a probar su autenticidad</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>✅ Requisitos Formales de la Prueba Documental</h3>
+    <div class="alerta">
+      <strong>📌 Presupuestos para plena existencia, validez y eficacia:</strong>
+      <ol style="margin-top: 0.5rem; padding-left: 1.5rem;">
+        <li><strong>Materialidad u Objetivación:</strong> Incorporación física o digital perceptible</li>
+        <li><strong>Autenticidad o Certeza de Autoría:</strong> Conocimiento o presunción legal cierta sobre quien expidió el documento</li>
+        <li><strong>Integridad e Inalterabilidad:</strong> Ausencia de borrones, raspaduras, enmiendas o alteraciones</li>
+        <li><strong>Pertinencia y Conducencia:</strong> Conexión directa con los hechos controvertidos</li>
+        <li><strong>Incorporación Oportuna:</strong> Presentación regular en las etapas fijadas por la ley</li>
+      </ol>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si A aporta un contrato privado firmado por B para probar la existencia de una obligación, B puede desconocer el documento. En ese caso, A deberá probar la autenticidad de la firma mediante cotejo pericial o testimonial.
+    </div>
+  </section>
+
+  <!-- TEMA 10: PRUEBA POR INFORME -->
+  <section id="tema10">
+    <h2>10. Prueba por Informe (Arts. 275 a 277 CGP)</h2>
+    <p>La prueba informe es el medio probatorio autónomo mediante el cual las entidades suministran datos, cifras o actuaciones contenidas en sus archivos.</p>
+
+    <h3> Concepto y Características</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon"></div>
+        <h4>Naturaleza</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Solicitud de datos, cifras o actuaciones contenidas en archivos de entidades públicas o privadas.</p>
+          <p>Rendidos bajo la <strong>gravedad del juramento</strong>.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🔄</div>
+        <h4>Diferencia con Documento</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Mientras el documento aporta la pieza original, el informe consiste en la <strong>elaboración de una respuesta consolidada</strong> rendida por la entidad requerida.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🔬</div>
+        <h4>Diferencia con Pericial</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>El informe no contiene juicio valorativo o dictamen técnico subjetivo, sino la <strong>mera transcripción objetiva</strong> de registros o datos oficiales.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>️ Obligación Institucional de Suministrar Información</h3>
+    <div class="alerta">
+      <strong>📌 Deber de información y transparencia:</strong>
+      <ul>
+        <li>Las autoridades públicas están obligadas a mantener a disposición información <strong>completa, actualizada y oportuna</strong></li>
+        <li>Deben expedir los informes solicitados dentro de los <strong>plazos perentorios</strong> concedidos por la ley</li>
+        <li>Sin dilaciones o pretextos que atenten contra la celeridad del trámite</li>
+      </ul>
+    </div>
+
+    <h3>⚠️ Consecuencias por Renuencia e Incumplimiento</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Conducta</th>
+          <th>Consecuencia</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Renuencia injustificada</strong></td>
+          <td>Multas sucesivas a los responsables en rebeldía</td>
+        </tr>
+        <tr>
+          <td><strong>Retardo en la rendición</strong></td>
+          <td>Multas sucesivas conforme al régimen de la Ley 1437 de 2011</td>
+        </tr>
+        <tr>
+          <td><strong>Omisión dolosa o datos falsos</strong></td>
+          <td>Procesos disciplinarios y penales para servidores públicos y particulares con funciones administrativas</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> En un proceso contra el Estado por falla en el servicio de salud, el juez puede solicitar a la EPS un informe sobre la historia clínica completa del paciente, los protocolos seguidos y las autorizaciones otorgadas. La EPS está obligada a suministrar esta información bajo juramento dentro del plazo señalado.
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz">
+    <h2>🎯 Quiz Completo - 40 Preguntas</h2>
+    <p>Pon a prueba tus conocimientos sobre el Régimen Probatorio del CGP.</p>
+
+    <div class="quiz-container">
+      <div class="quiz-header">
+        <h3>📊 Tu Progreso</h3>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="quiz-stats">
+          <div class="stat">Respondidas: <strong id="respondidas">0</strong>/40</div>
+          <div class="stat">Correctas: <strong id="correctas">0</strong></div>
+          <div class="stat">Incorrectas: <strong id="incorrectas">0</strong></div>
+          <div class="stat">Porcentaje: <strong id="porcentaje">0</strong>%</div>
+        </div>
+      </div>
+
+      <div class="quiz-tabs">
+        <div class="quiz-tab active" onclick="mostrarSeccion('s1', this)">T1 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s2', this)">T2 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s3', this)">T3 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s4', this)">T4 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s5', this)">T5 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s6', this)">T6 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s7', this)">T7 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s8', this)">T8 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s9', this)">T9 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s10', this)">T10 (4)</div>
+      </div>
+
+      <!-- SECCIÓN 1: GENERALIDADES -->
+      <div class="quiz-section active" id="s1">
+        <div class="pregunta" data-correcta="2" data-tema="1">
+          <span class="pregunta-num">1</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Según el Art. 164 CGP, toda decisión judicial debe fundarse en:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 1)">a) La voluntad del juez</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">b) La petición de las partes</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">c) Pruebas regular y oportunamente allegadas</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">d) La costumbre</div>
+          </div>
+          <div class="explicacion">Toda decisión judicial debe fundarse en pruebas regular y oportunamente allegadas (Art. 164 CGP).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="1">
+          <span class="pregunta-num">2</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La distribución dinámica de la carga de la prueba (Art. 167 CGP) permite al juez:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 2)">a) Eximir a las partes de probar</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">b) Distribuir la carga a la parte que se encuentre en mejor posición para aportar la prueba</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">c) Decretar todas las pruebas de oficio</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">d) Rechazar todas las pruebas de las partes</div>
+          </div>
+          <div class="explicacion">El juez puede distribuir la carga de la prueba a la parte que se encuentre en una situación más favorable para aportarla (Art. 167 CGP).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="1">
+          <span class="pregunta-num">3</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El juez rechazará motivadamente las pruebas (Art. 168 CGP) cuando sean:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 3)">a) Ilícitas, impertinentes, inconducentes o superfluas</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">b) Solo las documentales</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">c) Solo las testimoniales</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">d) Solo las periciales</div>
+          </div>
+          <div class="explicacion">El juez rechazará motivadamente las pruebas ilícitas, impertinentes, inconducentes o superfluas (Art. 168 CGP).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="1">
+          <span class="pregunta-num">4</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Las pruebas se aprecian según (Art. 176 CGP):</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 4)">a) La tarifa legal estricta</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">b) La libre convicción absoluta</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">c) El arbitrio del juez</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">d) La sana crítica, indicando razonadamente el mérito asignado a cada una</div>
+          </div>
+          <div class="explicacion">Las pruebas se aprecian en conjunto según la sana crítica, indicando razonadamente el mérito asignado a cada una (Art. 176 CGP).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 2: EXTRAPROCESALES -->
+      <div class="quiz-section" id="s2">
+        <div class="pregunta" data-correcta="1" data-tema="2">
+          <span class="pregunta-num">5</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Las pruebas extraprocesales se practican:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 5)">a) Durante el proceso</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">b) Antes del proceso, con citación personal de la contraparte con no menos de 5 días de antelación</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">c) Después de la sentencia</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">d) Solo en segunda instancia</div>
+          </div>
+          <div class="explicacion">Las pruebas extraprocesales se practican antes del proceso con citación personal de la contraparte con no menos de 5 días de antelación (Art. 183 CGP).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="2">
+          <span class="pregunta-num">6</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Si una prueba extraprocesal se practicó sin citación de la contraparte, para ser valorada requiere:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 6)">a) Ratificación o puesta en conocimiento de la parte contra quien se aduce</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">b) Nada, se valora directamente</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">c) Solo la firma del juez</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">d) Aprobación del Ministerio Público</div>
+          </div>
+          <div class="explicacion">Si se practicó sin citación, requiere ratificación o puesta en conocimiento de la parte contra quien se aduce para garantizar el derecho de contradicción.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="2">
+          <span class="pregunta-num">7</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los testimonios anticipados sin citación previa son:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 7)">a) Nulos de pleno derecho</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">b) Válidos como prueba plena</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">c) Prueba sumaria sujeta a ratificación en el proceso</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">d) Inadmisibles en todo caso</div>
+          </div>
+          <div class="explicacion">Los testimonios anticipados sin citación previa son prueba sumaria sujeta a ratificación en el proceso (Arts. 187-188 CGP).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="2">
+          <span class="pregunta-num">8</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La prueba extraprocesal debe incorporarse al proceso junto con:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 8)">a) La sentencia</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">b) El recurso de apelación</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">c) La liquidación de costas</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">d) La demanda o la contestación</div>
+          </div>
+          <div class="explicacion">La prueba extraprocesal debe presentarse junto con la demanda o en la contestación para integrarse regularmente al expediente.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 3: CONFESIÓN -->
+      <div class="quiz-section" id="s3">
+        <div class="pregunta" data-correcta="2" data-tema="3">
+          <span class="pregunta-num">9</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La confesión (Art. 191 CGP) exige:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 9)">a) Solo capacidad jurídica</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">b) Solo espontaneidad</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">c) Capacidad, poder dispositivo, espontaneidad y recaer sobre hechos personales que produzcan consecuencias adversas</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">d) Solo que sea escrita</div>
+          </div>
+          <div class="explicacion">La confesión exige capacidad, poder dispositivo, espontaneidad y recaer sobre hechos personales que produzcan consecuencias adversas al confesante (Art. 191 CGP).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="3">
+          <span class="pregunta-num">10</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La confesión de litisconsortes necesarios (Art. 192 CGP):</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 10)">a) Si no es realizada por la totalidad, vale solo como testimonio de tercero</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">b) Siempre vale como confesión plena</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">c) Nunca tiene valor probatorio</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">d) Solo vale si la hace el apoderado</div>
+          </div>
+          <div class="explicacion">La confesión no realizada por la totalidad de litisconsortes necesarios vale solo como testimonio de tercero (Art. 192 CGP).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="3">
+          <span class="pregunta-num">11</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La confesión de representantes de entidades públicas (Art. 195 CGP):</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 11)">a) Vale como confesión plena</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">b) No vale; en su lugar se solicita un informe escrito bajo juramento</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">c) Vale solo si es ratificada</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">d) Vale solo en procesos administrativos</div>
+          </div>
+          <div class="explicacion">No vale la confesión de representantes de entidades públicas; en su lugar, se solicita un informe escrito bajo juramento (Art. 195 CGP).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="3">
+          <span class="pregunta-num">12</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La inasistencia al interrogatorio de parte (Art. 205 CGP) genera:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 12)">a) Nulidad del proceso</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">b) Archivo del proceso</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">c) Multa automática</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">d) Presunción de certeza sobre los hechos susceptibles de confesión</div>
+          </div>
+          <div class="explicacion">La inasistencia al interrogatorio genera la presunción de certeza sobre los hechos susceptibles de confesión o indicio grave (Art. 205 CGP).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 4: JURAMENTO -->
+      <div class="quiz-section" id="s4">
+        <div class="pregunta" data-correcta="1" data-tema="4">
+          <span class="pregunta-num">13</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El juramento estimatorio (Art. 206 CGP) es requisito obligatorio para reclamar:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 13)">a) Solo daños morales</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">b) Indemnizaciones, frutos o mejoras</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">c) Solo costas procesales</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">d) Solo honorarios de abogados</div>
+          </div>
+          <div class="explicacion">El juramento estimatorio es requisito obligatorio para reclamar indemnizaciones, frutos o mejoras (Art. 206 CGP).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="4">
+          <span class="pregunta-num">14</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Si la cantidad estimada en el juramento excede en más del 50% la probada, se impone:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 14)">a) Sanción del 10% de la diferencia</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">b) Sanción del 5% de la diferencia</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">c) Nulidad de la demanda</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">d) Archivo del proceso</div>
+          </div>
+          <div class="explicacion">Si la cantidad estimada excede en más del 50% la probada, se impone sanción del 10% de la diferencia (Art. 206 CGP).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="4">
+          <span class="pregunta-num">15</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Si se demuestra falta de prueba absoluta del perjuicio, la multa será del:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 15)">a) 1%</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">b) 3%</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">c) 5%</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">d) 10%</div>
+          </div>
+          <div class="explicacion">Si se demuestra falta de prueba absoluta del perjuicio, la multa será del 5% (Art. 206 CGP).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="4">
+          <span class="pregunta-num">16</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El juramento estimatorio puede ser objetado por la contraparte cuando:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 16)">a) Nunca puede ser objetado</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">b) Solo con autorización del juez</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">c) Solo en segunda instancia</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">d) Cuando se considere desproporcionada, infundada o fraudulenta</div>
+          </div>
+          <div class="explicacion">La contraparte puede objetar la estimación cuando la considere desproporcionada, infundada o fraudulenta.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 5: TESTIMONIAL -->
+      <div class="quiz-section" id="s5">
+        <div class="pregunta" data-correcta="2" data-tema="5">
+          <span class="pregunta-num">17</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El deber general de rendir testimonio tiene excepciones por:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 17)">a) Edad avanzada</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">b) Condición económica</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">c) Secreto profesional o de oficio (abogados, médicos, ministros del culto)</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">d) Nacionalidad extranjera</div>
+          </div>
+          <div class="explicacion">El deber de testimoniar tiene excepciones por amparo de secreto profesional o de oficio (abogados, médicos, ministros del culto) (Arts. 208-209 CGP).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="5">
+          <span class="pregunta-num">18</span><span class="pregunta-tipo">Conceptual</span>
+          <p>En el interrogatorio directo está prohibido:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 18)">a) Formular preguntas sugestivas</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">b) Preguntar sobre los hechos</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">c) Identificar al testigo</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">d) Solicitar la versión libre</div>
+          </div>
+          <div class="explicacion">En el examen directo está prohibido formular preguntas sugestivas (Arts. 211-224 CGP).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="5">
+          <span class="pregunta-num">19</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El límite de testigos por cada hecho controvertido es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 19)">a) Uno</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">b) Dos</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">c) Tres</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">d) Cinco</div>
+          </div>
+          <div class="explicacion">El límite es de dos testigos por cada hecho controvertido (Arts. 211-224 CGP).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="5">
+          <span class="pregunta-num">20</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Las inhabilidades absolutas para testificar comprenden a quienes:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 20)">a) Tienen parentesco con las partes</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">b) Son enemigos de alguna parte</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">c) Tienen interés económico en el proceso</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">d) Padecen alteración mental grave o trastorno psíquico severo</div>
+          </div>
+          <div class="explicacion">Las inhabilidades absolutas comprenden a quienes padecen alteración mental grave o trastorno psíquico severo que les impida percibir o expresar razonadamente la realidad.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 6: PERICIAL -->
+      <div class="quiz-section" id="s6">
+        <div class="pregunta" data-correcta="1" data-tema="6">
+          <span class="pregunta-num">21</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La prueba pericial procede para verificar hechos que exijan:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 21)">a) Solo conocimiento jurídico</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">b) Conocimientos científicos, técnicos o artísticos</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">c) Solo conocimiento del juez</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">d) Solo testimonio de partes</div>
+          </div>
+          <div class="explicacion">La prueba pericial procede para verificar hechos que exijan conocimientos científicos, técnicos o artísticos (Arts. 226-227 CGP).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="6">
+          <span class="pregunta-num">22</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La prueba pericial NO es admisible sobre:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 22)">a) Puntos de derecho</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">b) Hechos técnicos</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">c) Hechos científicos</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">d) Hechos artísticos</div>
+          </div>
+          <div class="explicacion">La prueba pericial no es admisible sobre puntos de derecho (Arts. 226-227 CGP).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="6">
+          <span class="pregunta-num">23</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La contradicción del dictamen pericial (Art. 228 CGP) se realiza:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 23)">a) Solo por escrito</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">b) Solo mediante otro perito</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">c) En audiencia mediante interrogatorio directo al perito</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">d) Solo en segunda instancia</div>
+          </div>
+          <div class="explicacion">La contradicción del dictamen se realiza en audiencia mediante interrogatorio directo al perito por las partes y el juez (Art. 228 CGP).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="6">
+          <span class="pregunta-num">24</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los dictámenes periciales de parte deben aportarse:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 24)">a) En la audiencia inicial</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">b) En la sentencia</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">c) En el recurso de apelación</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">d) Directamente con la demanda o contestación</div>
+          </div>
+          <div class="explicacion">Las partes deben aportar los dictámenes periciales directamente con la demanda o contestación (Arts. 226-227 CGP).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 7: INSPECCIÓN JUDICIAL -->
+      <div class="quiz-section" id="s7">
+        <div class="pregunta" data-correcta="2" data-tema="7">
+          <span class="pregunta-num">25</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La inspección judicial (Art. 236 CGP) tiene carácter:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 25)">a) Principal y obligatorio</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">b) Complementario y opcional</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">c) Subsidiario</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">d) Exclusivo</div>
+          </div>
+          <div class="explicacion">La inspección judicial tiene carácter subsidiario: solo se decreta cuando sea imposible verificar los hechos por otros medios (Art. 236 CGP).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="7">
+          <span class="pregunta-num">26</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Impedir la inspección judicial (Art. 238 CGP) genera:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 26)">a) Multa de 5 a 10 SMLMV y presunción de certeza de los hechos</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">b) Solo amonestación verbal</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">c) Archivo del proceso</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">d) Nulidad de la demanda</div>
+          </div>
+          <div class="explicacion">Impedir la inspección genera multa de 5 a 10 SMLMV y la presunción de certeza de los hechos que se pretendían demostrar (Art. 238 CGP).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="7">
+          <span class="pregunta-num">27</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El juez debe rechazar la solicitud de inspección judicial si:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 27)">a) La solicita la parte demandada</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">b) El hecho puede acreditarse mediante dictámenes periciales, fotografías, videos u otros medios</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">c) La solicita el Ministerio Público</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">d) Es la primera vez que se solicita</div>
+          </div>
+          <div class="explicacion">El juez debe rechazar la inspección si el hecho puede acreditarse plenamente mediante otros medios probatorios (Art. 236 CGP).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="7">
+          <span class="pregunta-num">28</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El poder de coerción del juez durante la inspección permite:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 28)">a) Solo amonestar verbalmente</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">b) Solo suspender la diligencia</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">c) Solo multar a los testigos</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">d) Remover obstáculos, imponer multas y requerir auxilio de la fuerza pública</div>
+          </div>
+          <div class="explicacion">El poder de coerción faculta al juez para remover obstáculos, imponer multas y requerir auxilio de la fuerza pública.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 8: INDICIOS -->
+      <div class="quiz-section" id="s8">
+        <div class="pregunta" data-correcta="1" data-tema="8">
+          <span class="pregunta-num">29</span><span class="pregunta-tipo">Conceptual</span>
+          <p>En la estructura trilógica del indicio, el hecho indicador debe estar:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 29)">a) Solo alegado</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">b) Debidamente probado</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">c) Solo presumido</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">d) Solo afirmado por una parte</div>
+          </div>
+          <div class="explicacion">El hecho indicador debe estar debidamente probado para que opere la inferencia indiciaria (Arts. 240-242 CGP).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="8">
+          <span class="pregunta-num">30</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los indicios se aprecian en conjunto por su:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 30)">a) Gravedad, concordancia y convergencia</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">b) Solo cantidad</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">c) Solo antigüedad</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">d) Solo origen</div>
+          </div>
+          <div class="explicacion">Los indicios se aprecian en conjunto por su gravedad, concordancia y convergencia (Arts. 240-242 CGP).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="8">
+          <span class="pregunta-num">31</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El contraindicio es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 31)">a) Un hecho indicador adicional</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">b) Una presunción legal</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">c) Un acontecimiento fáctico que destruye, debilita o neutraliza la inferencia lógica</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">d) Una prueba documental</div>
+          </div>
+          <div class="explicacion">El contraindicio es un acontecimiento fáctico comprobado que destruye, debilita o neutraliza la inferencia lógica.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="8">
+          <span class="pregunta-num">32</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La conducta procesal de las partes (inasistencias, evasivas) constituye:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 32)">a) Prueba plena</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">b) Confesión ficta</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">c) Prueba documental</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">d) Indicio grave</div>
+          </div>
+          <div class="explicacion">La conducta procesal de las partes (inasistencias, evasivas) constituye indicio grave (Arts. 240-242 CGP).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 9: DOCUMENTOS -->
+      <div class="quiz-section" id="s9">
+        <div class="pregunta" data-correcta="2" data-tema="9">
+          <span class="pregunta-num">33</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los documentos comprenden (Art. 243 CGP):</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 33)">a) Solo escritos en papel</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">b) Solo documentos públicos</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">c) Todo objeto mueble representativo o declarativo, incluyendo mensajes de datos</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">d) Solo documentos con firma</div>
+          </div>
+          <div class="explicacion">El documento comprende todo objeto mueble representativo o declarativo, incluyendo mensajes de datos (Art. 243 CGP).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="9">
+          <span class="pregunta-num">34</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los mensajes de datos (Art. 247 CGP) se valoran:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 34)">a) En el formato que fueron generados o recibidos</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">b) Solo si se imprimen en papel</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">c) Solo si tienen firma digital</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">d) Con menor valor que los documentos físicos</div>
+          </div>
+          <div class="explicacion">Los mensajes de datos se valoran en el formato que fueron generados o recibidos (Art. 247 CGP).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="9">
+          <span class="pregunta-num">35</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La tacha de falsedad (Arts. 269-272 CGP) procede contra:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 35)">a) Solo documentos públicos</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">b) Documentos públicos o privados</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">c) Solo documentos privados</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">d) Solo mensajes de datos</div>
+          </div>
+          <div class="explicacion">La tacha de falsedad procede contra documentos públicos o privados (Arts. 269-272 CGP).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="9">
+          <span class="pregunta-num">36</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El desconocimiento de documento privado obliga a:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 36)">a) Archivar el documento</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">b) Nulidad del proceso</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">c) Rechazo automático de la demanda</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">d) La parte que lo presentó a probar su autenticidad</div>
+          </div>
+          <div class="explicacion">El desconocimiento obliga a la parte que presentó el documento privado a probar su autenticidad (Arts. 269-272 CGP).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 10: INFORMES -->
+      <div class="quiz-section" id="s10">
+        <div class="pregunta" data-correcta="1" data-tema="10">
+          <span class="pregunta-num">37</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La prueba informe (Arts. 275-277 CGP) consiste en:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 37)">a) Dictamen técnico subjetivo</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">b) Solicitud de datos, cifras o actuaciones contenidas en archivos de entidades, rendidos bajo juramento</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">c) Testimonio de un funcionario</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">d) Inspección de archivos</div>
+          </div>
+          <div class="explicacion">La prueba informe es la solicitud de datos, cifras o actuaciones contenidas en archivos de entidades, rendidos bajo juramento (Arts. 275-277 CGP).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="10">
+          <span class="pregunta-num">38</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La diferencia entre prueba informe y prueba documental es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 38)">a) El informe es una respuesta consolidada; el documento es la pieza original</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">b) No hay diferencia</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">c) El informe solo aplica a entidades privadas</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">d) El documento solo aplica a entidades públicas</div>
+          </div>
+          <div class="explicacion">Mientras el documento aporta la pieza original, el informe consiste en la elaboración de una respuesta consolidada rendida por la entidad.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="10">
+          <span class="pregunta-num">39</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El incumplimiento en la rendición de la prueba informe genera:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 39)">a) Solo amonestación verbal</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">b) Archivo del proceso</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">c) Multas sucesivas y posibles procesos disciplinarios y penales</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">d) Nulidad de la demanda</div>
+          </div>
+          <div class="explicacion">El incumplimiento genera multas sucesivas y posibles procesos disciplinarios y penales (Arts. 275-277 CGP).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="10">
+          <span class="pregunta-num">40</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La diferencia entre prueba informe y prueba pericial es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 40)">a) No hay diferencia</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">b) El informe contiene juicio valorativo; el pericial no</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">c) El pericial solo aplica a entidades públicas</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">d) El informe es transcripción objetiva de registros; el pericial contiene juicio técnico subjetivo</div>
+          </div>
+          <div class="explicacion">El informe no contiene juicio valorativo o dictamen técnico subjetivo, sino la mera transcripción objetiva de registros o datos oficiales.</div>
+        </div>
+      </div>
+
+      <div class="resultado-final" id="resultadoFinal">
+        <h3>🏆 Resultado Final</h3>
+        <div class="puntaje-final" id="puntajeFinal">0/40</div>
+        <p id="mensajeFinal"></p>
+        <div class="desglose-temas" id="desgloseTemas"></div>
+        <button onclick="reiniciarQuiz()" class="btn-reset">🔄 Reiniciar Quiz</button>
+      </div>
+
+      <div style="text-align: center; margin-top: 1.5rem;">
+        <button onclick="verResultadoFinal()">📊 Ver Resultado Final</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>⚖️ Guía Didáctica - Régimen Probatorio</p>
+  <p>Sección Tercera del Código General del Proceso · Arts. 164 a 277</p>
+  <p style="margin-top: 1rem; opacity: 0.7;">© 2026 - Material educativo interactivo</p>
+</footer>
+
+<script>
+  function toggleAcordeon(header) {
+    header.classList.toggle('active');
+    const content = header.nextElementSibling;
+    content.classList.toggle('active');
+  }
+
+  let respuestas = {};
+  const totalPreguntas = 40;
+
+  function mostrarSeccion(id, tab) {
+    document.querySelectorAll('.quiz-section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.quiz-tab').forEach(t => t.classList.remove('active'));
+    
+    document.getElementById(id).classList.add('active');
+    tab.classList.add('active');
+  }
+
+  function seleccionar(opcion, preguntaNum) {
+    if (respuestas[preguntaNum] !== undefined) return;
+
+    const pregunta = opcion.closest('.pregunta');
+    const opciones = pregunta.querySelectorAll('.opcion');
+    const correcta = parseInt(pregunta.dataset.correcta);
+    const tema = parseInt(pregunta.dataset.tema);
+    const seleccionada = Array.from(opciones).indexOf(opcion);
+    const explicacion = pregunta.querySelector('.explicacion');
+
+    opciones.forEach(o => o.classList.add('disabled'));
+
+    if (seleccionada === correcta) {
+      opcion.classList.add('correcta');
+      respuestas[preguntaNum] = { correcta: true, tema: tema };
+    } else {
+      opcion.classList.add('incorrecta');
+      opciones[correcta].classList.add('correcta');
+      respuestas[preguntaNum] = { correcta: false, tema: tema };
+    }
+
+    explicacion.classList.add('visible');
+    pregunta.classList.add('answered');
+    actualizarEstadisticas();
+  }
+
+  function actualizarEstadisticas() {
+    const total = Object.keys(respuestas).length;
+    const correctas = Object.values(respuestas).filter(r => r.correcta).length;
+    const incorrectas = total - correctas;
+    const porcentaje = total > 0 ? Math.round((correctas / total) * 100) : 0;
+
+    document.getElementById('respondidas').textContent = total;
+    document.getElementById('correctas').textContent = correctas;
+    document.getElementById('incorrectas').textContent = incorrectas;
+    document.getElementById('porcentaje').textContent = porcentaje;
+
+    const progreso = (total / totalPreguntas) * 100;
+    document.getElementById('progressFill').style.width = progreso + '%';
+  }
+
+  function verResultadoFinal() {
+    const total = Object.keys(respuestas).length;
+    
+    if (total < totalPreguntas) {
+      alert(`⚠️ Aún te faltan ${totalPreguntas - total} preguntas por responder.`);
+      return;
+    }
+
+    const correctas = Object.values(respuestas).filter(r => r.correcta).length;
+    const porcentaje = Math.round((correctas / totalPreguntas) * 100);
+
+    const resultadoFinal = document.getElementById('resultadoFinal');
+    resultadoFinal.classList.add('visible');
+
+    document.getElementById('puntajeFinal').textContent = `${correctas}/${totalPreguntas}`;
+
+    let mensaje = '';
+    if (porcentaje === 100) mensaje = '🏆 ¡PERFECTO! Dominas el Régimen Probatorio del CGP.';
+    else if (porcentaje >= 90) mensaje = '🌟 ¡Excelente! Dominio sobresaliente.';
+    else if (porcentaje >= 75) mensaje = '✅ ¡Muy bien! Buen dominio.';
+    else if (porcentaje >= 60) mensaje = ' Aceptable. Repasa los temas donde fallaste.';
+    else if (porcentaje >= 40) mensaje = '📖 Necesitas reforzar varios conceptos.';
+    else mensaje = ' Es necesario estudiar nuevamente todos los temas.';
+
+    document.getElementById('mensajeFinal').textContent = mensaje;
+
+    const temas = {
+      1: { nombre: 'T1: Generalidades', total: 4, correctas: 0 },
+      2: { nombre: 'T2: Extraprocesales', total: 4, correctas: 0 },
+      3: { nombre: 'T3: Confesión', total: 4, correctas: 0 },
+      4: { nombre: 'T4: Juramento', total: 4, correctas: 0 },
+      5: { nombre: 'T5: Testimonial', total: 4, correctas: 0 },
+      6: { nombre: 'T6: Pericial', total: 4, correctas: 0 },
+      7: { nombre: 'T7: Inspección', total: 4, correctas: 0 },
+      8: { nombre: 'T8: Indicios', total: 4, correctas: 0 },
+      9: { nombre: 'T9: Documentos', total: 4, correctas: 0 },
+      10: { nombre: 'T10: Informes', total: 4, correctas: 0 }
+    };
+
+    Object.values(respuestas).forEach(r => {
+      if (r.correcta) temas[r.tema].correctas++;
+    });
+
+    const desgloseHTML = Object.values(temas).map(t => {
+      const pct = Math.round((t.correctas / t.total) * 100);
+      return `
+        <div class="desglose-item">
+          <h4>${t.nombre}</h4>
+          <p>${t.correctas}/${t.total} (${pct}%)</p>
+          <div class="mini-bar">
+            <div class="mini-bar-fill" style="width: ${pct}%"></div>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    document.getElementById('desgloseTemas').innerHTML = desgloseHTML;
+    resultadoFinal.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  function reiniciarQuiz() {
+    if (!confirm('¿Reiniciar el quiz?')) return;
+
+    respuestas = {};
+
+    document.querySelectorAll('.opcion').forEach(o => o.classList.remove('correcta', 'incorrecta', 'disabled'));
+    document.querySelectorAll('.explicacion').forEach(e => e.classList.remove('visible'));
+    document.querySelectorAll('.pregunta').forEach(p => p.classList.remove('answered'));
+    document.getElementById('resultadoFinal').classList.remove('visible');
+
+    actualizarEstadisticas();
+    mostrarSeccion('s1', document.querySelector('.quiz-tab'));
+    document.getElementById('quiz').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  document.querySelectorAll('nav a').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+</script>
+
+</body>
+</html>
