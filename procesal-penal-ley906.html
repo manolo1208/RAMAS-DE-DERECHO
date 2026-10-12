@@ -1,0 +1,2553 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ley 906 de 2004 - Código de Procedimiento Penal</title>
+<style>
+  :root {
+    --primary: #7f1d1d;
+    --secondary: #fbbf24;
+    --accent: #991b1b;
+    --light: #fef3f2;
+    --dark: #1a202c;
+    --success: #38a169;
+    --warning: #d69e2e;
+    --danger: #c53030;
+    --card-bg: #ffffff;
+    --shadow: 0 4px 15px rgba(0,0,0,0.08);
+    --shadow-hover: 0 8px 25px rgba(0,0,0,0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    background: var(--light);
+    color: var(--dark);
+    line-height: 1.7;
+  }
+
+  header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    color: white;
+    padding: 2rem 1rem;
+    text-align: center;
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::before {
+    content: '⚖️';
+    position: absolute;
+    font-size: 15rem;
+    opacity: 0.05;
+    top: -30px;
+    right: -30px;
+  }
+
+  header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: 2px;
+  }
+
+  header p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    font-style: italic;
+  }
+
+  nav {
+    background: var(--dark);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow);
+  }
+
+  nav ul {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0.5rem;
+  }
+
+  nav a {
+    color: var(--light);
+    text-decoration: none;
+    padding: 0.7rem 1rem;
+    margin: 0.2rem;
+    border-radius: 5px;
+    font-size: 0.7rem;
+    transition: all 0.3s;
+    display: block;
+  }
+
+  nav a:hover {
+    background: var(--secondary);
+    color: var(--dark);
+    transform: translateY(-2px);
+  }
+
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+  }
+
+  section {
+    background: var(--card-bg);
+    margin-bottom: 2.5rem;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    border-left: 5px solid var(--secondary);
+    scroll-margin-top: 80px;
+  }
+
+  section h2 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--secondary);
+  }
+
+  section h3 {
+    color: var(--accent);
+    font-size: 1.4rem;
+    margin: 1.5rem 0 0.8rem;
+  }
+
+  section h4 {
+    color: var(--primary);
+    font-size: 1.15rem;
+    margin: 1rem 0 0.5rem;
+  }
+
+  p { margin-bottom: 1rem; text-align: justify; }
+
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.2rem;
+    margin: 1.5rem 0;
+  }
+
+  .card {
+    background: linear-gradient(135deg, #fff 0%, #f9f6ef 100%);
+    border: 2px solid var(--secondary);
+    border-radius: 10px;
+    padding: 1.2rem;
+    transition: all 0.3s;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--primary);
+  }
+
+  .card .icon {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .card h4 {
+    text-align: center;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+  }
+
+  .card .detail {
+    display: none;
+    margin-top: 0.8rem;
+    padding-top: 0.8rem;
+    border-top: 1px dashed var(--secondary);
+    font-size: 0.95rem;
+  }
+
+  .card.active .detail { display: block; }
+
+  .card .hint {
+    text-align: center;
+    color: var(--accent);
+    font-size: 0.85rem;
+    font-style: italic;
+  }
+
+  .mapa-container {
+    background: #fdfbf5;
+    border: 2px dashed var(--secondary);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    overflow-x: auto;
+  }
+
+  .mapa {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 600px;
+  }
+
+  .nodo {
+    background: var(--primary);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+    font-weight: bold;
+    text-align: center;
+    min-width: 180px;
+    box-shadow: var(--shadow);
+  }
+
+  .nodo.central {
+    background: linear-gradient(135deg, var(--secondary), #e0b888);
+    color: var(--dark);
+    font-size: 1.2rem;
+    padding: 1rem 2rem;
+  }
+
+  .nodo.sub {
+    background: var(--accent);
+    font-size: 0.95rem;
+  }
+
+  .linea {
+    width: 3px;
+    height: 25px;
+    background: var(--secondary);
+  }
+
+  .linea-h {
+    height: 3px;
+    background: var(--secondary);
+    width: 80%;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .rama {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 1rem;
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  .rama-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    min-width: 140px;
+  }
+
+  .ejemplo {
+    background: #e6f7ee;
+    border-left: 4px solid var(--success);
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .ejemplo strong { color: var(--success); }
+
+  .alerta {
+    background: #fff8e1;
+    border-left: 4px solid var(--warning);
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .alerta strong { color: var(--warning); }
+
+  .cita {
+    background: #f0f7ff;
+    border-left: 4px solid var(--accent);
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+    color: var(--primary);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    font-size: 0.9rem;
+  }
+
+  th {
+    background: var(--primary);
+    color: white;
+    padding: 0.8rem;
+    text-align: left;
+  }
+
+  td {
+    padding: 0.8rem;
+    border-bottom: 1px solid #eee;
+  }
+
+  tr:nth-child(even) { background: #f9f6ef; }
+  tr:hover { background: #f0ead6; }
+
+  .quiz-container {
+    background: linear-gradient(135deg, #f7f4ed 0%, #fff 100%);
+    padding: 1.5rem;
+    border-radius: 10px;
+    border: 2px solid var(--accent);
+  }
+
+  .quiz-header {
+    background: var(--primary);
+    color: white;
+    padding: 1.2rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .quiz-header h3 {
+    color: white;
+    margin: 0 0 0.5rem 0;
+  }
+
+  .progress-bar {
+    background: rgba(255,255,255,0.2);
+    height: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+  }
+
+  .progress-fill {
+    background: var(--secondary);
+    height: 100%;
+    width: 0%;
+    transition: width 0.4s ease;
+  }
+
+  .quiz-stats {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .stat {
+    background: rgba(255,255,255,0.1);
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    font-size: 0.9rem;
+  }
+
+  .stat strong { color: var(--secondary); }
+
+  .quiz-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    padding: 0.5rem;
+    background: #f0ead6;
+    border-radius: 8px;
+  }
+
+  .quiz-tab {
+    background: white;
+    border: 2px solid var(--accent);
+    color: var(--accent);
+    padding: 0.5rem 0.8rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.7rem;
+    transition: all 0.3s;
+    flex: 1;
+    min-width: 70px;
+    text-align: center;
+  }
+
+  .quiz-tab:hover {
+    background: var(--accent);
+    color: white;
+  }
+
+  .quiz-tab.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+  }
+
+  .quiz-section {
+    display: none;
+  }
+
+  .quiz-section.active {
+    display: block;
+    animation: fadeIn 0.4s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .pregunta {
+    margin-bottom: 1.5rem;
+    padding: 1.2rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    border-left: 4px solid var(--accent);
+    transition: all 0.3s;
+  }
+
+  .pregunta.answered {
+    border-left-color: var(--secondary);
+  }
+
+  .pregunta-num {
+    display: inline-block;
+    background: var(--accent);
+    color: white;
+    padding: 0.2rem 0.7rem;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    margin-right: 0.5rem;
+  }
+
+  .pregunta-tipo {
+    display: inline-block;
+    background: var(--secondary);
+    color: var(--dark);
+    padding: 0.2rem 0.7rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    margin-left: 0.3rem;
+    font-weight: bold;
+  }
+
+  .pregunta p { 
+    font-weight: bold; 
+    color: var(--primary); 
+    margin: 0.8rem 0;
+    text-align: left;
+  }
+
+  .opciones { display: flex; flex-direction: column; gap: 0.5rem; }
+
+  .opcion {
+    padding: 0.7rem 1rem;
+    background: #f9f6ef;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+  }
+
+  .opcion:hover:not(.disabled) {
+    border-color: var(--accent);
+    background: #e8f0f7;
+  }
+
+  .opcion.disabled {
+    cursor: not-allowed;
+    opacity: 0.85;
+  }
+
+  .opcion.correcta {
+    background: #c6f6d5;
+    border-color: var(--success);
+    color: var(--success);
+    font-weight: bold;
+  }
+
+  .opcion.incorrecta {
+    background: #fed7d7;
+    border-color: var(--danger);
+    color: var(--danger);
+  }
+
+  .opcion.correcta::after {
+    content: ' ✓';
+    font-weight: bold;
+  }
+
+  .opcion.incorrecta::after {
+    content: ' ✗';
+    font-weight: bold;
+  }
+
+  .explicacion {
+    margin-top: 0.8rem;
+    padding: 0.8rem;
+    background: #f0f7ff;
+    border-left: 3px solid var(--accent);
+    border-radius: 0 6px 6px 0;
+    font-size: 0.9rem;
+    display: none;
+    font-style: italic;
+  }
+
+  .explicacion.visible {
+    display: block;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .resultado-final {
+    margin-top: 2rem;
+    padding: 2rem;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    color: white;
+    border-radius: 12px;
+    text-align: center;
+    display: none;
+  }
+
+  .resultado-final.visible {
+    display: block;
+    animation: fadeIn 0.5s ease;
+  }
+
+  .resultado-final h3 {
+    color: var(--secondary);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .puntaje-final {
+    font-size: 3rem;
+    font-weight: bold;
+    color: var(--secondary);
+    margin: 1rem 0;
+  }
+
+  .desglose-temas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+    text-align: left;
+  }
+
+  .desglose-item {
+    background: rgba(255,255,255,0.1);
+    padding: 1rem;
+    border-radius: 8px;
+  }
+
+  .desglose-item h4 {
+    color: var(--secondary);
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+  }
+
+  .mini-bar {
+    background: rgba(255,255,255,0.2);
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+  }
+
+  .mini-bar-fill {
+    background: var(--secondary);
+    height: 100%;
+    transition: width 0.6s ease;
+  }
+
+  button {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 1rem;
+    transition: all 0.3s;
+  }
+
+  button:hover {
+    background: var(--secondary);
+    color: var(--dark);
+    transform: translateY(-2px);
+  }
+
+  .btn-reset {
+    background: var(--danger);
+    margin-left: 0.5rem;
+  }
+
+  .btn-reset:hover {
+    background: #9b2c2c;
+    color: white;
+  }
+
+  .acordeon-item {
+    margin-bottom: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .acordeon-header {
+    background: var(--accent);
+    color: white;
+    padding: 1rem;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.3s;
+  }
+
+  .acordeon-header:hover { background: var(--primary); }
+
+  .acordeon-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    background: white;
+  }
+
+  .acordeon-content.active {
+    max-height: 2000px;
+    padding: 1rem;
+  }
+
+  .flecha { transition: transform 0.3s; }
+  .acordeon-header.active .flecha { transform: rotate(180deg); }
+
+  footer {
+    background: var(--dark);
+    color: var(--light);
+    text-align: center;
+    padding: 2rem 1rem;
+    margin-top: 2rem;
+  }
+
+  footer p { margin-bottom: 0.5rem; }
+
+  @media (max-width: 768px) {
+    header h1 { font-size: 1.8rem; }
+    section { padding: 1.2rem; }
+    section h2 { font-size: 1.5rem; }
+    nav a { font-size: 0.6rem; padding: 0.3rem 0.4rem; }
+    .quiz-tab { font-size: 0.6rem; padding: 0.3rem 0.4rem; }
+    table { font-size: 0.8rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>️ Ley 906 de 2004 - Código de Procedimiento Penal</h1>
+  <p>Sistema Penal Acusatorio Colombiano · Guía Didáctica Interactiva</p>
+</header>
+
+<nav>
+  <ul>
+    <li><a href="#tema1">1. Principios</a></li>
+    <li><a href="#tema2">2. Jurisdicción</a></li>
+    <li><a href="#tema3">3. Acción Penal</a></li>
+    <li><a href="#tema4">4. Comiso</a></li>
+    <li><a href="#tema5">5. Reparación</a></li>
+    <li><a href="#tema6">6. Min. Público</a></li>
+    <li><a href="#tema7">7. Partes</a></li>
+    <li><a href="#tema8">8. Deberes</a></li>
+    <li><a href="#tema9">9. Actuación</a></li>
+    <li><a href="#tema10">10. Recursos</a></li>
+    <li><a href="#quiz">Quiz (40)</a></li>
+  </ul>
+</nav>
+
+<main>
+
+  <section>
+    <h2>📚 Introducción</h2>
+    <p>Bienvenido a esta guía interactiva sobre la <strong>Ley 906 de 2004 (Código de Procedimiento Penal)</strong>. Esta ley estableció el sistema penal acusatorio en Colombia, rediseñando el juzgamiento penal mediante la separación de funciones entre el Juez de Control de Garantías y el Juez de Conocimiento, con énfasis en la oralidad, la inmediación y la protección de derechos fundamentales.</p>
+    <div class="alerta">
+      <strong>💡 Cómo usar esta guía:</strong> Haz clic en las tarjetas para ver detalles, despliega los acordeones para información adicional y prueba tus conocimientos con el quiz de 40 preguntas al final.
+    </div>
+  </section>
+
+  <!-- TEMA 1: PRINCIPIOS RECTORES -->
+  <section id="tema1">
+    <h2>1. Principios Rectores y Garantías (Arts. 1-27)</h2>
+    <p>El Título Preliminar constituye la matriz dogmática, constitucional e interpretativa que condiciona la validez formal y sustancial de todo el sistema procesal penal acusatorio.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">PRINCIPIOS RECTORES</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Dignidad Humana</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Presunción Inocencia</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Oralidad</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Contradicción</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Inmediación</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3> Principios Fundamentales</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">👤</div>
+        <h4>Dignidad Humana (Art. 1)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Respeto irrestricto a la dignidad humana e intangibilidad de la libertad personal salvo mandato judicial.</p>
+          <p>Límite infranqueable a la potestad punitiva.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Presunción de Inocencia (Art. 7)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Tratamiento de inocente hasta sentencia firme. Carga probatoria exclusiva en el órgano de persecución.</p>
+          <p>Estándar: "más allá de toda duda razonable".</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon"></div>
+        <h4>Oralidad (Art. 9)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Desarrollo verbal de las audiencias con soporte en registros técnicos fidedignos.</p>
+          <p>Prohibición de transcripciones escritas salvo excepciones expresas.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚔️</div>
+        <h4>Contradicción (Art. 15)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Facultad de confrontar pruebas públicamente practicadas ante el juez de conocimiento.</p>
+          <p>Invalidez de elementos probatorios no practicados en juicio oral.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">👁️</div>
+        <h4>Inmediación (Art. 16)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>El juez debe percibir directamente las pruebas y los debates en las audiencias.</p>
+          <p>Prohibición de delegar la valoración probatoria.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🚫</div>
+        <h4>Cláusula de Exclusión (Art. 23)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Nulidad de pleno derecho de la prueba obtenida con violación de garantías fundamentales.</p>
+          <p>Incluye prueba derivada (frutos del árbol ponzoñoso).</p>
+        </div>
+      </div>
+    </div>
+
+    <h3> Matriz de Principios Rectores</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Principio</th>
+          <th>Artículo</th>
+          <th>Efecto Procesal</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Dignidad Humana</strong></td>
+          <td>Art. 1</td>
+          <td>Límite infranqueable a la potestad punitiva</td>
+        </tr>
+        <tr>
+          <td><strong>Libertad y Control</strong></td>
+          <td>Art. 2</td>
+          <td>Mandamiento judicial para restringir libertad; control en 36 horas</td>
+        </tr>
+        <tr>
+          <td><strong>Bloque Constitucional</strong></td>
+          <td>Art. 3</td>
+          <td>Prevalencia de tratados de DDHH</td>
+        </tr>
+        <tr>
+          <td><strong>Igualdad de Armas</strong></td>
+          <td>Art. 4</td>
+          <td>Simetría procesal entre acusación y defensa</td>
+        </tr>
+        <tr>
+          <td><strong>Imparcialidad</strong></td>
+          <td>Art. 5</td>
+          <td>Separación entre investigación y decisión</td>
+        </tr>
+        <tr>
+          <td><strong>Legalidad</strong></td>
+          <td>Art. 6</td>
+          <td>Juzgamiento conforme a ley previa</td>
+        </tr>
+        <tr>
+          <td><strong>Defensa</strong></td>
+          <td>Art. 8</td>
+          <td>Asistencia técnica irrenunciable desde la imputación</td>
+        </tr>
+        <tr>
+          <td><strong>Concentración</strong></td>
+          <td>Art. 17</td>
+          <td>Práctica continua del debate probatorio</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si la policía obtiene una confesión mediante tortura, esa prueba es nula de pleno derecho (Art. 23) y también lo son las pruebas derivadas de ella (frutos del árbol ponzoñoso). El juez debe excluirla del debate probatorio.
+    </div>
+  </section>
+
+  <!-- TEMA 2: JURISDICCIÓN Y COMPETENCIA -->
+  <section id="tema2">
+    <h2>2. Jurisdicción y Competencia (Arts. 28-65)</h2>
+    <p>La jurisdicción penal ordinaria es única, indivisible y de cobertura nacional, con una estructura jerárquica y funcional precisa.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">JURISDICCIÓN PENAL</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Corte Suprema</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Tribunales</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">J. Circuito</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">J. Municipal</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>🏛️ Estructura Jerárquica</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🏛️</div>
+        <h4>Corte Suprema (Art. 32)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Conoce casación y revisión. Juzga aforados constitucionales (congresistas, magistrados, etc.). Define competencia entre distritos.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Tribunales Superiores (Arts. 33-34)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Resuelven apelaciones. Juzgan en primera instancia a jueces, fiscales y procuradores por delitos en ejercicio de funciones.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">👨‍⚖️</div>
+        <h4>Jueces Especializados (Art. 35)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Delitos de alta complejidad: genocidio, homicidio agravado, secuestro extorsivo, desaparición forzada, tortura, terrorismo, lavado de activos, etc.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">👨‍</div>
+        <h4>Jueces de Circuito (Art. 36)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Competencia residual: delitos no asignados a especializados o municipales. Resuelven apelaciones contra autos de jueces municipales.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon"></div>
+        <h4>Jueces Municipales (Art. 37)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Lesiones personales, delitos patrimoniales ≤150 SMLMV, querellables, violencia intrafamiliar, inasistencia alimentaria, delitos informáticos.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon"></div>
+        <h4>Jueces de Control de Garantías (Art. 39)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Controlan legalidad de capturas, allanamientos, interceptaciones. Deciden medidas de aseguramiento. <strong>Impedidos</strong> para conocer el juicio en fondo.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3> Competencia Territorial (Arts. 42-45)</h3>
+    <div class="alerta">
+      <strong> Reglas:</strong>
+      <ul>
+        <li>Se fija por el <strong>lugar de ocurrencia del delito</strong></li>
+        <li>Si es incierto o en varios lugares: donde la Fiscalía formule acusación</li>
+        <li>Solo puede impugnarse en la <strong>audiencia de formulación de acusación</strong></li>
+      </ul>
+    </div>
+
+    <h3>🔗 Conexidad (Art. 51)</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">1️⃣</div>
+        <h4>Coparticipación</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Delito cometido en coparticipación criminal.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">2️⃣</div>
+        <h4>Unidad de Tiempo/Lugar</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Varios delitos con una o varias acciones, con unidad de tiempo y lugar.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">3️⃣</div>
+        <h4>Facilitación/Ocultamiento</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Delitos realizados para facilitar, ocultar o lograr impunidad de otros.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">4️⃣</div>
+        <h4>Homogeneidad</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Homogeneidad en modo de actuar, relación de tiempo/lugar, y evidencia que pueda influir entre casos.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong> Ejemplo:</strong> Si A y B cometen un homicidio en Bogotá, pero A también cometió un secuestro en Medellín relacionado con el mismo hecho, ambos casos se acumulan por conexidad y los juzga el juez de mayor jerarquía (Juez Especializado).
+    </div>
+  </section>
+
+  <!-- TEMA 3: ACCIÓN PENAL -->
+  <section id="tema3">
+    <h2>3. Acción Penal y Extinción (Arts. 66-81)</h2>
+    <p>La persecución penal es de titularidad estatal y de ejercicio público a cargo de la Fiscalía General de la Nación.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">ACCIÓN PENAL</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">De Oficio</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Querella</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Petición Especial</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Extinción</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Modalidades de Ejercicio</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Modalidad</th>
+          <th>Titular</th>
+          <th>Delitos</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>De oficio</strong></td>
+          <td>Fiscalía General de la Nación</td>
+          <td>La mayoría de delitos (regla general)</td>
+        </tr>
+        <tr>
+          <td><strong>Querella</strong></td>
+          <td>Víctima directa (6 meses)</td>
+          <td>Lesiones menores, hurtos/estafas ≤150 SMLMV, abuso de confianza</td>
+        </tr>
+        <tr>
+          <td><strong>Petición Especial</strong></td>
+          <td>Procurador General</td>
+          <td>Delitos cometidos en el extranjero</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>⚠️ Exoneración del Deber de Denunciar (Art. 68)</h3>
+    <div class="alerta">
+      <strong>📌 No están obligados a denunciar:</strong>
+      <ul>
+        <li>Por autoincriminación</li>
+        <li>Contra cónyuge/compañero permanente</li>
+        <li>Contra parientes (4° consanguinidad/civil, 2° afinidad)</li>
+        <li>Por secreto profesional</li>
+      </ul>
+      <p><strong>Excepción (C-848/14):</strong> No aplica cuando la víctima sea menor de edad y se afecte su vida, integridad o libertad sexual.</p>
+    </div>
+
+    <h3>🛑 Causales de Extinción (Art. 77)</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">💀</div>
+        <h4>Muerte del Imputado</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Extingue la acción penal.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⏰</div>
+        <h4>Prescripción</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Vencimiento del término legal para ejercer la acción.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🕊️</div>
+        <h4>Principio de Oportunidad</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Renuncia a la persecución por interés público.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🤝</div>
+        <h4>Reparación Integral (Art. 78A)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Extingue la acción cuando se repara el daño en delitos querellables, culposos no agravados, patrimoniales (excluyendo hurto con violencia y extorsión).</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si A comete un hurto simple por $100.000 (≤150 SMLMV), la víctima tiene 6 meses para presentar querella. Si A repara integralmente el daño antes de la sentencia, se extingue la acción penal (Art. 78A).
+    </div>
+  </section>
+
+  <!-- TEMA 4: COMISO Y MEDIDAS CAUTELARES -->
+  <section id="tema4">
+    <h2>4. Comiso y Medidas Cautelares Reales (Arts. 82-101)</h2>
+    <p>El comiso busca la privación definitiva del dominio sobre bienes ilícitos, mientras las medidas cautelares persiguen la reserva patrimonial para responder por perjuicios.</p>
+
+    <h3>📊 Mecanismos Cautelares</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Mecanismo</th>
+          <th>Finalidad</th>
+          <th>Oportunidad</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Incautación/Ocupación</strong> (Arts. 82-84)</td>
+          <td>Aprehensión de bienes producto/instrumento del delito</td>
+          <td>Indagación o investigación; revisión en 36 horas</td>
+        </tr>
+        <tr>
+          <td><strong>Suspensión Poder Dispositivo</strong> (Art. 85)</td>
+          <td>Congelamiento jurídico del tráfico comercial</td>
+          <td>Formulación de imputación o audiencia preliminar</td>
+        </tr>
+        <tr>
+          <td><strong>Embargo y Secuestro</strong> (Art. 92)</td>
+          <td>Inmovilización para garantizar indemnización</td>
+          <td>Imputación o posterior; requiere caución</td>
+        </tr>
+        <tr>
+          <td><strong>Prohibición de Enajenar</strong> (Art. 97)</td>
+          <td>Restricción legal sobre bienes con registro</td>
+          <td>Obligatoria por 6 meses desde la imputación</td>
+        </tr>
+        <tr>
+          <td><strong>Cancelación de Registros</strong> (Art. 101)</td>
+          <td>Anulación de títulos fraudulentos</td>
+          <td>Suspensión en cualquier momento; cancelación en sentencia</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>🔍 Control de Legalidad</h3>
+    <div class="alerta">
+      <strong>📌 Regla de las 36 horas:</strong> Toda medida cautelar real debe ser revisada por el Juez de Control de Garantías dentro de las <strong>36 horas siguientes</strong> a su imposición. Si no se cumple, la medida pierde validez.
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si la Fiscalía incauta un vehículo usado para transportar droga, debe presentar la incautación ante el Juez de Control de Garantías dentro de las 36 horas siguientes para que revise su legalidad. Si no lo hace, el vehículo debe ser devuelto.
+    </div>
+  </section>
+
+  <!-- TEMA 5: REPARACIÓN INTEGRAL -->
+  <section id="tema5">
+    <h2>5. Incidente de Reparación Integral (Arts. 102-108)</h2>
+    <p>Procedimiento especial para la efectividad de los derechos patrimoniales de las víctimas, una vez firme la sentencia condenatoria.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">REPARACIÓN INTEGRAL</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">1ª Audiencia</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Conciliación</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">2ª Audiencia</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Pruebas</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Decisión</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Sentencia</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3> Etapas del Incidente</h3>
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>⏰ Oportunidad y Caducidad (Art. 106)</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Debe solicitarse dentro de los <strong>30 días siguientes</strong> a la ejecutoria del fallo condenatorio. Vencido este término, opera la caducidad de la pretensión en el proceso penal.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>1️⃣ Primera Audiencia (Arts. 102-103)</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Se convoca dentro de los <strong>8 días</strong> siguientes a la solicitud. La víctima formula verbalmente su pretensión indemnizatoria. El juez invita a conciliar; si hay acuerdo, se incorpora a la sentencia y finaliza el incidente.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>2️⃣ Segunda Audiencia (Art. 104)</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Si no hay acuerdo, se cita dentro de los <strong>8 días</strong> siguientes. Se practican pruebas y se oyen alegatos. La ausencia injustificada del solicitante implica desistimiento y condena en costas.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>⚖️ Decisión (Art. 105)</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>El juez resuelve mediante <strong>sentencia dictada en la misma audiencia</strong>.</p>
+      </div>
+    </div>
+
+    <h3>👥 Terceros Civilmente Responsables (Arts. 107-108)</h3>
+    <div class="alerta">
+      <strong>📌 Nota dogmática (C-409/09):</strong> La limitación que restringía la citación de la aseguradora "exclusivamente para efectos de la conciliación" fue declarada <strong>INEXEQUIBLE</strong>, permitiendo su vinculación procesal plena.
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si A es condenado por homicidio culposo en accidente de tránsito, la víctima tiene 30 días desde la ejecutoria para solicitar el incidente de reparación. En la primera audiencia se intenta conciliar; si no hay acuerdo, en la segunda se practican pruebas sobre los perjuicios materiales y morales.
+    </div>
+  </section>
+
+  <!-- TEMA 6: MINISTERIO PÚBLICO -->
+  <section id="tema6">
+    <h2>6. Ministerio Público (Arts. 109-112)</h2>
+    <p>Actúa como sujeto procesal interviniente de carácter neutro e imparcial, garante del orden jurídico, patrimonio público y derechos fundamentales.</p>
+
+    <h3>️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">MINISTERIO PÚBLICO</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Garante DDHH</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Dimensión 1</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Representante Sociedad</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Dimensión 2</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>️ Dos Dimensiones Operativas</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">️</div>
+        <h4>Garante de DDHH (Art. 111.1)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <ul>
+            <li>Vigila actuaciones de policía judicial</li>
+            <li>Interviene en diligencias que afecten garantías</li>
+            <li>Procura decisiones que satisfagan verdad y justicia</li>
+            <li>Verifica condiciones de privación de libertad</li>
+            <li>Procura pronta definición en casos de DDHH y DIH</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">👥</div>
+        <h4>Representante Sociedad (Art. 111.2)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <ul>
+            <li>Solicita condena o absolución</li>
+            <li>Procura indemnización de perjuicios</li>
+            <li>Defiende intereses colectivos</li>
+            <li>Vela por protección de víctimas y testigos</li>
+            <li>Interviene en principio de oportunidad</li>
+            <li>Denuncia fraudes y colusiones procesales</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <h3>🔍 Atribuciones Probatorias (Art. 112)</h3>
+    <div class="alerta">
+      <strong>📌 Facultades excepcionales:</strong>
+      <ul>
+        <li>Solicitar práctica de <strong>pruebas anticipadas</strong> cuando cumpla o haya cumplido funciones de policía judicial</li>
+        <li>Solicitar <strong>pruebas adicionales</strong> en el juicio oral (Art. 357)</li>
+      </ul>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> En un juicio por homicidio, el Ministerio Público puede solicitar la condena si considera probada la responsabilidad, o la absolución si encuentra dudas razonables. También puede vigilar que no se vulneren derechos del acusado durante la audiencia.
+    </div>
+  </section>
+
+  <!-- TEMA 7: PARTES E INTERVINIENTES -->
+  <section id="tema7">
+    <h2>7. Partes e Intervinientes (Arts. 113-137)</h2>
+    <p>El juicio penal acusatorio se fundamenta en el principio de contradicción y la "igualdad de armas" entre Fiscalía y Defensa, con la víctima como interviniente especial.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">SUJETOS PROCESALES</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Fiscalía</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Acusador</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Defensa</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Contradictor</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Imputado</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Acusado</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Víctima</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Interviniente</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📊 Cuadro de Simetría Procesal</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Sujeto</th>
+          <th>Rol Principal</th>
+          <th>Facultades Probatorias</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Fiscalía</strong></td>
+          <td>Órgano acusador; titular de la persecución</td>
+          <td>Recaudar evidencia, presentar carga probatoria</td>
+        </tr>
+        <tr>
+          <td><strong>Defensa</strong></td>
+          <td>Parte contradictoria; refuta hipótesis acusatoria</td>
+          <td>Autonomía investigativa, contrainterrogatorio</td>
+        </tr>
+        <tr>
+          <td><strong>Imputado/Acusado</strong></td>
+          <td>Sujeto pasivo del proceso</td>
+          <td>Derecho al silencio, última palabra</td>
+        </tr>
+        <tr>
+          <td><strong>Víctima</strong></td>
+          <td>Interviniente especial tutelado</td>
+          <td>Solicitar pruebas, promover incidente de reparación</td>
+        </tr>
+        <tr>
+          <td><strong>Min. Público</strong></td>
+          <td>Interviniente neutro; garante constitucional</td>
+          <td>Prueba anticipada y complementaria (Art. 357)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>🔍 Aspectos Clave</h3>
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>🎯 Principio de Objetividad (Art. 115)</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Obliga al ente acusador a adecuar su actuación a criterios transparentes y rigurosos, debiendo <strong>develar y suministrar incluso el material probatorio favorable al procesado</strong>.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>️ 10 Deberes y Atribuciones de la Defensa (Art. 125)</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <ul>
+          <li>Asistir al imputado desde la captura</li>
+          <li>Disponer de tiempo/medios para preparar la defensa</li>
+          <li>Conocer los elementos probatorios</li>
+          <li>Controvertir pruebas</li>
+          <li>Interrogar y contrainterrogar testigos/peritos</li>
+          <li>Solicitar comparecencia coercitiva de testigos</li>
+          <li>Interponer recursos y nulidades</li>
+          <li>No ser obligado a presentar prueba de descargo</li>
+          <li>Investigar de forma independiente</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>👤 Adquisición de la Condición de Imputado (Art. 126)</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Adquiere la calidad de <strong>imputado</strong> con la formulación de imputación o la captura, y de <strong>acusado</strong> con la presentación del escrito de acusación.</p>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si A es capturado en flagrancia, desde ese momento adquiere la calidad de imputado y tiene derecho a defensor (de confianza o público). La Fiscalía debe suministrarle todos los elementos probatorios en su contra y a favor (principio de objetividad).
+    </div>
+  </section>
+
+  <!-- TEMA 8: DEBERES Y PODERES -->
+  <section id="tema8">
+    <h2>8. Deberes y Poderes de los Intervinientes (Arts. 138-143)</h2>
+    <p>El desarrollo de la actuación penal exige la sujeción estricta a los principios de lealtad, buena fe, moralidad procesal y respeto a la administración de justicia.</p>
+
+    <h3>📋 Deberes de Servidores Judiciales (Arts. 138-139)</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⏰</div>
+        <h4>Oportunidad</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Resolver dentro de los términos legalmente fijados.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🔒</div>
+        <h4>Reserva</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Guardar reserva de las actuaciones cuando la ley lo exija.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📝</div>
+        <h4>Motivación</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Motivar adecuadamente las decisiones que afecten derechos fundamentales.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🚫</div>
+        <h4>Rechazo de Dilaciones</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Rechazar de plano maniobras dilatorias, peticiones inconducentes o superfluas.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>⚠️ Temeridad o Mala Fe (Art. 141)</h3>
+    <div class="alerta">
+      <strong>📌 Se configura al:</strong>
+      <ul>
+        <li>Alegar hechos contrarios a la realidad a sabiendas</li>
+        <li>Formular peticiones o recursos con manifiesta carencia de fundamento legal</li>
+        <li>Utilizar la actuación para fines ilegales o fraudulentos</li>
+        <li>Obstruir la práctica probatoria</li>
+      </ul>
+    </div>
+
+    <h3>💰 Régimen de Sanciones (Art. 143)</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Tipo</th>
+          <th>Causal</th>
+          <th>Sanción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Multa</strong></td>
+          <td>Recusación infundada</td>
+          <td>1-10 SMLMV</td>
+        </tr>
+        <tr>
+          <td><strong>Multa</strong></td>
+          <td>Violación de reserva</td>
+          <td>1-5 SMLMV</td>
+        </tr>
+        <tr>
+          <td><strong>Multa</strong></td>
+          <td>Temeridad/Mala fe</td>
+          <td>1-10 SMLMV</td>
+        </tr>
+        <tr>
+          <td><strong>Multa</strong></td>
+          <td>Pruebas inconducentes</td>
+          <td>1-10 SMLMV</td>
+        </tr>
+        <tr>
+          <td><strong>Arresto</strong></td>
+          <td>Obstrucción de diligencias</td>
+          <td>1-30 días inconmutables</td>
+        </tr>
+        <tr>
+          <td><strong>Arresto</strong></td>
+          <td>Falta de respeto al juez</td>
+          <td>Hasta 5 días inconmutables</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si el abogado de la defensa presenta una recusación contra el juez sin fundamento legal alguno, el juez puede imponerle una multa de 1 a 10 SMLMV por temeridad procesal.
+    </div>
+  </section>
+
+  <!-- TEMA 9: ACTUACIÓN PROCESAL -->
+  <section id="tema9">
+    <h2>9. Actuación Procesal y Audiencias (Arts. 144-175)</h2>
+    <p>La actuación procesal se erige sobre los principios metodológicos de oralidad, publicidad, inmediación y celeridad.</p>
+
+    <h3>️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">ACTUACIÓN PROCESAL</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Oralidad</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Publicidad</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Audiencias</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Términos</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>🎤 Oralidad y Publicidad (Arts. 144-152A)</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">️</div>
+        <h4>Oralidad (Art. 144)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Idioma castellano (con traducción si es necesario). Registros técnicos de audiencias. Prohibición de transcripciones escritas extensivas.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">️</div>
+        <h4>Publicidad (Arts. 149-152A)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Principio general de acceso público. Restricciones motivadas por orden público, seguridad, protección de menores/víctimas.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>️ Audiencias Preliminares (Art. 154)</h3>
+    <div class="alerta">
+      <strong>📌 Tramitan ante el Juez de Control de Garantías:</strong>
+      <ol style="margin-top: 0.5rem; padding-left: 1.5rem;">
+        <li>Control de legalidad posterior de allanamientos, registros, interceptaciones (36 horas)</li>
+        <li>Práctica de prueba anticipada</li>
+        <li>Adopción de medidas de protección a víctimas y testigos</li>
+        <li>Solicitudes de medidas de aseguramiento y cautelares reales</li>
+        <li>Formulación de la imputación</li>
+        <li>Control de legalidad sobre principio de oportunidad</li>
+        <li>Peticiones de libertad antes del anuncio del fallo</li>
+      </ol>
+    </div>
+
+    <h3>⏰ Términos Procesales (Arts. 156-160, 175)</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Término</th>
+          <th>Plazo</th>
+          <th>Observaciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Indagación (regla general)</strong></td>
+          <td>2 años</td>
+          <td>Desde noticia criminis; 3 años en concurso o ≥3 imputados; 5 años en Especializada</td>
+        </tr>
+        <tr>
+          <td><strong>Indagación (delitos graves)</strong></td>
+          <td>8 meses</td>
+          <td>Homicidio, feminicidio, violencia intrafamiliar, delitos sexuales contra menores; prorrogable por 6 meses</td>
+        </tr>
+        <tr>
+          <td><strong>Formulación de acusación</strong></td>
+          <td>90 días</td>
+          <td>Desde la imputación; 120 días en concurso o ≥3 imputados</td>
+        </tr>
+        <tr>
+          <td><strong>Audiencia Preparatoria</strong></td>
+          <td>45 días</td>
+          <td>Posteriores a la acusación</td>
+        </tr>
+        <tr>
+          <td><strong>Juicio Oral</strong></td>
+          <td>45 días</td>
+          <td>Posteriores a la preparatoria</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="ejemplo">
+      <strong> Ejemplo:</strong> Si la Fiscalía tiene noticia de un homicidio el 1° de enero de 2024, tiene 8 meses (hasta septiembre) para formular imputación o archivar. Si formula imputación el 1° de marzo, tiene 90 días (hasta mayo) para presentar acusación o solicitar preclusión.
+    </div>
+  </section>
+
+  <!-- TEMA 10: RECURSOS -->
+  <section id="tema10">
+    <h2>10. Recursos e Impugnación (Arts. 176-199)</h2>
+    <p>El sistema de impugnación garantiza el derecho a controvertir las decisiones judiciales mediante recursos ordinarios y extraordinarios.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">RECURSOS</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Ordinarios</div>
+            <div class="linea"></div>
+            <div class="rama">
+              <div class="rama-item">
+                <div class="linea"></div>
+                <div class="nodo sub">Reposición</div>
+              </div>
+              <div class="rama-item">
+                <div class="linea"></div>
+                <div class="nodo sub">Apelación</div>
+              </div>
+              <div class="rama-item">
+                <div class="linea"></div>
+                <div class="nodo sub">Queja</div>
+              </div>
+            </div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Extraordinarios</div>
+            <div class="linea"></div>
+            <div class="rama">
+              <div class="rama-item">
+                <div class="linea"></div>
+                <div class="nodo sub">Casación</div>
+              </div>
+              <div class="rama-item">
+                <div class="linea"></div>
+                <div class="nodo sub">Revisión</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Recursos Ordinarios</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Recurso</th>
+          <th>Procedencia</th>
+          <th>Efectos</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Reposición (Art. 176)</strong></td>
+          <td>Contra autos en audiencia. No contra sentencias.</td>
+          <td>Resuelve el mismo juez; oral e inmediato</td>
+        </tr>
+        <tr>
+          <td><strong>Apelación Autos (Arts. 176-178)</strong></td>
+          <td>Autos que afecten libertad, pruebas, nulidades o cautelares</td>
+          <td>Suspensivo o devolutivo según el tipo</td>
+        </tr>
+        <tr>
+          <td><strong>Apelación Sentencias (Arts. 176, 179)</strong></td>
+          <td>Sentencias condenatorias o absolutorias de 1ª instancia</td>
+          <td>Efecto suspensivo obligatorio; debate oral en 10 días</td>
+        </tr>
+        <tr>
+          <td><strong>Queja (Arts. 179B-179E)</strong></td>
+          <td>Cuando se deniega la apelación</td>
+          <td>Se envía al superior; sustentación en 3 días</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>🏛️ Recurso Extraordinario de Casación (Arts. 180-191)</h3>
+    <div class="alerta">
+      <strong>📌 Finalidades (Art. 180):</strong>
+      <ul>
+        <li>Efectividad del derecho material</li>
+        <li>Respeto de las garantías de los intervinientes</li>
+        <li>Reparación de agravios</li>
+        <li>Unificación de la jurisprudencia</li>
+      </ul>
+    </div>
+
+    <h4>Causales (Art. 181)</h4>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">1️⃣</div>
+        <h4>Falta/Errónea Aplicación</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Falta de aplicación, interpretación errónea o aplicación indebida de la Constitución o la ley.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">2️⃣</div>
+        <h4>Debido Proceso</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Desconocimiento del debido proceso por afectación sustancial de la estructura procesal o garantías.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">3️⃣</div>
+        <h4>Reglas de Prueba</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Manifiesto desconocimiento de las reglas de producción y apreciación de la prueba.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>🔄 Acción de Revisión (Arts. 192-198)</h3>
+    <div class="cita">
+      <strong>"Acción autónoma que procede contra sentencias ejecutoriadas en los 7 casos taxativos del Artículo 192."</strong>
+    </div>
+
+    <h4>7 Causales Taxativas</h4>
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>1. Condena Múltiple por Delito Individual</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Condena de dos o más personas por un delito que solo pudo ser cometido por una.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>2. Sentencia en Proceso Extinguido</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Sentencia condenatoria dictada en proceso extinto por prescripción, falta de querella u otra causal.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>3. Hechos Nuevos o Pruebas Desconocidas</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Aparición de hechos nuevos o pruebas no conocidas en el debate que establezcan la inocencia o inimputabilidad.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>4. Decisión Internacional de DDHH</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Fallo absolutorio en graves violaciones a DDHH/DIH determinado por decisión de instancia internacional aceptada por Colombia.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>5. Delito del Juez o Tercero</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Demostración en firme de que el fallo fue determinado por un delito del juez o de un tercero.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>6. Prueba Falsa Determinante</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Demostración de que el fallo se fundamentó en prueba falsa determinante.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>7. Cambio Jurisprudencial Favorable</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Cambio jurisprudencial favorable de la Corte Suprema sobre la norma aplicada en la condena.</p>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong> Ejemplo:</strong> Si A fue condenado por homicidio en 2010, pero en 2024 aparece un video que demuestra que estaba en otra ciudad al momento del hecho, puede interponer acción de revisión por la causal 3 (hechos nuevos o pruebas desconocidas que establezcan la inocencia).
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz">
+    <h2>🎯 Quiz Completo - 40 Preguntas</h2>
+    <p>Pon a prueba tus conocimientos sobre la Ley 906 de 2004 - Código de Procedimiento Penal.</p>
+
+    <div class="quiz-container">
+      <div class="quiz-header">
+        <h3>📊 Tu Progreso</h3>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="quiz-stats">
+          <div class="stat">Respondidas: <strong id="respondidas">0</strong>/40</div>
+          <div class="stat">Correctas: <strong id="correctas">0</strong></div>
+          <div class="stat">Incorrectas: <strong id="incorrectas">0</strong></div>
+          <div class="stat">Porcentaje: <strong id="porcentaje">0</strong>%</div>
+        </div>
+      </div>
+
+      <div class="quiz-tabs">
+        <div class="quiz-tab active" onclick="mostrarSeccion('s1', this)">T1 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s2', this)">T2 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s3', this)">T3 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s4', this)">T4 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s5', this)">T5 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s6', this)">T6 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s7', this)">T7 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s8', this)">T8 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s9', this)">T9 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s10', this)">T10 (4)</div>
+      </div>
+
+      <!-- SECCIÓN 1: PRINCIPIOS -->
+      <div class="quiz-section active" id="s1">
+        <div class="pregunta" data-correcta="2" data-tema="1">
+          <span class="pregunta-num">1</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El principio de presunción de inocencia (Art. 7) establece que:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 1)">a) El acusado debe probar su inocencia</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">b) La carga probatoria se comparte entre las partes</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">c) Se trata al acusado como inocente hasta sentencia firme, con carga probatoria exclusiva en el órgano de persecución</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">d) Solo aplica en delitos graves</div>
+          </div>
+          <div class="explicacion">La presunción de inocencia (Art. 7) establece que se trata al acusado como inocente hasta sentencia firme, con carga probatoria exclusiva en el órgano de persecución y estándar "más allá de toda duda razonable".</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="1">
+          <span class="pregunta-num">2</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La cláusula de exclusión (Art. 23) establece:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 2)">a) La prueba ilícita puede usarse si es relevante</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">b) Nulidad de pleno derecho de la prueba obtenida con violación de garantías fundamentales, incluyendo prueba derivada</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">c) Solo excluye la prueba directa, no la derivada</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">d) Aplica solo en delitos graves</div>
+          </div>
+          <div class="explicacion">La cláusula de exclusión (Art. 23) estatuye la nulidad de pleno derecho de toda prueba obtenida mediante vulneración de derechos o garantías fundamentales, extendiéndose a las pruebas derivadas (frutos del árbol ponzoñoso).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="1">
+          <span class="pregunta-num">3</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El principio de oralidad (Art. 9) implica:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 3)">a) Desarrollo verbal de las audiencias con soporte en registros técnicos, prohibiendo transcripciones escritas extensivas</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">b) Que todo debe quedar por escrito</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">c) Solo aplica al juicio oral</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">d) Permite transcripciones extensivas</div>
+          </div>
+          <div class="explicacion">La oralidad (Art. 9) implica desarrollo verbal de las audiencias con soporte en registros técnicos fidedignos, quedando prohibida la reproducción escrita extensiva salvo excepciones expresas.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="1">
+          <span class="pregunta-num">4</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El control de legalidad de la captura debe realizarse ante el Juez de Garantías en un plazo máximo de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 4)">a) 24 horas</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">b) 48 horas</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">c) 72 horas</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">d) 36 horas</div>
+          </div>
+          <div class="explicacion">El control de legalidad de la captura debe realizarse ante el Juez de Garantías en un plazo máximo e improrrogable de 36 horas (Sentencia C-163/08).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 2: JURISDICCIÓN -->
+      <div class="quiz-section" id="s2">
+        <div class="pregunta" data-correcta="1" data-tema="2">
+          <span class="pregunta-num">5</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La jurisdicción penal ordinaria es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 5)">a) Múltiple y regional</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">b) Única, indivisible y de cobertura nacional</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">c) Solo para delitos graves</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">d) Delegable a autoridades administrativas</div>
+          </div>
+          <div class="explicacion">La jurisdicción penal ordinaria es única, indivisible y de cobertura nacional (Art. 28), con excepciones del fuero militar y jurisdicción indígena.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="2">
+          <span class="pregunta-num">6</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los Jueces Penales de Circuito Especializados conocen de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 6)">a) Delitos de alta complejidad como genocidio, homicidio agravado, secuestro extorsivo, desaparición forzada, tortura, terrorismo</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">b) Delitos menores como lesiones personales</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">c) Solo delitos contra la administración pública</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">d) Solo delitos informáticos</div>
+          </div>
+          <div class="explicacion">Los Jueces Especializados (Art. 35) conocen de delitos de alta complejidad: genocidio, homicidio agravado, secuestro extorsivo, desaparición forzada, tortura, terrorismo, lavado de activos, etc.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="2">
+          <span class="pregunta-num">7</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El Juez de Control de Garantías queda impedido para:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 7)">a) Decretar medidas de aseguramiento</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">b) Legalizar capturas</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">c) Conocer del juicio en su fondo</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">d) Decretar pruebas anticipadas</div>
+          </div>
+          <div class="explicacion">El juez que actúa en control de garantías queda de pleno derecho impedido para conocer del juicio en su fondo, garantizando la separación de funciones.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="2">
+          <span class="pregunta-num">8</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La competencia territorial se fija por:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 8)">a) El domicilio del acusado</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">b) El lugar donde se presentó la denuncia</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">c) El lugar donde está la Fiscalía</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">d) El lugar de ocurrencia del delito</div>
+          </div>
+          <div class="explicacion">La competencia territorial (Arts. 42-45) se fija por el lugar de ocurrencia del delito. Cuando fuere incierto, por el sitio donde la Fiscalía formule acusación.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 3: ACCIÓN PENAL -->
+      <div class="quiz-section" id="s3">
+        <div class="pregunta" data-correcta="1" data-tema="3">
+          <span class="pregunta-num">9</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La querella debe formularse dentro de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 9)">a) 3 meses</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">b) 6 meses siguientes a la comisión del delito</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">c) 1 año</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">d) 2 años</div>
+          </div>
+          <div class="explicacion">La querella debe formularse por la víctima directa dentro de los 6 meses siguientes a la comisión del delito (Art. 73).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="3">
+          <span class="pregunta-num">10</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La reparación integral (Art. 78A) extingue la acción penal en:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 10)">a) Delitos querellables, culposos no agravados, patrimoniales (excluyendo hurto con violencia y extorsión)</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">b) Todos los delitos sin excepción</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">c) Solo delitos contra la administración pública</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">d) Solo delitos sexuales</div>
+          </div>
+          <div class="explicacion">La reparación integral extingue la acción penal en delitos querellables, homicidio/lesiones culposas no agravados, lesiones dolosas con secuelas transitorias, derechos de autor, inasistencia alimentaria y delitos patrimoniales (excluyendo hurto calificado con violencia y extorsión).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="3">
+          <span class="pregunta-num">11</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El deber de denunciar NO exonera cuando:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 11)">a) El denunciante es familiar del acusado</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">b) Hay secreto profesional</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">c) La víctima es menor de edad y se afecta su vida, integridad o libertad sexual</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">d) El delito es culposo</div>
+          </div>
+          <div class="explicacion">Según la Sentencia C-848/14, la exoneración del deber de denunciar NO aplica cuando la víctima sea menor de edad y se afecte su vida, integridad o libertad sexual.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="3">
+          <span class="pregunta-num">12</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La petición especial (Art. 75) corresponde exclusivamente al:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 12)">a) Fiscal General de la Nación</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">b) Defensor del Pueblo</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">c) Presidente de la República</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">d) Procurador General de la Nación para delitos cometidos en el extranjero</div>
+          </div>
+          <div class="explicacion">La petición especial le corresponde exclusivamente al Procurador General de la Nación para delitos cometidos en el extranjero (Art. 75).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 4: COMISO -->
+      <div class="quiz-section" id="s4">
+        <div class="pregunta" data-correcta="1" data-tema="4">
+          <span class="pregunta-num">13</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El control de legalidad de medidas cautelares reales debe realizarse dentro de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 13)">a) 24 horas</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">b) 36 horas</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">c) 48 horas</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">d) 72 horas</div>
+          </div>
+          <div class="explicacion">Toda medida cautelar real debe ser revisada por el Juez de Control de Garantías dentro de las 36 horas siguientes a su imposición.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="4">
+          <span class="pregunta-num">14</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La prohibición de enajenar bienes sujetos a registro (Art. 97) opera por:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 14)">a) 6 meses desde la imputación</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">b) 3 meses</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">c) 1 año</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">d) Indefinidamente</div>
+          </div>
+          <div class="explicacion">La prohibición de enajenar bienes sujetos a registro es una medida legal obligatoria de 6 meses impuesta expresamente en la imputación (Art. 97).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="4">
+          <span class="pregunta-num">15</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El comiso busca:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 15)">a) Solo incautar temporalmente</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">b) Devolver los bienes al propietario</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">c) La privación definitiva del dominio sobre bienes ilícitos o instrumentos del delito</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">d) Solo congelar cuentas bancarias</div>
+          </div>
+          <div class="explicacion">El comiso busca la privación definitiva del dominio sobre bienes producto directo/indirecto o instrumentos de delitos dolosos.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="4">
+          <span class="pregunta-num">16</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La suspensión y cancelación de registros fraudulentos (Art. 101) puede decretarse:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 16)">a) Solo en sentencia</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">b) Solo al inicio del proceso</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">c) Solo con autorización del acusado</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">d) Suspensión en cualquier momento; cancelación en sentencia o decisión equivalente</div>
+          </div>
+          <div class="explicacion">La suspensión puede decretarse en cualquier momento a petición de Fiscalía o Víctima; la cancelación en cualquier providencia que ponga fin al proceso.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 5: REPARACIÓN -->
+      <div class="quiz-section" id="s5">
+        <div class="pregunta" data-correcta="1" data-tema="5">
+          <span class="pregunta-num">17</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El incidente de reparación integral debe solicitarse dentro de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 17)">a) 15 días</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">b) 30 días siguientes a la ejecutoria del fallo condenatorio</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">c) 60 días</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">d) 6 meses</div>
+          </div>
+          <div class="explicacion">Debe solicitarse dentro de los 30 días siguientes a la ejecutoria del fallo condenatorio. Vencido este término, opera la caducidad (Art. 106).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="5">
+          <span class="pregunta-num">18</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La primera audiencia del incidente de reparación se convoca dentro de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 18)">a) 8 días siguientes a la solicitud</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">b) 15 días</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">c) 30 días</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">d) 60 días</div>
+          </div>
+          <div class="explicacion">La primera audiencia se convoca dentro de los 8 días siguientes a la solicitud (Arts. 102-103).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="5">
+          <span class="pregunta-num">19</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Si no hay acuerdo en la primera audiencia, la segunda audiencia de pruebas se cita dentro de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 19)">a) 5 días</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">b) 10 días</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">c) 8 días siguientes</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">d) 30 días</div>
+          </div>
+          <div class="explicacion">Si no hay acuerdo, se cita a una segunda audiencia dentro de los 8 días siguientes para práctica de pruebas y alegatos (Art. 104).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="5">
+          <span class="pregunta-num">20</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La ausencia injustificada del solicitante en la segunda audiencia implica:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 20)">a) Suspensión del incidente</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">b) Nulidad del proceso</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">c) Aplazamiento automático</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">d) Desistimiento y condena en costas</div>
+          </div>
+          <div class="explicacion">La ausencia injustificada del solicitante implica el desistimiento y condena en costas (Art. 104).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 6: MINISTERIO PÚBLICO -->
+      <div class="quiz-section" id="s6">
+        <div class="pregunta" data-correcta="1" data-tema="6">
+          <span class="pregunta-num">21</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El Ministerio Público actúa como:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 21)">a) Parte acusadora</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">b) Sujeto procesal interviniente de carácter neutro e imparcial</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">c) Defensor del acusado</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">d) Representante de la víctima</div>
+          </div>
+          <div class="explicacion">El Ministerio Público actúa como sujeto procesal interviniente de carácter neutro e imparcial (Art. 109), no como acusador ni defensa.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="6">
+          <span class="pregunta-num">22</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Como Garante de DDHH, el Ministerio Público debe:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 22)">a) Vigilar actuaciones de policía judicial que puedan afectar garantías fundamentales</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">b) Acusar formalmente al imputado</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">c) Defender al acusado</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">d) Representar a la víctima</div>
+          </div>
+          <div class="explicacion">Como Garante (Art. 111.1), vigila actuaciones de policía judicial, interviene en diligencias que afecten garantías, procura decisiones de verdad y justicia, y verifica condiciones de privación de libertad.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="6">
+          <span class="pregunta-num">23</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Como Representante de la Sociedad, el Ministerio Público puede:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 23)">a) Solo observar el proceso</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">b) Solo defender al acusado</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">c) Solicitar condena o absolución, procurar indemnización y velar por protección de víctimas</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">d) Solo presentar pruebas</div>
+          </div>
+          <div class="explicacion">Como Representante (Art. 111.2), solicita condena/absolución, procura indemnización, defiende intereses colectivos, vela por protección de víctimas e interviene en principio de oportunidad.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="6">
+          <span class="pregunta-num">24</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El Ministerio Público puede constituir "Agencias Especiales" en procesos de relevante importancia, designando:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 24)">a) Solo fiscales</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">b) Solo jueces</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">c) Solo abogados privados</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">d) Un procurador delegado o personero municipal</div>
+          </div>
+          <div class="explicacion">El Procurador General puede constituir Agencias Especiales designando un procurador delegado o personero municipal (Arts. 109-110).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 7: PARTES -->
+      <div class="quiz-section" id="s7">
+        <div class="pregunta" data-correcta="1" data-tema="7">
+          <span class="pregunta-num">25</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El principio de objetividad (Art. 115) obliga a la Fiscalía a:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 25)">a) Solo presentar pruebas en contra del acusado</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">b) Develar y suministrar incluso el material probatorio favorable al procesado</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">c) Ocultar pruebas débiles</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">d) Solo actuar según la denuncia</div>
+          </div>
+          <div class="explicacion">El principio de objetividad obliga al ente acusador a develar y suministrar incluso el material probatorio favorable al procesado.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="7">
+          <span class="pregunta-num">26</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La defensa técnica es exigible desde:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 26)">a) La captura o la formulación de imputación</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">b) Solo desde el juicio oral</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">c) Solo desde la acusación</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">d) Solo desde la sentencia</div>
+          </div>
+          <div class="explicacion">La defensa técnica es exigible desde la captura o la formulación de imputación (Arts. 118-123).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="7">
+          <span class="pregunta-num">27</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La persona ausente (Art. 127) se declara cuando:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 27)">a) El acusado se niega a declarar</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">b) El acusado renuncia al proceso</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">c) Hay imposibilidad de localización, previo emplazamiento por edicto durante 5 días hábiles</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">d) El acusado huye del país</div>
+          </div>
+          <div class="explicacion">Ante la imposibilidad de localización, el Juez de Garantías lo declara persona ausente previo emplazamiento por edicto durante 5 días hábiles, asignándole defensor público.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="7">
+          <span class="pregunta-num">28</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Las víctimas pueden solicitar medidas de protección ante:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 28)">a) Solo el juez de conocimiento</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">b) Solo la Corte Suprema</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">c) Solo el Ministerio Público</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">d) El fiscal y el Juez de Garantías</div>
+          </div>
+          <div class="explicacion">Las víctimas pueden solicitar medidas de protección ante el fiscal (Art. 137) y requieren asistencia de abogado a partir de la audiencia preparatoria.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 8: DEBERES -->
+      <div class="quiz-section" id="s8">
+        <div class="pregunta" data-correcta="1" data-tema="8">
+          <span class="pregunta-num">29</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La temeridad o mala fe (Art. 141) se configura al:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 29)">a) Solo no asistir a audiencias</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">b) Alegar hechos contrarios a la realidad a sabiendas, formular peticiones infundadas, utilizar la actuación para fines ilegales u obstruir pruebas</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">c) Solo presentar recursos</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">d) Solo no pagar costas</div>
+          </div>
+          <div class="explicacion">La temeridad o mala fe se configura al alegar hechos contrarios a la realidad a sabiendas, formular peticiones o recursos con manifiesta carencia de fundamento legal, utilizar la actuación para fines ilegales o fraudulentos, u obstruir la práctica probatoria.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="8">
+          <span class="pregunta-num">30</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Las sanciones por recusación infundada son multas de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 30)">a) 1-10 SMLMV</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">b) 1-5 SMLMV</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">c) 10-50 SMLMV</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">d) 50-100 SMLMV</div>
+          </div>
+          <div class="explicacion">La recusación infundada genera multa de 1-10 SMLMV (Art. 143).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="8">
+          <span class="pregunta-num">31</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La obstrucción de diligencias puede generar arresto de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 31)">a) 1-5 días</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">b) 5-10 días</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">c) 1 a 30 días inconmutables</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">d) 30-60 días</div>
+          </div>
+          <div class="explicacion">La obstrucción de diligencias genera arresto de 1 a 30 días inconmutables (Art. 143).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="8">
+          <span class="pregunta-num">32</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los deberes de la Fiscalía (Art. 142) incluyen:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 32)">a) Solo acusar</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">b) Solo investigar</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">c) Solo presentar pruebas</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">d) Actuación objetiva y descubrimiento de elementos favorables al procesado</div>
+          </div>
+          <div class="explicacion">La Fiscalía debe actuar objetivamente y descubrir elementos favorables al procesado (Art. 142).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 9: ACTUACIÓN -->
+      <div class="quiz-section" id="s9">
+        <div class="pregunta" data-correcta="2" data-tema="9">
+          <span class="pregunta-num">33</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Las audiencias preliminares se tramitan ante:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 33)">a) El juez de conocimiento</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">b) El Tribunal Superior</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">c) El Juez de Control de Garantías</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">d) La Corte Suprema</div>
+          </div>
+          <div class="explicacion">Las audiencias preliminares se tramitan ante el Juez de Control de Garantías (Art. 154).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="9">
+          <span class="pregunta-num">34</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El término de indagación para delitos graves (homicidio, feminicidio, violencia intrafamiliar, delitos sexuales contra menores) es de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 34)">a) 8 meses (prorrogables por 6 meses más)</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">b) 2 años</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">c) 3 años</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">d) 5 años</div>
+          </div>
+          <div class="explicacion">Para delitos graves (homicidio, feminicidio, violencia intrafamiliar, delitos sexuales contra menores), el término es de 8 meses prorrogables por 6 meses más (Art. 175 Par. 2 - Ley 2205 de 2022).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="9">
+          <span class="pregunta-num">35</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El término para presentar escrito de acusación o preclusión desde la imputación es de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 35)">a) 60 días</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">b) 90 días (120 días en concurso o ≥3 imputados)</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">c) 180 días</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">d) 1 año</div>
+          </div>
+          <div class="explicacion">Son 90 días desde la imputación para presentar escrito de acusación o preclusión (120 días en concurso, ≥3 imputados o Jueces Especializados) (Art. 175).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="9">
+          <span class="pregunta-num">36</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La regla general de notificación en el sistema oral es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 36)">a) Por correo certificado</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">b) Por estado electrónico</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">c) Por aviso personal</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">d) Notificación en estrados de forma oral e inmediata durante las audiencias</div>
+          </div>
+          <div class="explicacion">La regla general es la notificación en estrados de forma oral e inmediata durante las audiencias (Art. 169).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 10: RECURSOS -->
+      <div class="quiz-section" id="s10">
+        <div class="pregunta" data-correcta="1" data-tema="10">
+          <span class="pregunta-num">37</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El recurso de reposición procede contra:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 37)">a) Sentencias</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">b) Autos adoptados en audiencia</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">c) Providencias de segunda instancia</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">d) Laudos arbitrales</div>
+          </div>
+          <div class="explicacion">La reposición (Art. 176) procede contra todos los autos adoptados en audiencia. No procede contra sentencias.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="10">
+          <span class="pregunta-num">38</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El recurso de casación se interpone ante:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 38)">a) La Sala Penal de la Corte Suprema de Justicia</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">b) El Tribunal Superior</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">c) El Juez de Circuito</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">d) El Consejo de Estado</div>
+          </div>
+          <div class="explicacion">El recurso extraordinario de casación se interpone ante la Sala Penal de la Corte Suprema de Justicia (Arts. 180-191).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="10">
+          <span class="pregunta-num">39</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La acción de revisión procede contra:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 39)">a) Autos interlocutorios</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">b) Providencias en trámite</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">c) Sentencias ejecutoriadas en 7 casos taxativos</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">d) Cualquier providencia</div>
+          </div>
+          <div class="explicacion">La acción de revisión (Arts. 192-198) procede contra sentencias ejecutoriadas en los 7 casos taxativos del Artículo 192.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="10">
+          <span class="pregunta-num">40</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El principio de no reformatio in pejus (Art. 20 y 188) significa que:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 40)">a) El superior siempre puede agravar la pena</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">b) No hay límites para el superior</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">c) Solo aplica en primera instancia</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">d) El superior no puede empeorar la situación del apelante único</div>
+          </div>
+          <div class="explicacion">La prohibición de reformatio in pejus significa que el superior no puede empeorar la situación del apelante único (Arts. 20 y 188).</div>
+        </div>
+      </div>
+
+      <div class="resultado-final" id="resultadoFinal">
+        <h3>🏆 Resultado Final</h3>
+        <div class="puntaje-final" id="puntajeFinal">0/40</div>
+        <p id="mensajeFinal"></p>
+        <div class="desglose-temas" id="desgloseTemas"></div>
+        <button onclick="reiniciarQuiz()" class="btn-reset">🔄 Reiniciar Quiz</button>
+      </div>
+
+      <div style="text-align: center; margin-top: 1.5rem;">
+        <button onclick="verResultadoFinal()">📊 Ver Resultado Final</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>⚖️ Guía Didáctica - Ley 906 de 2004</p>
+  <p>Código de Procedimiento Penal Colombiano · Sistema Penal Acusatorio</p>
+  <p style="margin-top: 1rem; opacity: 0.7;">© 2026 - Material educativo interactivo</p>
+</footer>
+
+<script>
+  function toggleAcordeon(header) {
+    header.classList.toggle('active');
+    const content = header.nextElementSibling;
+    content.classList.toggle('active');
+  }
+
+  let respuestas = {};
+  const totalPreguntas = 40;
+
+  function mostrarSeccion(id, tab) {
+    document.querySelectorAll('.quiz-section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.quiz-tab').forEach(t => t.classList.remove('active'));
+    
+    document.getElementById(id).classList.add('active');
+    tab.classList.add('active');
+  }
+
+  function seleccionar(opcion, preguntaNum) {
+    if (respuestas[preguntaNum] !== undefined) return;
+
+    const pregunta = opcion.closest('.pregunta');
+    const opciones = pregunta.querySelectorAll('.opcion');
+    const correcta = parseInt(pregunta.dataset.correcta);
+    const tema = parseInt(pregunta.dataset.tema);
+    const seleccionada = Array.from(opciones).indexOf(opcion);
+    const explicacion = pregunta.querySelector('.explicacion');
+
+    opciones.forEach(o => o.classList.add('disabled'));
+
+    if (seleccionada === correcta) {
+      opcion.classList.add('correcta');
+      respuestas[preguntaNum] = { correcta: true, tema: tema };
+    } else {
+      opcion.classList.add('incorrecta');
+      opciones[correcta].classList.add('correcta');
+      respuestas[preguntaNum] = { correcta: false, tema: tema };
+    }
+
+    explicacion.classList.add('visible');
+    pregunta.classList.add('answered');
+    actualizarEstadisticas();
+  }
+
+  function actualizarEstadisticas() {
+    const total = Object.keys(respuestas).length;
+    const correctas = Object.values(respuestas).filter(r => r.correcta).length;
+    const incorrectas = total - correctas;
+    const porcentaje = total > 0 ? Math.round((correctas / total) * 100) : 0;
+
+    document.getElementById('respondidas').textContent = total;
+    document.getElementById('correctas').textContent = correctas;
+    document.getElementById('incorrectas').textContent = incorrectas;
+    document.getElementById('porcentaje').textContent = porcentaje;
+
+    const progreso = (total / totalPreguntas) * 100;
+    document.getElementById('progressFill').style.width = progreso + '%';
+  }
+
+  function verResultadoFinal() {
+    const total = Object.keys(respuestas).length;
+    
+    if (total < totalPreguntas) {
+      alert(`⚠️ Aún te faltan ${totalPreguntas - total} preguntas por responder.`);
+      return;
+    }
+
+    const correctas = Object.values(respuestas).filter(r => r.correcta).length;
+    const porcentaje = Math.round((correctas / totalPreguntas) * 100);
+
+    const resultadoFinal = document.getElementById('resultadoFinal');
+    resultadoFinal.classList.add('visible');
+
+    document.getElementById('puntajeFinal').textContent = `${correctas}/${totalPreguntas}`;
+
+    let mensaje = '';
+    if (porcentaje === 100) mensaje = '🏆 ¡PERFECTO! Dominas la Ley 906 de 2004.';
+    else if (porcentaje >= 90) mensaje = ' ¡Excelente! Dominio sobresaliente.';
+    else if (porcentaje >= 75) mensaje = '✅ ¡Muy bien! Buen dominio.';
+    else if (porcentaje >= 60) mensaje = '📚 Aceptable. Repasa los temas donde fallaste.';
+    else if (porcentaje >= 40) mensaje = '📖 Necesitas reforzar varios conceptos.';
+    else mensaje = '🔍 Es necesario estudiar nuevamente todos los temas.';
+
+    document.getElementById('mensajeFinal').textContent = mensaje;
+
+    const temas = {
+      1: { nombre: 'T1: Principios', total: 4, correctas: 0 },
+      2: { nombre: 'T2: Jurisdicción', total: 4, correctas: 0 },
+      3: { nombre: 'T3: Acción Penal', total: 4, correctas: 0 },
+      4: { nombre: 'T4: Comiso/Cautelares', total: 4, correctas: 0 },
+      5: { nombre: 'T5: Reparación', total: 4, correctas: 0 },
+      6: { nombre: 'T6: Min. Público', total: 4, correctas: 0 },
+      7: { nombre: 'T7: Partes', total: 4, correctas: 0 },
+      8: { nombre: 'T8: Deberes', total: 4, correctas: 0 },
+      9: { nombre: 'T9: Actuación', total: 4, correctas: 0 },
+      10: { nombre: 'T10: Recursos', total: 4, correctas: 0 }
+    };
+
+    Object.values(respuestas).forEach(r => {
+      if (r.correcta) temas[r.tema].correctas++;
+    });
+
+    const desgloseHTML = Object.values(temas).map(t => {
+      const pct = Math.round((t.correctas / t.total) * 100);
+      return `
+        <div class="desglose-item">
+          <h4>${t.nombre}</h4>
+          <p>${t.correctas}/${t.total} (${pct}%)</p>
+          <div class="mini-bar">
+            <div class="mini-bar-fill" style="width: ${pct}%"></div>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    document.getElementById('desgloseTemas').innerHTML = desgloseHTML;
+    resultadoFinal.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  function reiniciarQuiz() {
+    if (!confirm('¿Reiniciar el quiz?')) return;
+
+    respuestas = {};
+
+    document.querySelectorAll('.opcion').forEach(o => o.classList.remove('correcta', 'incorrecta', 'disabled'));
+    document.querySelectorAll('.explicacion').forEach(e => e.classList.remove('visible'));
+    document.querySelectorAll('.pregunta').forEach(p => p.classList.remove('answered'));
+    document.getElementById('resultadoFinal').classList.remove('visible');
+
+    actualizarEstadisticas();
+    mostrarSeccion('s1', document.querySelector('.quiz-tab'));
+    document.getElementById('quiz').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  document.querySelectorAll('nav a').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+</script>
+
+</body>
+</html>
