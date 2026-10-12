@@ -1,0 +1,2128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Medidas Cautelares, Cauciones y Cuestiones Varias - CGP</title>
+<style>
+  :root {
+    --primary: #1e3a8a;
+    --secondary: #f59e0b;
+    --accent: #2563eb;
+    --light: #eff6ff;
+    --dark: #1e293b;
+    --success: #059669;
+    --warning: #d97706;
+    --danger: #dc2626;
+    --card-bg: #ffffff;
+    --shadow: 0 4px 15px rgba(0,0,0,0.08);
+    --shadow-hover: 0 8px 25px rgba(0,0,0,0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    background: var(--light);
+    color: var(--dark);
+    line-height: 1.7;
+  }
+
+  header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    color: white;
+    padding: 2rem 1rem;
+    text-align: center;
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::before {
+    content: '⚖️';
+    position: absolute;
+    font-size: 15rem;
+    opacity: 0.05;
+    top: -30px;
+    right: -30px;
+  }
+
+  header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: 2px;
+  }
+
+  header p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    font-style: italic;
+  }
+
+  nav {
+    background: var(--dark);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow);
+  }
+
+  nav ul {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0.5rem;
+  }
+
+  nav a {
+    color: var(--light);
+    text-decoration: none;
+    padding: 0.7rem 1rem;
+    margin: 0.2rem;
+    border-radius: 5px;
+    font-size: 0.7rem;
+    transition: all 0.3s;
+    display: block;
+  }
+
+  nav a:hover {
+    background: var(--secondary);
+    color: var(--dark);
+    transform: translateY(-2px);
+  }
+
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+  }
+
+  section {
+    background: var(--card-bg);
+    margin-bottom: 2.5rem;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    border-left: 5px solid var(--secondary);
+    scroll-margin-top: 80px;
+  }
+
+  section h2 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--secondary);
+  }
+
+  section h3 {
+    color: var(--accent);
+    font-size: 1.4rem;
+    margin: 1.5rem 0 0.8rem;
+  }
+
+  section h4 {
+    color: var(--primary);
+    font-size: 1.15rem;
+    margin: 1rem 0 0.5rem;
+  }
+
+  p { margin-bottom: 1rem; text-align: justify; }
+
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.2rem;
+    margin: 1.5rem 0;
+  }
+
+  .card {
+    background: linear-gradient(135deg, #fff 0%, #f0f7ff 100%);
+    border: 2px solid var(--secondary);
+    border-radius: 10px;
+    padding: 1.2rem;
+    transition: all 0.3s;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--primary);
+  }
+
+  .card .icon {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .card h4 {
+    text-align: center;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+  }
+
+  .card .detail {
+    display: none;
+    margin-top: 0.8rem;
+    padding-top: 0.8rem;
+    border-top: 1px dashed var(--secondary);
+    font-size: 0.95rem;
+  }
+
+  .card.active .detail { display: block; }
+
+  .card .hint {
+    text-align: center;
+    color: var(--accent);
+    font-size: 0.85rem;
+    font-style: italic;
+  }
+
+  .mapa-container {
+    background: #f8fafc;
+    border: 2px dashed var(--secondary);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    overflow-x: auto;
+  }
+
+  .mapa {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 600px;
+  }
+
+  .nodo {
+    background: var(--primary);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+    font-weight: bold;
+    text-align: center;
+    min-width: 180px;
+    box-shadow: var(--shadow);
+  }
+
+  .nodo.central {
+    background: linear-gradient(135deg, var(--secondary), #fbbf24);
+    color: var(--dark);
+    font-size: 1.2rem;
+    padding: 1rem 2rem;
+  }
+
+  .nodo.sub {
+    background: var(--accent);
+    font-size: 0.95rem;
+  }
+
+  .linea {
+    width: 3px;
+    height: 25px;
+    background: var(--secondary);
+  }
+
+  .linea-h {
+    height: 3px;
+    background: var(--secondary);
+    width: 80%;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .rama {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 1rem;
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  .rama-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    min-width: 140px;
+  }
+
+  .ejemplo {
+    background: #ecfdf5;
+    border-left: 4px solid var(--success);
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .ejemplo strong { color: var(--success); }
+
+  .alerta {
+    background: #fffbeb;
+    border-left: 4px solid var(--warning);
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .alerta strong { color: var(--warning); }
+
+  .cita {
+    background: #eff6ff;
+    border-left: 4px solid var(--accent);
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+    color: var(--primary);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    font-size: 0.9rem;
+  }
+
+  th {
+    background: var(--primary);
+    color: white;
+    padding: 0.8rem;
+    text-align: left;
+  }
+
+  td {
+    padding: 0.8rem;
+    border-bottom: 1px solid #eee;
+  }
+
+  tr:nth-child(even) { background: #f8fafc; }
+  tr:hover { background: #eff6ff; }
+
+  .quiz-container {
+    background: linear-gradient(135deg, #f8fafc 0%, #fff 100%);
+    padding: 1.5rem;
+    border-radius: 10px;
+    border: 2px solid var(--accent);
+  }
+
+  .quiz-header {
+    background: var(--primary);
+    color: white;
+    padding: 1.2rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .quiz-header h3 {
+    color: white;
+    margin: 0 0 0.5rem 0;
+  }
+
+  .progress-bar {
+    background: rgba(255,255,255,0.2);
+    height: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+  }
+
+  .progress-fill {
+    background: var(--secondary);
+    height: 100%;
+    width: 0%;
+    transition: width 0.4s ease;
+  }
+
+  .quiz-stats {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .stat {
+    background: rgba(255,255,255,0.1);
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    font-size: 0.9rem;
+  }
+
+  .stat strong { color: var(--secondary); }
+
+  .quiz-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    padding: 0.5rem;
+    background: #f0f7ff;
+    border-radius: 8px;
+  }
+
+  .quiz-tab {
+    background: white;
+    border: 2px solid var(--accent);
+    color: var(--accent);
+    padding: 0.5rem 0.8rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.7rem;
+    transition: all 0.3s;
+    flex: 1;
+    min-width: 70px;
+    text-align: center;
+  }
+
+  .quiz-tab:hover {
+    background: var(--accent);
+    color: white;
+  }
+
+  .quiz-tab.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+  }
+
+  .quiz-section {
+    display: none;
+  }
+
+  .quiz-section.active {
+    display: block;
+    animation: fadeIn 0.4s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .pregunta {
+    margin-bottom: 1.5rem;
+    padding: 1.2rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    border-left: 4px solid var(--accent);
+    transition: all 0.3s;
+  }
+
+  .pregunta.answered {
+    border-left-color: var(--secondary);
+  }
+
+  .pregunta-num {
+    display: inline-block;
+    background: var(--accent);
+    color: white;
+    padding: 0.2rem 0.7rem;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    margin-right: 0.5rem;
+  }
+
+  .pregunta-tipo {
+    display: inline-block;
+    background: var(--secondary);
+    color: var(--dark);
+    padding: 0.2rem 0.7rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    margin-left: 0.3rem;
+    font-weight: bold;
+  }
+
+  .pregunta p { 
+    font-weight: bold; 
+    color: var(--primary); 
+    margin: 0.8rem 0;
+    text-align: left;
+  }
+
+  .opciones { display: flex; flex-direction: column; gap: 0.5rem; }
+
+  .opcion {
+    padding: 0.7rem 1rem;
+    background: #f8fafc;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+  }
+
+  .opcion:hover:not(.disabled) {
+    border-color: var(--accent);
+    background: #eff6ff;
+  }
+
+  .opcion.disabled {
+    cursor: not-allowed;
+    opacity: 0.85;
+  }
+
+  .opcion.correcta {
+    background: #d1fae5;
+    border-color: var(--success);
+    color: var(--success);
+    font-weight: bold;
+  }
+
+  .opcion.incorrecta {
+    background: #fee2e2;
+    border-color: var(--danger);
+    color: var(--danger);
+  }
+
+  .opcion.correcta::after {
+    content: ' ✓';
+    font-weight: bold;
+  }
+
+  .opcion.incorrecta::after {
+    content: ' ✗';
+    font-weight: bold;
+  }
+
+  .explicacion {
+    margin-top: 0.8rem;
+    padding: 0.8rem;
+    background: #eff6ff;
+    border-left: 3px solid var(--accent);
+    border-radius: 0 6px 6px 0;
+    font-size: 0.9rem;
+    display: none;
+    font-style: italic;
+  }
+
+  .explicacion.visible {
+    display: block;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .resultado-final {
+    margin-top: 2rem;
+    padding: 2rem;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    color: white;
+    border-radius: 12px;
+    text-align: center;
+    display: none;
+  }
+
+  .resultado-final.visible {
+    display: block;
+    animation: fadeIn 0.5s ease;
+  }
+
+  .resultado-final h3 {
+    color: var(--secondary);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .puntaje-final {
+    font-size: 3rem;
+    font-weight: bold;
+    color: var(--secondary);
+    margin: 1rem 0;
+  }
+
+  .desglose-temas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+    text-align: left;
+  }
+
+  .desglose-item {
+    background: rgba(255,255,255,0.1);
+    padding: 1rem;
+    border-radius: 8px;
+  }
+
+  .desglose-item h4 {
+    color: var(--secondary);
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+  }
+
+  .mini-bar {
+    background: rgba(255,255,255,0.2);
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+  }
+
+  .mini-bar-fill {
+    background: var(--secondary);
+    height: 100%;
+    transition: width 0.6s ease;
+  }
+
+  button {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 1rem;
+    transition: all 0.3s;
+  }
+
+  button:hover {
+    background: var(--secondary);
+    color: var(--dark);
+    transform: translateY(-2px);
+  }
+
+  .btn-reset {
+    background: var(--danger);
+    margin-left: 0.5rem;
+  }
+
+  .btn-reset:hover {
+    background: #991b1b;
+    color: white;
+  }
+
+  .acordeon-item {
+    margin-bottom: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .acordeon-header {
+    background: var(--accent);
+    color: white;
+    padding: 1rem;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.3s;
+  }
+
+  .acordeon-header:hover { background: var(--primary); }
+
+  .acordeon-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    background: white;
+  }
+
+  .acordeon-content.active {
+    max-height: 2000px;
+    padding: 1rem;
+  }
+
+  .flecha { transition: transform 0.3s; }
+  .acordeon-header.active .flecha { transform: rotate(180deg); }
+
+  footer {
+    background: var(--dark);
+    color: var(--light);
+    text-align: center;
+    padding: 2rem 1rem;
+    margin-top: 2rem;
+  }
+
+  footer p { margin-bottom: 0.5rem; }
+
+  @media (max-width: 768px) {
+    header h1 { font-size: 1.8rem; }
+    section { padding: 1.2rem; }
+    section h2 { font-size: 1.5rem; }
+    nav a { font-size: 0.6rem; padding: 0.3rem 0.4rem; }
+    .quiz-tab { font-size: 0.6rem; padding: 0.3rem 0.4rem; }
+    table { font-size: 0.8rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>️ Medidas Cautelares, Cauciones y Cuestiones Varias</h1>
+  <p>Libros Cuarto y Quinto del CGP (Arts. 588 a 627) · Guía Didáctica Interactiva</p>
+</header>
+
+<nav>
+  <ul>
+    <li><a href="#tema1">1. Cautelares</a></li>
+    <li><a href="#tema2">2. Ejecutivos</a></li>
+    <li><a href="#tema3">3. Cauciones</a></li>
+    <li><a href="#tema4">4. Exequátur</a></li>
+    <li><a href="#tema5">5. Comisiones</a></li>
+    <li><a href="#tema6">6. ANDJE</a></li>
+    <li><a href="#tema7">7. Notariales</a></li>
+    <li><a href="#tema8">8. Implementación</a></li>
+    <li><a href="#tema9">9. Vigencia</a></li>
+    <li><a href="#quiz">Quiz (40)</a></li>
+  </ul>
+</nav>
+
+<main>
+
+  <section>
+    <h2>📚 Introducción</h2>
+    <p>Bienvenido a esta guía interactiva sobre los <strong>Libros Cuarto y Quinto del Código General del Proceso (CGP)</strong>. Aquí estudiarás las medidas cautelares (preventivas, conservativas, anticipativas), las cauciones, el exequátur de sentencias extranjeras, las comisiones rogatorias, la Agencia Nacional de Defensa Jurídica del Estado, los trámites notariales y el régimen de implementación y vigencia del CGP.</p>
+    <div class="alerta">
+      <strong>💡 Cómo usar esta guía:</strong> Haz clic en las tarjetas para ver detalles, despliega los acordeones para información adicional y prueba tus conocimientos con el quiz de 40 preguntas al final.
+    </div>
+  </section>
+
+  <!-- TEMA 1: MEDIDAS CAUTELARES -->
+  <section id="tema1">
+    <h2>1. Medidas Cautelares - Normas Generales (Arts. 588 a 598 CGP)</h2>
+    <p>Las medidas cautelares constituyen un pilar sustancial en la administración de justicia moderna, al erigirse como el instrumento técnico-procesal indispensable para materializar el principio de tutela judicial efectiva.</p>
+
+    <h3>️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">MEDIDAS CAUTELARES</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Preventivas</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Conservativas</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Anticipativas</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">De Suspensión</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Clasificación de las Medidas Cautelares</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">️</div>
+        <h4>Preventivas</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Dirigidas a <strong>mitigar o impedir</strong> la ocurrencia o agravamiento de un daño inminente sobre los derechos objeto de litigio.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon"></div>
+        <h4>Conservativas</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Destinadas a mantener el <strong>statu quo</strong> o estado de cosas fáctico y jurídico existente al instante de la admisión de la demanda.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚡</div>
+        <h4>Anticipativas</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Concebidas para otorgar provisionalmente, de forma total o parcial, el <strong>objeto de las pretensiones</strong> cuando la urgencia o la inminencia del perjuicio irremediable así lo exijan.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⏸️</div>
+        <h4>De Suspensión</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Enfocadas en <strong>paralizar temporalmente</strong> los efectos de los actos administrativos impugnados mientras la jurisdicción resuelve sobre su validez sustancial.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>🎯 Medidas en Procesos Declarativos (Art. 590)</h3>
+    <div class="alerta">
+      <strong> Medidas específicas:</strong>
+      <ul>
+        <li><strong>Inscripción de la demanda:</strong> Sobre bienes sujetos a registro de propiedad del demandado</li>
+        <li><strong>Secuestro de bienes muebles:</strong> En procesos de responsabilidad médica, contractual o extracontractual</li>
+        <li><strong>Medidas innominadas:</strong> El juez puede decretar cualquier medida razonable para prevenir daños irreparables o asegurar la efectividad de la sentencia</li>
+      </ul>
+    </div>
+
+    <h3>⚖️ Requisitos Esenciales de Procesabilidad</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Requisito</th>
+          <th>Descripción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Solicitud de parte</strong></td>
+          <td>Debe ser invocada por el demandante en cualquier etapa del proceso declarativo</td>
+        </tr>
+        <tr>
+          <td><strong>Relación directa y necesaria</strong></td>
+          <td>Las medidas deben guardar vinculación estricta y congruente con las pretensiones de la demanda</td>
+        </tr>
+        <tr>
+          <td><strong>Fundamentación probatoria</strong></td>
+          <td>Soporte probatorio suficiente que demuestre <em>fumus boni iuris</em> (apariencia de buen derecho) y <em>periculum in mora</em> (urgencia)</td>
+        </tr>
+        <tr>
+          <td><strong>Suficiencia y proporcionalidad</strong></td>
+          <td>El juez gradúa, sustituye o limita la medida, asegurando que sea la menos gravosa para el interés público</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3> Prestación de Caución (20%)</h3>
+    <div class="alerta">
+      <strong>📌 Regla general:</strong> El demandante debe prestar caución equivalente al <strong>veinte por ciento (20%)</strong> del valor de las pretensiones para responder por posibles perjuicios.
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si A demanda a B por $100 millones y solicita embargo preventivo de bienes, el juez puede decretar la medida pero exigirá a A una caución del 20% ($20 millones) para responder por posibles perjuicios si la demanda es desestimada.
+    </div>
+  </section>
+
+  <!-- TEMA 2: CAUTELARES EN EJECUTIVOS -->
+  <section id="tema2">
+    <h2>2. Medidas Cautelares en Procesos Ejecutivos (Arts. 599 a 602 CGP)</h2>
+    <p>En los procesos de ejecución, la tutela cautelar abandona el carácter precautorio declarativo para asumir una función eminentemente coercitiva y patrimonial.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">CAUTELARES EJECUTIVAS</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Embargo</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Secuestro Preventivo</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Límite del Doble</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Características Fundamentales</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚡</div>
+        <h4>Inmediatez Coercitiva</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Se decreta <strong>desde el mandamiento ejecutivo</strong> sobre los bienes del deudor para garantizar la acreencia, antes de la notificación.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🔒</div>
+        <h4>Embargo y Secuestro Preventivo</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Medidas reales sobre el patrimonio del deudor que neutralizan la evasión de activos y contrarrestan maniobras de insolvencia.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon"></div>
+        <h4>Límite del Doble (Art. 600)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>No se embargarán bienes cuyo valor supere el <strong>doble del crédito cobrado</strong>, sus intereses y las costas presupuestadas, salvo que se trate de un solo bien indivisible.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📉</div>
+        <h4>Reducción de Embargos</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>A solicitud del ejecutado cuando se considere que la medida es <strong>gravosa o desproporcionada</strong>.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3> Títulos Ejecutivos que Fundan la Coerción</h3>
+    <div class="alerta">
+      <strong>📌 Prestan mérito ejecutivo formal (Art. 297 Ley 1437/2011):</strong>
+      <ol style="margin-top: 0.5rem; padding-left: 1.5rem;">
+        <li>Sentencias judiciales ejecutoriadas de la Jurisdicción Contencioso-Administrativa</li>
+        <li>Decisiones en firme de mecanismos alternativos (actas de conciliación, laudos arbitrales)</li>
+        <li>Contratos estatales, sus garantías, actas de liquidación contractual y actos administrativos contractuales</li>
+      </ol>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si el Estado tiene una sentencia ejecutoriada contra una empresa por $500 millones, puede decretar embargo preventivo sobre bienes de la empresa por hasta $1.000 millones (doble del crédito), pero no más, salvo que el bien sea indivisible.
+    </div>
+  </section>
+
+  <!-- TEMA 3: CAUCIONES -->
+  <section id="tema3">
+    <h2>3. Cauciones (Arts. 603 y 604 CGP)</h2>
+    <p>La caución o contracautela constituye un mecanismo de contrapeso patrimonial en la técnica procesal.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">CAUCIONES</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Reales</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Bancarias</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Seguros</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Juratorias</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Naturaleza y Clases (Art. 603)</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon"></div>
+        <h4>Garantías Bancarias</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Aval o garantía emitida por una entidad bancaria a favor del proceso.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🛡️</div>
+        <h4>Pólizas de Seguros</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Pólizas de cumplimiento otorgadas por compañías de seguros autorizadas.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">💎</div>
+        <h4>Garantías Reales</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Prenda o hipoteca sobre bienes específicos del garante.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">✋</div>
+        <h4>Garantías Juratorias</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Juramento de pagar cuando el solicitante carece de recursos pero tiene buen derecho.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>⚖️ Cancelación y Efectividad (Art. 604)</h3>
+    <div class="alerta">
+      <strong>📌 Se efectúan mediante:</strong>
+      <ul>
+        <li><strong>Incidente:</strong> Cuando se configura el riesgo o se extingue la obligación garantizada</li>
+        <li><strong>Liquidación de perjuicios:</strong> Para determinar el monto exacto de la indemnización</li>
+      </ul>
+    </div>
+
+    <h3> Ponderación del Acceso a la Justicia</h3>
+    <div class="cita">
+      <strong>"Una exigencia económica desproporcionada convertiría a la contracautela en una barrera infranqueable que negaría el amparo cautelar a quien litiga sin abundante solvencia financiera."</strong>
+    </div>
+
+    <div class="alerta">
+      <strong>📌 Evaluación de doble vía:</strong>
+      <ol style="margin-top: 0.5rem; padding-left: 1.5rem;">
+        <li><strong>Valoración del perjuicio real:</strong> Magnitud económica que la medida generaría en la contraparte</li>
+        <li><strong>Capacidad del solicitante:</strong> Constatar la capacidad económica del actor para evitar que la caución obste el ejercicio del derecho procesal</li>
+      </ol>
+      <p>Cuando el solicitante sea una persona en situación de <strong>debilidad manifiesta</strong>, o cuando la medida recaiga sobre la protección de <strong>derechos colectivos o fundamentales</strong>, el juez debe modular o exonerar la exigencia dineraria.</p>
+    </div>
+
+    <div class="ejemplo">
+      <strong> Ejemplo:</strong> Si una comunidad indígena solicita medida cautelar para proteger un territorio ancestral, el juez puede exonerar la caución del 20% por tratarse de derechos colectivos y fundamentales, aun cuando la comunidad carezca de recursos económicos.
+    </div>
+  </section>
+
+  <!-- TEMA 4: EXEQUÁTUR -->
+  <section id="tema4">
+    <h2>4. Sentencias y Laudos en el Exterior - Exequátur (Arts. 605 a 607 CGP)</h2>
+    <p>El exequátur es el procedimiento jurisdiccional mediante el cual se concede validez jurídica y fuerza ejecutiva en el territorio nacional a las sentencias judiciales y laudos arbitrales dictados en otros países.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">EXEQUÁTUR</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Reciprocidad</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Debido Proceso</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Orden Público</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Corte Suprema</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Requisitos para el Exequátur</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🤝</div>
+        <h4>Reciprocidad</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Existencia de <strong>reciprocidad diplomática o legislativa</strong> entre los Estados.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Debido Proceso</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Garantía comprobada del debido proceso en la citación del demandado.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🔒</div>
+        <h4>Firmeza Ejecutoria</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>La sentencia debe estar en firme según la ley del país de origen.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🏛️</div>
+        <h4>Orden Público</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>No debe vulnerar garantías constitucionales inalienables ni normas imperativas de derecho público colombiano.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>🏛️ Competencia</h3>
+    <div class="alerta">
+      <strong>📌 El exequátur se tramita ante la Sala de Casación Civil de la Corte Suprema de Justicia.</strong>
+    </div>
+
+    <h3>⚠️ Filtro del Orden Público Internacional</h3>
+    <div class="cita">
+      <strong>"La noción de orden público internacional opera como un filtro hermenéutico insustituible para defender la coherencia del sistema legal doméstico."</strong>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si un tribunal de España condena a una empresa colombiana al pago de $1 millón, para que esa sentencia tenga efectos en Colombia debe tramitarse el exequátur ante la Sala de Casación Civil de la Corte Suprema, verificando reciprocidad, debido proceso y respeto al orden público colombiano.
+    </div>
+  </section>
+
+  <!-- TEMA 5: COMISIONES ROGATORIAS -->
+  <section id="tema5">
+    <h2>5. Comisiones Rogatorias y Auxilio Judicial Internacional (Arts. 608 y 609 CGP)</h2>
+    <p>La evacuación de pruebas, notificaciones e inspecciones dentro de las fronteras nacionales a solicitud de tribunales foráneos, o la petición recíproca hacia el exterior, se instrumenta mediante comisiones rogatorias.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">COMISIONES ROGATORIAS</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Cartas Rogatorias</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Exhortos Internacionales</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Auxilio Judicial</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Mecanismos de Cooperación</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon"></div>
+        <h4>Cartas Rogatorias</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Solicitud formal de un tribunal extranjero a las autoridades colombianas para practicar pruebas o notificaciones.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📨</div>
+        <h4>Exhortos Internacionales</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Peticiones recíprocas entre Estados para la práctica de actuaciones procesales transfronterizas.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🤝</div>
+        <h4>Auxilio Judicial</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Cooperación entre autoridades judiciales de distintas soberanías para recolección de testimonios, exhibiciones documentales y notificaciones.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>🎯 Impacto en la Celeridad Procesal</h3>
+    <div class="alerta">
+      <strong>📌 Beneficios de la cooperación judicial internacional:</strong>
+      <ul>
+        <li>Neutraliza la <strong>parálisis probatoria</strong> y la mora judicial en disputas complejas</li>
+        <li>Permite obtener elementos de juicio ubicados en el extranjero <strong>sin traumatismos procedimentales</strong></li>
+        <li>Asegura la <strong>celeridad del proceso</strong> y el juzgamiento oportuno</li>
+      </ul>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si en un proceso comercial en Colombia se necesita el testimonio de un testigo residente en Estados Unidos, el juez colombiano puede librar carta rogatoria a través del Ministerio de Relaciones Exteriores para que un tribunal estadounidense practique la diligencia.
+    </div>
+  </section>
+
+  <!-- TEMA 6: ANDJE -->
+  <section id="tema6">
+    <h2>6. Agencia Nacional de Defensa Jurídica del Estado (Arts. 610 a 612 CGP)</h2>
+    <p>La ANDJE responde a la necesidad de estructurar una defensa pública técnica, unificada y centralizada ante la proliferación de litigios de alto impacto económico dirigidos contra las entidades públicas.</p>
+
+    <h3>️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">ANDJE</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Funciones Defensivas</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Litigio</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Funciones Preventivas</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Políticas públicas</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>⚖️ Medios de Control Patrimoniales</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Medio de Control</th>
+          <th>Artículo</th>
+          <th>Objeto</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Reparación Directa</strong></td>
+          <td>Art. 140</td>
+          <td>Declarar responsabilidad extracontractual del Estado e indemnizar daños antijurídicos</td>
+        </tr>
+        <tr>
+          <td><strong>Controversias Contractuales</strong></td>
+          <td>Art. 141</td>
+          <td>Litigios derivados de celebración, ejecución, nulidad, interpretación o liquidación de contratos estatales</td>
+        </tr>
+        <tr>
+          <td><strong>Repetición</strong></td>
+          <td>Art. 142</td>
+          <td>Acciones contra servidores públicos para reembolsar montos pagados por condenas por conductas dolosas o gravemente culposas</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3> Funciones de la ANDJE</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">️</div>
+        <h4>Funciones Defensivas</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <ul>
+            <li>Intervención procesal oportuna como parte o coadyuvante</li>
+            <li>Recepción de notificaciones personales de demandas</li>
+            <li>Interposición del Recurso Extraordinario de Unificación</li>
+            <li>Asunción directa o por delegación de la representación judicial estatal</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🛡️</div>
+        <h4>Funciones Preventivas</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <ul>
+            <li>Formulación de políticas públicas de prevención del daño antijurídico</li>
+            <li>Solicitud de Extensión de Jurisprudencia del Consejo de Estado</li>
+            <li>Intervención técnica en Comités de Conciliación</li>
+            <li>Diseño de directrices de defensa jurídica uniforme</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si una empresa demanda al Estado por $50.000 millones por supuesta falla en el servicio de salud, la ANDJE interviene como coadyuvante para defender los intereses patrimoniales de la Nación, puede interponer recursos y solicitar extensión de jurisprudencia favorable.
+    </div>
+  </section>
+
+  <!-- TEMA 7: TRÁMITES NOTARIALES -->
+  <section id="tema7">
+    <h2>7. Trámites Notariales (Art. 617 CGP)</h2>
+    <p>La adscripción de competencias de jurisdicción voluntaria a la función notarial constituye un eje estratégico de descongestión pública.</p>
+
+    <h3>📋 Asuntos Delegados a la Función Notarial</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">💍</div>
+        <h4>Divorcio de Común Acuerdo</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Cuando no hay hijos menores o con acuerdos previos sobre custodia y alimentos.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📋</div>
+        <h4>Inventarios Solemnes</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Elaboración de inventarios de bienes en procesos sucesorales o de liquidación.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon"></div>
+        <h4>Corrección de Registros Civiles</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Rectificación de errores materiales en partidas de nacimiento, matrimonio o defunción.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🏠</div>
+        <h4>Liquidación de Herencias</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Liquidaciones de herencias y sociedades conyugales por mutuo acuerdo entre los interesados.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>🎯 Economía Procesal y Eficiencia</h3>
+    <div class="alerta">
+      <strong>📌 Beneficios de la delegación notarial:</strong>
+      <ul>
+        <li><strong>Libera capacidad operativa</strong> en los juzgados para causas verdaderamente contenciosas</li>
+        <li><strong>Optimiza el factor tiempo</strong> y reduce erogaciones del Tesoro Público</li>
+        <li>Permite a los administrados solventar situaciones jurídicas no litigiosas de forma <strong>célere y segura</strong></li>
+      </ul>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Una pareja sin hijos menores que desea divorciarse de común acuerdo puede hacerlo directamente ante notario, sin necesidad de acudir a un juez, ahorrando tiempo y costos procesales.
+    </div>
+  </section>
+
+  <!-- TEMA 8: PLAN DE IMPLEMENTACIÓN -->
+  <section id="tema8">
+    <h2>8. Plan de Implementación del Código (Arts. 618 a 624 CGP)</h2>
+    <p>La transición hacia un nuevo ordenamiento procedimental exige un diseño legislativo y logístico que ampare la continuidad de la función jurisdiccional.</p>
+
+    <h3>️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">PLAN DE IMPLEMENTACIÓN</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Modelos por Fases</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Despachos Paralelos</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Comisión de Seguimiento</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Componentes Operativos del Plan de Transición</h3>
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>1️ Modelos Procedimentales por Fases</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Adopción del sistema procesal mixto por audiencias (arts. 179-186), estructurado en tres momentos procesales clave:</p>
+        <ol style="margin-top: 0.5rem; padding-left: 1.5rem;">
+          <li><strong>Audiencia Inicial (Fase 1):</strong> Saneamiento del proceso, fijación del litigio, decisión de excepciones previas y conciliación</li>
+          <li><strong>Audiencia de Pruebas (Fase 2):</strong> Práctica e interrogatorio directo oral a partes y peritos bajo inmediatez del juez</li>
+          <li><strong>Audiencia de Alegaciones y Juzgamiento (Fase 3):</strong> Alegatos de conclusión verbales y emisión o anuncio del sentido del fallo</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>2️⃣ Estructura Paralela de Despachos</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Creación de juzgados dedicados a la depuración de la congestión represada bajo la legislación anterior, operando a la par de los despachos destinados a la aplicación del nuevo código.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>3️⃣ Comisión de Seguimiento</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Mandato normativo que instauró un órgano técnico de vigilancia institucional para diagnosticar la paulatina implementación procedimental y canalizar los recursos presupuestales y tecnológicos requeridos.</p>
+      </div>
+    </div>
+
+    <h3>🔄 Impacto en la Economía Procesal</h3>
+    <div class="alerta">
+      <strong>📌 La división tripartita por audiencias transforma cualitativamente:</strong>
+      <ul>
+        <li><strong>Audiencia Inicial:</strong> Sanea el vicio y delimita la contienda (Evita dilaciones)</li>
+        <li><strong>Audiencia de Pruebas:</strong> Recaudo probatorio concentrado (Asegura inmediatez)</li>
+        <li><strong>Audiencia de Juzgamiento:</strong> Alegación oral y sentido del fallo (Erradica la mora)</li>
+      </ul>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Un proceso verbal que antes tomaba 3-4 años con múltiples escritos y dilaciones, ahora se resuelve en 6-12 meses mediante tres audiencias concentradas con decisión oral del juez.
+    </div>
+  </section>
+
+  <!-- TEMA 9: DEROGACIONES Y VIGENCIA -->
+  <section id="tema9">
+    <h2>9. Otras Modificaciones, Derogaciones y Vigencia (Arts. 625 a 627 CGP)</h2>
+    <p>Las cláusulas de vigencia y derogatoria aseguran la certeza jurídica y la coherencia del ordenamiento positivo.</p>
+
+    <h3>📋 Régimen de Transición (Art. 625)</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📅</div>
+        <h4>Ultraactividad de la Norma Derogada</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Los expedientes, actuaciones administrativas y demandas instauradas <strong>con anterioridad al 2 de julio de 2012</strong> continuaron su curso bajo el régimen procesal anterior (Decreto 01 de 1984).</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚡</div>
+        <h4>Aplicabilidad Inmediata</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>El nuevo código cobijó con aplicabilidad inmediata a todas las actuaciones y demandas promovidas <strong>a partir del 2 de julio de 2012</strong>.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>📜 Derogatoria Explícita (Art. 627)</h3>
+    <div class="alerta">
+      <strong>📌 El CGP derogó expresamente:</strong>
+      <ul>
+        <li>El Decreto 01 de 1984 (Código de Procedimiento Civil precedente)</li>
+        <li>Todas las disposiciones contrarias al nuevo modelo procesal</li>
+      </ul>
+      <p>Entró en vigencia plena el <strong>2 de julio de 2012</strong>, consolidando el modelo de oralidad.</p>
+    </div>
+
+    <h3>🔗 Régimen de Supletoriedad</h3>
+    <div class="cita">
+      <strong>"Ante los vacíos existentes en la regulación del procedimiento administrativo o del proceso contencioso-administrativo, el operador judicial acudirá a las previsiones del Código General del Proceso, en la medida en que sus preceptos no resulten incompatibles con la naturaleza de la materia contencioso-administrativa."</strong>
+    </div>
+
+    <h3>🎯 Consolidación de Garantías Procedimentales</h3>
+    <div class="alerta">
+      <strong>📌 Principios rectores consolidados (Art. 3° Ley 1437/2011):</strong>
+      <ul>
+        <li>Debido proceso</li>
+        <li>Igualdad</li>
+        <li>Transparencia</li>
+        <li>Publicidad</li>
+        <li>Eficacia</li>
+        <li>Economía</li>
+        <li>Celeridad</li>
+      </ul>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si una demanda se radicó el 1° de junio de 2012, se rige por el Decreto 01 de 1984 (CPC). Si se radicó el 3 de julio de 2012, se rige por el nuevo CGP. Esto evita traumatismos procedimentales y garantiza la intangibilidad del debido proceso.
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz">
+    <h2>🎯 Quiz Completo - 40 Preguntas</h2>
+    <p>Pon a prueba tus conocimientos sobre Medidas Cautelares, Cauciones y Cuestiones Varias del CGP.</p>
+
+    <div class="quiz-container">
+      <div class="quiz-header">
+        <h3>📊 Tu Progreso</h3>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="quiz-stats">
+          <div class="stat">Respondidas: <strong id="respondidas">0</strong>/40</div>
+          <div class="stat">Correctas: <strong id="correctas">0</strong></div>
+          <div class="stat">Incorrectas: <strong id="incorrectas">0</strong></div>
+          <div class="stat">Porcentaje: <strong id="porcentaje">0</strong>%</div>
+        </div>
+      </div>
+
+      <div class="quiz-tabs">
+        <div class="quiz-tab active" onclick="mostrarSeccion('s1', this)">T1 (5)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s2', this)">T2 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s3', this)">T3 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s4', this)">T4 (5)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s5', this)">T5 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s6', this)">T6 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s7', this)">T7 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s8', this)">T8 (5)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s9', this)">T9 (5)</div>
+      </div>
+
+      <!-- SECCIÓN 1: MEDIDAS CAUTELARES -->
+      <div class="quiz-section active" id="s1">
+        <div class="pregunta" data-correcta="2" data-tema="1">
+          <span class="pregunta-num">1</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Las medidas cautelares tienen como propósito primordial:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 1)">a) Decidir el fondo del asunto</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">b) Sancionar al demandado</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">c) Salvaguardar la eficacia de la sentencia definitiva</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">d) Reemplazar la sentencia</div>
+          </div>
+          <div class="explicacion">Las medidas cautelares salvaguardan la eficacia de la sentencia definitiva, impidiendo que la insolvencia sobreviniente o la alteración del objeto litigioso conviertan el pronunciamiento judicial en una decisión inocua.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="1">
+          <span class="pregunta-num">2</span><span class="pregunta-tipo">Clasificación</span>
+          <p>Las medidas cautelares conservativas están destinadas a:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 2)">a) Otorgar provisionalmente el objeto de las pretensiones</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">b) Mantener el statu quo o estado de cosas existente al instante de la admisión de la demanda</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">c) Paralizar los efectos de actos administrativos</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">d) Mitigar daños inminentes</div>
+          </div>
+          <div class="explicacion">Las medidas conservativas mantienen el statu quo o estado de cosas fáctico y jurídico existente al instante de la admisión de la demanda.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="1">
+          <span class="pregunta-num">3</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El requisito "fumus boni iuris" se refiere a:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 3)">a) La apariencia de buen derecho</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">b) La urgencia de la medida</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">c) La proporcionalidad</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">d) La capacidad económica</div>
+          </div>
+          <div class="explicacion">El fumus boni iuris es la apariencia de buen derecho que debe demostrar el solicitante de la medida cautelar.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="1">
+          <span class="pregunta-num">4</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El requisito "periculum in mora" se refiere a:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 4)">a) La apariencia de buen derecho</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">b) La proporcionalidad de la medida</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">c) La relación directa con las pretensiones</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">d) La urgencia del mandato cautelar para evitar daños irreparables</div>
+          </div>
+          <div class="explicacion">El periculum in mora es la urgencia del mandato cautelar para prevenir daños irreparables o asegurar la efectividad de la sentencia.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="1">
+          <span class="pregunta-num">5</span><span class="pregunta-tipo">Conceptual</span>
+          <p>En procesos declarativos, el demandante debe prestar caución equivalente al:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 5)">a) 10% del valor de las pretensiones</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">b) 50% del valor de las pretensiones</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">c) 20% del valor de las pretensiones</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">d) 100% del valor de las pretensiones</div>
+          </div>
+          <div class="explicacion">El demandante debe prestar caución equivalente al 20% del valor de las pretensiones para responder por posibles perjuicios (Art. 590 CGP).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 2: CAUTELARES EN EJECUTIVOS -->
+      <div class="quiz-section" id="s2">
+        <div class="pregunta" data-correcta="1" data-tema="2">
+          <span class="pregunta-num">6</span><span class="pregunta-tipo">Conceptual</span>
+          <p>En procesos ejecutivos, el embargo y secuestro preventivo se decreta:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 6)">a) Después de la sentencia</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">b) Desde el mandamiento ejecutivo</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">c) Solo con autorización del demandado</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">d) Al finalizar el proceso</div>
+          </div>
+          <div class="explicacion">En procesos ejecutivos, el embargo y secuestro preventivo se decreta desde el mandamiento ejecutivo sobre los bienes del deudor.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="2">
+          <span class="pregunta-num">7</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El límite de los embargos (Art. 600 CGP) establece que no se embargarán bienes cuyo valor supere:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 7)">a) El doble del crédito cobrado, sus intereses y costas presupuestadas</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">b) El valor exacto del crédito</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">c) El triple del crédito</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">d) No hay límite</div>
+          </div>
+          <div class="explicacion">No se embargarán bienes cuyo valor supere el doble del crédito cobrado, sus intereses y las costas presupuestadas, salvo que se trate de un solo bien indivisible (Art. 600 CGP).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="2">
+          <span class="pregunta-num">8</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La reducción de embargos procede:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 8)">a) De oficio por el juez</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">b) Solo en segunda instancia</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">c) A solicitud del ejecutado cuando la medida sea gravosa o desproporcionada</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">d) Nunca procede</div>
+          </div>
+          <div class="explicacion">La reducción de embargos procede a solicitud del ejecutado cuando se considere que la medida es gravosa o desproporcionada.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="2">
+          <span class="pregunta-num">9</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Constituyen títulos ejecutivos formales:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 9)">a) Solo sentencias judiciales</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">b) Solo contratos privados</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">c) Solo actos administrativos</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">d) Sentencias ejecutoriadas, actas de conciliación, laudos arbitrales y contratos estatales</div>
+          </div>
+          <div class="explicacion">Prestan mérito ejecutivo: sentencias ejecutoriadas, decisiones de MASC (actas de conciliación, laudos), contratos estatales y actos administrativos contractuales.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 3: CAUCIONES -->
+      <div class="quiz-section" id="s3">
+        <div class="pregunta" data-correcta="1" data-tema="3">
+          <span class="pregunta-num">10</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La caución o contracautela tiene como finalidad:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 10)">a) Garantizar el pago de la condena</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">b) Resarcir los eventuales perjuicios que la ejecución de una medida cautelar desatinada cause a la parte demandada</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">c) Asegurar la presencia del demandante</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">d) Pagar las costas del proceso</div>
+          </div>
+          <div class="explicacion">La caución sirve de fondo de garantía para responder por las costas, indemnizaciones o daños derivados del cumplimiento de un mandato cautelar cuya pretensión de fondo es desestimada.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="3">
+          <span class="pregunta-num">11</span><span class="pregunta-tipo">Clasificación</span>
+          <p>Las cauciones pueden ser:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 11)">a) Reales, bancarias, otorgadas por compañías de seguros o juratorias</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">b) Solo bancarias</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">c) Solo reales</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">d) Solo juratorias</div>
+          </div>
+          <div class="explicacion">Las cauciones pueden ser reales, bancarias, otorgadas por compañías de seguros o juratorias (Art. 603 CGP).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="3">
+          <span class="pregunta-num">12</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Cuando el solicitante es una persona en situación de debilidad manifiesta, el juez debe:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 12)">a) Exigir caución completa</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">b) Negar la medida cautelar</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">c) Modular o exonerar la exigencia dineraria</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">d) Duplicar la caución</div>
+          </div>
+          <div class="explicacion">Cuando el solicitante es persona en situación de debilidad manifiesta, o la medida recae sobre derechos colectivos o fundamentales, el juez debe modular o exonerar la exigencia dineraria.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="3">
+          <span class="pregunta-num">13</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La cancelación de la caución se efectúa mediante:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 13)">a) Solo sentencia definitiva</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">b) Solo acuerdo de partes</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">c) Solo decisión del juez</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">d) Incidente o liquidación de perjuicios cuando se configura el riesgo o se extingue la obligación</div>
+          </div>
+          <div class="explicacion">La caución se cancela mediante incidente o liquidación de perjuicios cuando se configura el riesgo o se extingue la obligación garantizada (Art. 604 CGP).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 4: EXEQUÁTUR -->
+      <div class="quiz-section" id="s4">
+        <div class="pregunta" data-correcta="2" data-tema="4">
+          <span class="pregunta-num">14</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El exequátur es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 14)">a) Un recurso de apelación internacional</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">b) Un mecanismo de cooperación probatoria</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">c) El procedimiento para conceder validez jurídica y fuerza ejecutiva en Colombia a sentencias y laudos extranjeros</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">d) Una medida cautelar internacional</div>
+          </div>
+          <div class="explicacion">El exequátur es el procedimiento jurisdiccional mediante el cual se concede validez jurídica y fuerza ejecutiva en el territorio nacional a las sentencias judiciales y laudos arbitrales dictados en otros países.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="4">
+          <span class="pregunta-num">15</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El exequátur se tramita ante:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 15)">a) La Sala de Casación Civil de la Corte Suprema de Justicia</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">b) El Consejo de Estado</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">c) La Corte Constitucional</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">d) El Tribunal Superior del distrito</div>
+          </div>
+          <div class="explicacion">El exequátur se tramita ante la Sala de Casación Civil de la Corte Suprema de Justicia (Arts. 605-607 CGP).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="4">
+          <span class="pregunta-num">16</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La eficacia local de sentencias extranjeras está condicionada por:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 16)">a) Solo la reciprocidad diplomática</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">b) La reciprocidad diplomática o legislativa, garantía del debido proceso y firmeza ejecutoria</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">c) Solo el pago de tasas judiciales</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">d) Solo la traducción al español</div>
+          </div>
+          <div class="explicacion">La eficacia local exige reciprocidad diplomática o legislativa, garantía del debido proceso en la citación y firmeza ejecutoria del fallo según la ley del país de origen.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="4">
+          <span class="pregunta-num">17</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El orden público internacional opera como:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 17)">a) Un requisito formal</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">b) Una causal de exequátur automático</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">c) Un mecanismo de cooperación</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">d) Un filtro hermenéutico para defender la coherencia del sistema legal doméstico</div>
+          </div>
+          <div class="explicacion">La noción de orden público internacional opera como un filtro hermenéutico insustituible para defender la coherencia del sistema legal doméstico frente a fallos extranjeros incompatibles con principios constitucionales.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="4">
+          <span class="pregunta-num">18</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Una sentencia extranjera NO obtendrá homologación si:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 18)">a) Está en idioma diferente al español</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">b) Fue proferida hace más de 5 años</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">c) Sus fundamentos o trámites vulneran garantías constitucionales inalienables como la imparcialidad o el derecho de defensa</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">d) Fue proferida por un tribunal inferior</div>
+          </div>
+          <div class="explicacion">No obtendrá homologación si sus fundamentos o trámites vulneran garantías constitucionales inalienables como la imparcialidad, el derecho de defensa o normas imperativas de derecho público.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 5: COMISIONES ROGATORIAS -->
+      <div class="quiz-section" id="s5">
+        <div class="pregunta" data-correcta="1" data-tema="5">
+          <span class="pregunta-num">19</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Las comisiones rogatorias son:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 19)">a) Recursos de apelación internacional</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">b) Mecanismos de auxilio judicial transfronterizo para práctica de pruebas o notificaciones</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">c) Medidas cautelares internacionales</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">d) Sentencias extranjeras</div>
+          </div>
+          <div class="explicacion">Las comisiones rogatorias, cartas rogatorias y exhortos internacionales son mecanismos de auxilio judicial transfronterizo para la práctica de pruebas o notificaciones entre autoridades de distintas soberanías.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="5">
+          <span class="pregunta-num">20</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El flujo eficiente de comisiones rogatorias:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 20)">a) Agiliza la instrucción de juicios que trascienden el territorio nacional</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">b) Solo aplica a procesos penales</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">c) Requiere sentencia previa</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">d) Solo aplica entre países vecinos</div>
+          </div>
+          <div class="explicacion">El flujo eficiente de comisiones rogatorias agiliza sustancialmente la instrucción de juicios que trascienden el territorio nacional, neutralizando la parálisis probatoria.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="5">
+          <span class="pregunta-num">21</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Las comisiones rogatorias permiten:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 21)">a) Solo notificaciones</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">b) Solo práctica de testimonios</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">c) Recolección de testimonios, exhibiciones documentales y notificaciones entre autoridades de distintas soberanías</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">d) Solo inspecciones judiciales</div>
+          </div>
+          <div class="explicacion">Las comisiones rogatorias permiten articular el auxilio judicial transfronterizo para recolección de testimonios, exhibiciones documentales y notificaciones.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="5">
+          <span class="pregunta-num">22</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El principio que modula la cooperación judicial internacional es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 22)">a) La soberanía absoluta</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">b) La reciprocidad económica</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">c) La jurisdicción universal</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">d) La cooperación judicial internacional modulada por el postulado supremo de la soberanía estatal</div>
+          </div>
+          <div class="explicacion">La cooperación judicial internacional se cimenta en el principio de cooperación modulada rigurosamente por el postulado supremo de la soberanía estatal.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 6: ANDJE -->
+      <div class="quiz-section" id="s6">
+        <div class="pregunta" data-correcta="1" data-tema="6">
+          <span class="pregunta-num">23</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La ANDJE está facultada para intervenir como:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 23)">a) Solo como demandante</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">b) Parte, interviniente especial o coadyuvante en procesos contencioso-administrativos con intereses patrimoniales del Estado</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">c) Solo como testigo</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">d) Solo en procesos penales</div>
+          </div>
+          <div class="explicacion">La ANDJE está facultada para intervenir como parte, interviniente especial o coadyuvante en cualquier proceso contencioso-administrativo con intereses patrimoniales del Estado.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="6">
+          <span class="pregunta-num">24</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La Reparación Directa (Art. 140) tiene por objeto:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 24)">a) Declarar la responsabilidad extracontractual del Estado e indemnizar daños antijurídicos</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">b) Cobrar deudas tributarias</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">c) Ejecutar contratos estatales</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">d) Sancionar servidores públicos</div>
+          </div>
+          <div class="explicacion">La Reparación Directa (Art. 140) tiene por objeto declarar la responsabilidad extracontractual del Estado e indemnizar daños antijurídicos causados por acción u omisión de sus agentes.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="6">
+          <span class="pregunta-num">25</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La acción de Repetición (Art. 142) procede contra:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 25)">a) Los ciudadanos</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">b) Los contratistas del Estado</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">c) Actuales o exservidores públicos para reembolsar montos pagados por condenas por conductas dolosas o gravemente culposas</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">d) Los jueces</div>
+          </div>
+          <div class="explicacion">La acción de Repetición (Art. 142) procede contra actuales o exservidores públicos para reembolsar montos pagados por condenas originadas en conductas dolosas o gravemente culposas.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="6">
+          <span class="pregunta-num">26</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Las funciones preventivas de la ANDJE incluyen:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 26)">a) Solo litigar</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">b) Solo cobrar deudas</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">c) Solo representar al Estado</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">d) Formulación de políticas públicas de prevención del daño antijurídico y extensión de jurisprudencia</div>
+          </div>
+          <div class="explicacion">Las funciones preventivas incluyen formulación de políticas públicas de prevención del daño antijurídico, extensión de jurisprudencia e intervención en Comités de Conciliación.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 7: TRÁMITES NOTARIALES -->
+      <div class="quiz-section" id="s7">
+        <div class="pregunta" data-correcta="1" data-tema="7">
+          <span class="pregunta-num">27</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La adscripción de competencias de jurisdicción voluntaria a la función notarial constituye:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 27)">a) Una limitación de derechos</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">b) Un eje estratégico de descongestión pública</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">c) Una restricción procesal</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">d) Una medida cautelar</div>
+          </div>
+          <div class="explicacion">La adscripción de competencias de jurisdicción voluntaria a la función notarial constituye un eje estratégico de descongestión pública.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="7">
+          <span class="pregunta-num">28</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Son asuntos delegados a la función notarial:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 28)">a) Divorcio de común acuerdo, inventarios solemnes, corrección de registros civiles y liquidación de herencias por mutuo acuerdo</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">b) Solo divorcios contenciosos</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">c) Solo procesos ejecutivos</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">d) Solo medidas cautelares</div>
+          </div>
+          <div class="explicacion">Se han derivado a la fe pública notarial: liquidaciones de herencias y sociedades conyugales por mutuo acuerdo, inventarios solemnes, divorcio de común acuerdo y actos de formalización del estado civil.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="7">
+          <span class="pregunta-num">29</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La delegación notarial optimiza:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 29)">a) Solo el tiempo de los jueces</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">b) Solo los costos de los abogados</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">c) El factor tiempo y reduce erogaciones del Tesoro Público, permitiendo solventar situaciones jurídicas no litigiosas de forma célere y segura</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">d) Solo la carga de los notarios</div>
+          </div>
+          <div class="explicacion">La vía notarial optimiza el factor tiempo y reduce sustancialmente las erogaciones del Tesoro Público, permitiendo a los administrados solventar situaciones jurídicas no litigiosas de forma célere y segura.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="7">
+          <span class="pregunta-num">30</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los trámites notariales aplican cuando:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 30)">a) Hay controversia entre las partes</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">b) Se requiere medida cautelar</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">c) Hay litigio pendiente</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">d) No existe disputa entre partes (trámites no contenciosos)</div>
+          </div>
+          <div class="explicacion">Los trámites notariales aplican a actuaciones desprovistas de contradicción, donde no existe disputa entre partes.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 8: PLAN DE IMPLEMENTACIÓN -->
+      <div class="quiz-section" id="s8">
+        <div class="pregunta" data-correcta="1" data-tema="8">
+          <span class="pregunta-num">31</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El sistema procesal mixto por audiencias estructura la causa en:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 31)">a) Dos momentos procesales</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">b) Tres momentos procesales clave (Audiencia Inicial, de Pruebas y de Alegaciones y Juzgamiento)</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">c) Cuatro momentos procesales</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">d) Un solo momento procesal</div>
+          </div>
+          <div class="explicacion">El sistema procesal mixto por audiencias estructura la causa en tres momentos: Audiencia Inicial, Audiencia de Pruebas y Audiencia de Alegaciones y Juzgamiento.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="8">
+          <span class="pregunta-num">32</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La Audiencia Inicial (Fase 1) tiene por objeto:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 32)">a) Saneamiento del proceso, fijación del litigio, decisión de excepciones previas y conciliación</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">b) Solo practicar pruebas</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">c) Solo dictar sentencia</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">d) Solo notificar a las partes</div>
+          </div>
+          <div class="explicacion">La Audiencia Inicial tiene por objeto el saneamiento del proceso, fijación del litigio, decisión de excepciones previas y conciliación.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="8">
+          <span class="pregunta-num">33</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La Audiencia de Pruebas (Fase 2) se caracteriza por:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 33)">a) Solo alegatos escritos</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">b) Solo notificaciones</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">c) Práctica e interrogatorio directo oral a partes y peritos bajo inmediatez del juez</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">d) Solo lectura de documentos</div>
+          </div>
+          <div class="explicacion">La Audiencia de Pruebas contempla la práctica e interrogatorio directo oral a partes y peritos bajo inmediatez del juez.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="8">
+          <span class="pregunta-num">34</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La Audiencia de Alegaciones y Juzgamiento (Fase 3) culmina con:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 34)">a) Solo conciliación</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">b) Solo decreto de pruebas</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">c) Solo notificación</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">d) Presentación de alegatos de conclusión verbales y emisión o anuncio formal del sentido del fallo</div>
+          </div>
+          <div class="explicacion">La Audiencia de Alegaciones y Juzgamiento culmina con la presentación oral de alegatos de conclusión y la emisión o anuncio formal del sentido resolutivo.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="8">
+          <span class="pregunta-num">35</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La Comisión de Seguimiento tiene por objeto:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 35)">a) Solo sancionar jueces</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">b) Diagnosticar la paulatina implementación procedimental y canalizar recursos presupuestales y tecnológicos</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">c) Solo aprobar presupuestos</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">d) Solo nombrar jueces</div>
+          </div>
+          <div class="explicacion">La Comisión de Seguimiento es un órgano técnico de vigilancia institucional para diagnosticar la implementación procedimental y canalizar recursos presupuestales y tecnológicos.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 9: DEROGACIONES Y VIGENCIA -->
+      <div class="quiz-section" id="s9">
+        <div class="pregunta" data-correcta="2" data-tema="9">
+          <span class="pregunta-num">36</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El CGP entró en vigencia plena el:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 36)">a) 1° de enero de 2010</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">b) 1° de julio de 2015</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">c) 2 de julio de 2012</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">d) 1° de enero de 2020</div>
+          </div>
+          <div class="explicacion">La Ley 1437 de 2011 (CGP) entró en vigencia plena el 2 de julio de 2012.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="9">
+          <span class="pregunta-num">37</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El principio de ultraactividad de la norma derogada establece que:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 37)">a) Los expedientes instaurados con anterioridad al 2 de julio de 2012 continuaron su curso bajo el régimen procesal anterior</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">b) Todas las demandas anteriores se archivan</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">c) Se aplica retroactivamente el nuevo código</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">d) No hay transición</div>
+          </div>
+          <div class="explicacion">Los expedientes, actuaciones administrativas y demandas instauradas con anterioridad al 2 de julio de 2012 continuaron su curso bajo el régimen procesal anterior (Decreto 01 de 1984).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="9">
+          <span class="pregunta-num">38</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El CGP derogó expresamente:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 38)">a) Solo la Ley 80 de 1993</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">b) El Decreto 01 de 1984 (Código de Procedimiento Civil) y todas las disposiciones contrarias al nuevo modelo</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">c) Solo la Constitución Política</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">d) Ninguna norma</div>
+          </div>
+          <div class="explicacion">El CGP derogó expresamente el Decreto 01 de 1984 (Código de Procedimiento Civil precedente) y todas las disposiciones contrarias al nuevo modelo procesal.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="9">
+          <span class="pregunta-num">39</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Ante vacíos en la regulación del procedimiento administrativo, el operador judicial acudirá a:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 39)">a) La costumbre</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">b) La doctrina extranjera</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">c) El arbitrio judicial</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">d) Las previsiones del Código General del Proceso, en la medida en que no resulten incompatibles con la naturaleza de la materia</div>
+          </div>
+          <div class="explicacion">Ante vacíos, el operador judicial acudirá a las previsiones del CGP, en la medida en que sus preceptos no resulten incompatibles con la naturaleza de la materia contencioso-administrativa.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="9">
+          <span class="pregunta-num">40</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los principios rectores consolidados en el Art. 3° incluyen:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 40)">a) Solo debido proceso</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">b) Solo celeridad</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">c) Debido proceso, igualdad, transparencia, publicidad, eficacia, economía y celeridad</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">d) Solo economía procesal</div>
+          </div>
+          <div class="explicacion">Los principios rectores consolidados son: debido proceso, igualdad, transparencia, publicidad, eficacia, economía y celeridad.</div>
+        </div>
+      </div>
+
+      <div class="resultado-final" id="resultadoFinal">
+        <h3>🏆 Resultado Final</h3>
+        <div class="puntaje-final" id="puntajeFinal">0/40</div>
+        <p id="mensajeFinal"></p>
+        <div class="desglose-temas" id="desgloseTemas"></div>
+        <button onclick="reiniciarQuiz()" class="btn-reset">🔄 Reiniciar Quiz</button>
+      </div>
+
+      <div style="text-align: center; margin-top: 1.5rem;">
+        <button onclick="verResultadoFinal()">📊 Ver Resultado Final</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>️ Guía Didáctica - Medidas Cautelares, Cauciones y Cuestiones Varias</p>
+  <p>Libros Cuarto y Quinto del CGP · Arts. 588 a 627</p>
+  <p style="margin-top: 1rem; opacity: 0.7;">© 2026 - Material educativo interactivo</p>
+</footer>
+
+<script>
+  function toggleAcordeon(header) {
+    header.classList.toggle('active');
+    const content = header.nextElementSibling;
+    content.classList.toggle('active');
+  }
+
+  let respuestas = {};
+  const totalPreguntas = 40;
+
+  function mostrarSeccion(id, tab) {
+    document.querySelectorAll('.quiz-section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.quiz-tab').forEach(t => t.classList.remove('active'));
+    
+    document.getElementById(id).classList.add('active');
+    tab.classList.add('active');
+  }
+
+  function seleccionar(opcion, preguntaNum) {
+    if (respuestas[preguntaNum] !== undefined) return;
+
+    const pregunta = opcion.closest('.pregunta');
+    const opciones = pregunta.querySelectorAll('.opcion');
+    const correcta = parseInt(pregunta.dataset.correcta);
+    const tema = parseInt(pregunta.dataset.tema);
+    const seleccionada = Array.from(opciones).indexOf(opcion);
+    const explicacion = pregunta.querySelector('.explicacion');
+
+    opciones.forEach(o => o.classList.add('disabled'));
+
+    if (seleccionada === correcta) {
+      opcion.classList.add('correcta');
+      respuestas[preguntaNum] = { correcta: true, tema: tema };
+    } else {
+      opcion.classList.add('incorrecta');
+      opciones[correcta].classList.add('correcta');
+      respuestas[preguntaNum] = { correcta: false, tema: tema };
+    }
+
+    explicacion.classList.add('visible');
+    pregunta.classList.add('answered');
+    actualizarEstadisticas();
+  }
+
+  function actualizarEstadisticas() {
+    const total = Object.keys(respuestas).length;
+    const correctas = Object.values(respuestas).filter(r => r.correcta).length;
+    const incorrectas = total - correctas;
+    const porcentaje = total > 0 ? Math.round((correctas / total) * 100) : 0;
+
+    document.getElementById('respondidas').textContent = total;
+    document.getElementById('correctas').textContent = correctas;
+    document.getElementById('incorrectas').textContent = incorrectas;
+    document.getElementById('porcentaje').textContent = porcentaje;
+
+    const progreso = (total / totalPreguntas) * 100;
+    document.getElementById('progressFill').style.width = progreso + '%';
+  }
+
+  function verResultadoFinal() {
+    const total = Object.keys(respuestas).length;
+    
+    if (total < totalPreguntas) {
+      alert(`⚠️ Aún te faltan ${totalPreguntas - total} preguntas por responder.`);
+      return;
+    }
+
+    const correctas = Object.values(respuestas).filter(r => r.correcta).length;
+    const porcentaje = Math.round((correctas / totalPreguntas) * 100);
+
+    const resultadoFinal = document.getElementById('resultadoFinal');
+    resultadoFinal.classList.add('visible');
+
+    document.getElementById('puntajeFinal').textContent = `${correctas}/${totalPreguntas}`;
+
+    let mensaje = '';
+    if (porcentaje === 100) mensaje = '🏆 ¡PERFECTO! Dominas Medidas Cautelares, Cauciones y Cuestiones Varias.';
+    else if (porcentaje >= 90) mensaje = ' ¡Excelente! Dominio sobresaliente.';
+    else if (porcentaje >= 75) mensaje = '✅ ¡Muy bien! Buen dominio.';
+    else if (porcentaje >= 60) mensaje = '📚 Aceptable. Repasa los temas donde fallaste.';
+    else if (porcentaje >= 40) mensaje = '📖 Necesitas reforzar varios conceptos.';
+    else mensaje = '🔍 Es necesario estudiar nuevamente todos los temas.';
+
+    document.getElementById('mensajeFinal').textContent = mensaje;
+
+    const temas = {
+      1: { nombre: 'T1: Cautelares Generales', total: 5, correctas: 0 },
+      2: { nombre: 'T2: Cautelares Ejecutivos', total: 4, correctas: 0 },
+      3: { nombre: 'T3: Cauciones', total: 4, correctas: 0 },
+      4: { nombre: 'T4: Exequátur', total: 5, correctas: 0 },
+      5: { nombre: 'T5: Comisiones Rogatorias', total: 4, correctas: 0 },
+      6: { nombre: 'T6: ANDJE', total: 4, correctas: 0 },
+      7: { nombre: 'T7: Trámites Notariales', total: 4, correctas: 0 },
+      8: { nombre: 'T8: Implementación', total: 5, correctas: 0 },
+      9: { nombre: 'T9: Derogaciones/Vigencia', total: 5, correctas: 0 }
+    };
+
+    Object.values(respuestas).forEach(r => {
+      if (r.correcta) temas[r.tema].correctas++;
+    });
+
+    const desgloseHTML = Object.values(temas).map(t => {
+      const pct = Math.round((t.correctas / t.total) * 100);
+      return `
+        <div class="desglose-item">
+          <h4>${t.nombre}</h4>
+          <p>${t.correctas}/${t.total} (${pct}%)</p>
+          <div class="mini-bar">
+            <div class="mini-bar-fill" style="width: ${pct}%"></div>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    document.getElementById('desgloseTemas').innerHTML = desgloseHTML;
+    resultadoFinal.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  function reiniciarQuiz() {
+    if (!confirm('¿Reiniciar el quiz?')) return;
+
+    respuestas = {};
+
+    document.querySelectorAll('.opcion').forEach(o => o.classList.remove('correcta', 'incorrecta', 'disabled'));
+    document.querySelectorAll('.explicacion').forEach(e => e.classList.remove('visible'));
+    document.querySelectorAll('.pregunta').forEach(p => p.classList.remove('answered'));
+    document.getElementById('resultadoFinal').classList.remove('visible');
+
+    actualizarEstadisticas();
+    mostrarSeccion('s1', document.querySelector('.quiz-tab'));
+    document.getElementById('quiz').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  document.querySelectorAll('nav a').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+</script>
+
+</body>
+</html>
