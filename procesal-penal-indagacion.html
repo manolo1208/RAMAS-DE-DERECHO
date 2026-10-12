@@ -1,0 +1,2399 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Indagación e Investigación - Ley 906 de 2004</title>
+<style>
+  :root {
+    --primary: #7f1d1d;
+    --secondary: #fbbf24;
+    --accent: #991b1b;
+    --light: #fef3f2;
+    --dark: #1a202c;
+    --success: #38a169;
+    --warning: #d69e2e;
+    --danger: #c53030;
+    --card-bg: #ffffff;
+    --shadow: 0 4px 15px rgba(0,0,0,0.08);
+    --shadow-hover: 0 8px 25px rgba(0,0,0,0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    background: var(--light);
+    color: var(--dark);
+    line-height: 1.7;
+  }
+
+  header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    color: white;
+    padding: 2rem 1rem;
+    text-align: center;
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::before {
+    content: '⚖️';
+    position: absolute;
+    font-size: 15rem;
+    opacity: 0.05;
+    top: -30px;
+    right: -30px;
+  }
+
+  header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: 2px;
+  }
+
+  header p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    font-style: italic;
+  }
+
+  nav {
+    background: var(--dark);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow);
+  }
+
+  nav ul {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0.5rem;
+  }
+
+  nav a {
+    color: var(--light);
+    text-decoration: none;
+    padding: 0.7rem 1rem;
+    margin: 0.2rem;
+    border-radius: 5px;
+    font-size: 0.7rem;
+    transition: all 0.3s;
+    display: block;
+  }
+
+  nav a:hover {
+    background: var(--secondary);
+    color: var(--dark);
+    transform: translateY(-2px);
+  }
+
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+  }
+
+  section {
+    background: var(--card-bg);
+    margin-bottom: 2.5rem;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    border-left: 5px solid var(--secondary);
+    scroll-margin-top: 80px;
+  }
+
+  section h2 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--secondary);
+  }
+
+  section h3 {
+    color: var(--accent);
+    font-size: 1.4rem;
+    margin: 1.5rem 0 0.8rem;
+  }
+
+  section h4 {
+    color: var(--primary);
+    font-size: 1.15rem;
+    margin: 1rem 0 0.5rem;
+  }
+
+  p { margin-bottom: 1rem; text-align: justify; }
+
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.2rem;
+    margin: 1.5rem 0;
+  }
+
+  .card {
+    background: linear-gradient(135deg, #fff 0%, #f9f6ef 100%);
+    border: 2px solid var(--secondary);
+    border-radius: 10px;
+    padding: 1.2rem;
+    transition: all 0.3s;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--primary);
+  }
+
+  .card .icon {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .card h4 {
+    text-align: center;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+  }
+
+  .card .detail {
+    display: none;
+    margin-top: 0.8rem;
+    padding-top: 0.8rem;
+    border-top: 1px dashed var(--secondary);
+    font-size: 0.95rem;
+  }
+
+  .card.active .detail { display: block; }
+
+  .card .hint {
+    text-align: center;
+    color: var(--accent);
+    font-size: 0.85rem;
+    font-style: italic;
+  }
+
+  .mapa-container {
+    background: #fdfbf5;
+    border: 2px dashed var(--secondary);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    overflow-x: auto;
+  }
+
+  .mapa {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 600px;
+  }
+
+  .nodo {
+    background: var(--primary);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+    font-weight: bold;
+    text-align: center;
+    min-width: 180px;
+    box-shadow: var(--shadow);
+  }
+
+  .nodo.central {
+    background: linear-gradient(135deg, var(--secondary), #e0b888);
+    color: var(--dark);
+    font-size: 1.2rem;
+    padding: 1rem 2rem;
+  }
+
+  .nodo.sub {
+    background: var(--accent);
+    font-size: 0.95rem;
+  }
+
+  .linea {
+    width: 3px;
+    height: 25px;
+    background: var(--secondary);
+  }
+
+  .linea-h {
+    height: 3px;
+    background: var(--secondary);
+    width: 80%;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .rama {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 1rem;
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  .rama-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    min-width: 140px;
+  }
+
+  .ejemplo {
+    background: #e6f7ee;
+    border-left: 4px solid var(--success);
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .ejemplo strong { color: var(--success); }
+
+  .alerta {
+    background: #fff8e1;
+    border-left: 4px solid var(--warning);
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .alerta strong { color: var(--warning); }
+
+  .cita {
+    background: #f0f7ff;
+    border-left: 4px solid var(--accent);
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+    color: var(--primary);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    font-size: 0.9rem;
+  }
+
+  th {
+    background: var(--primary);
+    color: white;
+    padding: 0.8rem;
+    text-align: left;
+  }
+
+  td {
+    padding: 0.8rem;
+    border-bottom: 1px solid #eee;
+  }
+
+  tr:nth-child(even) { background: #f9f6ef; }
+  tr:hover { background: #f0ead6; }
+
+  .quiz-container {
+    background: linear-gradient(135deg, #f7f4ed 0%, #fff 100%);
+    padding: 1.5rem;
+    border-radius: 10px;
+    border: 2px solid var(--accent);
+  }
+
+  .quiz-header {
+    background: var(--primary);
+    color: white;
+    padding: 1.2rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .quiz-header h3 {
+    color: white;
+    margin: 0 0 0.5rem 0;
+  }
+
+  .progress-bar {
+    background: rgba(255,255,255,0.2);
+    height: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+  }
+
+  .progress-fill {
+    background: var(--secondary);
+    height: 100%;
+    width: 0%;
+    transition: width 0.4s ease;
+  }
+
+  .quiz-stats {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .stat {
+    background: rgba(255,255,255,0.1);
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    font-size: 0.9rem;
+  }
+
+  .stat strong { color: var(--secondary); }
+
+  .quiz-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    padding: 0.5rem;
+    background: #f0ead6;
+    border-radius: 8px;
+  }
+
+  .quiz-tab {
+    background: white;
+    border: 2px solid var(--accent);
+    color: var(--accent);
+    padding: 0.5rem 0.8rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.7rem;
+    transition: all 0.3s;
+    flex: 1;
+    min-width: 70px;
+    text-align: center;
+  }
+
+  .quiz-tab:hover {
+    background: var(--accent);
+    color: white;
+  }
+
+  .quiz-tab.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+  }
+
+  .quiz-section {
+    display: none;
+  }
+
+  .quiz-section.active {
+    display: block;
+    animation: fadeIn 0.4s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .pregunta {
+    margin-bottom: 1.5rem;
+    padding: 1.2rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    border-left: 4px solid var(--accent);
+    transition: all 0.3s;
+  }
+
+  .pregunta.answered {
+    border-left-color: var(--secondary);
+  }
+
+  .pregunta-num {
+    display: inline-block;
+    background: var(--accent);
+    color: white;
+    padding: 0.2rem 0.7rem;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    margin-right: 0.5rem;
+  }
+
+  .pregunta-tipo {
+    display: inline-block;
+    background: var(--secondary);
+    color: var(--dark);
+    padding: 0.2rem 0.7rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    margin-left: 0.3rem;
+    font-weight: bold;
+  }
+
+  .pregunta p { 
+    font-weight: bold; 
+    color: var(--primary); 
+    margin: 0.8rem 0;
+    text-align: left;
+  }
+
+  .opciones { display: flex; flex-direction: column; gap: 0.5rem; }
+
+  .opcion {
+    padding: 0.7rem 1rem;
+    background: #f9f6ef;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+  }
+
+  .opcion:hover:not(.disabled) {
+    border-color: var(--accent);
+    background: #e8f0f7;
+  }
+
+  .opcion.disabled {
+    cursor: not-allowed;
+    opacity: 0.85;
+  }
+
+  .opcion.correcta {
+    background: #c6f6d5;
+    border-color: var(--success);
+    color: var(--success);
+    font-weight: bold;
+  }
+
+  .opcion.incorrecta {
+    background: #fed7d7;
+    border-color: var(--danger);
+    color: var(--danger);
+  }
+
+  .opcion.correcta::after {
+    content: ' ✓';
+    font-weight: bold;
+  }
+
+  .opcion.incorrecta::after {
+    content: ' ✗';
+    font-weight: bold;
+  }
+
+  .explicacion {
+    margin-top: 0.8rem;
+    padding: 0.8rem;
+    background: #f0f7ff;
+    border-left: 3px solid var(--accent);
+    border-radius: 0 6px 6px 0;
+    font-size: 0.9rem;
+    display: none;
+    font-style: italic;
+  }
+
+  .explicacion.visible {
+    display: block;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .resultado-final {
+    margin-top: 2rem;
+    padding: 2rem;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    color: white;
+    border-radius: 12px;
+    text-align: center;
+    display: none;
+  }
+
+  .resultado-final.visible {
+    display: block;
+    animation: fadeIn 0.5s ease;
+  }
+
+  .resultado-final h3 {
+    color: var(--secondary);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .puntaje-final {
+    font-size: 3rem;
+    font-weight: bold;
+    color: var(--secondary);
+    margin: 1rem 0;
+  }
+
+  .desglose-temas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+    text-align: left;
+  }
+
+  .desglose-item {
+    background: rgba(255,255,255,0.1);
+    padding: 1rem;
+    border-radius: 8px;
+  }
+
+  .desglose-item h4 {
+    color: var(--secondary);
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+  }
+
+  .mini-bar {
+    background: rgba(255,255,255,0.2);
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+  }
+
+  .mini-bar-fill {
+    background: var(--secondary);
+    height: 100%;
+    transition: width 0.6s ease;
+  }
+
+  button {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 1rem;
+    transition: all 0.3s;
+  }
+
+  button:hover {
+    background: var(--secondary);
+    color: var(--dark);
+    transform: translateY(-2px);
+  }
+
+  .btn-reset {
+    background: var(--danger);
+    margin-left: 0.5rem;
+  }
+
+  .btn-reset:hover {
+    background: #9b2c2c;
+    color: white;
+  }
+
+  .acordeon-item {
+    margin-bottom: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .acordeon-header {
+    background: var(--accent);
+    color: white;
+    padding: 1rem;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.3s;
+  }
+
+  .acordeon-header:hover { background: var(--primary); }
+
+  .acordeon-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    background: white;
+  }
+
+  .acordeon-content.active {
+    max-height: 2000px;
+    padding: 1rem;
+  }
+
+  .flecha { transition: transform 0.3s; }
+  .acordeon-header.active .flecha { transform: rotate(180deg); }
+
+  footer {
+    background: var(--dark);
+    color: var(--light);
+    text-align: center;
+    padding: 2rem 1rem;
+    margin-top: 2rem;
+  }
+
+  footer p { margin-bottom: 0.5rem; }
+
+  @media (max-width: 768px) {
+    header h1 { font-size: 1.8rem; }
+    section { padding: 1.2rem; }
+    section h2 { font-size: 1.5rem; }
+    nav a { font-size: 0.6rem; padding: 0.3rem 0.4rem; }
+    .quiz-tab { font-size: 0.6rem; padding: 0.3rem 0.4rem; }
+    table { font-size: 0.8rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>️ Indagación e Investigación Penal</h1>
+  <p>Libro Segundo de la Ley 906 de 2004 · Guía Didáctica Interactiva</p>
+</header>
+
+<nav>
+  <ul>
+    <li><a href="#tema1">1. Órganos</a></li>
+    <li><a href="#tema2">2. Sin Autorización</a></li>
+    <li><a href="#tema3">3. Con Autorización</a></li>
+    <li><a href="#tema4">4. Identificación</a></li>
+    <li><a href="#tema5">5. Cadena Custodia</a></li>
+    <li><a href="#tema6">6. Defensa</a></li>
+    <li><a href="#tema7">7. Medios Probatorios</a></li>
+    <li><a href="#tema8">8. Imputación</a></li>
+    <li><a href="#tema9">9. Libertad</a></li>
+    <li><a href="#tema10">10. Oportunidad/Preclusión</a></li>
+    <li><a href="#quiz">Quiz (40)</a></li>
+  </ul>
+</nav>
+
+<main>
+
+  <section>
+    <h2>📚 Introducción</h2>
+    <p>Bienvenido a esta guía interactiva sobre el <strong>Libro Segundo de la Ley 906 de 2004</strong> (Código de Procedimiento Penal Colombiano). Aquí estudiarás la indagación e investigación, los medios cognoscitivos, la formulación de imputación, el régimen de libertad, el principio de oportunidad y la preclusión.</p>
+    <div class="alerta">
+      <strong> Cómo usar esta guía:</strong> Haz clic en las tarjetas para ver detalles, despliega los acordeones para información adicional y prueba tus conocimientos con el quiz de 40 preguntas al final.
+    </div>
+  </section>
+
+  <!-- TEMA 1: ÓRGANOS DE INDAGACIÓN -->
+  <section id="tema1">
+    <h2>1. Órganos de Indagación e Investigación (Arts. 200-212)</h2>
+    <p>La Fiscalía General de la Nación dirige y coordina la investigación con el apoyo de los organismos de Policía Judicial.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">INDAGACIÓN E INVESTIGACIÓN</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Fiscalía General</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Dirección</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Policía Judicial</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Apoyo técnico</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Medicina Legal</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Auxilio científico</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3> Estructura Organizacional</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">️</div>
+        <h4>Fiscalía General de la Nación</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p><strong>Titular y directora</strong> de la investigación penal.</p>
+          <p>Coordina las actuaciones con apoyo de la Policía Judicial.</p>
+          <p>Elabora el <strong>programa metodológico</strong>: planificación estratégica para el descubrimiento de la verdad.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">👮</div>
+        <h4>Policía Judicial</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Organismos de apoyo técnico-científico a la Fiscalía.</p>
+          <p>Incluye CTI, Policía Nacional, DAS (históricamente).</p>
+          <p>Realizan actos urgentes, entrevistas forenses y recolección de evidencia.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🔬</div>
+        <h4>Instituto Nacional de Medicina Legal</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Órgano técnico-científico de auxilio.</p>
+          <p>Realiza necropsias, exámenes de ADN, balística, toxicología.</p>
+          <p>Sus dictámenes son fundamentales como elementos materiales probatorios.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>🔍 Actividades Iniciales</h3>
+    <div class="alerta">
+      <strong>📌 Fases de la investigación:</strong>
+      <ol style="margin-top: 0.5rem; padding-left: 1.5rem;">
+        <li><strong>Recepción de denuncias o querellas</strong></li>
+        <li><strong>Actos urgentes</strong> (preservación de evidencia)</li>
+        <li><strong>Entrevistas forenses</strong> a víctimas y testigos</li>
+        <li><strong>Informe de inicio</strong> de investigación</li>
+        <li><strong>Programa metodológico</strong> del fiscal</li>
+      </ol>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Cuando se recibe una denuncia por homicidio, la Fiscalía asigna un fiscal quien elabora un programa metodológico. La Policía Judicial (CTI) realiza la inspección al lugar de los hechos, Medicina Legal practica la necropsia, y el fiscal coordina todas las actuaciones para descubrir la verdad.
+    </div>
+  </section>
+
+  <!-- TEMA 2: ACTUACIONES SIN AUTORIZACIÓN -->
+  <section id="tema2">
+    <h2>2. Actuaciones sin Autorización Judicial Previa (Arts. 213-245)</h2>
+    <p>Ciertas actuaciones investigativas pueden ser realizadas por la Fiscalía sin requerir autorización previa del juez, aunque algunas exigen control posterior.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">ACTUACIONES SIN AUTORIZACIÓN</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Inspección</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Registros</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Interceptación</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Técnicas Especiales</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Tipos de Actuaciones</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🔍</div>
+        <h4>Inspección de Lugares y Cadáveres</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Examen minucioso y metódico en la escena del hecho para recabar evidencia física.</p>
+          <p>No requiere autorización judicial previa.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🚪</div>
+        <h4>Registros y Allanamientos</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Proceden bajo motivos fundados ordenados por el fiscal.</p>
+          <p><strong>Excepciones:</strong> flagrancia o emergencias.</p>
+          <p><strong>Control posterior:</strong> legalidad dentro de las 36 horas ante Juez de Garantías.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon"></div>
+        <h4>Interceptación de Comunicaciones</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Retención de correspondencia, interceptación de comunicaciones e informática forense.</p>
+          <p>Sujeta a <strong>revisión del Juez de Control de Garantías</strong>.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🕵️</div>
+        <h4>Técnicas Especiales de Investigación</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <ul>
+            <li>Vigilancia de personas y cosas</li>
+            <li>Agentes encubiertos</li>
+            <li>Entregas vigiladas</li>
+            <li>Búsqueda selectiva en bases de datos</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <h3>⚠️ Control de Legalidad Posterior</h3>
+    <div class="alerta">
+      <strong>📌 Regla de las 36 horas:</strong> Los allanamientos, registros e interceptaciones de comunicaciones deben ser presentados ante el Juez de Control de Garantías dentro de las <strong>36 horas siguientes</strong> para control de legalidad. Si no se cumple, la evidencia puede ser excluida.
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si la Fiscalía allana una casa sospechosa de ser laboratorio de drogas a las 10:00 PM del lunes, debe presentar el allanamiento ante el Juez de Control de Garantías antes de las 10:00 PM del miércoles (36 horas) para que revise su legalidad.
+    </div>
+  </section>
+
+  <!-- TEMA 3: ACTUACIONES CON AUTORIZACIÓN -->
+  <section id="tema3">
+    <h2>3. Actuaciones con Autorización Judicial Previa (Arts. 246-253)</h2>
+    <p>Ciertas actuaciones que afectan derechos fundamentales requieren autorización previa del Juez de Control de Garantías.</p>
+
+    <h3>️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">AUTORIZACIÓN JUDICIAL PREVIA</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Inspección Corporal</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Registro Personal</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Muestras Biológicas</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Exámenes a Víctimas</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Actuaciones que Requieren Autorización</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🩺</div>
+        <h4>Inspección Corporal</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Examen físico del imputado que involucre su cuerpo.</p>
+          <p>Requiere autorización previa del Juez de Control de Garantías.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">👤</div>
+        <h4>Registro Personal no Incidental</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Registro del cuerpo o vestimenta del imputado cuando no es incidental a la captura.</p>
+          <p>Requiere control judicial previo.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🧬</div>
+        <h4>Obtención de Muestras</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Toma de muestras biológicas (sangre, ADN, etc.) que involucran al imputado.</p>
+          <p>Exige autorización judicial previa.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">👩</div>
+        <h4>Exámenes a Víctimas</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Reconocimientos físicos y toma de muestras en investigaciones por delitos contra la libertad e integridad sexual.</p>
+          <p>Requieren especial cuidado y autorización judicial.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>🔍 Métodos de Identificación (Arts. 251-253)</h3>
+    <div class="alerta">
+      <strong>📌 Procedimientos técnicos autorizados:</strong>
+      <ul>
+        <li><strong>Reconocimiento por fotografías</strong> (álbumes fotográficos)</li>
+        <li><strong>Reconocimiento en fila de personas</strong> (ruedas de reconocimiento)</li>
+        <li><strong>Cotejos dactiloscópicos</strong> (huellas dactilares)</li>
+        <li><strong>Cotejos morfológicos</strong> (rasgos físicos)</li>
+      </ul>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si la Fiscalía necesita tomar una muestra de ADN al imputado para compararla con evidencia de la escena del crimen, debe solicitar autorización previa al Juez de Control de Garantías, quien evaluará la necesidad y proporcionalidad de la medida.
+    </div>
+  </section>
+
+  <!-- TEMA 4: CADENA DE CUSTODIA -->
+  <section id="tema4">
+    <h2>4. Cadena de Custodia (Arts. 254-266)</h2>
+    <p>Sistema de identificación, embalaje, rotulado, conservación y registro continuo de custodios desde el hallazgo de la evidencia hasta la decisión final.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">CADENA DE CUSTODIA</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Hallazgo</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Embalaje</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Rotulado</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Conservación</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Registro</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Garantía de Autenticidad</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🔒</div>
+        <h4>Identificación</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Cada elemento de evidencia debe ser identificado de manera única e individualizada desde su hallazgo.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📦</div>
+        <h4>Embalaje</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>La evidencia debe ser embalada de manera que preserve sus características originales y evite contaminación.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🏷️</div>
+        <h4>Rotulado</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Cada empaque debe llevar rótulo con información completa: fecha, hora, lugar, quien la recolectó, descripción.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📋</div>
+        <h4>Registro Continuo</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Documentación de cada persona que tiene custodia de la evidencia, desde el hallazgo hasta la decisión final.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3> Macroelementos</h3>
+    <div class="alerta">
+      <strong> Reglas especiales:</strong>
+      <ul>
+        <li><strong>Registro audiovisual:</strong> Obligatorio para evidencias de gran tamaño o que no pueden ser trasladadas fácilmente.</li>
+        <li><strong>Devolución provisional:</strong> Bienes de gran tamaño pueden ser devueltos provisionalmente a su propietario mientras dura el proceso.</li>
+      </ul>
+    </div>
+
+    <h3>⚠️ Importancia Procesal</h3>
+    <div class="cita">
+      <strong>"La ruptura de la cadena de custodia puede generar la exclusión de la evidencia por violación del debido proceso, al no poderse garantizar su autenticidad e integridad."</strong>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si se encuentra un arma en la escena del crimen, debe ser: (1) identificada con número único, (2) embalada en bolsa especial, (3) rotulada con fecha/hora/lugar, (4) registrada cada persona que la manipula, y (5) almacenada en bodega de evidencia. Si se rompe esta cadena, el arma podría ser excluida como prueba.
+    </div>
+  </section>
+
+  <!-- TEMA 5: FACULTADES DE LA DEFENSA -->
+  <section id="tema5">
+    <h2>5. Facultades de la Defensa en la Investigación (Arts. 267-274)</h2>
+    <p>La defensa tiene facultades amplias para realizar investigación defensiva durante la etapa de indagación e investigación.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">DEFENSA TÉCNICA</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Investigación Defensiva</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Entrevistas</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Declaraciones Juradas</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Prueba Anticipada</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Herramientas de la Defensa</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🔍</div>
+        <h4>Investigación Defensiva</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Búsqueda, recolección y análisis de elementos materiales probatorios por cuenta propia o a través de laboratorios autorizados.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🎤</div>
+        <h4>Entrevistas a Personas</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>La defensa puede entrevistar a testigos y personas relevantes para el caso, sin coerción.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📝</div>
+        <h4>Declaraciones Juradas</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Obtención de declaraciones juradas de testigos que pueden ser presentadas como elementos materiales probatorios.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚡</div>
+        <h4>Prueba Anticipada</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Solicitud ante el Juez de Control de Garantías para practicar pruebas que podrían perderse o alterarse antes del juicio oral.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>⚖️ Principio de Igualdad de Armas</h3>
+    <div class="alerta">
+      <strong>📌 La defensa tiene derecho a:</strong>
+      <ul>
+        <li>Acceder a todos los elementos materiales probatorios y evidencia física</li>
+        <li>Conocer el programa metodológico de la Fiscalía</li>
+        <li>Solicitar prácticas de pruebas anticipadas</li>
+        <li>Contratar peritos propios</li>
+        <li>Participar en actos de investigación cuando la ley lo permita</li>
+      </ul>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si la Fiscalía tiene un testigo clave que está gravemente enfermo, la defensa puede solicitar al Juez de Control de Garantías que se practique prueba anticipada de su testimonio, para evitar que se pierda por su fallecimiento antes del juicio oral.
+    </div>
+  </section>
+
+  <!-- TEMA 6: MEDIOS COGNOSCITIVOS -->
+  <section id="tema6">
+    <h2>6. Medios Cognoscitivos (Arts. 275-285)</h2>
+    <p>Los elementos materiales probatorios, evidencia física e información son los medios mediante los cuales se reconstruyen los hechos en el proceso penal.</p>
+
+    <h3> Catálogo de Elementos</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Tipo</th>
+          <th>Ejemplos</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Huellas</strong></td>
+          <td>Dactilares, de calzado, de llantas, biológicas</td>
+        </tr>
+        <tr>
+          <td><strong>Armas</strong></td>
+          <td>Armas de fuego, armas blancas, explosivos</td>
+        </tr>
+        <tr>
+          <td><strong>Documentos</strong></td>
+          <td>Contratos, cartas, registros contables</td>
+        </tr>
+        <tr>
+          <td><strong>Mensajes de datos</strong></td>
+          <td>Correos electrónicos, mensajes de texto, redes sociales</td>
+        </tr>
+        <tr>
+          <td><strong>Grabaciones</strong></td>
+          <td>Audio, video, fotografías</td>
+        </tr>
+        <tr>
+          <td><strong>Evidencia de campo</strong></td>
+          <td>Restos biológicos, fibras, tierra, vegetación</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>⚖️ Requisitos de Legalidad y Valoración</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">️</div>
+        <h4>Legalidad</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Adquisición conforme a la Constitución y Tratados Internacionales de DDHH.</p>
+          <p>Respeto del debido proceso en su obtención.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🔗</div>
+        <h4>Cadena de Custodia</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Sometimiento estricto a las reglas de cadena de custodia.</p>
+          <p>Garantía de autenticidad e integridad.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>🎤 Interrogatorio al Indiciado e Imputado</h3>
+    <div class="alerta">
+      <strong>📌 Garantías fundamentales:</strong>
+      <ul>
+        <li><strong>Derecho al silencio:</strong> No puede ser obligado a autoincriminarse</li>
+        <li><strong>Asistencia de defensor:</strong> Obligatorio desde el primer interrogatorio</li>
+        <li><strong>Aceptación voluntaria:</strong> Si decide declarar, debe ser de forma libre y voluntaria</li>
+        <li><strong>Información clara:</strong> Debe ser informado de los hechos que se le atribuyen</li>
+      </ul>
+    </div>
+
+    <h3>⚡ Prueba Anticipada</h3>
+    <div class="cita">
+      <strong>"Tramitación excepcional ante el Juez de Control de Garantías por necesidad urgente de evitar la pérdida o alteración del medio probatorio."</strong>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Un testigo presencial de un accidente de tránsito está en estado crítico en el hospital. La defensa o la Fiscalía pueden solicitar prueba anticipada de su testimonio ante el Juez de Control de Garantías, para que su declaración quede registrada antes de que fallezca.
+    </div>
+  </section>
+
+  <!-- TEMA 7: FORMULACIÓN DE IMPUTACIÓN -->
+  <section id="tema7">
+    <h2>7. Formulación de la Imputación (Arts. 286-294)</h2>
+    <p>Acto de comunicación formal mediante el cual la Fiscalía comunica a una persona su calidad de imputado ante el Juez de Control de Garantías.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">FORMULACIÓN DE IMPUTACIÓN</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Individualización</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Hechos</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Derechos</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Efectos</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Contenido del Acto de Imputación</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">👤</div>
+        <h4>Individualización</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Identificación completa del investigado: nombres, apellidos, documento de identidad, datos de contacto.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📝</div>
+        <h4>Relación de Hechos</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Descripción clara y detallada de los hechos jurídicamente relevantes que se le atribuyen.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Información de Derechos</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Se informa al imputado sobre:</p>
+          <ul>
+            <li>Derecho a guardar silencio</li>
+            <li>Derecho a no autoincriminarse</li>
+            <li>Posibilidad de allanamiento a cargos</li>
+            <li>Derecho a defenderse</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <h3>⚡ Efectos Procesales de la Imputación</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Efecto</th>
+          <th>Descripción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Interrupción de la prescripción</strong></td>
+          <td>Se interrumpe el término prescriptivo de la acción penal</td>
+        </tr>
+        <tr>
+          <td><strong>Activación del derecho de defensa</strong></td>
+          <td>El imputado adquiere plenas facultades de defensa técnica</td>
+        </tr>
+        <tr>
+          <td><strong>Restricción temporal</strong></td>
+          <td>Prohibición de enajenar bienes sujetos a registro</td>
+        </tr>
+        <tr>
+          <td><strong>Inicio de términos</strong></td>
+          <td>Comienza a correr el plazo de 90-120 días para acusar o precluir</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>⏰ Vencimiento de Términos</h3>
+    <div class="alerta">
+      <strong> Plazos perentorios:</strong>
+      <ul>
+        <li><strong>90 días</strong> para formular acusación o solicitar preclusión (regla general)</li>
+        <li><strong>120 días</strong> en casos de concurso de delitos, múltiples imputados o delitos complejos</li>
+        <li>Vencido el término sin acusación ni preclusión → el imputado recupera su libertad si está detenido</li>
+      </ul>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si A es imputado por homicidio el 1° de marzo de 2024, la Fiscalía tiene hasta el 29 de mayo de 2024 (90 días) para presentar escrito de acusación o solicitar preclusión. Si no lo hace, A debe ser liberado si está detenido preventivamente.
+    </div>
+  </section>
+
+  <!-- TEMA 8: RÉGIMEN DE LIBERTAD -->
+  <section id="tema8">
+    <h2>8. Régimen de la Libertad y su Restricción (Arts. 295-320)</h2>
+    <p>La privación o restricción preventiva de la libertad es excepcional y debe responder a criterios de necesidad, proporcionalidad y razonabilidad.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">RÉGIMEN DE LIBERTAD</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Captura</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Arts. 297-305</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Medidas de Aseguramiento</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Arts. 306-320</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>⚖️ Carácter Excepcional (Art. 295)</h3>
+    <div class="cita">
+      <strong>"La privación o restricción preventiva de la libertad es de interpretación restrictiva y debe responder a criterios de necesidad, proporcionalidad y razonabilidad."</strong> — Art. 295 Ley 906/2004
+    </div>
+
+    <h3>📋 Finalidades de la Restricción</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Evitar Obstrucción</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Impedir que el imputado destruya, altere u oculte elementos materiales probatorios o influya en testigos.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🏃</div>
+        <h4>Asegurar Comparecencia</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Garantizar que el imputado se presente a todas las etapas del proceso judicial.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🛡️</div>
+        <h4>Proteger Víctimas</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Proteger a las víctimas o a la comunidad de posibles actos de violencia o intimidación.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🔒</div>
+        <h4>Garantizar Pena</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Asegurar el cumplimiento de la pena en caso de condena.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3> Modalidades de Captura (Arts. 297-305)</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Tipo</th>
+          <th>Características</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Orden Judicial Previa</strong></td>
+          <td>Expedida por Juez de Control de Garantías, vigencia máxima de 1 año prorrogable</td>
+        </tr>
+        <tr>
+          <td><strong>Flagrancia</strong></td>
+          <td>Aprehensión inmediata; legalización en audiencia dentro de 36 horas</td>
+        </tr>
+        <tr>
+          <td><strong>Captura Excepcional</strong></td>
+          <td>Por Fiscalía cuando no hay juez disponible y existe riesgo inminente de fuga o alteración probatoria</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3> Medidas de Aseguramiento (Arts. 306-320)</h3>
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>️ Medidas Privativas de Libertad</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <ul>
+          <li><strong>Detención en centro carcelario:</strong> Reclusión en establecimiento penitenciario</li>
+          <li><strong>Detención domiciliaria:</strong> Prisión en el lugar de residencia (sustitutiva)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📡 Medidas No Privativas de Libertad</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <ul>
+          <li><strong>Vigilancia electrónica:</strong> Uso de dispositivos de monitoreo</li>
+          <li><strong>Cauciones:</strong> Depósitos de dinero o garantías</li>
+          <li><strong>Prohibición de salir del país:</strong> Retención de pasaporte</li>
+          <li><strong>Prohibición de comunicarse con víctimas:</strong> Órdenes de alejamiento</li>
+          <li><strong>Presentación periódica:</strong> Comparecencia ante autoridad</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>⚖️ Requisitos de Procedencia</h3>
+    <div class="alerta">
+      <strong>📌 Para decretar medida de aseguramiento se requiere:</strong>
+      <ol style="margin-top: 0.5rem; padding-left: 1.5rem;">
+        <li><strong>Inferencia razonable de autoría o participación</strong> en el delito</li>
+        <li><strong>Necesidad de la medida</strong> basada en alguno de los siguientes criterios:
+          <ul>
+            <li>Riesgo de obstrucción a la justicia</li>
+            <li>Peligro para la comunidad o la víctima</li>
+            <li>Riesgo de fuga o no comparecencia</li>
+          </ul>
+        </li>
+        <li><strong>Proporcionalidad</strong> entre la medida y la gravedad del delito</li>
+      </ol>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si A es capturado en flagrancia por homicidio, debe ser presentado ante el Juez de Control de Garantías dentro de las 36 horas siguientes. El fiscal solicita medida de aseguramiento en centro carcelario, argumentando riesgo de fuga (A no tiene domicilio fijo) y peligro para la comunidad (amenazas previas). El juez evalúa los requisitos y decide si decreta la medida.
+    </div>
+  </section>
+
+  <!-- TEMA 9: PRINCIPIO DE OPORTUNIDAD -->
+  <section id="tema9">
+    <h2>9. Principio de Oportunidad y Política Criminal (Arts. 321-330)</h2>
+    <p>Facultad constitucional de la Fiscalía para suspender, interrumpir o renunciar a la persecución penal con fundamento en causales taxativas de política criminal.</p>
+
+    <h3>️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">PRINCIPIO DE OPORTUNIDAD</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Renuncia</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Suspensión</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Inmunidad</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Control Judicial</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Modalidades</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🚫</div>
+        <h4>Renuncia a la Acción Penal</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>La Fiscalía decide no ejercer la acción penal cuando se cumplen los requisitos legales.</p>
+          <p>Aplica en casos de mínima lesividad o cuando el interés público no exige persecución.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⏸️</div>
+        <h4>Suspensión del Procedimiento a Prueba</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Se suspende el proceso condicionado al cumplimiento de reglas de conducta por parte del imputado.</p>
+          <p>Si cumple las condiciones, se extingue la acción penal.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon"></div>
+        <h4>Inmunidad por Testimonio</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Se otorga inmunidad a quien colabora con la justicia proporcionando información decisiva sobre delitos más graves.</p>
+          <p>Común en casos de crimen organizado y corrupción.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>⚖️ Control Judicial de Legalidad</h3>
+    <div class="alerta">
+      <strong>📌 Audiencia obligatoria:</strong>
+      <ul>
+        <li>Se realiza ante el <strong>Juez de Control de Garantías</strong></li>
+        <li>Dentro de los <strong>5 días siguientes</strong> a la decisión de la Fiscalía</li>
+        <li>Participan: Fiscalía, Defensa, Víctima y Ministerio Público</li>
+        <li>El juez verifica el cumplimiento de los requisitos legales y constitucionales</li>
+      </ul>
+    </div>
+
+    <h3> Causales Taxativas</h3>
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📋 Causales del Principio de Oportunidad</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <ol>
+          <li>Cuando el aporte esencial para evitar la continuación del delito o sus efectos sea más importante que la pena</li>
+          <li>Cuando el imputado colabore eficazmente con la investigación</li>
+          <li>Cuando se trate de delitos de mínima lesividad</li>
+          <li>Cuando el imputado haya sufrido una reducción grave y permanente de su capacidad física o psíquica</li>
+          <li>Cuando la pena proyectada carezca de importancia en consideración al delito ya sufrido</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si A es miembro de una banda criminal y decide colaborar con la Fiscalía proporcionando información que permite desarticular toda la organización y capturar a los cabecillas, puede acogerse al principio de oportunidad y obtener inmunidad o reducción significativa de pena.
+    </div>
+  </section>
+
+  <!-- TEMA 10: PRECLUSIÓN -->
+  <section id="tema10">
+    <h2>10. De la Preclusión (Arts. 331-335)</h2>
+    <p>La preclusión pone fin definitivamente a la persecución penal cuando se configuran ciertas causales legales.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">PRECLUSIÓN</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Causales</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Trámite</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Efectos</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Causales de Preclusión (Art. 332)</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🚫</div>
+        <h4>Imposibilidad de Iniciar/Continuar</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Cuando es imposible iniciar o continuar la acción penal (ej: muerte del imputado, prescripción).</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Causal de Ausencia de Responsabilidad</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Cuando existe causal de ausencia de responsabilidad (legítima defensa, estado de necesidad, etc.).</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon"></div>
+        <h4>Inexistencia o Atipicidad</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Cuando el hecho no existe o no constituye delito (atipicidad de la conducta).</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon"></div>
+        <h4>Falta de Intervención</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Cuando el imputado no intervino en el hecho punible.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon"></div>
+        <h4>Imposibilidad de Desvirtuar Presunción</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Cuando no es posible desvirtuar la presunción de inocencia del imputado.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>⚙️ Trámite Procesal</h3>
+    <div class="alerta">
+      <strong>📌 Procedimiento:</strong>
+      <ol style="margin-top: 0.5rem; padding-left: 1.5rem;">
+        <li><strong>Solicitud motivada del fiscal</strong> ante el Juez de Conocimiento</li>
+        <li><strong>Audiencia pública</strong> con participación de:
+          <ul>
+            <li>Fiscalía</li>
+            <li>Defensa</li>
+            <li>Víctimas</li>
+            <li>Ministerio Público</li>
+          </ul>
+        </li>
+        <li><strong>Decisión judicial</strong> fundamentada</li>
+      </ol>
+    </div>
+
+    <h3>⚡ Efectos de la Preclusión</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Efecto</th>
+          <th>Descripción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Cosa Juzgada</strong></td>
+          <td>Sentencia con fuerza de cosa juzgada material</td>
+        </tr>
+        <tr>
+          <td><strong>Cese de persecución</strong></td>
+          <td>Termina definitivamente la persecución penal</td>
+        </tr>
+        <tr>
+          <td><strong>Revocatoria de medidas</strong></td>
+          <td>Se revocan todas las medidas cautelares decretadas</td>
+        </tr>
+        <tr>
+          <td><strong>Libertad</strong></td>
+          <td>Si el imputado está detenido, debe ser liberado inmediatamente</td>
+        </tr>
+        <tr>
+          <td><strong>Entrega de bienes</strong></td>
+          <td>Se entregan los bienes embargados o secuestrados</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si la Fiscalía investiga a A por homicidio, pero durante la investigación descubre que A estaba en otro país al momento del hecho (tiene coartada verificada), el fiscal solicita preclusión por "falta de intervención del imputado". El juez celebra audiencia pública y, si verifica la coartada, decreta preclusión con efectos de cosa juzgada. A es liberado si estaba detenido y se le devuelven sus bienes embargados.
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz">
+    <h2>🎯 Quiz Completo - 40 Preguntas</h2>
+    <p>Pon a prueba tus conocimientos sobre el Libro Segundo de la Ley 906 de 2004.</p>
+
+    <div class="quiz-container">
+      <div class="quiz-header">
+        <h3>📊 Tu Progreso</h3>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="quiz-stats">
+          <div class="stat">Respondidas: <strong id="respondidas">0</strong>/40</div>
+          <div class="stat">Correctas: <strong id="correctas">0</strong></div>
+          <div class="stat">Incorrectas: <strong id="incorrectas">0</strong></div>
+          <div class="stat">Porcentaje: <strong id="porcentaje">0</strong>%</div>
+        </div>
+      </div>
+
+      <div class="quiz-tabs">
+        <div class="quiz-tab active" onclick="mostrarSeccion('s1', this)">T1 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s2', this)">T2 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s3', this)">T3 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s4', this)">T4 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s5', this)">T5 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s6', this)">T6 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s7', this)">T7 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s8', this)">T8 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s9', this)">T9 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s10', this)">T10 (4)</div>
+      </div>
+
+      <!-- SECCIÓN 1: ÓRGANOS -->
+      <div class="quiz-section active" id="s1">
+        <div class="pregunta" data-correcta="1" data-tema="1">
+          <span class="pregunta-num">1</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El órgano que dirige y coordina la investigación penal es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 1)">a) La Policía Nacional</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">b) La Fiscalía General de la Nación</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">c) El Juez de Control de Garantías</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">d) El Instituto de Medicina Legal</div>
+          </div>
+          <div class="explicacion">La Fiscalía General de la Nación dirige y coordina la investigación penal con apoyo de la Policía Judicial (Arts. 200-212).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="1">
+          <span class="pregunta-num">2</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El programa metodológico es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 2)">a) Un documento judicial</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">b) Una resolución de la Corte</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">c) La planificación estratégica del fiscal para el descubrimiento de la verdad</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">d) Un acuerdo entre partes</div>
+          </div>
+          <div class="explicacion">El programa metodológico es la planificación estratégica estructurada por el fiscal para el descubrimiento de la verdad y de los elementos probatorios.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="1">
+          <span class="pregunta-num">3</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El Instituto Nacional de Medicina Legal cumple la función de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 3)">a) Órgano técnico-científico de auxilio</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">b) Órgano judicial</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">c) Órgano de defensa</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">d) Órgano legislativo</div>
+          </div>
+          <div class="explicacion">El Instituto Nacional de Medicina Legal y Ciencias Forenses es el órgano técnico-científico de auxilio en la investigación penal.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="1">
+          <span class="pregunta-num">4</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Las actividades iniciales de la investigación incluyen:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 4)">a) Solo la recepción de denuncias</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">b) Solo actos urgentes</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">c) Solo entrevistas forenses</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">d) Recepción de denuncias, actos urgentes, entrevistas forenses e informe de inicio</div>
+          </div>
+          <div class="explicacion">Las actividades iniciales incluyen recepción de denuncias o querellas, realización de actos urgentes, entrevistas forenses e informe de inicio.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 2: SIN AUTORIZACIÓN -->
+      <div class="quiz-section" id="s2">
+        <div class="pregunta" data-correcta="1" data-tema="2">
+          <span class="pregunta-num">5</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La inspección de lugares y cadáveres:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 5)">a) Requiere autorización judicial previa</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">b) No requiere autorización judicial previa</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">c) Solo la puede hacer un juez</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">d) Requiere consentimiento del imputado</div>
+          </div>
+          <div class="explicacion">La inspección de lugares y cadáveres no requiere autorización judicial previa; puede ser realizada directamente por la Fiscalía.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="2">
+          <span class="pregunta-num">6</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los allanamientos requieren control de legalidad dentro de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 6)">a) 36 horas</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">b) 24 horas</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">c) 48 horas</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">d) 72 horas</div>
+          </div>
+          <div class="explicacion">Los allanamientos y registros deben ser presentados ante el Juez de Control de Garantías dentro de las 36 horas siguientes para control de legalidad.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="2">
+          <span class="pregunta-num">7</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Las técnicas especiales de investigación incluyen:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 7)">a) Solo interceptación de comunicaciones</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">b) Solo agentes encubiertos</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">c) Vigilancia, agentes encubiertos, entregas vigiladas y búsqueda en bases de datos</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">d) Solo registros domiciliarios</div>
+          </div>
+          <div class="explicacion">Las técnicas especiales incluyen vigilancia de personas y cosas, agentes encubiertos, entregas vigiladas y búsqueda selectiva en bases de datos.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="2">
+          <span class="pregunta-num">8</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La interceptación de comunicaciones está sujeta a:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 8)">a) Control de la Fiscalía</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">b) Control de la Policía</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">c) Control del Ministerio Público</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">d) Revisión del Juez de Control de Garantías</div>
+          </div>
+          <div class="explicacion">La interceptación de comunicaciones está sujeta a revisión del Juez de Control de Garantías para garantizar los derechos fundamentales.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 3: CON AUTORIZACIÓN -->
+      <div class="quiz-section" id="s3">
+        <div class="pregunta" data-correcta="2" data-tema="3">
+          <span class="pregunta-num">9</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La inspección corporal requiere:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 9)">a) Solo orden del fiscal</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">b) Consentimiento del imputado</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">c) Autorización previa del Juez de Control de Garantías</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">d) Orden de la Policía</div>
+          </div>
+          <div class="explicacion">La inspección corporal que afecta derechos fundamentales requiere autorización previa del Juez de Control de Garantías (Arts. 246-250).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="3">
+          <span class="pregunta-num">10</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los exámenes a víctimas en delitos sexuales:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 10)">a) Requieren especial cuidado y autorización judicial</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">b) No requieren autorización</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">c) Solo requieren consentimiento de la víctima</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">d) Los puede ordenar cualquier funcionario</div>
+          </div>
+          <div class="explicacion">Los reconocimientos físicos y toma de muestras en investigaciones por delitos contra la libertad e integridad sexual requieren especial cuidado y autorización judicial.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="3">
+          <span class="pregunta-num">11</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los métodos de identificación incluyen:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 11)">a) Solo reconocimiento en fila</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">b) Reconocimiento por fotografías, fila de personas, cotejos dactiloscópicos y morfológicos</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">c) Solo pruebas de ADN</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">d) Solo testimonios</div>
+          </div>
+          <div class="explicacion">Los métodos de identificación incluyen reconocimiento por fotografías, reconocimiento en fila de personas, cotejos dactiloscópicos y morfológicos (Arts. 251-253).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="3">
+          <span class="pregunta-num">12</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El registro personal incidental a la captura:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 12)">a) Siempre requiere autorización judicial</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">b) Está prohibido</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">c) Solo lo puede hacer un médico</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">d) No requiere autorización judicial previa cuando es incidental a la captura</div>
+          </div>
+          <div class="explicacion">El registro personal incidental a la captura no requiere autorización judicial previa, a diferencia del registro personal no incidental.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 4: CADENA DE CUSTODIA -->
+      <div class="quiz-section" id="s4">
+        <div class="pregunta" data-correcta="1" data-tema="4">
+          <span class="pregunta-num">13</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La cadena de custodia garantiza:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 13)">a) Solo el almacenamiento</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">b) La autenticidad e integridad de la evidencia desde su hallazgo hasta la decisión final</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">c) Solo el transporte</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">d) Solo la presentación en juicio</div>
+          </div>
+          <div class="explicacion">La cadena de custodia es el sistema de identificación, embalaje, rotulado, conservación y registro continuo que garantiza la autenticidad de la evidencia.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="4">
+          <span class="pregunta-num">14</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La ruptura de la cadena de custodia puede generar:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 14)">a) La exclusión de la evidencia por violación del debido proceso</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">b) Solo una amonestación</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">c) Nada, la evidencia sigue siendo válida</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">d) Solo multa al funcionario</div>
+          </div>
+          <div class="explicacion">La ruptura de la cadena de custodia puede generar la exclusión de la evidencia por violación del debido proceso, al no poder garantizar su autenticidad.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="4">
+          <span class="pregunta-num">15</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los macroelementos de la cadena de custodia incluyen:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 15)">a) Solo el embalaje</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">b) Solo el rotulado</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">c) Registro audiovisual y devolución provisional de bienes de gran tamaño</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">d) Solo la conservación</div>
+          </div>
+          <div class="explicacion">Los macroelementos incluyen reglas de registro audiovisual y devolución provisional de bienes de gran tamaño (Arts. 254-266).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="4">
+          <span class="pregunta-num">16</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El registro de custodios debe documentar:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 16)">a) Solo el primer custodio</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">b) Solo el último custodio</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">c) Solo los custodios principales</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">d) Cada persona que tiene custodia de la evidencia desde el hallazgo hasta la decisión final</div>
+          </div>
+          <div class="explicacion">El registro debe documentar cada persona que tiene custodia de la evidencia, garantizando la trazabilidad completa.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 5: DEFENSA -->
+      <div class="quiz-section" id="s5">
+        <div class="pregunta" data-correcta="1" data-tema="5">
+          <span class="pregunta-num">17</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La investigación defensiva permite a la defensa:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 17)">a) Solo conocer los elementos de la Fiscalía</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">b) Buscar, recolectar y analizar elementos materiales probatorios por cuenta propia</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">c) Solo presentar recursos</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">d) Solo interrogar testigos en juicio</div>
+          </div>
+          <div class="explicacion">La investigación defensiva permite a la defensa buscar, recolectar y analizar elementos materiales probatorios por cuenta propia o a través de laboratorios autorizados.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="5">
+          <span class="pregunta-num">18</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La prueba anticipada se solicita ante:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 18)">a) El Juez de Control de Garantías</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">b) La Fiscalía</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">c) La Policía Judicial</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">d) El Ministerio Público</div>
+          </div>
+          <div class="explicacion">La prueba anticipada se solicita ante el Juez de Control de Garantías cuando existe necesidad urgente de evitar la pérdida o alteración del medio probatorio.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="5">
+          <span class="pregunta-num">19</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El principio de igualdad de armas garantiza:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 19)">a) Solo el acceso a expedientes</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">b) Solo la presencia en audiencias</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">c) Que la defensa tenga facultades equivalentes a la Fiscalía para investigar y presentar pruebas</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">d) Solo el derecho al silencio</div>
+          </div>
+          <div class="explicacion">La igualdad de armas garantiza que la defensa tenga facultades equivalentes a la Fiscalía para investigar, recolectar pruebas y participar en la investigación.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="5">
+          <span class="pregunta-num">20</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Las declaraciones juradas obtenidas por la defensa:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 20)">a) No tienen valor probatorio</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">b) Solo valen si las toma un juez</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">c) Solo valen en la investigación</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">d) Pueden ser presentadas como elementos materiales probatorios</div>
+          </div>
+          <div class="explicacion">Las declaraciones juradas obtenidas por la defensa pueden ser presentadas como elementos materiales probatorios en el proceso.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 6: MEDIOS COGNOSCITIVOS -->
+      <div class="quiz-section" id="s6">
+        <div class="pregunta" data-correcta="2" data-tema="6">
+          <span class="pregunta-num">21</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los elementos materiales probatorios incluyen:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 21)">a) Solo documentos</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">b) Solo armas</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">c) Huellas, armas, documentos, mensajes de datos, grabaciones y evidencia de campo</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">d) Solo testimonios</div>
+          </div>
+          <div class="explicacion">Los elementos materiales probatorios incluyen huellas, armas, documentos, mensajes de datos, grabaciones y evidencia de campo (Arts. 275-285).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="6">
+          <span class="pregunta-num">22</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El derecho al silencio del indiciado/imputado es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 22)">a) Una garantía fundamental contra la autoincriminación</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">b) Solo aplicable en juicio</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">c) Renunciable en cualquier momento</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">d) Solo para delitos graves</div>
+          </div>
+          <div class="explicacion">El derecho al silencio es una garantía fundamental contra la autoincriminación, aplicable desde el primer interrogatorio.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="6">
+          <span class="pregunta-num">23</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los mensajes de datos como elemento probatorio:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 23)">a) No son admisibles</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">b) Son admisibles si se obtienen legalmente y mantienen cadena de custodia</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">c) Solo si son impresos</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">d) Solo con autorización del proveedor</div>
+          </div>
+          <div class="explicacion">Los mensajes de datos (correos electrónicos, mensajes de texto, redes sociales) son admisibles como elementos materiales probatorios si se obtienen legalmente.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="6">
+          <span class="pregunta-num">24</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La prueba anticipada procede cuando:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 24)">a) La defensa lo solicita sin justificación</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">b) El fiscal lo considera conveniente</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">c) Hay testigos disponibles</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">d) Existe necesidad urgente de evitar la pérdida o alteración del medio probatorio</div>
+          </div>
+          <div class="explicacion">La prueba anticipada procede excepcionalmente cuando existe necesidad urgente de evitar la pérdida o alteración del medio probatorio.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 7: IMPUTACIÓN -->
+      <div class="quiz-section" id="s7">
+        <div class="pregunta" data-correcta="1" data-tema="7">
+          <span class="pregunta-num">25</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La formulación de imputación es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 25)">a) Una sentencia judicial</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">b) Un acto de comunicación formal de la calidad de imputado ante el Juez de Control de Garantías</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">c) Una acusación formal</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">d) Una medida de aseguramiento</div>
+          </div>
+          <div class="explicacion">La formulación de imputación es el acto de comunicación formal mediante el cual la Fiscalía comunica a una persona su calidad de imputado ante el Juez de Control de Garantías.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="7">
+          <span class="pregunta-num">26</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La imputación interrumpe:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 26)">a) El término prescriptivo de la acción penal</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">b) Solo el término de investigación</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">c) El término de la pena</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">d) El término de apelación</div>
+          </div>
+          <div class="explicacion">La formulación de imputación interrumpe el término prescriptivo de la acción penal (Art. 287).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="7">
+          <span class="pregunta-num">27</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El plazo para formular acusación o solicitar preclusión después de la imputación es de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 27)">a) 30 a 60 días</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">b) 60 a 90 días</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">c) 90 a 120 días</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">d) 120 a 180 días</div>
+          </div>
+          <div class="explicacion">El plazo es de 90 a 120 días desde la imputación para presentar escrito de acusación o solicitar preclusión (Art. 294).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="7">
+          <span class="pregunta-num">28</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La imputación activa:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 28)">a) Solo el derecho al silencio</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">b) Solo el derecho a la defensa</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">c) Solo el derecho a la presunción de inocencia</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">d) El derecho de defensa técnica y la restricción temporal para enajenar bienes</div>
+          </div>
+          <div class="explicacion">La imputación activa el derecho de defensa técnica y genera restricción temporal para enajenar bienes sujetos a registro.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 8: LIBERTAD -->
+      <div class="quiz-section" id="s8">
+        <div class="pregunta" data-correcta="1" data-tema="8">
+          <span class="pregunta-num">29</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La privación preventiva de la libertad es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 29)">a) La regla general</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">b) De carácter excepcional y de interpretación restrictiva</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">c) Automática tras la imputación</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">d) Decidida por la Fiscalía</div>
+          </div>
+          <div class="explicacion">La privación o restricción preventiva de la libertad es de carácter excepcional y de interpretación restrictiva (Art. 295).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="8">
+          <span class="pregunta-num">30</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La captura en flagrancia debe ser legalizada en audiencia dentro de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 30)">a) 36 horas</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">b) 24 horas</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">c) 48 horas</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">d) 72 horas</div>
+          </div>
+          <div class="explicacion">La captura en flagrancia debe ser legalizada en audiencia preliminar dentro de las 36 horas siguientes (Art. 301).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="8">
+          <span class="pregunta-num">31</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Las medidas de aseguramiento no privativas de la libertad incluyen:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 31)">a) Solo cauciones</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">b) Solo vigilancia electrónica</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">c) Vigilancia electrónica, cauciones, prohibición de salir del país y de comunicarse con víctimas</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">d) Solo prohibición de comunicarse</div>
+          </div>
+          <div class="explicacion">Las medidas no privativas incluyen vigilancia electrónica, cauciones, prohibición de salir del país, prohibición de comunicarse con víctimas, entre otras.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="8">
+          <span class="pregunta-num">32</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Para decretar medida de aseguramiento se requiere:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 32)">a) Solo la solicitud del fiscal</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">b) Solo la gravedad del delito</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">c) Solo el riesgo de fuga</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">d) Inferencia razonable de autoría y necesidad de la medida</div>
+          </div>
+          <div class="explicacion">Se requiere inferencia razonable de autoría/participación y sustentación de la medida en criterios de necesidad (obstrucción, peligro, riesgo de fuga).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 9: PRINCIPIO DE OPORTUNIDAD -->
+      <div class="quiz-section" id="s9">
+        <div class="pregunta" data-correcta="1" data-tema="9">
+          <span class="pregunta-num">33</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El principio de oportunidad es una facultad de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 33)">a) El Juez de Control de Garantías</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">b) La Fiscalía General de la Nación</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">c) La Defensa</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">d) El Ministerio Público</div>
+          </div>
+          <div class="explicacion">El principio de oportunidad es una facultad constitucional de la Fiscalía General de la Nación para suspender, interrumpir o renunciar a la persecución penal.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="9">
+          <span class="pregunta-num">34</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El control judicial del principio de oportunidad se realiza dentro de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 34)">a) 5 días siguientes a la decisión</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">b) 10 días</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">c) 15 días</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">d) 30 días</div>
+          </div>
+          <div class="explicacion">El control judicial de legalidad se realiza en audiencia obligatoria dentro de los 5 días siguientes a la decisión de la Fiscalía.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="9">
+          <span class="pregunta-num">35</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La inmunidad por testimonio se otorga a quien:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 35)">a) Se declara inocente</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">b) Paga una multa</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">c) Colabora con la justicia proporcionando información decisiva sobre delitos más graves</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">d) Se entrega voluntariamente</div>
+          </div>
+          <div class="explicacion">La inmunidad se otorga a quien colabora eficazmente con la justicia proporcionando información decisiva sobre delitos más graves.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="9">
+          <span class="pregunta-num">36</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La suspensión del procedimiento a prueba requiere:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 36)">a) Solo la voluntad del fiscal</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">b) Solo la aceptación del imputado</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">c) Solo la aprobación de la víctima</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">d) El cumplimiento de condiciones impuestas al imputado</div>
+          </div>
+          <div class="explicacion">La suspensión del procedimiento a prueba requiere el cumplimiento de condiciones impuestas al imputado; si las cumple, se extingue la acción penal.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 10: PRECLUSIÓN -->
+      <div class="quiz-section" id="s10">
+        <div class="pregunta" data-correcta="2" data-tema="10">
+          <span class="pregunta-num">37</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La preclusión pone fin a:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 37)">a) Solo la investigación</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">b) Solo el juicio</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">c) Definitivamente a la persecución penal</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">d) Solo las medidas cautelares</div>
+          </div>
+          <div class="explicacion">La preclusión pone fin definitivamente a la persecución penal con fuerza de cosa juzgada (Arts. 331-335).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="10">
+          <span class="pregunta-num">38</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La preclusión por "inexistencia del hecho" procede cuando:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 38)">a) Se demuestra que el hecho no ocurrió</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">b) El imputado se declara inocente</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">c) La víctima retira la denuncia</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">d) Prescribe la acción</div>
+          </div>
+          <div class="explicacion">La preclusión por inexistencia del hecho procede cuando se demuestra que el hecho materia de investigación no ocurrió.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="10">
+          <span class="pregunta-num">39</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La audiencia de preclusión cuenta con la participación de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 39)">a) Solo el fiscal</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">b) Fiscalía, Defensa, Víctimas y Ministerio Público</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">c) Solo el juez y el fiscal</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">d) Solo la defensa</div>
+          </div>
+          <div class="explicacion">La audiencia de preclusión es pública y participan Fiscalía, Defensa, Víctimas y Ministerio Público.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="10">
+          <span class="pregunta-num">40</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los efectos de la preclusión incluyen:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 40)">a) Solo el archivo del expediente</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">b) Solo la libertad del imputado</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">c) Solo la devolución de bienes</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">d) Cosa juzgada, cese de persecución, revocatoria de medidas cautelares y libertad</div>
+          </div>
+          <div class="explicacion">La preclusión genera cosa juzgada, cesa la persecución penal, revoca medidas cautelares y ordena la libertad si el imputado está detenido.</div>
+        </div>
+      </div>
+
+      <div class="resultado-final" id="resultadoFinal">
+        <h3>🏆 Resultado Final</h3>
+        <div class="puntaje-final" id="puntajeFinal">0/40</div>
+        <p id="mensajeFinal"></p>
+        <div class="desglose-temas" id="desgloseTemas"></div>
+        <button onclick="reiniciarQuiz()" class="btn-reset">🔄 Reiniciar Quiz</button>
+      </div>
+
+      <div style="text-align: center; margin-top: 1.5rem;">
+        <button onclick="verResultadoFinal()">📊 Ver Resultado Final</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>️ Guía Didáctica - Indagación e Investigación Penal</p>
+  <p>Libro Segundo de la Ley 906 de 2004 · Código de Procedimiento Penal</p>
+  <p style="margin-top: 1rem; opacity: 0.7;">© 2026 - Material educativo interactivo</p>
+</footer>
+
+<script>
+  function toggleAcordeon(header) {
+    header.classList.toggle('active');
+    const content = header.nextElementSibling;
+    content.classList.toggle('active');
+  }
+
+  let respuestas = {};
+  const totalPreguntas = 40;
+
+  function mostrarSeccion(id, tab) {
+    document.querySelectorAll('.quiz-section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.quiz-tab').forEach(t => t.classList.remove('active'));
+    
+    document.getElementById(id).classList.add('active');
+    tab.classList.add('active');
+  }
+
+  function seleccionar(opcion, preguntaNum) {
+    if (respuestas[preguntaNum] !== undefined) return;
+
+    const pregunta = opcion.closest('.pregunta');
+    const opciones = pregunta.querySelectorAll('.opcion');
+    const correcta = parseInt(pregunta.dataset.correcta);
+    const tema = parseInt(pregunta.dataset.tema);
+    const seleccionada = Array.from(opciones).indexOf(opcion);
+    const explicacion = pregunta.querySelector('.explicacion');
+
+    opciones.forEach(o => o.classList.add('disabled'));
+
+    if (seleccionada === correcta) {
+      opcion.classList.add('correcta');
+      respuestas[preguntaNum] = { correcta: true, tema: tema };
+    } else {
+      opcion.classList.add('incorrecta');
+      opciones[correcta].classList.add('correcta');
+      respuestas[preguntaNum] = { correcta: false, tema: tema };
+    }
+
+    explicacion.classList.add('visible');
+    pregunta.classList.add('answered');
+    actualizarEstadisticas();
+  }
+
+  function actualizarEstadisticas() {
+    const total = Object.keys(respuestas).length;
+    const correctas = Object.values(respuestas).filter(r => r.correcta).length;
+    const incorrectas = total - correctas;
+    const porcentaje = total > 0 ? Math.round((correctas / total) * 100) : 0;
+
+    document.getElementById('respondidas').textContent = total;
+    document.getElementById('correctas').textContent = correctas;
+    document.getElementById('incorrectas').textContent = incorrectas;
+    document.getElementById('porcentaje').textContent = porcentaje;
+
+    const progreso = (total / totalPreguntas) * 100;
+    document.getElementById('progressFill').style.width = progreso + '%';
+  }
+
+  function verResultadoFinal() {
+    const total = Object.keys(respuestas).length;
+    
+    if (total < totalPreguntas) {
+      alert(`⚠️ Aún te faltan ${totalPreguntas - total} preguntas por responder.`);
+      return;
+    }
+
+    const correctas = Object.values(respuestas).filter(r => r.correcta).length;
+    const porcentaje = Math.round((correctas / totalPreguntas) * 100);
+
+    const resultadoFinal = document.getElementById('resultadoFinal');
+    resultadoFinal.classList.add('visible');
+
+    document.getElementById('puntajeFinal').textContent = `${correctas}/${totalPreguntas}`;
+
+    let mensaje = '';
+    if (porcentaje === 100) mensaje = ' ¡PERFECTO! Dominas la Indagación e Investigación Penal.';
+    else if (porcentaje >= 90) mensaje = '🌟 ¡Excelente! Dominio sobresaliente.';
+    else if (porcentaje >= 75) mensaje = '✅ ¡Muy bien! Buen dominio.';
+    else if (porcentaje >= 60) mensaje = '📚 Aceptable. Repasa los temas donde fallaste.';
+    else if (porcentaje >= 40) mensaje = ' Necesitas reforzar varios conceptos.';
+    else mensaje = '🔍 Es necesario estudiar nuevamente todos los temas.';
+
+    document.getElementById('mensajeFinal').textContent = mensaje;
+
+    const temas = {
+      1: { nombre: 'T1: Órganos', total: 4, correctas: 0 },
+      2: { nombre: 'T2: Sin Autorización', total: 4, correctas: 0 },
+      3: { nombre: 'T3: Con Autorización', total: 4, correctas: 0 },
+      4: { nombre: 'T4: Cadena de Custodia', total: 4, correctas: 0 },
+      5: { nombre: 'T5: Defensa', total: 4, correctas: 0 },
+      6: { nombre: 'T6: Medios Probatorios', total: 4, correctas: 0 },
+      7: { nombre: 'T7: Imputación', total: 4, correctas: 0 },
+      8: { nombre: 'T8: Libertad', total: 4, correctas: 0 },
+      9: { nombre: 'T9: Principio de Oportunidad', total: 4, correctas: 0 },
+      10: { nombre: 'T10: Preclusión', total: 4, correctas: 0 }
+    };
+
+    Object.values(respuestas).forEach(r => {
+      if (r.correcta) temas[r.tema].correctas++;
+    });
+
+    const desgloseHTML = Object.values(temas).map(t => {
+      const pct = Math.round((t.correctas / t.total) * 100);
+      return `
+        <div class="desglose-item">
+          <h4>${t.nombre}</h4>
+          <p>${t.correctas}/${t.total} (${pct}%)</p>
+          <div class="mini-bar">
+            <div class="mini-bar-fill" style="width: ${pct}%"></div>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    document.getElementById('desgloseTemas').innerHTML = desgloseHTML;
+    resultadoFinal.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  function reiniciarQuiz() {
+    if (!confirm('¿Reiniciar el quiz?')) return;
+
+    respuestas = {};
+
+    document.querySelectorAll('.opcion').forEach(o => o.classList.remove('correcta', 'incorrecta', 'disabled'));
+    document.querySelectorAll('.explicacion').forEach(e => e.classList.remove('visible'));
+    document.querySelectorAll('.pregunta').forEach(p => p.classList.remove('answered'));
+    document.getElementById('resultadoFinal').classList.remove('visible');
+
+    actualizarEstadisticas();
+    mostrarSeccion('s1', document.querySelector('.quiz-tab'));
+    document.getElementById('quiz').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  document.querySelectorAll('nav a').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+</script>
+
+</body>
+</html>
