@@ -1,0 +1,2206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Procedimiento Especial Abreviado y Acción Penal Privada - Ley 906 de 2004</title>
+<style>
+  :root {
+    --primary: #7f1d1d;
+    --secondary: #fbbf24;
+    --accent: #991b1b;
+    --light: #fef3f2;
+    --dark: #1a202c;
+    --success: #38a169;
+    --warning: #d69e2e;
+    --danger: #c53030;
+    --card-bg: #ffffff;
+    --shadow: 0 4px 15px rgba(0,0,0,0.08);
+    --shadow-hover: 0 8px 25px rgba(0,0,0,0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    background: var(--light);
+    color: var(--dark);
+    line-height: 1.7;
+  }
+
+  header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    color: white;
+    padding: 2rem 1rem;
+    text-align: center;
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::before {
+    content: '⚖️';
+    position: absolute;
+    font-size: 15rem;
+    opacity: 0.05;
+    top: -30px;
+    right: -30px;
+  }
+
+  header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: 2px;
+  }
+
+  header p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    font-style: italic;
+  }
+
+  nav {
+    background: var(--dark);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow);
+  }
+
+  nav ul {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0.5rem;
+  }
+
+  nav a {
+    color: var(--light);
+    text-decoration: none;
+    padding: 0.7rem 1rem;
+    margin: 0.2rem;
+    border-radius: 5px;
+    font-size: 0.7rem;
+    transition: all 0.3s;
+    display: block;
+  }
+
+  nav a:hover {
+    background: var(--secondary);
+    color: var(--dark);
+    transform: translateY(-2px);
+  }
+
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+  }
+
+  section {
+    background: var(--card-bg);
+    margin-bottom: 2.5rem;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    border-left: 5px solid var(--secondary);
+    scroll-margin-top: 80px;
+  }
+
+  section h2 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--secondary);
+  }
+
+  section h3 {
+    color: var(--accent);
+    font-size: 1.4rem;
+    margin: 1.5rem 0 0.8rem;
+  }
+
+  section h4 {
+    color: var(--primary);
+    font-size: 1.15rem;
+    margin: 1rem 0 0.5rem;
+  }
+
+  p { margin-bottom: 1rem; text-align: justify; }
+
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.2rem;
+    margin: 1.5rem 0;
+  }
+
+  .card {
+    background: linear-gradient(135deg, #fff 0%, #f9f6ef 100%);
+    border: 2px solid var(--secondary);
+    border-radius: 10px;
+    padding: 1.2rem;
+    transition: all 0.3s;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--primary);
+  }
+
+  .card .icon {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .card h4 {
+    text-align: center;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+  }
+
+  .card .detail {
+    display: none;
+    margin-top: 0.8rem;
+    padding-top: 0.8rem;
+    border-top: 1px dashed var(--secondary);
+    font-size: 0.95rem;
+  }
+
+  .card.active .detail { display: block; }
+
+  .card .hint {
+    text-align: center;
+    color: var(--accent);
+    font-size: 0.85rem;
+    font-style: italic;
+  }
+
+  .mapa-container {
+    background: #fdfbf5;
+    border: 2px dashed var(--secondary);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    overflow-x: auto;
+  }
+
+  .mapa {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 600px;
+  }
+
+  .nodo {
+    background: var(--primary);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+    font-weight: bold;
+    text-align: center;
+    min-width: 180px;
+    box-shadow: var(--shadow);
+  }
+
+  .nodo.central {
+    background: linear-gradient(135deg, var(--secondary), #e0b888);
+    color: var(--dark);
+    font-size: 1.2rem;
+    padding: 1rem 2rem;
+  }
+
+  .nodo.sub {
+    background: var(--accent);
+    font-size: 0.95rem;
+  }
+
+  .linea {
+    width: 3px;
+    height: 25px;
+    background: var(--secondary);
+  }
+
+  .linea-h {
+    height: 3px;
+    background: var(--secondary);
+    width: 80%;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .rama {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 1rem;
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  .rama-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    min-width: 140px;
+  }
+
+  .ejemplo {
+    background: #e6f7ee;
+    border-left: 4px solid var(--success);
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .ejemplo strong { color: var(--success); }
+
+  .alerta {
+    background: #fff8e1;
+    border-left: 4px solid var(--warning);
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .alerta strong { color: var(--warning); }
+
+  .cita {
+    background: #f0f7ff;
+    border-left: 4px solid var(--accent);
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+    color: var(--primary);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    font-size: 0.9rem;
+  }
+
+  th {
+    background: var(--primary);
+    color: white;
+    padding: 0.8rem;
+    text-align: left;
+  }
+
+  td {
+    padding: 0.8rem;
+    border-bottom: 1px solid #eee;
+  }
+
+  tr:nth-child(even) { background: #f9f6ef; }
+  tr:hover { background: #f0ead6; }
+
+  .quiz-container {
+    background: linear-gradient(135deg, #f7f4ed 0%, #fff 100%);
+    padding: 1.5rem;
+    border-radius: 10px;
+    border: 2px solid var(--accent);
+  }
+
+  .quiz-header {
+    background: var(--primary);
+    color: white;
+    padding: 1.2rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .quiz-header h3 {
+    color: white;
+    margin: 0 0 0.5rem 0;
+  }
+
+  .progress-bar {
+    background: rgba(255,255,255,0.2);
+    height: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+  }
+
+  .progress-fill {
+    background: var(--secondary);
+    height: 100%;
+    width: 0%;
+    transition: width 0.4s ease;
+  }
+
+  .quiz-stats {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .stat {
+    background: rgba(255,255,255,0.1);
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    font-size: 0.9rem;
+  }
+
+  .stat strong { color: var(--secondary); }
+
+  .quiz-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    padding: 0.5rem;
+    background: #f0ead6;
+    border-radius: 8px;
+  }
+
+  .quiz-tab {
+    background: white;
+    border: 2px solid var(--accent);
+    color: var(--accent);
+    padding: 0.5rem 0.8rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.7rem;
+    transition: all 0.3s;
+    flex: 1;
+    min-width: 70px;
+    text-align: center;
+  }
+
+  .quiz-tab:hover {
+    background: var(--accent);
+    color: white;
+  }
+
+  .quiz-tab.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+  }
+
+  .quiz-section {
+    display: none;
+  }
+
+  .quiz-section.active {
+    display: block;
+    animation: fadeIn 0.4s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .pregunta {
+    margin-bottom: 1.5rem;
+    padding: 1.2rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    border-left: 4px solid var(--accent);
+    transition: all 0.3s;
+  }
+
+  .pregunta.answered {
+    border-left-color: var(--secondary);
+  }
+
+  .pregunta-num {
+    display: inline-block;
+    background: var(--accent);
+    color: white;
+    padding: 0.2rem 0.7rem;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    margin-right: 0.5rem;
+  }
+
+  .pregunta-tipo {
+    display: inline-block;
+    background: var(--secondary);
+    color: var(--dark);
+    padding: 0.2rem 0.7rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    margin-left: 0.3rem;
+    font-weight: bold;
+  }
+
+  .pregunta p { 
+    font-weight: bold; 
+    color: var(--primary); 
+    margin: 0.8rem 0;
+    text-align: left;
+  }
+
+  .opciones { display: flex; flex-direction: column; gap: 0.5rem; }
+
+  .opcion {
+    padding: 0.7rem 1rem;
+    background: #f9f6ef;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+  }
+
+  .opcion:hover:not(.disabled) {
+    border-color: var(--accent);
+    background: #e8f0f7;
+  }
+
+  .opcion.disabled {
+    cursor: not-allowed;
+    opacity: 0.85;
+  }
+
+  .opcion.correcta {
+    background: #c6f6d5;
+    border-color: var(--success);
+    color: var(--success);
+    font-weight: bold;
+  }
+
+  .opcion.incorrecta {
+    background: #fed7d7;
+    border-color: var(--danger);
+    color: var(--danger);
+  }
+
+  .opcion.correcta::after {
+    content: ' ✓';
+    font-weight: bold;
+  }
+
+  .opcion.incorrecta::after {
+    content: ' ✗';
+    font-weight: bold;
+  }
+
+  .explicacion {
+    margin-top: 0.8rem;
+    padding: 0.8rem;
+    background: #f0f7ff;
+    border-left: 3px solid var(--accent);
+    border-radius: 0 6px 6px 0;
+    font-size: 0.9rem;
+    display: none;
+    font-style: italic;
+  }
+
+  .explicacion.visible {
+    display: block;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .resultado-final {
+    margin-top: 2rem;
+    padding: 2rem;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    color: white;
+    border-radius: 12px;
+    text-align: center;
+    display: none;
+  }
+
+  .resultado-final.visible {
+    display: block;
+    animation: fadeIn 0.5s ease;
+  }
+
+  .resultado-final h3 {
+    color: var(--secondary);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .puntaje-final {
+    font-size: 3rem;
+    font-weight: bold;
+    color: var(--secondary);
+    margin: 1rem 0;
+  }
+
+  .desglose-temas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+    text-align: left;
+  }
+
+  .desglose-item {
+    background: rgba(255,255,255,0.1);
+    padding: 1rem;
+    border-radius: 8px;
+  }
+
+  .desglose-item h4 {
+    color: var(--secondary);
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+  }
+
+  .mini-bar {
+    background: rgba(255,255,255,0.2);
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+  }
+
+  .mini-bar-fill {
+    background: var(--secondary);
+    height: 100%;
+    transition: width 0.6s ease;
+  }
+
+  button {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 1rem;
+    transition: all 0.3s;
+  }
+
+  button:hover {
+    background: var(--secondary);
+    color: var(--dark);
+    transform: translateY(-2px);
+  }
+
+  .btn-reset {
+    background: var(--danger);
+    margin-left: 0.5rem;
+  }
+
+  .btn-reset:hover {
+    background: #9b2c2c;
+    color: white;
+  }
+
+  .acordeon-item {
+    margin-bottom: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .acordeon-header {
+    background: var(--accent);
+    color: white;
+    padding: 1rem;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.3s;
+  }
+
+  .acordeon-header:hover { background: var(--primary); }
+
+  .acordeon-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    background: white;
+  }
+
+  .acordeon-content.active {
+    max-height: 2000px;
+    padding: 1rem;
+  }
+
+  .flecha { transition: transform 0.3s; }
+  .acordeon-header.active .flecha { transform: rotate(180deg); }
+
+  footer {
+    background: var(--dark);
+    color: var(--light);
+    text-align: center;
+    padding: 2rem 1rem;
+    margin-top: 2rem;
+  }
+
+  footer p { margin-bottom: 0.5rem; }
+
+  @media (max-width: 768px) {
+    header h1 { font-size: 1.8rem; }
+    section { padding: 1.2rem; }
+    section h2 { font-size: 1.5rem; }
+    nav a { font-size: 0.6rem; padding: 0.3rem 0.4rem; }
+    .quiz-tab { font-size: 0.6rem; padding: 0.3rem 0.4rem; }
+    table { font-size: 0.8rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>⚖️ Procedimiento Especial Abreviado y Acción Penal Privada</h1>
+  <p>Títulos I y II del Libro Especial - Ley 906 de 2004 · Guía Didáctica Interactiva</p>
+</header>
+
+<nav>
+  <ul>
+    <li><a href="#tema1">1. Ámbito</a></li>
+    <li><a href="#tema2">2. Traslado</a></li>
+    <li><a href="#tema3">3. Rebajas</a></li>
+    <li><a href="#tema4">4. Audiencia Conc.</a></li>
+    <li><a href="#tema5">5. Juicio Oral</a></li>
+    <li><a href="#tema6">6. Acusador Privado</a></li>
+    <li><a href="#tema7">7. Conversión</a></li>
+    <li><a href="#tema8">8. Facultades</a></li>
+    <li><a href="#tema9">9. Reversión</a></li>
+    <li><a href="#quiz">Quiz (40)</a></li>
+  </ul>
+</nav>
+
+<main>
+
+  <section>
+    <h2>📚 Introducción</h2>
+    <p>Bienvenido a esta guía interactiva sobre el <strong>Procedimiento Especial Abreviado y la Acción Penal Privada</strong> de la Ley 906 de 2004. Aquí estudiarás el ámbito de aplicación del procedimiento abreviado, el traslado del escrito de acusación, las rebajas punitivas, la audiencia concentrada, el juicio oral, las causales de libertad, el acusador privado, la conversión de la acción penal, las facultades investigativas, la reversión y la reparación integral.</p>
+    <div class="alerta">
+      <strong>💡 Cómo usar esta guía:</strong> Haz clic en las tarjetas para ver detalles, despliega los acordeones para información adicional y prueba tus conocimientos con el quiz de 40 preguntas al final.
+    </div>
+  </section>
+
+  <!-- TEMA 1: ÁMBITO DE APLICACIÓN -->
+  <section id="tema1">
+    <h2>1. Ámbito de Aplicación (Art. 534)</h2>
+    <p>El procedimiento especial abreviado aplica a conductas específicas de menor complejidad probatoria y gravedad relativa.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">PROCEDIMIENTO ABREVIADO</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Querellables</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Lesiones</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Hurto</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Estafa</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Flagrancia</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Delitos que Tramitan por Procedimiento Abreviado</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📜</div>
+        <h4>Delitos Querellables</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Todos los delitos querellables en su totalidad.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🩹</div>
+        <h4>Lesiones Personales</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Arts. 111 a 116, 118 y 120 del Código Penal.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon"></div>
+        <h4>Hurto y Estafa</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Hurto (Art. 239), hurto calificado (Art. 240), hurto agravado (Art. 241, nums. 1-10), estafa (Art. 246).</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🏠</div>
+        <h4>Violencia Intrafamiliar</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Art. 229 (violencia intrafamiliar) y Art. 233 (inasistencia alimentaria).</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🚨</div>
+        <h4>Flagrancia</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Aplica a todos los casos de captura en flagrancia de los delitos anteriores.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📄</div>
+        <h4>Falsedad en Documento Privado</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Arts. 289 y 290 del Código Penal.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>⚠️ Excepción Importante</h3>
+    <div class="alerta">
+      <strong>📌 Regla del concurso:</strong> Si existe concurso con delitos sometidos al procedimiento ordinario, <strong>toda la actuación se rige por el procedimiento ordinario</strong>.
+    </div>
+
+    <h3> Integración Normativa (Art. 535)</h3>
+    <div class="cita">
+      <strong>"En lo no regulado expresamente en este título, se aplican las disposiciones generales de la Ley 906 de 2004 y del Código Penal."</strong>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si A es capturado en flagrancia por hurto simple (Art. 239), su caso se tramita por el procedimiento especial abreviado. Pero si A también es acusado de homicidio (procedimiento ordinario), todo el caso se tramita por el procedimiento ordinario.
+    </div>
+  </section>
+
+  <!-- TEMA 2: TRASLADO DEL ESCRITO -->
+  <section id="tema2">
+    <h2>2. Traslado del Escrito de Acusación (Arts. 536-537)</h2>
+    <p>El traslado del escrito de acusación sustituye la audiencia de formulación de imputación del proceso ordinario.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">TRASLADO ACUSACIÓN</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Citación</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Fiscal, indiciado, víctima</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Descubrimiento</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Total</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Efectos</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Interrumpe prescripción</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Procedimiento (Art. 536)</h3>
+    <div class="alerta">
+      <strong>📌 La Fiscalía cita a:</strong>
+      <ul>
+        <li>Al <strong>indiciado</strong></li>
+        <li>A su <strong>defensor</strong></li>
+        <li>A la <strong>víctima</strong></li>
+      </ul>
+      <p>Para entregar el escrito de acusación y realizar el <strong>descubrimiento probatorio total</strong>.</p>
+    </div>
+
+    <h3>⚡ Efectos del Traslado</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Condición de Parte</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Otorga la condición de parte al indiciado.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📢</div>
+        <h4>Equivale a Imputación</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>El traslado equivale formalmente a la imputación.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon"></div>
+        <h4>Interrumpe Prescripción</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Interrumpe la prescripción de la acción penal, que vuelve a correr por <strong>la mitad del término legal</strong>, sin ser inferior a 3 años.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>🔍 Traslado en Audiencia de Medida de Aseguramiento (Art. 537)</h3>
+    <div class="alerta">
+      <strong>📌 Regla especial:</strong> Si procede la imposición de una medida de aseguramiento, el traslado del escrito de acusación se realiza <strong>al inicio de dicha audiencia preliminar</strong>.
+    </div>
+
+    <h3>🤝 Delitos Querellables</h3>
+    <div class="cita">
+      <strong>"En delitos querellables, se indaga si las partes tienen ánimo conciliatorio al finalizar el traslado."</strong>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si la Fiscalía acusa a B por lesiones personales, cita a B, a su defensor y a la víctima para el traslado. En ese acto se realiza el descubrimiento probatorio total y se interrumpe la prescripción. Si es delito querellable, al finalizar se indaga sobre ánimo conciliatorio.
+    </div>
+  </section>
+
+  <!-- TEMA 3: ACEPTACIÓN DE CARGOS -->
+  <section id="tema3">
+    <h2>3. Aceptación de Cargos y Rebajas Punitivas (Art. 539)</h2>
+    <p>El sistema de rebajas punitivas incentiva la aceptación temprana de cargos, reduciendo progresivamente el beneficio según el momento procesal.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">REBAJAS PUNITIVAS</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Antes Audiencia</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Hasta 1/2</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">En Audiencia Conc.</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Hasta 1/3</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">En Juicio Oral</div>
+            <div class="linea"></div>
+            <div class="nodo sub">1/6</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📊 Escala de Rebajas</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Momento Procesal</th>
+          <th>Rebaja Máxima</th>
+          <th>Artículo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Antes de la audiencia concentrada</strong></td>
+          <td>Hasta la mitad (1/2) de la pena</td>
+          <td>Art. 539</td>
+        </tr>
+        <tr>
+          <td><strong>En la audiencia concentrada</strong></td>
+          <td>Hasta un tercio (1/3) de la pena</td>
+          <td>Art. 539</td>
+        </tr>
+        <tr>
+          <td><strong>En la audiencia de juicio oral</strong></td>
+          <td>Una sexta parte (1/6) de la pena</td>
+          <td>Art. 539</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3> Principio de Oportunidad Temporal</h3>
+    <div class="alerta">
+      <strong>📌 Regla fundamental:</strong> A mayor prontitud en la aceptación de cargos, mayor beneficio punitivo. El sistema incentiva la colaboración temprana con la justicia.
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si C es acusado por hurto con pena de 6 años (72 meses):
+      <ul>
+        <li>Si acepta cargos ANTES de la audiencia concentrada: rebaja hasta 1/2 → pena de 36 meses</li>
+        <li>Si acepta cargos EN la audiencia concentrada: rebaja hasta 1/3 → pena de 48 meses</li>
+        <li>Si acepta cargos EN el juicio oral: rebaja de 1/6 → pena de 60 meses</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- TEMA 4: AUDIENCIA CONCENTRADA -->
+  <section id="tema4">
+    <h2>4. Audiencia Concentrada (Arts. 541-542)</h2>
+    <p>La audiencia concentrada unifica los trámites de las audiencias de formulación de acusación y preparatoria del procedimiento ordinario.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">AUDIENCIA CONCENTRADA</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Preparación (60 días)</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Contenido Múltiple</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Unificación</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>⏰ Plazo de Preparación</h3>
+    <div class="alerta">
+      <strong> Regla temporal:</strong> Tras el traslado de la acusación, la defensa dispone de <strong>60 días</strong> para preparar el caso, tras lo cual se cita a la audiencia concentrada.
+    </div>
+
+    <h3>📋 Contenido de la Audiencia Concentrada</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">👥</div>
+        <h4>Reconocimiento de Víctimas</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Se identifican y reconocen los derechos de las víctimas en el proceso.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📝</div>
+        <h4>Observaciones al Escrito</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Las partes formulan observaciones al escrito de acusación.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Saneamiento de Nulidades</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Se resuelven nulidades e incompetencias.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🔍</div>
+        <h4>Descubrimiento Probatorio</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Se realiza el descubrimiento de elementos materiales probatorios.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🤝</div>
+        <h4>Estipulaciones Probatorias</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Acuerdos sobre hechos no controvertidos.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">✅</div>
+        <h4>Decisión sobre Pruebas</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Decisión sobre exclusión o admisión de pruebas.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>🔄 Unificación de Audiencias</h3>
+    <div class="cita">
+      <strong>"La audiencia concentrada unifica los trámites de las audiencias de formulación de acusación y preparatoria del procedimiento ordinario."</strong>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> En el procedimiento ordinario se requieren dos audiencias separadas (formulación de acusación y preparatoria). En el abreviado, ambas se unifican en una sola audiencia concentrada, agilizando el proceso.
+    </div>
+  </section>
+
+  <!-- TEMA 5: JUICIO ORAL Y LIBERTAD -->
+  <section id="tema5">
+    <h2>5. Juicio Oral y Causales de Libertad (Arts. 544-548)</h2>
+    <p>El juicio oral en el procedimiento abreviado se rige por las reglas del juicio oral ordinario, con plazos específicos para la sentencia y causales de libertad por vencimiento de términos.</p>
+
+    <h3>📋 Juicio Oral y Sentencia (Arts. 544-545)</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Reglas Aplicables</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Se rige por las reglas del <strong>juicio oral ordinario</strong>.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📝</div>
+        <h4>Plazo para Sentencia</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Anunciado el sentido del fallo, el juez cuenta con <strong>10 días</strong> para proferir la sentencia por escrito y correr traslado a las partes.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>🔓 Causales de Libertad (Art. 548)</h3>
+    <div class="alerta">
+      <strong>📌 Límite máximo de medida de aseguramiento privativa de libertad:</strong>
+      <ul>
+        <li>No puede exceder los <strong>180 días</strong></li>
+      </ul>
+    </div>
+
+    <h3>⏰ Vencimiento de Términos que Generan Libertad</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Causal</th>
+          <th>Plazo</th>
+          <th>Efecto</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Sin iniciar audiencia concentrada</strong></td>
+          <td>70 días desde el traslado</td>
+          <td>Libertad inmediata</td>
+        </tr>
+        <tr>
+          <td><strong>Sin iniciar juicio oral</strong></td>
+          <td>30 días desde la audiencia concentrada</td>
+          <td>Libertad inmediata</td>
+        </tr>
+        <tr>
+          <td><strong>Máximo de medida privativa</strong></td>
+          <td>180 días</td>
+          <td>Libertad inmediata</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si D fue trasladado el 1° de marzo y el 10 de mayo (70 días después) aún no se ha iniciado la audiencia concentrada, D tiene derecho a libertad inmediata. Lo mismo ocurre si pasados 30 días desde la audiencia concentrada no se ha iniciado el juicio oral.
+    </div>
+  </section>
+
+  <!-- TEMA 6: ACUSADOR PRIVADO -->
+  <section id="tema6">
+    <h2>6. El Acusador Privado (Art. 549)</h2>
+    <p>El acusador privado es la víctima facultada legalmente para ejercer la acción penal, asumiendo una función pública transitoria.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">ACUSADOR PRIVADO</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Víctima</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Facultada legalmente</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Abogado</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Obligatorio</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Función Pública</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Transitoria</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Definición y Características</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">👤</div>
+        <h4>Definición</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Es la víctima facultada legalmente para ejercer la acción penal.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Representación Obligatoria</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Debe ser representado por un <strong>abogado de confianza</strong> o estudiante de consultorio jurídico.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🏛️</div>
+        <h4>Función Pública Transitoria</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>El acusador privado asume una <strong>función pública transitoria</strong>.</p>
+          <p>Queda sujeto al mismo régimen disciplinario y penal de los fiscales.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si E es víctima de un hurto calificado (delito susceptible de conversión), puede solicitar la conversión de la acción penal de pública a privada. E se convierte en acusador privado, debe contratar un abogado y asume la investigación y acusación del caso, sujeto al mismo régimen disciplinario que un fiscal.
+    </div>
+  </section>
+
+  <!-- TEMA 7: CONVERSIÓN DE LA ACCIÓN -->
+  <section id="tema7">
+    <h2>7. Conversión de la Acción Penal (Arts. 550-554)</h2>
+    <p>La conversión permite que la víctima asuma la acción penal, transformándola de pública a privada bajo ciertas condiciones.</p>
+
+    <h3>📋 Delitos Susceptibles de Conversión (Art. 550)</h3>
+    <div class="alerta">
+      <strong>✅ Aplica a:</strong> Conductas tramitadas por el procedimiento especial abreviado.
+      <br><br>
+      <strong>❌ Excepciones (NO se pueden convertir):</strong>
+      <ul>
+        <li>Delitos que atenten contra <strong>bienes del Estado</strong></li>
+        <li>Delito de <strong>violencia intrafamiliar</strong> (Art. 229)</li>
+      </ul>
+    </div>
+
+    <h3>📝 Solicitud y Requisitos (Arts. 551-554)</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📄</div>
+        <h4>Presentación</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>La víctima (o querellante legítimo) solicita por escrito la conversión ante el fiscal del caso.</p>
+          <p><strong>Momento:</strong> Antes del traslado del escrito de acusación.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">👥</div>
+        <h4>Múltiples Víctimas</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Si existen múltiples víctimas, se requiere el <strong>acuerdo de todas</strong> para la conversión.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon"></div>
+        <h4>Término del Fiscal</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>El fiscal resuelve en un término de <strong>un (1) mes</strong>.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3> Causales de Denegación (Art. 554)</h3>
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>1️⃣ No se acredita la condición de víctima</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>El solicitante no demuestra ser víctima directa del delito.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>2️⃣ Indiciado no identificado</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>El indiciado no está identificado plenamente.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>3️ Pertenece a organización criminal</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>El indiciado pertenece a una organización criminal.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>4️ Inimputabilidad</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>El indiciado es inimputable.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>5️⃣ Conexidad con delitos no convertibles</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Existe conexidad con delitos no susceptibles de conversión.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>6️ Riesgo para la víctima</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>La conversión implica riesgo para la víctima.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>7️ Política criminal e interés del Estado</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Razones de política criminal e interés del Estado lo desaconsejan.</p>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si F es víctima de estafa (Art. 246) y solicita la conversión de la acción penal, el fiscal tiene 1 mes para resolver. Si F acredita su condición de víctima, el indiciado está identificado, no pertenece a organización criminal y no hay riesgo, el fiscal autoriza la conversión y F asume la acusación con su abogado.
+    </div>
+  </section>
+
+  <!-- TEMA 8: FACULTADES INVESTIGATIVAS -->
+  <section id="tema8">
+    <h2>8. Facultades Investigativas del Acusador Privado (Arts. 556-557)</h2>
+    <p>El acusador privado tiene facultades investigativas similares a la defensa, con prohibiciones específicas para actos complejos.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">FACULTADES INVESTIGATIVAS</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Permitidas</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Como la defensa</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Prohibidas</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Actos complejos</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Apoyo Fiscal</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Vía Juez Garantías</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>✅ Facultades Permitidas</h3>
+    <div class="alerta">
+      <strong> El acusador privado tiene las mismas facultades investigativas que la defensa:</strong>
+      <ul>
+        <li>Entrevistas a personas</li>
+        <li>Obtención de declaraciones juradas</li>
+        <li>Solicitud de práctica de prueba anticipada</li>
+        <li>Recolección de elementos materiales probatorios</li>
+      </ul>
+    </div>
+
+    <h3>🚫 Actos Complejos Prohibidos Directamente</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon"></div>
+        <h4>Interceptación de Comunicaciones</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Prohibido realizar directamente interceptaciones de comunicaciones.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🚪</div>
+        <h4>Registros y Allanamientos</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Prohibido realizar directamente registros y allanamientos.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🩺</div>
+        <h4>Inspecciones Corporales</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Prohibido realizar directamente inspecciones corporales.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">️</div>
+        <h4>Entregas Vigiladas y Agentes Encubiertos</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Prohibido realizar directamente entregas vigiladas ni usar agentes encubiertos.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>🤝 Apoyo de la Fiscalía para Actos Complejos</h3>
+    <div class="alerta">
+      <strong>📌 Procedimiento:</strong>
+      <ol style="margin-top: 0.5rem; padding-left: 1.5rem;">
+        <li>El acusador privado acude ante el <strong>juez de control de garantías</strong></li>
+        <li>Si el juez considera los actos <strong>urgentes y proporcionales</strong>, ordena a la Fiscalía que los ejecute</li>
+        <li>La Fiscalía los ejecuta de manera <strong>exclusiva</strong></li>
+        <li>Se someten a <strong>control posterior</strong> antes de entregar la evidencia</li>
+      </ol>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si G (acusador privado) necesita interceptar comunicaciones telefónicas del indiciado, no puede hacerlo directamente. Debe acudir al juez de control de garantías, quien si lo considera urgente y proporcional, ordenará a la Fiscalía que realice la interceptación y luego entregue la evidencia a G.
+    </div>
+  </section>
+
+  <!-- TEMA 9: REVERSIÓN Y REPARACIÓN -->
+  <section id="tema9">
+    <h2>9. Reversión de la Acción Penal y Reparación Integral (Arts. 560-564)</h2>
+    <p>La Fiscalía puede revertir la acción privada a pública en ciertas circunstancias, y la reparación integral se tramita de forma simplificada.</p>
+
+    <h3>🔄 Reversión de la Acción Penal (Art. 560)</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🔙</div>
+        <h4>Concepto</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>En cualquier estado del proceso, la Fiscalía puede disponer motivadamente que la acción privada <strong>vuelva a ser pública</strong>.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>⚠️ Causales de Reversión</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Causal</th>
+          <th>Descripción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Sobreviene causal de no conversión</strong></td>
+          <td>Aparece alguna de las causales del Art. 554 que originalmente impedían la conversión</td>
+        </tr>
+        <tr>
+          <td><strong>Desviación de poder</strong></td>
+          <td>El acusador privado utiliza la investigación para fines distintos a la justicia</td>
+        </tr>
+        <tr>
+          <td><strong>Ausencia permanente del abogado</strong></td>
+          <td>El abogado del acusador privado se ausenta de manera permanente</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>💰 Reparación Integral (Art. 564)</h3>
+    <div class="alerta">
+      <strong>📌 Características especiales en acción penal privada:</strong>
+      <ul>
+        <li>La pretensión de indemnización de perjuicios se incorpora <strong>directamente en el escrito de acusación privada</strong></li>
+        <li>El juez define y liquida los daños causados <strong>directamente en la sentencia condenatoria</strong></li>
+        <li><strong>No se requiere</strong> tramitar un incidente de reparación separado</li>
+      </ul>
+    </div>
+
+    <h3>🔍 Comparativa: Reparación en Acción Pública vs. Privada</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Aspecto</th>
+          <th>Acción Pública</th>
+          <th>Acción Privada</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Momento de solicitud</strong></td>
+          <td>Incidente de reparación integral (después de sentencia condenatoria firme)</td>
+          <td>Directamente en el escrito de acusación privada</td>
+        </tr>
+        <tr>
+          <td><strong>Trámite</strong></td>
+          <td>Procedimiento separado con audiencias</td>
+          <td>Resuelto directamente en la sentencia condenatoria</td>
+        </tr>
+        <tr>
+          <td><strong>Decisión</strong></td>
+          <td>Sentencia independiente sobre reparación</td>
+          <td>Incluida en la sentencia condenatoria principal</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo de reversión:</strong> Si H es acusador privado en un caso de estafa, pero durante la investigación se descubre que el indiciado pertenece a una organización criminal (causal de no conversión), la Fiscalía puede revertir la acción a pública y asumir la investigación.
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo de reparación:</strong> Si I (acusador privado) incluye en su escrito de acusación una pretensión de indemnización por $50 millones por daños causados por el delito, y el juez condena al acusado, en la misma sentencia condena al pago de los $50 millones, sin necesidad de incidente separado.
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz">
+    <h2>🎯 Quiz Completo - 40 Preguntas</h2>
+    <p>Pon a prueba tus conocimientos sobre el Procedimiento Especial Abreviado y la Acción Penal Privada.</p>
+
+    <div class="quiz-container">
+      <div class="quiz-header">
+        <h3>📊 Tu Progreso</h3>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="quiz-stats">
+          <div class="stat">Respondidas: <strong id="respondidas">0</strong>/40</div>
+          <div class="stat">Correctas: <strong id="correctas">0</strong></div>
+          <div class="stat">Incorrectas: <strong id="incorrectas">0</strong></div>
+          <div class="stat">Porcentaje: <strong id="porcentaje">0</strong>%</div>
+        </div>
+      </div>
+
+      <div class="quiz-tabs">
+        <div class="quiz-tab active" onclick="mostrarSeccion('s1', this)">T1 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s2', this)">T2 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s3', this)">T3 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s4', this)">T4 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s5', this)">T5 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s6', this)">T6 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s7', this)">T7 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s8', this)">T8 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s9', this)">T9 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s10', this)">T10 (4)</div>
+      </div>
+
+      <!-- SECCIÓN 1: ÁMBITO -->
+      <div class="quiz-section active" id="s1">
+        <div class="pregunta" data-correcta="2" data-tema="1">
+          <span class="pregunta-num">1</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El procedimiento especial abreviado aplica a:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 1)">a) Todos los delitos</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">b) Solo delitos graves</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">c) Delitos querellables, lesiones, hurto, estafa, violencia intrafamiliar y otros específicos</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">d) Solo delitos contra la administración pública</div>
+          </div>
+          <div class="explicacion">El procedimiento abreviado aplica a delitos querellables, lesiones personales, hurto, estafa, violencia intrafamiliar, inasistencia alimentaria, falsedad en documento privado y otros específicos (Art. 534).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="1">
+          <span class="pregunta-num">2</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Si existe concurso con delitos del procedimiento ordinario:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 2)">a) Se tramitan separadamente</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">b) Toda la actuación se rige por el procedimiento ordinario</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">c) Se aplica el abreviado a los delitos menores</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">d) Decide el juez caso por caso</div>
+          </div>
+          <div class="explicacion">Si existe concurso con delitos sometidos al procedimiento ordinario, toda la actuación se rige por el procedimiento ordinario (Art. 534).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="1">
+          <span class="pregunta-num">3</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La flagrancia en el procedimiento abreviado aplica a:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 3)">a) Todos los casos de captura en flagrancia de los delitos del Art. 534</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">b) Solo delitos graves</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">c) Solo delitos contra personas</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">d) No aplica en procedimiento abreviado</div>
+          </div>
+          <div class="explicacion">La flagrancia aplica a todos los casos de captura en flagrancia de los delitos mencionados en el Art. 534.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="1">
+          <span class="pregunta-num">4</span><span class="pregunta-tipo">Conceptual</span>
+          <p>En lo no regulado expresamente en el procedimiento abreviado, se aplican:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 4)">a) Solo el Código Penal</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">b) Solo la Constitución</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">c) La costumbre judicial</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">d) Las disposiciones generales de la Ley 906 de 2004 y del Código Penal</div>
+          </div>
+          <div class="explicacion">En lo no regulado expresamente, se aplican las disposiciones generales de la Ley 906 de 2004 y del Código Penal (Art. 535).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 2: TRASLADO -->
+      <div class="quiz-section" id="s2">
+        <div class="pregunta" data-correcta="1" data-tema="2">
+          <span class="pregunta-num">5</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El traslado del escrito de acusación en el procedimiento abreviado sustituye:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 5)">a) El juicio oral</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">b) La audiencia de formulación de imputación del proceso ordinario</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">c) La audiencia preparatoria</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">d) La sentencia</div>
+          </div>
+          <div class="explicacion">El traslado del escrito de acusación sustituye la audiencia de formulación de imputación del proceso ordinario (Art. 536).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="2">
+          <span class="pregunta-num">6</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La Fiscalía cita para el traslado a:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 6)">a) Indiciado, defensor y víctima</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">b) Solo al indiciado</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">c) Solo al defensor</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">d) Solo a la víctima</div>
+          </div>
+          <div class="explicacion">La Fiscalía cita al indiciado, a su defensor y a la víctima para entregar el escrito de acusación y realizar el descubrimiento probatorio total (Art. 536).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="2">
+          <span class="pregunta-num">7</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El traslado del escrito de acusación interrumpe la prescripción, que vuelve a correr por:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 7)">a) El término completo</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">b) El doble del término legal</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">c) La mitad del término legal, sin ser inferior a 3 años</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">d) Un año fijo</div>
+          </div>
+          <div class="explicacion">El traslado interrumpe la prescripción de la acción penal, que vuelve a correr por la mitad del término legal, sin ser inferior a 3 años (Art. 536).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="2">
+          <span class="pregunta-num">8</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Si procede medida de aseguramiento, el traslado se realiza:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 8)">a) Después de la audiencia concentrada</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">b) En el juicio oral</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">c) En la audiencia de legalización de captura</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">d) Al inicio de la audiencia de medida de aseguramiento</div>
+          </div>
+          <div class="explicacion">Si procede la imposición de medida de aseguramiento, el traslado del escrito de acusación se realiza al inicio de dicha audiencia preliminar (Art. 537).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 3: REBAJAS -->
+      <div class="quiz-section" id="s3">
+        <div class="pregunta" data-correcta="1" data-tema="3">
+          <span class="pregunta-num">9</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Si el acusado acepta cargos antes de la audiencia concentrada, la rebaja es de hasta:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 9)">a) Un tercio (1/3)</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">b) La mitad (1/2)</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">c) Una sexta parte (1/6)</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">d) Dos tercios (2/3)</div>
+          </div>
+          <div class="explicacion">Antes de la audiencia concentrada, la rebaja es de hasta la mitad (1/2) de la pena (Art. 539).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="3">
+          <span class="pregunta-num">10</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Si el acusado acepta cargos en la audiencia concentrada, la rebaja es de hasta:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 10)">a) Un tercio (1/3)</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">b) La mitad (1/2)</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">c) Una sexta parte (1/6)</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">d) Un cuarto (1/4)</div>
+          </div>
+          <div class="explicacion">En la audiencia concentrada, la rebaja es de hasta un tercio (1/3) de la pena (Art. 539).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="3">
+          <span class="pregunta-num">11</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Si el acusado acepta cargos en la audiencia de juicio oral, la rebaja es de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 11)">a) La mitad (1/2)</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">b) Un tercio (1/3)</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">c) Una sexta parte (1/6)</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">d) Un cuarto (1/4)</div>
+          </div>
+          <div class="explicacion">En la audiencia de juicio oral, la rebaja es de una sexta parte (1/6) de la pena (Art. 539).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="3">
+          <span class="pregunta-num">12</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El principio que rige las rebajas punitivas es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 12)">a) Mayor demora, mayor beneficio</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">b) Todas las rebajas son iguales</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">c) Solo aplica en procedimiento ordinario</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">d) A mayor prontitud en la aceptación, mayor beneficio punitivo</div>
+          </div>
+          <div class="explicacion">El sistema incentiva la colaboración temprana: a mayor prontitud en la aceptación de cargos, mayor beneficio punitivo.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 4: AUDIENCIA CONCENTRADA -->
+      <div class="quiz-section" id="s4">
+        <div class="pregunta" data-correcta="1" data-tema="4">
+          <span class="pregunta-num">13</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Tras el traslado de la acusación, la defensa dispone de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 13)">a) 30 días</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">b) 60 días</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">c) 90 días</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">d) 120 días</div>
+          </div>
+          <div class="explicacion">Tras el traslado de la acusación, la defensa dispone de 60 días para preparar el caso, tras lo cual se cita a la audiencia concentrada (Art. 541).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="4">
+          <span class="pregunta-num">14</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La audiencia concentrada unifica los trámites de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 14)">a) Las audiencias de formulación de acusación y preparatoria del procedimiento ordinario</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">b) Solo la audiencia de juicio oral</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">c) Solo la audiencia de legalización de captura</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">d) Solo la audiencia de sentencia</div>
+          </div>
+          <div class="explicacion">La audiencia concentrada unifica los trámites de las audiencias de formulación de acusación y preparatoria del procedimiento ordinario (Arts. 541-542).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="4">
+          <span class="pregunta-num">15</span><span class="pregunta-tipo">Conceptual</span>
+          <p>En la audiencia concentrada se realiza:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 15)">a) Solo el descubrimiento probatorio</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">b) Solo la lectura de la acusación</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">c) Reconocimiento de víctimas, observaciones, saneamiento, descubrimiento, estipulaciones y decisión sobre pruebas</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">d) Solo la sentencia</div>
+          </div>
+          <div class="explicacion">La audiencia concentrada incluye reconocimiento de víctimas, observaciones al escrito, saneamiento de nulidades, descubrimiento probatorio, estipulaciones y decisión sobre exclusión o admisión de pruebas.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="4">
+          <span class="pregunta-num">16</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Las estipulaciones probatorias son:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 16)">a) Pruebas periciales</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">b) Testimonios anticipados</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">c) Documentos públicos</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">d) Acuerdos sobre hechos no controvertidos</div>
+          </div>
+          <div class="explicacion">Las estipulaciones probatorias son acuerdos sobre hechos no controvertidos que no requieren prueba en el juicio.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 5: JUICIO ORAL Y LIBERTAD -->
+      <div class="quiz-section" id="s5">
+        <div class="pregunta" data-correcta="1" data-tema="5">
+          <span class="pregunta-num">17</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El juicio oral en el procedimiento abreviado se rige por:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 17)">a) Reglas especiales exclusivas</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">b) Las reglas del juicio oral ordinario</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">c) Solo la voluntad del juez</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">d) Reglas del procedimiento administrativo</div>
+          </div>
+          <div class="explicacion">El juicio oral en el procedimiento abreviado se rige por las reglas del juicio oral ordinario (Arts. 544-545).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="5">
+          <span class="pregunta-num">18</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Anunciado el sentido del fallo, el juez cuenta con:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 18)">a) 10 días para proferir la sentencia por escrito</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">b) 5 días</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">c) 15 días</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">d) 30 días</div>
+          </div>
+          <div class="explicacion">Anunciado el sentido del fallo, el juez cuenta con 10 días para proferir la sentencia por escrito y correr traslado a las partes (Arts. 544-545).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="5">
+          <span class="pregunta-num">19</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La medida de aseguramiento privativa de la libertad no puede exceder:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 19)">a) 90 días</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">b) 120 días</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">c) 180 días</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">d) 365 días</div>
+          </div>
+          <div class="explicacion">La medida de aseguramiento privativa de la libertad no puede exceder los 180 días (Art. 548).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="5">
+          <span class="pregunta-num">20</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Si pasados 70 días desde el traslado no se inicia la audiencia concentrada:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 20)">a) Se archiva el caso</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">b) Se prorroga el término</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">c) Se cambia de juez</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">d) Opera la libertad inmediata del detenido</div>
+          </div>
+          <div class="explicacion">Si pasan 70 días desde el traslado sin iniciar la audiencia concentrada, opera la libertad inmediata (Art. 548).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 6: ACUSADOR PRIVADO -->
+      <div class="quiz-section" id="s6">
+        <div class="pregunta" data-correcta="1" data-tema="6">
+          <span class="pregunta-num">21</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El acusador privado es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 21)">a) Un fiscal delegado</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">b) La víctima facultada legalmente para ejercer la acción penal</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">c) Un abogado de oficio</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">d) El defensor del indiciado</div>
+          </div>
+          <div class="explicacion">El acusador privado es la víctima facultada legalmente para ejercer la acción penal (Art. 549).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="6">
+          <span class="pregunta-num">22</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El acusador privado debe ser representado por:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 22)">a) Abogado de confianza o estudiante de consultorio jurídico</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">b) Cualquier persona</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">c) Solo un fiscal</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">d) Solo un magistrado</div>
+          </div>
+          <div class="explicacion">El acusador privado debe ser representado de manera obligatoria por un abogado de confianza o estudiante de consultorio jurídico (Art. 549).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="6">
+          <span class="pregunta-num">23</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El acusador privado asume:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 23)">a) Una función privada exclusiva</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">b) Solo la representación de la víctima</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">c) Una función pública transitoria, sujeto al mismo régimen disciplinario y penal de los fiscales</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">d) Ninguna responsabilidad especial</div>
+          </div>
+          <div class="explicacion">El acusador privado asume una función pública transitoria y queda sujeto al mismo régimen disciplinario y penal de los fiscales (Art. 549).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="6">
+          <span class="pregunta-num">24</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El acusador privado tiene las mismas facultades investigativas que:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 24)">a) La Fiscalía</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">b) El juez</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">c) El Ministerio Público</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">d) La defensa</div>
+          </div>
+          <div class="explicacion">El acusador privado tiene las mismas facultades investigativas que la defensa (Art. 556).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 7: CONVERSIÓN -->
+      <div class="quiz-section" id="s7">
+        <div class="pregunta" data-correcta="1" data-tema="7">
+          <span class="pregunta-num">25</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La conversión de la acción penal aplica a:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 25)">a) Todos los delitos</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">b) Conductas tramitadas por el procedimiento especial abreviado, con excepciones</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">c) Solo delitos graves</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">d) Solo delitos contra la administración pública</div>
+          </div>
+          <div class="explicacion">La conversión aplica a las conductas tramitadas por el procedimiento especial abreviado, con excepción de las que atenten contra bienes del Estado y la violencia intrafamiliar (Art. 550).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="7">
+          <span class="pregunta-num">26</span><span class="pregunta-tipo">Conceptual</span>
+          <p>NO se pueden convertir en acción privada:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 26)">a) Delitos contra bienes del Estado y violencia intrafamiliar</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">b) Hurto y estafa</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">c) Lesiones personales</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">d) Delitos querellables</div>
+          </div>
+          <div class="explicacion">No se autoriza la conversión de delitos que atenten contra bienes del Estado ni del delito de violencia intrafamiliar (Art. 550).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="7">
+          <span class="pregunta-num">27</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La solicitud de conversión debe presentarse:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 27)">a) Después del juicio oral</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">b) En cualquier momento</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">c) Antes del traslado del escrito de acusación</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">d) Solo en la audiencia concentrada</div>
+          </div>
+          <div class="explicacion">La víctima solicita la conversión ante el fiscal del caso antes del traslado del escrito de acusación (Arts. 551-554).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="7">
+          <span class="pregunta-num">28</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El fiscal resuelve la solicitud de conversión en un término de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 28)">a) 15 días</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">b) 20 días</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">c) 30 días</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">d) Un (1) mes</div>
+          </div>
+          <div class="explicacion">El fiscal resuelve la solicitud de conversión en un término de un (1) mes (Art. 553).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 8: FACULTADES INVESTIGATIVAS -->
+      <div class="quiz-section" id="s8">
+        <div class="pregunta" data-correcta="1" data-tema="8">
+          <span class="pregunta-num">29</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El acusador privado NO puede realizar directamente:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 29)">a) Entrevistas a personas</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">b) Interceptaciones de comunicaciones, registros, allanamientos, inspecciones corporales, entregas vigiladas ni agentes encubiertos</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">c) Obtención de declaraciones juradas</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">d) Solicitud de prueba anticipada</div>
+          </div>
+          <div class="explicacion">El acusador privado no puede realizar directamente interceptaciones de comunicaciones, registros y allanamientos, inspecciones corporales, entregas vigiladas ni agentes encubiertos (Arts. 556-557).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="8">
+          <span class="pregunta-num">30</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Para actos complejos, el acusador privado debe acudir ante:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 30)">a) El juez de control de garantías</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">b) La Fiscalía directamente</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">c) La Policía Judicial</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">d) El Ministerio Público</div>
+          </div>
+          <div class="explicacion">Para la práctica de actos complejos, el acusador privado debe acudir ante el juez de control de garantías, quien si los considera urgentes y proporcionales ordenará a la Fiscalía que los ejecute (Arts. 556-557).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="8">
+          <span class="pregunta-num">31</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los actos complejos ejecutados por la Fiscalía a solicitud del acusador privado se someten a:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 31)">a) Control previo únicamente</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">b) Ningún control</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">c) Control posterior antes de entregar la evidencia</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">d) Control de la víctima</div>
+          </div>
+          <div class="explicacion">Los actos complejos ejecutados por la Fiscalía se someten a control posterior antes de entregar la evidencia al acusador privado (Arts. 556-557).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="8">
+          <span class="pregunta-num">32</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Las facultades investigativas del acusador privado son equivalentes a las de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 32)">a) La Fiscalía</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">b) El juez</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">c) El Ministerio Público</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">d) La defensa</div>
+          </div>
+          <div class="explicacion">El acusador privado tiene las mismas facultades investigativas que la defensa (Art. 556).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 9: REVERSIÓN Y REPARACIÓN -->
+      <div class="quiz-section" id="s9">
+        <div class="pregunta" data-correcta="1" data-tema="9">
+          <span class="pregunta-num">33</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La reversión de la acción penal privada a pública puede disponerse:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 33)">a) Solo al inicio del proceso</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">b) En cualquier estado del proceso</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">c) Solo después de la sentencia</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">d) Solo en la audiencia concentrada</div>
+          </div>
+          <div class="explicacion">En cualquier estado del proceso, la Fiscalía puede disponer motivadamente que la acción privada vuelva a ser pública (Art. 560).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="9">
+          <span class="pregunta-num">34</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Son causales de reversión:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 34)">a) Sobrevenga causal de no conversión, desviación de poder o ausencia permanente del abogado</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">b) Solo la voluntad del acusador privado</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">c) Solo el pago de la reparación</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">d) Solo la prescripción</div>
+          </div>
+          <div class="explicacion">Las causales de reversión incluyen: sobrevenga causal de no conversión, desviación de poder en la investigación o ausencia permanente del abogado del acusador privado (Art. 560).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="9">
+          <span class="pregunta-num">35</span><span class="pregunta-tipo">Conceptual</span>
+          <p>En la acción penal privada, la pretensión de indemnización se incorpora:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 35)">a) En incidente separado</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">b) Después de la sentencia</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">c) Directamente en el escrito de acusación privada</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">d) En la audiencia concentrada</div>
+          </div>
+          <div class="explicacion">La pretensión de indemnización de perjuicios se incorpora directamente en el escrito de acusación privada (Art. 564).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="9">
+          <span class="pregunta-num">36</span><span class="pregunta-tipo">Conceptual</span>
+          <p>En la acción penal privada, el juez define y liquida los daños:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 36)">a) En incidente separado</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">b) Después de la sentencia</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">c) En audiencia especial</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">d) Directamente en la sentencia condenatoria, sin incidente separado</div>
+          </div>
+          <div class="explicacion">El juez define y liquida los daños causados directamente en la sentencia condenatoria, sin necesidad de tramitar un incidente de reparación separado (Art. 564).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 10: COMPARATIVAS Y CASOS -->
+      <div class="quiz-section" id="s10">
+        <div class="pregunta" data-correcta="1" data-tema="10">
+          <span class="pregunta-num">37</span><span class="pregunta-tipo">Comparación</span>
+          <p>La diferencia principal entre el procedimiento abreviado y el ordinario es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 37)">a) No hay diferencia</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">b) El abreviado unifica audiencias y tiene plazos más cortos</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">c) El ordinario es más rápido</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">d) El abreviado no tiene juicio oral</div>
+          </div>
+          <div class="explicacion">El procedimiento abreviado unifica audiencias (audiencia concentrada) y tiene plazos más cortos, agilizando el proceso.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="10">
+          <span class="pregunta-num">38</span><span class="pregunta-tipo">Comparación</span>
+          <p>La diferencia entre acción pública y privada en materia de reparación es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 38)">a) En la privada se incluye en el escrito de acusación y se resuelve en la sentencia; en la pública requiere incidente separado</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">b) No hay diferencia</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">c) La pública es más rápida</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">d) La privada no permite reparación</div>
+          </div>
+          <div class="explicacion">En la acción privada la reparación se incluye en el escrito de acusación y se resuelve en la sentencia; en la pública requiere incidente de reparación integral separado.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="10">
+          <span class="pregunta-num">39</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Si A es víctima de hurto simple y el indiciado es identificado, no pertenece a organización criminal y no hay riesgo, A puede:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 39)">a) Solo denunciar ante la Fiscalía</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">b) Solo aceptar preacuerdos</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">c) Solicitar la conversión de la acción penal de pública a privada y asumir la acusación</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">d) Solo solicitar la preclusión</div>
+          </div>
+          <div class="explicacion">Si se cumplen los requisitos (delito abreviado, víctima identificada, indiciado identificado, sin causales de denegación), A puede solicitar la conversión y asumir la acusación como acusador privado.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="10">
+          <span class="pregunta-num">40</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Si B es acusado por hurto (procedimiento abreviado) y acepta cargos en la audiencia concentrada, la rebaja máxima es de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 40)">a) La mitad (1/2)</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">b) Una sexta parte (1/6)</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">c) Dos tercios (2/3)</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">d) Un tercio (1/3)</div>
+          </div>
+          <div class="explicacion">Si acepta cargos en la audiencia concentrada, la rebaja máxima es de un tercio (1/3) de la pena (Art. 539).</div>
+        </div>
+      </div>
+
+      <div class="resultado-final" id="resultadoFinal">
+        <h3>🏆 Resultado Final</h3>
+        <div class="puntaje-final" id="puntajeFinal">0/40</div>
+        <p id="mensajeFinal"></p>
+        <div class="desglose-temas" id="desgloseTemas"></div>
+        <button onclick="reiniciarQuiz()" class="btn-reset">🔄 Reiniciar Quiz</button>
+      </div>
+
+      <div style="text-align: center; margin-top: 1.5rem;">
+        <button onclick="verResultadoFinal()">📊 Ver Resultado Final</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>️ Guía Didáctica - Procedimiento Especial Abreviado y Acción Penal Privada</p>
+  <p>Títulos I y II del Libro Especial · Ley 906 de 2004</p>
+  <p style="margin-top: 1rem; opacity: 0.7;">© 2026 - Material educativo interactivo</p>
+</footer>
+
+<script>
+  function toggleAcordeon(header) {
+    header.classList.toggle('active');
+    const content = header.nextElementSibling;
+    content.classList.toggle('active');
+  }
+
+  let respuestas = {};
+  const totalPreguntas = 40;
+
+  function mostrarSeccion(id, tab) {
+    document.querySelectorAll('.quiz-section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.quiz-tab').forEach(t => t.classList.remove('active'));
+    
+    document.getElementById(id).classList.add('active');
+    tab.classList.add('active');
+  }
+
+  function seleccionar(opcion, preguntaNum) {
+    if (respuestas[preguntaNum] !== undefined) return;
+
+    const pregunta = opcion.closest('.pregunta');
+    const opciones = pregunta.querySelectorAll('.opcion');
+    const correcta = parseInt(pregunta.dataset.correcta);
+    const tema = parseInt(pregunta.dataset.tema);
+    const seleccionada = Array.from(opciones).indexOf(opcion);
+    const explicacion = pregunta.querySelector('.explicacion');
+
+    opciones.forEach(o => o.classList.add('disabled'));
+
+    if (seleccionada === correcta) {
+      opcion.classList.add('correcta');
+      respuestas[preguntaNum] = { correcta: true, tema: tema };
+    } else {
+      opcion.classList.add('incorrecta');
+      opciones[correcta].classList.add('correcta');
+      respuestas[preguntaNum] = { correcta: false, tema: tema };
+    }
+
+    explicacion.classList.add('visible');
+    pregunta.classList.add('answered');
+    actualizarEstadisticas();
+  }
+
+  function actualizarEstadisticas() {
+    const total = Object.keys(respuestas).length;
+    const correctas = Object.values(respuestas).filter(r => r.correcta).length;
+    const incorrectas = total - correctas;
+    const porcentaje = total > 0 ? Math.round((correctas / total) * 100) : 0;
+
+    document.getElementById('respondidas').textContent = total;
+    document.getElementById('correctas').textContent = correctas;
+    document.getElementById('incorrectas').textContent = incorrectas;
+    document.getElementById('porcentaje').textContent = porcentaje;
+
+    const progreso = (total / totalPreguntas) * 100;
+    document.getElementById('progressFill').style.width = progreso + '%';
+  }
+
+  function verResultadoFinal() {
+    const total = Object.keys(respuestas).length;
+    
+    if (total < totalPreguntas) {
+      alert(`⚠️ Aún te faltan ${totalPreguntas - total} preguntas por responder.`);
+      return;
+    }
+
+    const correctas = Object.values(respuestas).filter(r => r.correcta).length;
+    const porcentaje = Math.round((correctas / totalPreguntas) * 100);
+
+    const resultadoFinal = document.getElementById('resultadoFinal');
+    resultadoFinal.classList.add('visible');
+
+    document.getElementById('puntajeFinal').textContent = `${correctas}/${totalPreguntas}`;
+
+    let mensaje = '';
+    if (porcentaje === 100) mensaje = '🏆 ¡PERFECTO! Dominas el Procedimiento Abreviado y la Acción Penal Privada.';
+    else if (porcentaje >= 90) mensaje = '🌟 ¡Excelente! Dominio sobresaliente.';
+    else if (porcentaje >= 75) mensaje = '✅ ¡Muy bien! Buen dominio.';
+    else if (porcentaje >= 60) mensaje = '📚 Aceptable. Repasa los temas donde fallaste.';
+    else if (porcentaje >= 40) mensaje = ' Necesitas reforzar varios conceptos.';
+    else mensaje = '🔍 Es necesario estudiar nuevamente todos los temas.';
+
+    document.getElementById('mensajeFinal').textContent = mensaje;
+
+    const temas = {
+      1: { nombre: 'T1: Ámbito Aplicación', total: 4, correctas: 0 },
+      2: { nombre: 'T2: Traslado Acusación', total: 4, correctas: 0 },
+      3: { nombre: 'T3: Rebajas Punitivas', total: 4, correctas: 0 },
+      4: { nombre: 'T4: Audiencia Concentrada', total: 4, correctas: 0 },
+      5: { nombre: 'T5: Juicio Oral/Libertad', total: 4, correctas: 0 },
+      6: { nombre: 'T6: Acusador Privado', total: 4, correctas: 0 },
+      7: { nombre: 'T7: Conversión', total: 4, correctas: 0 },
+      8: { nombre: 'T8: Facultades Investigativas', total: 4, correctas: 0 },
+      9: { nombre: 'T9: Reversión/Reparación', total: 4, correctas: 0 },
+      10: { nombre: 'T10: Comparativas', total: 4, correctas: 0 }
+    };
+
+    Object.values(respuestas).forEach(r => {
+      if (r.correcta) temas[r.tema].correctas++;
+    });
+
+    const desgloseHTML = Object.values(temas).map(t => {
+      const pct = Math.round((t.correctas / t.total) * 100);
+      return `
+        <div class="desglose-item">
+          <h4>${t.nombre}</h4>
+          <p>${t.correctas}/${t.total} (${pct}%)</p>
+          <div class="mini-bar">
+            <div class="mini-bar-fill" style="width: ${pct}%"></div>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    document.getElementById('desgloseTemas').innerHTML = desgloseHTML;
+    resultadoFinal.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  function reiniciarQuiz() {
+    if (!confirm('¿Reiniciar el quiz?')) return;
+
+    respuestas = {};
+
+    document.querySelectorAll('.opcion').forEach(o => o.classList.remove('correcta', 'incorrecta', 'disabled'));
+    document.querySelectorAll('.explicacion').forEach(e => e.classList.remove('visible'));
+    document.querySelectorAll('.pregunta').forEach(p => p.classList.remove('answered'));
+    document.getElementById('resultadoFinal').classList.remove('visible');
+
+    actualizarEstadisticas();
+    mostrarSeccion('s1', document.querySelector('.quiz-tab'));
+    document.getElementById('quiz').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  document.querySelectorAll('nav a').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+</script>
+
+</body>
+</html>
