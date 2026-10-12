@@ -1,0 +1,1991 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Delitos contra el Patrimonio y la Fe Pública - Código Penal</title>
+<style>
+  :root {
+    --primary: #7f1d1d;
+    --secondary: #fbbf24;
+    --accent: #991b1b;
+    --light: #fef3f2;
+    --dark: #1a202c;
+    --success: #38a169;
+    --warning: #d69e2e;
+    --danger: #c53030;
+    --card-bg: #ffffff;
+    --shadow: 0 4px 15px rgba(0,0,0,0.08);
+    --shadow-hover: 0 8px 25px rgba(0,0,0,0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    background: var(--light);
+    color: var(--dark);
+    line-height: 1.7;
+  }
+
+  header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    color: white;
+    padding: 2rem 1rem;
+    text-align: center;
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::before {
+    content: '⚖️';
+    position: absolute;
+    font-size: 15rem;
+    opacity: 0.05;
+    top: -30px;
+    right: -30px;
+  }
+
+  header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: 2px;
+  }
+
+  header p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    font-style: italic;
+  }
+
+  nav {
+    background: var(--dark);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow);
+  }
+
+  nav ul {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0.5rem;
+  }
+
+  nav a {
+    color: var(--light);
+    text-decoration: none;
+    padding: 0.7rem 1rem;
+    margin: 0.2rem;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    transition: all 0.3s;
+    display: block;
+  }
+
+  nav a:hover {
+    background: var(--secondary);
+    color: var(--dark);
+    transform: translateY(-2px);
+  }
+
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+  }
+
+  section {
+    background: var(--card-bg);
+    margin-bottom: 2.5rem;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    border-left: 5px solid var(--secondary);
+    scroll-margin-top: 80px;
+  }
+
+  section h2 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--secondary);
+  }
+
+  section h3 {
+    color: var(--accent);
+    font-size: 1.4rem;
+    margin: 1.5rem 0 0.8rem;
+  }
+
+  section h4 {
+    color: var(--primary);
+    font-size: 1.15rem;
+    margin: 1rem 0 0.5rem;
+  }
+
+  p { margin-bottom: 1rem; text-align: justify; }
+
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.2rem;
+    margin: 1.5rem 0;
+  }
+
+  .card {
+    background: linear-gradient(135deg, #fff 0%, #f9f6ef 100%);
+    border: 2px solid var(--secondary);
+    border-radius: 10px;
+    padding: 1.2rem;
+    transition: all 0.3s;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--primary);
+  }
+
+  .card .icon {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .card h4 {
+    text-align: center;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+  }
+
+  .card .detail {
+    display: none;
+    margin-top: 0.8rem;
+    padding-top: 0.8rem;
+    border-top: 1px dashed var(--secondary);
+    font-size: 0.95rem;
+  }
+
+  .card.active .detail { display: block; }
+
+  .card .hint {
+    text-align: center;
+    color: var(--accent);
+    font-size: 0.85rem;
+    font-style: italic;
+  }
+
+  .mapa-container {
+    background: #fdfbf5;
+    border: 2px dashed var(--secondary);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    overflow-x: auto;
+  }
+
+  .mapa {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 600px;
+  }
+
+  .nodo {
+    background: var(--primary);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+    font-weight: bold;
+    text-align: center;
+    min-width: 180px;
+    box-shadow: var(--shadow);
+  }
+
+  .nodo.central {
+    background: linear-gradient(135deg, var(--secondary), #e0b888);
+    color: var(--dark);
+    font-size: 1.2rem;
+    padding: 1rem 2rem;
+  }
+
+  .nodo.sub {
+    background: var(--accent);
+    font-size: 0.95rem;
+  }
+
+  .linea {
+    width: 3px;
+    height: 25px;
+    background: var(--secondary);
+  }
+
+  .linea-h {
+    height: 3px;
+    background: var(--secondary);
+    width: 80%;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .rama {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 1rem;
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  .rama-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    min-width: 140px;
+  }
+
+  .ejemplo {
+    background: #e6f7ee;
+    border-left: 4px solid var(--success);
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .ejemplo strong { color: var(--success); }
+
+  .alerta {
+    background: #fff8e1;
+    border-left: 4px solid var(--warning);
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .alerta strong { color: var(--warning); }
+
+  .cita {
+    background: #f0f7ff;
+    border-left: 4px solid var(--accent);
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+    color: var(--primary);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    font-size: 0.9rem;
+  }
+
+  th {
+    background: var(--primary);
+    color: white;
+    padding: 0.8rem;
+    text-align: left;
+  }
+
+  td {
+    padding: 0.8rem;
+    border-bottom: 1px solid #eee;
+  }
+
+  tr:nth-child(even) { background: #f9f6ef; }
+  tr:hover { background: #f0ead6; }
+
+  .quiz-container {
+    background: linear-gradient(135deg, #f7f4ed 0%, #fff 100%);
+    padding: 1.5rem;
+    border-radius: 10px;
+    border: 2px solid var(--accent);
+  }
+
+  .quiz-header {
+    background: var(--primary);
+    color: white;
+    padding: 1.2rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .quiz-header h3 {
+    color: white;
+    margin: 0 0 0.5rem 0;
+  }
+
+  .progress-bar {
+    background: rgba(255,255,255,0.2);
+    height: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+  }
+
+  .progress-fill {
+    background: var(--secondary);
+    height: 100%;
+    width: 0%;
+    transition: width 0.4s ease;
+  }
+
+  .quiz-stats {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .stat {
+    background: rgba(255,255,255,0.1);
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    font-size: 0.9rem;
+  }
+
+  .stat strong { color: var(--secondary); }
+
+  .quiz-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    padding: 0.5rem;
+    background: #f0ead6;
+    border-radius: 8px;
+  }
+
+  .quiz-tab {
+    background: white;
+    border: 2px solid var(--accent);
+    color: var(--accent);
+    padding: 0.5rem 0.8rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.75rem;
+    transition: all 0.3s;
+    flex: 1;
+    min-width: 80px;
+    text-align: center;
+  }
+
+  .quiz-tab:hover {
+    background: var(--accent);
+    color: white;
+  }
+
+  .quiz-tab.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+  }
+
+  .quiz-section {
+    display: none;
+  }
+
+  .quiz-section.active {
+    display: block;
+    animation: fadeIn 0.4s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .pregunta {
+    margin-bottom: 1.5rem;
+    padding: 1.2rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    border-left: 4px solid var(--accent);
+    transition: all 0.3s;
+  }
+
+  .pregunta.answered {
+    border-left-color: var(--secondary);
+  }
+
+  .pregunta-num {
+    display: inline-block;
+    background: var(--accent);
+    color: white;
+    padding: 0.2rem 0.7rem;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    margin-right: 0.5rem;
+  }
+
+  .pregunta-tipo {
+    display: inline-block;
+    background: var(--secondary);
+    color: var(--dark);
+    padding: 0.2rem 0.7rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    margin-left: 0.3rem;
+    font-weight: bold;
+  }
+
+  .pregunta p { 
+    font-weight: bold; 
+    color: var(--primary); 
+    margin: 0.8rem 0;
+    text-align: left;
+  }
+
+  .opciones { display: flex; flex-direction: column; gap: 0.5rem; }
+
+  .opcion {
+    padding: 0.7rem 1rem;
+    background: #f9f6ef;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+  }
+
+  .opcion:hover:not(.disabled) {
+    border-color: var(--accent);
+    background: #e8f0f7;
+  }
+
+  .opcion.disabled {
+    cursor: not-allowed;
+    opacity: 0.85;
+  }
+
+  .opcion.correcta {
+    background: #c6f6d5;
+    border-color: var(--success);
+    color: var(--success);
+    font-weight: bold;
+  }
+
+  .opcion.incorrecta {
+    background: #fed7d7;
+    border-color: var(--danger);
+    color: var(--danger);
+  }
+
+  .opcion.correcta::after {
+    content: ' ✓';
+    font-weight: bold;
+  }
+
+  .opcion.incorrecta::after {
+    content: ' ✗';
+    font-weight: bold;
+  }
+
+  .explicacion {
+    margin-top: 0.8rem;
+    padding: 0.8rem;
+    background: #f0f7ff;
+    border-left: 3px solid var(--accent);
+    border-radius: 0 6px 6px 0;
+    font-size: 0.9rem;
+    display: none;
+    font-style: italic;
+  }
+
+  .explicacion.visible {
+    display: block;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .resultado-final {
+    margin-top: 2rem;
+    padding: 2rem;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    color: white;
+    border-radius: 12px;
+    text-align: center;
+    display: none;
+  }
+
+  .resultado-final.visible {
+    display: block;
+    animation: fadeIn 0.5s ease;
+  }
+
+  .resultado-final h3 {
+    color: var(--secondary);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .puntaje-final {
+    font-size: 3rem;
+    font-weight: bold;
+    color: var(--secondary);
+    margin: 1rem 0;
+  }
+
+  .desglose-temas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+    text-align: left;
+  }
+
+  .desglose-item {
+    background: rgba(255,255,255,0.1);
+    padding: 1rem;
+    border-radius: 8px;
+  }
+
+  .desglose-item h4 {
+    color: var(--secondary);
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+  }
+
+  .mini-bar {
+    background: rgba(255,255,255,0.2);
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+  }
+
+  .mini-bar-fill {
+    background: var(--secondary);
+    height: 100%;
+    transition: width 0.6s ease;
+  }
+
+  button {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 1rem;
+    transition: all 0.3s;
+  }
+
+  button:hover {
+    background: var(--secondary);
+    color: var(--dark);
+    transform: translateY(-2px);
+  }
+
+  .btn-reset {
+    background: var(--danger);
+    margin-left: 0.5rem;
+  }
+
+  .btn-reset:hover {
+    background: #9b2c2c;
+    color: white;
+  }
+
+  .acordeon-item {
+    margin-bottom: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .acordeon-header {
+    background: var(--accent);
+    color: white;
+    padding: 1rem;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.3s;
+  }
+
+  .acordeon-header:hover { background: var(--primary); }
+
+  .acordeon-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    background: white;
+  }
+
+  .acordeon-content.active {
+    max-height: 2000px;
+    padding: 1rem;
+  }
+
+  .flecha { transition: transform 0.3s; }
+  .acordeon-header.active .flecha { transform: rotate(180deg); }
+
+  footer {
+    background: var(--dark);
+    color: var(--light);
+    text-align: center;
+    padding: 2rem 1rem;
+    margin-top: 2rem;
+  }
+
+  footer p { margin-bottom: 0.5rem; }
+
+  @media (max-width: 768px) {
+    header h1 { font-size: 1.8rem; }
+    section { padding: 1.2rem; }
+    section h2 { font-size: 1.5rem; }
+    nav a { font-size: 0.7rem; padding: 0.4rem 0.5rem; }
+    .quiz-tab { font-size: 0.65rem; padding: 0.3rem 0.4rem; }
+    table { font-size: 0.8rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>💰 Delitos contra el Patrimonio y la Fe Pública</h1>
+  <p>Código Penal Colombiano (Ley 599/2000) · Guía Didáctica Interactiva 6</p>
+</header>
+
+<nav>
+  <ul>
+    <li><a href="#tema1">1. Fraude</a></li>
+    <li><a href="#tema2">2. Fluidos/Daño</a></li>
+    <li><a href="#tema3">3. Usurpación</a></li>
+    <li><a href="#tema4">4. Tributaria</a></li>
+    <li><a href="#tema5">5. Falsedad Mat.</a></li>
+    <li><a href="#tema6">6. Doc. ID</a></li>
+    <li><a href="#tema7">7. Moneda</a></li>
+    <li><a href="#tema8">8. Títulos</a></li>
+    <li><a href="#quiz">Quiz (40)</a></li>
+  </ul>
+</nav>
+
+<main>
+
+  <section>
+    <h2> Introducción</h2>
+    <p>Bienvenido a la <strong>Guía 6 de la Parte Especial</strong>. Aquí estudiaremos los delitos contra el patrimonio económico (fraude, defraudación de fluidos, usurpación, defraudación tributaria) y los delitos contra la fe pública (falsedad material, falsificación de moneda, documentos de identificación y títulos valores).</p>
+    <div class="alerta">
+      <strong>💡 Cómo usar esta guía:</strong> Haz clic en las tarjetas para ver detalles, despliega los acordeones para información adicional y prueba tus conocimientos con el quiz de 40 preguntas al final.
+    </div>
+  </section>
+
+  <!-- TEMA 1: FRAUDE -->
+  <section id="tema1">
+    <h2>1. Fraude (Art. 248B C.P.)</h2>
+    <p>El fraude es un delito patrimonial que se comete mediante astucia o habilidad para inducir a error a la víctima y obtener un provecho injusto.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">FRAUDE</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Astucia/Habilidad</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Inducción a Error</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Provecho Injusto</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Perjuicio Ajeno</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Tipo Básico (Art. 248B C.P.)</h3>
+    <div class="cita">
+      <strong>"El que con astucia o habilidad obtenga para sí o para un tercero un provecho injusto, con perjuicio patrimonial ajeno..."</strong> — Art. 248B Código Penal
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Elemento</th>
+          <th>Descripción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Sujeto Activo</strong></td>
+          <td>Común</td>
+        </tr>
+        <tr>
+          <td><strong>Sujeto Pasivo</strong></td>
+          <td>Titular del patrimonio perjudicado</td>
+        </tr>
+        <tr>
+          <td><strong>Verbo Rector</strong></td>
+          <td>Compuesto ("obtener provecho injusto mediante astucia o habilidad")</td>
+        </tr>
+        <tr>
+          <td><strong>Bien Jurídico</strong></td>
+          <td>El patrimonio económico</td>
+        </tr>
+        <tr>
+          <td><strong>Elemento Subjetivo</strong></td>
+          <td>Dolo + ánimo de lucro</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>🔍 Diferencia entre Fraude y Estafa</h3>
+    <div class="alerta">
+      <strong>⚖️ Diferencia clave:</strong>
+      <ul>
+        <li><strong>Estafa (Art. 246):</strong> Requiere un "artificio o engaño" que induzca a error a la víctima para que ella misma disponga del bien.</li>
+        <li><strong>Fraude (Art. 248B):</strong> Se basa en la "astucia o habilidad" del agente, sin necesidad de que la víctima realice un acto de disposición consciente. Es más amplio y abarca engaños menores o abusos de confianza no tipificados.</li>
+      </ul>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si A altera sutilmente las etiquetas de precios en un supermercado para pagar menos, comete fraude (astucia/habilidad). Si A crea una empresa fantasma y convence a B de invertir en ella mediante documentos falsos, comete estafa (engaño complejo con acto de disposición).
+    </div>
+  </section>
+
+  <!-- TEMA 2: FLUIDOS Y DAÑO -->
+  <section id="tema2">
+    <h2>2. Defraudación de Fluidos y Daño en Bien Ajeno</h2>
+    <p>Delitos patrimoniales que protegen bienes inmateriales (energía) y la integridad de las cosas ajenas.</p>
+
+    <h3>📋 Defraudación de Fluidos (Art. 256 C.P.)</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon"></div>
+        <h4>Concepto</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>El que se sirva de <strong>electricidad, gas, petróleo, agua</strong> o cualquier otro elemento de fuerza o energía, sin derecho y con perjuicio de otro.</p>
+          <p><strong>Pena:</strong> prisión de 1 a 5 años.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon"></div>
+        <h4>Naturaleza</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Es un delito de <strong>apropiación</strong> de bienes inmateriales. Aunque los fluidos no son "cosas muebles" en sentido estricto, la ley los equipara para efectos penales.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Daño en Bien Ajeno (Art. 265 C.P.)</h3>
+    <div class="cita">
+      <strong>"El que destruya, inutilice o haga perder total o parcialmente una cosa mueble o inmueble ajena..."</strong> — Art. 265 Código Penal
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Elemento</th>
+          <th>Descripción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Verbo Rector</strong></td>
+          <td>Compuesto: "destruir", "inutilizar" o "hacer perder"</td>
+        </tr>
+        <tr>
+          <td><strong>Objeto Material</strong></td>
+          <td>Cosa mueble o inmueble ajena</td>
+        </tr>
+        <tr>
+          <td><strong>Bien Jurídico</strong></td>
+          <td>El patrimonio económico (integridad de los bienes)</td>
+        </tr>
+        <tr>
+          <td><strong>Elemento Subjetivo</strong></td>
+          <td>Dolo (requiere intención de dañar)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>⚠️ Circunstancias de Agravación (Art. 266 C.P.)</h3>
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span> Agravantes del Daño en Bien Ajeno</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <ul>
+          <li>Cuando el daño recaiga sobre <strong>bienes de uso público</strong> (parques, monumentos, transporte público).</li>
+          <li>Cuando se utilicen <strong>medios explosivos, incendiarios o corrosivos</strong>.</li>
+          <li>Cuando el perjuicio supere los <strong>1.000 SMLMV</strong>.</li>
+          <li>Cuando se afecten <strong>bienes destinados a la prestación de servicios públicos</strong>.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong> Ejemplo de defraudación de fluidos:</strong> Conectar una manguera directamente a la red de acueducto municipal sin medidor para regar un cultivo comete defraudación de fluidos (Art. 256).
+    </div>
+  </section>
+
+  <!-- TEMA 3: USURPACIÓN Y ADMINISTRACIÓN DESLEAL -->
+  <section id="tema3">
+    <h2>3. Usurpación de Tierras y Administración Desleal</h2>
+    <p>Delitos que protegen la posesión, la tenencia y la correcta administración de patrimonios ajenos.</p>
+
+    <h3>📋 Usurpación de Tierras (Art. 261 C.P.)</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🌾</div>
+        <h4>Concepto</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>El que <strong>se apropie de un inmueble ajeno</strong> o de una servidumbre sobre él, o altere términos o linderos.</p>
+          <p><strong>Pena:</strong> prisión de 2 a 5 años.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon"></div>
+        <h4>Conductas Típicas</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <ul>
+            <li>Apropiarse de inmueble ajeno</li>
+            <li>Apropiarse de servidumbre</li>
+            <li>Alterar términos o linderos</li>
+            <li>Edificar o sembrar en terreno ajeno</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Administración Desleal (Art. 250 C.P.)</h3>
+    <div class="cita">
+      <strong>"El administrador de un patrimonio ajeno que, abusando de sus facultades, en provecho suyo o de un tercero, cause un perjuicio patrimonial..."</strong> — Art. 250 Código Penal
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Elemento</th>
+          <th>Descripción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Sujeto Activo</strong></td>
+          <td>Calificado: administrador de patrimonio ajeno (albacea, tutor, apoderado, gerente)</td>
+        </tr>
+        <tr>
+          <td><strong>Verbo Rector</strong></td>
+          <td>Compuesto: "abusar de facultades" y "causar perjuicio"</td>
+        </tr>
+        <tr>
+          <td><strong>Bien Jurídico</strong></td>
+          <td>El patrimonio económico y la lealtad en la administración</td>
+        </tr>
+        <tr>
+          <td><strong>Elemento Subjetivo</strong></td>
+          <td>Dolo + ánimo de lucro</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>🔍 Diferencia con Peculado y Abuso de Confianza</h3>
+    <div class="alerta">
+      <strong>⚖️ Diferencias clave:</strong>
+      <ul>
+        <li><strong>Peculado:</strong> Sujeto activo es servidor público con administración de bienes del Estado.</li>
+        <li><strong>Abuso de confianza:</strong> El agente se apropia de un bien mueble específico que le fue entregado.</li>
+        <li><strong>Administración desleal:</strong> El agente abusa de sus facultades de administración genérica causando perjuicio (no necesariamente se apropia de un bien específico).</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- TEMA 4: APROPIACIÓN INDEBIDA Y TRIBUTARIA -->
+  <section id="tema4">
+    <h2>4. Apropiación Indebida y Defraudación Tributaria</h2>
+    <p>Delitos patrimoniales relacionados con la retención de bienes y el perjuicio al fisco.</p>
+
+    <h3> Apropiación Indebida (Art. 252 C.P.)</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">💼</div>
+        <h4>Concepto</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>El que teniendo en su poder dinero, bienes muebles o títulos de crédito ajenos, <strong>se niegue a restituirlos</strong> o a darles el aplicación debida.</p>
+          <p><strong>Pena:</strong> prisión de 2 a 6 años.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">️</div>
+        <h4>Requisito Clave</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Requiere un <strong>requerimiento previo</strong> (extrajudicial o judicial) para la restitución. El delito se configura cuando el agente se niega a devolver lo que tiene en su poder.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Defraudación Tributaria (Art. 258 C.P.)</h3>
+    <div class="cita">
+      <strong>"El que por cualquier medio obtenga para sí o para un tercero un provecho injusto en perjuicio del fisco nacional, departamental, distrital o municipal..."</strong> — Art. 258 Código Penal
+    </div>
+
+    <h3>🔍 Conductas Típicas de la Defraudación Tributaria</h3>
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span> Modalidades del Delito</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <ul>
+          <li>Ocultar actividades generadoras de obligaciones tributarias</li>
+          <li>Simular, ocultar, alterar o destruir documentos contables</li>
+          <li>Presentar declaraciones falsas o incompletas</li>
+          <li>No inscribirse en los registros tributarios cuando está obligado</li>
+          <li>Obtener beneficios tributarios indebidos</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo de apropiación indebida:</strong> Un abogado que recibe dinero de su cliente para pagar una fianza, pero se lo queda para sí mismo y se niega a devolverlo cuando el cliente se lo exige, comete apropiación indebida (Art. 252).
+    </div>
+  </section>
+
+  <!-- TEMA 5: FALSEDAD MATERIAL -->
+  <section id="tema5">
+    <h2>5. Falsedad Material en Documentos (Arts. 286-287 C.P.)</h2>
+    <p>La falsedad material consiste en la alteración física o material de un documento, modificando su contenido verdadero.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">FALSEDAD MATERIAL</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Documento Público</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Art. 286</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Documento Privado</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Art. 287</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Falsedad Material en Documento Público (Art. 286)</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Elemento</th>
+          <th>Descripción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Sujeto Activo</strong></td>
+          <td>Cualquier persona (si es servidor público, la pena aumenta)</td>
+        </tr>
+        <tr>
+          <td><strong>Verbo Rector</strong></td>
+          <td>Compuesto: "falsificar", "alterar", "adulterar"</td>
+        </tr>
+        <tr>
+          <td><strong>Objeto Material</strong></td>
+          <td>Documento público (escrituras, sentencias, registros civiles)</td>
+        </tr>
+        <tr>
+          <td><strong>Bien Jurídico</strong></td>
+          <td>La fe pública</td>
+        </tr>
+        <tr>
+          <td><strong>Pena</strong></td>
+          <td>Prisión de 6 a 12 años</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3> Falsedad Material en Documento Privado (Art. 287)</h3>
+    <div class="alerta">
+      <strong>📌 Conductas típicas:</strong>
+      <ul>
+        <li>Falsificar un documento privado (crear uno falso desde cero)</li>
+        <li>Alterar un documento privado verdadero (modificar su contenido)</li>
+        <li>Falsificar la firma de otro o usar una firma falsificada</li>
+      </ul>
+      <p><strong>Pena:</strong> prisión de 2 a 6 años.</p>
+    </div>
+
+    <h3>🔍 Diferencia con Falsedad Ideológica</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">️</div>
+        <h4>Falsedad Material</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Se altera <strong>físicamente</strong> el documento (tinta, papel, firma, sellos). El documento en sí es falso o fue modificado materialmente.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🧠</div>
+        <h4>Falsedad Ideológica</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>El documento es <strong>auténtico en su forma</strong> (firmado por quien debe firmarlo), pero su <strong>contenido es falso</strong> (declaraciones mentirosas).</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEMA 6: DOCUMENTOS DE ID Y TÍTULOS -->
+  <section id="tema6">
+    <h2>6. Falsedad en Documentos de Identificación y Títulos Académicos</h2>
+    <p>Delitos específicos que protegen la autenticidad de los documentos de identificación personal y los títulos educativos.</p>
+
+    <h3>📋 Falsedad en Documento de Identificación (Art. 292 C.P.)</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🪪</div>
+        <h4>Concepto</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>El que <strong>falsifique, altere o suprima</strong> un documento de identificación personal (cédula, pasaporte, licencia de conducción).</p>
+          <p><strong>Pena:</strong> prisión de 3 a 8 años.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🎭</div>
+        <h4>Uso de Documento Falso</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>El que <strong>use</strong> un documento de identificación falso o adulterado incurre en la misma pena.</p>
+          <p>Protege la seguridad de las transacciones y el control estatal.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Falsedad en Título Académico (Art. 293 C.P.)</h3>
+    <div class="cita">
+      <strong>"El que falsifique un título académico o de formación para el trabajo, o certificaciones de estudios..."</strong> — Art. 293 Código Penal
+    </div>
+
+    <h3>📋 Suposición de Niño (Art. 297 C.P.)</h3>
+    <div class="alerta">
+      <strong> Concepto:</strong> El que suponga el parto de una mujer o la presentación de un niño vivo, cuando no lo hubo, o sustituya un niño por otro.
+      <br><br>
+      <strong>Bien jurídico:</strong> El estado civil de las personas y la familia.
+      <br>
+      <strong>Pena:</strong> prisión de 4 a 10 años.
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si A compra una cédula de ciudadanía falsa en la calle para abrir una cuenta bancaria, comete el delito de uso de documento de identificación falso (Art. 292). Si A paga para que le hagan un diploma universitario falso, comete falsedad en título académico (Art. 293).
+    </div>
+  </section>
+
+  <!-- TEMA 7: MONEDA Y SELLOS -->
+  <section id="tema7">
+    <h2>7. Falsificación de Moneda y Sellos Oficiales</h2>
+    <p>Delitos contra la fe pública que protegen la circulación monetaria y los símbolos de autoridad del Estado.</p>
+
+    <h3>📋 Falsificación de Moneda (Art. 303 C.P.)</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon"></div>
+        <h4>Concepto</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>El que <strong>falsifique moneda</strong> de curso legal en el país o en el extranjero, o billetes del Banco de la República.</p>
+          <p><strong>Pena:</strong> prisión de 5 a 12 años.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon"></div>
+        <h4>Conductas Típicas</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <ul>
+            <li>Falsificar moneda o billetes</li>
+            <li>Introducir al país moneda falsa</li>
+            <li>Expendir (gastar) moneda falsa a sabiendas</li>
+            <li>Alterar moneda legítima para darle mayor valor aparente</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <h3> Falsificación de Sellos Oficiales (Art. 306 C.P.)</h3>
+    <div class="alerta">
+      <strong>📌 Concepto:</strong> El que falsifique sellos oficiales, timbres, estampillas o marcas que utilice el Estado o empresas de servicios públicos.
+      <br><br>
+      <strong>Bien jurídico:</strong> La fe pública y la seguridad del tráfico jurídico.
+      <br>
+      <strong>Pena:</strong> prisión de 3 a 8 años.
+    </div>
+
+    <h3>🔍 Elemento Subjetivo Especial</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🧠</div>
+        <h4>Dolo Específico</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>En la falsificación de moneda, se requiere que el agente actúe <strong>a sabiendas</strong> de la falsedad. Si alguien recibe un billete falso sin saberlo y lo gasta, no comete el delito.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si A imprime billetes de $50.000 en su casa con una impresora de alta calidad y los gasta en comercios, comete falsificación de moneda y expendio de moneda falsa (Art. 303).
+    </div>
+  </section>
+
+  <!-- TEMA 8: TÍTULOS VALORES -->
+  <section id="tema8">
+    <h2>8. Falsificación de Títulos Valores y Uso de Documento Falso</h2>
+    <p>Delitos que protegen la seguridad del tráfico comercial y la autenticidad de los documentos que incorporan derechos.</p>
+
+    <h3> Falsificación de Títulos Valores (Art. 309 C.P.)</h3>
+    <div class="cita">
+      <strong>"El que falsifique, altere o suprima un título valor..."</strong> — Art. 309 Código Penal
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Elemento</th>
+          <th>Descripción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Objeto Material</strong></td>
+          <td>Títulos valores (letras de cambio, cheques, pagarés, acciones, bonos)</td>
+        </tr>
+        <tr>
+          <td><strong>Verbo Rector</strong></td>
+          <td>Falsificar, alterar o suprimir</td>
+        </tr>
+        <tr>
+          <td><strong>Bien Jurídico</strong></td>
+          <td>La fe pública y la seguridad del tráfico mercantil</td>
+        </tr>
+        <tr>
+          <td><strong>Pena</strong></td>
+          <td>Prisión de 4 a 10 años</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3> Uso de Documento Falso (Art. 294 C.P.)</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📄</div>
+        <h4>Concepto</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>El que <strong>haga uso</strong> de un documento público o privado falso, alterado o adulterado.</p>
+          <p><strong>Pena:</strong> prisión de 2 a 6 años.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">️</div>
+        <h4>Requisito Clave</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>El agente debe <strong>saber</strong> que el documento es falso. El uso de buena fe no constituye delito.</p>
+          <p>Es un delito autónomo: se castiga aunque el agente no haya sido el falsificador original.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>🔍 Cuadro Comparativo Final</h3>
+    <div style="overflow-x: auto;">
+      <table>
+        <thead>
+          <tr>
+            <th>Delito</th>
+            <th>Artículo</th>
+            <th>Objeto Protegido</th>
+            <th>Conducta Principal</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Fraude</strong></td>
+            <td>Art. 248B</td>
+            <td>Patrimonio</td>
+            <td>Obtener provecho por astucia/habilidad</td>
+          </tr>
+          <tr>
+            <td><strong>Defraudación de fluidos</strong></td>
+            <td>Art. 256</td>
+            <td>Patrimonio</td>
+            <td>Servirse de electricidad, gas, agua sin derecho</td>
+          </tr>
+          <tr>
+            <td><strong>Usurpación</strong></td>
+            <td>Art. 261</td>
+            <td>Patrimonio (inmuebles)</td>
+            <td>Apropiarse de inmueble o alterar linderos</td>
+          </tr>
+          <tr>
+            <td><strong>Falsedad material</strong></td>
+            <td>Arts. 286-287</td>
+            <td>Fe pública</td>
+            <td>Alterar físicamente un documento</td>
+          </tr>
+          <tr>
+            <td><strong>Falsificación de moneda</strong></td>
+            <td>Art. 303</td>
+            <td>Fe pública</td>
+            <td>Falsificar o expender moneda/billetes</td>
+          </tr>
+          <tr>
+            <td><strong>Uso de documento falso</strong></td>
+            <td>Art. 294</td>
+            <td>Fe pública</td>
+            <td>Utilizar a sabiendas un documento falso</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo de falsificación de títulos valores:</strong> Si A altera el monto de un cheque de $100.000 a $10.000.000 cambiando los números y la letra, comete falsificación de título valor (Art. 309). Si B recibe ese cheque alterado, sabe que es falso y aun así lo endosa para pagar una deuda, comete uso de documento falso (Art. 294).
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz">
+    <h2>🎯 Quiz Completo - 40 Preguntas</h2>
+    <p>Pon a prueba tus conocimientos sobre Delitos contra el Patrimonio y la Fe Pública.</p>
+
+    <div class="quiz-container">
+      <div class="quiz-header">
+        <h3>📊 Tu Progreso</h3>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="quiz-stats">
+          <div class="stat">Respondidas: <strong id="respondidas">0</strong>/40</div>
+          <div class="stat">Correctas: <strong id="correctas">0</strong></div>
+          <div class="stat">Incorrectas: <strong id="incorrectas">0</strong></div>
+          <div class="stat">Porcentaje: <strong id="porcentaje">0</strong>%</div>
+        </div>
+      </div>
+
+      <div class="quiz-tabs">
+        <div class="quiz-tab active" onclick="mostrarSeccion('s1', this)">T1 (5)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s2', this)">T2 (5)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s3', this)">T3 (5)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s4', this)">T4 (5)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s5', this)">T5 (5)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s6', this)">T6 (5)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s7', this)">T7 (5)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s8', this)">T8 (5)</div>
+      </div>
+
+      <!-- SECCIÓN 1: FRAUDE -->
+      <div class="quiz-section active" id="s1">
+        <div class="pregunta" data-correcta="2" data-tema="1">
+          <span class="pregunta-num">1</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El delito de fraude (Art. 248B) se caracteriza por:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 1)">a) El uso de violencia sobre las personas</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">b) La apropiación de bienes del Estado</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">c) La obtención de provecho injusto mediante astucia o habilidad</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">d) La alteración física de documentos</div>
+          </div>
+          <div class="explicacion">El fraude se comete mediante astucia o habilidad para obtener un provecho injusto con perjuicio patrimonial ajeno (Art. 248B).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="1">
+          <span class="pregunta-num">2</span><span class="pregunta-tipo">Comparación</span>
+          <p>La diferencia principal entre fraude y estafa es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 2)">a) La estafa requiere violencia</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">b) La estafa requiere un artificio/engaño que induzca a la víctima a disponer del bien; el fraude se basa en astucia/habilidad</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">c) El fraude solo aplica a servidores públicos</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">d) No hay diferencia</div>
+          </div>
+          <div class="explicacion">La estafa requiere un engaño complejo que provoque un acto de disposición de la víctima; el fraude se basa en astucia o habilidad más amplias.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="1">
+          <span class="pregunta-num">3</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El bien jurídico tutelado en el fraude es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 3)">a) El patrimonio económico</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">b) La fe pública</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">c) La administración pública</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">d) La libertad individual</div>
+          </div>
+          <div class="explicacion">El fraude tutela el patrimonio económico, al igual que la estafa y el hurto.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="1">
+          <span class="pregunta-num">4</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El elemento subjetivo del fraude requiere:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 4)">a) Culpa</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">b) Preterintención</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">c) Animus necandi</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">d) Dolo y ánimo de lucro</div>
+          </div>
+          <div class="explicacion">El fraude requiere dolo (intención) y ánimo de lucro (propósito de obtener provecho).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="1">
+          <span class="pregunta-num">5</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Si A altera sutilmente las etiquetas de precios en un supermercado para pagar menos, comete:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 5)">a) Hurto</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">b) Estafa</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">c) Fraude</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">d) Daño en bien ajeno</div>
+          </div>
+          <div class="explicacion">Alterar etiquetas de precios mediante astucia/habilidad sin que el cajero disponga conscientemente del bien configura fraude (Art. 248B).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 2: FLUIDOS Y DAÑO -->
+      <div class="quiz-section" id="s2">
+        <div class="pregunta" data-correcta="1" data-tema="2">
+          <span class="pregunta-num">6</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La defraudación de fluidos (Art. 256) protege:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 6)">a) Bienes muebles tangibles</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">b) Elementos de fuerza o energía (electricidad, gas, agua)</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">c) Documentos públicos</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">d) Bienes inmuebles</div>
+          </div>
+          <div class="explicacion">La defraudación de fluidos protege elementos de fuerza o energía como electricidad, gas, petróleo o agua.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="2">
+          <span class="pregunta-num">7</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El verbo rector del daño en bien ajeno (Art. 265) es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 7)">a) Destruir, inutilizar o hacer perder</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">b) Apoderarse</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">c) Inducir en error</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">d) Falsificar</div>
+          </div>
+          <div class="explicacion">El daño en bien ajeno tiene como verbos rectores destruir, inutilizar o hacer perder total o parcialmente una cosa ajena.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="2">
+          <span class="pregunta-num">8</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El daño en bien ajeno se agrava cuando:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 8)">a) La víctima es menor de edad</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">b) Se comete entre familiares</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">c) Se utilizan medios explosivos, incendiarios o se afecta bienes de uso público</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">d) El daño es menor a 100 SMLMV</div>
+          </div>
+          <div class="explicacion">El daño en bien ajeno se agrava cuando se usan medios explosivos/incendiarios o se afectan bienes de uso público (Art. 266).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="2">
+          <span class="pregunta-num">9</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La defraudación de fluidos requiere que el agente actúe:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 9)">a) Con violencia</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">b) Con engaño complejo</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">c) Con ánimo de lucro</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">d) Sin derecho y con perjuicio de otro</div>
+          </div>
+          <div class="explicacion">La defraudación de fluidos requiere servirse de los elementos sin derecho y con perjuicio de otro.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="2">
+          <span class="pregunta-num">10</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Conectar una manguera directamente a la red de acueducto sin medidor configura:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 10)">a) Hurto de agua</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">b) Defraudación de fluidos</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">c) Fraude</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">d) Daño en bien ajeno</div>
+          </div>
+          <div class="explicacion">Servirse de agua sin derecho y con perjuicio de la empresa de acueducto configura defraudación de fluidos (Art. 256).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 3: USURPACIÓN Y ADMIN. DESLEAL -->
+      <div class="quiz-section" id="s3">
+        <div class="pregunta" data-correcta="2" data-tema="3">
+          <span class="pregunta-num">11</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La usurpación de tierras (Art. 261) protege:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 11)">a) Bienes muebles</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">b) Documentos públicos</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">c) La posesión y tenencia de inmuebles</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">d) La fe pública</div>
+          </div>
+          <div class="explicacion">La usurpación de tierras protege la posesión y tenencia de inmuebles ajenos.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="3">
+          <span class="pregunta-num">12</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El sujeto activo de la administración desleal (Art. 250) es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 12)">a) Calificado: administrador de patrimonio ajeno</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">b) Cualquier persona</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">c) Solo servidor público</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">d) Solo el dueño del bien</div>
+          </div>
+          <div class="explicacion">La administración desleal requiere sujeto activo calificado: administrador de un patrimonio ajeno (albacea, tutor, apoderado, gerente).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="3">
+          <span class="pregunta-num">13</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La administración desleal se diferencia del abuso de confianza porque:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 13)">a) No hay diferencia</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">b) La administración desleal implica abuso de facultades de administración genérica; el abuso de confianza implica apropiación de un bien específico entregado</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">c) El abuso de confianza solo aplica a inmuebles</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">d) La administración desleal solo aplica a servidores públicos</div>
+          </div>
+          <div class="explicacion">La administración desleal implica abuso de facultades de administración genérica causando perjuicio; el abuso de confianza implica apropiación de un bien mueble específico.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="3">
+          <span class="pregunta-num">14</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Conductas típicas de la usurpación de tierras incluyen:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 14)">a) Solo apropiarse de inmueble</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">b) Solo alterar linderos</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">c) Solo edificar en terreno ajeno</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">d) Apropiarse de inmueble, alterar linderos, edificar o sembrar en terreno ajeno</div>
+          </div>
+          <div class="explicacion">La usurpación incluye apropiarse de inmueble, alteración de linderos, edificación o siembra en terreno ajeno (Art. 261).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="3">
+          <span class="pregunta-num">15</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Un gerente de empresa que usa fondos de la compañía para pagar deudas personales, causando perjuicio a los accionistas, comete:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 15)">a) Peculado</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">b) Hurto</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">c) Administración desleal</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">d) Fraude</div>
+          </div>
+          <div class="explicacion">El gerente que abusa de sus facultades de administración causando perjuicio patrimonial comete administración desleal (Art. 250).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 4: APROPIACIÓN Y TRIBUTARIA -->
+      <div class="quiz-section" id="s4">
+        <div class="pregunta" data-correcta="1" data-tema="4">
+          <span class="pregunta-num">16</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La apropiación indebida (Art. 252) requiere como requisito previo:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 16)">a) Violencia sobre las personas</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">b) Requerimiento para la restitución y negativa a devolver</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">c) Engaño complejo</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">d) Calidad de servidor público</div>
+          </div>
+          <div class="explicacion">La apropiación indebida requiere que el agente se niegue a restituir lo que tiene en su poder tras un requerimiento.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="4">
+          <span class="pregunta-num">17</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La defraudación tributaria (Art. 258) perjudica a:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 17)">a) El fisco (nacional, departamental, distrital o municipal)</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">b) Particulares</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">c) Empresas privadas</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">d) Entidades financieras</div>
+          </div>
+          <div class="explicacion">La defraudación tributaria obtiene provecho injusto en perjuicio del fisco (entes estatales recaudadores).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="4">
+          <span class="pregunta-num">18</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Conductas típicas de la defraudación tributaria incluyen:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 18)">a) Solo no pagar impuestos</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">b) Solo ocultar bienes</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">c) Ocultar actividades generadoras de obligaciones, presentar declaraciones falsas, no inscribirse en registros tributarios</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">d) Solo evadir la firma de contratos</div>
+          </div>
+          <div class="explicacion">La defraudación tributaria incluye ocultar actividades, presentar declaraciones falsas, no inscribirse en registros, entre otras (Art. 258).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="4">
+          <span class="pregunta-num">19</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La diferencia entre apropiación indebida y abuso de confianza es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 19)">a) No hay diferencia</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">b) El abuso de confianza requiere violencia</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">c) La apropiación indebida solo aplica a inmuebles</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">d) La apropiación indebida requiere negativa a restituir tras requerimiento; el abuso de confianza requiere apropiación de bien entregado en confianza</div>
+          </div>
+          <div class="explicacion">La apropiación indebida se configura por la negativa a restituir tras requerimiento; el abuso de confianza por la apropiación de bien entregado en confianza.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="4">
+          <span class="pregunta-num">20</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Un contador que presenta declaraciones de renta con ingresos ocultos para que su cliente pague menos impuestos comete:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 20)">a) Fraude</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">b) Defraudación tributaria</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">c) Falsedad ideológica</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">d) Estafa</div>
+          </div>
+          <div class="explicacion">Ocultar ingresos en declaraciones tributarias para obtener provecho injusto en perjuicio del fisco configura defraudación tributaria (Art. 258).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 5: FALSEDAD MATERIAL -->
+      <div class="quiz-section" id="s5">
+        <div class="pregunta" data-correcta="2" data-tema="5">
+          <span class="pregunta-num">21</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La falsedad material consiste en:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 21)">a) Insertar declaraciones falsas en documento auténtico</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">b) Usar documento ajeno sin permiso</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">c) Alteración física o material del documento (tinta, papel, firma, sellos)</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">d) Destruir un documento</div>
+          </div>
+          <div class="explicacion">La falsedad material implica la alteración física o material del documento (falsificar, alterar, adulterar).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="5">
+          <span class="pregunta-num">22</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La falsedad material en documento público (Art. 286) tiene pena de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 22)">a) Prisión de 6 a 12 años</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">b) Prisión de 1 a 3 años</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">c) Solo multa</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">d) Prisión de 2 a 6 años</div>
+          </div>
+          <div class="explicacion">La falsedad material en documento público tiene pena de prisión de 6 a 12 años (es más grave que en documento privado).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="5">
+          <span class="pregunta-num">23</span><span class="pregunta-tipo">Comparación</span>
+          <p>La diferencia entre falsedad material e ideológica es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 23)">a) No hay diferencia</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">b) La material altera físicamente el documento; la ideológica tiene documento auténtico pero contenido falso</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">c) La ideológica es más grave siempre</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">d) La material solo aplica a documentos privados</div>
+          </div>
+          <div class="explicacion">La falsedad material altera físicamente el documento; la ideológica mantiene la autenticidad formal pero el contenido es falso.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="5">
+          <span class="pregunta-num">24</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El bien jurídico tutelado en la falsedad material es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 24)">a) El patrimonio</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">b) La administración pública</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">c) La libertad</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">d) La fe pública</div>
+          </div>
+          <div class="explicacion">La falsedad material tutela la fe pública (la confianza en la autenticidad de los documentos).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="5">
+          <span class="pregunta-num">25</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Si A borra con químico una cifra en un cheque y la reemplaza por otra mayor, comete:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 25)">a) Falsedad ideológica</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">b) Estafa</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">c) Falsedad material</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">d) Fraude</div>
+          </div>
+          <div class="explicacion">Alterar físicamente el contenido de un cheque (borrar y reemplazar cifras) configura falsedad material.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 6: DOC. ID Y TÍTULOS -->
+      <div class="quiz-section" id="s6">
+        <div class="pregunta" data-correcta="1" data-tema="6">
+          <span class="pregunta-num">26</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La falsedad en documento de identificación (Art. 292) incluye:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 26)">a) Solo cédulas de ciudadanía</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">b) Cédulas, pasaportes, licencias de conducción y otros documentos de identificación personal</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">c) Solo pasaportes</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">d) Solo documentos privados</div>
+          </div>
+          <div class="explicacion">El Art. 292 protege cédulas, pasaportes, licencias de conducción y otros documentos de identificación personal.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="6">
+          <span class="pregunta-num">27</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La falsedad en título académico (Art. 293) sanciona:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 27)">a) Falsificar títulos académicos o certificaciones de estudios</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">b) No terminar la carrera</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">c) Presentar un título extranjero sin apostilla</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">d) Usar un título propio en otro país</div>
+          </div>
+          <div class="explicacion">El Art. 293 sanciona la falsificación de títulos académicos o certificaciones de estudios para el trabajo.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="6">
+          <span class="pregunta-num">28</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La suposición de niño (Art. 297) consiste en:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 28)">a) Adoptar un niño ilegalmente</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">b) Registrar un niño con nombre falso</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">c) Simular el parto de una mujer o sustituir un niño por otro</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">d) No registrar el nacimiento</div>
+          </div>
+          <div class="explicacion">La suposición de niño consiste en simular el parto o sustituir un niño por otro, afectando el estado civil.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="6">
+          <span class="pregunta-num">29</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El uso de documento de identificación falso:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 29)">a) No es delito si no se usa para defraudar</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">b) Solo es falta policial</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">c) Solo es delito si el agente es el falsificador</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">d) Constituye delito autónomo con la misma pena de la falsificación</div>
+          </div>
+          <div class="explicacion">El uso de documento de identificación falso constituye delito autónomo (Art. 292), aunque el agente no sea el falsificador.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="6">
+          <span class="pregunta-num">30</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Si A paga para que le hagan un diploma universitario falso y lo presenta para conseguir empleo, comete:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 30)">a) Estafa</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">b) Falsedad en título académico</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">c) Fraude</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">d) Suposición de niño</div>
+          </div>
+          <div class="explicacion">Falsificar o usar un título académico falso configura el delito del Art. 293.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 7: MONEDA Y SELLOS -->
+      <div class="quiz-section" id="s7">
+        <div class="pregunta" data-correcta="2" data-tema="7">
+          <span class="pregunta-num">31</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La falsificación de moneda (Art. 303) protege:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 31)">a) El patrimonio del Banco de la República</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">b) La economía nacional únicamente</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">c) La fe pública y la seguridad del tráfico monetario</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">d) Los derechos de autor de los billetes</div>
+          </div>
+          <div class="explicacion">La falsificación de moneda tutela la fe pública y la seguridad del tráfico monetario.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="7">
+          <span class="pregunta-num">32</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Conductas típicas en la falsificación de moneda incluyen:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 32)">a) Falsificar, introducir al país, expender a sabiendas, o alterar moneda legítima</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">b) Solo falsificar</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">c) Solo expender</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">d) Solo alterar</div>
+          </div>
+          <div class="explicacion">El Art. 303 tipifica falsificar, introducir al país, expender a sabiendas, y alterar moneda legítima.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="7">
+          <span class="pregunta-num">33</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Para que el expendio de moneda falsa sea delito, se requiere:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 33)">a) Que el agente sea el falsificador original</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">b) Que el agente actúe a sabiendas de la falsedad</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">c) Que la moneda sea de curso ilegal</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">d) Que el perjuicio sea mayor a 100 SMLMV</div>
+          </div>
+          <div class="explicacion">El expendio de moneda falsa requiere que el agente actúe a sabiendas de la falsedad (dolo específico).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="7">
+          <span class="pregunta-num">34</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La falsificación de sellos oficiales (Art. 306) sanciona:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 34)">a) Solo sellos del Banco de la República</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">b) Solo sellos de correos</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">c) Solo timbres notariales</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">d) Sellos oficiales, timbres, estampillas o marcas del Estado o empresas de servicios públicos</div>
+          </div>
+          <div class="explicacion">El Art. 306 protege sellos oficiales, timbres, estampillas o marcas del Estado o empresas de servicios públicos.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="7">
+          <span class="pregunta-num">35</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Si A recibe un billete de $50.000 falso en el cambio de una compra, se da cuenta y decide gastarlo en otra tienda, comete:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 35)">a) Falsificación de moneda</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">b) Fraude</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">c) Expendio de moneda falsa</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">d) Estafa</div>
+          </div>
+          <div class="explicacion">Gastar moneda falsa a sabiendas de su falsedad configura el delito de expendio de moneda falsa (Art. 303).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 8: TÍTULOS VALORES Y USO -->
+      <div class="quiz-section" id="s8">
+        <div class="pregunta" data-correcta="1" data-tema="8">
+          <span class="pregunta-num">36</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los títulos valores incluyen:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 36)">a) Solo cheques</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">b) Letras de cambio, cheques, pagarés, acciones, bonos</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">c) Solo acciones</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">d) Documentos de identificación</div>
+          </div>
+          <div class="explicacion">Los títulos valores incluyen letras de cambio, cheques, pagarés, acciones, bonos y otros documentos mercantiles.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="8">
+          <span class="pregunta-num">37</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El uso de documento falso (Art. 294) requiere:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 37)">a) Que el agente sepa que el documento es falso</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">b) Que el agente sea el falsificador original</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">c) Que el documento sea público exclusivamente</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">d) Que se cause perjuicio patrimonial</div>
+          </div>
+          <div class="explicacion">El uso de documento falso requiere que el agente actúe a sabiendas de la falsedad del documento.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="8">
+          <span class="pregunta-num">38</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La falsificación de títulos valores (Art. 309) tutela:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 38)">a) El patrimonio del emisor</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">b) La administración pública</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">c) La fe pública y la seguridad del tráfico mercantil</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">d) La libertad contractual</div>
+          </div>
+          <div class="explicacion">La falsificación de títulos valores tutela la fe pública y la seguridad del tráfico mercantil.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="8">
+          <span class="pregunta-num">39</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El uso de documento falso es un delito:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 39)">a) Culposo</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">b) Preterintencional</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">c) De mera actividad</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">d) Autónomo (se castiga aunque el agente no sea el falsificador)</div>
+          </div>
+          <div class="explicacion">El uso de documento falso es un delito autónomo que se castiga independientemente de si el agente fue el falsificador original.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="8">
+          <span class="pregunta-num">40</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Si A altera el monto de un cheque de $100.000 a $10.000.000 y B, sabiendo que está alterado, lo endosa para pagar una deuda, B comete:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 40)">a) Falsificación de título valor</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">b) Uso de documento falso</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">c) Estafa</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">d) Fraude</div>
+          </div>
+          <div class="explicacion">B, al usar a sabiendas un título valor alterado, comete uso de documento falso (Art. 294). A cometió falsificación de título valor (Art. 309).</div>
+        </div>
+      </div>
+
+      <div class="resultado-final" id="resultadoFinal">
+        <h3>🏆 Resultado Final</h3>
+        <div class="puntaje-final" id="puntajeFinal">0/40</div>
+        <p id="mensajeFinal"></p>
+        <div class="desglose-temas" id="desgloseTemas"></div>
+        <button onclick="reiniciarQuiz()" class="btn-reset">🔄 Reiniciar Quiz</button>
+      </div>
+
+      <div style="text-align: center; margin-top: 1.5rem;">
+        <button onclick="verResultadoFinal()">📊 Ver Resultado Final</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>⚖️ Guía Didáctica - Delitos contra el Patrimonio y la Fe Pública</p>
+  <p>Código Penal Colombiano · Ley 599 de 2000</p>
+  <p style="margin-top: 1rem; opacity: 0.7;">© 2026 - Material educativo interactivo</p>
+</footer>
+
+<script>
+  function toggleAcordeon(header) {
+    header.classList.toggle('active');
+    const content = header.nextElementSibling;
+    content.classList.toggle('active');
+  }
+
+  let respuestas = {};
+  const totalPreguntas = 40;
+
+  function mostrarSeccion(id, tab) {
+    document.querySelectorAll('.quiz-section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.quiz-tab').forEach(t => t.classList.remove('active'));
+    
+    document.getElementById(id).classList.add('active');
+    tab.classList.add('active');
+  }
+
+  function seleccionar(opcion, preguntaNum) {
+    if (respuestas[preguntaNum] !== undefined) return;
+
+    const pregunta = opcion.closest('.pregunta');
+    const opciones = pregunta.querySelectorAll('.opcion');
+    const correcta = parseInt(pregunta.dataset.correcta);
+    const tema = parseInt(pregunta.dataset.tema);
+    const seleccionada = Array.from(opciones).indexOf(opcion);
+    const explicacion = pregunta.querySelector('.explicacion');
+
+    opciones.forEach(o => o.classList.add('disabled'));
+
+    if (seleccionada === correcta) {
+      opcion.classList.add('correcta');
+      respuestas[preguntaNum] = { correcta: true, tema: tema };
+    } else {
+      opcion.classList.add('incorrecta');
+      opciones[correcta].classList.add('correcta');
+      respuestas[preguntaNum] = { correcta: false, tema: tema };
+    }
+
+    explicacion.classList.add('visible');
+    pregunta.classList.add('answered');
+    actualizarEstadisticas();
+  }
+
+  function actualizarEstadisticas() {
+    const total = Object.keys(respuestas).length;
+    const correctas = Object.values(respuestas).filter(r => r.correcta).length;
+    const incorrectas = total - correctas;
+    const porcentaje = total > 0 ? Math.round((correctas / total) * 100) : 0;
+
+    document.getElementById('respondidas').textContent = total;
+    document.getElementById('correctas').textContent = correctas;
+    document.getElementById('incorrectas').textContent = incorrectas;
+    document.getElementById('porcentaje').textContent = porcentaje;
+
+    const progreso = (total / totalPreguntas) * 100;
+    document.getElementById('progressFill').style.width = progreso + '%';
+  }
+
+  function verResultadoFinal() {
+    const total = Object.keys(respuestas).length;
+    
+    if (total < totalPreguntas) {
+      alert(`⚠️ Aún te faltan ${totalPreguntas - total} preguntas por responder.`);
+      return;
+    }
+
+    const correctas = Object.values(respuestas).filter(r => r.correcta).length;
+    const porcentaje = Math.round((correctas / totalPreguntas) * 100);
+
+    const resultadoFinal = document.getElementById('resultadoFinal');
+    resultadoFinal.classList.add('visible');
+
+    document.getElementById('puntajeFinal').textContent = `${correctas}/${totalPreguntas}`;
+
+    let mensaje = '';
+    if (porcentaje === 100) mensaje = '🏆 ¡PERFECTO! Dominas los Delitos contra el Patrimonio y la Fe Pública.';
+    else if (porcentaje >= 90) mensaje = '🌟 ¡Excelente! Dominio sobresaliente.';
+    else if (porcentaje >= 75) mensaje = '✅ ¡Muy bien! Buen dominio.';
+    else if (porcentaje >= 60) mensaje = '📚 Aceptable. Repasa los temas donde fallaste.';
+    else if (porcentaje >= 40) mensaje = ' Necesitas reforzar varios conceptos.';
+    else mensaje = '🔍 Es necesario estudiar nuevamente todos los temas.';
+
+    document.getElementById('mensajeFinal').textContent = mensaje;
+
+    const temas = {
+      1: { nombre: 'T1: Fraude', total: 5, correctas: 0 },
+      2: { nombre: 'T2: Fluidos/Daño', total: 5, correctas: 0 },
+      3: { nombre: 'T3: Usurpación/Admin', total: 5, correctas: 0 },
+      4: { nombre: 'T4: Apropiación/Tributaria', total: 5, correctas: 0 },
+      5: { nombre: 'T5: Falsedad Material', total: 5, correctas: 0 },
+      6: { nombre: 'T6: Doc. ID/Títulos', total: 5, correctas: 0 },
+      7: { nombre: 'T7: Moneda/Sellos', total: 5, correctas: 0 },
+      8: { nombre: 'T8: Títulos Valores/Uso', total: 5, correctas: 0 }
+    };
+
+    Object.values(respuestas).forEach(r => {
+      if (r.correcta) temas[r.tema].correctas++;
+    });
+
+    const desgloseHTML = Object.values(temas).map(t => {
+      const pct = Math.round((t.correctas / t.total) * 100);
+      return `
+        <div class="desglose-item">
+          <h4>${t.nombre}</h4>
+          <p>${t.correctas}/${t.total} (${pct}%)</p>
+          <div class="mini-bar">
+            <div class="mini-bar-fill" style="width: ${pct}%"></div>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    document.getElementById('desgloseTemas').innerHTML = desgloseHTML;
+    resultadoFinal.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  function reiniciarQuiz() {
+    if (!confirm('¿Reiniciar el quiz?')) return;
+
+    respuestas = {};
+
+    document.querySelectorAll('.opcion').forEach(o => o.classList.remove('correcta', 'incorrecta', 'disabled'));
+    document.querySelectorAll('.explicacion').forEach(e => e.classList.remove('visible'));
+    document.querySelectorAll('.pregunta').forEach(p => p.classList.remove('answered'));
+    document.getElementById('resultadoFinal').classList.remove('visible');
+
+    actualizarEstadisticas();
+    mostrarSeccion('s1', document.querySelector('.quiz-tab'));
+    document.getElementById('quiz').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  document.querySelectorAll('nav a').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+</script>
+
+</body>
+</html>
