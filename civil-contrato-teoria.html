@@ -1,0 +1,2925 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teoría General del Contrato y Negocios Jurídicos - Derecho Civil y Comercial</title>
+<style>
+  :root {
+    --primary: #065f46;
+    --secondary: #10b981;
+    --accent: #047857;
+    --light: #ecfdf5;
+    --dark: #064e3b;
+    --success: #059669;
+    --warning: #d97706;
+    --danger: #dc2626;
+    --card-bg: #ffffff;
+    --shadow: 0 4px 15px rgba(0,0,0,0.08);
+    --shadow-hover: 0 8px 25px rgba(0,0,0,0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    background: var(--light);
+    color: var(--dark);
+    line-height: 1.7;
+  }
+
+  header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    color: white;
+    padding: 2rem 1rem;
+    text-align: center;
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::before {
+    content: '📜';
+    position: absolute;
+    font-size: 15rem;
+    opacity: 0.05;
+    top: -30px;
+    right: -30px;
+  }
+
+  header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: 2px;
+  }
+
+  header p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    font-style: italic;
+  }
+
+  .volver-btn {
+    background: var(--dark);
+    padding: 0.8rem 1rem;
+    text-align: center;
+  }
+
+  .volver-btn a {
+    color: var(--secondary);
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.95rem;
+    transition: color 0.3s;
+  }
+
+  .volver-btn a:hover {
+    color: white;
+  }
+
+  nav {
+    background: var(--dark);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow);
+  }
+
+  nav ul {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0.5rem;
+  }
+
+  nav a {
+    color: var(--light);
+    text-decoration: none;
+    padding: 0.7rem 1rem;
+    margin: 0.2rem;
+    border-radius: 5px;
+    font-size: 0.7rem;
+    transition: all 0.3s;
+    display: block;
+  }
+
+  nav a:hover {
+    background: var(--secondary);
+    color: var(--dark);
+    transform: translateY(-2px);
+  }
+
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+  }
+
+  section {
+    background: var(--card-bg);
+    margin-bottom: 2.5rem;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    border-left: 5px solid var(--secondary);
+    scroll-margin-top: 80px;
+  }
+
+  section h2 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--secondary);
+  }
+
+  section h3 {
+    color: var(--accent);
+    font-size: 1.4rem;
+    margin: 1.5rem 0 0.8rem;
+  }
+
+  section h4 {
+    color: var(--primary);
+    font-size: 1.15rem;
+    margin: 1rem 0 0.5rem;
+  }
+
+  p { margin-bottom: 1rem; text-align: justify; }
+
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.2rem;
+    margin: 1.5rem 0;
+  }
+
+  .card {
+    background: linear-gradient(135deg, #fff 0%, #ecfdf5 100%);
+    border: 2px solid var(--secondary);
+    border-radius: 10px;
+    padding: 1.2rem;
+    transition: all 0.3s;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--primary);
+  }
+
+  .card .icon {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .card h4 {
+    text-align: center;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+  }
+
+  .card .detail {
+    display: none;
+    margin-top: 0.8rem;
+    padding-top: 0.8rem;
+    border-top: 1px dashed var(--secondary);
+    font-size: 0.95rem;
+  }
+
+  .card.active .detail { display: block; }
+
+  .card .hint {
+    text-align: center;
+    color: var(--accent);
+    font-size: 0.85rem;
+    font-style: italic;
+  }
+
+  .mapa-container {
+    background: #ecfdf5;
+    border: 2px dashed var(--secondary);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    overflow-x: auto;
+  }
+
+  .mapa {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 600px;
+  }
+
+  .nodo {
+    background: var(--primary);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+    font-weight: bold;
+    text-align: center;
+    min-width: 180px;
+    box-shadow: var(--shadow);
+  }
+
+  .nodo.central {
+    background: linear-gradient(135deg, var(--secondary), #34d399);
+    color: var(--dark);
+    font-size: 1.2rem;
+    padding: 1rem 2rem;
+  }
+
+  .nodo.sub {
+    background: var(--accent);
+    font-size: 0.95rem;
+  }
+
+  .linea {
+    width: 3px;
+    height: 25px;
+    background: var(--secondary);
+  }
+
+  .linea-h {
+    height: 3px;
+    background: var(--secondary);
+    width: 80%;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .rama {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 1rem;
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  .rama-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    min-width: 140px;
+  }
+
+  .ejemplo {
+    background: #ecfdf5;
+    border-left: 4px solid var(--success);
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .ejemplo strong { color: var(--success); }
+
+  .alerta {
+    background: #fffbeb;
+    border-left: 4px solid var(--warning);
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .alerta strong { color: var(--warning); }
+
+  .cita {
+    background: #ecfdf5;
+    border-left: 4px solid var(--accent);
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+    color: var(--primary);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    font-size: 0.9rem;
+  }
+
+  th {
+    background: var(--primary);
+    color: white;
+    padding: 0.8rem;
+    text-align: left;
+  }
+
+  td {
+    padding: 0.8rem;
+    border-bottom: 1px solid #eee;
+  }
+
+  tr:nth-child(even) { background: #ecfdf5; }
+  tr:hover { background: #d1fae5; }
+
+  .quiz-container {
+    background: linear-gradient(135deg, #ecfdf5 0%, #fff 100%);
+    padding: 1.5rem;
+    border-radius: 10px;
+    border: 2px solid var(--accent);
+  }
+
+  .quiz-header {
+    background: var(--primary);
+    color: white;
+    padding: 1.2rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .quiz-header h3 {
+    color: white;
+    margin: 0 0 0.5rem 0;
+  }
+
+  .progress-bar {
+    background: rgba(255,255,255,0.2);
+    height: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+  }
+
+  .progress-fill {
+    background: var(--secondary);
+    height: 100%;
+    width: 0%;
+    transition: width 0.4s ease;
+  }
+
+  .quiz-stats {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .stat {
+    background: rgba(255,255,255,0.1);
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    font-size: 0.9rem;
+  }
+
+  .stat strong { color: var(--secondary); }
+
+  .quiz-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    padding: 0.5rem;
+    background: #d1fae5;
+    border-radius: 8px;
+  }
+
+  .quiz-tab {
+    background: white;
+    border: 2px solid var(--accent);
+    color: var(--accent);
+    padding: 0.5rem 0.8rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.7rem;
+    transition: all 0.3s;
+    flex: 1;
+    min-width: 70px;
+    text-align: center;
+  }
+
+  .quiz-tab:hover {
+    background: var(--accent);
+    color: white;
+  }
+
+  .quiz-tab.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+  }
+
+  .quiz-section {
+    display: none;
+  }
+
+  .quiz-section.active {
+    display: block;
+    animation: fadeIn 0.4s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .pregunta {
+    margin-bottom: 1.5rem;
+    padding: 1.2rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    border-left: 4px solid var(--accent);
+    transition: all 0.3s;
+  }
+
+  .pregunta.answered {
+    border-left-color: var(--secondary);
+  }
+
+  .pregunta-num {
+    display: inline-block;
+    background: var(--accent);
+    color: white;
+    padding: 0.2rem 0.7rem;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    margin-right: 0.5rem;
+  }
+
+  .pregunta-tipo {
+    display: inline-block;
+    background: var(--secondary);
+    color: var(--dark);
+    padding: 0.2rem 0.7rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    margin-left: 0.3rem;
+    font-weight: bold;
+  }
+
+  .pregunta p { 
+    font-weight: bold; 
+    color: var(--primary); 
+    margin: 0.8rem 0;
+    text-align: left;
+  }
+
+  .opciones { display: flex; flex-direction: column; gap: 0.5rem; }
+
+  .opcion {
+    padding: 0.7rem 1rem;
+    background: #ecfdf5;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+  }
+
+  .opcion:hover:not(.disabled) {
+    border-color: var(--accent);
+    background: #d1fae5;
+  }
+
+  .opcion.disabled {
+    cursor: not-allowed;
+    opacity: 0.85;
+  }
+
+  .opcion.correcta {
+    background: #d1fae5;
+    border-color: var(--success);
+    color: var(--success);
+    font-weight: bold;
+  }
+
+  .opcion.incorrecta {
+    background: #fee2e2;
+    border-color: var(--danger);
+    color: var(--danger);
+  }
+
+  .opcion.correcta::after {
+    content: ' ✓';
+    font-weight: bold;
+  }
+
+  .opcion.incorrecta::after {
+    content: ' ✗';
+    font-weight: bold;
+  }
+
+  .explicacion {
+    margin-top: 0.8rem;
+    padding: 0.8rem;
+    background: #ecfdf5;
+    border-left: 3px solid var(--accent);
+    border-radius: 0 6px 6px 0;
+    font-size: 0.9rem;
+    display: none;
+    font-style: italic;
+  }
+
+  .explicacion.visible {
+    display: block;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .resultado-final {
+    margin-top: 2rem;
+    padding: 2rem;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    color: white;
+    border-radius: 12px;
+    text-align: center;
+    display: none;
+  }
+
+  .resultado-final.visible {
+    display: block;
+    animation: fadeIn 0.5s ease;
+  }
+
+  .resultado-final h3 {
+    color: var(--secondary);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .puntaje-final {
+    font-size: 3rem;
+    font-weight: bold;
+    color: var(--secondary);
+    margin: 1rem 0;
+  }
+
+  .desglose-temas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+    text-align: left;
+  }
+
+  .desglose-item {
+    background: rgba(255,255,255,0.1);
+    padding: 1rem;
+    border-radius: 8px;
+  }
+
+  .desglose-item h4 {
+    color: var(--secondary);
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+  }
+
+  .mini-bar {
+    background: rgba(255,255,255,0.2);
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+  }
+
+  .mini-bar-fill {
+    background: var(--secondary);
+    height: 100%;
+    transition: width 0.6s ease;
+  }
+
+  button {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 1rem;
+    transition: all 0.3s;
+  }
+
+  button:hover {
+    background: var(--secondary);
+    color: var(--dark);
+    transform: translateY(-2px);
+  }
+
+  .btn-reset {
+    background: var(--danger);
+    margin-left: 0.5rem;
+  }
+
+  .btn-reset:hover {
+    background: #991b1b;
+    color: white;
+  }
+
+  .acordeon-item {
+    margin-bottom: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .acordeon-header {
+    background: var(--accent);
+    color: white;
+    padding: 1rem;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.3s;
+  }
+
+  .acordeon-header:hover { background: var(--primary); }
+
+  .acordeon-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    background: white;
+  }
+
+  .acordeon-content.active {
+    max-height: 2000px;
+    padding: 1rem;
+  }
+
+  .flecha { transition: transform 0.3s; }
+  .acordeon-header.active .flecha { transform: rotate(180deg); }
+
+  .nav-modulos {
+    display: flex;
+    justify-content: space-between;
+    padding: 1.5rem 0;
+    border-top: 2px solid var(--secondary);
+    margin-top: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .nav-modulos a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+  }
+
+  .nav-modulos a:hover {
+    color: var(--secondary);
+  }
+
+  .nav-modulos .proximo {
+    color: #999;
+    cursor: not-allowed;
+  }
+
+  footer {
+    background: var(--dark);
+    color: var(--light);
+    text-align: center;
+    padding: 2rem 1rem;
+    margin-top: 2rem;
+  }
+
+  footer p { margin-bottom: 0.5rem; }
+
+  @media (max-width: 768px) {
+    header h1 { font-size: 1.8rem; }
+    section { padding: 1.2rem; }
+    section h2 { font-size: 1.5rem; }
+    nav a { font-size: 0.6rem; padding: 0.3rem 0.4rem; }
+    .quiz-tab { font-size: 0.6rem; padding: 0.3rem 0.4rem; }
+    table { font-size: 0.8rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>📜 Teoría General del Contrato y Negocios Jurídicos</h1>
+  <p>Módulo 1 de 8 · Derecho Civil y Comercial Colombiano · Guía Didáctica Interactiva</p>
+</header>
+
+<div class="volver-btn">
+  <a href="index.html#contratos">← Volver al Portal Principal</a>
+</div>
+
+<nav>
+  <ul>
+    <li><a href="#tema1">1. Negocio Jurídico</a></li>
+    <li><a href="#tema2">2. Principios Rectores</a></li>
+    <li><a href="#tema3">3. Límites y Función</a></li>
+    <li><a href="#tema4">4. Clasificación</a></li>
+    <li><a href="#tema5">5. Adhesión y Consumidor</a></li>
+    <li><a href="#tema6">6. Contratación Estatal</a></li>
+    <li><a href="#tema7">7. Fuentes del Derecho</a></li>
+    <li><a href="#tema8">8. Codificación</a></li>
+    <li><a href="#tema9">9. Requisitos Esenciales</a></li>
+    <li><a href="#tema10">10. Figuras Especiales</a></li>
+    <li><a href="#quiz">Quiz (40)</a></li>
+  </ul>
+</nav>
+
+<main>
+
+  <section>
+    <h2>📚 Introducción</h2>
+    <p>Bienvenido a esta guía interactiva sobre la <strong>Teoría General del Contrato y los Negocios Jurídicos</strong>. Aquí estudiarás la autonomía de la voluntad, los principios rectores de la contratación (pacta sunt servanda, buena fe), los límites al contrato, la clasificación de los contratos en el derecho civil y comercial colombiano, la contratación estatal, las fuentes del derecho contractual y las figuras especiales como la promesa, la opción y las arras, con fundamento en el Código Civil de 1873, el Código de Comercio de 1971 y la Ley 80 de 1993.</p>
+    <div class="alerta">
+      <strong>💡 Cómo usar esta guía:</strong> Haz clic en las tarjetas para ver detalles, despliega los acordeones para información adicional y prueba tus conocimientos con el quiz de 40 preguntas al final.
+    </div>
+  </section>
+
+  <!-- TEMA 1: NEGOCIO JURÍDICO -->
+  <section id="tema1">
+    <h2>1. El Negocio Jurídico y la Autonomía de la Voluntad</h2>
+    <p>El negocio jurídico es el acto voluntario lícito destinado a producir efectos jurídicos, reconocidos por el ordenamiento. Su fundamento es la <strong>autonomía de la voluntad</strong>, que permite a los particulares crear, modificar, transmitir y extinguir relaciones jurídicas.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">NEGOCIO JURÍDICO</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Autonomía Voluntad</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Libre disposición</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Declaración</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Expresa / Tácita</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Efectos Jurídicos</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Crear, modificar, extinguir</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Reconocimiento Legal</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Lícito</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Fundamento Legal</h3>
+    <div class="cita">
+      <strong>"Las declaraciones voluntarias, y hechas con las formalidades que la ley exige, dan nacimiento a derechos o imponen obligaciones que se reglan, así en su extensión como en sus efectos, por las leyes a cuya época se hubieren otorgado."</strong> — Art. 15, Ley 153 de 1887
+    </div>
+
+    <h3>🔍 Evolución Histórica del Concepto Contractual</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🏛️</div>
+        <h4>Derecho Romano</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Contrato como <em>negotium</em> con formalidades estrictas.</p>
+          <p>Tipicidad cerrada: solo los contratos previstos en la ley.</p>
+          <p>Base del sistema contractual occidental.</p>
+          <p>Principio: <em>pacta sunt servanda</em>.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon"></div>
+        <h4>Código de Napoleón (1804)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Consagración de la autonomía de la voluntad.</p>
+          <p>Libertad contractual absoluta.</p>
+          <p>El contrato es ley entre las partes.</p>
+          <p>Influencia directa en el Código Civil colombiano (1873).</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Estado Social de Derecho</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Limitaciones al contrato por el interés general.</p>
+          <p>Función social del contrato (Art. 830 C.Co.).</p>
+          <p>Protección al contratante débil (consumidor).</p>
+          <p>Constitución de 1991 como marco superior.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🌐</div>
+        <h4>Derecho Contemporáneo</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Contratos electrónicos y digitales.</p>
+          <p>Lex Mercatoria y UNIDROIT.</p>
+          <p>Globalización del comercio.</p>
+          <p>Nuevas figuras: franquicias, leasing, factoring.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>🔍 Diferencias Conceptuales Clave</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Concepto</th>
+          <th>Definición</th>
+          <th>Alcance</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Convención</strong></td>
+          <td>Acuerdo de voluntades para crear, modificar o extinguir obligaciones</td>
+          <td>Género más amplio</td>
+        </tr>
+        <tr>
+          <td><strong>Pacto</strong></td>
+          <td>Acuerdo sobre aspectos particulares de un contrato</td>
+          <td>Especie de convención</td>
+        </tr>
+        <tr>
+          <td><strong>Contrato</strong></td>
+          <td>Convención que crea o transmite obligaciones (Art. 1495 C.C.)</td>
+          <td>Especie de convención</td>
+        </tr>
+        <tr>
+          <td><strong>Obligación</strong></td>
+          <td>Vínculo jurídico entre acreedor y deudor</td>
+          <td>Efecto del contrato</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Cuando dos personas celebran un contrato de compraventa de un vehículo, están realizando un <strong>negocio jurídico</strong> basado en la <strong>autonomía de la voluntad</strong>. El contrato es la <strong>convención</strong> específica que genera <strong>obligaciones</strong> recíprocas: entregar el vehículo y pagar el precio.
+    </div>
+  </section>
+
+  <!-- TEMA 2: PRINCIPIOS RECTORES -->
+  <section id="tema2">
+    <h2>2. Principios Rectores de la Contratación</h2>
+    <p>Los principios rectores son los fundamentos éticos y jurídicos que orientan la interpretación, ejecución y aplicación de los contratos en el ordenamiento colombiano.</p>
+
+    <h3>️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">PRINCIPIOS CONTRACTUALES</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Pacta Sunt Servanda</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Buena Fe</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Libertad Contractual</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Equilibrio Contractual</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Principio del Pacta Sunt Servanda</h3>
+    <div class="cita">
+      <strong>"Todo contrato legalmente celebrado es una ley para los contratantes, y no puede ser invalidado sino por su consentimiento mutuo o por causas legales."</strong> — Art. 1602, Código Civil
+    </div>
+
+    <h3>🔍 Los Principios Fundamentales</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon"></div>
+        <h4>Pacta Sunt Servanda</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>El contrato es ley entre las partes.</p>
+          <p>Obliga a cumplir lo pactado.</p>
+          <p>Solo puede modificarse por mutuo consentimiento.</p>
+          <p>Base: Art. 1602 C.C.</p>
+          <p><strong>Excepción:</strong> Teoría de la imprevisión (Art. 868 C.Co.).</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🤝</div>
+        <h4>Buena Fe Objetiva</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Los contratos deben negociarse, celebrarse y ejecutarse de buena fe.</p>
+          <p>Base: Art. 871 C.Co. y Art. 83 C.P.</p>
+          <p>Impone deberes de lealtad, transparencia y colaboración.</p>
+          <p>Exenta de culpa en el tráfico jurídico mercantil.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🕊️</div>
+        <h4>Libertad Contractual</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Libertad de contratar o no.</p>
+          <p>Libertad de elegir contratante.</p>
+          <p>Libertad de determinar el contenido.</p>
+          <p>Limitada por el orden público y las buenas costumbres.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Equilibrio Contractual</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Mantiene la equivalencia de las prestaciones.</p>
+          <p>Se rompe por hechos extraordinarios e imprevisibles.</p>
+          <p>Teoría de la imprevisión: Art. 868 C.Co.</p>
+          <p>Permite la revisión judicial del contrato.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>📊 Balance: Pacta Sunt Servanda vs. Imprevisión</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Aspecto</th>
+          <th>Pacta Sunt Servanda</th>
+          <th>Imprevisión</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Fuente</strong></td>
+          <td>Art. 1602 C.C.</td>
+          <td>Art. 868 C.Co.</td>
+        </tr>
+        <tr>
+          <td><strong>Principio</strong></td>
+          <td>Cumplimiento obligatorio</td>
+          <td>Revisión por hechos extraordinarios</td>
+        </tr>
+        <tr>
+          <td><strong>Ámbito</strong></td>
+          <td>Civil y comercial</td>
+          <td>Solo contratos mercantiles de tracto sucesivo</td>
+        </tr>
+        <tr>
+          <td><strong>Requisitos</strong></td>
+          <td>Contrato válido</td>
+          <td>Hechos extraordinarios, imprevisibles, posteriores</td>
+        </tr>
+        <tr>
+          <td><strong>Efecto</strong></td>
+          <td>Cumplimiento íntegro</td>
+          <td>Ajuste o terminación judicial</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>🏛️ La Buena Fe Exenta de Culpa</h3>
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📋 Presunción de buena fe en el tráfico mercantil</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>En el derecho comercial, la buena fe se presume, exenta de culpa.</p>
+        <p><strong>Art. 871 C.Co.:</strong> "Los contratos deben negociarse, celebrarse y ejecutarse de buena fe".</p>
+        <p>Implica:</p>
+        <ul>
+          <li>Deber de información clara y veraz</li>
+          <li>Prohibición de reticencia y dolo</li>
+          <li>Lealtad en las negociaciones</li>
+          <li>Cooperación entre las partes</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si Pedro vende su casa a Juan por $500 millones, ambos deben cumplir lo pactado (<strong>pacta sunt servanda</strong>). Pero si durante la ejecución sobreviene una guerra que hace imposible el pago, Juan podría invocar la <strong>teoría de la imprevisión</strong> (Art. 868 C.Co.) para solicitar al juez el ajuste del contrato.
+    </div>
+  </section>
+
+  <!-- TEMA 3: LÍMITES Y FUNCIÓN SOCIAL -->
+  <section id="tema3">
+    <h2>3. Límites a la Autonomía de la Voluntad y Función Social</h2>
+    <p>La autonomía de la voluntad no es absoluta. El ordenamiento jurídico impone límites para proteger el interés general, el orden público, las buenas costumbres y los derechos de terceros.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">LÍMITES CONTRACTUALES</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Orden Público</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Buenas Costumbres</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Abuso del Derecho</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Función Social</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Fundamento Legal</h3>
+    <div class="cita">
+      <strong>"Los contratos celebrados en país extranjero para ser ejecutados en Colombia, en cuanto a la sustancia y validez de los actos, a las obligaciones que de ellos nazcan, a su interpretación, ejecución y efectos, se regirán por las leyes colombianas."</strong> — Art. 16, Ley 153 de 1887
+    </div>
+
+    <h3>🔍 Los Límites Principales</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🏛️</div>
+        <h4>Orden Público</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Conjunto de normas imperativas de orden público.</p>
+          <p>Protege intereses fundamentales del Estado.</p>
+          <p><strong>Orden público económico:</strong> Art. 333 C.P.</p>
+          <p>No puede ser derogado por la voluntad privada.</p>
+          <p>Su violación produce nulidad absoluta.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon"></div>
+        <h4>Buenas Costumbres</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Límite ético y moral a la contratación.</p>
+          <p>Conjunto de prácticas sociales aceptadas.</p>
+          <p>Art. 1524 C.C.: "Objeto y causa lícitos".</p>
+          <p>Su violación produce nulidad absoluta.</p>
+          <p>Ejemplo: contratos de prostitución, apuestas ilegales.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚠️</div>
+        <h4>Abuso del Derecho</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Art. 830 C.Co.: "El abuso del derecho da lugar a indemnización".</p>
+          <p>Uso desviado de un derecho legítimo.</p>
+          <p>En formación: negociación abusiva.</p>
+          <p>En ejecución: cumplimiento desleal.</p>
+          <p>Genera responsabilidad civil.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🌍</div>
+        <h4>Función Social y Económica</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Art. 830 C.Co.: función social del contrato.</p>
+          <p>El contrato debe servir al interés general.</p>
+          <p>Art. 58 y 333 C.P.: función social de la propiedad y actividad económica.</p>
+          <p>Justifica la intervención estatal.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>📊 Orden Público Económico</h3>
+    <div class="alerta">
+      <strong>📌 Art. 333 C.P.:</strong>
+      <p>"La actividad económica y la iniciativa privada no pueden ser impedidas, sino dentro de los límites del bien común".</p>
+      <br>
+      <strong> Implicaciones:</strong>
+      <ul>
+        <li>Libertad económica con límites</li>
+        <li>Prohibición de monopolios y prácticas restrictivas</li>
+        <li>Intervención estatal para corregir desequilibrios</li>
+        <li>Protección al consumidor</li>
+        <li>Regulación de mercados</li>
+      </ul>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Un contrato de arrendamiento donde se pacte que el arrendatario no puede tener hijos sería nulo por violar el <strong>orden público</strong> y las <strong>buenas costumbres</strong>. Igualmente, si una empresa abusa de su posición dominante para imponer precios desleales, comete <strong>abuso del derecho</strong> (Art. 830 C.Co.).
+    </div>
+  </section>
+
+  <!-- TEMA 4: CLASIFICACIÓN DE CONTRATOS -->
+  <section id="tema4">
+    <h2>4. Clasificación de los Contratos en el Derecho Civil Colombiano</h2>
+    <p>El Código Civil colombiano, en sus artículos 1496 a 1501, establece diversas clasificaciones de los contratos según distintos criterios.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">CLASIFICACIÓN CONTRACTUAL</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Unilaterales / Bilaterales</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Gratuitos / Onerosos</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Conmutativos / Aleatorios</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Principales / Accesorios</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Clasificación Principal</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">️</div>
+        <h4>Unilaterales</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Solo obligan a una de las partes.</p>
+          <p>Ejemplo: donación pura, mutuo.</p>
+          <p>Art. 1496 C.C.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🔄</div>
+        <h4>Bilaterales</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Obligan recíprocamente a ambas partes.</p>
+          <p>Ejemplo: compraventa, arrendamiento.</p>
+          <p>Art. 1496 C.C.</p>
+          <p>Excepción non adimpleti contractus.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🎁</div>
+        <h4>Gratuitos</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Sin contraprestación económica.</p>
+          <p>También llamados de beneficencia o liberales.</p>
+          <p>Ejemplo: donación, comodato.</p>
+          <p>Art. 1498 C.C.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">💰</div>
+        <h4>Onerosos</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Con contraprestación económica.</p>
+          <p>Ejemplo: compraventa, arrendamiento.</p>
+          <p>Art. 1498 C.C.</p>
+          <p>Aplica teoría de la imprevisión.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🎯</div>
+        <h4>Conmutativos</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Prestaciones ciertas y determinadas.</p>
+          <p>Sin riesgo en las prestaciones.</p>
+          <p>Ejemplo: compraventa de bien determinado.</p>
+          <p>Art. 1499 C.C.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🎲</div>
+        <h4>Aleatorios</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Prestaciones dependientes de evento incierto.</p>
+          <p>Con riesgo en las prestaciones.</p>
+          <p>Ejemplo: seguro, juego, apuesta.</p>
+          <p>Art. 1499 C.C.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🏛️</div>
+        <h4>Principales</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Existen por sí mismos.</p>
+          <p>No dependen de otro contrato.</p>
+          <p>Ejemplo: compraventa, arrendamiento.</p>
+          <p>Art. 1500 C.C.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📎</div>
+        <h4>Accesorios</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Dependen de un contrato principal.</p>
+          <p>Siguen la suerte de lo principal.</p>
+          <p>Ejemplo: fianza, hipoteca, prenda.</p>
+          <p>Art. 1500 C.C.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>📊 Clasificación por Perfeccionamiento y Ejecución</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Tipo</th>
+          <th>Perfeccionamiento</th>
+          <th>Ejemplo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Consensuales</strong></td>
+          <td>Solo consentimiento</td>
+          <td>Compraventa, arrendamiento</td>
+        </tr>
+        <tr>
+          <td><strong>Solemnes</strong></td>
+          <td>Requieren formalidades</td>
+          <td>Compraventa de inmueble (escritura pública)</td>
+        </tr>
+        <tr>
+          <td><strong>Reales</strong></td>
+          <td>Requieren entrega de la cosa</td>
+          <td>Mutuo, comodato</td>
+        </tr>
+        <tr>
+          <td><strong>Instantáneos</strong></td>
+          <td>Ejecución inmediata</td>
+          <td>Compraventa al contado</td>
+        </tr>
+        <tr>
+          <td><strong>Diferidos</strong></td>
+          <td>Ejecución futura</td>
+          <td>Promesa de compraventa</td>
+        </tr>
+        <tr>
+          <td><strong>Tracto sucesivo</strong></td>
+          <td>Ejecución continuada</td>
+          <td>Arrendamiento, sociedad</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>🔍 Contratos Nominados e Innominados</h3>
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📋 Contratos nominados (típicos)</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Regulados expresamente por la ley con nombre propio.</p>
+        <p>Ejemplos en el Código Civil:</p>
+        <ul>
+          <li>Compraventa</li>
+          <li>Permuta</li>
+          <li>Arrendamiento</li>
+          <li>Mutuo</li>
+          <li>Comodato</li>
+          <li>Depósito</li>
+          <li>Mandato</li>
+          <li>Sociedad</li>
+          <li>Transacción</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📋 Contratos innominados (atípicos)</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>No regulados expresamente por la ley.</p>
+        <p>Reconocidos por la autonomía de la voluntad.</p>
+        <p>Se rigen por las reglas generales de los contratos.</p>
+        <p>Ejemplos modernos:</p>
+        <ul>
+          <li>Leasing (arrendamiento financiero)</li>
+          <li>Factoring</li>
+          <li>Franchising (franquicia)</li>
+          <li>Joint venture</li>
+          <li>Contratos de ingeniería</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Un contrato de compraventa es <strong>bilateral</strong> (vendedor entrega, comprador paga), <strong>oneroso</strong> (hay precio), <strong>conmutativo</strong> (prestaciones ciertas), <strong>principal</strong> (existe por sí mismo) y <strong>consensual</strong> (se perfecciona con el consentimiento). La fianza que garantiza ese contrato es <strong>accesoria</strong>: si la compraventa es nula, la fianza también.
+    </div>
+  </section>
+
+  <!-- TEMA 5: ADHESIÓN Y CONSUMIDOR -->
+  <section id="tema5">
+    <h2>5. Contratos por Adhesión y Protección al Consumidor</h2>
+    <p>Los contratos por adhesión son aquellos en los que una de las partes impone las cláusulas y la otra solo puede aceptarlas o rechazarlas. La Ley 1480 de 2011 protege al consumidor frente a cláusulas abusivas.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">CONTRATOS POR ADHESIÓN</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Condiciones Generales</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Cláusulas Abusivas</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Ley 1480/2011</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">SIC</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Fundamento Legal</h3>
+    <div class="cita">
+      <strong>"Las cláusulas abusivas en los contratos de adhesión se tendrán por no escritas."</strong> — Art. 43, Ley 1480 de 2011
+    </div>
+
+    <h3>🔍 Contratos de Libre Discusión vs. Adhesión</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🗣️</div>
+        <h4>Libre Discusión</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Ambas partes negocian las cláusulas.</p>
+          <p>Igualdad entre los contratantes.</p>
+          <p>Autonomía de la voluntad plena.</p>
+          <p>Ejemplo: compraventa entre particulares.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📋</div>
+        <h4>Por Adhesión</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Una parte impone las cláusulas.</p>
+          <p>La otra solo acepta o rechaza.</p>
+          <p>Posición dominante de una parte.</p>
+          <p>Ejemplo: contratos bancarios, seguros.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚠️</div>
+        <h4>Cláusulas Abusivas</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Art. 43 Ley 1480/2011.</p>
+          <p>Generan desequilibrio injustificado.</p>
+          <p>Perjudican al consumidor.</p>
+          <p>Se tienen por no escritas.</p>
+          <p>Ejemplo: renuncia de derechos del consumidor.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🛡️</div>
+        <h4>Estatuto del Consumidor</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Ley 1480 de 2011.</p>
+          <p>Protege al consumidor en contratos de adhesión.</p>
+          <p>Exige información clara y veraz.</p>
+          <p>Regula garantías y responsabilidad.</p>
+          <p>SIC como autoridad de vigilancia.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3> Ejemplos de Cláusulas Abusivas</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Cláusula</th>
+          <th>Por qué es abusiva</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Renuncia a derechos del consumidor</td>
+          <td>Viola el estatuto del consumidor</td>
+        </tr>
+        <tr>
+          <td>Modificación unilateral del contrato</td>
+          <td>Desequilibrio en las prestaciones</td>
+        </tr>
+        <tr>
+          <td>Prórroga automática sin aviso</td>
+          <td>Vulnera libertad contractual</td>
+        </tr>
+        <tr>
+          <td>Inversión de la carga de la prueba</td>
+          <td>Perjudica al consumidor</td>
+        </tr>
+        <tr>
+          <td>Limitación de responsabilidad del proveedor</td>
+          <td>Exime al proveedor de obligaciones</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Cuando una persona abre una cuenta bancaria, firma un contrato de adhesión donde el banco impone todas las cláusulas. Si el contrato incluye una cláusula que permite al banco modificar unilateralmente las tasas de interés sin previo aviso, esa cláusula es <strong>abusiva</strong> y se tiene por no escrita (Art. 43 Ley 1480/2011).
+    </div>
+  </section>
+
+  <!-- TEMA 6: CONTRATACIÓN ESTATAL -->
+  <section id="tema6">
+    <h2>6. La Contratación Estatal</h2>
+    <p>La contratación estatal se rige por un régimen especial de derecho público, regulado principalmente por la Ley 80 de 1993 y la Ley 1150 de 2007, con principios propios distintos a la contratación privada.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">CONTRATACIÓN ESTATAL</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Transparencia</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Selección Objetiva</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Economía</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Responsabilidad</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Fundamento Legal</h3>
+    <div class="cita">
+      <strong>"La contratación estatal se regirá por los principios de transparencia, selección objetiva, economía y responsabilidad."</strong> — Art. 2, Ley 80 de 1993
+    </div>
+
+    <h3>🔍 Principios de la Contratación Estatal</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🔍</div>
+        <h4>Transparencia</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Publicidad de los actos contractuales.</p>
+          <p>Acceso a la información.</p>
+          <p>Prohibición de favoritismos.</p>
+          <p>Art. 24 C.P. y Ley 80/93.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🎯</div>
+        <h4>Selección Objetiva</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Elección de la oferta más favorable.</p>
+          <p>Criterios objetivos y verificables.</p>
+          <p>Imparcialidad en la evaluación.</p>
+          <p>Art. 2, Ley 80/93.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚡</div>
+        <h4>Economía</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Simplificación de trámites.</p>
+          <p>Celeridad en los procesos.</p>
+          <p>Reducción de costos.</p>
+          <p>Art. 2, Ley 80/93.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📋</div>
+        <h4>Planeación</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Estudios previos obligatorios.</p>
+          <p>Presupuesto certificado.</p>
+          <p>Justificación de la necesidad.</p>
+          <p>Art. 25, Ley 80/93.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">️</div>
+        <h4>Responsabilidad</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Responsabilidad de servidores públicos.</p>
+          <p>Responsabilidad de contratistas.</p>
+          <p>Control fiscal, disciplinario y penal.</p>
+          <p>Art. 2, Ley 80/93.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🌍</div>
+        <h4>Interés General</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Prevalencia sobre el interés particular.</p>
+          <p>Finalidad pública del contrato.</p>
+          <p>Art. 1 C.P.</p>
+          <p>Cláusulas exorbitantes.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>📊 Diferencias: Contratación Privada vs. Estatal</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Aspecto</th>
+          <th>Contratación Privada</th>
+          <th>Contratación Estatal</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Régimen</strong></td>
+          <td>Derecho privado (C.C., C.Co.)</td>
+          <td>Derecho público (Ley 80/93)</td>
+        </tr>
+        <tr>
+          <td><strong>Principios</strong></td>
+          <td>Autonomía de la voluntad</td>
+          <td>Transparencia, selección objetiva</td>
+        </tr>
+        <tr>
+          <td><strong>Finalidad</strong></td>
+          <td>Interés particular</td>
+          <td>Interés general</td>
+        </tr>
+        <tr>
+          <td><strong>Cláusulas</strong></td>
+          <td>Libre negociación</td>
+          <td>Cláusulas exorbitantes</td>
+        </tr>
+        <tr>
+          <td><strong>Jurisdicción</strong></td>
+          <td>Ordinaria civil/comercial</td>
+          <td>Contencioso-administrativa</td>
+        </tr>
+        <tr>
+          <td><strong>Selección</strong></td>
+          <td>Libre elección</td>
+          <td>Licitación pública o selección abreviada</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>⚖️ Cláusulas Exorbitantes</h3>
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📋 Facultades especiales de la entidad pública</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>La entidad estatal tiene facultades que no existen en la contratación privada:</p>
+        <ul>
+          <li><strong>Interpretación:</strong> Interpreta unilateralmente el contrato</li>
+          <li><strong>Modificación:</strong> Puede modificar el contrato por razones de interés público</li>
+          <li><strong>Sanción:</strong> Puede imponer multas y sanciones</li>
+          <li><strong>Terminación:</strong> Puede terminar unilateralmente el contrato</li>
+          <li><strong>Control:</strong> Vigila la ejecución del contrato</li>
+          <li><strong>Ocupación temporal:</strong> Puede ocupar bienes del contratista</li>
+        </ul>
+        <p>Estas cláusulas son de aplicación obligatoria (Art. 14 Ley 80/93).</p>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> En un contrato estatal de obra pública, la entidad puede <strong>terminar unilateralmente</strong> el contrato si el contratista incumple, sin necesidad de acudir al juez. En cambio, en un contrato privado, el incumplimiento debe ser declarado judicialmente. Esto se debe a las <strong>cláusulas exorbitantes</strong> propias del derecho público.
+    </div>
+  </section>
+
+  <!-- TEMA 7: FUENTES DEL DERECHO CONTRACTUAL -->
+  <section id="tema7">
+    <h2>7. Fuentes del Derecho Contractual</h2>
+    <p>El derecho contractual colombiano se nutre de diversas fuentes: la ley, la costumbre, la analogía, los tratados internacionales y la jurisprudencia.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">FUENTES CONTRACTUALES</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Ley</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Costumbre</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Analogía</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Tratados</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Fuentes en el Código de Comercio</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon"></div>
+        <h4>Ley (Art. 1 C.Co.)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Fuente principal del derecho.</p>
+          <p>Normas imperativas y supletorias.</p>
+          <p>Código Civil y Código de Comercio.</p>
+          <p>Leyes especiales (Ley 80/93, Ley 1480/11).</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon"></div>
+        <h4>Analogía (Art. 1 C.Co.)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Método de integración en vacíos normativos.</p>
+          <p>Aplicación de normas similares.</p>
+          <p>Prohibida en materia sancionatoria.</p>
+          <p>Art. 1 C.Co.: "A falta de ley aplicable, se aplicará la analogía".</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📚</div>
+        <h4>Legislación Civil (Art. 2 C.Co.)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Aplicación subsidiaria en materia mercantil.</p>
+          <p>El Código Civil suple vacíos del Código de Comercio.</p>
+          <p>Art. 2 C.Co.: "En materia mercantil rigen las normas del Código de Comercio y, a falta de ellas, las del Código Civil".</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon"></div>
+        <h4>Costumbre Mercantil (Art. 3 C.Co.)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Repetición uniforme de actos.</p>
+          <p>Convicción de obligatoriedad.</p>
+          <p>Nacional o internacional.</p>
+          <p>Art. 3 C.Co.: "La costumbre mercantil es fuente de derechos y obligaciones".</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>📊 Fuentes Internacionales</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Fuente</th>
+          <th>Ámbito</th>
+          <th>Ejemplo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Tratados ratificados</strong></td>
+          <td>Comercio internacional</td>
+          <td>Convención de Viena (compraventa internacional)</td>
+        </tr>
+        <tr>
+          <td><strong>Principios UNIDROIT</strong></td>
+          <td>Contratos comerciales internacionales</td>
+          <td>Principios sobre contratos comerciales</td>
+        </tr>
+        <tr>
+          <td><strong>Lex Mercatoria</strong></td>
+          <td>Usos del comercio global</td>
+          <td>Incoterms, reglas de la CCI</td>
+        </tr>
+        <tr>
+          <td><strong>Costumbre internacional</strong></td>
+          <td>Prácticas uniformes</td>
+          <td>UCP 600 (créditos documentarios)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>️ Requisitos de la Costumbre Mercantil</h3>
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📋 Requisitos de existencia y prueba</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p><strong>Requisitos:</strong></p>
+        <ul>
+          <li><strong>Repetición uniforme:</strong> Actos reiterados en el tiempo</li>
+          <li><strong>Publicidad:</strong> Conocimiento general en el sector</li>
+          <li><strong>Uniformidad:</strong> Sin contradicciones</li>
+          <li><strong>Convicción de obligatoriedad:</strong> Opinio juris</li>
+          <li><strong>No contraria a la ley:</strong> Lícita</li>
+        </ul>
+        <p><strong>Prueba:</strong> Certificados de cámaras de comercio, declaraciones de testigos expertos, resoluciones de tribunales arbitrales.</p>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> En un contrato de compraventa internacional de café entre un exportador colombiano y un importador alemán, si hay vacío legal, se aplican los <strong>Principios UNIDROIT</strong> o los <strong>Incoterms</strong> de la Cámara de Comercio Internacional (Lex Mercatoria). En Colombia, el Art. 3 C.Co. reconoce la costumbre mercantil como fuente de derecho.
+    </div>
+  </section>
+
+  <!-- TEMA 8: CODIFICACIÓN -->
+  <section id="tema8">
+    <h2>8. Codificación y Unificación del Derecho Contractual</h2>
+    <p>Colombia cuenta con dos grandes códigos que regulan el derecho contractual: el Código Civil de 1873 y el Código de Comercio de 1971, que conviven y se complementan.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">CODIFICACIÓN COLOMBIANA</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Código Civil (1873)</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Código de Comercio (1971)</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Leyes Especiales</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Jurisprudencia</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Los Dos Grandes Códigos</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📕</div>
+        <h4>Código Civil (1873)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Obra de Andrés Bello.</p>
+          <p>Regula contratos civiles.</p>
+          <p>Inspiración napoleónica.</p>
+          <p>Autonomía de la voluntad plena.</p>
+          <p>Aplicación subsidiaria en materia mercantil.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📘</div>
+        <h4>Código de Comercio (1971)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Decreto 410 de 1971.</p>
+          <p>Regula actos y contratos mercantiles.</p>
+          <p>Moderniza el derecho comercial.</p>
+          <p>Reconoce la función social del contrato.</p>
+          <p>Teoría de la imprevisión (Art. 868).</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🔀</div>
+        <h4>Comercialización del Civil</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Tendencia moderna de unificación parcial.</p>
+          <p>Normas civiles aplicables a contratos mercantiles.</p>
+          <p>Ejemplo: buena fe (Art. 871 C.Co.).</p>
+          <p>Interpretación integradora.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Normas Imperativas vs. Supletorias</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p><strong>Imperativas:</strong> No pueden ser modificadas por las partes.</p>
+          <p><strong>Supletorias:</strong> Se aplican a falta de pacto.</p>
+          <p>Ejemplo imperativo: prohibición de pactos contrarios al orden público.</p>
+          <p>Ejemplo supletorio: reglas de la compraventa (Art. 900 C.Co.).</p>
+        </div>
+      </div>
+    </div>
+
+    <h3> Convivencia de los Códigos</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Aspecto</th>
+          <th>Código Civil</th>
+          <th>Código de Comercio</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Vigencia</strong></td>
+          <td>1873</td>
+          <td>1971</td>
+        </tr>
+        <tr>
+          <td><strong>Autor</strong></td>
+          <td>Andrés Bello</td>
+          <td>Comisión reformadora</td>
+        </tr>
+        <tr>
+          <td><strong>Ámbito</strong></td>
+          <td>Contratos civiles</td>
+          <td>Actos y contratos mercantiles</td>
+        </tr>
+        <tr>
+          <td><strong>Principio rector</strong></td>
+          <td>Autonomía de la voluntad</td>
+          <td>Función social del contrato</td>
+        </tr>
+        <tr>
+          <td><strong>Imprevisión</strong></td>
+          <td>No regulada</td>
+          <td>Art. 868 C.Co.</td>
+        </tr>
+        <tr>
+          <td><strong>Buena fe</strong></td>
+          <td>Presunción simple</td>
+          <td>Exenta de culpa (Art. 871)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>️ Unificación Jurisprudencial</h3>
+    <div class="alerta">
+      <strong>📌 Corte Suprema de Justicia:</strong>
+      <p>Sala de Casación Civil. Competente en materia civil y comercial.</p>
+      <br>
+      <strong>📌 Consejo de Estado:</strong>
+      <p>Sala de lo Contencioso Administrativo. Competente en contratación estatal.</p>
+      <br>
+      <strong>📌 Unificación de criterios:</strong>
+      <p>Ambos tribunales buscan armonizar la interpretación del derecho contractual, especialmente en temas como la buena fe, la responsabilidad contractual y la teoría de la imprevisión.</p>
+    </div>
+
+    <div class="ejemplo">
+      <strong> Ejemplo:</strong> En un contrato de compraventa mercantil, si hay vacío sobre un aspecto específico, se aplica primero el <strong>Código de Comercio</strong>. Si el vacío persiste, se aplica el <strong>Código Civil</strong> (Art. 2 C.Co.). Por ejemplo, las reglas sobre la lesión enorme (Art. 1946 C.C.) no aplican en materia mercantil, salvo excepciones.
+    </div>
+  </section>
+
+  <!-- TEMA 9: REQUISITOS ESENCIALES -->
+  <section id="tema9">
+    <h2>9. Requisitos Esenciales del Contrato</h2>
+    <p>Para que un contrato exista y sea válido, debe cumplir con requisitos esenciales establecidos en el artículo 1502 del Código Civil: capacidad, consentimiento, objeto y causa lícitos.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">REQUISITOS ESENCIALES</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Capacidad</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Consentimiento</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Objeto Lícito</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Causa Lícita</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3> Fundamento Legal</h3>
+    <div class="cita">
+      <strong>"Para que una persona se obligue a otra, se requiere: 1. Capacidad legal de las partes; 2. Consentimiento exento de vicios; 3. Objeto lícito; 4. Causa lícita."</strong> — Art. 1502, Código Civil
+    </div>
+
+    <h3>🔍 Los Requisitos Esenciales</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">👤</div>
+        <h4>Capacidad</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p><strong>De goce:</strong> Aptitud para ser titular de derechos.</p>
+          <p><strong>De ejercicio:</strong> Aptitud para ejercer derechos por sí mismo.</p>
+          <p>Regla general: toda persona capaz puede contratar.</p>
+          <p>Incapaces: menores de edad, interdictos.</p>
+          <p>Art. 1502 N°1 C.C.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🤝</div>
+        <h4>Consentimiento</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Concurrencia de ofertas y aceptación.</p>
+          <p>Debe estar libre de vicios.</p>
+          <p><strong>Vicios:</strong> error, fuerza, dolo.</p>
+          <p>Art. 1502 N°2 C.C. y Art. 1503 C.C.</p>
+          <p>Expreso o tácito.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🎯</div>
+        <h4>Objeto Lícito</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>La materia sobre la cual recae el contrato.</p>
+          <p>Debe ser lícito, posible, determinado o determinable.</p>
+          <p>Art. 1518 C.C.</p>
+          <p>Ilícito: cosas fuera del comercio, contrarias a la ley.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📋</div>
+        <h4>Causa Lícita</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Motivo determinante que impulsa a contratar.</p>
+          <p>Debe ser lícita.</p>
+          <p>Art. 1524 C.C.</p>
+          <p>Ilícita: contraria a la ley, al orden público o a las buenas costumbres.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>📊 Vicios del Consentimiento</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Vicio</th>
+          <th>Definición</th>
+          <th>Efecto</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Error</strong></td>
+          <td>Falsa representación de la realidad</td>
+          <td>Nulidad relativa (si es esencial)</td>
+        </tr>
+        <tr>
+          <td><strong>Fuerza/Violencia</strong></td>
+          <td>Coacción física o moral</td>
+          <td>Nulidad relativa</td>
+        </tr>
+        <tr>
+          <td><strong>Dolo</strong></td>
+          <td>Maquinaciones fraudulentas</td>
+          <td>Nulidad relativa + indemnización</td>
+        </tr>
+        <tr>
+          <td><strong>Lesión enorme</strong></td>
+          <td>Desproporción en prestaciones (inmuebles)</td>
+          <td>Rescisión (Art. 1946 C.C.)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>⚖️ Representación y Poder</h3>
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📋 Representación voluntaria (Art. 832 C.Co.)</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>El representante actúa en nombre del representado.</p>
+        <p>Requiere poder suficiente.</p>
+        <p><strong>Exceso de representación:</strong> Acto inoponible al representado.</p>
+        <p><strong>Defecto de representación:</strong> Acto ineficaz.</p>
+        <p>Ratificación posterior valida el acto.</p>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong> Ejemplo:</strong> Si un menor de 18 años celebra un contrato de compraventa de un inmueble, el contrato es <strong>nulo relativamente</strong> por falta de capacidad. Si una persona firma un contrato bajo amenaza de muerte, el consentimiento está viciado por <strong>fuerza</strong> y el contrato es nulo relativamente.
+    </div>
+  </section>
+
+  <!-- TEMA 10: FIGURAS ESPECIALES -->
+  <section id="tema10">
+    <h2>10. Figuras Contractuales Especiales</h2>
+    <p>El derecho contractual colombiano contempla figuras especiales como la promesa de contrato, la opción, las arras y los contratos electrónicos.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">FIGURAS ESPECIALES</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Promesa</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Opción</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Arras</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Contrato Electrónico</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3> Las Figuras Principales</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📝</div>
+        <h4>Promesa de Contrato</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Contrato preparatorio para celebrar otro.</p>
+          <p>Requisitos: Art. 1611 C.C.</p>
+          <ul>
+            <li>Constancia escrita</li>
+            <li>Capacidad de las partes</li>
+            <li>Determinación del contrato prometido</li>
+            <li>Plazo o condición para su celebración</li>
+          </ul>
+          <p>Incumplimiento: indemnización de perjuicios.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon"></div>
+        <h4>Contrato de Opción</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Derecho potestativo de celebrar un contrato.</p>
+          <p>Una parte (otorgante) se obliga a mantener una oferta.</p>
+          <p>La otra (beneficiario) puede aceptar o no.</p>
+          <p>Común en opciones de compra de acciones.</p>
+          <p>Figura atípica reconocida por la jurisprudencia.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">💰</div>
+        <h4>Arras</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p><strong>Confirmatorias:</strong> Señal de perfeccionamiento del contrato.</p>
+          <p><strong>De retracto (Art. 1861 C.C.):</strong> Facultad de desistir.</p>
+          <p>Si el comprador desiste: pierde las arras.</p>
+          <p>Si el vendedor desiste: devuelve el doble.</p>
+          <p>Común en compraventas inmobiliarias.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">💻</div>
+        <h4>Contrato Electrónico</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Celebrado por medios electrónicos.</p>
+          <p>Ley 527 de 1999: comercio electrónico.</p>
+          <p>Firma digital con valor jurídico.</p>
+          <p>Documento electrónico como soporte válido.</p>
+          <p>Mismos requisitos que el contrato físico.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>📊 Comparativa de Figuras</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Figura</th>
+          <th>Base Legal</th>
+          <th>Efecto Principal</th>
+          <th>Ejemplo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Promesa</strong></td>
+          <td>Art. 1611 C.C.</td>
+          <td>Obliga a celebrar el contrato prometido</td>
+          <td>Promesa de compraventa de inmueble</td>
+        </tr>
+        <tr>
+          <td><strong>Opción</strong></td>
+          <td>Figura atípica</td>
+          <td>Derecho a aceptar o rechazar</td>
+          <td>Opción de compra de acciones</td>
+        </tr>
+        <tr>
+          <td><strong>Arras</strong></td>
+          <td>Art. 1861 C.C.</td>
+          <td>Señal o facultad de desistimiento</td>
+          <td>Arras en compraventa de vehículo</td>
+        </tr>
+        <tr>
+          <td><strong>Electrónico</strong></td>
+          <td>Ley 527/99</td>
+          <td>Mismos efectos que el físico</td>
+          <td>Compra en línea con firma digital</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>🏛️ Enriquecimiento Sin Causa</h3>
+    <div class="alerta">
+      <strong>📌 Prohibición general:</strong>
+      <p>Nadie puede enriquecerse sin causa a expensas de otro.</p>
+      <br>
+      <strong>📌 Fundamento:</strong>
+      <p>Principio de equidad y justicia.</p>
+      <p>Art. 2314 C.C. y jurisprudencia.</p>
+      <br>
+      <strong>📌 Requisitos:</strong>
+      <ul>
+        <li>Enriquecimiento de una persona</li>
+        <li>Empobrecimiento de otra</li>
+        <li>Relación de causalidad</li>
+        <li>Ausencia de causa justificada</li>
+        <li>Ausencia de otro remedio legal</li>
+      </ul>
+    </div>
+
+    <div class="ejemplo">
+      <strong> Ejemplo:</strong> Si Pedro paga $10 millones de arras a Juan por la compra de una casa, y luego Pedro decide no comprar, pierde las arras. Si Juan decide no vender, debe devolver $20 millones (el doble). Si celebran una promesa de compraventa y Juan no cumple, Pedro puede demandar el cumplimiento forzado o la indemnización.
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz">
+    <h2>🎯 Quiz Completo - 40 Preguntas</h2>
+    <p>Pon a prueba tus conocimientos sobre la Teoría General del Contrato y los Negocios Jurídicos.</p>
+
+    <div class="quiz-container">
+      <div class="quiz-header">
+        <h3>📊 Tu Progreso</h3>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="quiz-stats">
+          <div class="stat">Respondidas: <strong id="respondidas">0</strong>/40</div>
+          <div class="stat">Correctas: <strong id="correctas">0</strong></div>
+          <div class="stat">Incorrectas: <strong id="incorrectas">0</strong></div>
+          <div class="stat">Porcentaje: <strong id="porcentaje">0</strong>%</div>
+        </div>
+      </div>
+
+      <div class="quiz-tabs">
+        <div class="quiz-tab active" onclick="mostrarSeccion('s1', this)">T1 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s2', this)">T2 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s3', this)">T3 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s4', this)">T4 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s5', this)">T5 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s6', this)">T6 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s7', this)">T7 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s8', this)">T8 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s9', this)">T9 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s10', this)">T10 (4)</div>
+      </div>
+
+      <!-- SECCIÓN 1: NEGOCIO JURÍDICO -->
+      <div class="quiz-section active" id="s1">
+        <div class="pregunta" data-correcta="1" data-tema="1">
+          <span class="pregunta-num">1</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El fundamento de la teoría general del negocio jurídico es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 1)">a) El orden público</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">b) La autonomía de la voluntad</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">c) La función social</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">d) El interés general</div>
+          </div>
+          <div class="explicacion">El negocio jurídico tiene como fundamento la autonomía de la voluntad, que permite a los particulares crear, modificar, transmitir y extinguir relaciones jurídicas.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="1">
+          <span class="pregunta-num">2</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La diferencia conceptual entre convención y contrato es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 2)">a) Son sinónimos</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">b) El contrato es más amplio que la convención</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">c) La convención es el género y el contrato es la especie que crea o transmite obligaciones</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">d) La convención solo existe en derecho público</div>
+          </div>
+          <div class="explicacion">La convención es el género (acuerdo de voluntades) y el contrato es la especie que crea o transmite obligaciones (Art. 1495 C.C.).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="1">
+          <span class="pregunta-num">3</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La evolución del contrato en el Estado Social de Derecho se caracteriza por:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 3)">a) Libertad contractual absoluta</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">b) Limitaciones por el interés general y la función social</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">c) Eliminación de la autonomía de la voluntad</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">d) Prohibición de contratos privados</div>
+          </div>
+          <div class="explicacion">En el Estado Social de Derecho, la autonomía de la voluntad se limita por el interés general, la función social del contrato y la protección al contratante débil.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="1">
+          <span class="pregunta-num">4</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El pacto se diferencia del contrato en que:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 4)">a) El pacto es más formal</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">b) El pacto solo existe en derecho público</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">c) El contrato es un género del pacto</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">d) El pacto es un acuerdo sobre aspectos particulares de un contrato</div>
+          </div>
+          <div class="explicacion">El pacto es un acuerdo sobre aspectos particulares de un contrato, mientras que el contrato es la convención que crea o transmite obligaciones.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 2: PRINCIPIOS RECTORES -->
+      <div class="quiz-section" id="s2">
+        <div class="pregunta" data-correcta="1" data-tema="2">
+          <span class="pregunta-num">5</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El principio pacta sunt servanda está consagrado en:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 5)">a) Artículo 830 del Código de Comercio</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">b) Artículo 1602 del Código Civil</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">c) Artículo 871 del Código de Comercio</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">d) Artículo 868 del Código de Comercio</div>
+          </div>
+          <div class="explicacion">El principio pacta sunt servanda, que establece que el contrato es ley entre las partes, está consagrado en el artículo 1602 del Código Civil.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="2">
+          <span class="pregunta-num">6</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La buena fe objetiva en los contratos está regulada en:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 6)">a) Artículo 871 del Código de Comercio</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">b) Artículo 1602 del Código Civil</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">c) Artículo 830 del Código de Comercio</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">d) Artículo 1502 del Código Civil</div>
+          </div>
+          <div class="explicacion">El artículo 871 del Código de Comercio establece que los contratos deben negociarse, celebrarse y ejecutarse de buena fe, consagrando la buena fe objetiva.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="2">
+          <span class="pregunta-num">7</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La teoría de la imprevisión contractual está regulada en:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 7)">a) Artículo 1602 del Código Civil</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">b) Artículo 871 del Código de Comercio</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">c) Artículo 868 del Código de Comercio</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">d) Artículo 830 del Código de Comercio</div>
+          </div>
+          <div class="explicacion">La teoría de la imprevisión, que permite la revisión judicial del contrato por hechos extraordinarios e imprevisibles, está regulada en el artículo 868 del Código de Comercio.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="2">
+          <span class="pregunta-num">8</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La buena fe en el tráfico jurídico mercantil se caracteriza por:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 8)">a) Ser una presunción simple</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">b) Deber ser probada por quien la invoca</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">c) Aplicarse solo en contratos civiles</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">d) Ser exenta de culpa</div>
+          </div>
+          <div class="explicacion">En el derecho comercial, la buena fe se presume exenta de culpa, lo que significa que no requiere prueba de diligencia especial.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 3: LÍMITES Y FUNCIÓN SOCIAL -->
+      <div class="quiz-section" id="s3">
+        <div class="pregunta" data-correcta="1" data-tema="3">
+          <span class="pregunta-num">9</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El artículo 16 del Código Civil establece que los contratos no pueden:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 9)">a) Ser modificados por las partes</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">b) Ser contrarios al orden público ni a las buenas costumbres</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">c) Ser celebrados entre particulares</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">d) Tener objeto lícito</div>
+          </div>
+          <div class="explicacion">El artículo 16 del Código Civil establece que los contratos no pueden ser contrarios al orden público ni a las buenas costumbres, bajo pena de nulidad.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="3">
+          <span class="pregunta-num">10</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El abuso del derecho en la contratación está regulado en:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 10)">a) Artículo 830 del Código de Comercio</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">b) Artículo 1602 del Código Civil</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">c) Artículo 871 del Código de Comercio</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">d) Artículo 868 del Código de Comercio</div>
+          </div>
+          <div class="explicacion">El artículo 830 del Código de Comercio establece que el abuso del derecho da lugar a indemnización, regulando esta figura en el ámbito contractual.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="3">
+          <span class="pregunta-num">11</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La función social del contrato está consagrada en:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 11)">a) Artículo 1602 del Código Civil</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">b) Artículo 871 del Código de Comercio</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">c) Artículo 830 del Código de Comercio</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">d) Artículo 1502 del Código Civil</div>
+          </div>
+          <div class="explicacion">El artículo 830 del Código de Comercio establece la función social del contrato, limitando la autonomía de la voluntad por el interés general.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="3">
+          <span class="pregunta-num">12</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El orden público económico está regulado en:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 12)">a) Artículo 1 de la Constitución</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">b) Artículo 1602 del Código Civil</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">c) Artículo 830 del Código de Comercio</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">d) Artículo 333 de la Constitución Política</div>
+          </div>
+          <div class="explicacion">El artículo 333 de la Constitución Política regula la actividad económica y la iniciativa privada, estableciendo los límites del orden público económico.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 4: CLASIFICACIÓN -->
+      <div class="quiz-section" id="s4">
+        <div class="pregunta" data-correcta="1" data-tema="4">
+          <span class="pregunta-num">13</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los contratos que obligan recíprocamente a ambas partes se denominan:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 13)">a) Unilaterales</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">b) Bilaterales</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">c) Gratuitos</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">d) Accesorios</div>
+          </div>
+          <div class="explicacion">Los contratos bilaterales obligan recíprocamente a ambas partes, como la compraventa donde el vendedor entrega y el comprador paga (Art. 1496 C.C.).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="4">
+          <span class="pregunta-num">14</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los contratos donde las prestaciones dependen de un evento incierto se denominan:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 14)">a) Aleatorios</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">b) Conmutativos</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">c) Onerosos</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">d) Principales</div>
+          </div>
+          <div class="explicacion">Los contratos aleatorios son aquellos donde las prestaciones dependen de un evento incierto, como el seguro o el juego (Art. 1499 C.C.).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="4">
+          <span class="pregunta-num">15</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La fianza es un contrato:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 15)">a) Principal</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">b) Consensual</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">c) Accesorio</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">d) Aleatorio</div>
+          </div>
+          <div class="explicacion">La fianza es un contrato accesorio porque depende de un contrato principal (la obligación garantizada). Si la obligación principal es nula, la fianza también lo es (Art. 1500 C.C.).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="4">
+          <span class="pregunta-num">16</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los contratos que requieren la entrega de la cosa para perfeccionarse se denominan:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 16)">a) Consensuales</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">b) Solemnes</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">c) Instantáneos</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">d) Reales</div>
+          </div>
+          <div class="explicacion">Los contratos reales requieren la entrega de la cosa para perfeccionarse, como el mutuo o el comodato. Los consensuales se perfeccionan con el solo consentimiento.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 5: ADHESIÓN Y CONSUMIDOR -->
+      <div class="quiz-section" id="s5">
+        <div class="pregunta" data-correcta="1" data-tema="5">
+          <span class="pregunta-num">17</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los contratos por adhesión se caracterizan por:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 17)">a) Ser negociados libremente entre las partes</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">b) Tener cláusulas impuestas por una de las partes</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">c) Ser siempre nulos</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">d) Requerir escritura pública</div>
+          </div>
+          <div class="explicacion">Los contratos por adhesión son aquellos donde una de las partes impone las cláusulas y la otra solo puede aceptarlas o rechazarlas, sin posibilidad de negociación.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="5">
+          <span class="pregunta-num">18</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El estatuto del consumidor en Colombia está regulado por:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 18)">a) Ley 1480 de 2011</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">b) Ley 80 de 1993</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">c) Código de Comercio</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">d) Código Civil</div>
+          </div>
+          <div class="explicacion">El estatuto del consumidor está regulado por la Ley 1480 de 2011, que protege al consumidor en contratos de adhesión y regula las cláusulas abusivas.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="5">
+          <span class="pregunta-num">19</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Las cláusulas abusivas en contratos de adhesión:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 19)">a) Son válidas si fueron aceptadas</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">b) Pueden ser modificadas por el juez</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">c) Se tienen por no escritas</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">d) Son nulas absolutamente</div>
+          </div>
+          <div class="explicacion">El artículo 43 de la Ley 1480 de 2011 establece que las cláusulas abusivas en contratos de adhesión se tienen por no escritas, es decir, no producen efectos.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="5">
+          <span class="pregunta-num">20</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La autoridad de vigilancia del estatuto del consumidor es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 20)">a) La Superintendencia Financiera</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">b) La Procuraduría General</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">c) El Ministerio de Comercio</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">d) La Superintendencia de Industria y Comercio (SIC)</div>
+          </div>
+          <div class="explicacion">La Superintendencia de Industria y Comercio (SIC) es la autoridad de vigilancia y control del estatuto del consumidor (Ley 1480 de 2011).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 6: CONTRATACIÓN ESTATAL -->
+      <div class="quiz-section" id="s6">
+        <div class="pregunta" data-correcta="1" data-tema="6">
+          <span class="pregunta-num">21</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La contratación estatal en Colombia está regulada principalmente por:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 21)">a) Código de Comercio</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">b) Ley 80 de 1993</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">c) Código Civil</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">d) Ley 1480 de 2011</div>
+          </div>
+          <div class="explicacion">La contratación estatal está regulada principalmente por la Ley 80 de 1993 (Estatuto General de Contratación de la Administración Pública) y la Ley 1150 de 2007.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="6">
+          <span class="pregunta-num">22</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los principios de la contratación estatal incluyen:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 22)">a) Transparencia, selección objetiva, economía y responsabilidad</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">b) Autonomía de la voluntad y buena fe</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">c) Pacta sunt servanda e imprevisión</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">d) Libertad contractual y función social</div>
+          </div>
+          <div class="explicacion">El artículo 2 de la Ley 80 de 1993 establece como principios de la contratación estatal: transparencia, selección objetiva, economía y responsabilidad.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="6">
+          <span class="pregunta-num">23</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Las cláusulas exorbitantes son propias de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 23)">a) Contratos civiles</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">b) Contratos mercantiles</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">c) Contratos estatales</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">d) Contratos de adhesión</div>
+          </div>
+          <div class="explicacion">Las cláusulas exorbitantes son propias de la contratación estatal y otorgan facultades especiales a la entidad pública, como la interpretación unilateral, modificación y terminación del contrato.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="6">
+          <span class="pregunta-num">24</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La jurisdicción competente para conocer de controversias en contratación estatal es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 24)">a) Ordinaria civil</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">b) Ordinaria comercial</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">c) Constitucional</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">d) Contencioso-administrativa</div>
+          </div>
+          <div class="explicacion">Las controversias derivadas de la contratación estatal son conocidas por la jurisdicción contencioso-administrativa, a diferencia de los contratos privados que van a la jurisdicción ordinaria.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 7: FUENTES -->
+      <div class="quiz-section" id="s7">
+        <div class="pregunta" data-correcta="1" data-tema="7">
+          <span class="pregunta-num">25</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El artículo 1 del Código de Comercio establece como método de integración en vacíos normativos:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 25)">a) La jurisprudencia</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">b) La analogía</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">c) La doctrina</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">d) La equidad</div>
+          </div>
+          <div class="explicacion">El artículo 1 del Código de Comercio establece que, a falta de ley aplicable, se aplicará la analogía como método de integración en vacíos normativos comerciales.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="7">
+          <span class="pregunta-num">26</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La aplicación subsidiaria de la legislación civil en materia mercantil está regulada en:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 26)">a) Artículo 2 del Código de Comercio</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">b) Artículo 1 del Código de Comercio</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">c) Artículo 3 del Código de Comercio</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">d) Artículo 16 del Código Civil</div>
+          </div>
+          <div class="explicacion">El artículo 2 del Código de Comercio establece que, en materia mercantil, a falta de normas del Código de Comercio, se aplicarán las normas del Código Civil.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="7">
+          <span class="pregunta-num">27</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La costumbre mercantil como fuente de derecho está regulada en:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 27)">a) Artículo 1 del Código de Comercio</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">b) Artículo 2 del Código de Comercio</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">c) Artículo 3 del Código de Comercio</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">d) Artículo 16 del Código Civil</div>
+          </div>
+          <div class="explicacion">El artículo 3 del Código de Comercio reconoce la costumbre mercantil como fuente de derechos y obligaciones, siempre que sea uniforme, pública y no contraria a la ley.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="7">
+          <span class="pregunta-num">28</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los Principios UNIDROIT regulan:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 28)">a) Contratos civiles nacionales</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">b) Contratos estatales</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">c) Contratos de consumo</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">d) Contratos comerciales internacionales</div>
+          </div>
+          <div class="explicacion">Los Principios UNIDROIT regulan los contratos comerciales internacionales, estableciendo reglas uniformes para el comercio global.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 8: CODIFICACIÓN -->
+      <div class="quiz-section" id="s8">
+        <div class="pregunta" data-correcta="1" data-tema="8">
+          <span class="pregunta-num">29</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El Código Civil colombiano fue elaborado por:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 29)">a) Simón Bolívar</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">b) Andrés Bello</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">c) Francisco de Paula Santander</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">d) Rafael Núñez</div>
+          </div>
+          <div class="explicacion">El Código Civil colombiano fue elaborado por Andrés Bello e entró en vigencia en 1873, con inspiración en el Código de Napoleón de 1804.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="8">
+          <span class="pregunta-num">30</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El Código de Comercio colombiano es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 30)">a) Decreto 410 de 1971</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">b) Ley 45 de 1990</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">c) Ley 80 de 1993</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">d) Decreto 2153 de 1992</div>
+          </div>
+          <div class="explicacion">El Código de Comercio colombiano es el Decreto 410 de 1971, que modernizó el derecho comercial colombiano y regula los actos y contratos mercantiles.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="8">
+          <span class="pregunta-num">31</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La teoría de la imprevisión está regulada en:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 31)">a) Código Civil</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">b) Ley 80 de 1993</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">c) Código de Comercio</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">d) Ley 1480 de 2011</div>
+          </div>
+          <div class="explicacion">La teoría de la imprevisión está regulada en el artículo 868 del Código de Comercio, que permite la revisión judicial del contrato por hechos extraordinarios e imprevisibles.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="8">
+          <span class="pregunta-num">32</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Las normas supletorias en el Código de Comercio:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 32)">a) No pueden ser modificadas por las partes</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">b) Son de orden público</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">c) Solo aplican en contratos estatales</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">d) Se aplican a falta de pacto entre las partes</div>
+          </div>
+          <div class="explicacion">Las normas supletorias se aplican a falta de pacto entre las partes, a diferencia de las imperativas que no pueden ser modificadas por la voluntad privada.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 9: REQUISITOS ESENCIALES -->
+      <div class="quiz-section" id="s9">
+        <div class="pregunta" data-correcta="1" data-tema="9">
+          <span class="pregunta-num">33</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los requisitos esenciales del contrato están establecidos en:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 33)">a) Artículo 1495 del Código Civil</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">b) Artículo 1502 del Código Civil</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">c) Artículo 1602 del Código Civil</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">d) Artículo 871 del Código de Comercio</div>
+          </div>
+          <div class="explicacion">El artículo 1502 del Código Civil establece los requisitos esenciales del contrato: capacidad, consentimiento, objeto lícito y causa lícita.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="9">
+          <span class="pregunta-num">34</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los vicios del consentimiento son:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 34)">a) Error, fuerza y dolo</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">b) Capacidad, objeto y causa</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">c) Forma, tiempo y lugar</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">d) Precio, cosa y consentimiento</div>
+          </div>
+          <div class="explicacion">Los vicios del consentimiento son el error (falsa representación de la realidad), la fuerza (coacción) y el dolo (maquinaciones fraudulentas), que afectan la validez del contrato.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="9">
+          <span class="pregunta-num">35</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La lesión enorme en los contratos civiles aplica a:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 35)">a) Todos los contratos</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">b) Contratos mercantiles</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">c) Contratos conmutativos de bienes inmuebles</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">d) Contratos aleatorios</div>
+          </div>
+          <div class="explicacion">La lesión enorme aplica solo a los contratos conmutativos de bienes inmuebles (Art. 1946 C.C.), donde existe una desproporción superior a la mitad del justo precio.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="9">
+          <span class="pregunta-num">36</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La representación voluntaria para contratar está regulada en:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 36)">a) Código Civil</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">b) Ley 80 de 1993</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">c) Ley 1480 de 2011</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">d) Código de Comercio</div>
+          </div>
+          <div class="explicacion">La representación voluntaria y el poder para contratar están regulados en los artículos 832 y siguientes del Código de Comercio, que establecen las reglas de la representación.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 10: FIGURAS ESPECIALES -->
+      <div class="quiz-section" id="s10">
+        <div class="pregunta" data-correcta="1" data-tema="10">
+          <span class="pregunta-num">37</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Los requisitos del contrato de promesa están establecidos en:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 37)">a) Artículo 1502 del Código Civil</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">b) Artículo 1611 del Código Civil</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">c) Artículo 1602 del Código Civil</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">d) Artículo 871 del Código de Comercio</div>
+          </div>
+          <div class="explicacion">El artículo 1611 del Código Civil establece los requisitos del contrato de promesa: constancia escrita, capacidad, determinación del contrato prometido y plazo o condición.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="10">
+          <span class="pregunta-num">38</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Si en un contrato de compraventa se pactan arras de retracto y el comprador desiste:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 38)">a) El vendedor debe devolver el doble</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">b) El comprador pierde las arras</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">c) El contrato se cumple forzosamente</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">d) El vendedor debe devolver las arras</div>
+          </div>
+          <div class="explicacion">En las arras de retracto (Art. 1861 C.C.), si el comprador desiste, pierde las arras. Si el vendedor desiste, debe devolver el doble de las arras recibidas.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="10">
+          <span class="pregunta-num">39</span><span class="pregunta-tipo">Aplicación</span>
+          <p>El contrato de opción se caracteriza por:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 39)">a) Obligar a ambas partes a celebrar el contrato</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">b) Ser un contrato nominado en el Código Civil</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">c) Dar derecho potestativo a una parte para aceptar o rechazar</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">d) Requerir escritura pública siempre</div>
+          </div>
+          <div class="explicacion">El contrato de opción es una figura atípica donde una parte (otorgante) se obliga a mantener una oferta y la otra (beneficiario) tiene el derecho potestativo de aceptar o rechazar.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="10">
+          <span class="pregunta-num">40</span><span class="pregunta-tipo">Aplicación</span>
+          <p>El comercio electrónico en Colombia está regulado por:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 40)">a) Ley 1480 de 2011</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">b) Ley 80 de 1993</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">c) Código de Comercio</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">d) Ley 527 de 1999</div>
+          </div>
+          <div class="explicacion">El comercio electrónico en Colombia está regulado por la Ley 527 de 1999, que reconoce el valor jurídico del documento electrónico y la firma digital.</div>
+        </div>
+      </div>
+
+      <div class="resultado-final" id="resultadoFinal">
+        <h3>🏆 Resultado Final</h3>
+        <div class="puntaje-final" id="puntajeFinal">0/40</div>
+        <p id="mensajeFinal"></p>
+        <div class="desglose-temas" id="desgloseTemas"></div>
+        <button onclick="reiniciarQuiz()" class="btn-reset">🔄 Reiniciar Quiz</button>
+      </div>
+
+      <div style="text-align: center; margin-top: 1.5rem;">
+        <button onclick="verResultadoFinal()">📊 Ver Resultado Final</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="nav-modulos">
+    <a href="index.html#contratos">← Portal Principal</a>
+    <span class="proximo">Módulo 2: Próximamente →</span>
+  </div>
+
+</main>
+
+<footer>
+  <p>📜 Guía Didáctica - Teoría General del Contrato y Negocios Jurídicos</p>
+  <p>Módulo 1 de 8 · Derecho Civil y Comercial Colombiano</p>
+  <p style="margin-top: 1rem; opacity: 0.7;">© 2026 - Material educativo interactivo</p>
+</footer>
+
+<script>
+  function toggleAcordeon(header) {
+    header.classList.toggle('active');
+    const content = header.nextElementSibling;
+    content.classList.toggle('active');
+  }
+
+  let respuestas = {};
+  const totalPreguntas = 40;
+
+  function mostrarSeccion(id, tab) {
+    document.querySelectorAll('.quiz-section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.quiz-tab').forEach(t => t.classList.remove('active'));
+    
+    document.getElementById(id).classList.add('active');
+    tab.classList.add('active');
+  }
+
+  function seleccionar(opcion, preguntaNum) {
+    if (respuestas[preguntaNum] !== undefined) return;
+
+    const pregunta = opcion.closest('.pregunta');
+    const opciones = pregunta.querySelectorAll('.opcion');
+    const correcta = parseInt(pregunta.dataset.correcta);
+    const tema = parseInt(pregunta.dataset.tema);
+    const seleccionada = Array.from(opciones).indexOf(opcion);
+    const explicacion = pregunta.querySelector('.explicacion');
+
+    opciones.forEach(o => o.classList.add('disabled'));
+
+    if (seleccionada === correcta) {
+      opcion.classList.add('correcta');
+      respuestas[preguntaNum] = { correcta: true, tema: tema };
+    } else {
+      opcion.classList.add('incorrecta');
+      opciones[correcta].classList.add('correcta');
+      respuestas[preguntaNum] = { correcta: false, tema: tema };
+    }
+
+    explicacion.classList.add('visible');
+    pregunta.classList.add('answered');
+    actualizarEstadisticas();
+  }
+
+  function actualizarEstadisticas() {
+    const total = Object.keys(respuestas).length;
+    const correctas = Object.values(respuestas).filter(r => r.correcta).length;
+    const incorrectas = total - correctas;
+    const porcentaje = total > 0 ? Math.round((correctas / total) * 100) : 0;
+
+    document.getElementById('respondidas').textContent = total;
+    document.getElementById('correctas').textContent = correctas;
+    document.getElementById('incorrectas').textContent = incorrectas;
+    document.getElementById('porcentaje').textContent = porcentaje;
+
+    const progreso = (total / totalPreguntas) * 100;
+    document.getElementById('progressFill').style.width = progreso + '%';
+  }
+
+  function verResultadoFinal() {
+    const total = Object.keys(respuestas).length;
+    
+    if (total < totalPreguntas) {
+      alert(`⚠️ Aún te faltan ${totalPreguntas - total} preguntas por responder.`);
+      return;
+    }
+
+    const correctas = Object.values(respuestas).filter(r => r.correcta).length;
+    const porcentaje = Math.round((correctas / totalPreguntas) * 100);
+
+    const resultadoFinal = document.getElementById('resultadoFinal');
+    resultadoFinal.classList.add('visible');
+
+    document.getElementById('puntajeFinal').textContent = `${correctas}/${totalPreguntas}`;
+
+    let mensaje = '';
+    if (porcentaje === 100) mensaje = '🏆 ¡PERFECTO! Dominas la Teoría General del Contrato.';
+    else if (porcentaje >= 90) mensaje = ' ¡Excelente! Dominio sobresaliente.';
+    else if (porcentaje >= 75) mensaje = '✅ ¡Muy bien! Buen dominio.';
+    else if (porcentaje >= 60) mensaje = '📚 Aceptable. Repasa los temas donde fallaste.';
+    else if (porcentaje >= 40) mensaje = ' Necesitas reforzar varios conceptos.';
+    else mensaje = '🔍 Es necesario estudiar nuevamente todos los temas.';
+
+    document.getElementById('mensajeFinal').textContent = mensaje;
+
+    const temas = {
+      1: { nombre: 'T1: Negocio Jurídico', total: 4, correctas: 0 },
+      2: { nombre: 'T2: Principios Rectores', total: 4, correctas: 0 },
+      3: { nombre: 'T3: Límites y Función', total: 4, correctas: 0 },
+      4: { nombre: 'T4: Clasificación', total: 4, correctas: 0 },
+      5: { nombre: 'T5: Adhesión y Consumidor', total: 4, correctas: 0 },
+      6: { nombre: 'T6: Contratación Estatal', total: 4, correctas: 0 },
+      7: { nombre: 'T7: Fuentes del Derecho', total: 4, correctas: 0 },
+      8: { nombre: 'T8: Codificación', total: 4, correctas: 0 },
+      9: { nombre: 'T9: Requisitos Esenciales', total: 4, correctas: 0 },
+      10: { nombre: 'T10: Figuras Especiales', total: 4, correctas: 0 }
+    };
+
+    Object.values(respuestas).forEach(r => {
+      if (r.correcta) temas[r.tema].correctas++;
+    });
+
+    const desgloseHTML = Object.values(temas).map(t => {
+      const pct = Math.round((t.correctas / t.total) * 100);
+      return `
+        <div class="desglose-item">
+          <h4>${t.nombre}</h4>
+          <p>${t.correctas}/${t.total} (${pct}%)</p>
+          <div class="mini-bar">
+            <div class="mini-bar-fill" style="width: ${pct}%"></div>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    document.getElementById('desgloseTemas').innerHTML = desgloseHTML;
+    resultadoFinal.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  function reiniciarQuiz() {
+    if (!confirm('¿Reiniciar el quiz?')) return;
+
+    respuestas = {};
+
+    document.querySelectorAll('.opcion').forEach(o => o.classList.remove('correcta', 'incorrecta', 'disabled'));
+    document.querySelectorAll('.explicacion').forEach(e => e.classList.remove('visible'));
+    document.querySelectorAll('.pregunta').forEach(p => p.classList.remove('answered'));
+    document.getElementById('resultadoFinal').classList.remove('visible');
+
+    actualizarEstadisticas();
+    mostrarSeccion('s1', document.querySelector('.quiz-tab'));
+    document.getElementById('quiz').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  document.querySelectorAll('nav a').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+</script>
+
+</body>
+</html>
