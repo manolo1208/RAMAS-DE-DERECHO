@@ -1,0 +1,1771 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teoría General del Acto Administrativo II - Derecho Administrativo</title>
+<style>
+  :root {
+    --primary: #065f46;
+    --secondary: #10b981;
+    --accent: #047857;
+    --light: #ecfdf5;
+    --dark: #064e3b;
+    --success: #059669;
+    --warning: #d97706;
+    --danger: #dc2626;
+    --card-bg: #ffffff;
+    --shadow: 0 4px 15px rgba(0,0,0,0.08);
+    --shadow-hover: 0 8px 25px rgba(0,0,0,0.15);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Georgia', 'Times New Roman', serif; background: var(--light); color: var(--dark); line-height: 1.7; }
+  header { background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%); color: white; padding: 2rem 1rem; text-align: center; box-shadow: var(--shadow); position: relative; overflow: hidden; }
+  header::before { content: '📋'; position: absolute; font-size: 15rem; opacity: 0.05; top: -30px; right: -30px; }
+  header h1 { font-size: 2.5rem; margin-bottom: 0.5rem; letter-spacing: 2px; }
+  header p { font-size: 1.1rem; opacity: 0.9; font-style: italic; }
+  nav { background: var(--dark); position: sticky; top: 0; z-index: 100; box-shadow: var(--shadow); }
+  nav ul { display: flex; justify-content: center; flex-wrap: wrap; list-style: none; padding: 0.5rem; }
+  nav a { color: var(--light); text-decoration: none; padding: 0.7rem 1rem; margin: 0.2rem; border-radius: 5px; font-size: 0.7rem; transition: all 0.3s; display: block; }
+  nav a:hover { background: var(--secondary); color: var(--dark); transform: translateY(-2px); }
+  main { max-width: 1200px; margin: 0 auto; padding: 2rem 1rem; }
+  section { background: var(--card-bg); margin-bottom: 2.5rem; padding: 2rem; border-radius: 12px; box-shadow: var(--shadow); border-left: 5px solid var(--secondary); scroll-margin-top: 80px; }
+  section h2 { color: var(--primary); font-size: 2rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--secondary); }
+  section h3 { color: var(--accent); font-size: 1.4rem; margin: 1.5rem 0 0.8rem; }
+  section h4 { color: var(--primary); font-size: 1.15rem; margin: 1rem 0 0.5rem; }
+  p { margin-bottom: 1rem; text-align: justify; }
+  .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.2rem; margin: 1.5rem 0; }
+  .card { background: linear-gradient(135deg, #fff 0%, #ecfdf5 100%); border: 2px solid var(--secondary); border-radius: 10px; padding: 1.2rem; transition: all 0.3s; cursor: pointer; position: relative; }
+  .card:hover { transform: translateY(-5px); box-shadow: var(--shadow-hover); border-color: var(--primary); }
+  .card .icon { font-size: 2.5rem; text-align: center; margin-bottom: 0.5rem; }
+  .card h4 { text-align: center; color: var(--primary); margin-bottom: 0.5rem; }
+  .card .detail { display: none; margin-top: 0.8rem; padding-top: 0.8rem; border-top: 1px dashed var(--secondary); font-size: 0.95rem; }
+  .card.active .detail { display: block; }
+  .card .hint { text-align: center; color: var(--accent); font-size: 0.85rem; font-style: italic; }
+  .mapa-container { background: #ecfdf5; border: 2px dashed var(--secondary); border-radius: 10px; padding: 1.5rem; margin: 1.5rem 0; overflow-x: auto; }
+  .mapa { display: flex; flex-direction: column; align-items: center; min-width: 600px; }
+  .nodo { background: var(--primary); color: white; padding: 0.8rem 1.5rem; border-radius: 25px; font-weight: bold; text-align: center; min-width: 180px; box-shadow: var(--shadow); }
+  .nodo.central { background: linear-gradient(135deg, var(--secondary), #34d399); color: var(--dark); font-size: 1.2rem; padding: 1rem 2rem; }
+  .nodo.sub { background: var(--accent); font-size: 0.95rem; }
+  .linea { width: 3px; height: 25px; background: var(--secondary); }
+  .linea-h { height: 3px; background: var(--secondary); width: 80%; max-width: 900px; margin: 0 auto; }
+  .rama { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 1rem; width: 100%; margin-top: 1rem; }
+  .rama-item { display: flex; flex-direction: column; align-items: center; flex: 1; min-width: 140px; }
+  .ejemplo { background: #ecfdf5; border-left: 4px solid var(--success); padding: 1rem 1.2rem; margin: 1rem 0; border-radius: 0 8px 8px 0; }
+  .ejemplo strong { color: var(--success); }
+  .alerta { background: #fffbeb; border-left: 4px solid var(--warning); padding: 1rem 1.2rem; margin: 1rem 0; border-radius: 0 8px 8px 0; }
+  .alerta strong { color: var(--warning); }
+  .cita { background: #ecfdf5; border-left: 4px solid var(--accent); padding: 1rem 1.2rem; margin: 1rem 0; border-radius: 0 8px 8px 0; font-style: italic; color: var(--primary); }
+  table { width: 100%; border-collapse: collapse; margin: 1rem 0; background: white; border-radius: 8px; overflow: hidden; box-shadow: var(--shadow); font-size: 0.9rem; }
+  th { background: var(--primary); color: white; padding: 0.8rem; text-align: left; }
+  td { padding: 0.8rem; border-bottom: 1px solid #eee; }
+  tr:nth-child(even) { background: #ecfdf5; }
+  tr:hover { background: #d1fae5; }
+  .quiz-container { background: linear-gradient(135deg, #ecfdf5 0%, #fff 100%); padding: 1.5rem; border-radius: 10px; border: 2px solid var(--accent); }
+  .quiz-header { background: var(--primary); color: white; padding: 1.2rem; border-radius: 8px; margin-bottom: 1.5rem; text-align: center; }
+  .quiz-header h3 { color: white; margin: 0 0 0.5rem 0; }
+  .progress-bar { background: rgba(255,255,255,0.2); height: 10px; border-radius: 5px; overflow: hidden; margin-top: 0.5rem; }
+  .progress-fill { background: var(--secondary); height: 100%; width: 0%; transition: width 0.4s ease; }
+  .quiz-stats { display: flex; justify-content: space-around; margin-top: 1rem; flex-wrap: wrap; gap: 0.5rem; }
+  .stat { background: rgba(255,255,255,0.1); padding: 0.5rem 1rem; border-radius: 5px; font-size: 0.9rem; }
+  .stat strong { color: var(--secondary); }
+  .quiz-tabs { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; padding: 0.5rem; background: #d1fae5; border-radius: 8px; }
+  .quiz-tab { background: white; border: 2px solid var(--accent); color: var(--accent); padding: 0.5rem 0.8rem; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 0.7rem; transition: all 0.3s; flex: 1; min-width: 70px; text-align: center; }
+  .quiz-tab:hover { background: var(--accent); color: white; }
+  .quiz-tab.active { background: var(--primary); color: white; border-color: var(--primary); }
+  .quiz-section { display: none; }
+  .quiz-section.active { display: block; animation: fadeIn 0.4s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  .pregunta { margin-bottom: 1.5rem; padding: 1.2rem; background: white; border-radius: 8px; box-shadow: var(--shadow); border-left: 4px solid var(--accent); transition: all 0.3s; }
+  .pregunta.answered { border-left-color: var(--secondary); }
+  .pregunta-num { display: inline-block; background: var(--accent); color: white; padding: 0.2rem 0.7rem; border-radius: 12px; font-size: 0.85rem; margin-right: 0.5rem; }
+  .pregunta-tipo { display: inline-block; background: var(--secondary); color: var(--dark); padding: 0.2rem 0.7rem; border-radius: 12px; font-size: 0.75rem; margin-left: 0.3rem; font-weight: bold; }
+  .pregunta p { font-weight: bold; color: var(--primary); margin: 0.8rem 0; text-align: left; }
+  .opciones { display: flex; flex-direction: column; gap: 0.5rem; }
+  .opcion { padding: 0.7rem 1rem; background: #ecfdf5; border: 2px solid transparent; border-radius: 6px; cursor: pointer; transition: all 0.2s; position: relative; }
+  .opcion:hover:not(.disabled) { border-color: var(--accent); background: #d1fae5; }
+  .opcion.disabled { cursor: not-allowed; opacity: 0.85; }
+  .opcion.correcta { background: #d1fae5; border-color: var(--success); color: var(--success); font-weight: bold; }
+  .opcion.incorrecta { background: #fee2e2; border-color: var(--danger); color: var(--danger); }
+  .opcion.correcta::after { content: ' ✓'; font-weight: bold; }
+  .opcion.incorrecta::after { content: ' ✗'; font-weight: bold; }
+  .explicacion { margin-top: 0.8rem; padding: 0.8rem; background: #ecfdf5; border-left: 3px solid var(--accent); border-radius: 0 6px 6px 0; font-size: 0.9rem; display: none; font-style: italic; }
+  .explicacion.visible { display: block; animation: fadeIn 0.3s ease; }
+  .resultado-final { margin-top: 2rem; padding: 2rem; background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%); color: white; border-radius: 12px; text-align: center; display: none; }
+  .resultado-final.visible { display: block; animation: fadeIn 0.5s ease; }
+  .resultado-final h3 { color: var(--secondary); font-size: 2rem; margin-bottom: 1rem; }
+  .puntaje-final { font-size: 3rem; font-weight: bold; color: var(--secondary); margin: 1rem 0; }
+  .desglose-temas { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1.5rem; text-align: left; }
+  .desglose-item { background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px; }
+  .desglose-item h4 { color: var(--secondary); margin-bottom: 0.5rem; font-size: 1rem; }
+  .mini-bar { background: rgba(255,255,255,0.2); height: 8px; border-radius: 4px; overflow: hidden; margin-top: 0.5rem; }
+  .mini-bar-fill { background: var(--secondary); height: 100%; transition: width 0.6s ease; }
+  button { background: var(--primary); color: white; border: none; padding: 0.8rem 1.5rem; border-radius: 6px; cursor: pointer; font-size: 1rem; margin-top: 1rem; transition: all 0.3s; }
+  button:hover { background: var(--secondary); color: var(--dark); transform: translateY(-2px); }
+  .btn-reset { background: var(--danger); margin-left: 0.5rem; }
+  .btn-reset:hover { background: #991b1b; color: white; }
+  .acordeon-item { margin-bottom: 0.5rem; border: 1px solid #ddd; border-radius: 6px; overflow: hidden; }
+  .acordeon-header { background: var(--accent); color: white; padding: 1rem; cursor: pointer; font-weight: bold; display: flex; justify-content: space-between; align-items: center; transition: background 0.3s; }
+  .acordeon-header:hover { background: var(--primary); }
+  .acordeon-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; background: white; }
+  .acordeon-content.active { max-height: 2000px; padding: 1rem; }
+  .flecha { transition: transform 0.3s; }
+  .acordeon-header.active .flecha { transform: rotate(180deg); }
+  footer { background: var(--dark); color: var(--light); text-align: center; padding: 2rem 1rem; margin-top: 2rem; }
+  footer p { margin-bottom: 0.5rem; }
+  @media (max-width: 768px) { header h1 { font-size: 1.8rem; } section { padding: 1.2rem; } section h2 { font-size: 1.5rem; } nav a { font-size: 0.6rem; padding: 0.3rem 0.4rem; } .quiz-tab { font-size: 0.6rem; padding: 0.3rem 0.4rem; } table { font-size: 0.8rem; } }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>📋 Teoría General del Acto Administrativo II</h1>
+  <p>Guía 4 de 8 · Derecho Administrativo Colombiano · Guía Didáctica Interactiva</p>
+</header>
+
+<nav>
+  <ul>
+    <li><a href="#tema1">1. Incompetencia</a></li>
+    <li><a href="#tema2">2. Vicios Forma</a></li>
+    <li><a href="#tema3">3. Falsa Motivación</a></li>
+    <li><a href="#tema4">4. Desviación Poder</a></li>
+    <li><a href="#tema5">5. Violación Normas</a></li>
+    <li><a href="#tema6">6. Convalidación</a></li>
+    <li><a href="#tema7">7. Pérdida Fuerza</a></li>
+    <li><a href="#tema8">8. Decaimiento</a></li>
+    <li><a href="#tema9">9. Revocatoria II</a></li>
+    <li><a href="#tema10">10. Notificaciones</a></li>
+    <li><a href="#quiz">Quiz (40)</a></li>
+  </ul>
+</nav>
+
+<main>
+
+  <section>
+    <h2>📚 Introducción</h2>
+    <p>Bienvenido a esta guía interactiva sobre la <strong>Teoría General del Acto Administrativo II</strong>. Aquí profundizarás en las causales de nulidad de los actos administrativos (incompetencia, vicios de forma, falsa motivación, desviación de poder y violación de normas), los mecanismos de convalidación y saneamiento, la pérdida de fuerza ejecutoria, el decaimiento del acto, la revocatoria directa ampliada y los regímenes de publicidad y notificaciones, conforme al CPACA (Ley 1437 de 2011).</p>
+    <div class="alerta">
+      <strong>💡 Cómo usar esta guía:</strong> Haz clic en las tarjetas para ver detalles, despliega los acordeones para información adicional y prueba tus conocimientos con el quiz de 40 preguntas al final.
+    </div>
+  </section>
+
+  <!-- TEMA 1: INCOMPETENCIA -->
+  <section id="tema1">
+    <h2>1. Causal de Nulidad: Incompetencia</h2>
+    <p>La <strong>incompetencia</strong> es la falta de aptitud legal de una autoridad para conocer y decidir válidamente sobre un determinado asunto. Constituye la causal de nulidad más grave, pues ataca el elemento subjetivo del acto.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">INCOMPETENCIA</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Material</div><div class="linea"></div><div class="nodo sub">Ratione Materiae</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Territorial</div><div class="linea"></div><div class="nodo sub">Ratione Loci</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Temporal</div><div class="linea"></div><div class="nodo sub">Ratione Temporis</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Por Grados</div><div class="linea"></div><div class="nodo sub">Jerárquico</div></div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Fundamento Legal</h3>
+    <div class="cita">
+      <strong>"Toda persona podrá solicitar que se declare la nulidad de los actos administrativos... cuando hayan sido expedidos... sin competencia..."</strong> — Art. 137 CPACA
+    </div>
+
+    <h3>🔍 Tipos de Incompetencia</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📋</div>
+        <h4>Material (Ratione Materiae)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>La autoridad actúa sobre un asunto que la ley no le ha asignado.</p>
+          <p><strong>Ejemplo:</strong> Un alcalde que regula el tráfico aéreo (es competencia de la Aeronáutica Civil).</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🗺️</div>
+        <h4>Territorial (Ratione Loci)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>La autoridad actúa fuera de su circunscripción geográfica.</p>
+          <p><strong>Ejemplo:</strong> Un gobernador de Antioquia expidiendo un decreto para Bogotá.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⏰</div>
+        <h4>Temporal (Ratione Temporis)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>La autoridad actúa antes de posesionarse o después de retirarse del cargo.</p>
+          <p><strong>Ejemplo:</strong> Un funcionario que expide actos estando en vacaciones o licencia.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📊</div>
+        <h4>Por Grados (Jerárquico)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>El superior asume funciones del inferior o viceversa sin delegación.</p>
+          <p><strong>Ejemplo:</strong> Un ministro que asume funciones exclusivas del Presidente.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>⚖️ Usurpación vs. Extralimitación</h3>
+    <table>
+      <thead>
+        <tr><th>Concepto</th><th>Descripción</th><th>Ejemplo</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Usurpación</strong></td>
+          <td>La autoridad ejerce funciones que no le corresponden en absoluto.</td>
+          <td>Un alcalde que ejerce funciones de juez.</td>
+        </tr>
+        <tr>
+          <td><strong>Extralimitación</strong></td>
+          <td>La autoridad actúa dentro de sus funciones pero excede los límites.</td>
+          <td>Un juez que impone penas no previstas en la ley.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="alerta">
+      <strong>📌 Regla de Oro:</strong> En el Estado de Derecho, las competencias son <strong>expresas y taxativas</strong>. No existen competencias implícitas, por analogía o por extensión (Corte Constitucional, Sentencia C-319 de 2007). La incompetencia es causal de nulidad absoluta del acto.
+    </div>
+  </section>
+
+  <!-- TEMA 2: VICIOS DE FORMA -->
+  <section id="tema2">
+    <h2>2. Causal de Nulidad: Vicios de Forma y Procedimiento</h2>
+    <p>Los <strong>vicios de forma</strong> son las irregularidades que afectan el procedimiento de expedición del acto, especialmente cuando se desconocen las <strong>formas sustanciales</strong> establecidas por la ley.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">VICIOS DE FORMA</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Forma Sustancial</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Forma Ad Solemnitatem</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Forma Ad Habilitatem</div></div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Clasificación de las Formas</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Forma Sustancial</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Es aquella cuya omisión <strong>impide conocer la voluntad de la administración</strong> o afecta derechos fundamentales.</p>
+          <p><strong>Ejemplo:</strong> La motivación del acto, la notificación personal.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📜</div>
+        <h4>Forma Ad Solemnitatem</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Es la forma establecida por la ley para la validez del acto.</p>
+          <p><strong>Ejemplo:</strong> La escritura pública para la venta de bienes fiscales.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🔑</div>
+        <h4>Forma Ad Habilitatem</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Es la forma que habilita al acto para producir efectos jurídicos.</p>
+          <p><strong>Ejemplo:</strong> La publicación en el Diario Oficial de actos generales.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>⚠️ Violación del Derecho de Audiencia y Defensa</h3>
+    <div class="alerta">
+      <strong>📌 Art. 137 CPACA:</strong> Constituye causal autónoma de nulidad la expedición del acto <strong>"con desconocimiento del derecho de audiencia y defensa"</strong>.
+      <br><br>
+      <strong>📌 Ejemplos:</strong>
+      <ul>
+        <li>No notificar al interesado antes de expedir un acto gravoso</li>
+        <li>No permitir la presentación de pruebas</li>
+        <li>No conceder el término legal para alegatos</li>
+        <li>No informar sobre los recursos procedentes</li>
+      </ul>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si la Secretaría de Gobierno expide una resolución sancionando a un comerciante sin haberle notificado previamente ni darle la oportunidad de presentar descargos, el acto es nulo por violación del derecho de audiencia y defensa, independientemente de la legalidad del fondo.
+    </div>
+  </section>
+
+  <!-- TEMA 3: FALSA MOTIVACIÓN -->
+  <section id="tema3">
+    <h2>3. Causal de Nulidad: Falsa Motivación</h2>
+    <p>La <strong>falsa motivación</strong> se presenta cuando los fundamentos de hecho o de derecho expresados en el acto no corresponden con la realidad, o cuando existe un error en la apreciación de los mismos.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">FALSA MOTIVACIÓN</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Inexistencia</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Error de Hecho</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Error de Derecho</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Dolo/Fuerza</div></div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Tipos de Falsa Motivación</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">❌</div>
+        <h4>Inexistencia de Motivos</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>El acto se sustenta en un supuesto acontecimiento que nunca ocurrió.</p>
+          <p><strong>Ejemplo:</strong> Sancionar a un empleado por abandono del cargo cuando estaba en licencia.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🔍</div>
+        <h4>Error de Hecho</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>La autoridad toma una decisión con fundamento en una situación fáctica apreciada incorrectamente.</p>
+          <p><strong>Ejemplo:</strong> Otorgar una licencia de maternidad a quien solicitó vacaciones.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📚</div>
+        <h4>Error de Derecho</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Se aplica una norma derogada o se interpreta erróneamente el ordenamiento.</p>
+          <p><strong>Ejemplo:</strong> Negar una pensión con fundamento en una ley ya derogada.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🎭</div>
+        <h4>Dolo o Fuerza</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>La voluntad del funcionario se forma por engaño (dolo) o coacción (fuerza).</p>
+          <p><strong>Ejemplo:</strong> Expedir un acto con fundamento en documentos falsos presentados por un tercero.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>⚖️ Motivación vs. Considerandos</h3>
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📋 ¿Qué son los motivos?</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Son las <strong>circunstancias de hecho o de derecho</strong> que sirven de fundamento para la expedición del acto administrativo.</p>
+        <p>Responden a la pregunta: <strong>"¿Por qué?"</strong> se expide el acto.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📋 ¿Qué es la motivación?</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Es la <strong>obligación de insertar en el texto del acto</strong> los motivos que lo justifican.</p>
+        <p>Se materializa en los <strong>"considerandos"</strong> del acto administrativo.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📋 ¿Cuándo es obligatoria la motivación?</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Según el Consejo de Estado, requieren motivación:</p>
+        <ul>
+          <li>El acto que extinga o modifique una situación jurídica ya creada</li>
+          <li>El que cambie una práctica administrativa</li>
+          <li>El que esté en contradicción con actuaciones anteriores</li>
+          <li>El que se expida siguiendo ciertos factores señalados en la ley</li>
+          <li>En general, todo acto que cree una situación perjudicial o gravosa para el administrado</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si un alcalde sanciona a un funcionario por "faltas repetidas al servicio", pero en realidad el funcionario nunca incurrió en tales faltas (los motivos son inexistentes), el acto es nulo por falsa motivación.
+    </div>
+  </section>
+
+  <!-- TEMA 4: DESVIACIÓN DE PODER -->
+  <section id="tema4">
+    <h2>4. Causal de Nulidad: Desviación de Poder</h2>
+    <p>La <strong>desviación de poder</strong> se presenta cuando el acto administrativo es expedido con una finalidad distinta a la contemplada en la norma que confiere la competencia. Es la causal más difícil de probar, pues requiere entrar al fuero interno de la autoridad.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">DESVIACIÓN DE PODER</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Fin Distinto</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Contrario al Interés General</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Pruebas Indirectas</div></div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Elementos de la Desviación de Poder</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🎯</div>
+        <h4>Finalidad Distinta</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>El acto se expide persiguiendo un fin diferente al establecido en la norma que confiere la competencia.</p>
+          <p><strong>Ejemplo:</strong> Prohibir la circulación de vehículos no por seguridad vial, sino para evitar una protesta política.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Contrario al Interés General</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>El fin perseguido es contrario al interés público o al beneficio colectivo.</p>
+          <p><strong>Ejemplo:</strong> Otorgar una licencia no por interés urbanístico, sino para favorecer a un amigo.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🔍</div>
+        <h4>Pruebas Indirectas</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Se prueba mediante indicios, presunciones y circunstancias que revelan la verdadera intención.</p>
+          <p><strong>Ejemplo:</strong> Declaraciones públicas del funcionario que revelan su verdadero propósito.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>⚠️ Diferencia con Falsa Motivación</h3>
+    <table>
+      <thead>
+        <tr><th>Aspecto</th><th>Falsa Motivación</th><th>Desviación de Poder</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Objeto</strong></td>
+          <td>Los motivos (el "por qué")</td>
+          <td>La finalidad (el "para qué")</td>
+        </tr>
+        <tr>
+          <td><strong>Naturaleza</strong></td>
+          <td>Error en los hechos o derecho</td>
+          <td>Intención contraria a la ley</td>
+        </tr>
+        <tr>
+          <td><strong>Prueba</strong></td>
+          <td>Directa (documentos, hechos)</td>
+          <td>Indirecta (indicios, presunciones)</td>
+        </tr>
+        <tr>
+          <td><strong>Aplicación</strong></td>
+          <td>Actos reglados y discrecionales</td>
+          <td>Solo actos discrecionales</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="cita">
+      <strong>"En los actos discrecionales, la autoridad tiene un margen de apreciación, pero debe actuar siempre conforme a los fines de la norma que le confiere la competencia y de manera proporcional a los hechos."</strong> — Art. 44 CPACA
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Un alcalde expide un decreto prohibiendo las carretillas en el centro histórico argumentando "ornato y estética", pero en realidad lo hace para evitar que los vendedores ambulantes lleguen a una plaza donde se realizará un evento político de su partido. Hay desviación de poder porque el fin real (proteger un evento político) es distinto al fin legal (ornato público).
+    </div>
+  </section>
+
+  <!-- TEMA 5: VIOLACIÓN DE NORMAS -->
+  <section id="tema5">
+    <h2>5. Causal de Nulidad: Violación de las Normas en que Debe Fundarse</h2>
+    <p>Esta causal se presenta cuando el <strong>objeto del acto</strong> es contrario al ordenamiento jurídico superior, es decir, cuando la decisión administrativa vulnera la Constitución, la ley o los reglamentos.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">VIOLACIÓN DE NORMAS</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Objeto Físicamente Imposible</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Objeto Contradictorio</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Objeto Contrario al Ordenamiento</div></div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Tipos de Ilegalidad del Objeto</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">❌</div>
+        <h4>Objeto Físicamente Imposible</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>El contenido del acto establece situaciones contrarias a la naturaleza o recae sobre un objeto inexistente.</p>
+          <p><strong>Ejemplo:</strong> Nombrar a una persona fallecida; otorgar una licencia para construir en un predio que no existe.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚡</div>
+        <h4>Objeto Contradictorio</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>El acto contiene disposiciones que se excluyen entre sí.</p>
+          <p><strong>Ejemplo:</strong> Una resolución que otorga una licencia de construcción pero simultáneamente prohíbe ejecutar cualquier trabajo en el predio.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Objeto Contrario al Ordenamiento</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>La decisión administrativa contradice normas constitucionales, legales o reglamentarias superiores.</p>
+          <p><strong>Ejemplo:</strong> Un alcalde que prohíbe la circulación de vehículos carretillas cuando la ley permite su uso.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>📊 Comparativa de las Causales de Nulidad</h3>
+    <table>
+      <thead>
+        <tr><th>Causal</th><th>Elemento Afectado</th><th>Naturaleza</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Incompetencia</strong></td><td>Sujeto (autoridad)</td><td>Subjetiva</td></tr>
+        <tr><td><strong>Vicios de forma</strong></td><td>Forma y procedimiento</td><td>Externa</td></tr>
+        <tr><td><strong>Falsa motivación</strong></td><td>Motivos</td><td>Interna</td></tr>
+        <tr><td><strong>Desviación de poder</strong></td><td>Fin</td><td>Interna</td></tr>
+        <tr><td><strong>Violación de normas</strong></td><td>Objeto</td><td>Material</td></tr>
+      </tbody>
+    </table>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si el Ministerio de Salud expide una resolución prohibiendo el uso de un medicamento legalmente aprobado sin fundamento científico, el acto es nulo por violación de las normas en que debe fundarse, pues contradice el ordenamiento jurídico superior que regula la materia.
+    </div>
+  </section>
+
+  <!-- TEMA 6: CONVALIDACIÓN -->
+  <section id="tema6">
+    <h2>6. Convalidación y Saneamiento de Vicios</h2>
+    <p>La <strong>convalidación</strong> es el mecanismo mediante el cual la autoridad subsana los vicios de que adolece un acto administrativo para evitar su declaratoria de nulidad posterior.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">CONVALIDACIÓN</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Subsanación</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Ratificación</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Incomunicación</div></div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Fundamento Legal</h3>
+    <div class="cita">
+      <strong>"En virtud del principio de eficacia, las autoridades buscarán que los procedimientos logren su finalidad y, para el efecto, removerán de oficio los obstáculos puramente formales..."</strong> — Art. 3.11 CPACA
+    </div>
+
+    <h3>🔍 Mecanismos de Convalidación</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🔧</div>
+        <h4>Subsanación</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>La autoridad corrige las irregularidades formales antes de proferir el acto definitivo.</p>
+          <p><strong>Ejemplo:</strong> Notificar nuevamente un acto que fue notificado en forma defectuosa.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">✅</div>
+        <h4>Ratificación</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>La autoridad confirma expresamente el acto viciado, sanando los defectos.</p>
+          <p><strong>Ejemplo:</strong> El superior jerárquico ratifica un acto expedido por funcionario incompetente.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🔗</div>
+        <h4>Incomunicación de Invalidez</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Cuando un acto es declarado nulo, los actos sucesivos independientes mantienen su validez.</p>
+          <p><strong>Ejemplo:</strong> Si se anula un nombramiento, no se afectan los actos posteriores (vacaciones, ascensos).</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>⚠️ Límites de la Convalidación</h3>
+    <div class="alerta">
+      <strong>📌 No son convalidables:</strong>
+      <ul>
+        <li>Los vicios de <strong>incompetencia absoluta</strong> (usurpación de funciones)</li>
+        <li>Los vicios de <strong>objeto ilícito</strong> (contrario a normas de orden público)</li>
+        <li>Los vicios de <strong>causa ilícita</strong> (contrario a buenas costumbres)</li>
+        <li>Los actos <strong>nulos de pleno derecho</strong></li>
+      </ul>
+    </div>
+
+    <h3>📊 Convalidación en Materia Contractual</h3>
+    <table>
+      <thead>
+        <tr><th>Tipo de Vicio</th><th>¿Convalidable?</th><th>Forma</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Nulidad absoluta</td><td><strong>No</strong></td><td>—</td></tr>
+        <tr><td>Nulidad relativa</td><td><strong>Sí</strong></td><td>Ratificación expresa o transcurso de 2 años</td></tr>
+        <tr><td>Vicios de forma</td><td><strong>Sí</strong></td><td>Subsanación antes del acto definitivo</td></tr>
+        <tr><td>Incompetencia</td><td><strong>Sí</strong></td><td>Ratificación por autoridad competente</td></tr>
+      </tbody>
+    </table>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si un acto administrativo se expide sin la motivación requerida (vicio de forma), la autoridad puede subsanarlo mediante un nuevo acto que incluya los considerandos faltantes, siempre que lo haga antes de que el acto sea demandado ante la jurisdicción contenciosa.
+    </div>
+  </section>
+
+  <!-- TEMA 7: PÉRDIDA DE FUERZA EJECUTORIA -->
+  <section id="tema7">
+    <h2>7. Pérdida de Fuerza Ejecutoria</h2>
+    <p>La <strong>pérdida de fuerza ejecutoria</strong> es el fenómeno mediante el cual un acto administrativo deja de ser obligatorio y exigible, sin que necesariamente sea declarado nulo.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">PÉRDIDA FUERZA EJECUTORIA</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Suspensión Provisional</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Decaimiento</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Prescripción Quinquenal</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Condición Resolutoria</div></div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Causales (Art. 91 CPACA)</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⏸️</div>
+        <h4>Suspensión Provisional</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Medida cautelar del juez contencioso que "congela" los efectos del acto mientras se decide el fondo del litigio.</p>
+          <p><strong>Efecto:</strong> Temporal, hasta que se profiera sentencia definitiva.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📉</div>
+        <h4>Decaimiento del Acto</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Desaparición sobrevenida de los fundamentos de hecho o de derecho que le dieron origen.</p>
+          <p><strong>Ejemplo:</strong> Se otorga una pensión por invalidez, pero el beneficiario se recupera.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⏰</div>
+        <h4>Prescripción Quinquenal</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Si al cabo de 5 años de estar en firme, la administración no ha realizado los actos necesarios para ejecutarlo.</p>
+          <p><strong>Efecto:</strong> Pérdida definitiva de la fuerza ejecutoria.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🔚</div>
+        <h4>Condición Resolutoria o Plazo Extintivo</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Cuando se cumple la condición a la que estaba sometido el acto o vence el plazo fijado.</p>
+          <p><strong>Ejemplo:</strong> Licencia de construcción por 24 meses que vence sin haber iniciado la obra.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>⚖️ Diferencia entre Nulidad y Pérdida de Fuerza Ejecutoria</h3>
+    <table>
+      <thead>
+        <tr><th>Aspecto</th><th>Nulidad</th><th>Pérdida de Fuerza Ejecutoria</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Causa</strong></td>
+          <td>Vicio en la formación del acto</td>
+          <td>Circunstancia sobrevenida</td>
+        </tr>
+        <tr>
+          <td><strong>Efecto</strong></td>
+          <td>Retroactivo (Ex tunc)</td>
+          <td>Hacia el futuro (Ex nunc)</td>
+        </tr>
+        <tr>
+          <td><strong>Declaración</strong></td>
+          <td>Juez contencioso</td>
+          <td>Automática o por autoridad</td>
+        </tr>
+        <tr>
+          <td><strong>Validez</strong></td>
+          <td>Acto nulo de pleno derecho</td>
+          <td>Acto válido pero inaplicable</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si la DIAN expide un acto imponiendo una sanción fiscal, pero al cabo de 5 años no ha iniciado el cobro coactivo ni realizado gestiones para ejecutarlo, el acto pierde su fuerza ejecutoria por prescripción quinquenal, sin necesidad de declaratoria judicial.
+    </div>
+  </section>
+
+  <!-- TEMA 8: DECAIMIENTO -->
+  <section id="tema8">
+    <h2>8. Decaimiento del Acto Administrativo</h2>
+    <p>El <strong>decaimiento</strong> es una causal específica de pérdida de fuerza ejecutoria que se presenta cuando desaparecen los fundamentos de hecho o de derecho que dieron origen al acto administrativo.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">DECAIMIENTO</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Fundamentos de Hecho</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Fundamentos de Derecho</div></div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Tipos de Decaimiento</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📊</div>
+        <h4>Por Desaparición de Fundamentos de Hecho</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Cuando las circunstancias materiales que justificaron el acto dejan de existir.</p>
+          <p><strong>Ejemplo:</strong> Se otorga una licencia ambiental para una actividad que posteriormente se prohíbe por razones ecológicas.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Por Desaparición de Fundamentos de Derecho</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Cuando la norma jurídica en que se fundamentaba el acto es derogada o declarada inexequible.</p>
+          <p><strong>Ejemplo:</strong> Un acto expedido con fundamento en una ley que posteriormente es derogada.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>⚠️ Efectos del Decaimiento</h3>
+    <div class="alerta">
+      <strong>📌 Efectos:</strong>
+      <ul>
+        <li>El acto <strong>pierde su fuerza ejecutoria</strong> pero no es nulo</li>
+        <li>Los efectos producidos <strong>antes del decaimiento</strong> mantienen su validez</li>
+        <li>No requiere declaratoria judicial, opera <strong>automáticamente</strong></li>
+        <li>La autoridad puede <strong>revocarlo directamente</strong> si lo considera pertinente</li>
+      </ul>
+    </div>
+
+    <h3>📊 Decaimiento vs. Nulidad</h3>
+    <table>
+      <thead>
+        <tr><th>Aspecto</th><th>Decaimiento</th><th>Nulidad</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Causa</strong></td>
+          <td>Desaparición de fundamentos</td>
+          <td>Vicio en la formación</td>
+        </tr>
+        <tr>
+          <td><strong>Momento</strong></td>
+          <td>Sobrevenido (posterior)</td>
+          <td>Originario (al expedirse)</td>
+        </tr>
+        <tr>
+          <td><strong>Efecto</strong></td>
+          <td>Pérdida de fuerza ejecutoria</td>
+          <td>Inexistencia jurídica</td>
+        </tr>
+        <tr>
+          <td><strong>Declaración</strong></td>
+          <td>Automática</td>
+          <td>Judicial</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si un municipio otorga una licencia de construcción con fundamento en un Plan de Ordenamiento Territorial (POT) que posteriormente es declarado nulo por la jurisdicción contenciosa, todos los actos expedidos con base en ese POT decaen automáticamente, perdiendo su fuerza ejecutoria.
+    </div>
+  </section>
+
+  <!-- TEMA 9: REVOCATORIA DIRECTA II -->
+  <section id="tema9">
+    <h2>9. Revocatoria Directa (Ampliación)</h2>
+    <p>La <strong>revocatoria directa</strong> es la facultad de la administración (y recurso extraordinario para el particular) para dejar sin efecto sus propios actos, sin necesidad de acudir al juez.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">REVOCATORIA DIRECTA</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Causales</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Límites</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Procedimiento</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Efectos</div></div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Causales (Art. 93 CPACA)</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>1. Manifiesta Oposición a la Constitución o la Ley</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Debe ser una ilegalidad <strong>"manifiesta"</strong>, evidente de la simple comparación de textos, sin necesidad de complejas interpretaciones jurídicas.</p>
+          <p><strong>Ejemplo:</strong> Un acto que impone un tributo no autorizado por la ley.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🌐</div>
+        <h4>2. No Conformidad con el Interés Público</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Aplica principalmente a actos <strong>discrecionales de carácter general</strong>. Si las circunstancias cambian y el acto ya no conviene a la comunidad, puede revocarse.</p>
+          <p><strong>Ejemplo:</strong> Un reglamento que se vuelve obsoleto por cambios tecnológicos.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">💔</div>
+        <h4>3. Agravio Injustificado a una Persona</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Aplica a actos <strong>particulares</strong>. Cuando el acto impone una carga que excede los límites de lo razonable o carece de justificación.</p>
+          <p><strong>Ejemplo:</strong> Una sanción desproporcionada respecto a la falta cometida.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>⚠️ Límites y Requisitos (Arts. 94 a 97 CPACA)</h3>
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📋 Actos Generales</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Pueden revocarse en cualquier tiempo por la propia administración, sin restricciones.</p>
+        <p>También pueden ser objeto de revocatoria a petición de parte en cualquier tiempo.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📋 Actos Particulares</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Requieren el <strong>consentimiento previo, expreso y escrito</strong> del titular del derecho (Art. 97 CPACA).</p>
+        <p><strong>Excepción:</strong> Si el acto se obtuvo por medios ilegales o fraudulentos, la administración NO puede revocarlo directamente; debe demandarlo ante la jurisdicción contenciosa y solicitar suspensión provisional.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📋 Caducidad</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>No procede solicitar revocatoria si ya operó la caducidad de la acción judicial contra el acto.</p>
+        <p>La revocatoria <strong>no revive los términos</strong> para demandar el acto ante el juez contencioso.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📋 Oferta de Revocatoria</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Novedad del CPACA: Durante el proceso judicial, hasta antes de sentencia de segunda instancia, la administración puede formular <strong>oferta de revocatoria</strong> de los actos impugnados, previa aprobación del Comité de Conciliación.</p>
+        <p>Si el demandante acepta, el proceso termina mediante auto con mérito ejecutivo.</p>
+      </div>
+    </div>
+
+    <h3>📊 Revocatoria vs. Nulidad Judicial</h3>
+    <table>
+      <thead>
+        <tr><th>Aspecto</th><th>Revocatoria Directa</th><th>Nulidad Judicial</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Quién la declara</strong></td><td>La propia administración</td><td>Juez contencioso</td></tr>
+        <tr><td><strong>Efectos</strong></td><td>Hacia el futuro (Ex nunc)</td><td>Retroactivos (Ex tunc)</td></tr>
+        <tr><td><strong>Causales</strong></td><td>Ilegalidad manifiesta, inconveniencia, agravio</td><td>Todas las causales de nulidad</td></tr>
+        <tr><td><strong>Consentimiento</strong></td><td>Sí requiere en actos particulares</td><td>No requiere</td></tr>
+        <tr><td><strong>Plazo</strong></td><td>Cualquier tiempo (salvo caducidad)</td><td>Términos de caducidad</td></tr>
+      </tbody>
+    </table>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si la DIAN expide un acto reconociendo una devolución de IVA con fundamento en una norma derogada, puede iniciar la revocatoria directa. Sin embargo, al ser un acto particular que creó un derecho a favor del contribuyente, la DIAN debe solicitar el consentimiento expreso y escrito de la empresa. Si la empresa se niega, la DIAN deberá demandar su propio acto ante el juez contencioso.
+    </div>
+  </section>
+
+  <!-- TEMA 10: NOTIFICACIONES -->
+  <section id="tema10">
+    <h2>10. Publicidad y Notificaciones</h2>
+    <p>Los actos administrativos deben ser <strong>publicitados</strong> para que produzcan efectos jurídicos frente a los interesados y terceros. El régimen de notificaciones está regulado en el CPACA (Arts. 56 a 69).</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">PUBLICIDAD Y NOTIFICACIONES</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Actos Generales</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Actos Particulares</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Medios Electrónicos</div></div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Régimen de Publicidad</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📰</div>
+        <h4>Actos Generales</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Deben publicarse en el <strong>Diario Oficial</strong> (orden nacional) o en la <strong>Gaceta Territorial</strong> (orden territorial).</p>
+          <p>Sin publicación, no producen efectos jurídicos.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📬</div>
+        <h4>Actos Particulares</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Deben notificarse <strong>personalmente</strong> al interesado.</p>
+          <p>Si no es posible, se notificarán por <strong>aviso</strong>, <strong>correo electrónico</strong> o <strong>edicto</strong>.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">💻</div>
+        <h4>Medios Electrónicos</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>El CPACA regula la <strong>notificación electrónica</strong> como medio válido.</p>
+          <p>Requiere consentimiento del interesado o autorización legal.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>⚖️ Formas de Notificación Personal</h3>
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📬 Notificación Personal Directa</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Se realiza entregando copia auténtica del acto al interesado en la sede de la entidad.</p>
+        <p>Debe dejarse <strong>constancia escrita</strong> de la fecha y hora de la notificación.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📬 Notificación por Correo Certificado</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Se envía el acto al domicilio o dirección registrada del interesado.</p>
+        <p>Se entiende surtida <strong>dos (2) días después</strong> de la fecha de entrega del aviso de recibo.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📬 Notificación por Aviso</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Procede cuando no se conoce el domicilio del interesado o cuando no comparece a notificarse personalmente.</p>
+        <p>Se fija aviso en la sede de la entidad por <strong>cinco (5) días hábiles</strong>.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📬 Notificación por Edicto</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Procede cuando se desconoce la identidad o domicilio del interesado, o cuando se trata de actos de carácter general que afectan a terceros indeterminados.</p>
+        <p>Se publica en un medio de comunicación de amplia circulación.</p>
+      </div>
+    </div>
+
+    <h3>📊 Comparativa de Medios de Notificación</h3>
+    <table>
+      <thead>
+        <tr><th>Medio</th><th>Procedencia</th><th>Plazo</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Personal directa</strong></td><td>Regla general</td><td>Inmediato</td></tr>
+        <tr><td><strong>Correo certificado</strong></td><td>Cuando se conoce el domicilio</td><td>2 días después del recibo</td></tr>
+        <tr><td><strong>Aviso</strong></td><td>Desconocimiento de domicilio o no comparecencia</td><td>5 días hábiles de fijación</td></tr>
+        <tr><td><strong>Edicto</strong></td><td>Actos generales o terceros indeterminados</td><td>Publicación en medio masivo</td></tr>
+        <tr><td><strong>Electrónico</strong></td><td>Con consentimiento o autorización legal</td><td>Según regulación especial</td></tr>
+      </tbody>
+    </table>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si la DIAN expide un acto imponiendo una sanción fiscal a un contribuyente, debe notificárselo personalmente en la sede de la entidad o enviarlo por correo certificado a su domicilio registrado. Si no comparece o no se conoce su domicilio, se notificará por aviso fijado en la sede de la DIAN por cinco días hábiles.
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz">
+    <h2>🎯 Quiz Completo - 40 Preguntas</h2>
+    <p>Pon a prueba tus conocimientos sobre la Teoría General del Acto Administrativo II.</p>
+
+    <div class="quiz-container">
+      <div class="quiz-header">
+        <h3>📊 Tu Progreso</h3>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="quiz-stats">
+          <div class="stat">Respondidas: <strong id="respondidas">0</strong>/40</div>
+          <div class="stat">Correctas: <strong id="correctas">0</strong></div>
+          <div class="stat">Incorrectas: <strong id="incorrectas">0</strong></div>
+          <div class="stat">Porcentaje: <strong id="porcentaje">0</strong>%</div>
+        </div>
+      </div>
+
+      <div class="quiz-tabs">
+        <div class="quiz-tab active" onclick="mostrarSeccion('s1', this)">T1 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s2', this)">T2 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s3', this)">T3 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s4', this)">T4 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s5', this)">T5 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s6', this)">T6 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s7', this)">T7 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s8', this)">T8 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s9', this)">T9 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s10', this)">T10 (4)</div>
+      </div>
+
+      <!-- SECCIÓN 1: INCOMPETENCIA -->
+      <div class="quiz-section active" id="s1">
+        <div class="pregunta" data-correcta="1" data-tema="1">
+          <span class="pregunta-num">1</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La incompetencia material (ratione materiae) se presenta cuando:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 1)">a) La autoridad actúa fuera de su circunscripción geográfica.</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">b) La autoridad actúa sobre un asunto que la ley no le ha asignado.</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">c) La autoridad actúa antes de posesionarse o después de retirarse.</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">d) La autoridad asume funciones del superior jerárquico.</div>
+          </div>
+          <div class="explicacion">La incompetencia material se presenta cuando la autoridad actúa sobre un asunto que la ley no le ha asignado, es decir, cuando carece de competencia por razón de la materia.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="1">
+          <span class="pregunta-num">2</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Un alcalde expide un decreto regulando el tráfico aéreo en su municipio. El acto adolece de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 2)">a) Incompetencia material.</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">b) Incompetencia territorial.</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">c) Incompetencia temporal.</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">d) Desviación de poder.</div>
+          </div>
+          <div class="explicacion">Es incompetencia material, pues la regulación del tráfico aéreo no es competencia del alcalde sino de la Aeronáutica Civil.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="1">
+          <span class="pregunta-num">3</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La diferencia entre usurpación y extralimitación es que:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 3)">a) La usurpación es más grave que la extralimitación.</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">b) La extralimitación solo aplica a actos discrecionales.</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">c) La usurpación es ejercer funciones ajenas; la extralimitación es exceder los límites de las propias.</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">d) No hay diferencia, son sinónimos.</div>
+          </div>
+          <div class="explicacion">La usurpación consiste en ejercer funciones que no le corresponden a la autoridad; la extralimitación en actuar dentro de sus funciones pero excediendo los límites legales.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="1">
+          <span class="pregunta-num">4</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Según la jurisprudencia de la Corte Constitucional, las competencias administrativas:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 4)">a) Pueden inferirse por analogía.</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">b) Son implícitas si el servicio público lo exige.</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">c) Pueden extenderse por costumbre.</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">d) Deben ser expresas y taxativas; no existen competencias implícitas.</div>
+          </div>
+          <div class="explicacion">La Corte ha sido enfática en que permitir competencias implícitas abriría la puerta a la arbitrariedad. Deben estar claramente determinadas por la Constitución o la ley.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 2: VICIOS DE FORMA -->
+      <div class="quiz-section" id="s2">
+        <div class="pregunta" data-correcta="1" data-tema="2">
+          <span class="pregunta-num">5</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La forma sustancial es aquella cuya omisión:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 5)">a) Impide la validez del acto.</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">b) Impide conocer la voluntad de la administración o afecta derechos fundamentales.</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">c) Solo genera nulidad relativa.</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">d) Puede ser convalidada en cualquier tiempo.</div>
+          </div>
+          <div class="explicacion">La forma sustancial es aquella cuya omisión impide conocer la voluntad de la administración o afecta derechos fundamentales, como la motivación o la notificación personal.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="2">
+          <span class="pregunta-num">6</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Si la Secretaría de Gobierno expide una resolución sancionando a un comerciante sin haberle notificado previamente ni darle oportunidad de presentar descargos, el acto es nulo por:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 6)">a) Violación del derecho de audiencia y defensa.</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">b) Incompetencia.</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">c) Falsa motivación.</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">d) Desviación de poder.</div>
+          </div>
+          <div class="explicacion">Es violación del derecho de audiencia y defensa, causal autónoma de nulidad según el Art. 137 CPACA.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="2">
+          <span class="pregunta-num">7</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La forma ad solemnitatem es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 7)">a) La forma que habilita al acto para producir efectos jurídicos.</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">b) La forma establecida por la costumbre.</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">c) La forma establecida por la ley para la validez del acto.</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">d) La forma que puede ser subsanada en cualquier tiempo.</div>
+          </div>
+          <div class="explicacion">La forma ad solemmnitatem es la forma establecida por la ley para la validez del acto, como la escritura pública para la venta de bienes fiscales.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="2">
+          <span class="pregunta-num">8</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La forma ad habilitatem es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 8)">a) La forma que impide conocer la voluntad de la administración.</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">b) La forma establecida por la costumbre.</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">c) La forma que puede ser convalidada por ratificación.</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">d) La forma que habilita al acto para producir efectos jurídicos.</div>
+          </div>
+          <div class="explicacion">La forma ad habilitatem es aquella que habilita al acto para producir efectos jurídicos, como la publicación en el Diario Oficial de actos generales.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 3: FALSA MOTIVACIÓN -->
+      <div class="quiz-section" id="s3">
+        <div class="pregunta" data-correcta="1" data-tema="3">
+          <span class="pregunta-num">9</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La falsa motivación se presenta cuando:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 9)">a) El acto se expide sin competencia.</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">b) Los fundamentos de hecho o de derecho no corresponden con la realidad.</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">c) El acto se expide con una finalidad distinta a la legal.</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">d) El acto contradice normas superiores.</div>
+          </div>
+          <div class="explicacion">La falsa motivación se presenta cuando los fundamentos de hecho o de derecho expresados en el acto no corresponden con la realidad.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="3">
+          <span class="pregunta-num">10</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Si un funcionario sanciona a un empleado por "abandono del cargo" cuando en realidad estaba en licencia médica, el acto adolece de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 10)">a) Falsa motivación por inexistencia de motivos.</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">b) Desviación de poder.</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">c) Incompetencia.</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">d) Violación de normas.</div>
+          </div>
+          <div class="explicacion">Es falsa motivación por inexistencia de motivos, pues el hecho que se alega (abandono del cargo) nunca ocurrió.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="3">
+          <span class="pregunta-num">11</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La diferencia entre motivos y motivación es que:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 11)">a) Los motivos son obligatorios; la motivación es facultativa.</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">b) La motivación es obligatoria; los motivos son facultativos.</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">c) Los motivos son las circunstancias que fundamentan el acto; la motivación es la obligación de insertarlas en el texto.</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">d) No hay diferencia, son sinónimos.</div>
+          </div>
+          <div class="explicacion">Los motivos son las circunstancias de hecho o de derecho que sirven de fundamento; la motivación es la obligación de insertarlas en el texto del acto.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="3">
+          <span class="pregunta-num">12</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El error de derecho como causal de falsa motivación se presenta cuando:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 12)">a) Se aplica una norma vigente.</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">b) Se interpreta correctamente el ordenamiento.</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">c) Se aplica una norma derogada o se interpreta erróneamente el ordenamiento.</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">d) Se omite la motivación del acto.</div>
+          </div>
+          <div class="explicacion">El error de derecho se presenta cuando se aplica una norma derogada o se interpreta erróneamente el ordenamiento jurídico.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 4: DESVIACIÓN DE PODER -->
+      <div class="quiz-section" id="s4">
+        <div class="pregunta" data-correcta="1" data-tema="4">
+          <span class="pregunta-num">13</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La desviación de poder se presenta cuando:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 13)">a) El acto se expide sin competencia.</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">b) El acto se expide con una finalidad distinta a la contemplada en la norma.</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">c) El acto se expide con vicios de forma.</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">d) El acto se expide con falsa motivación.</div>
+          </div>
+          <div class="explicacion">La desviación de poder se presenta cuando el acto administrativo es expedido con una finalidad distinta a la contemplada en la norma que confiere la competencia.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="4">
+          <span class="pregunta-num">14</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Un alcalde prohíbe las manifestaciones públicas en el parque central argumentando "protección del césped", pero en realidad lo hace para evitar críticas a su gobierno. El acto es nulo por:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 14)">a) Desviación de poder.</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">b) Falsa motivación.</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">c) Incompetencia.</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">d) Violación de normas.</div>
+          </div>
+          <div class="explicacion">Hay desviación de poder porque el fin real (evitar críticas) es distinto al fin legal (proteger el espacio público) y al interés general.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="4">
+          <span class="pregunta-num">15</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La desviación de poder solo es predicable de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 15)">a) Actos reglados.</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">b) Actos generales.</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">c) Actos discrecionales.</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">d) Actos particulares.</div>
+          </div>
+          <div class="explicacion">La desviación de poder solo es predicable de actos discrecionales, pues en los reglados la autoridad no tiene margen de apreciación.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="4">
+          <span class="pregunta-num">16</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La diferencia entre falsa motivación y desviación de poder es que:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 16)">a) La falsa motivación recae sobre la finalidad; la desviación sobre los motivos.</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">b) La falsa motivación es más grave que la desviación de poder.</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">c) La desviación de poder recae sobre los motivos; la falsa motivación sobre la finalidad.</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">d) La falsa motivación recae sobre los motivos; la desviación sobre la finalidad.</div>
+          </div>
+          <div class="explicacion">La falsa motivación recae sobre los motivos (el "por qué"); la desviación de poder sobre la finalidad (el "para qué").</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 5: VIOLACIÓN DE NORMAS -->
+      <div class="quiz-section" id="s5">
+        <div class="pregunta" data-correcta="1" data-tema="5">
+          <span class="pregunta-num">17</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La violación de las normas en que debe fundarse el acto se presenta cuando:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 17)">a) El acto se expide sin competencia.</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">b) El objeto del acto es contrario al ordenamiento jurídico superior.</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">c) El acto se expide con vicios de forma.</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">d) El acto se expide con falsa motivación.</div>
+          </div>
+          <div class="explicacion">La violación de normas se presenta cuando el objeto del acto es contrario al ordenamiento jurídico superior (Constitución, ley o reglamentos).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="5">
+          <span class="pregunta-num">18</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Si el Ministerio de Salud expide una resolución prohibiendo el uso de un medicamento legalmente aprobado sin fundamento científico, el acto es nulo por:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 18)">a) Violación de las normas en que debe fundarse.</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">b) Desviación de poder.</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">c) Incompetencia.</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">d) Falsa motivación.</div>
+          </div>
+          <div class="explicacion">Es violación de las normas en que debe fundarse, pues contradice el ordenamiento jurídico superior que regula la materia.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="5">
+          <span class="pregunta-num">19</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El objeto físicamente imposible se presenta cuando:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 19)">a) El acto contradice normas superiores.</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">b) El acto contiene disposiciones que se excluyen entre sí.</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">c) El contenido del acto establece situaciones contrarias a la naturaleza o recae sobre un objeto inexistente.</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">d) El acto se expide sin competencia.</div>
+          </div>
+          <div class="explicacion">El objeto físicamente imposible se presenta cuando el contenido del acto establece situaciones contrarias a la naturaleza o recae sobre un objeto inexistente.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="5">
+          <span class="pregunta-num">20</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Si un funcionario expide un acto nombrando a una persona que ya había fallecido, el acto adolece de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 20)">a) Desviación de poder.</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">b) Falsa motivación.</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">c) Incompetencia.</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">d) Objeto físicamente imposible.</div>
+          </div>
+          <div class="explicacion">El objeto es imposible, pues recae sobre una persona que ya no existe en el mundo jurídico (fallecida).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 6: CONVALIDACIÓN -->
+      <div class="quiz-section" id="s6">
+        <div class="pregunta" data-correcta="1" data-tema="6">
+          <span class="pregunta-num">21</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La convalidación es el mecanismo mediante el cual:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 21)">a) Se declara la nulidad del acto.</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">b) La autoridad subsana los vicios de que adolece un acto para evitar su nulidad.</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">c) Se revoca el acto a petición de parte.</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">d) Se notifica el acto al interesado.</div>
+          </div>
+          <div class="explicacion">La convalidación es el mecanismo mediante el cual la autoridad subsana los vicios de que adolece un acto administrativo para evitar su declaratoria de nulidad posterior.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="6">
+          <span class="pregunta-num">22</span><span class="pregunta-tipo">Conceptual</span>
+          <p>NO son convalidables:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 22)">a) Los vicios de incompetencia absoluta, objeto ilícito y causa ilícita.</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">b) Los vicios de forma subsanables.</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">c) Los vicios de motivación.</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">d) Los vicios de procedimiento.</div>
+          </div>
+          <div class="explicacion">No son convalidables los vicios de incompetencia absoluta (usurpación), objeto ilícito y causa ilícita, así como los actos nulos de pleno derecho.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="6">
+          <span class="pregunta-num">23</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La incomunicación de invalidez se presenta cuando:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 23)">a) Un acto es convalidado por la autoridad.</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">b) Un acto es ratificado por el superior jerárquico.</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">c) Un acto es declarado nulo pero los actos sucesivos independientes mantienen su validez.</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">d) Un acto es notificado en forma defectuosa.</div>
+          </div>
+          <div class="explicacion">La incomunicación de invalidez se presenta cuando un acto es declarado nulo pero los actos sucesivos independientes mantienen su validez.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="6">
+          <span class="pregunta-num">24</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Si se anula un nombramiento, ¿se afectan los actos posteriores (vacaciones, ascensos)?</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 24)">a) Sí, todos los actos posteriores son nulos.</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">b) Solo los actos posteriores que dependan directamente del nombramiento.</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">c) No, los actos posteriores son válidos si son independientes.</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">d) Depende de la gravedad del vicio.</div>
+          </div>
+          <div class="explicacion">No, los actos posteriores son válidos si son independientes del acto nulo, en aplicación del principio de incomunicación de invalidez.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 7: PÉRDIDA DE FUERZA EJECUTORIA -->
+      <div class="quiz-section" id="s7">
+        <div class="pregunta" data-correcta="1" data-tema="7">
+          <span class="pregunta-num">25</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La pérdida de fuerza ejecutoria se presenta cuando:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 25)">a) El acto es declarado nulo por el juez.</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">b) El acto deja de ser obligatorio y exigible, sin necesariamente ser nulo.</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">c) El acto es revocado por la autoridad.</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">d) El acto es notificado en forma defectuosa.</div>
+          </div>
+          <div class="explicacion">La pérdida de fuerza ejecutoria es el fenómeno mediante el cual un acto administrativo deja de ser obligatorio y exigible, sin que necesariamente sea declarado nulo.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="7">
+          <span class="pregunta-num">26</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La prescripción quinquenal opera cuando:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 26)">a) Al cabo de 5 años de estar en firme, la administración no ha realizado los actos necesarios para ejecutarlo.</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">b) Al cabo de 2 años de expedido el acto.</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">c) Al cabo de 10 años de expedido el acto.</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">d) Cuando el acto es demandado ante el juez.</div>
+          </div>
+          <div class="explicacion">La prescripción quinquenal opera cuando al cabo de 5 años de estar en firme, la administración no ha realizado los actos necesarios para ejecutarlo.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="7">
+          <span class="pregunta-num">27</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La suspensión provisional es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 27)">a) Una causal de nulidad del acto.</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">b) Una forma de convalidación del acto.</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">c) Una medida cautelar del juez contencioso que "congela" los efectos del acto.</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">d) Una forma de revocatoria directa.</div>
+          </div>
+          <div class="explicacion">La suspensión provisional es una medida cautelar del juez contencioso que "congela" los efectos del acto mientras se decide el fondo del litigio.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="7">
+          <span class="pregunta-num">28</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La diferencia entre nulidad y pérdida de fuerza ejecutoria es que:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 28)">a) La nulidad opera hacia el futuro; la pérdida de fuerza ejecutoria es retroactiva.</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">b) La nulidad es automática; la pérdida de fuerza ejecutoria requiere declaratoria judicial.</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">c) La nulidad es retroactiva (Ex tunc); la pérdida de fuerza ejecutoria opera hacia el futuro (Ex nunc).</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">d) No hay diferencia, son sinónimos.</div>
+          </div>
+          <div class="explicacion">La nulidad es retroactiva (Ex tunc), es decir, el acto se considera nulo desde su expedición; la pérdida de fuerza ejecutoria opera hacia el futuro (Ex nunc), es decir, el acto deja de ser obligatorio desde ese momento.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 8: DECAIMIENTO -->
+      <div class="quiz-section" id="s8">
+        <div class="pregunta" data-correcta="1" data-tema="8">
+          <span class="pregunta-num">29</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El decaimiento del acto administrativo se presenta cuando:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 29)">a) El acto es declarado nulo por el juez.</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">b) Desaparecen los fundamentos de hecho o de derecho que le dieron origen.</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">c) El acto prescribe por el transcurso del tiempo.</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">d) El acto es revocado por la autoridad.</div>
+          </div>
+          <div class="explicacion">El decaimiento se presenta cuando desaparecen los fundamentos de hecho o de derecho que le dieron origen al acto administrativo.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="8">
+          <span class="pregunta-num">30</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Si se otorga una pensión por invalidez y el beneficiario se recupera, el acto:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 30)">a) Decae por desaparición de los fundamentos de hecho.</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">b) Es nulo de pleno derecho.</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">c) Prescribe por el transcurso del tiempo.</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">d) Debe ser revocado por la autoridad.</div>
+          </div>
+          <div class="explicacion">El acto decae por desaparición de los fundamentos de hecho (la invalidez), pues la circunstancia que justificó su expedición ya no existe.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="8">
+          <span class="pregunta-num">31</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El decaimiento por desaparición de fundamentos de derecho se presenta cuando:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 31)">a) Las circunstancias materiales que justificaron el acto dejan de existir.</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">b) El acto es declarado nulo por el juez.</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">c) La norma jurídica en que se fundamentaba el acto es derogada o declarada inexequible.</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">d) El acto prescribe por el transcurso del tiempo.</div>
+          </div>
+          <div class="explicacion">El decaimiento por desaparición de fundamentos de derecho se presenta cuando la norma jurídica en que se fundamentaba el acto es derogada o declarada inexequible.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="8">
+          <span class="pregunta-num">32</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El decaimiento del acto:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 32)">a) Requiere declaratoria judicial.</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">b) Produce efectos retroactivos.</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">c) Hace que el acto sea nulo de pleno derecho.</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">d) Opera automáticamente, sin necesidad de declaratoria judicial.</div>
+          </div>
+          <div class="explicacion">El decaimiento opera automáticamente, sin necesidad de declaratoria judicial, pues es una consecuencia de la desaparición de los fundamentos del acto.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 9: REVOCATORIA DIRECTA II -->
+      <div class="quiz-section" id="s9">
+        <div class="pregunta" data-correcta="1" data-tema="9">
+          <span class="pregunta-num">33</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La revocatoria directa procede contra actos particulares cuando:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 33)">a) En cualquier tiempo, sin restricciones.</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">b) Se cuenta con el consentimiento previo, expreso y escrito del titular del derecho.</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">c) Solo cuando el acto es ilegal.</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">d) Solo cuando el acto es inconveniente.</div>
+          </div>
+          <div class="explicacion">La revocatoria directa procede contra actos particulares cuando se cuenta con el consentimiento previo, expreso y escrito del titular del derecho (Art. 97 CPACA).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="9">
+          <span class="pregunta-num">34</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Si la administración considera que un acto particular se obtuvo por medios ilegales o fraudulentos:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 34)">a) Puede revocarlo directamente sin pedir consentimiento.</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">b) Debe demandar el acto ante la jurisdicción contenciosa y solicitar suspensión provisional.</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">c) Debe pedir el consentimiento del particular para revocarlo.</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">d) Debe esperar a que opere la prescripción.</div>
+          </div>
+          <div class="explicacion">Si el acto se obtuvo por medios ilegales o fraudulentos, la administración NO puede revocarlo directamente; debe demandarlo ante el juez contencioso y solicitar suspensión provisional (Art. 97 CPACA).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="9">
+          <span class="pregunta-num">35</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La oferta de revocatoria directa durante el proceso judicial:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 35)">a) No está regulada en el CPACA.</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">b) Solo procede en procesos de nulidad simple.</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">c) Puede formularse hasta antes de sentencia de segunda instancia, previa aprobación del Comité de Conciliación.</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">d) Solo procede a petición del demandante.</div>
+          </div>
+          <div class="explicacion">La oferta de revocatoria directa puede formularse durante el proceso judicial, hasta antes de sentencia de segunda instancia, previa aprobación del Comité de Conciliación de la entidad.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="9">
+          <span class="pregunta-num">36</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La revocatoria directa a petición de parte:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 36)">a) Revive los términos para demandar el acto.</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">b) Genera silencio administrativo positivo.</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">c) Procede aunque haya operado la caducidad.</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">d) No revive los términos legales para demandar ni da lugar al silencio administrativo.</div>
+          </div>
+          <div class="explicacion">La revocatoria directa a petición de parte NO revive los términos de caducidad ni genera silencio administrativo (Art. 96 CPACA).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 10: NOTIFICACIONES -->
+      <div class="quiz-section" id="s10">
+        <div class="pregunta" data-correcta="1" data-tema="10">
+          <span class="pregunta-num">37</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los actos generales deben publicarse en:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 37)">a) La página web de la entidad.</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">b) El Diario Oficial (orden nacional) o la Gaceta Territorial (orden territorial).</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">c) Un periódico de amplia circulación.</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">d) La sede de la entidad.</div>
+          </div>
+          <div class="explicacion">Los actos generales deben publicarse en el Diario Oficial (orden nacional) o en la Gaceta Territorial (orden territorial) para que produzcan efectos jurídicos.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="10">
+          <span class="pregunta-num">38</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los actos particulares deben notificarse:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 38)">a) Personalmente al interesado.</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">b) Por aviso en la sede de la entidad.</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">c) Por edicto en un periódico.</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">d) Por correo electrónico.</div>
+          </div>
+          <div class="explicacion">Los actos particulares deben notificarse personalmente al interesado, como regla general.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="10">
+          <span class="pregunta-num">39</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La notificación por correo certificado se entiende surtida:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 39)">a) El día de la entrega del aviso de recibo.</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">b) Al día siguiente de la fecha de entrega.</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">c) Dos (2) días después de la fecha de entrega del aviso de recibo.</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">d) Cinco (5) días después de la fecha de entrega.</div>
+          </div>
+          <div class="explicacion">La notificación por correo certificado se entiende surtida dos (2) días después de la fecha de entrega del aviso de recibo.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="10">
+          <span class="pregunta-num">40</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La notificación por aviso procede cuando:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 40)">a) El interesado comparece a notificarse personalmente.</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">b) Se trata de actos generales.</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">c) Se trata de actos particulares que afectan a terceros indeterminados.</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">d) No se conoce el domicilio del interesado o no comparece a notificarse personalmente.</div>
+          </div>
+          <div class="explicacion">La notificación por aviso procede cuando no se conoce el domicilio del interesado o cuando no comparece a notificarse personalmente.</div>
+        </div>
+      </div>
+
+      <div class="resultado-final" id="resultadoFinal">
+        <h3>🏆 Resultado Final</h3>
+        <div class="puntaje-final" id="puntajeFinal">0/40</div>
+        <p id="mensajeFinal"></p>
+        <div class="desglose-temas" id="desgloseTemas"></div>
+        <button onclick="reiniciarQuiz()" class="btn-reset">🔄 Reiniciar Quiz</button>
+      </div>
+
+      <div style="text-align: center; margin-top: 1.5rem;">
+        <button onclick="verResultadoFinal()">📊 Ver Resultado Final</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>📋 Guía Didáctica - Teoría General del Acto Administrativo II</p>
+  <p>Guía 4 de 8 · Derecho Administrativo Colombiano</p>
+  <p style="margin-top: 1rem; opacity: 0.7;">© 2026 - Material educativo interactivo</p>
+</footer>
+
+<script>
+  function toggleAcordeon(header) {
+    header.classList.toggle('active');
+    const content = header.nextElementSibling;
+    content.classList.toggle('active');
+  }
+
+  let respuestas = {};
+  const totalPreguntas = 40;
+
+  function mostrarSeccion(id, tab) {
+    document.querySelectorAll('.quiz-section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.quiz-tab').forEach(t => t.classList.remove('active'));
+    
+    document.getElementById(id).classList.add('active');
+    tab.classList.add('active');
+  }
+
+  function seleccionar(opcion, preguntaNum) {
+    if (respuestas[preguntaNum] !== undefined) return;
+
+    const pregunta = opcion.closest('.pregunta');
+    const opciones = pregunta.querySelectorAll('.opcion');
+    const correcta = parseInt(pregunta.dataset.correcta);
+    const tema = parseInt(pregunta.dataset.tema);
+    const seleccionada = Array.from(opciones).indexOf(opcion);
+    const explicacion = pregunta.querySelector('.explicacion');
+
+    opciones.forEach(o => o.classList.add('disabled'));
+
+    if (seleccionada === correcta) {
+      opcion.classList.add('correcta');
+      respuestas[preguntaNum] = { correcta: true, tema: tema };
+    } else {
+      opcion.classList.add('incorrecta');
+      opciones[correcta].classList.add('correcta');
+      respuestas[preguntaNum] = { correcta: false, tema: tema };
+    }
+
+    explicacion.classList.add('visible');
+    pregunta.classList.add('answered');
+    actualizarEstadisticas();
+  }
+
+  function actualizarEstadisticas() {
+    const total = Object.keys(respuestas).length;
+    const correctas = Object.values(respuestas).filter(r => r.correcta).length;
+    const incorrectas = total - correctas;
+    const porcentaje = total > 0 ? Math.round((correctas / total) * 100) : 0;
+
+    document.getElementById('respondidas').textContent = total;
+    document.getElementById('correctas').textContent = correctas;
+    document.getElementById('incorrectas').textContent = incorrectas;
+    document.getElementById('porcentaje').textContent = porcentaje;
+
+    const progreso = (total / totalPreguntas) * 100;
+    document.getElementById('progressFill').style.width = progreso + '%';
+  }
+
+  function verResultadoFinal() {
+    const total = Object.keys(respuestas).length;
+    
+    if (total < totalPreguntas) {
+      alert(`⚠️ Aún te faltan ${totalPreguntas - total} preguntas por responder.`);
+      return;
+    }
+
+    const correctas = Object.values(respuestas).filter(r => r.correcta).length;
+    const porcentaje = Math.round((correctas / totalPreguntas) * 100);
+
+    const resultadoFinal = document.getElementById('resultadoFinal');
+    resultadoFinal.classList.add('visible');
+
+    document.getElementById('puntajeFinal').textContent = `${correctas}/${totalPreguntas}`;
+
+    let mensaje = '';
+    if (porcentaje === 100) mensaje = '🏆 ¡PERFECTO! Dominas la Teoría General del Acto Administrativo II.';
+    else if (porcentaje >= 90) mensaje = '🌟 ¡Excelente! Dominio sobresaliente.';
+    else if (porcentaje >= 75) mensaje = '✅ ¡Muy bien! Buen dominio.';
+    else if (porcentaje >= 60) mensaje = '📚 Aceptable. Repasa los temas donde fallaste.';
+    else if (porcentaje >= 40) mensaje = '📖 Necesitas reforzar varios conceptos.';
+    else mensaje = '🔍 Es necesario estudiar nuevamente todos los temas.';
+
+    document.getElementById('mensajeFinal').textContent = mensaje;
+
+    const temas = {
+      1: { nombre: 'T1: Incompetencia', total: 4, correctas: 0 },
+      2: { nombre: 'T2: Vicios Forma', total: 4, correctas: 0 },
+      3: { nombre: 'T3: Falsa Motivación', total: 4, correctas: 0 },
+      4: { nombre: 'T4: Desviación Poder', total: 4, correctas: 0 },
+      5: { nombre: 'T5: Violación Normas', total: 4, correctas: 0 },
+      6: { nombre: 'T6: Convalidación', total: 4, correctas: 0 },
+      7: { nombre: 'T7: Pérdida Fuerza', total: 4, correctas: 0 },
+      8: { nombre: 'T8: Decaimiento', total: 4, correctas: 0 },
+      9: { nombre: 'T9: Revocatoria II', total: 4, correctas: 0 },
+      10: { nombre: 'T10: Notificaciones', total: 4, correctas: 0 }
+    };
+
+    Object.values(respuestas).forEach(r => {
+      if (r.correcta) temas[r.tema].correctas++;
+    });
+
+    const desgloseHTML = Object.values(temas).map(t => {
+      const pct = Math.round((t.correctas / t.total) * 100);
+      return `
+        <div class="desglose-item">
+          <h4>${t.nombre}</h4>
+          <p>${t.correctas}/${t.total} (${pct}%)</p>
+          <div class="mini-bar">
+            <div class="mini-bar-fill" style="width: ${pct}%"></div>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    document.getElementById('desgloseTemas').innerHTML = desgloseHTML;
+    resultadoFinal.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  function reiniciarQuiz() {
+    if (!confirm('¿Reiniciar el quiz?')) return;
+
+    respuestas = {};
+
+    document.querySelectorAll('.opcion').forEach(o => o.classList.remove('correcta', 'incorrecta', 'disabled'));
+    document.querySelectorAll('.explicacion').forEach(e => e.classList.remove('visible'));
+    document.querySelectorAll('.pregunta').forEach(p => p.classList.remove('answered'));
+    document.getElementById('resultadoFinal').classList.remove('visible');
+
+    actualizarEstadisticas();
+    mostrarSeccion('s1', document.querySelector('.quiz-tab'));
+    document.getElementById('quiz').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  document.querySelectorAll('nav a').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+</script>
+
+</body>
+</html>
