@@ -1,0 +1,2353 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fundamentos del Constitucionalismo - Derecho Constitucional Colombiano</title>
+<style>
+  :root {
+    --primary: #831843;
+    --secondary: #f472b6;
+    --accent: #be185d;
+    --light: #fdf2f8;
+    --dark: #1a202c;
+    --success: #059669;
+    --warning: #d97706;
+    --danger: #dc2626;
+    --card-bg: #ffffff;
+    --shadow: 0 4px 15px rgba(0,0,0,0.08);
+    --shadow-hover: 0 8px 25px rgba(0,0,0,0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    background: var(--light);
+    color: var(--dark);
+    line-height: 1.7;
+  }
+
+  header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    color: white;
+    padding: 2rem 1rem;
+    text-align: center;
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::before {
+    content: '🏛️';
+    position: absolute;
+    font-size: 15rem;
+    opacity: 0.05;
+    top: -30px;
+    right: -30px;
+  }
+
+  header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: 2px;
+  }
+
+  header p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    font-style: italic;
+  }
+
+  nav {
+    background: var(--dark);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow);
+  }
+
+  nav ul {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0.5rem;
+  }
+
+  nav a {
+    color: var(--light);
+    text-decoration: none;
+    padding: 0.7rem 1rem;
+    margin: 0.2rem;
+    border-radius: 5px;
+    font-size: 0.75rem;
+    transition: all 0.3s;
+    display: block;
+  }
+
+  nav a:hover {
+    background: var(--secondary);
+    color: var(--dark);
+    transform: translateY(-2px);
+  }
+
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+  }
+
+  section {
+    background: var(--card-bg);
+    margin-bottom: 2.5rem;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    border-left: 5px solid var(--secondary);
+    scroll-margin-top: 80px;
+  }
+
+  section h2 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--secondary);
+  }
+
+  section h3 {
+    color: var(--accent);
+    font-size: 1.4rem;
+    margin: 1.5rem 0 0.8rem;
+  }
+
+  section h4 {
+    color: var(--primary);
+    font-size: 1.15rem;
+    margin: 1rem 0 0.5rem;
+  }
+
+  p { margin-bottom: 1rem; text-align: justify; }
+
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.2rem;
+    margin: 1.5rem 0;
+  }
+
+  .card {
+    background: linear-gradient(135deg, #fff 0%, #fdf2f8 100%);
+    border: 2px solid var(--secondary);
+    border-radius: 10px;
+    padding: 1.2rem;
+    transition: all 0.3s;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--primary);
+  }
+
+  .card .icon {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .card h4 {
+    text-align: center;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+  }
+
+  .card .detail {
+    display: none;
+    margin-top: 0.8rem;
+    padding-top: 0.8rem;
+    border-top: 1px dashed var(--secondary);
+    font-size: 0.95rem;
+  }
+
+  .card.active .detail { display: block; }
+
+  .card .hint {
+    text-align: center;
+    color: var(--accent);
+    font-size: 0.85rem;
+    font-style: italic;
+  }
+
+  .mapa-container {
+    background: #fdf2f8;
+    border: 2px dashed var(--secondary);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    overflow-x: auto;
+  }
+
+  .mapa {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 600px;
+  }
+
+  .nodo {
+    background: var(--primary);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+    font-weight: bold;
+    text-align: center;
+    min-width: 180px;
+    box-shadow: var(--shadow);
+  }
+
+  .nodo.central {
+    background: linear-gradient(135deg, var(--secondary), #f9a8d4);
+    color: var(--dark);
+    font-size: 1.2rem;
+    padding: 1rem 2rem;
+  }
+
+  .nodo.sub {
+    background: var(--accent);
+    font-size: 0.95rem;
+  }
+
+  .linea {
+    width: 3px;
+    height: 25px;
+    background: var(--secondary);
+  }
+
+  .linea-h {
+    height: 3px;
+    background: var(--secondary);
+    width: 80%;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .rama {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 1rem;
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  .rama-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    min-width: 140px;
+  }
+
+  .ejemplo {
+    background: #ecfdf5;
+    border-left: 4px solid var(--success);
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .ejemplo strong { color: var(--success); }
+
+  .alerta {
+    background: #fffbeb;
+    border-left: 4px solid var(--warning);
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .alerta strong { color: var(--warning); }
+
+  .cita {
+    background: #fdf2f8;
+    border-left: 4px solid var(--accent);
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+    color: var(--primary);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    font-size: 0.9rem;
+  }
+
+  th {
+    background: var(--primary);
+    color: white;
+    padding: 0.8rem;
+    text-align: left;
+  }
+
+  td {
+    padding: 0.8rem;
+    border-bottom: 1px solid #eee;
+  }
+
+  tr:nth-child(even) { background: #fdf2f8; }
+  tr:hover { background: #fce7f3; }
+
+  .quiz-container {
+    background: linear-gradient(135deg, #fdf2f8 0%, #fff 100%);
+    padding: 1.5rem;
+    border-radius: 10px;
+    border: 2px solid var(--accent);
+  }
+
+  .quiz-header {
+    background: var(--primary);
+    color: white;
+    padding: 1.2rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .quiz-header h3 {
+    color: white;
+    margin: 0 0 0.5rem 0;
+  }
+
+  .progress-bar {
+    background: rgba(255,255,255,0.2);
+    height: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+  }
+
+  .progress-fill {
+    background: var(--secondary);
+    height: 100%;
+    width: 0%;
+    transition: width 0.4s ease;
+  }
+
+  .quiz-stats {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .stat {
+    background: rgba(255,255,255,0.1);
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    font-size: 0.9rem;
+  }
+
+  .stat strong { color: var(--secondary); }
+
+  .quiz-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    padding: 0.5rem;
+    background: #fce7f3;
+    border-radius: 8px;
+  }
+
+  .quiz-tab {
+    background: white;
+    border: 2px solid var(--accent);
+    color: var(--accent);
+    padding: 0.5rem 0.8rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.75rem;
+    transition: all 0.3s;
+    flex: 1;
+    min-width: 80px;
+    text-align: center;
+  }
+
+  .quiz-tab:hover {
+    background: var(--accent);
+    color: white;
+  }
+
+  .quiz-tab.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+  }
+
+  .quiz-section {
+    display: none;
+  }
+
+  .quiz-section.active {
+    display: block;
+    animation: fadeIn 0.4s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .pregunta {
+    margin-bottom: 1.5rem;
+    padding: 1.2rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    border-left: 4px solid var(--accent);
+    transition: all 0.3s;
+  }
+
+  .pregunta.answered {
+    border-left-color: var(--secondary);
+  }
+
+  .pregunta-num {
+    display: inline-block;
+    background: var(--accent);
+    color: white;
+    padding: 0.2rem 0.7rem;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    margin-right: 0.5rem;
+  }
+
+  .pregunta-tipo {
+    display: inline-block;
+    background: var(--secondary);
+    color: var(--dark);
+    padding: 0.2rem 0.7rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    margin-left: 0.3rem;
+    font-weight: bold;
+  }
+
+  .pregunta p { 
+    font-weight: bold; 
+    color: var(--primary); 
+    margin: 0.8rem 0;
+    text-align: left;
+  }
+
+  .opciones { display: flex; flex-direction: column; gap: 0.5rem; }
+
+  .opcion {
+    padding: 0.7rem 1rem;
+    background: #fdf2f8;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+  }
+
+  .opcion:hover:not(.disabled) {
+    border-color: var(--accent);
+    background: #fce7f3;
+  }
+
+  .opcion.disabled {
+    cursor: not-allowed;
+    opacity: 0.85;
+  }
+
+  .opcion.correcta {
+    background: #d1fae5;
+    border-color: var(--success);
+    color: var(--success);
+    font-weight: bold;
+  }
+
+  .opcion.incorrecta {
+    background: #fee2e2;
+    border-color: var(--danger);
+    color: var(--danger);
+  }
+
+  .opcion.correcta::after {
+    content: ' ✓';
+    font-weight: bold;
+  }
+
+  .opcion.incorrecta::after {
+    content: ' ✗';
+    font-weight: bold;
+  }
+
+  .explicacion {
+    margin-top: 0.8rem;
+    padding: 0.8rem;
+    background: #fdf2f8;
+    border-left: 3px solid var(--accent);
+    border-radius: 0 6px 6px 0;
+    font-size: 0.9rem;
+    display: none;
+    font-style: italic;
+  }
+
+  .explicacion.visible {
+    display: block;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .resultado-final {
+    margin-top: 2rem;
+    padding: 2rem;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    color: white;
+    border-radius: 12px;
+    text-align: center;
+    display: none;
+  }
+
+  .resultado-final.visible {
+    display: block;
+    animation: fadeIn 0.5s ease;
+  }
+
+  .resultado-final h3 {
+    color: var(--secondary);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .puntaje-final {
+    font-size: 3rem;
+    font-weight: bold;
+    color: var(--secondary);
+    margin: 1rem 0;
+  }
+
+  .desglose-temas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+    text-align: left;
+  }
+
+  .desglose-item {
+    background: rgba(255,255,255,0.1);
+    padding: 1rem;
+    border-radius: 8px;
+  }
+
+  .desglose-item h4 {
+    color: var(--secondary);
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+  }
+
+  .mini-bar {
+    background: rgba(255,255,255,0.2);
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+  }
+
+  .mini-bar-fill {
+    background: var(--secondary);
+    height: 100%;
+    transition: width 0.6s ease;
+  }
+
+  button {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 1rem;
+    transition: all 0.3s;
+  }
+
+  button:hover {
+    background: var(--secondary);
+    color: var(--dark);
+    transform: translateY(-2px);
+  }
+
+  .btn-reset {
+    background: var(--danger);
+    margin-left: 0.5rem;
+  }
+
+  .btn-reset:hover {
+    background: #991b1b;
+    color: white;
+  }
+
+  .acordeon-item {
+    margin-bottom: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .acordeon-header {
+    background: var(--accent);
+    color: white;
+    padding: 1rem;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.3s;
+  }
+
+  .acordeon-header:hover { background: var(--primary); }
+
+  .acordeon-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    background: white;
+  }
+
+  .acordeon-content.active {
+    max-height: 2000px;
+    padding: 1rem;
+  }
+
+  .flecha { transition: transform 0.3s; }
+  .acordeon-header.active .flecha { transform: rotate(180deg); }
+
+  footer {
+    background: var(--dark);
+    color: var(--light);
+    text-align: center;
+    padding: 2rem 1rem;
+    margin-top: 2rem;
+  }
+
+  footer p { margin-bottom: 0.5rem; }
+
+  @media (max-width: 768px) {
+    header h1 { font-size: 1.8rem; }
+    section { padding: 1.2rem; }
+    section h2 { font-size: 1.5rem; }
+    nav a { font-size: 0.65rem; padding: 0.4rem 0.5rem; }
+    .quiz-tab { font-size: 0.65rem; padding: 0.3rem 0.4rem; }
+    table { font-size: 0.8rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🏛️ Fundamentos del Constitucionalismo</h1>
+  <p>Derecho Constitucional Colombiano · Guía Didáctica Interactiva 1</p>
+</header>
+
+<nav>
+  <ul>
+    <li><a href="#tema1">1. Origen</a></li>
+    <li><a href="#tema2">2. Carta Magna</a></li>
+    <li><a href="#tema3">3. Inglaterra</a></li>
+    <li><a href="#tema4">4. América/Francia</a></li>
+    <li><a href="#tema5">5. Colombia</a></li>
+    <li><a href="#tema6">6. Concepto</a></li>
+    <li><a href="#tema7">7. Estructura</a></li>
+    <li><a href="#tema8">8. Fuentes</a></li>
+    <li><a href="#tema9">9. Reforma</a></li>
+    <li><a href="#tema10">10. Jurisprudencia</a></li>
+    <li><a href="#quiz">Quiz (40)</a></li>
+  </ul>
+</nav>
+
+<main>
+
+  <section>
+    <h2>📚 Introducción</h2>
+    <p>Bienvenido a esta guía interactiva sobre los <strong>Fundamentos del Derecho Constitucional</strong>. Aquí estudiarás la historia del constitucionalismo, desde la Carta Magna de 1215 hasta la Constitución de 1991, pasando por la Revolución Francesa, las generaciones de derechos, y la teoría de la Constitución y sus fuentes en el ordenamiento colombiano.</p>
+    <div class="alerta">
+      <strong>💡 Cómo usar esta guía:</strong> Haz clic en las tarjetas para ver detalles, despliega los acordeones para información adicional y prueba tus conocimientos con el quiz de 40 preguntas al final.
+    </div>
+  </section>
+
+  <!-- TEMA 1: ORIGEN DEL DERECHO CONSTITUCIONAL -->
+  <section id="tema1">
+    <h2>1. Origen del Derecho Constitucional</h2>
+    <p>El Derecho Constitucional surge como respuesta de la sociedad occidental y la burguesía frente al poder político absoluto de la monarquía.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">CONSTITUCIONALISMO</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Respuesta burguesa</div>
+            <div class="linea"></div>
+            <div class="nodo sub">vs. Absolutismo</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Límites al poder</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Estado de Derecho</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Derechos individuales</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Garantías</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Contexto Histórico</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">👑</div>
+        <h4>Absolutismo Monárquico</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Antecedente histórico: el monarca concentraba todo el poder sin límites jurídicos.</p>
+          <p>La burguesía emergente buscó limitar este poder mediante normas superiores.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🏰</div>
+        <h4>Sociedad Feudal</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Relaciones de vasallaje entre señor feudal y vasallos, con derechos y obligaciones recíprocas.</p>
+          <p>De aquí surge la idea de que el poder tiene límites contractuales.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📜</div>
+        <h4>Iluminismo</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Movimiento filosófico del siglo XVIII que fundamenta el constitucionalismo moderno.</p>
+          <p>Ideas de Rousseau, Montesquieu, Locke sobre soberanía popular y separación de poderes.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="cita">
+      <strong>"El Derecho Constitucional nace como respuesta de la sociedad occidental y la burguesía frente al poder político absoluto, buscando limitar el ejercicio del poder público mediante normas superiores."</strong>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Antes del constitucionalismo, el rey podía dictar normas sin límite alguno. Con el surgimiento del constitucionalismo, el poder del monarca queda sometido a una norma superior (Constitución) que garantiza derechos fundamentales a los ciudadanos.
+    </div>
+  </section>
+
+  <!-- TEMA 2: CARTA MAGNA -->
+  <section id="tema2">
+    <h2>2. La Carta Magna de 1215</h2>
+    <p>La Carta Magna es considerada el primer hito del constitucionalismo, al establecer la naturaleza contractual del poder y los derechos individuales frente a la monarquía.</p>
+
+    <h3>📋 Características Fundamentales</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📜</div>
+        <h4>Naturaleza Contractual</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>La Carta Magna establece una relación <strong>feudal contractual</strong> entre el rey Juan Sin Tierra y los barones ingleses.</p>
+          <p>El poder del monarca queda sujeto a obligaciones recíprocas.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🛡️</div>
+        <h4>Derechos Individuales</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Reconoce derechos individuales frente a la monarquía, como el derecho al debido proceso y a no ser juzgado sino por sus pares.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Límites al Poder</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Establece que el rey no puede imponer impuestos sin el consentimiento del <em>Concilium</em> (consejo de barones).</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>🔄 Evolución del Concilium Supremum</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Etapa</th>
+          <th>Nombre</th>
+          <th>Características</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Inicial</strong></td>
+          <td>Mágnum Concilium</td>
+          <td>Gran consejo de barones asesores del rey</td>
+        </tr>
+        <tr>
+          <td><strong>Intermedia</strong></td>
+          <td>Comun Concilium</td>
+          <td>Consejo común con representación más amplia</td>
+        </tr>
+        <tr>
+          <td><strong>Final</strong></td>
+          <td>Parlamento Inglés</td>
+          <td>Institución legislativa bicameral (Lores y Comunes)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> La Carta Magna de 1215 es como un "contrato" entre el rey y los barones: si el rey no respeta los derechos de los barones, estos pueden rebelarse. De aquí nace la idea de que el poder político tiene límites jurídicos.
+    </div>
+  </section>
+
+  <!-- TEMA 3: DOCUMENTOS CONSTITUCIONALES INGLESES -->
+  <section id="tema3">
+    <h2>3. Documentos Constitucionales Ingleses</h2>
+    <p>Inglaterra produjo una serie de documentos fundamentales que consolidaron el constitucionalismo moderno.</p>
+
+    <h3>📋 Los Cuatro Documentos Clave</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📝</div>
+        <h4>Petition of Rights (1628)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p><strong>Ley de Petición de Derechos.</strong></p>
+          <p>Limita el poder del rey Carlos I. Prohíbe impuestos sin consentimiento del Parlamento y el alojamiento forzoso de soldados.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🏛️</div>
+        <h4>Instrument of Government (1653)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p><strong>Ley de Instrumento de Gobierno.</strong></p>
+          <p>Primera "constitución" escrita de la historia. Establece el gobierno de Oliver Cromwell como Lord Protector.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🔓</div>
+        <h4>Habeas Corpus Act (1679)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p><strong>Ley de Hábeas Corpus.</strong></p>
+          <p>Garantiza la libertad personal frente a detenciones arbitrarias. Establece el derecho a ser presentado ante un juez en plazo razonable.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Bill of Rights (1689)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p><strong>Declaración de Derechos.</strong></p>
+          <p>Consolida la supremacía del Parlamento sobre el rey. Establece elecciones libres, libertad de expresión parlamentaria y prohibición de penas crueles.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>📊 Línea de Tiempo del Constitucionalismo Inglés</h3>
+    <div class="alerta">
+      <strong>📜 Cronología:</strong>
+      <ol style="margin-top: 0.5rem; padding-left: 1.5rem;">
+        <li><strong>1215:</strong> Carta Magna (límites al poder real)</li>
+        <li><strong>1628:</strong> Petition of Rights (limitación de impuestos)</li>
+        <li><strong>1653:</strong> Instrument of Government (primera constitución escrita)</li>
+        <li><strong>1679:</strong> Habeas Corpus Act (libertad personal)</li>
+        <li><strong>1689:</strong> Bill of Rights (supremacía parlamentaria)</li>
+      </ol>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> El Hábeas Corpus Act de 1679 es el antecesor directo de la acción de tutela de la libertad personal en Colombia. Si alguien es detenido ilegalmente, puede invocar el hábeas corpus para que un juez ordene su liberación inmediata.
+    </div>
+  </section>
+
+  <!-- TEMA 4: AMÉRICA Y FRANCIA -->
+  <section id="tema4">
+    <h2>4. Constitucionalismo Americano y Revolución Francesa</h2>
+    <p>Las revoluciones americana y francesa consolidaron el constitucionalismo moderno con documentos de alcance universal.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">CONSTITUCIONALISMO MODERNO</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Virginia (1776)</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Primera declaración</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Filadelfia (1787)</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Primera constitución</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Francia (1789)</div>
+            <div class="linea"></div>
+            <div class="nodo sub">DDHC universal</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>🇺🇸 Antecedentes Americanos</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📜</div>
+        <h4>Declaración de Virginia (1776)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Primera declaración de derechos de la era moderna.</p>
+          <p>Redactada por George Mason, proclama que "todos los hombres son por naturaleza libres e independientes".</p>
+          <p>Influyó directamente en la Declaración de Independencia de 1776 y en la DDHC francesa.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🏛️</div>
+        <h4>Constitución de Filadelfia (1787)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Primera constitución escrita de la historia moderna.</p>
+          <p>Establece la estructura federal, la separación de poderes y el sistema de checks and balances.</p>
+          <p>Incluye las 10 enmiendas (Bill of Rights) de 1791 con derechos fundamentales.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>🇫🇷 La Revolución Francesa (1789)</h3>
+    <div class="alerta">
+      <strong> Declaración de los Derechos del Hombre y del Ciudadano:</strong>
+      <ul>
+        <li><strong>Art. 1:</strong> "Los hombres nacen y permanecen libres e iguales en derechos"</li>
+        <li><strong>Art. 2:</strong> Derechos naturales e imprescriptibles: libertad, propiedad, seguridad y resistencia a la opresión</li>
+        <li><strong>Art. 6:</strong> La ley es expresión de la voluntad general</li>
+        <li><strong>Art. 16:</strong> "Toda sociedad en la cual no esté establecida la garantía de los derechos ni determinada la separación de poderes, no tiene Constitución"</li>
+      </ul>
+    </div>
+
+    <h3>🌍 Evolución de las Generaciones de Derechos</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Generación</th>
+          <th>Tipo de Derechos</th>
+          <th>Ejemplos</th>
+          <th>Origen Histórico</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>1ª Generación</strong></td>
+          <td>Civiles y políticos</td>
+          <td>Vida, libertad, propiedad, voto</td>
+          <td>Revolución Francesa (1789)</td>
+        </tr>
+        <tr>
+          <td><strong>2ª Generación</strong></td>
+          <td>Sociales y económicos</td>
+          <td>Trabajo, salud, educación, vivienda</td>
+          <td>Constituciones de Querétaro (1917) y Weimar (1919)</td>
+        </tr>
+        <tr>
+          <td><strong>3ª Generación</strong></td>
+          <td>Colectivos y del ambiente</td>
+          <td>Paz, ambiente sano, desarrollo</td>
+          <td>Declaración Universal DDHH (1948)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>🏭 Nacimiento del Constitucionalismo Social</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🇲🇽</div>
+        <h4>Constitución de Querétaro (1917)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Primera constitución del mundo en incluir <strong>derechos sociales</strong>.</p>
+          <p>Incorporó derechos laborales, agrarios y educativos.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🇩🇪</div>
+        <h4>Constitución de Weimar (1919)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Consolida el constitucionalismo social en Europa.</p>
+          <p>Establece el Estado Social de Derecho con deberes positivos del Estado.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> El derecho a la vida y la la libertad son derechos de 1ª generación (Revolución Francesa). Elright a la salud y la educación son de 2ª generación (Constit, 1917). El derecho a un ambiente sano es de 3ª generación (DUDH, 1948).
+    </div>
+  </section>
+
+  <!-- TEMA 5: CONSTITUCIONALISMO COLOMBIANO -->
+  <section id="tema5">
+    <h2>5. Contexto Histórico Colombiano</h2>
+    <p>Colombia transitó de la Constitución de 1886 (centralista y confesional) a la Constitución de 1991 (pluralista, descentralizada y garantista) mediante un proceso constituyente único.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">CONSTITUCIONALISMO COLOMBIANO</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Constitución 1886</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Centralista</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Plebiscito 1957</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Barrera reformatoria</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">7ª Papeleta 1990</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Movimiento estudiantil</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">ANC 1991</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Nueva Constitución</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Barreras Normativas para Reformar la Constitución de 1886</h3>
+    <div class="alerta">
+      <strong>📌 Art. 218 de la Constitución de 1886:</strong>
+      <p>La Constitución solo podía ser reformada por <strong>Acto Legislativo</strong> discutido y aprobado por el Congreso, lo que hacía muy difícil su reforma.</p>
+      <p>Esta rigidez fue una de las razones que motivó el proceso constituyente de 1991.</p>
+    </div>
+
+    <h3>🗳️ El Período Pre-constituyente</h3>
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>🗳️ Séptima Papeleta (1990)</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Movimiento estudiantil que surgió tras el asesinato de Luis Carlos Galán.</p>
+        <p>Recogió más de 30.000 firmas para solicitar una papeleta adicional en las elecciones presidenciales del 27 de mayo de 1990.</p>
+        <p>El 89% de los votantes (5.095.631 ciudadanos) se pronunció a favor de convocar una Asamblea Constituyente.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📜 Decreto 927 de 1990</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Decreto de estado de sitio expedido el 3 de mayo de 1990.</p>
+        <p>Ordenó contabilizar los votos sobre la integración de una Asamblea Constitucional en las elecciones presidenciales.</p>
+        <p>La Corte Suprema de Justicia lo declaró constitucional el 24 de mayo de 1990.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📜 Decreto 1926 de 1990</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Permitió que los ciudadanos convocaran y eligieran una Asamblea Constitucional en un mismo acto electoral.</p>
+        <p>La Corte Suprema declaró ajustado a la Constitución casi la totalidad del decreto, excepto la parte que limitaba el temario de la Asamblea.</p>
+        <p>La Corte dijo que la Asamblea solo podía tener las limitaciones que le pusiera el mismo pueblo.</p>
+      </div>
+    </div>
+
+    <h3>🏛️ La Asamblea Nacional Constituyente (1991)</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🗳️</div>
+        <h4>Resultados Electorales</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Elecciones del 9 de diciembre de 1990.</p>
+          <p>Participación electoral: solo 26%.</p>
+          <p>Distribución: 31.22% Liberal, 26.75% M-19, 15.48% MSN, 6.38% Conservador, entre otros.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📅</div>
+        <h4>Sesiones</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Se instaló formalmente el <strong>5 de febrero de 1991</strong>.</p>
+          <p>Cesó sus funciones el <strong>4 de julio de 1991</strong> (fecha de promulgación).</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>🎯 Carácter de la Constitución de 1991</h3>
+    <div class="alerta">
+      <strong>📌 Naturaleza del texto constitucional:</strong>
+      <ul>
+        <li><strong>Consensuada:</strong> Fruto del acuerdo entre diversas fuerzas políticas y sociales</li>
+        <li><strong>Ecléctica:</strong> Combina elementos de distintas tradiciones constitucionales</li>
+        <li><strong>Incluyente:</strong> Reconoce la diversidad étnica, cultural y religiosa del país</li>
+        <li><strong>Garantista:</strong> Amplía el catálogo de derechos fundamentales</li>
+        <li><strong>Descentralizadora:</strong> Fortalece la autonomía territorial</li>
+      </ul>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> La Constitución de 1991 es producto de un proceso constituyente único en la historia de Colombia. A diferencia de otras constituciones impuestas por gobiernos de turno, esta fue elaborada por una Asamblea Nacional Constituyente elegida democráticamente, con participación de guerrillas desmovilizadas (M-19), indígenas, religiosos y diversos sectores sociales.
+    </div>
+  </section>
+
+  <!-- TEMA 6: CONCEPTO DE CONSTITUCIÓN -->
+  <section id="tema6">
+    <h2>6. Concepto y Definición de Constitución Política</h2>
+    <p>La Constitución Política es la norma fundamental que establece los límites al ejercicio del poder público y garantiza los derechos fundamentales.</p>
+
+    <h3>📋 Definiciones Doctrinales</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📜</div>
+        <h4>Norma de Normas</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>La Constitución es la <strong>norma suprema</strong> del ordenamiento jurídico.</p>
+          <p>Todas las demás normas deben ajustarse a ella (Art. 4° C.P.).</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Límite al Poder</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Establece los <strong>límites al ejercicio del poder público</strong>.</p>
+          <p>Define la estructura del Estado y la distribución de competencias.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🛡️</div>
+        <h4>Garantía de Derechos</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Contiene el <strong>catálogo de derechos fundamentales</strong>.</p>
+          <p>Establece los mecanismos para su protección (tutela, hábeas corpus, etc.).</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>✅ Requisitos de Existencia Constitucional</h3>
+    <div class="alerta">
+      <strong>📌 Según el Art. 16 de la Declaración Universal de los Derechos Humanos:</strong>
+      <p>Toda Constitución debe garantizar dos elementos esenciales:</p>
+      <ol style="margin-top: 0.5rem; padding-left: 1.5rem;">
+        <li><strong>Garantía de derechos:</strong> Reconocimiento y protección de los derechos fundamentales</li>
+        <li><strong>Separación de funciones:</strong> Distribución del poder público entre diferentes órganos</li>
+      </ol>
+      <p>Si falta alguno de estos elementos, no puede hablarse propiamente de Constitución.</p>
+    </div>
+
+    <div class="cita">
+      <strong>"Toda sociedad en la cual no esté establecida la garantía de los derechos ni determinada la separación de poderes, no tiene Constitución."</strong> — Art. 16 DDHC (1789)
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Un país que tenga un texto llamado "Constitución" pero que no garantice derechos fundamentales ni separe los poderes (por ejemplo, un régimen totalitario donde el líder concentra todo el poder), NO es una Constitución en sentido material.
+    </div>
+  </section>
+
+  <!-- TEMA 7: ESTRUCTURA CONSTITUCIONAL -->
+  <section id="tema7">
+    <h2>7. Contenido y Estructura Constitucional</h2>
+    <p>La Constitución Política de Colombia tiene una estructura tripartita: Preámbulo, Parte Dogmática y Parte Orgánica.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">ESTRUCTURA CONSTITUCIONAL</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Preámbulo</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Valores y fines</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Parte Dogmática</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Derechos</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Parte Orgánica</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Estructura del Estado</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Las Tres Partes de la Constitución</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Parte</th>
+          <th>Contenido</th>
+          <th>Artículos</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Preámbulo</strong></td>
+          <p>Declara los valores, principios y fines del ordenamiento jurídico. Tiene poder vinculante.</p>
+          <td>Preámbulo inicial</td>
+        </tr>
+        <tr>
+          <td><strong>Parte Dogmática</strong></td>
+          <td>Contiene los principios fundamentales (Título I) y los derechos, deberes y garantías (Título II).</td>
+          <td>Arts. 1° a 115 aprox.</td>
+        </tr>
+        <tr>
+          <td><strong>Parte Orgánica</strong></td>
+          <td>Regula la estructura del Estado: ramas del poder público, órganos de control, entidades territoriales.</td>
+          <td>Arts. 116 en adelante</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>📝 Cláusulas Neutras y de Reforma</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📋</div>
+        <h4>Cláusulas Neutras</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Normas que no tienen contenido valorativo ni programático.</p>
+          <p>Ejemplo: disposiciones sobre vigencia, derrogatorias, transitorias.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🔄</div>
+        <h4>Cláusulas de Reforma</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Normas que establecen los mecanismos para modificar la Constitución.</p>
+          <p>En Colombia: Acto Legislativo, Asamblea Constituyente y Referendo.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> El Título I de la Constitución (Arts. 1° a 9°) hace parte de la Parte Dogmática, pues contiene los principios fundamentales del Estado colombiano (Estado Social de Derecho, soberanía popular, forma de gobierno, etc.). El Título VIII (Rama Legislativa) hace parte de la Parte Orgánica, pues regula la estructura del Congreso.
+    </div>
+  </section>
+
+  <!-- TEMA 8: FUENTES DEL DERECHO CONSTITUCIONAL -->
+  <section id="tema8">
+    <h2>8. Sistema de Fuentes del Derecho Constitucional</h2>
+    <p>El Derecho Constitucional colombiano tiene un sistema jerárquico de fuentes que garantizan la supremacía de la Constitución.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">FUENTES DEL DERECHO CONSTITUCIONAL</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Constitución</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Norma de normas</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Tratados DDHH</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Bloque constitucional</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Jurisprudencia</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Corte/Consejo de Estado</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Leyes Estatutarias/Orgánicas</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📊 Jerarquía Normativa en Colombia</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Nivel</th>
+          <th>Fuente</th>
+          <th>Características</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>1°</strong></td>
+          <td>Constitución Política</td>
+          <td>Norma de normas. Fuente primaria y obligatoria (Art. 4° C.P.)</td>
+        </tr>
+        <tr>
+          <td><strong>2°</strong></td>
+          <td>Tratados Internacionales de DDHH</td>
+          <td>Hacen parte del bloque de constitucionalidad (Art. 93 C.P.)</td>
+        </tr>
+        <tr>
+          <td><strong>3°</strong></td>
+          <td>Jurisprudencia Constitucional</td>
+          <td>Decisiones de la Corte Constitucional y del Consejo de Estado</td>
+        </tr>
+        <tr>
+          <td><strong>4°</strong></td>
+          <td>Jurisprudencia Interamericana</td>
+          <td>Corte IDH con carácter vinculante (Sentencia C-370/2006)</td>
+        </tr>
+        <tr>
+          <td><strong>5°</strong></td>
+          <td>Leyes Estatutarias</td>
+          <td>Regulan el alcance de los derechos fundamentales</td>
+        </tr>
+        <tr>
+          <td><strong>6°</strong></td>
+          <td>Leyes Orgánicas</td>
+          <td>Parámetro normativo superior para leyes ordinarias</td>
+        </tr>
+        <tr>
+          <td><strong>7°</strong></td>
+          <td>Leyes Ordinarias</td>
+          <td>Regulación general de materias</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>🏛️ La Constitución como Norma de Normas</h3>
+    <div class="cita">
+      <strong>"La Constitución es norma de normas. En todo caso de incompatibilidad entre la Constitución y la ley u otra norma jurídica, se aplican las disposiciones constitucionales."</strong> — Art. 4° C.P.
+    </div>
+
+    <h3>📋 Las Leyes Estatutarias</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📜</div>
+        <h4>Concepto</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Leyes que regulan el <strong>alcance de los derechos fundamentales</strong>.</p>
+          <p>Requieren mayoría absoluta para su aprobación.</p>
+          <p>Sujetas a revisión previa de constitucionalidad por la Corte.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📝</div>
+        <h4>Ejemplos</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <ul>
+            <li>Ley Estatutaria de Salud (Ley 1751 de 2015)</li>
+            <li>Ley Estatutaria de Habeas Corpus (Ley 1095 de 2006)</li>
+            <li>Ley Estatutaria de Mecanismos de Participación (Ley 134 de 1994)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Las Leyes Orgánicas</h3>
+    <div class="alerta">
+      <strong>📌 Características:</strong>
+      <ul>
+        <li>Son <strong>parámetro normativo superior</strong> para la expedición de leyes ordinarias</li>
+        <li>Regulan materias específicas señaladas en la Constitución</li>
+        <li>Requieren <strong>mayoría absoluta</strong> para su aprobación</li>
+        <li>Ejemplos: Ley Orgánica del Presupuesto, Ley Orgánica de Ordenamiento Territorial</li>
+      </ul>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si una ley ordinaria contradice una ley estatutaria de derechos fundamentales, prevalece la ley estatutaria. Si una ley ordinaria contradice una ley orgánica, prevalece la ley orgánica. Y si cualquiera de ellas contradice la Constitución, prevalece la Constitución (Art. 4° C.P.).
+    </div>
+  </section>
+
+  <!-- TEMA 9: REFORMA CONSTITUCIONAL -->
+  <section id="tema9">
+    <h2>9. Mecanismos de Reforma Constitucional</h2>
+    <p>La Constitución de 1991 puede ser reformada por tres mecanismos distintos, cada uno con procedimientos y mayorías específicas.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">REFORMA CONSTITUCIONAL</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Acto Legislativo</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Por el Congreso</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Asamblea Constituyente</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Por el pueblo</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Referendo</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Votación popular</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Los Tres Mecanismos de Reforma</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Mecanismo</th>
+          <th>Procedimiento</th>
+          <th>Mayoría Requerida</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Acto Legislativo</strong></td>
+          <td>Aprobado por el Congreso en dos períodos ordinarios sucesivos</td>
+          <td>Mayoría absoluta (2/3 en primera vuelta si es reforma total)</td>
+        </tr>
+        <tr>
+          <td><strong>Asamblea Constituyente</strong></td>
+          <td>Convocada por el pueblo mediante consulta popular aprobada por mayoría simple</td>
+          <td>Decisión de los constituyentes elegidos democráticamente</td>
+        </tr>
+        <tr>
+          <td><strong>Referendo</strong></td>
+          <td>Sometido a votación popular directa</td>
+          <td>Aprobación de la mayoría de los votantes (mínimo 1/4 del censo electoral)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>⚖️ Control de Constitucionalidad de las Reformas</h3>
+    <div class="alerta">
+      <strong>📌 Competencia de la Corte Constitucional:</strong>
+      <ul>
+        <li>Las reformas aprobadas por el <strong>Congreso</strong> (Actos Legislativos) están sujetas a control automático de constitucionalidad por la Corte</li>
+        <li>Las reformas por <strong>Asamblea Constituyente o Referendo</strong> NO están sujetas a control de constitucionalidad posterior, pues son expresión directa de la soberanía popular</li>
+      </ul>
+    </div>
+
+    <h3>🔍 Límites a la Reforma Constitucional</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🚫</div>
+        <h4>Límites Materiales</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>No se pueden reformar los <strong>derechos fundamentales</strong> que reduzcan su protección (Art. 377 C.P.)</p>
+          <p>Tampoco el Art. 4° (supremacía constitucional) ni el Art. 214 (estado de excepción).</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Sustitución de la Constitución</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>La Corte Constitucional ha establecido que las reformas no pueden <strong>sustituir la Constitución</strong> (doctrina de la sustitución).</p>
+          <p>Si una reforma cambia elementos esenciales de la Constitución, debe hacerse por Asamblea Constituyente.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Para reformar el Art. 219 de la Constitución (sobre organización electoral), el Congreso debe aprobar un Acto Legislativo en dos períodos ordinarios sucesivos, con mayoría absoluta. Una vez aprobado, la Corte Constitucional lo revisa automáticamente para verificar que no viole los límites materiales de la reforma.
+    </div>
+  </section>
+
+  <!-- TEMA 10: JURISPRUDENCIA CONSTITUCIONAL -->
+  <section id="tema10">
+    <h2>10. Jurisprudencia Constitucional</h2>
+    <p>La jurisprudencia es una fuente fundamental del Derecho Constitucional, especialmente las decisiones de la Corte Constitucional y la Corte Interamericana de Derechos Humanos.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">JURISPRUDENCIA CONSTITUCIONAL</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Corte Constitucional</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Consejo de Estado</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Corte IDH</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>🏛️ Decisiones de la Corte Constitucional</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Sentencias de Constitucionalidad</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Deciden sobre la exequibilidad o inexequibilidad de leyes y actos reformatorios.</p>
+          <p>Hacen tránsito a cosa juzgada constitucional.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🛡️</div>
+        <h4>Sentencias de Tutela</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Protegen derechos fundamentales mediante revisión de fallos de tutela.</p>
+          <p>Crean jurisprudencia constitucional aplicable a casos similares.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📋</div>
+        <h4>Autos y Sentencias de Unificación</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Unifican la jurisprudencia sobre materias específicas.</p>
+          <p>Obligatorias para todos los jueces y autoridades del país.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>🌎 Jurisprudencia de la Corte Interamericana de DDHH</h3>
+    <div class="alerta">
+      <strong>📌 Carácter Vinculante (Sentencia C-370 de 2006):</strong>
+      <p>La Corte Constitucional estableció que las decisiones de la <strong>Corte Interamericana de Derechos Humanos</strong> tienen carácter vinculante para Colombia.</p>
+      <p>Esto significa que los jueces nacionales deben aplicar los criterios de la Corte IDH al interpretar y proteger los derechos humanos.</p>
+    </div>
+
+    <h3>📊 Consejo de Estado como Fuente</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🏛️</div>
+        <h4>Consejo de Estado</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Máximo tribunal de lo contencioso-administrativo.</p>
+          <p>Sus decisiones sobre constitucionalidad de decretos y actos administrativos son fuente del Derecho Constitucional.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>🔍 Diferencia entre Jurisprudencia Nacional e Interamericana</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Aspecto</th>
+          <th>Corte Constitucional</th>
+          <th>Corte IDH</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Ámbito</strong></td>
+          <td>Nacional (Colombia)</td>
+          <td
+          <td>Regional (América)</td>
+        </tr>
+        <tr>
+          <td><strong>Competencia</strong></td>
+          <td>Control constitucional de leyes</td>
+          <td>Interpretación de Convención Americana</td>
+        </tr>
+        <tr>
+          <td><strong>Efecto</strong></td>
+          <td>Cosa juzgada constitucional</td>
+          <td>Vinculante para Colombia (C-370/2006)</td>
+        </tr>
+        <tr>
+          <td><strong>Ejemplo</strong></td>
+          <td>Sentencia C-355/2006 (despenalización aborto)</td>
+          <td>Caso Alvarado vs. Colombia</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Cuando un juez colombiano debe decidir sobre el derecho a la consulta previa de comunidades indígenas, no solo aplica la Constitución y las leyes nacionales, sino también la jurisprudencia de la Corte IDH sobre el tema (como el Caso Saramaka vs. Surinam), que es vinculante para Colombia.
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz">
+    <h2>🎯 Quiz Completo - 40 Preguntas</h2>
+    <p>Pon a prueba tus conocimientos sobre los Fundamentos del Constitucionalismo.</p>
+
+    <div class="quiz-container">
+      <div class="quiz-header">
+        <h3>📊 Tu Progreso</h3>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="quiz-stats">
+          <div class="stat">Respondidas: <strong id="respondidas">0</strong>/40</div>
+          <div class="stat">Correctas: <strong id="correctas">0</strong></div>
+          <div class="stat">Incorrectas: <strong id="incorrectas">0</strong></div>
+          <div class="stat">Porcentaje: <strong id="porcentaje">0</strong>%</div>
+        </div>
+      </div>
+
+      <div class="quiz-tabs">
+        <div class="quiz-tab active" onclick="mostrarSeccion('s1', this)">T1 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s2', this)">T2 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s3', this)">T3 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s4', this)">T4 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s5', this)">T5 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s6', this)">T6 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s7', this)">T7 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s8', this)">T8 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s9', this)">T9 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s10', this)">T10 (4)</div>
+      </div>
+
+      <!-- SECCIÓN 1: ORIGEN -->
+      <div class="quiz-section active" id="s1">
+        <div class="pregunta" data-correcta="1" data-tema="1">
+          <span class="pregunta-num">1</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El Derecho Constitucional surge como respuesta de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 1)">a) La monarquía frente al pueblo</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">b) La sociedad occidental y la burguesía frente al poder político absoluto</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">c) El clero frente al Estado</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">d) Los militares frente a los civiles</div>
+          </div>
+          <div class="explicacion">El Derecho Constitucional nace como respuesta de la sociedad occidental y la burguesía frente al poder político absoluto de la monarquía.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="1">
+          <span class="pregunta-num">2</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El principal objetivo del constitucionalismo moderno es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 2)">a) Limitar el ejercicio del poder público</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">b) Concentrar el poder en una sola persona</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">c) Eliminar los derechos individuales</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">d) Fortalecer el absolutismo monárquico</div>
+          </div>
+          <div class="explicacion">El constitucionalismo moderno busca limitar el ejercicio del poder público mediante normas superiores que garanticen derechos fundamentales.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="1">
+          <span class="pregunta-num">3</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El movimiento filosófico que fundamenta el constitucionalismo es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 3)">a) El positivismo</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">b) El marxismo</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">c) El iluminismo</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">d) El existencialismo</div>
+          </div>
+          <div class="explicacion">El iluminismo (siglo XVIII) con pensadores como Rousseau, Montesquieu y Locke fundamenta el constitucionalismo moderno.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="1">
+          <span class="pregunta-num">4</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La idea de que el poder político tiene límites jurídicos proviene de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 4)">a) El absolutismo</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">b) El feudalismo</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">c) El socialismo</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">d) La naturaleza contractual del poder en la sociedad feudal</div>
+          </div>
+          <div class="explicacion">La idea de límites al poder proviene de la naturaleza contractual del poder en la sociedad feudal, donde el señor y los vasallos tenían derechos y obligaciones recíprocas.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 2: CARTA MAGNA -->
+      <div class="quiz-section" id="s2">
+        <div class="pregunta" data-correcta="1" data-tema="2">
+          <span class="pregunta-num">5</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La Carta Magna de 1215 se firmó entre:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 5)">a) El Papa y el Emperador</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">b) El rey Juan Sin Tierra y los barones ingleses</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">c) Los colonos americanos y la corona británica</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">d) El pueblo francés y la nobleza</div>
+          </div>
+          <div class="explicacion">La Carta Magna de 1215 fue firmada entre el rey Juan Sin Tierra y los barones ingleses, estableciendo límites al poder real.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="2">
+          <span class="pregunta-num">6</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La Carta Magna estableció una relación de tipo:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 6)">a) Contractual feudal entre el rey y los barones</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">b) Absolutista sin límites</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">c) Democrática con elecciones</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">d) Teocrática con el Papa</div>
+          </div>
+          <div class="explicacion">La Carta Magna estableció una relación contractual feudal entre el rey y los barones, con derechos y obligaciones recíprocas.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="2">
+          <span class="pregunta-num">7</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El Concilium Supremum evolucionó hacia:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 7)">a) La monarquía absoluta</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">b) La república presidencial</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">c) El Parlamento inglés</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">d) La asamblea popular griega</div>
+          </div>
+          <div class="explicacion">El Concilium Supremum evolucionó del Mágnum Concilium al Comun Concilium y finalmente al Parlamento inglés.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="2">
+          <span class="pregunta-num">8</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La Carta Magna es considerada:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 8)">a) La primera constitución escrita</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">b) Un código penal medieval</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">c) Un tratado comercial</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">d) El primer hito del constitucionalismo</div>
+          </div>
+          <div class="explicacion">La Carta Magna de 1215 es considerada el primer hito del constitucionalismo al establecer límites al poder real.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 3: DOCUMENTOS INGLESES -->
+      <div class="quiz-section" id="s3">
+        <div class="pregunta" data-correcta="1" data-tema="3">
+          <span class="pregunta-num">9</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La Petition of Rights (1628) limitaba:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 9)">a) El poder del Parlamento</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">b) El poder del rey Carlos I, especialmente en materia de impuestos</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">c) El poder de la Iglesia</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">d) El poder de los jueces</div>
+          </div>
+          <div class="explicacion">La Petition of Rights de 1628 limitaba el poder del rey Carlos I, especialmente en materia de impuestos sin consentimiento del Parlamento.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="3">
+          <span class="pregunta-num">10</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El Instrument of Government (1653) es considerado:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 10)">a) La primera constitución escrita de la historia</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">b) Un código civil</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">c) Un tratado internacional</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">d) Una ley penal</div>
+          </div>
+          <div class="explicacion">El Instrument of Government de 1653 es considerado la primera constitución escrita de la historia, estableciendo el gobierno de Oliver Cromwell.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="3">
+          <span class="pregunta-num">11</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El Habeas Corpus Act (1679) garantiza:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 11)">a) La propiedad privada</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">b) La libertad de expresión</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">c) La libertad personal frente a detenciones arbitrarias</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">d) La libertad religiosa</div>
+          </div>
+          <div class="explicacion">El Habeas Corpus Act de 1679 garantiza la libertad personal frente a detenciones arbitrarias, estableciendo el derecho a ser presentado ante un juez.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="3">
+          <span class="pregunta-num">12</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El Bill of Rights (1689) consolidó:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 12)">a) El poder absoluto del rey</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">b) El poder de la Iglesia</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">c) El poder militar</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">d) La supremacía del Parlamento sobre el rey</div>
+          </div>
+          <div class="explicacion">El Bill of Rights de 1689 consolidó la supremacía del Parlamento sobre el rey, estableciendo elecciones libres y libertades fundamentales.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 4: AMÉRICA Y FRANCIA -->
+      <div class="quiz-section" id="s4">
+        <div class="pregunta" data-correcta="1" data-tema="4">
+          <span class="pregunta-num">13</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La Declaración de Virginia (1776) fue:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 13)">a) La primera constitución escrita</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">b) La primera declaración de derechos de la era moderna</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">c) Un tratado de paz</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">d) Una ley comercial</div>
+          </div>
+          <div class="explicacion">La Declaración de Virginia de 1776 fue la primera declaración de derechos de la era moderna, redactada por George Mason.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="4">
+          <span class="pregunta-num">14</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La Constitución de Filadelfia (1787) es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 14)">a) La primera constitución escrita de la historia moderna</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">b) Una declaración de independencia</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">c) Un tratado internacional</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">d) Una ley penal</div>
+          </div>
+          <div class="explicacion">La Constitución de Filadelfia de 1787 es la primera constitución escrita de la historia moderna, estableciendo la estructura federal estadounidense.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="4">
+          <span class="pregunta-num">15</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La Declaración de los Derechos del Hombre y del Ciudadano (1789) establece en su Art. 16 que:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 15)">a) Todos los hombres nacen libres</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">b) La propiedad es inviolable</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">c) Toda sociedad sin garantía de derechos ni separación de poderes no tiene Constitución</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">d) La ley es expresión de la voluntad general</div>
+          </div>
+          <div class="explicacion">El Art. 16 de la DDHC establece: "Toda sociedad en la cual no esté establecida la garantía de los derechos ni determinada la separación de poderes, no tiene Constitución".</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="4">
+          <span class="pregunta-num">16</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los derechos de segunda generación (sociales y económicos) se incorporan en las constituciones de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 16)">a) Francia (1789) y Estados Unidos (1787)</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">b) Inglaterra (1215) y Alemania (1871)</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">c) Rusia (1918) y China (1949)</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">d) Querétaro (1917) y Weimar (1919)</div>
+          </div>
+          <div class="explicacion">Los derechos sociales de 2ª generación se incorporan en las Constituciones de Querétaro (México, 1917) y Weimar (Alemania, 1919).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 5: COLOMBIA -->
+      <div class="quiz-section" id="s5">
+        <div class="pregunta" data-correcta="1" data-tema="5">
+          <span class="pregunta-num">17</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La Constitución de 1886 fue reformada mediante:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 17)">a) Referendo popular</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">b) Acto Legislativo del Congreso</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">c) Asamblea Constituyente</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">d) Decreto presidencial</div>
+          </div>
+          <div class="explicacion">La Constitución de 1886 solo podía ser reformada por Acto Legislativo del Congreso, según su Art. 218, lo que hacía muy difícil su reforma.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="5">
+          <span class="pregunta-num">18</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La Séptima Papeleta de 1990 fue promovida por:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 18)">a) El movimiento estudiantil tras el asesinato de Luis Carlos Galán</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">b) El gobierno de Virgilio Barco</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">c) La guerrilla del M-19</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">d) La Iglesia Católica</div>
+          </div>
+          <div class="explicacion">La Séptima Papeleta fue promovida por el movimiento estudiantil tras el asesinato de Luis Carlos Galán, recogiendo más de 30.000 firmas.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="5">
+          <span class="pregunta-num">19</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La Asamblea Nacional Constituyente de 1991 se instaló el:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 19)">a) 4 de julio de 1990</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">b) 9 de diciembre de 1990</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">c) 5 de febrero de 1991</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">d) 20 de julio de 1991</div>
+          </div>
+          <div class="explicacion">La Asamblea Nacional Constituyente se instaló formalmente el 5 de febrero de 1991 y cesó sus funciones el 4 de julio de 1991.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="5">
+          <span class="pregunta-num">20</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La Constitución de 1991 se caracteriza por ser:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 20)">a) Centralista y confesional</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">b) Autoritaria y excluyente</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">c) Unitaria y homogénea</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">d) Consensuada, ecléctica e incluyente</div>
+          </div>
+          <div class="explicacion">La Constitución de 1991 se caracteriza por ser consensuada (fruto del acuerdo), ecléctica (combina diversas tradiciones) e incluyente (reconoce la diversidad).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 6: CONCEPTO -->
+      <div class="quiz-section" id="s6">
+        <div class="pregunta" data-correcta="1" data-tema="6">
+          <span class="pregunta-num">21</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La Constitución Política es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 21)">a) Una ley ordinaria más</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">b) La norma fundamental que establece límites al poder público</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">c) Un decreto presidencial</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">d) Un tratado internacional</div>
+          </div>
+          <div class="explicacion">La Constitución Política es la norma fundamental que establece límites al ejercicio del poder público y garantiza los derechos fundamentales.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="6">
+          <span class="pregunta-num">22</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Según el Art. 16 de la DUDH, para que exista Constitución se requiere:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 22)">a) Garantía de derechos y separación de funciones</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">b) Solo un texto escrito</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">c) Solo un presidente electo</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">d) Solo un parlamento</div>
+          </div>
+          <div class="explicacion">El Art. 16 de la DUDH establece que para que exista Constitución se requiere garantía de derechos y separación de funciones (poderes).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="6">
+          <span class="pregunta-num">23</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La Constitución se denomina "norma de normas" porque:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 23)">a) Es la más antigua</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">b) Es la más extensa</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">c) Todas las demás normas deben ajustarse a ella</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">d) Es la más moderna</div>
+          </div>
+          <div class="explicacion">La Constitución es la "norma de normas" porque es la norma suprema del ordenamiento jurídico, y todas las demás deben ajustarse a ella (Art. 4° C.P.).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="6">
+          <span class="pregunta-num">24</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Un país con un texto llamado "Constitución" pero sin separación de poderes:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 24)">a) Tiene una verdadera Constitución</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">b) Tiene una Constitución parcial</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">c) Tiene una Constitución flexible</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">d) No tiene Constitución en sentido material</div>
+          </div>
+          <div class="explicacion">Si no hay separación de poderes ni garantía de derechos, no puede hablarse propiamente de Constitución en sentido material, aunque exista un texto con ese nombre.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 7: ESTRUCTURA -->
+      <div class="quiz-section" id="s7">
+        <div class="pregunta" data-correcta="1" data-tema="7">
+          <span class="pregunta-num">25</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La Constitución se divide en:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 25)">a) Dos partes: dogmática y orgánica</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">b) Tres partes: preámbulo, dogmática y orgánica</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">c) Cuatro partes: preámbulo, dogmática, orgánica y transitoria</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">d) Una sola parte unificada</div>
+          </div>
+          <div class="explicacion">La Constitución se divide en tres partes: Preámbulo, Parte Dogmática (derechos) y Parte Orgánica (estructura del Estado).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="7">
+          <span class="pregunta-num">26</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La Parte Dogmática contiene:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 26)">a) La estructura del Estado</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">b) Los principios fundamentales y los derechos, deberes y garantías</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">c) Las disposiciones transitorias</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">d) Los mecanismos de reforma</div>
+          </div>
+          <div class="explicacion">La Parte Dogmática contiene los principios fundamentales (Título I) y los derechos, deberes y garantías (Título II).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="7">
+          <span class="pregunta-num">27</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La Parte Orgánica regula:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 27)">a) Los derechos fundamentales</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">b) El preámbulo</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">c) La estructura del Estado: ramas del poder, órganos de control, entidades territoriales</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">d) Las disposiciones transitorias</div>
+          </div>
+          <div class="explicacion">La Parte Orgánica regula la estructura del Estado: ramas del poder público, órganos de control y entidades territoriales.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="7">
+          <span class="pregunta-num">28</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El Preámbulo constitucional tiene:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 28)">a) Solo valor simbólico</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">b) Ningún valor jurídico</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">c) Valor orientativo pero no vinculante</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">d) Poder vinculante y establece valores superiores</div>
+          </div>
+          <div class="explicacion">El Preámbulo tiene poder vinculante y establece los valores, principios y fines del ordenamiento jurídico.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 8: FUENTES -->
+      <div class="quiz-section" id="s8">
+        <div class="pregunta" data-correcta="1" data-tema="8">
+          <span class="pregunta-num">29</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La fuente primaria del Derecho Constitucional colombiano es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 29)">a) La costumbre</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">b) La Constitución Política</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">c) La doctrina</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">d) La jurisprudencia</div>
+          </div>
+          <div class="explicacion">La Constitución Política es la fuente primaria y obligatoria del Derecho Constitucional colombiano, como norma de normas (Art. 4° C.P.).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="8">
+          <span class="pregunta-num">30</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los tratados internacionales de DDHH ratificados por Colombia:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 30)">a) Hacen parte del bloque de constitucionalidad (Art. 93 C.P.)</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">b) Son leyes ordinarias</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">c) No tienen valor jurídico interno</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">d) Solo aplican en tiempos de paz</div>
+          </div>
+          <div class="explicacion">Los tratados internacionales de DDHH ratificados por Colombia hacen parte del bloque de constitucionalidad según el Art. 93 de la C.P.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="8">
+          <span class="pregunta-num">31</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Las leyes estatutarias regulan:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 31)">a) El procedimiento legislativo</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">b) El presupuesto nacional</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">c) El alcance de los derechos fundamentales</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">d) La organización territorial</div>
+          </div>
+          <div class="explicacion">Las leyes estatutarias regulan el alcance de los derechos fundamentales y requieren mayoría absoluta para su aprobación.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="8">
+          <span class="pregunta-num">32</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Las leyes orgánicas son:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 32)">a) Leyes ordinarias sin jerarquía especial</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">b) Decretos presidenciales</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">c) Normas inferiores a las leyes ordinarias</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">d) Parámetro normativo superior para la expedición de leyes ordinarias</div>
+          </div>
+          <div class="explicacion">Las leyes orgánicas son parámetro normativo superior para la expedición de leyes ordinarias, regulando materias específicas señaladas en la Constitución.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 9: REFORMA -->
+      <div class="quiz-section" id="s9">
+        <div class="pregunta" data-correcta="1" data-tema="9">
+          <span class="pregunta-num">33</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La Constitución de 1991 puede ser reformada por:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 33)">a) Solo el Presidente</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">b) Acto Legislativo, Asamblea Constituyente y Referendo</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">c) Solo la Corte Constitucional</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">d) Solo el Congreso sin límites</div>
+          </div>
+          <div class="explicacion">La Constitución puede ser reformada por tres mecanismos: Acto Legislativo (por el Congreso), Asamblea Constituyente (por el pueblo) y Referendo (votación popular).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="9">
+          <span class="pregunta-num">34</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El Acto Legislativo debe ser aprobado por el Congreso en:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 34)">a) Dos períodos ordinarios sucesivos</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">b) Un solo período extraordinario</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">c) Tres períodos ordinarios</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">d) Una sola votación</div>
+          </div>
+          <div class="explicacion">El Acto Legislativo debe ser aprobado por el Congreso en dos períodos ordinarios sucesivos, con mayorías especiales.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="9">
+          <span class="pregunta-num">35</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La Asamblea Constituyente es convocada por:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 35)">a) El Presidente directamente</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">b) El Congreso automáticamente</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">c) El pueblo mediante consulta popular aprobada por mayoría simple</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">d) La Corte Constitucional</div>
+          </div>
+          <div class="explicacion">La Asamblea Constituyente es convocada por el pueblo mediante consulta popular aprobada por mayoría simple, conforme al Art. 375 de la C.P.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="9">
+          <span class="pregunta-num">36</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los derechos fundamentales no pueden ser reducidos por reforma constitucional porque:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 36)">a) Son muy antiguos</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">b) Son muy modernos</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">c) Son muy costosos</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">d) Constituyen un límite material a la reforma (Art. 377 C.P.)</div>
+          </div>
+          <div class="explicacion">Los derechos fundamentales constituyen un límite material a la reforma constitucional. El Art. 377 establece que no pueden ser reducidos por reforma.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 10: JURISPRUDENCIA -->
+      <div class="quiz-section" id="s10">
+        <div class="pregunta" data-correcta="1" data-tema="10">
+          <span class="pregunta-num">37</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La jurisprudencia constitucional en Colombia es producida principalmente por:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 37)">a) El Congreso de la República</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">b) La Corte Constitucional</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">c) El Presidente de la República</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">d) La Procuraduría General</div>
+          </div>
+          <div class="explicacion">La jurisprudencia constitucional es producida principalmente por la Corte Constitucional, que es el máximo intérprete de la Constitución.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="10">
+          <span class="pregunta-num">38</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La Sentencia C-370 de 2006 estableció que la jurisprudencia de la Corte IDH:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 38)">a) No tiene valor en Colombia</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">b) Tiene carácter vinculante para Colombia</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">c) Solo aplica en casos penales</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">d) Solo aplica en tiempos de paz</div>
+          </div>
+          <div class="explicacion">La Sentencia C-370 de 2006 estableció que la jurisprudencia de la Corte Interamericana de Derechos Humanos tiene carácter vinculante para Colombia.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="10">
+          <span class="pregunta-num">39</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Las sentencias de la Corte Constitucional que hacen tránsito a cosa juzgada constitucional son:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 39)">a) Las sentencias de tutela</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">b) Los autos de trámite</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">c) Las sentencias de constitucionalidad sobre leyes</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">d) Las sentencias de única instancia</div>
+          </div>
+          <div class="explicacion">Las sentencias de constitucionalidad sobre leyes hacen tránsito a cosa juzgada constitucional, es decir, son definitivas e inmodificables.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="10">
+          <span class="pregunta-num">40</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El Consejo de Estado es fuente del Derecho Constitucional porque:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 40)">a) Es el máximo tribunal penal</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">b) Es el máximo tribunal laboral</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">c) Es el máximo tribunal civil</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">d) Es el máximo tribunal de lo contencioso-administrativo y sus decisiones sobre constitucionalidad de decretos son fuente</div>
+          </div>
+          <div class="explicacion">El Consejo de Estado es el máximo tribunal de lo contencioso-administrativo, y sus decisiones sobre constitucionalidad de decretos y actos administrativos son fuente del Derecho Constitucional.</div>
+        </div>
+      </div>
+
+      <div class="resultado-final" id="resultadoFinal">
+        <h3>🏆 Resultado Final</h3>
+        <div class="puntaje-final" id="puntajeFinal">0/40</div>
+        <p id="mensajeFinal"></p>
+        <div class="desglose-temas" id="desgloseTemas"></div>
+        <button onclick="reiniciarQuiz()" class="btn-reset">🔄 Reiniciar Quiz</button>
+      </div>
+
+      <div style="text-align: center; margin-top: 1.5rem;">
+        <button onclick="verResultadoFinal()">📊 Ver Resultado Final</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>🏛️ Guía Didáctica - Fundamentos del Constitucionalismo</p>
+  <p>Derecho Constitucional Colombiano · Guía 1 de 5</p>
+  <p style="margin-top: 1rem; opacity: 0.7;">© 2026 - Material educativo interactivo</p>
+</footer>
+
+<script>
+  function toggleAcordeon(header) {
+    header.classList.toggle('active');
+    const content = header.nextElementSibling;
+    content.classList.toggle('active');
+  }
+
+  let respuestas = {};
+  const totalPreguntas = 40;
+
+  function mostrarSeccion(id, tab) {
+    document.querySelectorAll('.quiz-section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.quiz-tab').forEach(t => t.classList.remove('active'));
+    
+    document.getElementById(id).classList.add('active');
+    tab.classList.add('active');
+  }
+
+  function seleccionar(opcion, preguntaNum) {
+    if (respuestas[preguntaNum] !== undefined) return;
+
+    const pregunta = opcion.closest('.pregunta');
+    const opciones = pregunta.querySelectorAll('.opcion');
+    const correcta = parseInt(pregunta.dataset.correcta);
+    const tema = parseInt(pregunta.dataset.tema);
+    const seleccionada = Array.from(opciones).indexOf(opcion);
+    const explicacion = pregunta.querySelector('.explicacion');
+
+    opciones.forEach(o => o.classList.add('disabled'));
+
+    if (seleccionada === correcta) {
+      opcion.classList.add('correcta');
+      respuestas[preguntaNum] = { correcta: true, tema: tema };
+    } else {
+      opcion.classList.add('incorrecta');
+      opciones[correcta].classList.add('correcta');
+      respuestas[preguntaNum] = { correcta: false, tema: tema };
+    }
+
+    explicacion.classList.add('visible');
+    pregunta.classList.add('answered');
+    actualizarEstadisticas();
+  }
+
+  function actualizarEstadisticas() {
+    const total = Object.keys(respuestas).length;
+    const correctas = Object.values(respuestas).filter(r => r.correcta).length;
+    const incorrectas = total - correctas;
+    const porcentaje = total > 0 ? Math.round((correctas / total) * 100) : 0;
+
+    document.getElementById('respondidas').textContent = total;
+    document.getElementById('correctas').textContent = correctas;
+    document.getElementById('incorrectas').textContent = incorrectas;
+    document.getElementById('porcentaje').textContent = porcentaje;
+
+    const progreso = (total / totalPreguntas) * 100;
+    document.getElementById('progressFill').style.width = progreso + '%';
+  }
+
+  function verResultadoFinal() {
+    const total = Object.keys(respuestas).length;
+    
+    if (total < totalPreguntas) {
+      alert(`⚠️ Aún te faltan ${totalPreguntas - total} preguntas por responder.`);
+      return;
+    }
+
+    const correctas = Object.values(respuestas).filter(r => r.correcta).length;
+    const porcentaje = Math.round((correctas / totalPreguntas) * 100);
+
+    const resultadoFinal = document.getElementById('resultadoFinal');
+    resultadoFinal.classList.add('visible');
+
+    document.getElementById('puntajeFinal').textContent = `${correctas}/${totalPreguntas}`;
+
+    let mensaje = '';
+    if (porcentaje === 100) mensaje = '🏆 ¡PERFECTO! Dominas los Fundamentos del Constitucionalismo.';
+    else if (porcentaje >= 90) mensaje = '🌟 ¡Excelente! Dominio sobresaliente.';
+    else if (porcentaje >= 75) mensaje = '✅ ¡Muy bien! Buen dominio.';
+    else if (porcentaje >= 60) mensaje = '📚 Aceptable. Repasa los temas donde fallaste.';
+    else if (porcentaje >= 40) mensaje = '📖 Necesitas reforzar varios conceptos.';
+    else mensaje = '🔍 Es necesario estudiar nuevamente todos los temas.';
+
+    document.getElementById('mensajeFinal').textContent = mensaje;
+
+    const temas = {
+      1: { nombre: 'T1: Origen', total: 4, correctas: 0 },
+      2: { nombre: 'T2: Carta Magna', total: 4, correctas: 0 },
+      3: { nombre: 'T3: Inglaterra', total: 4, correctas: 0 },
+      4: { nombre: 'T4: América/Francia', total: 4, correctas: 0 },
+      5: { nombre: 'T5: Colombia', total: 4, correctas: 0 },
+      6: { nombre: 'T6: Concepto', total: 4, correctas: 0 },
+      7: { nombre: 'T7: Estructura', total: 4, correctas: 0 },
+      8: { nombre: 'T8: Fuentes', total: 4, correctas: 0 },
+      9: { nombre: 'T9: Reforma', total: 4, correctas: 0 },
+      10: { nombre: 'T10: Jurisprudencia', total: 4, correctas: 0 }
+    };
+
+    Object.values(respuestas).forEach(r => {
+      if (r.correcta) temas[r.tema].correctas++;
+    });
+
+    const desgloseHTML = Object.values(temas).map(t => {
+      const pct = Math.round((t.correctas / t.total) * 100);
+      return `
+        <div class="desglose-item">
+          <h4>${t.nombre}</h4>
+          <p>${t.correctas}/${t.total} (${pct}%)</p>
+          <div class="mini-bar">
+            <div class="mini-bar-fill" style="width: ${pct}%"></div>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    document.getElementById('desgloseTemas').innerHTML = desgloseHTML;
+    resultadoFinal.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  function reiniciarQuiz() {
+    if (!confirm('¿Reiniciar el quiz?')) return;
+
+    respuestas = {};
+
+    document.querySelectorAll('.opcion').forEach(o => o.classList.remove('correcta', 'incorrecta', 'disabled'));
+    document.querySelectorAll('.explicacion').forEach(e => e.classList.remove('visible'));
+    document.querySelectorAll('.pregunta').forEach(p => p.classList.remove('answered'));
+    document.getElementById('resultadoFinal').classList.remove('visible');
+
+    actualizarEstadisticas();
+    mostrarSeccion('s1', document.querySelector('.quiz-tab'));
+    document.getElementById('quiz').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  document.querySelectorAll('nav a').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+</script>
+
+</body>
+</html>
