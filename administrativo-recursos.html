@@ -1,0 +1,2324 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Recursos Administrativos - Derecho Administrativo</title>
+<style>
+  :root {
+    --primary: #065f46;
+    --secondary: #10b981;
+    --accent: #047857;
+    --light: #ecfdf5;
+    --dark: #064e3b;
+    --success: #059669;
+    --warning: #d97706;
+    --danger: #dc2626;
+    --card-bg: #ffffff;
+    --shadow: 0 4px 15px rgba(0,0,0,0.08);
+    --shadow-hover: 0 8px 25px rgba(0,0,0,0.15);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Georgia', 'Times New Roman', serif; background: var(--light); color: var(--dark); line-height: 1.7; }
+  header { background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%); color: white; padding: 2rem 1rem; text-align: center; box-shadow: var(--shadow); position: relative; overflow: hidden; }
+  header::before { content: '⚖️'; position: absolute; font-size: 15rem; opacity: 0.05; top: -30px; right: -30px; }
+  header h1 { font-size: 2.5rem; margin-bottom: 0.5rem; letter-spacing: 2px; }
+  header p { font-size: 1.1rem; opacity: 0.9; font-style: italic; }
+  nav { background: var(--dark); position: sticky; top: 0; z-index: 100; box-shadow: var(--shadow); }
+  nav ul { display: flex; justify-content: center; flex-wrap: wrap; list-style: none; padding: 0.5rem; }
+  nav a { color: var(--light); text-decoration: none; padding: 0.7rem 1rem; margin: 0.2rem; border-radius: 5px; font-size: 0.7rem; transition: all 0.3s; display: block; }
+  nav a:hover { background: var(--secondary); color: var(--dark); transform: translateY(-2px); }
+  main { max-width: 1200px; margin: 0 auto; padding: 2rem 1rem; }
+  section { background: var(--card-bg); margin-bottom: 2.5rem; padding: 2rem; border-radius: 12px; box-shadow: var(--shadow); border-left: 5px solid var(--secondary); scroll-margin-top: 80px; }
+  section h2 { color: var(--primary); font-size: 2rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--secondary); }
+  section h3 { color: var(--accent); font-size: 1.4rem; margin: 1.5rem 0 0.8rem; }
+  section h4 { color: var(--primary); font-size: 1.15rem; margin: 1rem 0 0.5rem; }
+  p { margin-bottom: 1rem; text-align: justify; }
+  .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.2rem; margin: 1.5rem 0; }
+  .card { background: linear-gradient(135deg, #fff 0%, #ecfdf5 100%); border: 2px solid var(--secondary); border-radius: 10px; padding: 1.2rem; transition: all 0.3s; cursor: pointer; position: relative; }
+  .card:hover { transform: translateY(-5px); box-shadow: var(--shadow-hover); border-color: var(--primary); }
+  .card .icon { font-size: 2.5rem; text-align: center; margin-bottom: 0.5rem; }
+  .card h4 { text-align: center; color: var(--primary); margin-bottom: 0.5rem; }
+  .card .detail { display: none; margin-top: 0.8rem; padding-top: 0.8rem; border-top: 1px dashed var(--secondary); font-size: 0.95rem; }
+  .card.active .detail { display: block; }
+  .card .hint { text-align: center; color: var(--accent); font-size: 0.85rem; font-style: italic; }
+  .mapa-container { background: #ecfdf5; border: 2px dashed var(--secondary); border-radius: 10px; padding: 1.5rem; margin: 1.5rem 0; overflow-x: auto; }
+  .mapa { display: flex; flex-direction: column; align-items: center; min-width: 600px; }
+  .nodo { background: var(--primary); color: white; padding: 0.8rem 1.5rem; border-radius: 25px; font-weight: bold; text-align: center; min-width: 180px; box-shadow: var(--shadow); }
+  .nodo.central { background: linear-gradient(135deg, var(--secondary), #34d399); color: var(--dark); font-size: 1.2rem; padding: 1rem 2rem; }
+  .nodo.sub { background: var(--accent); font-size: 0.95rem; }
+  .linea { width: 3px; height: 25px; background: var(--secondary); }
+  .linea-h { height: 3px; background: var(--secondary); width: 80%; max-width: 900px; margin: 0 auto; }
+  .rama { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 1rem; width: 100%; margin-top: 1rem; }
+  .rama-item { display: flex; flex-direction: column; align-items: center; flex: 1; min-width: 140px; }
+  .ejemplo { background: #ecfdf5; border-left: 4px solid var(--success); padding: 1rem 1.2rem; margin: 1rem 0; border-radius: 0 8px 8px 0; }
+  .ejemplo strong { color: var(--success); }
+  .alerta { background: #fffbeb; border-left: 4px solid var(--warning); padding: 1rem 1.2rem; margin: 1rem 0; border-radius: 0 8px 8px 0; }
+  .alerta strong { color: var(--warning); }
+  .cita { background: #ecfdf5; border-left: 4px solid var(--accent); padding: 1rem 1.2rem; margin: 1rem 0; border-radius: 0 8px 8px 0; font-style: italic; color: var(--primary); }
+  table { width: 100%; border-collapse: collapse; margin: 1rem 0; background: white; border-radius: 8px; overflow: hidden; box-shadow: var(--shadow); font-size: 0.9rem; }
+  th { background: var(--primary); color: white; padding: 0.8rem; text-align: left; }
+  td { padding: 0.8rem; border-bottom: 1px solid #eee; }
+  tr:nth-child(even) { background: #ecfdf5; }
+  tr:hover { background: #d1fae5; }
+  .quiz-container { background: linear-gradient(135deg, #ecfdf5 0%, #fff 100%); padding: 1.5rem; border-radius: 10px; border: 2px solid var(--accent); }
+  .quiz-header { background: var(--primary); color: white; padding: 1.2rem; border-radius: 8px; margin-bottom: 1.5rem; text-align: center; }
+  .quiz-header h3 { color: white; margin: 0 0 0.5rem 0; }
+  .progress-bar { background: rgba(255,255,255,0.2); height: 10px; border-radius: 5px; overflow: hidden; margin-top: 0.5rem; }
+  .progress-fill { background: var(--secondary); height: 100%; width: 0%; transition: width 0.4s ease; }
+  .quiz-stats { display: flex; justify-content: space-around; margin-top: 1rem; flex-wrap: wrap; gap: 0.5rem; }
+  .stat { background: rgba(255,255,255,0.1); padding: 0.5rem 1rem; border-radius: 5px; font-size: 0.9rem; }
+  .stat strong { color: var(--secondary); }
+  .quiz-tabs { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; padding: 0.5rem; background: #d1fae5; border-radius: 8px; }
+  .quiz-tab { background: white; border: 2px solid var(--accent); color: var(--accent); padding: 0.5rem 0.8rem; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 0.7rem; transition: all 0.3s; flex: 1; min-width: 70px; text-align: center; }
+  .quiz-tab:hover { background: var(--accent); color: white; }
+  .quiz-tab.active { background: var(--primary); color: white; border-color: var(--primary); }
+  .quiz-section { display: none; }
+  .quiz-section.active { display: block; animation: fadeIn 0.4s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  .pregunta { margin-bottom: 1.5rem; padding: 1.2rem; background: white; border-radius: 8px; box-shadow: var(--shadow); border-left: 4px solid var(--accent); transition: all 0.3s; }
+  .pregunta.answered { border-left-color: var(--secondary); }
+  .pregunta-num { display: inline-block; background: var(--accent); color: white; padding: 0.2rem 0.7rem; border-radius: 12px; font-size: 0.85rem; margin-right: 0.5rem; }
+  .pregunta-tipo { display: inline-block; background: var(--secondary); color: var(--dark); padding: 0.2rem 0.7rem; border-radius: 12px; font-size: 0.75rem; margin-left: 0.3rem; font-weight: bold; }
+  .pregunta p { font-weight: bold; color: var(--primary); margin: 0.8rem 0; text-align: left; }
+  .opciones { display: flex; flex-direction: column; gap: 0.5rem; }
+  .opcion { padding: 0.7rem 1rem; background: #ecfdf5; border: 2px solid transparent; border-radius: 6px; cursor: pointer; transition: all 0.2s; position: relative; }
+  .opcion:hover:not(.disabled) { border-color: var(--accent); background: #d1fae5; }
+  .opcion.disabled { cursor: not-allowed; opacity: 0.85; }
+  .opcion.correcta { background: #d1fae5; border-color: var(--success); color: var(--success); font-weight: bold; }
+  .opcion.incorrecta { background: #fee2e2; border-color: var(--danger); color: var(--danger); }
+  .opcion.correcta::after { content: ' ✓'; font-weight: bold; }
+  .opcion.incorrecta::after { content: ' ✗'; font-weight: bold; }
+  .explicacion { margin-top: 0.8rem; padding: 0.8rem; background: #ecfdf5; border-left: 3px solid var(--accent); border-radius: 0 6px 6px 0; font-size: 0.9rem; display: none; font-style: italic; }
+  .explicacion.visible { display: block; animation: fadeIn 0.3s ease; }
+  .resultado-final { margin-top: 2rem; padding: 2rem; background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%); color: white; border-radius: 12px; text-align: center; display: none; }
+  .resultado-final.visible { display: block; animation: fadeIn 0.5s ease; }
+  .resultado-final h3 { color: var(--secondary); font-size: 2rem; margin-bottom: 1rem; }
+  .puntaje-final { font-size: 3rem; font-weight: bold; color: var(--secondary); margin: 1rem 0; }
+  .desglose-temas { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1.5rem; text-align: left; }
+  .desglose-item { background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px; }
+  .desglose-item h4 { color: var(--secondary); margin-bottom: 0.5rem; font-size: 1rem; }
+  .mini-bar { background: rgba(255,255,255,0.2); height: 8px; border-radius: 4px; overflow: hidden; margin-top: 0.5rem; }
+  .mini-bar-fill { background: var(--secondary); height: 100%; transition: width 0.6s ease; }
+  button { background: var(--primary); color: white; border: none; padding: 0.8rem 1.5rem; border-radius: 6px; cursor: pointer; font-size: 1rem; margin-top: 1rem; transition: all 0.3s; }
+  button:hover { background: var(--secondary); color: var(--dark); transform: translateY(-2px); }
+  .btn-reset { background: var(--danger); margin-left: 0.5rem; }
+  .btn-reset:hover { background: #991b1b; color: white; }
+  .acordeon-item { margin-bottom: 0.5rem; border: 1px solid #ddd; border-radius: 6px; overflow: hidden; }
+  .acordeon-header { background: var(--accent); color: white; padding: 1rem; cursor: pointer; font-weight: bold; display: flex; justify-content: space-between; align-items: center; transition: background 0.3s; }
+  .acordeon-header:hover { background: var(--primary); }
+  .acordeon-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; background: white; }
+  .acordeon-content.active { max-height: 2000px; padding: 1rem; }
+  .flecha { transition: transform 0.3s; }
+  .acordeon-header.active .flecha { transform: rotate(180deg); }
+  footer { background: var(--dark); color: var(--light); text-align: center; padding: 2rem 1rem; margin-top: 2rem; }
+  footer p { margin-bottom: 0.5rem; }
+  @media (max-width: 768px) { header h1 { font-size: 1.8rem; } section { padding: 1.2rem; } section h2 { font-size: 1.5rem; } nav a { font-size: 0.6rem; padding: 0.3rem 0.4rem; } .quiz-tab { font-size: 0.6rem; padding: 0.3rem 0.4rem; } table { font-size: 0.8rem; } }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>⚖️ Recursos Administrativos</h1>
+  <p>Guía 6 de 8 · Derecho Administrativo Colombiano · Guía Didáctica Interactiva</p>
+</header>
+
+<nav>
+  <ul>
+    <li><a href="#tema1">1. Noción</a></li>
+    <li><a href="#tema2">2. Clasificación</a></li>
+    <li><a href="#tema3">3. Reposición</a></li>
+    <li><a href="#tema4">4. Apelación</a></li>
+    <li><a href="#tema5">5. Queja</a></li>
+    <li><a href="#tema6">6. Súplica</a></li>
+    <li><a href="#tema7">7. Efectos</a></li>
+    <li><a href="#tema8">8. Trámite</a></li>
+    <li><a href="#tema9">9. Silencio</a></li>
+    <li><a href="#tema10">10. Casos</a></li>
+    <li><a href="#quiz">Quiz (40)</a></li>
+  </ul>
+</nav>
+
+<main>
+
+  <section>
+    <h2>📚 Introducción</h2>
+    <p>Bienvenido a esta guía interactiva sobre los <strong>Recursos Administrativos</strong>. Aquí estudiarás la noción, fundamento, clasificación y trámite de los recursos en vía gubernativa conforme a la Ley 1437 de 2011 (CPACA): reposición, apelación, queja y súplica. Analizarás sus efectos, el silencio administrativo en sede de recursos y casos prácticos de aplicación.</p>
+    <div class="alerta">
+      <strong>💡 Cómo usar esta guía:</strong> Haz clic en las tarjetas para ver detalles, despliega los acordeones para información adicional y prueba tus conocimientos con el quiz de 40 preguntas al final.
+    </div>
+  </section>
+
+  <!-- TEMA 1: NOCIÓN -->
+  <section id="tema1">
+    <h2>1. Noción y Fundamento de los Recursos Administrativos</h2>
+    <p>Los <strong>recursos administrativos</strong> son mecanismos de impugnación que tienen las partes y terceros habilitados para solicitar la reforma, revocación o aclaración de una decisión administrativa ante la misma autoridad o su superior jerárquico o funcional.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">RECURSOS ADMINISTRATIVOS</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Mecanismos de Impugnación</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Vía Gubernativa</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Control de Legalidad</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Garantía del Debido Proceso</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Fundamento Constitucional y Legal</h3>
+    <div class="cita">
+      <strong>"El debido proceso se aplicará a toda clase de actuaciones judiciales y administrativas."</strong> — Art. 29 C.P.
+    </div>
+
+    <p>Los recursos administrativos se fundamentan en:</p>
+    <ul>
+      <li><strong>Artículo 29 C.P.:</strong> Derecho al debido proceso y a impugnar la sentencia condenatoria.</li>
+      <li><strong>Artículo 31 C.P.:</strong> Toda sentencia podrá ser apelada o consultada, salvo las excepciones que consagre la ley.</li>
+      <li><strong>Artículo 74 a 82 CPACA:</strong> Regulación específica de los recursos contra actos administrativos.</li>
+    </ul>
+
+    <h3>🔍 Finalidad de los Recursos</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🛡️</div>
+        <h4>Defensa del Administrado</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Permiten al particular controvertir decisiones que afectan sus derechos o intereses legítimos.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Autocorrección de la Administración</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Brindan a la autoridad la oportunidad de revisar y corregir sus propias decisiones sin necesidad de acudir al juez.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📊</div>
+        <h4>Control de Legalidad</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Garantizan que las decisiones administrativas se ajusten al ordenamiento jurídico superior.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🏛️</div>
+        <h4>Principio de Doble Instancia</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Aseguran que las decisiones sean revisadas por un superior jerárquico o funcional.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>⚖️ Diferencia entre Recursos y Acciones</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Aspecto</th>
+          <th>Recursos Administrativos</th>
+          <th>Acciones Contenciosas</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Órgano que decide</strong></td>
+          <td>Autoridad administrativa (mismo funcionario o superior)</td>
+          <td>Juez de la jurisdicción contencioso administrativa</td>
+        </tr>
+        <tr>
+          <td><strong>Naturaleza</strong></td>
+          <td>Vía gubernativa</td>
+          <td>Vía jurisdiccional</td>
+        </tr>
+        <tr>
+          <td><strong>Finalidad</strong></td>
+          <td>Reformar, revocar o aclarar el acto</td>
+          <td>Anular el acto o restablecer el derecho</td>
+        </tr>
+        <tr>
+          <td><strong>Efectos</strong></td>
+          <td>Suspensivos (por regla general)</td>
+          <td>Depende del medio de control</td>
+        </tr>
+        <tr>
+          <td><strong>Requisito</strong></td>
+          <td>Agotamiento obligatorio para acceder al juez</td>
+          <td>Demanda ante la jurisdicción</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Un ciudadano recibe una multa de tránsito. Puede interponer recurso de reposición ante el mismo funcionario que la impuso o recurso de apelación ante el superior. Si no está conforme con la decisión, puede demandar el acto ante la jurisdicción contencioso administrativa mediante la acción de nulidad y restablecimiento del derecho.
+    </div>
+  </section>
+
+  <!-- TEMA 2: CLASIFICACIÓN -->
+  <section id="tema2">
+    <h2>2. Clasificación de los Recursos Administrativos</h2>
+    <p>El CPACA regula cuatro tipos de recursos ordinarios contra los actos administrativos definitivos.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">RECURSOS (Art. 74 CPACA)</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Reposición</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Apelación</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Queja</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Súplica</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Tipos de Recursos</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🔄</div>
+        <h4>Reposición</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Se interpone ante el mismo funcionario que profirió la decisión.</p>
+          <p>Busca que aclare, modifique, adicione o revoque el acto.</p>
+          <p>Art. 74.1 CPACA.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📤</div>
+        <h4>Apelación</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Se interpone ante el inmediato superior administrativo o funcional.</p>
+          <p>Busca que reforme o revoque la decisión del inferior.</p>
+          <p>Art. 74.2 CPACA.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📢</div>
+        <h4>Queja</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Procede cuando se niega el recurso de apelación.</p>
+          <p>Se interpone directamente ante el superior.</p>
+          <p>Art. 74.3 CPACA.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🙏</div>
+        <h4>Súplica</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Procede contra autos que serían apelables dictados en segunda o única instancia.</p>
+          <p>Se interpone ante la Sala, Sección o Subsección.</p>
+          <p>Art. 246 CPACA.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>📊 Cuadro Comparativo</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Recurso</th>
+          <th>Ante quién se interpone</th>
+          <th>Contra qué actos procede</th>
+          <th>Efecto</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Reposición</strong></td>
+          <td>Mismo funcionario</td>
+          <td>Autos no apelables ni suplicables</td>
+          <td>Suspensivo</td>
+        </tr>
+        <tr>
+          <td><strong>Apelación</strong></td>
+          <td>Superior jerárquico o funcional</td>
+          <td>Sentencias y ciertos autos de primera instancia</td>
+          <td>Suspensivo o devolutivo</td>
+        </tr>
+        <tr>
+          <td><strong>Queja</strong></td>
+          <td>Superior</td>
+          <td>Auto que niega o concede en efecto diferente la apelación</td>
+          <td>Devolutivo</td>
+        </tr>
+        <tr>
+          <td><strong>Súplica</strong></td>
+          <td>Sala, Sección o Subsección</td>
+          <td>Autos apelables dictados en segunda o única instancia</td>
+          <td>Devolutivo</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>⚠️ Actos contra los cuales NO proceden recursos</h3>
+    <div class="alerta">
+      <strong>📌 Art. 75 CPACA:</strong>
+      <p>No habrá recurso contra:</p>
+      <ul>
+        <li>Los actos de carácter <strong>general</strong></li>
+        <li>Los actos de <strong>trámite</strong>, <strong>preparatorios</strong> o de <strong>ejecución</strong></li>
+        <li>Excepto en los casos previstos en norma expresa</li>
+      </ul>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Contra un decreto reglamentario (acto general) no proceden recursos, sino acción de nulidad ante la jurisdicción. Contra un auto que ordena practicar una prueba (acto de trámite) no proceden recursos, salvo norma expresa que lo permita.
+    </div>
+  </section>
+
+  <!-- TEMA 3: REPOSICIÓN -->
+  <section id="tema3">
+    <h2>3. Recurso de Reposición</h2>
+    <p>Es el recurso ordinario que se interpone ante el mismo funcionario que profirió la decisión, con el fin de que la aclare, modifique, adicione o revoque.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">REPOSICIÓN</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Mismo Funcionario</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Aclarar, Modificar, Revocar</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Autos No Apelables</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Fundamento Legal</h3>
+    <div class="cita">
+      <strong>"Contra los autos que no sean susceptibles de apelación o de súplica procede el recurso de reposición, el cual se interpondrá ante el mismo funcionario que profirió la decisión."</strong> — Art. 242 CPACA
+    </div>
+
+    <h3>🔍 Características</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">👤</div>
+        <h4>Ante el Mismo Funcionario</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Se interpone ante la autoridad que dictó el acto impugnado.</p>
+          <p>Es ella quien debe resolver el recurso.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📝</div>
+        <h4>Objeto</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Que el funcionario aclare, modifique, adicione o revoque la decisión.</p>
+          <p>Busca la autocorrección de la administración.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Procedencia</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Contra autos que no sean susceptibles de apelación o de súplica.</p>
+          <p>También contra actos definitivos en vía gubernativa.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⏰</div>
+        <h4>Oportunidad</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Dentro de los 10 días siguientes a la notificación del acto.</p>
+          <p>O en la misma audiencia si fue dictado verbalmente.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Trámite</h3>
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📝 Interposición</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>El recurso debe interponse por escrito dentro de los 10 días siguientes a la notificación del acto.</p>
+        <p>Si el auto se profirió en audiencia, puede interponerse verbalmente en el mismo acto.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📝 Sustentación</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>El recurrente debe exponer las razones de su inconformidad.</p>
+        <p>Puede aportar pruebas y solicitar la práctica de nuevas pruebas.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📝 Traslado</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Si el recurso se formula por escrito, se mantendrá en secretaría por 2 días en traslado a la parte contraria.</p>
+        <p>No requiere auto que ordene el traslado.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📝 Decisión</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Surtido el traslado, el funcionario decide el recurso.</p>
+        <p>El auto que decide la reposición no es susceptible de recurso alguno.</p>
+        <p>Salvo que contenga puntos no decididos en el anterior.</p>
+      </div>
+    </div>
+
+    <h3>⚠️ Efecto Suspensivo</h3>
+    <div class="alerta">
+      <strong>📌 Regla General:</strong>
+      <p>El recurso de reposición se concede en <strong>efecto suspensivo</strong>.</p>
+      <p>Esto significa que mientras se resuelve el recurso, el acto no produce efectos jurídicos ni puede ejecutarse.</p>
+      <br>
+      <strong>📌 Excepción:</strong>
+      <p>Cuando la ley expresamente disponga lo contrario.</p>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Un funcionario profiere un auto que ordena el embargo de unos bienes. El afectado interpone recurso de reposición dentro de los 10 días siguientes. Mientras se resuelve el recurso, el embargo no puede ejecutarse (efecto suspensivo). Si el funcionario decide confirmar el auto, el afectado puede acudir a la jurisdicción contencioso administrativa.
+    </div>
+  </section>
+
+  <!-- TEMA 4: APELACIÓN -->
+  <section id="tema4">
+    <h2>4. Recurso de Apelación</h2>
+    <p>Es el recurso ordinario que se interpone ante el inmediato superior jerárquico o funcional del funcionario que profirió la decisión, con el fin de que la reforme o revoque.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">APELACIÓN</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Superior Jerárquico</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Reformar o Revocar</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Sentencias y Ciertos Autos</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Fundamento Legal</h3>
+    <div class="cita">
+      <strong>"Contra las sentencias y los autos que la ley determine, procede el recurso de apelación, el cual se interpondrá ante el inmediato superior administrativo o funcional."</strong> — Art. 243 CPACA
+    </div>
+
+    <h3>🔍 Características</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📤</div>
+        <h4>Ante el Superior</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Se interpone ante el funcionario que profirió la decisión.</p>
+          <p>Pero lo resuelve el inmediato superior jerárquico o funcional.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🔄</div>
+        <h4>Objeto</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Que el superior reforme o  revoque la decisión del inferior.</p>
+          <p>Garantiza el principio de doble instancia.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Procedencia</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Contra sentencias de primera instancia.</p>
+          <p>Contra ciertos autos taxativamente señalados en la ley.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⏰</div>
+        <h4>Oportunidad</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Dentro de los 10 días siguientes a la notificación.</p>
+          <p>O en la misma audiencia si fue dictada verbalmente.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Autos Apelables (Art. 243 CPACA)</h3>
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📝 Autos de primera instancia proferidos por jueces administrativos</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <ul>
+          <li>El que rechaza la demanda</li>
+          <li>El que decreta una medida cautelar</li>
+          <li>El que resuelve los incidentes de responsabilidad y desacato</li>
+          <li>El que pone fin al proceso</li>
+          <li>El que aprueba conciliaciones extrajudiciales o judiciales</li>
+          <li>El que resuelve la liquidación de la condena o de los perjuicios</li>
+          <li>El que decreta nulidades procesales</li>
+          <li>El que niega la intervención de terceros</li>
+          <li>El que prescinde de la audiencia de pruebas</li>
+          <li>El que deniega el decreto o práctica de alguna prueba pedida oportunamente</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📝 Autos de primera instancia proferidos por tribunales administrativos</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Solo son apelables cuando sean proferidos por los tribunales en primera instancia:</p>
+        <ul>
+          <li>El que rechaza la demanda</li>
+          <li>El que decreta una medida cautelar</li>
+          <li>El que resuelve los incidentes de responsabilidad y desacato</li>
+          <li>El que pone fin al proceso</li>
+          <li>El que aprueba conciliaciones extrajudiciales o judiciales</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>⚠️ Efecto en que se Concede</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Tipo de Providencia</th>
+          <th>Efecto</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Sentencias</strong></td>
+          <td>Suspensivo (regla general)</td>
+        </tr>
+        <tr>
+          <td><strong>Autos numerales 2, 6, 7 y 9</strong></td>
+          <td>Devolutivo</td>
+        </tr>
+        <tr>
+          <td><strong>Demás autos</strong></td>
+          <td>Suspensivo</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="alerta">
+      <strong>📌 Efecto Suspensivo:</strong>
+      <p>La sentencia no se cumple mientras se resuelve el recurso.</p>
+      <p>La competencia del juez queda suspendida para continuar el proceso.</p>
+      <br>
+      <strong>📌 Efecto Devolutivo:</strong>
+      <p>La sentencia se cumple inmediatamente.</p>
+      <p>La competencia del juez no se suspende.</p>
+    </div>
+
+    <h3>📋 Trámite</h3>
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📝 Interposición y Sustentación</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Se interpone y sustenta ante la autoridad que profirió la providencia.</p>
+        <p>Dentro de los 10 días siguientes a su notificación.</p>
+        <p>Si fue dictada en audiencia, se interpone y sustenta verbalmente.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📝 Concesión</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Si el recurso fue sustentado oportunamente y reúne los demás requisitos legales, se concede mediante auto.</p>
+        <p>El auto dispone remitir el expediente al superior.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📝 Admisión por el Superior</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Recibido el expediente por el superior, si se encuentran reunidos los requisitos, decide sobre su admisión.</p>
+        <p>Si carece de requisitos, los señala para que el recurrente los subsane en 5 días.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📝 Audiencia de Alegaciones y Juzgamiento</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Admitido el recurso o vencido el término probatorio, el superior señala fecha y hora para audiencia.</p>
+        <p>La audiencia debe llevarse a cabo en un término no mayor a 20 días.</p>
+        <p>Si el Magistrado Ponente considera innecesaria la audiencia, ordena la presentación de alegatos por escrito dentro de los 10 días siguientes.</p>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Un juez administrativo profiere sentencia de primera instancia condenando al Estado a pagar una indemnización. El Estado interpone recurso de apelación dentro de los 10 días siguientes. El juez concede el recurso en efecto suspensivo y remite el expediente al Tribunal Administrativo. El Tribunal admite el recurso, señala audiencia y profiere sentencia de segunda instancia confirmando, modificando o revocando la decisión del juez.
+    </div>
+  </section>
+
+  <!-- TEMA 5: QUEJA -->
+  <section id="tema5">
+    <h2>5. Recurso de Queja</h2>
+    <p>Es el recurso que procede ante el superior cuando el inferior niega la apelación o la concede en un efecto diferente al que legalmente corresponde.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">QUEJA</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Ante el Superior</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Cuando se Niega la Apelación</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Cuando se Concede en Efecto Diferente</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Fundamento Legal</h3>
+    <div class="cita">
+      <strong>"Procede el recurso de queja ante el superior cuando se niegue la apelación o se conceda en un efecto diferente al que legalmente corresponde, para que lo conceda si fuere procedente, o corrija tal equivocación, según el caso."</strong> — Art. 245 CPACA
+    </div>
+
+    <h3>🔍 Características</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📢</div>
+        <h4>Procedencia</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Cuando el juez inferior niega el recurso de apelación.</p>
+          <p>O cuando lo concede en efecto diferente al legalmente establecido.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📤</div>
+        <h4>Ante el Superior</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Se interpone directamente ante el superior jerárquico o funcional.</p>
+          <p>No ante el juez que negó o concedió indebidamente el recurso.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⏰</div>
+        <h4>Oportunidad</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Dentro de los 5 días siguientes al recibo de las copias.</p>
+          <p>Si no se presenta en este término, precluye el derecho.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Objeto</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Que el superior conceda la apelación si es procedente.</p>
+          <p>O que corrija el efecto en que fue concedida.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Trámite</h3>
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📝 Reposición previa</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>El recurrente debe pedir reposición del auto que negó el recurso de apelación.</p>
+        <p>Y subsidiariamente solicitar que se le expidan copias de la providencia recurrida.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📝 Expedición de copias</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>El auto que niegue la reposición ordena las copias solicitadas.</p>
+        <p>El recurrente debe suministrar lo necesario para que sean compulsadas en 5 días.</p>
+        <p>Si no lo hace por su culpa, se declara precluido el término.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📝 Interposición ante el superior</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Dentro de los 5 días siguientes al recibo de las copias, el recurrente formula el recurso ante el superior.</p>
+        <p>Expresando los fundamentos para que se conceda el recurso denegado.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📝 Traslado</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>El escrito se mantiene en secretaría por 2 días a disposición de la otra parte.</p>
+        <p>Para que manifieste lo que estime oportuno.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📝 Decisión del superior</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Surtido el traslado, el superior decide el recurso.</p>
+        <p>Si concede la apelación, determina el efecto en que debe concederse.</p>
+        <p>Y comunica su decisión al a quo para que envíe el expediente.</p>
+      </div>
+    </div>
+
+    <h3>⚠️ Facultades del Superior</h3>
+    <div class="alerta">
+      <strong>📌 El superior puede:</strong>
+      <ul>
+        <li>Ordenar al inferior que le remita copia de otras piezas del expediente</li>
+        <li>Si concede la apelación, determinar el efecto en que debe concederse</li>
+        <li>Comunicar su decisión al a quo para que envíe el expediente o expida copias</li>
+      </ul>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Un juez administrativo profiere sentencia condenatoria. El demandado interpone recurso de apelación. El juez niega el recurso argumentando que la sentencia no es apelable. El demandado pide reposición y subsidiariamente solicita copias. Negada la reposición, el juez ordena expedir las copias. El demandante recibe las copias y dentro de los 5 días interpone recurso de queja ante el Tribunal Administrativo. El Tribunal, si considera que la sentencia sí era apelable, concede el recurso y ordena al juez remitir el expediente.
+    </div>
+  </section>
+
+  <!-- TEMA 6: SÚPLICA -->
+  <section id="tema6">
+    <h2>6. Recurso de Súplica</h2>
+    <p>Es el recurso que procede contra autos que por su naturaleza serían apelables, dictados por el Magistrado Ponente en el curso de la segunda instancia o única instancia, o durante el trámite de la apelación de un asunto.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">SÚPLICA</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Segunda o Única Instancia</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Ante la Sala, Sección o Subsección</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Autos Apelables</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Fundamento Legal</h3>
+    <div class="cita">
+      <strong>"Procede el recurso de súplica contra los autos que por su naturaleza serían apelables, dictados por el Magistrado Ponente en el curso de la segunda instancia o única instancia, o durante el trámite de la apelación de un asunto."</strong> — Art. 246 CPACA
+    </div>
+
+    <h3>🔍 Características</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🙏</div>
+        <h4>Procedencia</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Contra autos que serían apelables si hubieran sido dictados en primera instancia.</p>
+          <p>Pero que al ser dictados en segunda o única instancia no admiten apelación.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">👥</div>
+        <h4>Ante el Colegiado</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Se interpone ante la Sala, Sección o Subsección.</p>
+          <p>No ante el Magistrado Ponente que dictó el auto.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⏰</div>
+        <h4>Oportunidad</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Dentro de los 3 días siguientes a la notificación del auto.</p>
+          <p>En escrito dirigido a la Sala de la cual forma parte el ponente.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Decisión</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>El expediente pasa al Magistrado que sigue en turno al que dictó el auto.</p>
+          <p>Quien será el ponente para resolverlo ante la Sala, Sección o Subsección.</p>
+          <p>Contra lo decidido no procede recurso alguno.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Trámite</h3>
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📝 Interposición</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Dentro de los 3 días siguientes a la notificación del auto.</p>
+        <p>Mediante escrito dirigido a la Sala de la cual forma parte el ponente.</p>
+        <p>Expresando las razones en que se funda.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📝 Traslado</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>El escrito debe agregarse al expediente.</p>
+        <p>Se mantiene en secretaría por 2 días a disposición de la parte contraria.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📝 Resolución</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Vencido el traslado, el secretario pasa el expediente al Despacho del Magistrado que sigue en turno al que dictó la providencia.</p>
+        <p>Quien será el ponente para resolverlo ante la Sala, Sección o Subsección.</p>
+        <p>Contra lo decidido no procede recurso alguno.</p>
+      </div>
+    </div>
+
+    <h3>⚠️ Casos Especiales</h3>
+    <div class="alerta">
+      <strong>📌 También procede contra:</strong>
+      <ul>
+        <li>El auto que rechaza o declara desierta la apelación</li>
+        <li>El auto que rechaza o declara desierto el recurso extraordinario</li>
+      </ul>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> En segunda instancia, el Magistrado Ponente del Tribunal Administrativo profiere un auto que decreta una medida cautelar. Este auto, si hubiera sido dictado en primera instancia, sería apelable. Pero al ser dictado en segunda instancia, no admite apelación. Sin embargo, contra este auto procede el recurso de súplica ante la Sala o Sección del Tribunal.
+    </div>
+  </section>
+
+  <!-- TEMA 7: EFECTOS -->
+  <section id="tema7">
+    <h2>7. Efectos de los Recursos</h2>
+    <p>Los recursos administrativos pueden producir diferentes efectos sobre la providencia impugnada y sobre la competencia del juez.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">EFECTOS DE LOS RECURSOS</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Suspensivo</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Devolutivo</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Diferido</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Tipos de Efectos</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⏸️</div>
+        <h4>Efecto Suspensivo</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>La sentencia o auto no se cumple mientras se resuelve el recurso.</p>
+          <p>La competencia del juez queda suspendida para continuar el proceso.</p>
+          <p>Es el efecto por regla general de la apelación.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">▶️</div>
+        <h4>Efecto Devolutivo</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>La sentencia o auto se cumple inmediatamente.</p>
+          <p>La competencia del juez no se suspende.</p>
+          <p>Procede contra ciertos autos taxativamente señalados.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⏭️</div>
+        <h4>Efecto Diferido</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>La sentencia no se cumple, pero la competencia del juez no se suspende.</p>
+          <p>El juez puede continuar conociendo del proceso.</p>
+          <p>Procede en casos especiales previstos en la ley.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>📊 Cuadro Comparativo de Efectos</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Efecto</th>
+          <th>¿Se cumple la sentencia?</th>
+          <th>¿Se suspende la competencia del juez?</th>
+          <th>Cuando procede</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Suspensivo</strong></td>
+          <td>No</td>
+          <td>Sí</td>
+          <td>Regla general de la apelación</td>
+        </tr>
+        <tr>
+          <td><strong>Devolutivo</strong></td>
+          <td>Sí</td>
+          <td>No</td>
+          <td>Ciertos autos (numerales 2, 6, 7 y 9 del art. 243)</td>
+        </tr>
+        <tr>
+          <td><strong>Diferido</strong></td>
+          <td>No</td>
+          <td>No</td>
+          <td>Casos especiales previstos en la ley</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>⚠️ Regla General y Excepciones</h3>
+    <div class="alerta">
+      <strong>📌 Regla General:</strong>
+      <p>El recurso de apelación se concede en <strong>efecto suspensivo</strong>.</p>
+      <br>
+      <strong>📌 Excepciones (Art. 243 CPACA):</strong>
+      <p>Se conceden en <strong>efecto devolutivo</strong> los recursos contra los autos referidos en los numerales 2, 6, 7 y 9:</p>
+      <ul>
+        <li>Numeral 2: El auto que decreta una medida cautelar</li>
+        <li>Numeral 6: El que resuelve la liquidación de la condena o de los perjuicios</li>
+        <li>Numeral 7: El que decreta las nulidades procesales</li>
+        <li>Numeral 9: El que deniega el decreto o práctica de alguna prueba pedida oportunamente</li>
+      </ul>
+    </div>
+
+    <h3>🔍 Efecto de la Interposición del Recurso</h3>
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📝 Sobre la providencia impugnada</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Mientras se resuelve el recurso, la providencia no produce efectos jurídicos definitivos.</p>
+        <p>Si el recurso se concede en efecto suspensivo, no puede ejecutarse.</p>
+        <p>Si se concede en efecto devolutivo, puede ejecutarse inmediatamente.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📝 Sobre la competencia del juez</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Si el recurso se concede en efecto suspensivo, la competencia del juez queda suspendida.</p>
+        <p>Si se concede en efecto devolutivo o diferido, el juez mantiene su competencia.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📝 Reformatio in pejus</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>El superior no puede agravar la situación del apelante único.</p>
+        <p>Si ambas partes apelan o se adhieren a la apelación, el superior puede modificar la decisión en cualquier sentido.</p>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Un juez administrativo profiere sentencia condenando al Estado a pagar 100 millones de pesos. El Estado interpone recurso de apelación. El recurso se concede en efecto suspensivo. Mientras el Tribunal resuelve la apelación, la sentencia no se cumple y el Estado no está obligado a pagar. Si el Tribunal confirma la sentencia, esta se ejecutoria y el Estado debe pagar. Si el Tribunal revoca la sentencia, el Estado no debe pagar nada.
+    </div>
+  </section>
+
+  <!-- TEMA 8: TRÁMITE -->
+  <section id="tema8">
+    <h2>8. Trámite y Decisión de los Recursos</h2>
+    <p>El trámite de los recursos administrativos está regulado en el CPACA y varía según el tipo de recurso y la providencia impugnada.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">TRÁMITE DE RECURSOS</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Interposición</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Sustentación</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Concesión</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Decisión</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Requisitos Generales de los Recursos</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">✓</div>
+        <h4>Legitimación</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Debe tener calidad de parte en el proceso.</p>
+          <p>O ser tercero habilitado para intervenir.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Perjuicio o Gravamen</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>El recurrente debe invocar un perjuicio o gravamen.</p>
+          <p>No puede recurrir quien no se siente afectado.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⏰</div>
+        <h4>Oportunidad</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Debe interponerse dentro del término legal.</p>
+          <p>10 días para reposición y apelación.</p>
+          <p>3 días para súplica.</p>
+          <p>5 días para queja.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📝</div>
+        <h4>Sustentación</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>El interesado debe exponer las razones de inconformidad.</p>
+          <p>Puede aportar pruebas y solicitar la práctica de nuevas pruebas.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Trámite del Recurso de Reposición</h3>
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📝 Si se interpone en audiencia</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Se interpone y sustenta oralmente en el transcurso de la misma.</p>
+        <p>De inmediato el juez da traslado del recurso a los demás sujetos procesales.</p>
+        <p>Para que se pronuncien y a continuación procede a resolver si lo concede o lo niega.</p>
+        <p>De todo lo cual dejará constancia en el acta.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📝 Si se interpone por escrito</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Debe interponerse y sustentarse por escrito dentro de los 3 días siguientes.</p>
+        <p>Ante el juez que lo profirió.</p>
+        <p>De la sustentación se dará traslado por secretaría a los demás sujetos procesales por igual término.</p>
+        <p>Sin necesidad de auto que así lo ordene.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📝 Decisión</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>El juez debe conceder el recurso en el caso de que sea procedente y haya sido sustentado.</p>
+        <p>Contra el auto que decide la reposición no procede ningún recurso.</p>
+      </div>
+    </div>
+
+    <h3>📋 Trámite del Recurso de Apelación contra Autos</h3>
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📝 Si el auto se profiere en audiencia</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>La apelación debe interponerse y sustentarse oralmente en el transcurso de la misma.</p>
+        <p>De inmediato el juez da traslado del recurso a los demás sujetos procesales.</p>
+        <p>Para que se pronuncien y a continuación procede a resolver si lo concede o lo niega.</p>
+        <p>De todo lo cual dejará constancia en el acta.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📝 Si el auto se notifica por estado</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>El recurso debe interponerse y sustentarse por escrito dentro de los 3 días siguientes.</p>
+        <p>Ante el juez que lo profirió.</p>
+        <p>De la sustentación se dará traslado por secretaría a los demás sujetos procesales por igual término.</p>
+        <p>Sin necesidad de auto que así lo ordene.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📝 Concesión</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>El juez debe conceder el recurso en el caso de que sea procedente y haya sido sustentado.</p>
+        <p>Concedido el recurso, se remitirá el expediente al superior para que lo decida de plano.</p>
+      </div>
+    </div>
+
+    <h3>📋 Trámite del Recurso de Apelación contra Sentencias</h3>
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📝 Interposición y sustentación</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>El recurso debe interponerse y sustentarse ante la autoridad que profirió la providencia.</p>
+        <p>Dentro de los 10 días siguientes a su notificación.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📝 Concesión</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Si el recurso fue sustentado oportunamente y reúne los demás requisitos legales, se concederá mediante auto.</p>
+        <p>Que dispondrá remitir el expediente al superior.</p>
+        <p>Quien decidirá de plano si no se hubiese pedido la práctica de pruebas.</p>
+        <p>Si las partes pidieron pruebas, el superior decidirá si se decretan según los parámetros del nuevo código.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📝 Admisión</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Recibido el expediente por el superior, si se encuentran reunidos los requisitos, decidirá sobre su admisión.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📝 Audiencia de alegaciones y juzgamiento</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Admitido el recurso o vencido el término probatorio si a él hubiere lugar, el superior señalará fecha y hora para audiencia de alegaciones y juzgamiento.</p>
+        <p>Que deberá llevarse a cabo en un término no mayor a 20 días.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📝 Alegatos por escrito</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Si el Magistrado Ponente considera innecesaria la celebración de audiencia, ordenará, mediante auto que no admite recurso alguno, la presentación de los alegatos por escrito dentro de los 10 días siguientes.</p>
+        <p>Caso en el cual dictará sentencia en el término de los 20 días siguientes.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📝 Concepto del Ministerio Público</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>En las mismas oportunidades concedidas a las partes para alegar, podrá el Ministerio Público presentar el concepto si a bien lo tiene.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📝 Devolución del expediente</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>En la sentencia se ordenará devolver el expediente al juez de primera instancia para su obedecimiento y cumplimiento.</p>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Un juez administrativo profiere sentencia de primera instancia. El demandado interpone recurso de apelación dentro de los 10 días siguientes y lo sustenta. El juez concede el recurso en efecto suspensivo y remite el expediente al Tribunal. El Tribunal admite el recurso, señala audiencia para alegatos y juzgamiento dentro de los 20 días siguientes. En la audiencia, las partes presentan sus alegatos verbales y el Tribunal profiere sentencia de segunda instancia confirmando, modificando o revocando la decisión del juez.
+    </div>
+  </section>
+
+  <!-- TEMA 9: SILENCIO -->
+  <section id="tema9">
+    <h2>9. Silencio Administrativo en Sede de Recursos</h2>
+    <p>El silencio administrativo también opera en sede de recursos, configurándose cuando la autoridad no decide el recurso interpuesto dentro del término legal.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">SILENCIO EN RECURSOS</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Silencio Negativo</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Silencio Positivo</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Silencio Administrativo Negativo (Art. 86 CPACA)</h3>
+    <div class="cita">
+      <strong>"Salvo lo dispuesto en el artículo 52 de este Código, transcurrido dos (2) meses, contados a partir de la interposición de los recursos de reposición o apelación, sin que se haya notificado decisión expresa sobre ellos, se entenderá que la decisión es negativa."</strong> — Art. 86 CPACA
+    </div>
+
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">❌</div>
+        <h4>Naturaleza</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Ficción jurídica que equivale a una decisión negativa.</p>
+          <p>Regla general en el CPACA.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Efectos</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Agota la vía gubernativa.</p>
+          <p>Permite al interesado acudir ante la jurisdicción contencioso administrativa.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚠️</div>
+        <h4>Responsabilidad</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>La ocurrencia del silencio no exime a la autoridad de responsabilidad.</p>
+          <p>Constituye causal de mala conducta para el funcionario omisivo.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>✅ Silencio Administrativo Positivo en Recursos</h3>
+    <p>Excepcionalmente, la ley otorga al silencio el valor de decisión favorable en sede de recursos. Opera en los siguientes casos:</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Caso</th>
+          <th>Norma</th>
+          <th>Término</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Recursos contra actos de servicios públicos</strong></td>
+          <td>Art. 158 L. 142/94</td>
+          <td>15 días hábiles sin respuesta</td>
+        </tr>
+        <tr>
+          <td><strong>Revisión de estratos socioeconómicos</strong></td>
+          <td>Art. 104 L. 142/94</td>
+          <td>2 meses sin respuesta del alcalde</td>
+        </tr>
+        <tr>
+          <td><strong>Revocatoria directa tributaria</strong></td>
+          <td>Art. 738-1 E.T.</td>
+          <td>1 año sin respuesta</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>⚠️ Interrupción del Término</h3>
+    <div class="alerta">
+      <strong>📌 Regla General:</strong>
+      <p>El término de 2 meses para decidir los recursos se interrumpe únicamente por la práctica de pruebas.</p>
+      <br>
+      <strong>📌 Excepción:</strong>
+      <p>Cuando la ley especial establezca un término diferente.</p>
+    </div>
+
+    <h3>📋 Competencia de la Autoridad tras el Silencio</h3>
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📝 ¿Puede la autoridad decidir después del silencio?</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Sí, siempre que no se hubiere notificado auto admisorio de la demanda.</p>
+        <p>La ocurrencia del silencio no priva a la autoridad de su competencia para decidir.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📝 ¿Qué pasa si la autoridad decide después de notificada la demanda?</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Si ya se notificó auto admisorio de la demanda, la autoridad pierde competencia.</p>
+        <p>El proceso continúa ante la jurisdicción contencioso administrativa.</p>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Un ciudadano interpone recurso de apelación contra una multa de tránsito. Transcurridos 2 meses sin que la autoridad decida el recurso, se configura el silencio administrativo negativo. El ciudadano puede entonces demandar el acto ante la jurisdicción contencioso administrativa mediante la acción de nulidad y restablecimiento del derecho. Sin embargo, si la autoridad decide el recurso antes de que se notifique auto admisorio de la demanda, el silencio se desvirtúa y la decisión de la autoridad produce efectos jurídicos.
+    </div>
+  </section>
+
+  <!-- TEMA 10: CASOS -->
+  <section id="tema10">
+    <h2>10. Casos Prácticos y Comparativa</h2>
+    <p>Análisis de situaciones reales para consolidar el aprendizaje.</p>
+
+    <div class="alerta">
+      <strong>🎯 Caso 1: Recurso de Reposición</strong>
+      <p>Un funcionario profiere un auto que ordena el embargo de unos bienes. El afectado interpone recurso de reposición dentro de los 10 días siguientes.</p>
+      <br>
+      <strong>📌 Solución:</strong>
+      <ul>
+        <li>El recurso se interpone ante el mismo funcionario que profirió el auto</li>
+        <li>El funcionario debe decidir el recurso dentro de los 2 meses siguientes</li>
+        <li>Mientras se resuelve el recurso, el auto no produce efectos (efecto suspensivo)</li>
+        <li>Si el funcionario confirma el auto, el afectado puede demandar ante la jurisdicción</li>
+      </ul>
+    </div>
+
+    <div class="alerta">
+      <strong>🎯 Caso 2: Recurso de Apelación</strong>
+      <p>Un juez administrativo profiere sentencia de primera instancia condenando al Estado a pagar una indemnización. El Estado interpone recurso de apelación.</p>
+      <br>
+      <strong>📌 Solución:</strong>
+      <ul>
+        <li>El recurso se interpone ante el juez que profirió la sentencia</li>
+        <li>Pero lo resuelve el Tribunal Administrativo (superior jerárquico)</li>
+        <li>El recurso se concede en efecto suspensivo (regla general)</li>
+        <li>Mientras se resuelve la apelación, la sentencia no se cumple</li>
+        <li>El Tribunal puede confirmar, modificar o revocar la sentencia</li>
+      </ul>
+    </div>
+
+    <div class="alerta">
+      <strong>🎯 Caso 3: Recurso de Queja</strong>
+      <p>Un juez administrativo profiere sentencia condenatoria. El demandado interpone recurso de apelación. El juez niega el recurso argumentando que la sentencia no es apelable.</p>
+      <br>
+      <strong>📌 Solución:</strong>
+      <ul>
+        <li>El demandado debe pedir reposición del auto que negó la apelación</li>
+        <li>Y subsidiariamente solicitar que se le expidan copias de la providencia</li>
+        <li>Negada la reposición, el juez ordena expedir las copias</li>
+        <li>Dentro de los 5 días siguientes al recibo de las copias, el demandado interpone recurso de queja ante el Tribunal</li>
+        <li>Si el Tribunal considera que la sentencia sí era apelable, concede el recurso y ordena al juez remitir el expediente</li>
+      </ul>
+    </div>
+
+    <div class="alerta">
+      <strong>🎯 Caso 4: Silencio Administrativo en Recursos</strong>
+      <p>Un ciudadano interpone recurso de apelación contra una multa. Transcurridos 2 meses sin que la autoridad decida el recurso.</p>
+      <br>
+      <strong>📌 Solución:</strong>
+      <ul>
+        <li>Se configura el silencio administrativo negativo</li>
+        <li>El ciudadano puede demandar el acto ante la jurisdicción contencioso administrativa</li>
+        <li>Sin embargo, si la autoridad decide el recurso antes de que se notifique auto admisorio de la demanda, el silencio se desvirtúa</li>
+        <li>La ocurrencia del silencio no exime a la autoridad de responsabilidad</li>
+      </ul>
+    </div>
+
+    <h3>📊 Cuadro Resumen: Términos de los Recursos</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Recurso</th>
+          <th>Término de Interposición</th>
+          <th>Término de Decisión</th>
+          <th>Efecto</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Reposición</strong></td>
+          <td>10 días</td>
+          <td>2 meses</td>
+          <td>Suspensivo</td>
+        </tr>
+        <tr>
+          <td><strong>Apelación</strong></td>
+          <td>10 días</td>
+          <td>No establecido</td>
+          <td>Suspensivo o devolutivo</td>
+        </tr>
+        <tr>
+          <td><strong>Queja</strong></td>
+          <td>5 días</td>
+          <td>No establecido</td>
+          <td>Devolutivo</td>
+        </tr>
+        <tr>
+          <td><strong>Súplica</strong></td>
+          <td>3 días</td>
+          <td>No establecido</td>
+          <td>Devolutivo</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="ejemplo">
+      <strong>📝 Reflexión final:</strong> Los recursos administrativos constituyen un mecanismo esencial de defensa de los derechos de los ciudadanos frente a las decisiones de la administración. Permiten que la propia administración corrija sus errores sin necesidad de acudir al juez, garantizando así el principio de autotutela. Sin embargo, cuando la administración no decide los recursos dentro del término legal, se configura el silencio administrativo, que permite al ciudadano acudir a la jurisdicción contencioso administrativa para obtener la protección de sus derechos.
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz">
+    <h2>🎯 Quiz Completo - 40 Preguntas</h2>
+    <p>Pon a prueba tus conocimientos sobre los Recursos Administrativos.</p>
+
+    <div class="quiz-container">
+      <div class="quiz-header">
+        <h3>📊 Tu Progreso</h3>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="quiz-stats">
+          <div class="stat">Respondidas: <strong id="respondidas">0</strong>/40</div>
+          <div class="stat">Correctas: <strong id="correctas">0</strong></div>
+          <div class="stat">Incorrectas: <strong id="incorrectas">0</strong></div>
+          <div class="stat">Porcentaje: <strong id="porcentaje">0</strong>%</div>
+        </div>
+      </div>
+
+      <div class="quiz-tabs">
+        <div class="quiz-tab active" onclick="mostrarSeccion('s1', this)">T1 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s2', this)">T2 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s3', this)">T3 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s4', this)">T4 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s5', this)">T5 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s6', this)">T6 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s7', this)">T7 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s8', this)">T8 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s9', this)">T9 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s10', this)">T10 (4)</div>
+      </div>
+
+      <!-- SECCIÓN 1: NOCIÓN -->
+      <div class="quiz-section active" id="s1">
+        <div class="pregunta" data-correcta="1" data-tema="1">
+          <span class="pregunta-num">1</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los recursos administrativos son:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 1)">a) Acciones que se interponen ante la jurisdicción contencioso administrativa.</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">b) Mecanismos de impugnación que tienen las partes para solicitar la reforma, revocación o aclaración de una decisión administrativa.</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">c) Mecanismos de solución de conflictos entre particulares.</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">d) Acciones constitucionales para proteger derechos fundamentales.</div>
+          </div>
+          <div class="explicacion">Los recursos administrativos son mecanismos de impugnación que tienen las partes y terceros habilitados para solicitar la reforma, revocación o aclaración de una decisión administrativa ante la misma autoridad o su superior jerárquico o funcional.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="1">
+          <span class="pregunta-num">2</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los recursos administrativos se fundamentan en el artículo:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 2)">a) 29 de la Constitución Política (debido proceso).</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">b) 23 de la Constitución Política (derecho de petición).</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">c) 86 de la Constitución Política (acción de tutela).</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">d) 88 de la Constitución Política (acciones populares).</div>
+          </div>
+          <div class="explicacion">Los recursos administrativos se fundamentan en el artículo 29 de la Constitución Política, que establece el derecho al debido proceso y a impugnar la sentencia condenatoria.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="1">
+          <span class="pregunta-num">3</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La finalidad principal de los recursos administrativos es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 3)">a) Sancionar a los funcionarios que actúan ilegalmente.</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">b) Recaudar impuestos y contribuciones.</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">c) Garantizar la defensa de los derechos de los administrados y el control de legalidad de las decisiones administrativas.</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">d) Agilizar los trámites burocráticos.</div>
+          </div>
+          <div class="explicacion">La finalidad principal de los recursos administrativos es garantizar la defensa de los derechos de los administrados y el control de legalidad de las decisiones administrativas, permitiendo que la propia administración corrija sus errores.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="1">
+          <span class="pregunta-num">4</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Un ciudadano recibe una multa de tránsito. Puede interponer:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 4)">a) Acción de tutela.</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">b) Acción popular.</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">c) Acción de cumplimiento.</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">d) Recurso de reposición o apelación.</div>
+          </div>
+          <div class="explicacion">Contra una multa de tránsito (acto administrativo particular) proceden los recursos administrativos de reposición y apelación, no las acciones constitucionales.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 2: CLASIFICACIÓN -->
+      <div class="quiz-section" id="s2">
+        <div class="pregunta" data-correcta="1" data-tema="2">
+          <span class="pregunta-num">5</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El CPACA regula los siguientes recursos ordinarios:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 5)">a) Reposición, apelación, queja, súplica y revisión.</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">b) Reposición, apelación, queja y súplica.</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">c) Apelación, queja y súplica.</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">d) Reposición y apelación únicamente.</div>
+          </div>
+          <div class="explicacion">El CPACA regula cuatro recursos ordinarios: reposición, apelación, queja y súplica (Art. 74).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="2">
+          <span class="pregunta-num">6</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El recurso de reposición se interpone ante:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 6)">a) El mismo funcionario que profirió la decisión.</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">b) El inmediato superior jerárquico.</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">c) El juez de la jurisdicción contencioso administrativa.</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">d) La Corte Constitucional.</div>
+          </div>
+          <div class="explicacion">El recurso de reposición se interpone ante el mismo funcionario que profirió la decisión, con el fin de que la aclare, modifique, adicione o revoque.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="2">
+          <span class="pregunta-num">7</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El recurso de apelación se interpone ante:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 7)">a) El mismo funcionario que profirió la decisión.</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">b) El juez de la jurisdicción contencioso administrativa.</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">c) El inmediato superior administrativo o funcional.</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">d) La Corte Suprema de Justicia.</div>
+          </div>
+          <div class="explicacion">El recurso de apelación se interpone ante el inmediato superior administrativo o funcional del funcionario que profirió la decisión.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="2">
+          <span class="pregunta-num">8</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Contra qué actos NO proceden recursos administrativos:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 8)">a) Contra los actos particulares y definitivos.</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">b) Contra los actos que ponen fin a la actuación.</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">c) Contra los actos que reconocen un derecho.</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">d) Contra los actos de carácter general, de trámite, preparatorios o de ejecución.</div>
+          </div>
+          <div class="explicacion">Contra los actos de carácter general, de trámite, preparatorios o de ejecución no proceden recursos administrativos (Art. 75 CPACA), salvo norma expresa.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 3: REPOSICIÓN -->
+      <div class="quiz-section" id="s3">
+        <div class="pregunta" data-correcta="1" data-tema="3">
+          <span class="pregunta-num">9</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El recurso de reposición procede contra:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 9)">a) Sentencias de primera instancia.</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">b) Autos que no sean susceptibles de apelación o de súplica.</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">c) Actos de carácter general.</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">d) Actos de trámite.</div>
+          </div>
+          <div class="explicacion">El recurso de reposición procede contra los autos que no sean susceptibles de apelación o de súplica (Art. 242 CPACA).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="3">
+          <span class="pregunta-num">10</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El término para interponer el recurso de reposición es de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 10)">a) 10 días siguientes a la notificación del acto.</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">b) 5 días siguientes a la notificación del acto.</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">c) 3 días siguientes a la notificación del acto.</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">d) 15 días siguientes a la notificación del acto.</div>
+          </div>
+          <div class="explicacion">El recurso de reposición debe interponerse dentro de los 10 días siguientes a la notificación del acto, o en la misma audiencia si fue dictado verbalmente.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="3">
+          <span class="pregunta-num">11</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El recurso de reposición se concede en efecto:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 11)">a) Devolutivo.</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">b) Diferido.</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">c) Suspensivo.</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">d) No produce efectos.</div>
+          </div>
+          <div class="explicacion">El recurso de reposición se concede en efecto suspensivo, lo que significa que mientras se resuelve el recurso, el acto no produce efectos jurídicos ni puede ejecutarse.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="3">
+          <span class="pregunta-num">12</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Un funcionario profiere un auto que ordena el embargo de unos bienes. El afectado interpone recurso de reposición. Mientras se resuelve el recurso:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 12)">a) El embargo puede ejecutarse inmediatamente.</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">b) El embargo se ejecuta solo si el funcionario lo autoriza.</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">c) El embargo se ejecuta si transcurren 10 días sin decisión.</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">d) El embargo no puede ejecutarse (efecto suspensivo).</div>
+          </div>
+          <div class="explicacion">Mientras se resuelve el recurso de reposición, el auto no produce efectos jurídicos ni puede ejecutarse (efecto suspensivo).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 4: APELACIÓN -->
+      <div class="quiz-section" id="s4">
+        <div class="pregunta" data-correcta="1" data-tema="4">
+          <span class="pregunta-num">13</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El recurso de apelación procede contra:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 13)">a) Todos los actos administrativos.</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">b) Sentencias de primera instancia y ciertos autos taxativamente señalados en la ley.</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">c) Actos de carácter general.</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">d) Actos de trámite.</div>
+          </div>
+          <div class="explicacion">El recurso de apelación procede contra las sentencias de primera instancia y contra ciertos autos taxativamente señalados en el artículo 243 del CPACA.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="4">
+          <span class="pregunta-num">14</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El término para interponer el recurso de apelación es de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 14)">a) 10 días siguientes a la notificación de la providencia.</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">b) 5 días siguientes a la notificación de la providencia.</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">c) 3 días siguientes a la notificación de la providencia.</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">d) 15 días siguientes a la notificación de la providencia.</div>
+          </div>
+          <div class="explicacion">El recurso de apelación debe interponerse dentro de los 10 días siguientes a la notificación de la providencia, o en la misma audiencia si fue dictada verbalmente.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="4">
+          <span class="pregunta-num">15</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La regla general es que el recurso de apelación se concede en efecto:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 15)">a) Devolutivo.</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">b) Diferido.</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">c) Suspensivo.</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">d) No produce efectos.</div>
+          </div>
+          <div class="explicacion">La regla general es que el recurso de apelación se concede en efecto suspensivo, salvo las excepciones establecidas en el artículo 243 del CPACA.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="4">
+          <span class="pregunta-num">16</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Un juez administrativo profiere sentencia de primera instancia condenando al Estado a pagar una indemnización. El Estado interpone recurso de apelación. Mientras el Tribunal resuelve la apelación:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 16)">a) La sentencia se cumple inmediatamente.</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">b) La sentencia se cumple si el Tribunal lo autoriza.</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">c) La sentencia se cumple si transcurren 10 días sin decisión.</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">d) La sentencia no se cumple (efecto suspensivo).</div>
+          </div>
+          <div class="explicacion">Mientras se resuelve el recurso de apelación concedido en efecto suspensivo, la sentencia no se cumple.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 5: QUEJA -->
+      <div class="quiz-section" id="s5">
+        <div class="pregunta" data-correcta="1" data-tema="5">
+          <span class="pregunta-num">17</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El recurso de queja procede cuando:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 17)">a) Se interpone contra sentencias de primera instancia.</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">b) Se niega el recurso de apelación o se concede en un efecto diferente al que legalmente corresponde.</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">c) Se interpone contra autos de segunda instancia.</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">d) Se interpone contra actos de carácter general.</div>
+          </div>
+          <div class="explicacion">El recurso de queja procede cuando se niega el recurso de apelación o se concede en un efecto diferente al que legalmente corresponde (Art. 245 CPACA).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="5">
+          <span class="pregunta-num">18</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El recurso de queja se interpone ante:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 18)">a) El superior jerárquico o funcional.</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">b) El mismo funcionario que negó la apelación.</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">c) El juez de la jurisdicción contencioso administrativa.</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">d) La Corte Constitucional.</div>
+          </div>
+          <div class="explicacion">El recurso de queja se interpone directamente ante el superior jerárquico o funcional, no ante el juez que negó o concedió indebidamente el recurso.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="5">
+          <span class="pregunta-num">19</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El término para interponer el recurso de queja es de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 19)">a) 10 días siguientes al recibo de las copias.</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">b) 3 días siguientes al recibo de las copias.</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">c) 5 días siguientes al recibo de las copias.</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">d) 15 días siguientes al recibo de las copias.</div>
+          </div>
+          <div class="explicacion">El recurso de queja debe interponerse dentro de los 5 días siguientes al recibo de las copias de la providencia recurrida.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="5">
+          <span class="pregunta-num">20</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Un juez administrativo profiere sentencia condenatoria. El demandado interpone recurso de apelación. El juez niega el recurso. El demandado debe:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 20)">a) Demandar inmediatamente ante la jurisdicción contencioso administrativa.</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">b) Interponer recurso de súplica.</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">c) Interponer recurso de reposición únicamente.</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">d) Pedir reposición del auto que negó la apelación y subsidiariamente solicitar copias para interponer recurso de queja ante el superior.</div>
+          </div>
+          <div class="explicacion">Cuando el juez niega el recurso de apelación, el demandado debe pedir reposición del auto y subsidiariamente solicitar copias para interponer recurso de queja ante el superior dentro de los 5 días siguientes al recibo de las copias.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 6: SÚPLICA -->
+      <div class="quiz-section" id="s6">
+        <div class="pregunta" data-correcta="1" data-tema="6">
+          <span class="pregunta-num">21</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El recurso de súplica procede contra:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 21)">a) Sentencias de primera instancia.</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">b) Autos que por su naturaleza serían apelables, dictados por el Magistrado Ponente en el curso de la segunda instancia o única instancia.</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">c) Actos de carácter general.</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">d) Actos de trámite.</div>
+          </div>
+          <div class="explicacion">El recurso de súplica procede contra los autos que por su naturaleza serían apelables, dictados por el Magistrado Ponente en el curso de la segunda instancia o única instancia, o durante el trámite de la apelación de un asunto (Art. 246 CPACA).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="6">
+          <span class="pregunta-num">22</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El recurso de súplica se interpone ante:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 22)">a) La Sala, Sección o Subsección.</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">b) El mismo Magistrado Ponente que dictó el auto.</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">c) El juez de la jurisdicción contencioso administrativa.</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">d) La Corte Constitucional.</div>
+          </div>
+          <div class="explicacion">El recurso de súplica se interpone ante la Sala, Sección o Subsección, no ante el Magistrado Ponente que dictó el auto.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="6">
+          <span class="pregunta-num">23</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El término para interponer el recurso de súplica es de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 23)">a) 10 días siguientes a la notificación del auto.</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">b) 5 días siguientes a la notificación del auto.</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">c) 3 días siguientes a la notificación del auto.</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">d) 15 días siguientes a la notificación del auto.</div>
+          </div>
+          <div class="explicacion">El recurso de súplica debe interponerse dentro de los 3 días siguientes a la notificación del auto, en escrito dirigido a la Sala de la cual forma parte el ponente.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="6">
+          <span class="pregunta-num">24</span><span class="pregunta-tipo">Aplicación</span>
+          <p>En segunda instancia, el Magistrado Ponente del Tribunal Administrativo profiere un auto que decreta una medida cautelar. Contra este auto procede:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 24)">a) Recurso de apelación.</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">b) Recurso de queja.</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">c) Recurso de reposición.</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">d) Recurso de súplica.</div>
+          </div>
+          <div class="explicacion">Contra el auto que decreta una medida cautelar dictado en segunda instancia procede el recurso de súplica, pues si hubiera sido dictado en primera instancia sería apelable.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 7: EFECTOS -->
+      <div class="quiz-section" id="s7">
+        <div class="pregunta" data-correcta="1" data-tema="7">
+          <span class="pregunta-num">25</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El efecto suspensivo significa que:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 25)">a) La sentencia se cumple inmediatamente.</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">b) La sentencia no se cumple mientras se resuelve el recurso y la competencia del juez queda suspendida.</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">c) La sentencia no se cumple, pero la competencia del juez no se suspende.</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">d) La sentencia se cumple, pero la competencia del juez queda suspendida.</div>
+          </div>
+          <div class="explicacion">El efecto suspensivo significa que la sentencia no se cumple mientras se resuelve el recurso y la competencia del juez queda suspendida para continuar el proceso.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="7">
+          <span class="pregunta-num">26</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El efecto devolutivo significa que:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 26)">a) La sentencia se cumple inmediatamente y la competencia del juez no se suspende.</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">b) La sentencia no se cumple mientras se resuelve el recurso.</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">c) La sentencia no se cumple, pero la competencia del juez no se suspende.</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">d) La sentencia se cumple, pero la competencia del juez queda suspendida.</div>
+          </div>
+          <div class="explicacion">El efecto devolutivo significa que la sentencia se cumple inmediatamente y la competencia del juez no se suspende.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="7">
+          <span class="pregunta-num">27</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El efecto diferido significa que:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 27)">a) La sentencia se cumple inmediatamente.</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">b) La sentencia no se cumple mientras se resuelve el recurso y la competencia del juez queda suspendida.</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">c) La sentencia no se cumple, pero la competencia del juez no se suspende.</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">d) La sentencia se cumple, pero la competencia del juez queda suspendida.</div>
+          </div>
+          <div class="explicacion">El efecto diferido significa que la sentencia no se cumple, pero la competencia del juez no se suspende, pudiendo continuar conociendo del proceso.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="7">
+          <span class="pregunta-num">28</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Un juez administrativo profiere un auto que decreta una medida cautelar. El afectado interpone recurso de apelación. Este recurso se concede en efecto:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 28)">a) Suspensivo.</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">b) Diferido.</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">c) No procede recurso de apelación contra este auto.</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">d) Devolutivo.</div>
+          </div>
+          <div class="explicacion">Contra el auto que decreta una medida cautelar (numeral 2 del artículo 243 CPACA) el recurso de apelación se concede en efecto devolutivo.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 8: TRÁMITE -->
+      <div class="quiz-section" id="s8">
+        <div class="pregunta" data-correcta="1" data-tema="8">
+          <span class="pregunta-num">29</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los requisitos generales de los recursos son:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 29)">a) Legitimación, perjuicio, oportunidad y sustentación.</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">b) Legitimación, perjuicio o gravamen, oportunidad y sustentación.</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">c) Legitimación, oportunidad y sustentación únicamente.</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">d) Perjuicio, oportunidad y sustentación únicamente.</div>
+          </div>
+          <div class="explicacion">Los requisitos generales de los recursos son: legitimación (tener calidad de parte), perjuicio o gravamen, oportunidad (dentro del término legal) y sustentación (exponer las razones de inconformidad).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="8">
+          <span class="pregunta-num">30</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Si el recurso de reposición se interpone en audiencia:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 30)">a) Se interpone y sustenta oralmente en el transcurso de la misma.</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">b) Debe interponerse por escrito dentro de los 10 días siguientes.</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">c) Debe interponerse por escrito dentro de los 3 días siguientes.</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">d) No puede interponerse en audiencia.</div>
+          </div>
+          <div class="explicacion">Si el recurso de reposición se interpone en audiencia, debe interponerse y sustentarse oralmente en el transcurso de la misma.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="8">
+          <span class="pregunta-num">31</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Si el recurso de apelación contra sentencia se interpone por escrito:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 31)">a) Debe interponerse dentro de los 3 días siguientes.</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">b) Debe interponerse dentro de los 5 días siguientes.</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">c) Debe interponerse y sustentarse dentro de los 10 días siguientes a la notificación.</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">d) Debe interponerse dentro de los 15 días siguientes.</div>
+          </div>
+          <div class="explicacion">El recurso de apelación contra sentencia debe interponerse y sustentarse ante la autoridad que profirió la providencia, dentro de los 10 días siguientes a su notificación.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="8">
+          <span class="pregunta-num">32</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Un juez administrativo profiere sentencia de primera instancia. El demandado interpone recurso de apelación dentro de los 10 días siguientes y lo sustenta. El juez concede el recurso y remite el expediente al Tribunal. El Tribunal debe:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 32)">a) Decidir el recurso inmediatamente sin admitirlo.</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">b) Negar el recurso por improcedente.</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">c) Remitir el expediente de vuelta al juez de primera instancia.</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">d) Admitir el recurso, señalar audiencia de alegaciones y juzgamiento dentro de los 20 días siguientes, y proferir sentencia.</div>
+          </div>
+          <div class="explicacion">Recibido el expediente por el Tribunal, si se encuentran reunidos los requisitos, debe decidir sobre su admisión. Admitido el recurso, señalará fecha y hora para audiencia de alegaciones y juzgamiento dentro de los 20 días siguientes, y proferirá sentencia.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 9: SILENCIO -->
+      <div class="quiz-section" id="s9">
+        <div class="pregunta" data-correcta="1" data-tema="9">
+          <span class="pregunta-num">33</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El silencio administrativo en sede de recursos se configura cuando:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 33)">a) La autoridad decide el recurso dentro del término legal.</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">b) Transcurridos 2 meses contados a partir de la interposición de los recursos, sin que se haya notificado decisión expresa sobre ellos.</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">c) La autoridad niega el recurso.</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">d) El interesado no interpone el recurso dentro del término legal.</div>
+          </div>
+          <div class="explicacion">El silencio administrativo en sede de recursos se configura cuando, transcurridos 2 meses contados a partir de la interposición de los recursos de reposición o apelación, sin que se haya notificado decisión expresa sobre ellos (Art. 86 CPACA).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="9">
+          <span class="pregunta-num">34</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La regla general es que el silencio administrativo en sede de recursos es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 34)">a) Negativo.</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">b) Positivo.</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">c) Diferido.</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">d) No existe silencio en sede de recursos.</div>
+          </div>
+          <div class="explicacion">La regla general es que el silencio administrativo en sede de recursos es negativo, es decir, equivale a una decisión negativa.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="9">
+          <span class="pregunta-num">35</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El silencio administrativo negativo en sede de recursos:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 35)">a) Agota la vía gubernativa y permite al interesado acudir ante la jurisdicción contencioso administrativa.</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">b) No produce efectos jurídicos.</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">c) Obliga a la autoridad a decidir el recurso.</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">d) Permite al interesado interponer un nuevo recurso.</div>
+          </div>
+          <div class="explicacion">El silencio administrativo negativo agota la vía gubernativa y permite al interesado acudir ante la jurisdicción contencioso administrativa para demandar el acto.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="9">
+          <span class="pregunta-num">36</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Un ciudadano interpone recurso de apelación contra una multa. Transcurridos 2 meses sin que la autoridad decida el recurso. El ciudadano puede:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 36)">a) Interponer un nuevo recurso de apelación.</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">b) Interponer recurso de queja.</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">c) Interponer recurso de súplica.</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">d) Demandar el acto ante la jurisdicción contencioso administrativa.</div>
+          </div>
+          <div class="explicacion">Transcurridos 2 meses sin que la autoridad decida el recurso, se configura el silencio administrativo negativo, lo que agota la vía gubernativa y permite al ciudadano demandar el acto ante la jurisdicción contencioso administrativa.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 10: CASOS -->
+      <div class="quiz-section" id="s10">
+        <div class="pregunta" data-correcta="1" data-tema="10">
+          <span class="pregunta-num">37</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Un funcionario profiere un auto que ordena el embargo de unos bienes. El afectado interpone recurso de reposición dentro de los 10 días siguientes. El funcionario debe decidir el recurso dentro de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 37)">a) 5 días siguientes a su interposición.</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">b) 2 meses siguientes a su interposición.</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">c) 10 días siguientes a su interposición.</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">d) 3 meses siguientes a su interposición.</div>
+          </div>
+          <div class="explicacion">El funcionario debe decidir el recurso de reposición dentro de los 2 meses siguientes a su interposición.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="10">
+          <span class="pregunta-num">38</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Un juez administrativo profiere sentencia de primera instancia. El demandado interpone recurso de apelación dentro de los 10 días siguientes. El recurso se concede en efecto suspensivo. Mientras el Tribunal resuelve la apelación:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 38)">a) La sentencia no se cumple.</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">b) La sentencia se cumple inmediatamente.</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">c) La sentencia se cumple si transcurren 10 días sin decisión.</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">d) La sentencia se cumple si el Tribunal lo autoriza.</div>
+          </div>
+          <div class="explicacion">Mientras se resuelve el recurso de apelación concedido en efecto suspensivo, la sentencia no se cumple.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="10">
+          <span class="pregunta-num">39</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Un juez administrativo profiere sentencia condenatoria. El demandado interpone recurso de apelación. El juez niega el recurso. El demandado pide reposición del auto que negó la apelación y subsidiariamente solicita copias. Negada la reposición, el juez ordena expedir las copias. El demandado recibe las copias y dentro de los 5 días interpone recurso de queja ante el Tribunal. El Tribunal, si considera que la sentencia sí era apelable, debe:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 39)">a) Negar el recurso de queja.</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">b) Remitir el expediente de vuelta al juez de primera instancia.</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">c) Conceder el recurso y ordenar al juez remitir el expediente.</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">d) Decidir el recurso de queja inmediatamente.</div>
+          </div>
+          <div class="explicacion">Si el Tribunal considera que la sentencia sí era apelable, debe conceder el recurso de queja y ordenar al juez remitir el expediente para que decida la apelación.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="10">
+          <span class="pregunta-num">40</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Un ciudadano interpone recurso de apelación contra una multa. Transcurridos 2 meses sin que la autoridad decida el recurso. Sin embargo, antes de que el ciudadano demande el acto ante la jurisdicción, la autoridad decide el recurso y confirma la multa. En este caso:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 40)">a) El silencio administrativo se mantiene y el ciudadano puede demandar el acto.</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">b) El ciudadano debe interponer un nuevo recurso de apelación.</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">c) El ciudadano debe interponer recurso de queja.</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">d) El silencio se desvirtúa y la decisión de la autoridad produce efectos jurídicos.</div>
+          </div>
+          <div class="explicacion">Si la autoridad decide el recurso antes de que se notifique auto admisorio de la demanda, el silencio se desvirtúa y la decisión de la autoridad produce efectos jurídicos.</div>
+        </div>
+      </div>
+
+      <div class="resultado-final" id="resultadoFinal">
+        <h3>🏆 Resultado Final</h3>
+        <div class="puntaje-final" id="puntajeFinal">0/40</div>
+        <p id="mensajeFinal"></p>
+        <div class="desglose-temas" id="desgloseTemas"></div>
+        <button onclick="reiniciarQuiz()" class="btn-reset">🔄 Reiniciar Quiz</button>
+      </div>
+
+      <div style="text-align: center; margin-top: 1.5rem;">
+        <button onclick="verResultadoFinal()">📊 Ver Resultado Final</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>⚖️ Guía Didáctica - Recursos Administrativos</p>
+  <p>Guía 6 de 8 · Derecho Administrativo Colombiano</p>
+  <p style="margin-top: 1rem; opacity: 0.7;">© 2026 - Material educativo interactivo</p>
+</footer>
+
+<script>
+  function toggleAcordeon(header) {
+    header.classList.toggle('active');
+    const content = header.nextElementSibling;
+    content.classList.toggle('active');
+  }
+
+  let respuestas = {};
+  const totalPreguntas = 40;
+
+  function mostrarSeccion(id, tab) {
+    document.querySelectorAll('.quiz-section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.quiz-tab').forEach(t => t.classList.remove('active'));
+    
+    document.getElementById(id).classList.add('active');
+    tab.classList.add('active');
+  }
+
+  function seleccionar(opcion, preguntaNum) {
+    if (respuestas[preguntaNum] !== undefined) return;
+
+    const pregunta = opcion.closest('.pregunta');
+    const opciones = pregunta.querySelectorAll('.opcion');
+    const correcta = parseInt(pregunta.dataset.correcta);
+    const tema = parseInt(pregunta.dataset.tema);
+    const seleccionada = Array.from(opciones).indexOf(opcion);
+    const explicacion = pregunta.querySelector('.explicacion');
+
+    opciones.forEach(o => o.classList.add('disabled'));
+
+    if (seleccionada === correcta) {
+      opcion.classList.add('correcta');
+      respuestas[preguntaNum] = { correcta: true, tema: tema };
+    } else {
+      opcion.classList.add('incorrecta');
+      opciones[correcta].classList.add('correcta');
+      respuestas[preguntaNum] = { correcta: false, tema: tema };
+    }
+
+    explicacion.classList.add('visible');
+    pregunta.classList.add('answered');
+    actualizarEstadisticas();
+  }
+
+  function actualizarEstadisticas() {
+    const total = Object.keys(respuestas).length;
+    const correctas = Object.values(respuestas).filter(r => r.correcta).length;
+    const incorrectas = total - correctas;
+    const porcentaje = total > 0 ? Math.round((correctas / total) * 100) : 0;
+
+    document.getElementById('respondidas').textContent = total;
+    document.getElementById('correctas').textContent = correctas;
+    document.getElementById('incorrectas').textContent = incorrectas;
+    document.getElementById('porcentaje').textContent = porcentaje;
+
+    const progreso = (total / totalPreguntas) * 100;
+    document.getElementById('progressFill').style.width = progreso + '%';
+  }
+
+  function verResultadoFinal() {
+    const total = Object.keys(respuestas).length;
+    
+    if (total < totalPreguntas) {
+      alert(`⚠️ Aún te faltan ${totalPreguntas - total} preguntas por responder.`);
+      return;
+    }
+
+    const correctas = Object.values(respuestas).filter(r => r.correcta).length;
+    const porcentaje = Math.round((correctas / totalPreguntas) * 100);
+
+    const resultadoFinal = document.getElementById('resultadoFinal');
+    resultadoFinal.classList.add('visible');
+
+    document.getElementById('puntajeFinal').textContent = `${correctas}/${totalPreguntas}`;
+
+    let mensaje = '';
+    if (porcentaje === 100) mensaje = '🏆 ¡PERFECTO! Dominas los Recursos Administrativos.';
+    else if (porcentaje >= 90) mensaje = '🌟 ¡Excelente! Dominio sobresaliente.';
+    else if (porcentaje >= 75) mensaje = '✅ ¡Muy bien! Buen dominio.';
+    else if (porcentaje >= 60) mensaje = '📚 Aceptable. Repasa los temas donde fallaste.';
+    else if (porcentaje >= 40) mensaje = '📖 Necesitas reforzar varios conceptos.';
+    else mensaje = '🔍 Es necesario estudiar nuevamente todos los temas.';
+
+    document.getElementById('mensajeFinal').textContent = mensaje;
+
+    const temas = {
+      1: { nombre: 'T1: Noción', total: 4, correctas: 0 },
+      2: { nombre: 'T2: Clasificación', total: 4, correctas: 0 },
+      3: { nombre: 'T3: Reposición', total: 4, correctas: 0 },
+      4: { nombre: 'T4: Apelación', total: 4, correctas: 0 },
+      5: { nombre: 'T5: Queja', total: 4, correctas: 0 },
+      6: { nombre: 'T6: Súplica', total: 4, correctas: 0 },
+      7: { nombre: 'T7: Efectos', total: 4, correctas: 0 },
+      8: { nombre: 'T8: Trámite', total: 4, correctas: 0 },
+      9: { nombre: 'T9: Silencio', total: 4, correctas: 0 },
+      10: { nombre: 'T10: Casos', total: 4, correctas: 0 }
+    };
+
+    Object.values(respuestas).forEach(r => {
+      if (r.correcta) temas[r.tema].correctas++;
+    });
+
+    const desgloseHTML = Object.values(temas).map(t => {
+      const pct = Math.round((t.correctas / t.total) * 100);
+      return `
+        <div class="desglose-item">
+          <h4>${t.nombre}</h4>
+          <p>${t.correctas}/${t.total} (${pct}%)</p>
+          <div class="mini-bar">
+            <div class="mini-bar-fill" style="width: ${pct}%"></div>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    document.getElementById('desgloseTemas').innerHTML = desgloseHTML;
+    resultadoFinal.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  function reiniciarQuiz() {
+    if (!confirm('¿Reiniciar el quiz?')) return;
+
+    respuestas = {};
+
+    document.querySelectorAll('.opcion').forEach(o => o.classList.remove('correcta', 'incorrecta', 'disabled'));
+    document.querySelectorAll('.explicacion').forEach(e => e.classList.remove('visible'));
+    document.querySelectorAll('.pregunta').forEach(p => p.classList.remove('answered'));
+    document.getElementById('resultadoFinal').classList.remove('visible');
+
+    actualizarEstadisticas();
+    mostrarSeccion('s1', document.querySelector('.quiz-tab'));
+    document.getElementById('quiz').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  document.querySelectorAll('nav a').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+</script>
+
+</body>
+</html>
