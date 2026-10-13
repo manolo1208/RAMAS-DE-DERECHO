@@ -1,0 +1,2832 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aspectos Orgánicos de la Administración Pública - Derecho Administrativo</title>
+<style>
+  :root {
+    --primary: #065f46;
+    --secondary: #10b981;
+    --accent: #047857;
+    --light: #ecfdf5;
+    --dark: #064e3b;
+    --success: #059669;
+    --warning: #d97706;
+    --danger: #dc2626;
+    --card-bg: #ffffff;
+    --shadow: 0 4px 15px rgba(0,0,0,0.08);
+    --shadow-hover: 0 8px 25px rgba(0,0,0,0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    background: var(--light);
+    color: var(--dark);
+    line-height: 1.7;
+  }
+
+  header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    color: white;
+    padding: 2rem 1rem;
+    text-align: center;
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::before {
+    content: '🏢';
+    position: absolute;
+    font-size: 15rem;
+    opacity: 0.05;
+    top: -30px;
+    right: -30px;
+  }
+
+  header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: 2px;
+  }
+
+  header p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    font-style: italic;
+  }
+
+  nav {
+    background: var(--dark);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow);
+  }
+
+  nav ul {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0.5rem;
+  }
+
+  nav a {
+    color: var(--light);
+    text-decoration: none;
+    padding: 0.7rem 1rem;
+    margin: 0.2rem;
+    border-radius: 5px;
+    font-size: 0.7rem;
+    transition: all 0.3s;
+    display: block;
+  }
+
+  nav a:hover {
+    background: var(--secondary);
+    color: var(--dark);
+    transform: translateY(-2px);
+  }
+
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+  }
+
+  section {
+    background: var(--card-bg);
+    margin-bottom: 2.5rem;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    border-left: 5px solid var(--secondary);
+    scroll-margin-top: 80px;
+  }
+
+  section h2 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--secondary);
+  }
+
+  section h3 {
+    color: var(--accent);
+    font-size: 1.4rem;
+    margin: 1.5rem 0 0.8rem;
+  }
+
+  section h4 {
+    color: var(--primary);
+    font-size: 1.15rem;
+    margin: 1rem 0 0.5rem;
+  }
+
+  p { margin-bottom: 1rem; text-align: justify; }
+
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.2rem;
+    margin: 1.5rem 0;
+  }
+
+  .card {
+    background: linear-gradient(135deg, #fff 0%, #ecfdf5 100%);
+    border: 2px solid var(--secondary);
+    border-radius: 10px;
+    padding: 1.2rem;
+    transition: all 0.3s;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--primary);
+  }
+
+  .card .icon {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .card h4 {
+    text-align: center;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+  }
+
+  .card .detail {
+    display: none;
+    margin-top: 0.8rem;
+    padding-top: 0.8rem;
+    border-top: 1px dashed var(--secondary);
+    font-size: 0.95rem;
+  }
+
+  .card.active .detail { display: block; }
+
+  .card .hint {
+    text-align: center;
+    color: var(--accent);
+    font-size: 0.85rem;
+    font-style: italic;
+  }
+
+  .mapa-container {
+    background: #ecfdf5;
+    border: 2px dashed var(--secondary);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    overflow-x: auto;
+  }
+
+  .mapa {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 600px;
+  }
+
+  .nodo {
+    background: var(--primary);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+    font-weight: bold;
+    text-align: center;
+    min-width: 180px;
+    box-shadow: var(--shadow);
+  }
+
+  .nodo.central {
+    background: linear-gradient(135deg, var(--secondary), #34d399);
+    color: var(--dark);
+    font-size: 1.2rem;
+    padding: 1rem 2rem;
+  }
+
+  .nodo.sub {
+    background: var(--accent);
+    font-size: 0.95rem;
+  }
+
+  .linea {
+    width: 3px;
+    height: 25px;
+    background: var(--secondary);
+  }
+
+  .linea-h {
+    height: 3px;
+    background: var(--secondary);
+    width: 80%;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .rama {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 1rem;
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  .rama-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    min-width: 140px;
+  }
+
+  .ejemplo {
+    background: #ecfdf5;
+    border-left: 4px solid var(--success);
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .ejemplo strong { color: var(--success); }
+
+  .alerta {
+    background: #fffbeb;
+    border-left: 4px solid var(--warning);
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .alerta strong { color: var(--warning); }
+
+  .cita {
+    background: #ecfdf5;
+    border-left: 4px solid var(--accent);
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+    color: var(--primary);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    font-size: 0.9rem;
+  }
+
+  th {
+    background: var(--primary);
+    color: white;
+    padding: 0.8rem;
+    text-align: left;
+  }
+
+  td {
+    padding: 0.8rem;
+    border-bottom: 1px solid #eee;
+  }
+
+  tr:nth-child(even) { background: #ecfdf5; }
+  tr:hover { background: #d1fae5; }
+
+  .quiz-container {
+    background: linear-gradient(135deg, #ecfdf5 0%, #fff 100%);
+    padding: 1.5rem;
+    border-radius: 10px;
+    border: 2px solid var(--accent);
+  }
+
+  .quiz-header {
+    background: var(--primary);
+    color: white;
+    padding: 1.2rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .quiz-header h3 {
+    color: white;
+    margin: 0 0 0.5rem 0;
+  }
+
+  .progress-bar {
+    background: rgba(255,255,255,0.2);
+    height: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+  }
+
+  .progress-fill {
+    background: var(--secondary);
+    height: 100%;
+    width: 0%;
+    transition: width 0.4s ease;
+  }
+
+  .quiz-stats {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .stat {
+    background: rgba(255,255,255,0.1);
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    font-size: 0.9rem;
+  }
+
+  .stat strong { color: var(--secondary); }
+
+  .quiz-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    padding: 0.5rem;
+    background: #d1fae5;
+    border-radius: 8px;
+  }
+
+  .quiz-tab {
+    background: white;
+    border: 2px solid var(--accent);
+    color: var(--accent);
+    padding: 0.5rem 0.8rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.7rem;
+    transition: all 0.3s;
+    flex: 1;
+    min-width: 70px;
+    text-align: center;
+  }
+
+  .quiz-tab:hover {
+    background: var(--accent);
+    color: white;
+  }
+
+  .quiz-tab.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+  }
+
+  .quiz-section {
+    display: none;
+  }
+
+  .quiz-section.active {
+    display: block;
+    animation: fadeIn 0.4s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .pregunta {
+    margin-bottom: 1.5rem;
+    padding: 1.2rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    border-left: 4px solid var(--accent);
+    transition: all 0.3s;
+  }
+
+  .pregunta.answered {
+    border-left-color: var(--secondary);
+  }
+
+  .pregunta-num {
+    display: inline-block;
+    background: var(--accent);
+    color: white;
+    padding: 0.2rem 0.7rem;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    margin-right: 0.5rem;
+  }
+
+  .pregunta-tipo {
+    display: inline-block;
+    background: var(--secondary);
+    color: var(--dark);
+    padding: 0.2rem 0.7rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    margin-left: 0.3rem;
+    font-weight: bold;
+  }
+
+  .pregunta p { 
+    font-weight: bold; 
+    color: var(--primary); 
+    margin: 0.8rem 0;
+    text-align: left;
+  }
+
+  .opciones { display: flex; flex-direction: column; gap: 0.5rem; }
+
+  .opcion {
+    padding: 0.7rem 1rem;
+    background: #ecfdf5;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+  }
+
+  .opcion:hover:not(.disabled) {
+    border-color: var(--accent);
+    background: #d1fae5;
+  }
+
+  .opcion.disabled {
+    cursor: not-allowed;
+    opacity: 0.85;
+  }
+
+  .opcion.correcta {
+    background: #d1fae5;
+    border-color: var(--success);
+    color: var(--success);
+    font-weight: bold;
+  }
+
+  .opcion.incorrecta {
+    background: #fee2e2;
+    border-color: var(--danger);
+    color: var(--danger);
+  }
+
+  .opcion.correcta::after {
+    content: ' ✓';
+    font-weight: bold;
+  }
+
+  .opcion.incorrecta::after {
+    content: ' ✗';
+    font-weight: bold;
+  }
+
+  .explicacion {
+    margin-top: 0.8rem;
+    padding: 0.8rem;
+    background: #ecfdf5;
+    border-left: 3px solid var(--accent);
+    border-radius: 0 6px 6px 0;
+    font-size: 0.9rem;
+    display: none;
+    font-style: italic;
+  }
+
+  .explicacion.visible {
+    display: block;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .resultado-final {
+    margin-top: 2rem;
+    padding: 2rem;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    color: white;
+    border-radius: 12px;
+    text-align: center;
+    display: none;
+  }
+
+  .resultado-final.visible {
+    display: block;
+    animation: fadeIn 0.5s ease;
+  }
+
+  .resultado-final h3 {
+    color: var(--secondary);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .puntaje-final {
+    font-size: 3rem;
+    font-weight: bold;
+    color: var(--secondary);
+    margin: 1rem 0;
+  }
+
+  .desglose-temas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+    text-align: left;
+  }
+
+  .desglose-item {
+    background: rgba(255,255,255,0.1);
+    padding: 1rem;
+    border-radius: 8px;
+  }
+
+  .desglose-item h4 {
+    color: var(--secondary);
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+  }
+
+  .mini-bar {
+    background: rgba(255,255,255,0.2);
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+  }
+
+  .mini-bar-fill {
+    background: var(--secondary);
+    height: 100%;
+    transition: width 0.6s ease;
+  }
+
+  button {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 1rem;
+    transition: all 0.3s;
+  }
+
+  button:hover {
+    background: var(--secondary);
+    color: var(--dark);
+    transform: translateY(-2px);
+  }
+
+  .btn-reset {
+    background: var(--danger);
+    margin-left: 0.5rem;
+  }
+
+  .btn-reset:hover {
+    background: #991b1b;
+    color: white;
+  }
+
+  .acordeon-item {
+    margin-bottom: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .acordeon-header {
+    background: var(--accent);
+    color: white;
+    padding: 1rem;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.3s;
+  }
+
+  .acordeon-header:hover { background: var(--primary); }
+
+  .acordeon-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    background: white;
+  }
+
+  .acordeon-content.active {
+    max-height: 2000px;
+    padding: 1rem;
+  }
+
+  .flecha { transition: transform 0.3s; }
+  .acordeon-header.active .flecha { transform: rotate(180deg); }
+
+  footer {
+    background: var(--dark);
+    color: var(--light);
+    text-align: center;
+    padding: 2rem 1rem;
+    margin-top: 2rem;
+  }
+
+  footer p { margin-bottom: 0.5rem; }
+
+  @media (max-width: 768px) {
+    header h1 { font-size: 1.8rem; }
+    section { padding: 1.2rem; }
+    section h2 { font-size: 1.5rem; }
+    nav a { font-size: 0.6rem; padding: 0.3rem 0.4rem; }
+    .quiz-tab { font-size: 0.6rem; padding: 0.3rem 0.4rem; }
+    table { font-size: 0.8rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🏢 Aspectos Orgánicos de la Administración Pública</h1>
+  <p>Guía 2 de 8 · Derecho Administrativo Colombiano · Guía Didáctica Interactiva</p>
+</header>
+
+<nav>
+  <ul>
+    <li><a href="#tema1">1. Personalidad</a></li>
+    <li><a href="#tema2">2. Org. Administrativa</a></li>
+    <li><a href="#tema3">3. Admin. Central</a></li>
+    <li><a href="#tema4">4. Admin. Descen.</a></li>
+    <li><a href="#tema5">5. Régimen Especial</a></li>
+    <li><a href="#tema6">6. Admin. Territorial</a></li>
+    <li><a href="#tema7">7. Control</a></li>
+    <li><a href="#tema8">8. Esquemas Asociat.</a></li>
+    <li><a href="#tema9">9. Función Pública</a></li>
+    <li><a href="#tema10">10. Comparativa</a></li>
+    <li><a href="#quiz">Quiz (40)</a></li>
+  </ul>
+</nav>
+
+<main>
+
+  <section>
+    <h2>📚 Introducción</h2>
+    <p>Bienvenido a esta guía interactiva sobre los <strong>Aspectos Orgánicos de la Administración Pública</strong>. Aquí estudiarás la personalidad jurídica del Estado, las formas de organización administrativa (centralización, descentralización, desconcentración y delegación), la estructura de la administración pública colombiana en sus distintos niveles, los mecanismos de control y los esquemas asociativos territoriales, con especial énfasis en la Ley 489 de 1998.</p>
+    <div class="alerta">
+      <strong>💡 Cómo usar esta guía:</strong> Haz clic en las tarjetas para ver detalles, despliega los acordeones para información adicional y prueba tus conocimientos con el quiz de 40 preguntas al final.
+    </div>
+  </section>
+
+  <!-- TEMA 1: PERSONALIDAD JURÍDICA DEL ESTADO -->
+  <section id="tema1">
+    <h2>1. Personalidad Jurídica del Estado</h2>
+    <p>El Estado colombiano es una persona jurídica de derecho público, creada por la Constitución y reconocida por la ley, con capacidad para ejercer derechos y contraer obligaciones.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">PERSONALIDAD JURÍDICA</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Estado</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Persona jurídica</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Nación</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Elemento humano</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Entidades Territoriales</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Autonomía</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Entidades Descentralizadas</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Servicios especializados</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Fundamento Constitucional</h3>
+    <div class="cita">
+      <strong>"La Nación, los departamentos, los municipios, los establecimientos de beneficencia y los de instrucción pública, y las corporaciones creadas o reconocidas por la ley, son personas jurídicas."</strong> — Art. 80, Ley 153 de 1887
+    </div>
+
+    <h3>🔍 Diferencias entre Personas Jurídicas Públicas y Privadas</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Aspecto</th>
+          <th>Personas Jurídicas Públicas</th>
+          <th>Personas Jurídicas Privadas</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Creación</strong></td>
+          <td>Creadas por ley o autorizadas por esta</td>
+          <td>Resultado de la autonomía privada</td>
+        </tr>
+        <tr>
+          <td><strong>Actos</strong></td>
+          <td>Sometidos a normas administrativas</td>
+          <td>Regidos por normas civiles y comerciales</td>
+        </tr>
+        <tr>
+          <td><strong>Privilegios</strong></td>
+          <td>Goza de prerrogativas (expropiación, etc.)</td>
+          <td>Sin privilegios especiales</td>
+        </tr>
+        <tr>
+          <td><strong>Finalidad</strong></td>
+          <td>Interés general</td>
+          <td>Ánimo de lucro o beneficencia</td>
+        </tr>
+        <tr>
+          <td><strong>Patrimonio</strong></td>
+          <td>Inalienable, imprescriptible, inembargable</td>
+          <td>Disponible y embargable</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>🏛️ Clasificación de las Personas Jurídicas Públicas</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🇨🇴</div>
+        <h4>La Nación</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Persona jurídica principal del Estado colombiano.</p>
+          <p>Representada por el Presidente de la República.</p>
+          <p>Art. 3º C.P.: "La soberanía reside exclusivamente en el pueblo".</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🗺️</div>
+        <h4>Entidades Territoriales</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Departamentos, Distritos, Municipios y Territorios Indígenas.</p>
+          <p>Goza de autonomía administrativa y fiscal.</p>
+          <p>Art. 286 C.P.: "Son entidades territoriales los departamentos, los distritos, los municipios y los territorios indígenas".</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🏢</div>
+        <h4>Entidades Descentralizadas</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Establecimientos públicos, empresas industriales y comerciales del Estado, sociedades de economía mixta.</p>
+          <p>Creadas por ley o con su autorización.</p>
+          <p>Art. 68 Ley 489/98.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Entidades de Régimen Especial</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Banco de la República, Corporaciones Autónomas Regionales, Universidades Públicas, CNSC.</p>
+          <p>Constituidas por mandato constitucional o legal.</p>
+          <p>Art. 40 Ley 489/98.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> La Nación Colombiana es la persona jurídica principal del Estado. Cuando un ciudadano demanda al Estado por un daño causado por un vehículo oficial, en realidad está demandando a la Nación, representada por el Ministerio o entidad correspondiente. Los departamentos y municipios también son personas jurídicas que pueden ser demandadas directamente.
+    </div>
+  </section>
+
+  <!-- TEMA 2: FORMAS DE ORGANIZACIÓN ADMINISTRATIVA -->
+  <section id="tema2">
+    <h2>2. Formas de Organización Administrativa</h2>
+    <p>La organización administrativa colombiana se rige por principios constitucionales y legales, especialmente los contenidos en la Ley 489 de 1998.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">FORMAS DE ORGANIZACIÓN</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Centralización</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Desconcentración</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Delegación</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Descentralización</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Principios de la Organización Administrativa</h3>
+    <div class="cita">
+      <strong>"La función administrativa está al servicio de los intereses generales y se desarrolla con fundamento en los principios de igualdad, moralidad, eficacia, economía, celeridad, imparcialidad y publicidad, mediante la descentralización, la delegación y la desconcentración de funciones."</strong> — Art. 209 C.P.
+    </div>
+
+    <h3>🔍 Las Cuatro Formas de Organización</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🏛️</div>
+        <h4>Centralización</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Concentración del poder en un único centro de decisión.</p>
+          <p>Las funciones se ejercen directamente por la administración central.</p>
+          <p>Ejemplo: Presidencia, Ministerios, Departamentos Administrativos.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📍</div>
+        <h4>Desconcentración</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Traslado de competencias a dependencias ubicadas fuera de la sede principal.</p>
+          <p>Mantiene la jerarquía administrativa.</p>
+          <p>Ejemplo: Seccionales de ministerios en departamentos.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🤝</div>
+        <h4>Delegación</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Transferencia del ejercicio de funciones a colaboradores o entidades afines.</p>
+          <p>El delegante conserva la titularidad de la competencia.</p>
+          <p>Art. 9 Ley 489/98.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🌐</div>
+        <h4>Descentralización</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Transferencia de competencias a entidades autónomas.</p>
+          <p>Puede ser territorial, por servicios o por colaboración.</p>
+          <p>Art. 7 Ley 489/98.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>📊 Comparativa de las Formas</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Forma</th>
+          <th>Autonomía</th>
+          <th>Jerarquía</th>
+          <th>Ejemplo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Centralización</strong></td>
+          <td>Ninguna</td>
+          <td>Total</td>
+          <td>Ministerios</td>
+        </tr>
+        <tr>
+          <td><strong>Desconcentración</strong></td>
+          <td>Limitada</td>
+          <td>Se mantiene</td>
+          <td>Seccionales del ICA</td>
+        </tr>
+        <tr>
+          <td><strong>Delegación</strong></td>
+          <td>Funcional</td>
+          <td>Se mantiene</td>
+          <td>Superintendencias delegadas</td>
+        </tr>
+        <tr>
+          <td><strong>Descentralización</strong></td>
+          <td>Plena</td>
+          <td>No hay</td>
+          <td>Alcaldías, Gobernaciones</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>🏢 Tipos de Descentralización</h3>
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>🗺️ Descentralización Territorial (por servicios territoriales)</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Transferencia de competencias a entidades territoriales (departamentos, municipios, distritos).</p>
+        <p>Características:</p>
+        <ul>
+          <li>Personería jurídica</li>
+          <li>Autonomía administrativa</li>
+          <li>Autonomía fiscal</li>
+          <li>Autoridades propias elegidas popularmente</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>🏢 Descentralización por Servicios (especializada)</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Creación de entidades para atender necesidades públicas especializadas.</p>
+        <p>Clases:</p>
+        <ul>
+          <li>Establecimientos públicos</li>
+          <li>Empresas Industriales y Comerciales del Estado (EICE)</li>
+          <li>Sociedades de Economía Mixta (SEM)</li>
+          <li>Empresas Sociales del Estado (ESE)</li>
+          <li>Superintendencias y UAE con personería</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>👥 Descentralización por Colaboración</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Particulares ejercen funciones administrativas por delegación o concesión.</p>
+        <p>Ejemplos:</p>
+        <ul>
+          <li>Concesionarios de servicios públicos</li>
+          <li>Notarios y registradores</li>
+          <li>Cámaras de Comercio</li>
+          <li>Curadores urbanos</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Cuando el Presidente delega en un Ministro la función de celebrar contratos de cierta cuantía, estamos ante una <strong>delegación</strong>. Cuando un Ministerio crea una seccional en una ciudad diferente a su sede principal, estamos ante una <strong>desconcentración</strong>. Cuando la Nación crea un establecimiento público como el SENA, estamos ante una <strong>descentralización por servicios</strong>.
+    </div>
+  </section>
+
+  <!-- TEMA 3: ESTRUCTURA DE LA ADMINISTRACIÓN CENTRAL -->
+  <section id="tema3">
+    <h2>3. Estructura de la Administración Pública Central</h2>
+    <p>La administración pública central está integrada por los organismos que conforman directamente la Rama Ejecutiva del Poder Público en el orden nacional.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">ADMINISTRACIÓN CENTRAL</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Presidencia</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Ministerios</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">DANE</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Superintendencias</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Organismos de la Administración Central</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">👨‍💼</div>
+        <h4>Presidencia de la República</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Jefe de Estado, Jefe de Gobierno y Suprema Autoridad Administrativa.</p>
+          <p>Elegido por voto popular para período de 4 años.</p>
+          <p>Art. 188 C.P.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">👥</div>
+        <h4>Vicepresidencia</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Elegido en la misma fórmula del Presidente.</p>
+          <p>Reemplaza al Presidente en faltas temporales o absolutas.</p>
+          <p>Puede desempeñar misiones o encargos especiales.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🏛️</div>
+        <h4>Ministerios</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>16 ministerios actualmente.</p>
+          <p>Dirigen la política del sector administrativo a su cargo.</p>
+          <p>Art. 11 Ley 489/98.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📊</div>
+        <h4>Departamentos Administrativos</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>DANE, DNP, DAFP, COLCIENCIAS.</p>
+          <p>Funciones técnicas o administrativas especializadas.</p>
+          <p>Misma categoría de los ministerios.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🔍</div>
+        <h4>Superintendencias sin Personería</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Ejercen inspección y vigilancia por delegación presidencial.</p>
+          <p>Ejemplos: SIC, Superfinanciera (antes SB y SV).</p>
+          <p>Art. 13 Ley 489/98.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚙️</div>
+        <h4>Unidades Administrativas Especiales</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Desarrollan actividades especializadas.</p>
+          <p>Autonomía administrativa y presupuestal.</p>
+          <p>Ejemplo: DIAN, UGPP.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>📊 Estructura del Sector Administrativo</h3>
+    <div class="alerta">
+      <strong>📌 Composición:</strong>
+      <p>Un ministerio o departamento administrativo, acompañado de las superintendencias, unidades administrativas especiales y demás órganos adscritos o vinculados, integran un <strong>sector administrativo</strong>.</p>
+      <br>
+      <strong>📌 Dirección:</strong>
+      <p>La dirección y orientación del sector está a cargo del ministro o director del departamento administrativo.</p>
+      <br>
+      <strong>📌 Coordinación:</strong>
+      <p>Cuando una política de Estado requiera la intervención de varios sectores, el Gobierno podrá crear <strong>comisiones intersectoriales</strong>.</p>
+    </div>
+
+    <h3>🏛️ Consejos Superiores de la Administración</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Consejo</th>
+          <th>Función</th>
+          <th>Integración</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>CONPES</strong></td>
+          <td>Máxima autoridad de planeación</td>
+          <td>Presidente, Ministros, Directores</td>
+        </tr>
+        <tr>
+          <td><strong>CONFIS</strong></td>
+          <td>Órgano rector de política fiscal</td>
+          <td>MinHacienda, DNP, Viceministros</td>
+        </tr>
+        <tr>
+          <td><strong>Consejo de Ministros</strong></td>
+          <td>Órgano asesor del Presidente</td>
+          <td>Todos los ministros</td>
+        </tr>
+        <tr>
+          <td><strong>CNSC</strong></td>
+          <td>Garantía del sistema de mérito</td>
+          <td>3 miembros independientes</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> El Ministerio de Hacienda y Crédito Público dirige el sector administrativo que incluye al DNP (adscrito), a la DIAN (vinculada) y al CONFIS (consejo superior). El Ministro de Hacienda coordina todas las políticas fiscales del Estado y preside el CONFIS.
+    </div>
+  </section>
+
+  <!-- TEMA 4: ESTRUCTURA DESCENTRALIZADA POR SERVICIOS -->
+  <section id="tema4">
+    <h2>4. Estructura Descentralizada por Servicios</h2>
+    <p>Las entidades descentralizadas por servicios son organismos creados por ley o autorizados por esta, encargados de atender necesidades públicas especializadas.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">DESCENTRALIZACIÓN POR SERVICIOS</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Establecimientos Públicos</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">EICE</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">SEM</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">ESE</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Empresas de SP</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Características Comunes</h3>
+    <div class="alerta">
+      <strong>📌 Todas las entidades descentralizadas tienen:</strong>
+      <ul>
+        <li><strong>Personería jurídica</strong></li>
+        <li><strong>Autonomía administrativa</strong></li>
+        <li><strong>Patrimonio propio</strong></li>
+        <li><strong>Creadas por ley o con su autorización</strong></li>
+        <li><strong>Objeto: funciones administrativas, prestación de servicios o actividades industriales/comerciales</strong></li>
+      </ul>
+    </div>
+
+    <h3>🏢 Tipos de Entidades Descentralizadas</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🏛️</div>
+        <h4>Establecimientos Públicos</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Atienden funciones administrativas o prestación de servicios.</p>
+          <p>Patrimonio integrado por recursos públicos.</p>
+          <p>Régimen de derecho público.</p>
+          <p><strong>Ejemplos:</strong> SENA, ICA, ICET, ICBF.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🏭</div>
+        <h4>Empresas Industriales y Comerciales del Estado (EICE)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Desarrollan actividades industriales o comerciales.</p>
+          <p>Capital 100% estatal.</p>
+          <p>Régimen de derecho privado, con excepciones.</p>
+          <p><strong>Ejemplos:</strong> ECOPETROL, SATENA, INDUMIL.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🤝</div>
+        <h4>Sociedades de Economía Mixta (SEM)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Capital mixto: estatal (mayor al 50%) y privado.</p>
+          <p>Constituidas como sociedades comerciales.</p>
+          <p>Régimen de derecho privado.</p>
+          <p><strong>Ejemplos:</strong> ECOPETROL S.A., FINDETER.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🏥</div>
+        <h4>Empresas Sociales del Estado (ESE)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Prestación de servicios de salud.</p>
+          <p>Creadas por la Ley 100 de 1993.</p>
+          <p>Gerente de período fijo (4 años).</p>
+          <p><strong>Ejemplo:</strong> Hospitales públicos.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">💧</div>
+        <h4>Empresas de Servicios Públicos</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Prestación de servicios públicos domiciliarios.</p>
+          <p>Pueden ser oficiales, mixtas o privadas.</p>
+          <p>Reguladas por Ley 142 de 1994.</p>
+          <p><strong>Ejemplo:</strong> EAAB, EPM.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🔬</div>
+        <h4>Instituciones Científicas y Tecnológicas</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Desarrollo de investigación científica.</p>
+          <p>Regidas por normas especiales.</p>
+          <p><strong>Ejemplo:</strong> Instituto Geográfico Agustín Codazzi.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>📊 Comparativa de Entidades</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Tipo</th>
+          <th>Capital</th>
+          <th>Régimen</th>
+          <th>Objeto</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Establecimiento Público</strong></td>
+          <td>100% estatal</td>
+          <td>Derecho público</td>
+          <td>Funciones administrativas</td>
+        </tr>
+        <tr>
+          <td><strong>EICE</strong></td>
+          <td>100% estatal</td>
+          <td>Derecho privado</td>
+          <td>Actividad industrial/comercial</td>
+        </tr>
+        <tr>
+          <td><strong>SEM</strong></td>
+          <td>Mixto (estatal >50%)</td>
+          <td>Derecho privado</td>
+          <td>Actividad industrial/comercial</td>
+        </tr>
+        <tr>
+          <td><strong>ESE</strong></td>
+          <td>Estatal</td>
+          <td>Mixto</td>
+          <td>Servicios de salud</td>
+        </tr>
+        <tr>
+          <td><strong>Empresa de SP</strong></td>
+          <td>Variable</td>
+          <td>Derecho privado</td>
+          <td>Servicios públicos domiciliarios</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> El SENA es un establecimiento público del orden nacional adscrito al Ministerio del Trabajo. Tiene personería jurídica, autonomía administrativa y patrimonio propio. Su objeto es la formación profesional integral de los trabajadores. ECOPETROL S.A., por su parte, es una sociedad de economía mixta donde el Estado tiene el 89% de las acciones y los particulares el 11%.
+    </div>
+  </section>
+
+  <!-- TEMA 5: ENTIDADES DE RÉGIMEN ESPECIAL -->
+  <section id="tema5">
+    <h2>5. Entidades y Organismos de Régimen Especial</h2>
+    <p>La Constitución y la ley han creado entidades con autonomía especial, sujetas a regímenes jurídicos propios.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">RÉGIMEN ESPECIAL</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Banco de la República</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">CAR</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Universidades Públicas</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">CNSC</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Principales Entidades de Régimen Especial</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">💰</div>
+        <h4>Banco de la República</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Ente autónomo de rango constitucional.</p>
+          <p>Función principal: velar por el poder adquisitivo de la moneda.</p>
+          <p>Art. 371-373 C.P.</p>
+          <p>Autonomía administrativa, patrimonial y técnica.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🌳</div>
+        <h4>Corporaciones Autónomas Regionales (CAR)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Entes corporativos de carácter público.</p>
+          <p>Gestión ambiental y recursos naturales renovables.</p>
+          <p>Creadas por la Ley 99 de 1993.</p>
+          <p>Autonomía administrativa y financiera.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🎓</div>
+        <h4>Universidades Públicas</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Autonomía universitaria constitucional.</p>
+          <p>Art. 69 C.P.</p>
+          <p>Régimen especial propio.</p>
+          <p>Ejemplo: Universidad Nacional, Universidad de Antioquia.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">👔</div>
+        <h4>Comisión Nacional del Servicio Civil (CNSC)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Órgano autónomo e independiente.</p>
+          <p>Administración y vigilancia de carrera administrativa.</p>
+          <p>Art. 130 C.P.</p>
+          <p>Garantía del principio de mérito.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>⚖️ Características del Régimen Especial</h3>
+    <div class="alerta">
+      <strong>📌 Autonomía:</strong>
+      <p>Estas entidades gozan de autonomía administrativa, patrimonial y técnica, conforme a sus normas especiales.</p>
+      <br>
+      <strong>📌 Control de tutela:</strong>
+      <p>Están sujetas al control de tutela del Presidente de la República o del ministerio al cual estén vinculadas, pero con las limitaciones establecidas en sus normas especiales.</p>
+      <br>
+      <strong>📌 Control fiscal:</strong>
+      <p>Todas están sujetas al control fiscal de la Contraloría General de la República.</p>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> El Banco de la República es una entidad de régimen especial que ejerce funciones de banca central. Su Junta Directiva es autónoma en sus decisiones técnicas, aunque debe coordinar su política con la política económica general del Gobierno. No puede ser intervenida por el Presidente en sus decisiones monetarias.
+    </div>
+  </section>
+
+  <!-- TEMA 6: ESTRUCTURA TERRITORIAL -->
+  <section id="tema6">
+    <h2>6. Estructura Territorial de la Administración Pública</h2>
+    <p>La Constitución de 1991 reconoció la autonomía de las entidades territoriales, conformando un Estado unitario descentralizado.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">ENTIDADES TERRITORIALES</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Departamentos</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Distritos</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Municipios</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Territorios Indígenas</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Fundamento Constitucional</h3>
+    <div class="cita">
+      <strong>"Son entidades territoriales los departamentos, los distritos, los municipios y los territorios indígenas. La ley podrá darle el carácter de entidades territoriales a las regiones y provincias que se constituyan en los términos de la Constitución y de la ley."</strong> — Art. 286 C.P.
+    </div>
+
+    <h3>🏛️ Características de las Entidades Territoriales</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🏛️</div>
+        <h4>Personería Jurídica</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Reconocida directamente por la ley.</p>
+          <p>Capacidad para ejercer derechos y contraer obligaciones.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🗳️</div>
+        <h4>Autonomía Administrativa</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Facultad para establecer su propia organización.</p>
+          <p>Dentro de los límites constitucionales y legales.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">💰</div>
+        <h4>Autonomía Fiscal</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Cuentan con recursos propios.</p>
+          <p>Presupuesto independiente.</p>
+          <p>Art. 362 C.P.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">👥</div>
+        <h4>Autoridades Propias</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Gobernadores y Alcaldes elegidos popularmente.</p>
+          <p>Asambleas y Concejos como corporaciones administrativas.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>📊 Distribución de Competencias</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Nivel</th>
+          <th>Competencias Principales</th>
+          <th>Autoridades</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Nación</strong></td>
+          <td>Políticas, planes y estrategias</td>
+          <td>Presidente, Ministros</td>
+        </tr>
+        <tr>
+          <td><strong>Departamento</strong></td>
+          <td>Control y coordinación, apoyo a municipios</td>
+          <td>Gobernador, Asamblea</td>
+        </tr>
+        <tr>
+          <td><strong>Municipio</strong></td>
+          <td>Prestación directa de servicios públicos</td>
+          <td>Alcalde, Concejo</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>🗺️ Principios de Distribución de Competencias</h3>
+    <div class="alerta">
+      <strong>📌 Art. 7 Ley 489/98:</strong>
+      <p>El Gobierno procurará desarrollar disposiciones y normas que profundicen en la distribución de competencias siguiendo el criterio de que:</p>
+      <ul>
+        <li><strong>La prestación de los servicios</strong> corresponda a los municipios</li>
+        <li><strong>El control sobre dicha prestación</strong> a los departamentos</li>
+        <li><strong>La definición de planes, políticas y estrategias</strong> a la Nación</li>
+      </ul>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> El servicio de acueducto y alcantarillado es prestado directamente por el municipio de Bogotá a través de la EAAB. El Departamento de Cundinamarca ejerce control y vigilancia sobre la prestación del servicio. El Ministerio de Vivienda define las políticas nacionales de agua potable y saneamiento básico.
+    </div>
+  </section>
+
+  <!-- TEMA 7: CONTROL -->
+  <section id="tema7">
+    <h2>7. Control sobre la Organización Administrativa</h2>
+    <p>El control sobre las entidades públicas se ejerce a través de diferentes mecanismos, según la naturaleza de la entidad.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">CONTROL ADMINISTRATIVO</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Control Jerárquico</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Control de Tutela</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Control Fiscal</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Control Disciplinario</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>🔍 Tipos de Control</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🏛️</div>
+        <h4>Control Jerárquico</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Se ejerce sobre entidades centralizadas y desconcentradas.</p>
+          <p>El superior puede:</p>
+          <ul>
+            <li>Dar instrucciones</li>
+            <li>Revocar actos del subordinado</li>
+            <li>Avocar competencias</li>
+            <li>Calificar el servicio</li>
+            <li>Imponer sanciones disciplinarias</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🛡️</div>
+        <h4>Control de Tutela</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Se ejerce sobre entidades descentralizadas.</p>
+          <p>Verifica que las actividades se cumplan en armonía con las políticas gubernamentales.</p>
+          <p>Menor intensidad que el jerárquico.</p>
+          <p>No puede revocar actos directamente.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">💰</div>
+        <h4>Control Fiscal</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Ejercido por la Contraloría General de la República.</p>
+          <p>Vigila la gestión fiscal de la administración.</p>
+          <p>Incluye control financiero, de gestión y de resultados.</p>
+          <p>Art. 267 C.P.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Control Disciplinario</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Ejercido por la Procuraduría General de la Nación.</p>
+          <p>Vigila la conducta de los servidores públicos.</p>
+          <p>Art. 277 C.P.</p>
+          <p>Ley 734 de 2002 (Código Disciplinario Único).</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>📊 Comparativa de Controles</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Tipo de Control</th>
+          <th>Órgano</th>
+          <th>Entidades</th>
+          <th>Alcance</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Jerárquico</strong></td>
+          <td>Superior inmediato</td>
+          <td>Centralizadas</td>
+          <td>Amplio (instrucciones, revocatoria)</td>
+        </tr>
+        <tr>
+          <td><strong>De tutela</strong></td>
+          <td>Ministerio/Departamento</td>
+          <td>Descentralizadas</td>
+          <td>Limitado (verificación de políticas)</td>
+        </tr>
+        <tr>
+          <td><strong>Fiscal</strong></td>
+          <td>Contraloría</td>
+          <td>Todas</td>
+          <td>Financiero y de gestión</td>
+        </tr>
+        <tr>
+          <td><strong>Disciplinario</strong></td>
+          <td>Procuraduría</td>
+          <td>Servidores públicos</td>
+          <td>Conducta personal</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>⚖️ Control de Tutela sobre Entidades Descentralizadas</h3>
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📋 Sobre entidades territoriales</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>El Presidente ejerce control de tutela sobre gobernadores y alcaldes.</p>
+        <p>Los gobernadores ejercen control de tutela sobre acuerdos municipales.</p>
+        <p>Se manifiesta a través de:</p>
+        <ul>
+          <li>Revisión de legalidad de actos</li>
+          <li>Suspensión de actos contrarios a la Constitución o la ley</li>
+          <li>Designación de alcaldes en casos de falta absoluta</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📋 Sobre entidades descentralizadas por servicios</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Ejercido por el ministerio o departamento administrativo al cual estén adscritas o vinculadas.</p>
+        <p>Se manifiesta a través de:</p>
+        <ul>
+          <li>Participación en juntas o consejos directivos</li>
+          <li>Designación de gerentes o directores</li>
+          <li>Aprobación de presupuestos</li>
+          <li>Suscripción de convenios de desempeño</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> El Ministerio de Salud ejerce control de tutela sobre el Instituto Nacional de Cancerología (INCan), que es un establecimiento público del orden nacional. El Ministerio participa en la junta directiva, designa al director y aprueba el presupuesto. Sin embargo, no puede revocar directamente los actos administrativos del INCan; para ello debe acudir a la jurisdicción contencioso administrativa.
+    </div>
+  </section>
+
+  <!-- TEMA 8: ESQUEMAS ASOCIATIVOS -->
+  <section id="tema8">
+    <h2>8. Esquemas Asociativos Territoriales</h2>
+    <p>La Ley de Ordenamiento Territorial impulsó la creación de alianzas estratégicas entre entidades territoriales para impulsar el desarrollo autónomo y autosostenible de las comunidades.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">ESQUEMAS ASOCIATIVOS</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Áreas Metropolitanas</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Provincias</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Regiones</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Asociaciones</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Principales Esquemas Asociativos</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🏙️</div>
+        <h4>Áreas Metropolitanas</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Conjunto de 2 o más municipios integrados alrededor de un municipio núcleo.</p>
+          <p>Relaciones económicas, sociales y físicas.</p>
+          <p>Persona jurídica de derecho público.</p>
+          <p>Art. 319 C.P. y Ley 128 de 1994.</p>
+          <p><strong>Ejemplo:</strong> Área Metropolitana de Bogotá.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🗺️</div>
+        <h4>Provincias Administrativas y de Planificación</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Dos o más municipios geográficamente contiguos del mismo departamento.</p>
+          <p>Objeto: prestación conjunta de servicios, ejecución de obras de interés regional.</p>
+          <p>Creadas por ordenanza departamental.</p>
+          <p>Art. 321 C.P.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🌎</div>
+        <h4>Regiones Administrativas y de Planificación (RAP)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Conformadas por 2 o más departamentos con continuidad geográfica.</p>
+          <p>Persona jurídica de derecho público.</p>
+          <p>Autonomía administrativa y financiera.</p>
+          <p>Objeto: desarrollo económico y social del respectivo territorio.</p>
+          <p>Art. 306 C.P.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🤝</div>
+        <h4>Asociaciones de Municipios</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Convenios entre municipios para fines específicos.</p>
+          <p>Pueden constituir persona jurídica o no.</p>
+          <p>Objeto: prestación conjunta de servicios o ejecución de obras.</p>
+          <p>Art. 321 C.P. y Ley 136 de 1994.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>📊 Comparativa de Esquemas</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Esquema</th>
+          <th>Integrantes</th>
+          <th>Personería Jurídica</th>
+          <th>Finalidad</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Área Metropolitana</strong></td>
+          <td>2+ municipios</td>
+          <td>Sí</td>
+          <td>Prestación de servicios metropolitanos</td>
+        </tr>
+        <tr>
+          <td><strong>Provincia</strong></td>
+          <td>2+ municipios</td>
+          <td>Sí</td>
+          <td>Desarrollo regional</td>
+        </tr>
+        <tr>
+          <td><strong>Región</strong></td>
+          <td>2+ departamentos</td>
+          <td>Sí</td>
+          <td>Desarrollo económico y social</td>
+        </tr>
+        <tr>
+          <td><strong>Asociación</strong></td>
+          <td>2+ municipios</td>
+          <td>Variable</td>
+          <td>Fines específicos</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>⚖️ Características Comunes</h3>
+    <div class="alerta">
+      <strong>📌 Principios:</strong>
+      <ul>
+        <li><strong>Voluntariedad:</strong> Las entidades territoriales deciden libremente asociarse</li>
+        <li><strong>Autonomía:</strong> Las entidades asociadas mantienen su autonomía</li>
+        <li><strong>Finalidad específica:</strong> Objeto determinado en el acto de constitución</li>
+        <li><strong>Coordinación:</strong> Buscan generar economías de escala y sinergias</li>
+      </ul>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> El Área Metropolitana de Bogotá está conformada por Bogotá y 17 municipios de Cundinamarca (Chía, Cajicá, Zipaquirá, etc.). Tiene como objeto la prestación coordinada de servicios públicos, la ejecución de obras de interés metropolitano y la planificación integral del territorio. Está regida por una Junta Metropolitana y un Director Metropolitano.
+    </div>
+  </section>
+
+  <!-- TEMA 9: FUNCIÓN PÚBLICA -->
+  <section id="tema9">
+    <h2>9. Servidores Públicos y Función Pública</h2>
+    <p>La función pública es el conjunto de actividades desarrolladas por los servidores públicos para el cumplimiento de los fines del Estado.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">FUNCIÓN PÚBLICA</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Empleados Públicos</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Trabajadores Oficiales</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Carrera Administrativa</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Régimen Disciplinario</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Clasificación de los Servidores Públicos</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">👔</div>
+        <h4>Empleados Públicos</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Vinculados al Estado mediante <strong>relación legal y reglamentaria</strong>.</p>
+          <p>No son trabajadores oficiales.</p>
+          <p>Art. 123 C.P.</p>
+          <p>Rigen sus derechos y obligaciones por normas estatutarias.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🔧</div>
+        <h4>Trabajadores Oficiales</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Vinculados al Estado mediante <strong>contrato de trabajo</strong>.</p>
+          <p>Rigen por el Código Sustantivo del Trabajo.</p>
+          <p>Ordinariamente desempeñan actividades de construcción y mantenimiento de obras públicas.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📝</div>
+        <h4>Particulares que cumplen funciones públicas</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Ejercen funciones administrativas por delegación o concesión.</p>
+          <p>Sujetos al régimen disciplinario.</p>
+          <p>Ejemplos: notarios, registradores, concesionarios.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>🏛️ La Carrera Administrativa</h3>
+    <div class="cita">
+      <strong>"Ninguna persona podrá ejercer empleos públicos cuyo nombramiento no sea por concurso, salvo los de elección popular, los de libre nombramiento y remoción, los de trabajadores oficiales y los demás que determine la ley."</strong> — Art. 125 C.P.
+    </div>
+
+    <h4>Principios de la Carrera Administrativa</h4>
+    <table>
+      <thead>
+        <tr>
+          <th>Principio</th>
+          <th>Contenido</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Mérito</strong></td>
+          <p>Selección basada en capacidades y competencias</p>
+        </tr>
+        <tr>
+          <td><strong>Igualdad</strong></td>
+          <p>Acceso en condiciones de igualdad para todos los ciudadanos</p>
+        </tr>
+        <tr>
+          <td><strong>Libre concurrencia</strong></td>
+          <p>Participación abierta en concursos públicos</p>
+        </tr>
+        <tr>
+          <td><strong>Estabilidad</strong></td>
+          <p>Permanencia en el cargo mientras se cumplan los requisitos</p>
+        </tr>
+        <tr>
+          <td><strong>Escalafón</strong></td>
+          <p>Sistema de ascensos basado en méritos</p>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>📋 Clasificación de Empleos Públicos</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🗳️</div>
+        <h4>De Elección Popular</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Presidente, Vicepresidente, Gobernadores, Alcaldes, Senadores, Representantes, Diputados, Concejales, Ediles.</p>
+          <p>Período fijo.</p>
+          <p>Sujetos a revocatoria del mandato.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">👔</div>
+        <h4>De Libre Nombramiento y Remoción</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Ministros, Directores de Departamento, Gerentes de entidades descentralizadas.</p>
+          <p>Funciones de dirección, confianza o manejo.</p>
+          <p>Removidos discrecionalmente.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📊</div>
+        <h4>De Carrera Administrativa</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Ingreso por concurso público de méritos.</p>
+          <p>Estabilidad en el empleo.</p>
+          <p>Ascensos por mérito.</p>
+          <p>Administrados por la CNSC.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>⚖️ Régimen Disciplinario</h3>
+    <div class="alerta">
+      <strong>📌 Ley 734 de 2002 (Código Disciplinario Único):</strong>
+      <p>Regula la conducta de los servidores públicos y particulares que cumplen funciones públicas.</p>
+      <br>
+      <strong>📌 Principios:</strong>
+      <ul>
+        <li>Debido proceso</li>
+        <li>Presunción de inocencia</li>
+        <li>Legalidad de las faltas y sanciones</li>
+        <li>Proporcionalidad</li>
+        <li>Non bis in idem</li>
+      </ul>
+      <br>
+      <strong>📌 Sujetos disciplinables:</strong>
+      <ul>
+        <li>Servidores públicos</li>
+        <li>Particulares que cumplen funciones públicas</li>
+        <li>Interventores en contratos estatales</li>
+        <li>Prestadores de servicios públicos</li>
+      </ul>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Un alcalde es un empleado público de elección popular, con período fijo de 4 años. Un ministro es un empleado público de libre nombramiento y remoción, designado por el Presidente. Un funcionario de carrera administrativa ingresa por concurso público y tiene estabilidad en el empleo, pudiendo ser ascendido por méritos.
+    </div>
+  </section>
+
+  <!-- TEMA 10: COMPARATIVA -->
+  <section id="tema10">
+    <h2>10. Comparativa y Casos Prácticos</h2>
+    <p>Análisis comparativo de las diferentes formas de organización administrativa y casos prácticos de aplicación.</p>
+
+    <h3>📊 Cuadro Comparativo General</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Aspecto</th>
+          <th>Administración Central</th>
+          <th>Entidades Territoriales</th>
+          <th>Entidades Descentralizadas</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Personería jurídica</strong></td>
+          <td>No tienen (son parte de la Nación)</td>
+          <td>Sí</td>
+          <td>Sí</td>
+        </tr>
+        <tr>
+          <td><strong>Autonomía</strong></td>
+          <td>Ninguna</td>
+          <td>Administrativa y fiscal</td>
+          <td>Administrativa</td>
+        </tr>
+        <tr>
+          <td><strong>Control</strong></td>
+          <td>Jerárquico</td>
+          <td>De tutela</td>
+          <td>De tutela</td>
+        </tr>
+        <tr>
+          <td><strong>Autoridades</strong></td>
+          <td>Presidente, Ministros</td>
+          <td>Gobernadores, Alcaldes</td>
+          <td>Gerentes, Directores</td>
+        </tr>
+        <tr>
+          <td><strong>Patrimonio</strong></td>
+          <td>De la Nación</td>
+          <td>Propio</td>
+          <td>Propio</td>
+        </tr>
+        <tr>
+          <td><strong>Régimen</strong></td>
+          <td>Derecho público</td>
+          <td>Derecho público</td>
+          <td>Variable</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>📋 Casos Prácticos</h3>
+    <div class="alerta">
+      <strong>🎯 Caso 1: Creación de una nueva entidad</strong>
+      <p>El Gobierno Nacional desea crear un nuevo establecimiento público para atender la formación profesional en tecnología.</p>
+      <br>
+      <strong>📌 Solución:</strong>
+      <ul>
+        <li>Debe expedirse una ley que cree la entidad</li>
+        <li>La ley debe establecer: objeto, estructura, patrimonio, adscripción</li>
+        <li>La entidad tendrá personería jurídica, autonomía administrativa y patrimonio propio</li>
+        <li>Estará adscrita al Ministerio de Educación o TIC</li>
+        <li>Será un establecimiento público del orden nacional</li>
+      </ul>
+    </div>
+
+    <div class="alerta">
+      <strong>🎯 Caso 2: Delegación de funciones</strong>
+      <p>El Presidente de la República desea delegar en el Ministro de Hacienda la función de celebrar contratos de empréstito hasta por cierto monto.</p>
+      <br>
+      <strong>📌 Solución:</strong>
+      <ul>
+        <li>La delegación es facultad discrecional del Presidente</li>
+        <li>Debe hacerse mediante acto administrativo motivado</li>
+        <li>El Presidente conserva la responsabilidad</li>
+        <li>El Ministro ejercerá la función en las mismas condiciones</li>
+        <li>El Presidente puede reasumir la competencia en cualquier momento</li>
+      </ul>
+    </div>
+
+    <div class="alerta">
+      <strong>🎯 Caso 3: Control sobre entidad descentralizada</strong>
+      <p>Un establecimiento público del orden nacional expide un acto administrativo que el Ministerio de adscripción considera inconveniente.</p>
+      <br>
+      <strong>📌 Solución:</strong>
+      <ul>
+        <li>El Ministerio ejerce control de tutela, no jerárquico</li>
+        <li>No puede revocar directamente el acto</li>
+        <li>Puede solicitar al representante legal que lo revoque</li>
+        <li>Si no lo hace, puede demandar el acto ante la jurisdicción contencioso administrativa</li>
+        <li>Puede ejercer control a través de la junta directiva</li>
+      </ul>
+    </div>
+
+    <div class="alerta">
+      <strong>🎯 Caso 4: Asociación de municipios</strong>
+      <p>Tres municipios de un departamento desean asociarse para prestar conjuntamente el servicio de aseo.</p>
+      <br>
+      <strong>📌 Solución:</strong>
+      <ul>
+        <li>Pueden constituir un área metropolitana si cumplen los requisitos</li>
+        <li>O pueden celebrar un convenio interadministrativo</li>
+        <li>Si constituyen persona jurídica, requieren autorización de las asambleas municipales</li>
+        <li>El acto de constitución debe inscribirse en la Cámara de Comercio</li>
+        <li>La entidad tendrá personería jurídica y patrimonio propio</li>
+      </ul>
+    </div>
+
+    <h3>🎯 Síntesis Final</h3>
+    <div class="cita">
+      <strong>"La Administración Pública se integra por los organismos que conforman la Rama Ejecutiva del Poder Público y por todos los demás organismos y entidades de naturaleza pública que de manera permanente tienen a su cargo el ejercicio de las actividades y funciones administrativas o la prestación de servicios públicos del Estado colombiano."</strong> — Art. 38 Ley 489/98
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Reflexión final:</strong> La organización administrativa colombiana se caracteriza por su diversidad y complejidad. Conviven entidades centralizadas y descentralizadas, con diferentes regímenes jurídicos y grados de autonomía. El reto permanente es garantizar la coordinación entre todas ellas para el cumplimiento eficiente de los fines del Estado, respetando su autonomía pero asegurando la unidad de acción.
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz">
+    <h2>🎯 Quiz Completo - 40 Preguntas</h2>
+    <p>Pon a prueba tus conocimientos sobre los Aspectos Orgánicos de la Administración Pública.</p>
+
+    <div class="quiz-container">
+      <div class="quiz-header">
+        <h3>📊 Tu Progreso</h3>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="quiz-stats">
+          <div class="stat">Respondidas: <strong id="respondidas">0</strong>/40</div>
+          <div class="stat">Correctas: <strong id="correctas">0</strong></div>
+          <div class="stat">Incorrectas: <strong id="incorrectas">0</strong></div>
+          <div class="stat">Porcentaje: <strong id="porcentaje">0</strong>%</div>
+        </div>
+      </div>
+
+      <div class="quiz-tabs">
+        <div class="quiz-tab active" onclick="mostrarSeccion('s1', this)">T1 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s2', this)">T2 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s3', this)">T3 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s4', this)">T4 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s5', this)">T5 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s6', this)">T6 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s7', this)">T7 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s8', this)">T8 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s9', this)">T9 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s10', this)">T10 (4)</div>
+      </div>
+
+      <!-- SECCIÓN 1: PERSONALIDAD JURÍDICA -->
+      <div class="quiz-section active" id="s1">
+        <div class="pregunta" data-correcta="1" data-tema="1">
+          <span class="pregunta-num">1</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La personalidad jurídica del Estado colombiano está reconocida en:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 1)">a) Artículo 1 de la Constitución Política</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">b) Artículo 80 de la Ley 153 de 1887</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">c) Artículo 2 de la Ley 489 de 1998</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">d) Artículo 104 del CPACA</div>
+          </div>
+          <div class="explicacion">El artículo 80 de la Ley 153 de 1887 establece que "La Nación, los departamentos, los municipios, los establecimientos de beneficencia y los de instrucción pública, y las corporaciones creadas o reconocidas por la ley, son personas jurídicas".</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="1">
+          <span class="pregunta-num">2</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Las personas jurídicas de derecho público se diferencian de las privadas en que:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 2)">a) Son creadas por ley y persiguen el interés general</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">b) Tienen ánimo de lucro</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">c) Se rigen por el derecho privado</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">d) No tienen patrimonio propio</div>
+          </div>
+          <div class="explicacion">Las personas jurídicas de derecho público son creadas por ley o autorizadas por esta, persiguen el interés general y se rigen por normas de derecho público.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="1">
+          <span class="pregunta-num">3</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El patrimonio de las personas jurídicas públicas se caracteriza por ser:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 3)">a) Disponible y embargable</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">b) Privado y comercial</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">c) Inalienable, imprescriptible e inembargable</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">d) De libre disposición</div>
+          </div>
+          <div class="explicacion">El patrimonio público se caracteriza por ser inalienable (no se puede enajenar), imprescriptible (no se pierde por el tiempo) e inembargable (no puede ser objeto de embargos).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="1">
+          <span class="pregunta-num">4</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La Nación Colombiana es representada por:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 4)">a) El Congreso de la República</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">b) La Corte Constitucional</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">c) El Consejo de Estado</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">d) El Presidente de la República</div>
+          </div>
+          <div class="explicacion">La Nación Colombiana, como persona jurídica principal del Estado, es representada por el Presidente de la República, quien es Jefe de Estado, Jefe de Gobierno y Suprema Autoridad Administrativa (Art. 188 C.P.).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 2: FORMAS DE ORGANIZACIÓN -->
+      <div class="quiz-section" id="s2">
+        <div class="pregunta" data-correcta="1" data-tema="2">
+          <span class="pregunta-num">5</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La forma de organización administrativa que mantiene la jerarquía pero traslada competencias a dependencias fuera de la sede principal es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 5)">a) Descentralización</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">b) Desconcentración</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">c) Delegación</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">d) Centralización</div>
+          </div>
+          <div class="explicacion">La desconcentración es el traslado de competencias a dependencias ubicadas fuera de la sede principal del organismo, manteniendo la jerarquía administrativa.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="2">
+          <span class="pregunta-num">6</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La delegación se diferencia de la desconcentración en que:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 6)">a) En la delegación se transfiere el ejercicio de funciones, no la titularidad</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">b) En la desconcentración hay autonomía plena</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">c) La delegación es permanente</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">d) La desconcentración requiere ley</div>
+          </div>
+          <div class="explicacion">En la delegación se transfiere el ejercicio de funciones (no la titularidad de la competencia), mientras que en la desconcentración se trasladan competencias a dependencias del mismo organismo.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="2">
+          <span class="pregunta-num">7</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La descentralización territorial está regulada en:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 7)">a) Artículo 1 de la Constitución</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">b) Artículo 209 de la Constitución</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">c) Artículo 286 de la Constitución</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">d) Artículo 338 de la Constitución</div>
+          </div>
+          <div class="explicacion">El artículo 286 de la Constitución establece que "Son entidades territoriales los departamentos, los distritos, los municipios y los territorios indígenas", reconociendo su autonomía.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="2">
+          <span class="pregunta-num">8</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La descentralización por colaboración se presenta cuando:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 8)">a) El Estado crea entidades públicas</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">b) Los municipios se asocian</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">c) El Presidente delega funciones</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">d) Particulares ejercen funciones administrativas</div>
+          </div>
+          <div class="explicacion">La descentralización por colaboración se presenta cuando particulares ejercen funciones administrativas por delegación o concesión del Estado (notarios, concesionarios, etc.).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 3: ADMINISTRACIÓN CENTRAL -->
+      <div class="quiz-section" id="s3">
+        <div class="pregunta" data-correcta="1" data-tema="3">
+          <span class="pregunta-num">9</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El Presidente de la República es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 9)">a) Solo Jefe de Estado</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">b) Jefe de Estado, Jefe de Gobierno y Suprema Autoridad Administrativa</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">c) Solo Jefe de Gobierno</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">d) Representante del Congreso</div>
+          </div>
+          <div class="explicacion">El artículo 188 de la Constitución establece que el Presidente es Jefe de Estado, Jefe de Gobierno y Suprema Autoridad Administrativa.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="3">
+          <span class="pregunta-num">10</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los ministerios son dirigidos por:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 10)">a) Ministros del Despacho</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">b) Directores de Departamento</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">c) Superintendentes</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">d) Gerentes</div>
+          </div>
+          <div class="explicacion">Los ministerios son dirigidos por Ministros del Despacho, quienes son de libre nombramiento y remoción del Presidente.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="3">
+          <span class="pregunta-num">11</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El DANE es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 11)">a) Un ministerio</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">b) Un establecimiento público</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">c) Un departamento administrativo</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">d) Una superintendencia</div>
+          </div>
+          <div class="explicacion">El DANE (Departamento Administrativo Nacional de Estadística) es un departamento administrativo, organismo técnico que produce y analiza estadísticas oficiales.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="3">
+          <span class="pregunta-num">12</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El CONPES es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 12)">a) Un ministerio</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">b) Una superintendencia</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">c) Un establecimiento público</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">d) Consejo Superior de la Administración</div>
+          </div>
+          <div class="explicacion">El CONPES (Consejo Nacional de Política Económica y Social) es el máximo órgano de asesoría del Gobierno en todo lo relacionado con el desarrollo económico y social del país.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 4: ADMINISTRACIÓN DESCENTRALIZADA -->
+      <div class="quiz-section" id="s4">
+        <div class="pregunta" data-correcta="1" data-tema="4">
+          <span class="pregunta-num">13</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los establecimientos públicos se caracterizan por:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 13)">a) Tener capital mixto</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">b) Tener patrimonio integrado por recursos públicos y régimen de derecho público</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">c) Desarrollar actividades industriales</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">d) No tener personería jurídica</div>
+          </div>
+          <div class="explicacion">Los establecimientos públicos tienen personería jurídica, autonomía administrativa y patrimonio propio integrado por recursos públicos. Su régimen es de derecho público.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="4">
+          <span class="pregunta-num">14</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Las Empresas Industriales y Comerciales del Estado (EICE) se caracterizan por:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 14)">a) Desarrollar actividades industriales o comerciales con capital 100% estatal</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">b) Tener capital mixto</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">c) Prestar servicios de salud</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">d) Ser establecimientos públicos</div>
+          </div>
+          <div class="explicacion">Las EICE desarrollan actividades industriales o comerciales, tienen capital 100% estatal y se rigen por el régimen de derecho privado, salvo excepciones legales.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="4">
+          <span class="pregunta-num">15</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Las Sociedades de Economía Mixta (SEM) tienen:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 15)">a) Capital 100% estatal</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">b) Capital 100% privado</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">c) Capital mixto con participación estatal mayor al 50%</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">d) Capital mixto con participación estatal menor al 50%</div>
+          </div>
+          <div class="explicacion">Las SEM tienen capital mixto, con participación estatal mayor al 50%. Se constituyen como sociedades comerciales y se rigen por el derecho privado.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="4">
+          <span class="pregunta-num">16</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Las Empresas Sociales del Estado (ESE) se crearon para:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 16)">a) Desarrollar actividades industriales</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">b) Prestar servicios públicos domiciliarios</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">c) Administrar recursos públicos</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">d) Prestar servicios de salud</div>
+          </div>
+          <div class="explicacion">Las ESE se crearon mediante la Ley 100 de 1993 para la prestación de servicios de salud, con régimen especial y gerentes de período fijo.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 5: RÉGIMEN ESPECIAL -->
+      <div class="quiz-section" id="s5">
+        <div class="pregunta" data-correcta="1" data-tema="5">
+          <span class="pregunta-num">17</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El Banco de la República tiene como función principal:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 17)">a) Administrar el presupuesto nacional</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">b) Velar por el poder adquisitivo de la moneda</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">c) Regular el comercio exterior</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">d) Administrar las reservas internacionales únicamente</div>
+          </div>
+          <div class="explicacion">La función principal del Banco de la República es velar por el poder adquisitivo de la moneda (control de la inflación), conforme al artículo 373 de la Constitución.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="5">
+          <span class="pregunta-num">18</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Las Corporaciones Autónomas Regionales (CAR) son:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 18)">a) Entidades del orden nacional</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">b) Entes corporativos de carácter público para la gestión ambiental</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">c) Empresas industriales del Estado</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">d) Establecimientos públicos del orden departamental</div>
+          </div>
+          <div class="explicacion">Las CAR son entes corporativos de carácter público creados por la Ley 99 de 1993 para la gestión ambiental y conservación de recursos naturales renovables.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="5">
+          <span class="pregunta-num">19</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La Comisión Nacional del Servicio Civil (CNSC) tiene como objeto:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 19)">a) Administrar el presupuesto nacional</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">b) Regular el comercio exterior</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">c) Garantizar el principio de mérito en el empleo público</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">d) Administrar la justicia</div>
+          </div>
+          <div class="explicacion">La CNSC es un órgano autónomo e independiente encargado de la administración y vigilancia de las carreras de los servidores públicos, garantizando el principio de mérito (Art. 130 C.P.).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="5">
+          <span class="pregunta-num">20</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Las universidades públicas tienen:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 20)">a) Autonomía administrativa únicamente</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">b) Autonomía fiscal únicamente</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">c) Autonomía académica únicamente</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">d) Autonomía universitaria constitucional (académica, administrativa y fiscal)</div>
+          </div>
+          <div class="explicacion">El artículo 69 de la Constitución reconoce la autonomía universitaria, que comprende autonomía académica, administrativa y fiscal, con régimen especial propio.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 6: ESTRUCTURA TERRITORIAL -->
+      <div class="quiz-section" id="s6">
+        <div class="pregunta" data-correcta="1" data-tema="6">
+          <span class="pregunta-num">21</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Son entidades territoriales según el artículo 286 de la Constitución:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 21)">a) Ministerios y departamentos administrativos</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">b) Departamentos, distritos, municipios y territorios indígenas</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">c) Establecimientos públicos y empresas industriales</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">d) Superintendencias y unidades administrativas</div>
+          </div>
+          <div class="explicacion">El artículo 286 de la Constitución establece que son entidades territoriales los departamentos, los distritos, los municipios y los territorios indígenas.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="6">
+          <span class="pregunta-num">22</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Las entidades territoriales gozan de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 22)">a) Autonomía administrativa y fiscal</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">b) Autonomía total e ilimitada</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">c) Soberanía plena</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">d) Independencia del Gobierno Nacional</div>
+          </div>
+          <div class="explicacion">Las entidades territoriales gozan de autonomía administrativa y fiscal dentro de los límites establecidos por la Constitución y la ley (Art. 287 C.P.).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="6">
+          <span class="pregunta-num">23</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La prestación de servicios públicos domiciliarios corresponde principalmente a:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 23)">a) La Nación</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">b) Los departamentos</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">c) Los municipios</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">d) Las áreas metropolitanas</div>
+          </div>
+          <div class="explicacion">El artículo 367 de la Constitución establece que los servicios públicos domiciliarios se prestarán directamente por cada municipio cuando las características técnicas y económicas lo permitan.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="6">
+          <span class="pregunta-num">24</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los departamentos ejercen funciones de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 24)">a) Prestación directa de servicios públicos</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">b) Definición de políticas nacionales</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">c) Administración de justicia</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">d) Apoyo y coordinación con los municipios</div>
+          </div>
+          <div class="explicacion">Los departamentos cumplen funciones de apoyo y coordinación con los municipios, especialmente en la prestación de servicios públicos (Art. 367 C.P.).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 7: CONTROL -->
+      <div class="quiz-section" id="s7">
+        <div class="pregunta" data-correcta="1" data-tema="7">
+          <span class="pregunta-num">25</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El control jerárquico se ejerce sobre:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 25)">a) Entidades descentralizadas</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">b) Entidades centralizadas y desconcentradas</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">c) Entidades territoriales</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">d) Particulares que cumplen funciones públicas</div>
+          </div>
+          <div class="explicacion">El control jerárquico se ejerce sobre entidades centralizadas y desconcentradas, donde existe una relación de subordinación entre superior e inferior.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="7">
+          <span class="pregunta-num">26</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El control de tutela se ejerce sobre:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 26)">a) Entidades descentralizadas y territoriales</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">b) Entidades centralizadas</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">c) Servidores públicos individualmente</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">d) Particulares</div>
+          </div>
+          <div class="explicacion">El control de tutela se ejerce sobre entidades descentralizadas (por servicios y territoriales), verificando que sus actividades se ajusten a las políticas gubernamentales.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="7">
+          <span class="pregunta-num">27</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El control fiscal es ejercido por:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 27)">a) La Procuraduría General de la Nación</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">b) El Ministerio Público</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">c) La Contraloría General de la República</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">d) El Congreso de la República</div>
+          </div>
+          <div class="explicacion">El control fiscal es ejercido por la Contraloría General de la República, que vigila la gestión fiscal de la administración y de los particulares o entidades que manejen fondos o bienes del Estado (Art. 267 C.P.).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="7">
+          <span class="pregunta-num">28</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El control disciplinario es ejercido por:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 28)">a) La Contraloría General</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">b) El Presidente de la República</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">c) Los ministros</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">d) La Procuraduría General de la Nación</div>
+          </div>
+          <div class="explicacion">El control disciplinario es ejercido por la Procuraduría General de la Nación, que vigila la conducta de los servidores públicos y particulares que cumplen funciones públicas (Art. 277 C.P.).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 8: ESQUEMAS ASOCIATIVOS -->
+      <div class="quiz-section" id="s8">
+        <div class="pregunta" data-correcta="1" data-tema="8">
+          <span class="pregunta-num">29</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Las áreas metropolitanas están conformadas por:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 29)">a) 2 o más departamentos</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">b) 2 o más municipios integrados alrededor de un municipio núcleo</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">c) 2 o más establecimientos públicos</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">d) 2 o más empresas industriales</div>
+          </div>
+          <div class="explicacion">Las áreas metropolitanas están conformadas por 2 o más municipios integrados alrededor de un municipio núcleo, con relaciones económicas, sociales y físicas que les dan características de área metropolitana (Art. 319 C.P.).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="8">
+          <span class="pregunta-num">30</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Las regiones administrativas y de planificación están conformadas por:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 30)">a) 2 o más departamentos con continuidad geográfica</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">b) 2 o más municipios</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">c) 2 o más establecimientos públicos</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">d) 2 o más empresas industriales</div>
+          </div>
+          <div class="explicacion">Las regiones administrativas y de planificación están conformadas por 2 o más departamentos con continuidad geográfica, constituidas como entidades públicas (Art. 306 C.P.).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="8">
+          <span class="pregunta-num">31</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Las provincias administrativas están conformadas por:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 31)">a) 2 o más departamentos</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">b) 2 o más áreas metropolitanas</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">c) 2 o más municipios geográficamente contiguos del mismo departamento</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">d) 2 o más establecimientos públicos</div>
+          </div>
+          <div class="explicacion">Las provincias administrativas están conformadas por 2 o más municipios geográficamente contiguos del mismo departamento (Art. 321 C.P.).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="8">
+          <span class="pregunta-num">32</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los esquemas asociativos territoriales se caracterizan por:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 32)">a) Ser obligatorios</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">b) Eliminar la autonomía de las entidades</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">c) Ser permanentes e inmodificables</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">d) Ser voluntarios y mantener la autonomía de las entidades asociadas</div>
+          </div>
+          <div class="explicacion">Los esquemas asociativos son voluntarios (las entidades deciden libremente asociarse) y las entidades asociadas mantienen su autonomía administrativa y fiscal.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 9: FUNCIÓN PÚBLICA -->
+      <div class="quiz-section" id="s9">
+        <div class="pregunta" data-correcta="1" data-tema="9">
+          <span class="pregunta-num">33</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los empleados públicos están vinculados al Estado mediante:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 33)">a) Contrato de trabajo</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">b) Relación legal y reglamentaria</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">c) Contrato de prestación de servicios</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">d) Nombramiento temporal</div>
+          </div>
+          <div class="explicacion">Los empleados públicos están vinculados al Estado mediante relación legal y reglamentaria, no mediante contrato de trabajo (Art. 123 C.P.).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="9">
+          <span class="pregunta-num">34</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los trabajadores oficiales están vinculados al Estado mediante:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 34)">a) Contrato de trabajo</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">b) Relación legal y reglamentaria</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">c) Nombramiento provisional</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">d) Elección popular</div>
+          </div>
+          <div class="explicacion">Los trabajadores oficiales están vinculados al Estado mediante contrato de trabajo, regido por el Código Sustantivo del Trabajo.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="9">
+          <span class="pregunta-num">35</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El principio de mérito en el empleo público es garantizado por:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 35)">a) El Congreso de la República</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">b) El Presidente de la República</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">c) La Comisión Nacional del Servicio Civil (CNSC)</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">d) La Procuraduría General de la Nación</div>
+          </div>
+          <div class="explicacion">La CNSC es el órgano encargado de garantizar el principio de mérito en el empleo público, administrando y vigilando las carreras de los servidores públicos (Art. 130 C.P.).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="9">
+          <span class="pregunta-num">36</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El régimen disciplinario de los servidores públicos está regulado por:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 36)">a) Ley 100 de 1993</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">b) Ley 489 de 1998</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">c) Ley 1437 de 2011</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">d) Ley 734 de 2002 (Código Disciplinario Único)</div>
+          </div>
+          <div class="explicacion">El régimen disciplinario de los servidores públicos está regulado por la Ley 734 de 2002, conocida como Código Disciplinario Único.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 10: COMPARATIVA -->
+      <div class="quiz-section" id="s10">
+        <div class="pregunta" data-correcta="1" data-tema="10">
+          <span class="pregunta-num">37</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Si un establecimiento público expide un acto administrativo que el Ministerio de adscripción considera ilegal, el Ministerio puede:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 37)">a) Revocar directamente el acto</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">b) Solicitar al representante legal que lo revoque o demandarlo ante la jurisdicción contencioso administrativa</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">c) Destituir al director del establecimiento</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">d) No puede hacer nada</div>
+          </div>
+          <div class="explicacion">El Ministerio ejerce control de tutela, no jerárquico. No puede revocar directamente el acto, pero puede solicitar al representante legal que lo revoque o demandarlo ante la jurisdicción contencioso administrativa.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="10">
+          <span class="pregunta-num">38</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Si el Presidente delega en un Ministro la función de celebrar contratos, el Presidente:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 38)">a) Pierde la responsabilidad sobre los contratos celebrados</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">b) Conserva la responsabilidad y puede reasumir la competencia</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">c) No puede reasumir la competencia</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">d) Transfiere definitivamente la titularidad de la competencia</div>
+          </div>
+          <div class="explicacion">En la delegación, el delegante (Presidente) conserva la titularidad de la competencia y puede reasumirla en cualquier momento. El delegatario (Ministro) ejerce la función bajo responsabilidad del delegante.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="10">
+          <span class="pregunta-num">39</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Si tres municipios desean asociarse para prestar conjuntamente el servicio de aseo, pueden:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 39)">a) Crear un nuevo departamento</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">b) Fusionarse en un solo municipio</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">c) Constituir un área metropolitana o celebrar un convenio interadministrativo</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">d) Solicitar al Gobierno Nacional que preste el servicio</div>
+          </div>
+          <div class="explicacion">Los municipios pueden asociarse mediante esquemas asociativos como áreas metropolitanas o convenios interadministrativos para prestar conjuntamente servicios públicos.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="10">
+          <span class="pregunta-num">40</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Si un alcalde es destituido por la Procuraduría General de la Nación, se está ejerciendo:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 40)">a) Control jerárquico</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">b) Control de tutela</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">c) Control fiscal</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">d) Control disciplinario</div>
+          </div>
+          <div class="explicacion">La destitución de un alcalde por la Procuraduría es ejercicio del control disciplinario, que vigila la conducta de los servidores públicos.</div>
+        </div>
+      </div>
+
+      <div class="resultado-final" id="resultadoFinal">
+        <h3>🏆 Resultado Final</h3>
+        <div class="puntaje-final" id="puntajeFinal">0/40</div>
+        <p id="mensajeFinal"></p>
+        <div class="desglose-temas" id="desgloseTemas"></div>
+        <button onclick="reiniciarQuiz()" class="btn-reset">🔄 Reiniciar Quiz</button>
+      </div>
+
+      <div style="text-align: center; margin-top: 1.5rem;">
+        <button onclick="verResultadoFinal()">📊 Ver Resultado Final</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>🏢 Guía Didáctica - Aspectos Orgánicos de la Administración Pública</p>
+  <p>Guía 2 de 8 · Derecho Administrativo Colombiano</p>
+  <p style="margin-top: 1rem; opacity: 0.7;">© 2026 - Material educativo interactivo</p>
+</footer>
+
+<script>
+  function toggleAcordeon(header) {
+    header.classList.toggle('active');
+    const content = header.nextElementSibling;
+    content.classList.toggle('active');
+  }
+
+  let respuestas = {};
+  const totalPreguntas = 40;
+
+  function mostrarSeccion(id, tab) {
+    document.querySelectorAll('.quiz-section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.quiz-tab').forEach(t => t.classList.remove('active'));
+    
+    document.getElementById(id).classList.add('active');
+    tab.classList.add('active');
+  }
+
+  function seleccionar(opcion, preguntaNum) {
+    if (respuestas[preguntaNum] !== undefined) return;
+
+    const pregunta = opcion.closest('.pregunta');
+    const opciones = pregunta.querySelectorAll('.opcion');
+    const correcta = parseInt(pregunta.dataset.correcta);
+    const tema = parseInt(pregunta.dataset.tema);
+    const seleccionada = Array.from(opciones).indexOf(opcion);
+    const explicacion = pregunta.querySelector('.explicacion');
+
+    opciones.forEach(o => o.classList.add('disabled'));
+
+    if (seleccionada === correcta) {
+      opcion.classList.add('correcta');
+      respuestas[preguntaNum] = { correcta: true, tema: tema };
+    } else {
+      opcion.classList.add('incorrecta');
+      opciones[correcta].classList.add('correcta');
+      respuestas[preguntaNum] = { correcta: false, tema: tema };
+    }
+
+    explicacion.classList.add('visible');
+    pregunta.classList.add('answered');
+    actualizarEstadisticas();
+  }
+
+  function actualizarEstadisticas() {
+    const total = Object.keys(respuestas).length;
+    const correctas = Object.values(respuestas).filter(r => r.correcta).length;
+    const incorrectas = total - correctas;
+    const porcentaje = total > 0 ? Math.round((correctas / total) * 100) : 0;
+
+    document.getElementById('respondidas').textContent = total;
+    document.getElementById('correctas').textContent = correctas;
+    document.getElementById('incorrectas').textContent = incorrectas;
+    document.getElementById('porcentaje').textContent = porcentaje;
+
+    const progreso = (total / totalPreguntas) * 100;
+    document.getElementById('progressFill').style.width = progreso + '%';
+  }
+
+  function verResultadoFinal() {
+    const total = Object.keys(respuestas).length;
+    
+    if (total < totalPreguntas) {
+      alert(`⚠️ Aún te faltan ${totalPreguntas - total} preguntas por responder.`);
+      return;
+    }
+
+    const correctas = Object.values(respuestas).filter(r => r.correcta).length;
+    const porcentaje = Math.round((correctas / totalPreguntas) * 100);
+
+    const resultadoFinal = document.getElementById('resultadoFinal');
+    resultadoFinal.classList.add('visible');
+
+    document.getElementById('puntajeFinal').textContent = `${correctas}/${totalPreguntas}`;
+
+    let mensaje = '';
+    if (porcentaje === 100) mensaje = '🏆 ¡PERFECTO! Dominas los Aspectos Orgánicos de la Administración Pública.';
+    else if (porcentaje >= 90) mensaje = '🌟 ¡Excelente! Dominio sobresaliente.';
+    else if (porcentaje >= 75) mensaje = '✅ ¡Muy bien! Buen dominio.';
+    else if (porcentaje >= 60) mensaje = '📚 Aceptable. Repasa los temas donde fallaste.';
+    else if (porcentaje >= 40) mensaje = '📖 Necesitas reforzar varios conceptos.';
+    else mensaje = '🔍 Es necesario estudiar nuevamente todos los temas.';
+
+    document.getElementById('mensajeFinal').textContent = mensaje;
+
+    const temas = {
+      1: { nombre: 'T1: Personalidad Jurídica', total: 4, correctas: 0 },
+      2: { nombre: 'T2: Org. Administrativa', total: 4, correctas: 0 },
+      3: { nombre: 'T3: Admin. Central', total: 4, correctas: 0 },
+      4: { nombre: 'T4: Admin. Descentralizada', total: 4, correctas: 0 },
+      5: { nombre: 'T5: Régimen Especial', total: 4, correctas: 0 },
+      6: { nombre: 'T6: Admin. Territorial', total: 4, correctas: 0 },
+      7: { nombre: 'T7: Control', total: 4, correctas: 0 },
+      8: { nombre: 'T8: Esquemas Asociativos', total: 4, correctas: 0 },
+      9: { nombre: 'T9: Función Pública', total: 4, correctas: 0 },
+      10: { nombre: 'T10: Comparativa', total: 4, correctas: 0 }
+    };
+
+    Object.values(respuestas).forEach(r => {
+      if (r.correcta) temas[r.tema].correctas++;
+    });
+
+    const desgloseHTML = Object.values(temas).map(t => {
+      const pct = Math.round((t.correctas / t.total) * 100);
+      return `
+        <div class="desglose-item">
+          <h4>${t.nombre}</h4>
+          <p>${t.correctas}/${t.total} (${pct}%)</p>
+          <div class="mini-bar">
+            <div class="mini-bar-fill" style="width: ${pct}%"></div>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    document.getElementById('desgloseTemas').innerHTML = desgloseHTML;
+    resultadoFinal.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  function reiniciarQuiz() {
+    if (!confirm('¿Reiniciar el quiz?')) return;
+
+    respuestas = {};
+
+    document.querySelectorAll('.opcion').forEach(o => o.classList.remove('correcta', 'incorrecta', 'disabled'));
+    document.querySelectorAll('.explicacion').forEach(e => e.classList.remove('visible'));
+    document.querySelectorAll('.pregunta').forEach(p => p.classList.remove('answered'));
+    document.getElementById('resultadoFinal').classList.remove('visible');
+
+    actualizarEstadisticas();
+    mostrarSeccion('s1', document.querySelector('.quiz-tab'));
+    document.getElementById('quiz').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  document.querySelectorAll('nav a').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+</script>
+
+</body>
+</html>
