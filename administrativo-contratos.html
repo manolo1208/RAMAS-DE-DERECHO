@@ -1,0 +1,2000 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contratos Administrativos - Derecho Administrativo</title>
+<style>
+  :root {
+    --primary: #065f46;
+    --secondary: #10b981;
+    --accent: #047857;
+    --light: #ecfdf5;
+    --dark: #064e3b;
+    --success: #059669;
+    --warning: #d97706;
+    --danger: #dc2626;
+    --card-bg: #ffffff;
+    --shadow: 0 4px 15px rgba(0,0,0,0.08);
+    --shadow-hover: 0 8px 25px rgba(0,0,0,0.15);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Georgia', 'Times New Roman', serif; background: var(--light); color: var(--dark); line-height: 1.7; }
+  header { background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%); color: white; padding: 2rem 1rem; text-align: center; box-shadow: var(--shadow); position: relative; overflow: hidden; }
+  header::before { content: '📝'; position: absolute; font-size: 15rem; opacity: 0.05; top: -30px; right: -30px; }
+  header h1 { font-size: 2.5rem; margin-bottom: 0.5rem; letter-spacing: 2px; }
+  header p { font-size: 1.1rem; opacity: 0.9; font-style: italic; }
+  nav { background: var(--dark); position: sticky; top: 0; z-index: 100; box-shadow: var(--shadow); }
+  nav ul { display: flex; justify-content: center; flex-wrap: wrap; list-style: none; padding: 0.5rem; }
+  nav a { color: var(--light); text-decoration: none; padding: 0.7rem 1rem; margin: 0.2rem; border-radius: 5px; font-size: 0.7rem; transition: all 0.3s; display: block; }
+  nav a:hover { background: var(--secondary); color: var(--dark); transform: translateY(-2px); }
+  main { max-width: 1200px; margin: 0 auto; padding: 2rem 1rem; }
+  section { background: var(--card-bg); margin-bottom: 2.5rem; padding: 2rem; border-radius: 12px; box-shadow: var(--shadow); border-left: 5px solid var(--secondary); scroll-margin-top: 80px; }
+  section h2 { color: var(--primary); font-size: 2rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--secondary); }
+  section h3 { color: var(--accent); font-size: 1.4rem; margin: 1.5rem 0 0.8rem; }
+  section h4 { color: var(--primary); font-size: 1.15rem; margin: 1rem 0 0.5rem; }
+  p { margin-bottom: 1rem; text-align: justify; }
+  .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.2rem; margin: 1.5rem 0; }
+  .card { background: linear-gradient(135deg, #fff 0%, #ecfdf5 100%); border: 2px solid var(--secondary); border-radius: 10px; padding: 1.2rem; transition: all 0.3s; cursor: pointer; position: relative; }
+  .card:hover { transform: translateY(-5px); box-shadow: var(--shadow-hover); border-color: var(--primary); }
+  .card .icon { font-size: 2.5rem; text-align: center; margin-bottom: 0.5rem; }
+  .card h4 { text-align: center; color: var(--primary); margin-bottom: 0.5rem; }
+  .card .detail { display: none; margin-top: 0.8rem; padding-top: 0.8rem; border-top: 1px dashed var(--secondary); font-size: 0.95rem; }
+  .card.active .detail { display: block; }
+  .card .hint { text-align: center; color: var(--accent); font-size: 0.85rem; font-style: italic; }
+  .mapa-container { background: #ecfdf5; border: 2px dashed var(--secondary); border-radius: 10px; padding: 1.5rem; margin: 1.5rem 0; overflow-x: auto; }
+  .mapa { display: flex; flex-direction: column; align-items: center; min-width: 600px; }
+  .nodo { background: var(--primary); color: white; padding: 0.8rem 1.5rem; border-radius: 25px; font-weight: bold; text-align: center; min-width: 180px; box-shadow: var(--shadow); }
+  .nodo.central { background: linear-gradient(135deg, var(--secondary), #34d399); color: var(--dark); font-size: 1.2rem; padding: 1rem 2rem; }
+  .nodo.sub { background: var(--accent); font-size: 0.95rem; }
+  .linea { width: 3px; height: 25px; background: var(--secondary); }
+  .linea-h { height: 3px; background: var(--secondary); width: 80%; max-width: 900px; margin: 0 auto; }
+  .rama { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 1rem; width: 100%; margin-top: 1rem; }
+  .rama-item { display: flex; flex-direction: column; align-items: center; flex: 1; min-width: 140px; }
+  .ejemplo { background: #ecfdf5; border-left: 4px solid var(--success); padding: 1rem 1.2rem; margin: 1rem 0; border-radius: 0 8px 8px 0; }
+  .ejemplo strong { color: var(--success); }
+  .alerta { background: #fffbeb; border-left: 4px solid var(--warning); padding: 1rem 1.2rem; margin: 1rem 0; border-radius: 0 8px 8px 0; }
+  .alerta strong { color: var(--warning); }
+  .cita { background: #ecfdf5; border-left: 4px solid var(--accent); padding: 1rem 1.2rem; margin: 1rem 0; border-radius: 0 8px 8px 0; font-style: italic; color: var(--primary); }
+  table { width: 100%; border-collapse: collapse; margin: 1rem 0; background: white; border-radius: 8px; overflow: hidden; box-shadow: var(--shadow); font-size: 0.9rem; }
+  th { background: var(--primary); color: white; padding: 0.8rem; text-align: left; }
+  td { padding: 0.8rem; border-bottom: 1px solid #eee; }
+  tr:nth-child(even) { background: #ecfdf5; }
+  tr:hover { background: #d1fae5; }
+  .quiz-container { background: linear-gradient(135deg, #ecfdf5 0%, #fff 100%); padding: 1.5rem; border-radius: 10px; border: 2px solid var(--accent); }
+  .quiz-header { background: var(--primary); color: white; padding: 1.2rem; border-radius: 8px; margin-bottom: 1.5rem; text-align: center; }
+  .quiz-header h3 { color: white; margin: 0 0 0.5rem 0; }
+  .progress-bar { background: rgba(255,255,255,0.2); height: 10px; border-radius: 5px; overflow: hidden; margin-top: 0.5rem; }
+  .progress-fill { background: var(--secondary); height: 100%; width: 0%; transition: width 0.4s ease; }
+  .quiz-stats { display: flex; justify-content: space-around; margin-top: 1rem; flex-wrap: wrap; gap: 0.5rem; }
+  .stat { background: rgba(255,255,255,0.1); padding: 0.5rem 1rem; border-radius: 5px; font-size: 0.9rem; }
+  .stat strong { color: var(--secondary); }
+  .quiz-tabs { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; padding: 0.5rem; background: #d1fae5; border-radius: 8px; }
+  .quiz-tab { background: white; border: 2px solid var(--accent); color: var(--accent); padding: 0.5rem 0.8rem; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 0.7rem; transition: all 0.3s; flex: 1; min-width: 70px; text-align: center; }
+  .quiz-tab:hover { background: var(--accent); color: white; }
+  .quiz-tab.active { background: var(--primary); color: white; border-color: var(--primary); }
+  .quiz-section { display: none; }
+  .quiz-section.active { display: block; animation: fadeIn 0.4s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  .pregunta { margin-bottom: 1.5rem; padding: 1.2rem; background: white; border-radius: 8px; box-shadow: var(--shadow); border-left: 4px solid var(--accent); transition: all 0.3s; }
+  .pregunta.answered { border-left-color: var(--secondary); }
+  .pregunta-num { display: inline-block; background: var(--accent); color: white; padding: 0.2rem 0.7rem; border-radius: 12px; font-size: 0.85rem; margin-right: 0.5rem; }
+  .pregunta-tipo { display: inline-block; background: var(--secondary); color: var(--dark); padding: 0.2rem 0.7rem; border-radius: 12px; font-size: 0.75rem; margin-left: 0.3rem; font-weight: bold; }
+  .pregunta p { font-weight: bold; color: var(--primary); margin: 0.8rem 0; text-align: left; }
+  .opciones { display: flex; flex-direction: column; gap: 0.5rem; }
+  .opcion { padding: 0.7rem 1rem; background: #ecfdf5; border: 2px solid transparent; border-radius: 6px; cursor: pointer; transition: all 0.2s; position: relative; }
+  .opcion:hover:not(.disabled) { border-color: var(--accent); background: #d1fae5; }
+  .opcion.disabled { cursor: not-allowed; opacity: 0.85; }
+  .opcion.correcta { background: #d1fae5; border-color: var(--success); color: var(--success); font-weight: bold; }
+  .opcion.incorrecta { background: #fee2e2; border-color: var(--danger); color: var(--danger); }
+  .opcion.correcta::after { content: ' ✓'; font-weight: bold; }
+  .opcion.incorrecta::after { content: ' ✗'; font-weight: bold; }
+  .explicacion { margin-top: 0.8rem; padding: 0.8rem; background: #ecfdf5; border-left: 3px solid var(--accent); border-radius: 0 6px 6px 0; font-size: 0.9rem; display: none; font-style: italic; }
+  .explicacion.visible { display: block; animation: fadeIn 0.3s ease; }
+  .resultado-final { margin-top: 2rem; padding: 2rem; background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%); color: white; border-radius: 12px; text-align: center; display: none; }
+  .resultado-final.visible { display: block; animation: fadeIn 0.5s ease; }
+  .resultado-final h3 { color: var(--secondary); font-size: 2rem; margin-bottom: 1rem; }
+  .puntaje-final { font-size: 3rem; font-weight: bold; color: var(--secondary); margin: 1rem 0; }
+  .desglose-temas { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1.5rem; text-align: left; }
+  .desglose-item { background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px; }
+  .desglose-item h4 { color: var(--secondary); margin-bottom: 0.5rem; font-size: 1rem; }
+  .mini-bar { background: rgba(255,255,255,0.2); height: 8px; border-radius: 4px; overflow: hidden; margin-top: 0.5rem; }
+  .mini-bar-fill { background: var(--secondary); height: 100%; transition: width 0.6s ease; }
+  button { background: var(--primary); color: white; border: none; padding: 0.8rem 1.5rem; border-radius: 6px; cursor: pointer; font-size: 1rem; margin-top: 1rem; transition: all 0.3s; }
+  button:hover { background: var(--secondary); color: var(--dark); transform: translateY(-2px); }
+  .btn-reset { background: var(--danger); margin-left: 0.5rem; }
+  .btn-reset:hover { background: #991b1b; color: white; }
+  .acordeon-item { margin-bottom: 0.5rem; border: 1px solid #ddd; border-radius: 6px; overflow: hidden; }
+  .acordeon-header { background: var(--accent); color: white; padding: 1rem; cursor: pointer; font-weight: bold; display: flex; justify-content: space-between; align-items: center; transition: background 0.3s; }
+  .acordeon-header:hover { background: var(--primary); }
+  .acordeon-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; background: white; }
+  .acordeon-content.active { max-height: 2000px; padding: 1rem; }
+  .flecha { transition: transform 0.3s; }
+  .acordeon-header.active .flecha { transform: rotate(180deg); }
+  footer { background: var(--dark); color: var(--light); text-align: center; padding: 2rem 1rem; margin-top: 2rem; }
+  footer p { margin-bottom: 0.5rem; }
+  @media (max-width: 768px) { header h1 { font-size: 1.8rem; } section { padding: 1.2rem; } section h2 { font-size: 1.5rem; } nav a { font-size: 0.6rem; padding: 0.3rem 0.4rem; } .quiz-tab { font-size: 0.6rem; padding: 0.3rem 0.4rem; } table { font-size: 0.8rem; } }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>📝 Contratos Administrativos</h1>
+  <p>Guía 7 de 8 · Derecho Administrativo Colombiano · Guía Didáctica Interactiva</p>
+</header>
+
+<nav>
+  <ul>
+    <li><a href="#tema1">1. Noción</a></li>
+    <li><a href="#tema2">2. Características</a></li>
+    <li><a href="#tema3">3. Elementos</a></li>
+    <li><a href="#tema4">4. Principios</a></li>
+    <li><a href="#tema5">5. Partes</a></li>
+    <li><a href="#tema6">6. Escogencia</a></li>
+    <li><a href="#tema7">7. Contenido</a></li>
+    <li><a href="#tema8">8. Perfeccionamiento</a></li>
+    <li><a href="#tema9">9. Ejecución</a></li>
+    <li><a href="#tema10">10. Nulidades</a></li>
+    <li><a href="#quiz">Quiz (40)</a></li>
+  </ul>
+</nav>
+
+<main>
+
+  <section>
+    <h2>📚 Introducción</h2>
+    <p>Bienvenido a esta guía interactiva sobre los <strong>Contratos Administrativos</strong>. Aquí estudiarás la noción, características, elementos, principios, las partes intervinientes, procedimientos de escogencia del contratista, contenido, perfeccionamiento, ejecución, nulidades, liquidación y responsabilidad contractual, conforme a la Ley 80 de 1993 y la Ley 1150 de 2007.</p>
+    <div class="alerta">
+      <strong>💡 Cómo usar esta guía:</strong> Haz clic en las tarjetas para ver detalles, despliega los acordeones para información adicional y prueba tus conocimientos con el quiz de 40 preguntas al final.
+    </div>
+  </section>
+
+  <!-- TEMA 1: NOCIÓN -->
+  <section id="tema1">
+    <h2>1. Noción y Fundamento de los Contratos Estatales</h2>
+    <p>Los <strong>contratos estatales</strong> son actos jurídicos generadores de obligaciones que celebran las entidades estatales, previstos en el derecho privado o en disposiciones especiales, o derivados del ejercicio de la autonomía de la voluntad.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">CONTRATOS ESTATALES</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Acto Jurídico Bilateral</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Generador de Obligaciones</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Entidad Estatal como Parte</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Interés General</div></div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Definición Legal</h3>
+    <div class="cita">
+      <strong>"Son contratos estatales todos los actos jurídicos generadores de obligaciones que celebren las entidades a que se refiere el presente estatuto, previstos en el derecho privado o en disposiciones especiales, o derivados del ejercicio de la autonomía de la voluntad."</strong> — Art. 32 Ley 80 de 1993
+    </div>
+
+    <h3>🔍 Características Esenciales</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🏛️</div>
+        <h4>Entidad Estatal</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Al menos una de las partes debe ser una entidad estatal en los términos del Art. 2 Ley 80/93.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📜</div>
+        <h4>Acto Jurídico</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Es una manifestación de voluntad encaminada a crear, modificar o extinguir derechos y obligaciones.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Generador de Obligaciones</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Produce efectos jurídicos vinculantes para las partes, creando derechos y deberes recíprocos.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🎯</div>
+        <h4>Finalidad Pública</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Busca el cumplimiento de los fines estatales y la satisfacción de necesidades públicas.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>⚖️ Régimen Jurídico Aplicable</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Aspecto</th>
+          <th>Régimen Aplicable</th>
+          <th>Fundamento</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Regla General</strong></td>
+          <td>Derecho privado (civil y comercial)</td>
+          <td>Art. 13 Ley 80/93</td>
+        </tr>
+        <tr>
+          <td><strong>Excepciones</strong></td>
+          <td>Ley 80/93 y normas especiales</td>
+          <td>Art. 13 Ley 80/93</td>
+        </tr>
+        <tr>
+          <td><strong>Cláusulas Excepcionales</strong></td>
+          <td>Derecho público</td>
+          <td>Art. 14 Ley 80/93</td>
+        </tr>
+        <tr>
+          <td><strong>Controversias</strong></td>
+          <td>Jurisdicción Contencioso Administrativa</td>
+          <td>Art. 75 Ley 80/93</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Un contrato de obra pública entre un municipio y una constructora privada se rige por las normas civiles y comerciales, excepto en los aspectos especialmente regulados por la Ley 80 de 1993, como las cláusulas excepcionales de terminación, modificación e interpretación unilateral.
+    </div>
+  </section>
+
+  <!-- TEMA 2: CARACTERÍSTICAS -->
+  <section id="tema2">
+    <h2>2. Características de los Contratos Estatales</h2>
+    <p>Los contratos estatales presentan características propias que los diferencian de los contratos entre particulares, derivadas de la finalidad pública que persiguen y del régimen jurídico especial que los regula.</p>
+
+    <h3>📋 Principales Características</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🤝</div>
+        <h4>Bilateral o Sinalagmático</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Obliga recíprocamente a ambas partes. Cada una es acreedora y deudora de la otra.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">💰</div>
+        <h4>Oneroso</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Ambas partes obtienen beneficios económicos. El contratista recibe remuneración por su prestación.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Conmutativo</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Las prestaciones son ciertas y determinadas desde el momento de la celebración del contrato.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📝</div>
+        <h4>Solemne</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Requiere forma escrita y cumplimiento de formalidades especiales para su validez.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📋</div>
+        <h4>De Adhesión</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Las condiciones son establecidas unilateralmente por la entidad estatal en los pliegos.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⏰</div>
+        <h4>De Tracto Sucesivo</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Su ejecución se prolonga en el tiempo, no se agota en un solo momento.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>⚠️ Cláusulas Excepcionales</h3>
+    <div class="alerta">
+      <strong>📌 Art. 14 Ley 80/93:</strong>
+      <p>Las entidades estatales pueden pactar cláusulas excepcionales al derecho común, tales como:</p>
+      <ul>
+        <li><strong>Terminación unilateral:</strong> Por incumplimiento grave del contratista</li>
+        <li><strong>Modificación unilateral:</strong> Para mantener el equilibrio económico</li>
+        <li><strong>Interpretación unilateral:</strong> Para resolver dudas sobre el alcance del contrato</li>
+        <li><strong>Caducidad:</strong> Terminación por incumplimiento definitivo</li>
+      </ul>
+    </div>
+
+    <h3>📊 Comparativa con Contratos Privados</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Aspecto</th>
+          <th>Contrato Estatal</th>
+          <th>Contrato Privado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Finalidad</strong></td>
+          <td>Interés general y fines estatales</td>
+          <td>Interés particular de las partes</td>
+        </tr>
+        <tr>
+          <td><strong>Régimen</strong></td>
+          <td>Mixto (público y privado)</td>
+          <td>Derecho privado</td>
+        </tr>
+        <tr>
+          <td><strong>Cláusulas</strong></td>
+          <td>Puede incluir excepcionales</td>
+          <td>Solo las pactadas</td>
+        </tr>
+        <tr>
+          <td><strong>Jurisdicción</strong></td>
+          <td>Contencioso Administrativa</td>
+          <td>Ordinaria o arbitral</td>
+        </tr>
+        <tr>
+          <td><strong>Selección</strong></td>
+          <td>Procedimiento especial</td>
+          <td>Libre negociación</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- TEMA 3: ELEMENTOS -->
+  <section id="tema3">
+    <h2>3. Elementos de los Contratos Estatales</h2>
+    <p>Como todo acto jurídico, los contratos estatales requieren del cumplimiento de ciertos elementos esenciales para su validez y eficacia.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">ELEMENTOS DEL CONTRATO</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Esenciales</div><div class="linea"></div><div class="nodo sub">Capacidad, Consentimiento, Objeto, Causa</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Naturales</div><div class="linea"></div><div class="nodo sub">Plazo, Precio, Garantías</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Accidentales</div><div class="linea"></div><div class="nodo sub">Condiciones, Cláusulas</div></div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Elementos Esenciales</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">✓</div>
+        <h4>Capacidad</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Aptitud legal de las partes para celebrar el contrato. La entidad estatal actúa mediante su representante legal.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🤝</div>
+        <h4>Consentimiento</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Acuerdo de voluntades entre las partes. Debe ser libre, consciente y exento de vicios.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🎯</div>
+        <h4>Objeto</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Prestación que se debe cumplir. Debe ser lícito, posible y determinado o determinable.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Causa</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Motivo o razón que justifica el contrato. Debe ser lícita y conforme al interés general.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Elementos Naturales</h3>
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📝 Plazo del contrato</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Tiempo durante el cual debe ejecutarse el objeto contractual. Se establece en los pliegos de condiciones y puede ser prorrogado por mutuo acuerdo.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📝 Precio o remuneración</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Valor que la entidad estatal paga al contratista por la prestación del servicio, obra o suministro. Debe estar determinado o ser determinable.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📝 Garantías</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Mecanismos de aseguramiento del cumplimiento contractual. Incluyen garantía de seriedad de la oferta, de cumplimiento, de pago de salarios, etc.</p>
+      </div>
+    </div>
+
+    <h3>⚠️ Vicios del Consentimiento</h3>
+    <div class="alerta">
+      <strong>📌 Art. 1508 C.C.:</strong>
+      <p>Los vicios que pueden afectar el consentimiento en los contratos estatales son:</p>
+      <ul>
+        <li><strong>Error:</strong> Falso conocimiento de la realidad</li>
+        <li><strong>Fuerza:</strong> Coacción física o moral irresistible</li>
+        <li><strong>Dolo:</strong> Engaño o fraude para obtener el consentimiento</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- TEMA 4: PRINCIPIOS -->
+  <section id="tema4">
+    <h2>4. Principios de los Contratos Estatales</h2>
+    <p>Los contratos estatales se rigen por principios específicos que buscan garantizar la transparencia, eficiencia y moralidad en la contratación pública.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">PRINCIPIOS CONTRACTUALES</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Transparencia</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Economía</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Responsabilidad</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Selección Objetiva</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Equilibrio Económico</div></div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Principios Fundamentales</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🔍</div>
+        <h4>Transparencia</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Publicidad de los procedimientos y decisiones. Acceso a la información contractual por parte de los interesados.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">💰</div>
+        <h4>Economía</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Optimización de recursos públicos. Evitar trámites innecesarios y buscar la mayor eficiencia en la contratación.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Responsabilidad</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Los servidores públicos responden por sus decisiones y actuaciones contractuales.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🎯</div>
+        <h4>Selección Objetiva</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Escogencia del contratista basada en criterios técnicos y económicos objetivos, sin favoritismos.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Equilibrio Económico</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Mantenimiento de la equivalencia entre las prestaciones durante la ejecución del contrato.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🤝</div>
+        <h4>Buena Fe</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Actuación leal y honesta de las partes durante todas las etapas contractuales.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>📊 Principios Complementarios</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Principio</th>
+          <th>Contenido</th>
+          <th>Fundamento</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Planificación</strong></td>
+          <td>Los contratos deben responder a necesidades previamente identificadas y planificadas</td>
+          <td>Art. 3 Ley 1150/07</td>
+        </tr>
+        <tr>
+          <td><strong>Imparcialidad</strong></td>
+          <td>Trato igualitario a todos los proponentes</td>
+          <td>Art. 209 C.P.</td>
+        </tr>
+        <tr>
+          <td><strong>Publicidad</strong></td>
+          <td>Difusión de los actos contractuales</td>
+          <td>Art. 30 Ley 80/93</td>
+        </tr>
+        <tr>
+          <td><strong>Celeridad</strong></td>
+          <td>Trámites ágiles y oportunos</td>
+          <td>Art. 3 Ley 1150/07</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- TEMA 5: PARTES -->
+  <section id="tema5">
+    <h2>5. Las Partes en los Contratos Estatales</h2>
+    <p>En los contratos estatales intervienen dos partes: la entidad estatal contratante y el contratista particular o público.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">PARTES CONTRACTUALES</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Entidad Estatal</div><div class="linea"></div><div class="nodo sub">Representante Legal</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Contratista</div><div class="linea"></div><div class="nodo sub">Persona Natural o Jurídica</div></div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 La Entidad Estatal Contratante</h3>
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>🏛️ Entidades Estatales (Art. 2 Ley 80/93)</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <ul>
+          <li>La Nación y sus entidades descentralizadas</li>
+          <li>Departamentos, distritos y municipios</li>
+          <li>Establecimientos públicos</li>
+          <li>Empresas industriales y comerciales del Estado</li>
+          <li>Sociedades de economía mixta</li>
+          <li>Empresas de servicios públicos</li>
+          <li>Organismos autónomos e independientes</li>
+          <li>Particulares cuando ejerzan funciones administrativas</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>📋 El Contratista</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">👤</div>
+        <h4>Persona Natural</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Individualmente considerado. Debe cumplir con los requisitos de capacidad, experiencia y solvencia financiera.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🏢</div>
+        <h4>Persona Jurídica</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Sociedades, consorcios, uniones temporales. Deben estar debidamente constituidas y representadas.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🤝</div>
+        <h4>Consorcios</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Agrupación de personas naturales o jurídicas que presentan una propuesta conjunta y responden solidariamente.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⏰</div>
+        <h4>Uniones Temporales</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Agrupación para un proyecto específico. Cada miembro responde por su parte del contrato.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>⚠️ Inhabilidades e Incompatibilidades</h3>
+    <div class="alerta">
+      <strong>📌 Art. 8 Ley 80/93:</strong>
+      <p>No pueden ser contratistas:</p>
+      <ul>
+        <li>Quienes hayan intervenido en la elaboración de los pliegos</li>
+        <li>Parientes de servidores públicos hasta el cuarto grado de consanguinidad</li>
+        <li>Socios de personas inhabilitadas</li>
+        <li>Quienes hayan sido sancionados por delitos contra la administración pública</li>
+        <li>Deudores del Estado en mora</li>
+      </ul>
+    </div>
+
+    <h3>📊 Representación</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Parte</th>
+          <th>Representante</th>
+          <th>Facultades</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Entidad Estatal</strong></td>
+          <td>Representante legal o delegado</td>
+          <td>Celebrar, modificar, terminar contratos</td>
+        </tr>
+        <tr>
+          <td><strong>Persona Natural</strong></td>
+          <td>El contratista o apoderado</td>
+          <td>Actuar directamente o mediante representante</td>
+        </tr>
+        <tr>
+          <td><strong>Persona Jurídica</strong></td>
+          <td>Representante legal estatutario</td>
+          <td>Obligarse en nombre de la sociedad</td>
+        </tr>
+        <tr>
+          <td><strong>Consorcio</strong></td>
+          <td>Representante común designado</td>
+          <td>Actuar en nombre de todos los miembros</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- TEMA 6: ESCOGENCIA -->
+  <section id="tema6">
+    <h2>6. Procedimiento de Escogencia del Contratista</h2>
+    <p>La selección del contratista debe realizarse mediante procedimientos objetivos que garanticen la transparencia y la mejor oferta para el Estado.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">MODALIDADES DE SELECCIÓN</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Licitación Pública</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Selección Abreviada</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Concurso de Méritos</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Contratación Directa</div></div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Modalidades de Selección</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📢</div>
+        <h4>Licitación Pública</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p><strong>Procedimiento:</strong> Convocatoria pública, presentación de propuestas, evaluación, adjudicación.<br><strong>Aplicación:</strong> Contratos de mayor cuantía, obras públicas, suministros complejos.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚡</div>
+        <h4>Selección Abreviada</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p><strong>Procedimiento:</strong> Simplificado, con menos requisitos y plazos más cortos.<br><strong>Aplicación:</strong> Contratos de menor cuantía, bienes y servicios de común utilización.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🎓</div>
+        <h4>Concurso de Méritos</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p><strong>Procedimiento:</strong> Evaluación de capacidades técnicas y experiencia.<br><strong>Aplicación:</strong> Consultorías, estudios, diseños, interventorías.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🎯</div>
+        <h4>Contratación Directa</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p><strong>Procedimiento:</strong> Sin competencia, adjudicación directa.<br><strong>Aplicación:</strong> Urgencia manifiesta, monopolios, contratos interadministrativos, servicios profesionales.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Etapas del Procedimiento Licitatorio</h3>
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📝 1. Estudios Previos</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Análisis de necesidades, factibilidad técnica y económica, elaboración de pliegos de condiciones.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📝 2. Convocatoria Pública</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Publicación del aviso de convocatoria, entrega de pliegos, recepción de propuestas.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📝 3. Evaluación de Propuestas</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Verificación de requisitos, análisis técnico y económico, calificación de ofertas.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📝 4. Adjudicación</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Selección de la oferta más favorable, notificación, firma del contrato.</p>
+      </div>
+    </div>
+
+    <div class="alerta">
+      <strong>⚠️ Criterios de Evaluación:</strong>
+      <ul>
+        <li><strong>Experiencia:</strong> Trayectoria en contratos similares</li>
+        <li><strong>Capacidad financiera:</strong> Solvencia económica</li>
+        <li><strong>Capacidad técnica:</strong> Personal, equipos, tecnología</li>
+        <li><strong>Precio:</strong> Oferta económica más favorable</li>
+        <li><strong>Plazo:</strong> Tiempo de ejecución propuesto</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- TEMA 7: CONTENIDO -->
+  <section id="tema7">
+    <h2>7. Contenido de los Contratos Estatales</h2>
+    <p>El contenido contractual incluye las estipulaciones esenciales, naturales y accidentales que regulan la relación entre las partes.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">CONTENIDO CONTRACTUAL</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Objeto</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Obligaciones</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Precio</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Plazo</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Garantías</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Cláusulas</div></div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Elementos del Contenido</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🎯</div>
+        <h4>Objeto del Contrato</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Descripción clara y precisa de la prestación que debe cumplir el contratista (obra, servicio, suministro).</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📋</div>
+        <h4>Obligaciones de las Partes</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Deberes específicos de cada parte: entrega, pago, supervisión, cumplimiento de especificaciones.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">💰</div>
+        <h4>Precio y Forma de Pago</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Valor del contrato, moneda, forma de pago (anticipos, pagos parciales, pago final), ajustes.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⏰</div>
+        <h4>Plazo de Ejecución</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Tiempo para cumplir el objeto, fechas de entrega parciales, prórrogas, sanciones por retraso.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🛡️</div>
+        <h4>Garantías</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Pólizas de seriedad, cumplimiento, responsabilidad civil, salarios, previsiones sociales.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Cláusulas Excepcionales</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Terminación unilateral, modificación, interpretación, caducidad, multas, penalidades.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>📊 Cláusulas Esenciales</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Cláusula</th>
+          <th>Contenido</th>
+          <th>Finalidad</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Objeto</strong></td>
+          <td>Descripción de la prestación</td>
+          <td>Definir qué se debe cumplir</td>
+        </tr>
+        <tr>
+          <td><strong>Precio</strong></td>
+          <td>Valor y forma de pago</td>
+          <td>Establecer la contraprestación</td>
+        </tr>
+        <tr>
+          <td><strong>Plazo</strong></td>
+          <td>Tiempo de ejecución</td>
+          <td>Definir cuándo se debe cumplir</td>
+        </tr>
+        <tr>
+          <td><strong>Lugar</strong></td>
+          <td>Sitio de ejecución</td>
+          <td>Determinar dónde se cumple</td>
+        </tr>
+        <tr>
+          <td><strong>Garantías</strong></td>
+          <td>Mecanismos de aseguramiento</td>
+          <td>Proteger el cumplimiento</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> En un contrato de obra pública, el contenido incluye: descripción detallada de la obra, especificaciones técnicas, planos, cronograma de ejecución, valor del contrato, forma de pago (anticipos, pagos por avance), plazo de ejecución, garantías (seriedad, cumplimiento, calidad), cláusulas excepcionales (terminación, modificación, multas por retraso).
+    </div>
+  </section>
+
+  <!-- TEMA 8: PERFECCIONAMIENTO -->
+  <section id="tema8">
+    <h2>8. Perfeccionamiento y Legalización</h2>
+    <p>El perfeccionamiento es el momento en que el contrato nace a la vida jurídica, mientras que la legalización es el cumplimiento de requisitos formales para su ejecución.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">PERFECCIONAMIENTO</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Acuerdo de Voluntades</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Escritura Pública</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Aprobación</div></div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Requisitos de Perfeccionamiento</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🤝</div>
+        <h4>Acuerdo de Voluntades</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Consentimiento mutuo sobre el objeto y las condiciones del contrato. Se materializa con la adjudicación.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📝</div>
+        <h4>Escritura Pública</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Para contratos que impliquen mutación de dominio o gravámenes sobre bienes inmuebles.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">✓</div>
+        <h4>Aprobación</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>De órganos de control interno o externo cuando sea requerida por la ley.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Legalización del Contrato</h3>
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📝 Constitución de Garantías</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>El contratista debe presentar las pólizas de garantía exigidas en el contrato: seriedad de la oferta, cumplimiento, responsabilidad civil extracontractual, salarios y prestaciones sociales.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📝 Disponibilidad Presupuestal</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Certificado que acredita la existencia de recursos suficientes para atender las obligaciones contractuales.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📝 Registro Presupuestal</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Afectación de los recursos presupuestales al contrato, garantizando su pago.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📝 Acta de Inicio</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Documento que formaliza el comienzo de la ejecución contractual, con indicación de fecha, plazos y condiciones.</p>
+      </div>
+    </div>
+
+    <h3>⚠️ Efectos del Perfeccionamiento</h3>
+    <div class="alerta">
+      <strong>📌 Consecuencias Jurídicas:</strong>
+      <ul>
+        <li>Nacimiento de obligaciones para las partes</li>
+        <li>Exigibilidad del cumplimiento</li>
+        <li>Posibilidad de hacer efectivas las garantías</li>
+        <li>Inicio del plazo de ejecución</li>
+        <li>Sometimiento a la jurisdicción contencioso administrativa</li>
+      </ul>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Un contrato de suministro de computadores se perfecciona con la firma del contrato por ambas partes. Para su legalización, el contratista debe presentar las pólizas de garantía, la entidad debe certificar la disponibilidad presupuestal, y ambas partes firman el acta de inicio que establece la fecha de entrega.
+    </div>
+  </section>
+
+  <!-- TEMA 9: EJECUCIÓN -->
+  <section id="tema9">
+    <h2>9. Ejecución de los Contratos Estatales</h2>
+    <p>La ejecución contractual comprende todas las actuaciones necesarias para cumplir el objeto del contrato, desde el inicio hasta la liquidación.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">EJECUCIÓN CONTRACTUAL</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Inicio</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Desarrollo</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Supervisión</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Modificaciones</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Liquidación</div></div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Etapas de la Ejecución</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🚀</div>
+        <h4>Inicio</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Firma del acta de inicio, entrega de anticipo si aplica, comienzo de las actividades contractuales.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚙️</div>
+        <h4>Desarrollo</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Ejecución de las obligaciones, entrega de bienes o servicios, cumplimiento de especificaciones.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">👁️</div>
+        <h4>Supervisión</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Control y vigilancia por parte de la entidad o interventor, verificación de calidad y cumplimiento.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🔄</div>
+        <h4>Modificaciones</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Contratos adicionales, prórrogas, ajustes de precio, modificaciones al objeto cuando sea procedente.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">✓</div>
+        <h4>Recibo a Satisfacción</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Verificación del cumplimiento total, firma del acta de recibo definitivo.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📊</div>
+        <h4>Liquidación</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Cálculo final de valores, saldo a favor o en contra, paz y salvo, cierre contractual.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Supervisión e Interventoría</h3>
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>👁️ Supervisión</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Función ejercida directamente por la entidad estatal o un funcionario designado. Verifica el cumplimiento de las obligaciones contractuales, la calidad de los bienes o servicios, y el respeto de los plazos.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>👁️ Interventoría</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Contrato de consultoría mediante el cual se contrata a un tercero independiente para supervisar la ejecución contractual. Requiere conocimientos especializados.</p>
+      </div>
+    </div>
+
+    <h3>⚠️ Modificaciones Contractuales</h3>
+    <div class="alerta">
+      <strong>📌 Tipos de Modificaciones:</strong>
+      <ul>
+        <li><strong>Contratos adicionales:</strong> Para obras, bienes o servicios no previstos inicialmente</li>
+        <li><strong>Prórrogas:</strong> Ampliación del plazo de ejecución</li>
+        <li><strong>Ajustes de precio:</strong> Por variaciones en costos, inflación, devaluación</li>
+        <li><strong>Modificaciones al objeto:</strong> Cambios en especificaciones técnicas</li>
+      </ul>
+      <p><strong>Límite:</strong> No pueden exceder el 50% del valor inicial del contrato (Art. 40 Ley 1150/07)</p>
+    </div>
+
+    <h3>📊 Incumplimiento Contractual</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Tipo</th>
+          <th>Descripción</th>
+          <th>Consecuencias</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Total</strong></td>
+          <td>No se cumple ninguna obligación</td>
+          <td>Terminación unilateral, caducidad, ejecución de garantías</td>
+        </tr>
+        <tr>
+          <td><strong>Parcial</strong></td>
+          <td>Se cumple solo parte de las obligaciones</td>
+          <td>Multas, descuentos, exigencia de cumplimiento</td>
+        </tr>
+        <tr>
+          <td><strong>Tardío</strong></td>
+          <td>Se cumple fuera del plazo establecido</td>
+          <td>Intereses moratorios, multas por retraso</td>
+        </tr>
+        <tr>
+          <td><strong>Defectuoso</strong></td>
+          <td>Se cumple pero con vicios o defectos</td>
+          <td>Corrección a cargo del contratista, descuentos</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- TEMA 10: NULIDADES -->
+  <section id="tema10">
+    <h2>10. Nulidades, Liquidación y Responsabilidad</h2>
+    <p>Los contratos estatales pueden ser declarados nulos cuando adolecen de vicios en su formación, y generan responsabilidad para las partes cuando incumplen sus obligaciones.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">NULIDADES Y RESPONSABILIDAD</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Nulidad Absoluta</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Nulidad Relativa</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Liquidación</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Responsabilidad</div></div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Causales de Nulidad</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">❌</div>
+        <h4>Nulidad Absoluta</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p><strong>Causales:</strong> Objeto ilícito, causa ilícita, falta de capacidad absoluta, ausencia de solemnidades esenciales.<br><strong>Efectos:</strong> Inexistencia jurídica, no convalidable.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚠️</div>
+        <h4>Nulidad Relativa</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p><strong>Causales:</strong> Vicios del consentimiento (error, fuerza, dolo), incapacidad relativa, lesión enorme.<br><strong>Efectos:</strong> Anulable, convalidable por confirmación o prescripción.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📊</div>
+        <h4>Liquidación</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p><strong>Tipos:</strong> Por mutuo acuerdo, unilateral, judicial.<br><strong>Finalidad:</strong> Determinar saldos, valores pendientes, paz y salvo.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Responsabilidad Contractual</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p><strong>Tipos:</strong> Civil (indemnización), disciplinaria (servidores públicos), penal (delitos), fiscal (daño patrimonial).</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Liquidación del Contrato</h3>
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📝 Liquidación por Mutuo Acuerdo</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Las partes concurren voluntariamente a calcular los valores definitivos, saldos pendientes, y firman el acta de liquidación que pone fin al contrato.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📝 Liquidación Unilateral</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Cuando no hay acuerdo entre las partes, la entidad estatal procede unilateralmente a liquidar el contrato mediante acto administrativo motivado.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📝 Liquidación Judicial</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>El juez contencioso administrativo determina los valores definitivos cuando existe controversia sobre la liquidación.</p>
+      </div>
+    </div>
+
+    <h3>⚠️ Responsabilidad Contractual</h3>
+    <div class="alerta">
+      <strong>📌 Tipos de Responsabilidad:</strong>
+      <ul>
+        <li><strong>Civil:</strong> Indemnización de perjuicios por incumplimiento (daño emergente, lucro cesante)</li>
+        <li><strong>Disciplinaria:</strong> Sanciones a servidores públicos por irregularidades contractuales</li>
+        <li><strong>Penal:</strong> Delitos contra la administración pública (peculado, cohecho, celebración indebida de contratos)</li>
+        <li><strong>Fiscal:</strong> Acción de repetición contra servidores que causen daño patrimonial al Estado</li>
+      </ul>
+    </div>
+
+    <h3>📊 Solución de Controversias</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Mecanismo</th>
+          <th>Descripción</th>
+          <th>Aplicación</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Conciliación</strong></td>
+          <td>Acuerdo entre las partes con intervención de un conciliador</td>
+          <td>Requisito de procedibilidad para demandas</td>
+        </tr>
+        <tr>
+          <td><strong>Arbitramento</strong></td>
+          <td>Tribunal de árbitros que decide la controversia</td>
+          <td>Cláusula compromisoria o compromiso arbitral</td>
+        </tr>
+        <tr>
+          <td><strong>Acción Contenciosa</strong></td>
+          <td>Demanda ante la jurisdicción contencioso administrativa</td>
+          <td>Controversias contractuales, nulidad, restablecimiento</td>
+        </tr>
+        <tr>
+          <td><strong>Amigable Composición</strong></td>
+          <td>Tercero que decide en equidad</td>
+          <td>Conflictos de menor complejidad</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si un contratista incumple el plazo de entrega de una obra, la entidad puede: (1) imponer multas por retraso, (2) exigir el cumplimiento forzado, (3) declarar la terminación unilateral del contrato, (4) hacer efectiva la garantía de cumplimiento, (5) demandar la indemnización de perjuicios ante la jurisdicción contencioso administrativa.
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz">
+    <h2>🎯 Quiz Completo - 40 Preguntas</h2>
+    <p>Pon a prueba tus conocimientos sobre los Contratos Administrativos.</p>
+
+    <div class="quiz-container">
+      <div class="quiz-header">
+        <h3>📊 Tu Progreso</h3>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="quiz-stats">
+          <div class="stat">Respondidas: <strong id="respondidas">0</strong>/40</div>
+          <div class="stat">Correctas: <strong id="correctas">0</strong></div>
+          <div class="stat">Incorrectas: <strong id="incorrectas">0</strong></div>
+          <div class="stat">Porcentaje: <strong id="porcentaje">0</strong>%</div>
+        </div>
+      </div>
+
+      <div class="quiz-tabs">
+        <div class="quiz-tab active" onclick="mostrarSeccion('s1', this)">T1 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s2', this)">T2 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s3', this)">T3 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s4', this)">T4 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s5', this)">T5 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s6', this)">T6 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s7', this)">T7 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s8', this)">T8 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s9', this)">T9 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s10', this)">T10 (4)</div>
+      </div>
+
+      <!-- SECCIÓN 1: NOCIÓN -->
+      <div class="quiz-section active" id="s1">
+        <div class="pregunta" data-correcta="1" data-tema="1">
+          <span class="pregunta-num">1</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los contratos estatales se definen como:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 1)">a) Actos unilaterales de la administración.</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">b) Actos jurídicos generadores de obligaciones que celebran las entidades estatales.</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">c) Acuerdos verbales entre particulares.</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">d) Decisiones judiciales.</div>
+          </div>
+          <div class="explicacion">Los contratos estatales son actos jurídicos generadores de obligaciones que celebran las entidades estatales, previstos en el derecho privado o en disposiciones especiales (Art. 32 Ley 80/93).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="1">
+          <span class="pregunta-num">2</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El régimen jurídico aplicable a los contratos estatales es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 2)">a) Derecho privado (civil y comercial), salvo excepciones de la Ley 80/93.</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">b) Exclusivamente derecho público.</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">c) Derecho internacional.</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">d) Derecho consuetudinario.</div>
+          </div>
+          <div class="explicacion">Los contratos estatales se rigen por las normas civiles y comerciales, excepto en las materias particularmente reguladas en la Ley 80 de 1993 (Art. 13).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="1">
+          <span class="pregunta-num">3</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Un municipio celebra un contrato de obra pública con una constructora privada. Este contrato se rige por:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 3)">a) Exclusivamente el Código Civil.</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">b) Exclusivamente la Ley 80 de 1993.</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">c) Normas civiles y comerciales, con las excepciones de la Ley 80/93.</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">d) Normas internacionales.</div>
+          </div>
+          <div class="explicacion">El contrato se rige por las normas civiles y comerciales, salvo en los aspectos especialmente regulados por la Ley 80 de 1993, como las cláusulas excepcionales.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="1">
+          <span class="pregunta-num">4</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Las controversias derivadas de los contratos estatales son conocidas por:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 4)">a) La jurisdicción ordinaria.</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">b) La jurisdicción constitucional.</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">c) Tribunales arbitrales exclusivamente.</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">d) La jurisdicción contencioso administrativa.</div>
+          </div>
+          <div class="explicacion">La jurisdicción contencioso administrativa es competente para conocer las controversias derivadas de los contratos estatales (Art. 75 Ley 80/93).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 2: CARACTERÍSTICAS -->
+      <div class="quiz-section" id="s2">
+        <div class="pregunta" data-correcta="1" data-tema="2">
+          <span class="pregunta-num">5</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los contratos estatales son bilaterales porque:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 5)">a) Solo una parte asume obligaciones.</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">b) Obligan recíprocamente a ambas partes.</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">c) Requieren la intervención de tres partes.</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">d) Se celebran entre dos entidades públicas.</div>
+          </div>
+          <div class="explicacion">Son bilaterales o sinalagmáticos porque obligan recíprocamente a ambas partes, cada una es acreedora y deudora de la otra.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="2">
+          <span class="pregunta-num">6</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Las cláusulas excepcionales en los contratos estatales permiten:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 6)">a) La terminación, modificación e interpretación unilateral por la entidad estatal.</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">b) La modificación unilateral por el contratista.</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">c) La eliminación de todas las obligaciones contractuales.</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">d) La renegociación permanente del contrato.</div>
+          </div>
+          <div class="explicacion">Las cláusulas excepcionales (Art. 14 Ley 80/93) permiten a la entidad estatal la terminación, modificación e interpretación unilateral del contrato.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="2">
+          <span class="pregunta-num">7</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Un contrato de suministro de computadores para una entidad pública es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 7)">a) Gratuito.</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">b) Unilateral.</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">c) Oneroso.</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">d) Aleatorio.</div>
+          </div>
+          <div class="explicacion">Es oneroso porque ambas partes obtienen beneficios económicos: la entidad recibe los computadores y el contratista recibe el pago correspondiente.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="2">
+          <span class="pregunta-num">8</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La característica de "contrato de adhesión" en los contratos estatales significa que:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 8)">a) Las partes negocian libremente todas las cláusulas.</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">b) El contratista impone las condiciones.</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">c) Un tercero establece las condiciones.</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">d) Las condiciones son establecidas unilateralmente por la entidad estatal en los pliegos.</div>
+          </div>
+          <div class="explicacion">Es de adhesión porque las condiciones son establecidas unilateralmente por la entidad estatal en los pliegos de condiciones, y el contratista solo puede aceptarlas o rechazarlas.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 3: ELEMENTOS -->
+      <div class="quiz-section" id="s3">
+        <div class="pregunta" data-correcta="1" data-tema="3">
+          <span class="pregunta-num">9</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los elementos esenciales de los contratos estatales son:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 9)">a) Plazo, precio y lugar.</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">b) Capacidad, consentimiento, objeto y causa.</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">c) Garantías, multas y cláusulas excepcionales.</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">d) Supervisión, interventoría y liquidación.</div>
+          </div>
+          <div class="explicacion">Los elementos esenciales son capacidad, consentimiento, objeto y causa, sin los cuales el contrato no produce efectos jurídicos.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="3">
+          <span class="pregunta-num">10</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Si una entidad estatal celebra un contrato con una persona que no tiene capacidad legal, el contrato es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 10)">a) Válido.</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">b) Nulo absolutamente.</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">c) Anulable.</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">d) Inexistente.</div>
+          </div>
+          <div class="explicacion">La falta de capacidad absoluta es causal de nulidad absoluta del contrato, conforme al Art. 1741 C.C.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="3">
+          <span class="pregunta-num">11</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los vicios del consentimiento en los contratos estatales son:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 11)">a) Nulidad, anulabilidad e inexistencia.</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">b) Error, fuerza y dolo.</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">c) Capacidad, consentimiento y objeto.</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">d) Plazo, precio y lugar.</div>
+          </div>
+          <div class="explicacion">Los vicios del consentimiento son error, fuerza y dolo (Art. 1508 C.C.), los cuales pueden afectar la validez del contrato.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="3">
+          <span class="pregunta-num">12</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Si un contratista celebra un contrato estatal mediante engaño a la entidad, se configura:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 12)">a) Error.</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">b) Fuerza.</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">c) Lesión enorme.</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">d) Dolo.</div>
+          </div>
+          <div class="explicacion">El dolo es el engaño o fraude para obtener el consentimiento de la otra parte, lo cual vicia el consentimiento y puede generar la nulidad relativa del contrato.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 4: PRINCIPIOS -->
+      <div class="quiz-section" id="s4">
+        <div class="pregunta" data-correcta="1" data-tema="4">
+          <span class="pregunta-num">13</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El principio de selección objetiva en los contratos estatales busca:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 13)">a) Favorecer a contratistas conocidos.</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">b) Escoger al contratista basado en criterios técnicos y económicos objetivos.</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">c) Seleccionar al oferente con el precio más bajo sin importar la calidad.</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">d) Permitir la discrecionalidad absoluta de la entidad.</div>
+          </div>
+          <div class="explicacion">La selección objetiva busca la escogencia del contratista basada en criterios técnicos y económicos objetivos, sin favoritismos (Art. 5 Ley 1150/07).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="4">
+          <span class="pregunta-num">14</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El principio de equilibrio económico contractual significa:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 14)">a) Mantener la equivalencia entre las prestaciones durante la ejecución del contrato.</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">b) Que el contratista siempre gane dinero.</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">c) Que la entidad estatal no pague nada.</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">d) Que los precios sean fijos e inmodificables.</div>
+          </div>
+          <div class="explicacion">El equilibrio económico busca mantener la equivalencia entre las prestaciones durante la ejecución del contrato, permitiendo ajustes cuando se alteren las condiciones iniciales.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="4">
+          <span class="pregunta-num">15</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Si durante la ejecución de un contrato de obra se presenta un aumento inesperado en el precio del cemento, el contratista puede solicitar:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 15)">a) La terminación unilateral del contrato.</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">b) La nulidad del contrato.</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">c) El reconocimiento y pago de mayores costos (ajuste de precios).</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">d) La reducción del objeto contractual.</div>
+          </div>
+          <div class="explicacion">El principio de equilibrio económico permite solicitar el reconocimiento de mayores costos cuando se presentan variaciones imprevistas en los insumos (Art. 27 Ley 80/93).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="4">
+          <span class="pregunta-num">16</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El principio de transparencia en la contratación estatal implica:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 16)">a) Ocultar información a los proponentes.</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">b) Negociar en privado con un solo contratista.</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">c) Permitir la discrecionalidad absoluta.</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">d) Publicidad de los procedimientos y acceso a la información contractual.</div>
+          </div>
+          <div class="explicacion">La transparencia implica publicidad de los procedimientos y acceso a la información contractual por parte de los interesados (Art. 30 Ley 80/93).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 5: PARTES -->
+      <div class="quiz-section" id="s5">
+        <div class="pregunta" data-correcta="1" data-tema="5">
+          <span class="pregunta-num">17</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Son entidades estatales para efectos contractuales:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 17)">a) Solo los ministerios.</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">b) La Nación, departamentos, municipios, establecimientos públicos, empresas estatales, etc.</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">c) Solo las empresas privadas.</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">d) Solo las organizaciones internacionales.</div>
+          </div>
+          <div class="explicacion">Son entidades estatales la Nación, departamentos, municipios, establecimientos públicos, empresas industriales y comerciales del Estado, sociedades de economía mixta, etc. (Art. 2 Ley 80/93).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="5">
+          <span class="pregunta-num">18</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Un particular que ejerce funciones administrativas puede celebrar contratos estatales:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 18)">a) Sí, como entidad estatal.</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">b) No, nunca.</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">c) Solo con autorización del Presidente.</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">d) Solo si es persona jurídica.</div>
+          </div>
+          <div class="explicacion">Los particulares cuando ejercen funciones administrativas son considerados entidades estatales para efectos contractuales (Art. 2 Ley 80/93).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="5">
+          <span class="pregunta-num">19</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Un consorcio en la contratación estatal es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 19)">a) Una persona jurídica independiente.</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">b) Una empresa individual.</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">c) Una agrupación de personas que responden solidariamente.</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">d) Un contrato verbal.</div>
+          </div>
+          <div class="explicacion">Un consorcio es una agrupación de personas naturales o jurídicas que presentan una propuesta conjunta y responden solidariamente por el cumplimiento del contrato.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="5">
+          <span class="pregunta-num">20</span><span class="pregunta-tipo">Aplicación</span>
+          <p>El pariente hasta el cuarto grado de consanguinidad de un servidor público:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 20)">a) Puede celebrar contratos con la entidad donde trabaja su pariente.</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">b) Solo puede celebrar contratos de menor cuantía.</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">c) Puede celebrar contratos si renuncia el servidor público.</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">d) Está inhabilitado para celebrar contratos con esa entidad.</div>
+          </div>
+          <div class="explicacion">Los parientes hasta el cuarto grado de consanguinidad de servidores públicos están inhabilitados para celebrar contratos con la entidad donde trabaja su pariente (Art. 8 Ley 80/93).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 6: ESCOGENCIA -->
+      <div class="quiz-section" id="s6">
+        <div class="pregunta" data-correcta="1" data-tema="6">
+          <span class="pregunta-num">21</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La licitación pública es el procedimiento de selección para:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 21)">a) Contratos de menor cuantía.</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">b) Contratos de mayor cuantía, obras públicas, suministros complejos.</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">c) Solo contratos de consultoría.</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">d) Contratos urgentes.</div>
+          </div>
+          <div class="explicacion">La licitación pública es el procedimiento para contratos de mayor cuantía, obras públicas y suministros complejos, garantizando la concurrencia de oferentes.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="6">
+          <span class="pregunta-num">22</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La contratación directa procede en casos de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 22)">a) Urgencia manifiesta, monopolios, contratos interadministrativos.</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">b) Todos los contratos estatales.</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">c) Solo obras públicas.</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">d) Contratos de mayor cuantía.</div>
+          </div>
+          <div class="explicacion">La contratación directa procede en casos de urgencia manifiesta, monopolios, contratos interadministrativos, servicios profesionales y otros casos excepcionales (Art. 2 Ley 1150/07).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="6">
+          <span class="pregunta-num">23</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Una entidad estatal necesita contratar una consultoría para un estudio de factibilidad. El procedimiento adecuado es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 23)">a) Licitación pública.</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">b) Contratación directa.</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">c) Concurso de méritos.</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">d) Subasta inversa.</div>
+          </div>
+          <div class="explicacion">Para consultorías, estudios y diseños se utiliza el concurso de méritos, que evalúa las capacidades técnicas y experiencia de los proponentes.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="6">
+          <span class="pregunta-num">24</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los criterios de evaluación en un proceso licitatorio incluyen:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 24)">a) Solo el precio.</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">b) Solo la experiencia.</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">c) Solo la capacidad técnica.</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">d) Experiencia, capacidad financiera, capacidad técnica, precio y plazo.</div>
+          </div>
+          <div class="explicacion">Los criterios de evaluación incluyen experiencia, capacidad financiera, capacidad técnica, precio y plazo, conforme a los pliegos de condiciones.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 7: CONTENIDO -->
+      <div class="quiz-section" id="s7">
+        <div class="pregunta" data-correcta="1" data-tema="7">
+          <span class="pregunta-num">25</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El objeto del contrato estatal es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 25)">a) El precio del contrato.</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">b) La descripción clara y precisa de la prestación que debe cumplir el contratista.</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">c) El plazo de ejecución.</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">d) Las garantías.</div>
+          </div>
+          <div class="explicacion">El objeto es la descripción clara y precisa de la prestación que debe cumplir el contratista (obra, servicio, suministro).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="7">
+          <span class="pregunta-num">26</span><span class="pregunta-tipo">Aplicación</span>
+          <p>En un contrato de obra pública, el precio incluye:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 26)">a) Solo el valor de los materiales.</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">b) Solo la mano de obra.</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">c) Solo el lucro del contratista.</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">d) Materiales, mano de obra, equipos, administración, imprevistos y utilidad.</div>
+          </div>
+          <div class="explicacion">El precio en un contrato de obra incluye todos los costos directos e indirectos: materiales, mano de obra, equipos, administración, imprevistos y utilidad del contratista.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="7">
+          <span class="pregunta-num">27</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Las garantías en los contratos estatales buscan:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 27)">a) Aumentar el precio del contrato.</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">b) Prolongar el plazo de ejecución.</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">c) Asegurar el cumplimiento de las obligaciones contractuales.</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">d) Eliminar la responsabilidad del contratista.</div>
+          </div>
+          <div class="explicacion">Las garantías (pólizas) buscan asegurar el cumplimiento de las obligaciones contractuales y proteger a la entidad estatal frente a incumplimientos.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="7">
+          <span class="pregunta-num">28</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Las cláusulas excepcionales en un contrato de obra pública permiten:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 28)">a) Modificar el objeto del contrato sin límites.</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">b) Eliminar todas las obligaciones del contratista.</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">c) Renegociar permanentemente el contrato.</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">d) La terminación, modificación e interpretación unilateral por la entidad estatal.</div>
+          </div>
+          <div class="explicacion">Las cláusulas excepcionales permiten a la entidad estatal la terminación, modificación e interpretación unilateral del contrato cuando sea necesario para el interés público.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 8: PERFECCIONAMIENTO -->
+      <div class="quiz-section" id="s8">
+        <div class="pregunta" data-correcta="1" data-tema="8">
+          <span class="pregunta-num">29</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El perfeccionamiento del contrato estatal se produce con:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 29)">a) La publicación del aviso de convocatoria.</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">b) El acuerdo de voluntades y la firma del contrato.</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">c) La liquidación del contrato.</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">d) El pago final al contratista.</div>
+          </div>
+          <div class="explicacion">El contrato se perfecciona con el acuerdo de voluntades sobre el objeto y la contraprestación, y la firma del documento contractual.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="8">
+          <span class="pregunta-num">30</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Para la legalización de un contrato de obra pública se requiere:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 30)">a) Constitución de garantías, disponibilidad presupuestal y acta de inicio.</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">b) Solo la firma del contrato.</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">c) Solo la liquidación.</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">d) Solo el pago final.</div>
+          </div>
+          <div class="explicacion">La legalización requiere la constitución de garantías, la disponibilidad presupuestal y la firma del acta de inicio.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="8">
+          <span class="pregunta-num">31</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La escritura pública es requisito de perfeccionamiento para:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 31)">a) Todos los contratos estatales.</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">b) Solo contratos de suministro.</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">c) Contratos que impliquen mutación de dominio o gravámenes sobre bienes inmuebles.</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">d) Solo contratos de consultoría.</div>
+          </div>
+          <div class="explicacion">La escritura pública es requisito para contratos que impliquen mutación de dominio o constitución de gravámenes sobre bienes inmuebles.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="8">
+          <span class="pregunta-num">32</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Si una entidad estatal celebra un contrato sin disponibilidad presupuestal:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 32)">a) El contrato es válido.</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">b) El contrato es nulo absolutamente.</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">c) El contrato es anulable.</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">d) El contrato no puede ejecutarse hasta que se constituya la disponibilidad.</div>
+          </div>
+          <div class="explicacion">La disponibilidad presupuestal es requisito de legalización, sin la cual el contrato no puede ejecutarse, aunque ya esté perfeccionado.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 9: EJECUCIÓN -->
+      <div class="quiz-section" id="s9">
+        <div class="pregunta" data-correcta="1" data-tema="9">
+          <span class="pregunta-num">33</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La ejecución contractual comprende:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 33)">a) Solo la firma del contrato.</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">b) El inicio, desarrollo, supervisión, modificaciones y liquidación del contrato.</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">c) Solo el pago final.</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">d) Solo la selección del contratista.</div>
+          </div>
+          <div class="explicacion">La ejecución comprende todas las etapas desde el inicio hasta la liquidación, incluyendo el desarrollo, supervisión y posibles modificaciones.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="9">
+          <span class="pregunta-num">34</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Si durante la ejecución de un contrato se requiere ampliar el objeto, se debe:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 34)">a) Celebrar un contrato adicional.</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">b) Terminar el contrato y celebrar uno nuevo.</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">c) Ignorar la necesidad.</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">d) Modificar unilateralmente el contrato.</div>
+          </div>
+          <div class="explicacion">Para ampliar el objeto contractual se debe celebrar un contrato adicional, previa justificación y cumplimiento de los requisitos legales.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="9">
+          <span class="pregunta-num">35</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La supervisión contractual es ejercida por:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 35)">a) El contratista.</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">b) Un tercero independiente.</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">c) La entidad estatal o un funcionario designado.</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">d) El Ministerio Público.</div>
+          </div>
+          <div class="explicacion">La supervisión es ejercida directamente por la entidad estatal o un funcionario designado, quien verifica el cumplimiento de las obligaciones contractuales.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="9">
+          <span class="pregunta-num">36</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Si un contratista incumple el plazo de entrega, la entidad puede:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 36)">a) Solo terminar el contrato.</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">b) Solo hacer efectiva la garantía.</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">c) Solo imponer multas.</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">d) Imponer multas, exigir el cumplimiento o terminar el contrato.</div>
+          </div>
+          <div class="explicacion">Ante el incumplimiento, la entidad puede imponer multas por retraso, exigir el cumplimiento forzado, o declarar la terminación unilateral del contrato.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 10: NULIDADES -->
+      <div class="quiz-section" id="s10">
+        <div class="pregunta" data-correcta="1" data-tema="10">
+          <span class="pregunta-num">37</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La nulidad absoluta de un contrato estatal procede cuando:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 37)">a) Hay vicios del consentimiento.</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">b) El objeto o la causa son ilícitos, o falta capacidad absoluta.</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">c) Hay lesión enorme.</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">d) El contratista incumple parcialmente.</div>
+          </div>
+          <div class="explicacion">La nulidad absoluta procede por objeto ilícito, causa ilícita, falta de capacidad absoluta o ausencia de solemnidades esenciales (Art. 1741 C.C.).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="10">
+          <span class="pregunta-num">38</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Si un contrato estatal tiene por objeto actividades contrarias a la ley, es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 38)">a) Nulo absolutamente.</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">b) Anulable.</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">c) Válido.</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">d) Inexistente.</div>
+          </div>
+          <div class="explicacion">El objeto ilícito es causal de nulidad absoluta del contrato, conforme al Art. 1741 C.C.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="10">
+          <span class="pregunta-num">39</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La liquidación del contrato estatal puede ser:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 39)">a) Solo por mutuo acuerdo.</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">b) Solo unilateral.</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">c) Por mutuo acuerdo, unilateral o judicial.</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">d) Solo judicial.</div>
+          </div>
+          <div class="explicacion">La liquidación puede ser por mutuo acuerdo entre las partes, unilateral por la entidad estatal, o judicial cuando existe controversia.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="10">
+          <span class="pregunta-num">40</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Si un servidor público causa daño patrimonial al Estado por dolo en la ejecución de un contrato, puede ser sujeto de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 40)">a) Solo responsabilidad disciplinaria.</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">b) Solo responsabilidad penal.</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">c) Solo responsabilidad fiscal.</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">d) Responsabilidad disciplinaria, penal y fiscal (acción de repetición).</div>
+          </div>
+          <div class="explicacion">El servidor público puede ser sujeto de responsabilidad disciplinaria, penal y fiscal (acción de repetición) cuando causa daño patrimonial al Estado por dolo o culpa grave.</div>
+        </div>
+      </div>
+
+      <div class="resultado-final" id="resultadoFinal">
+        <h3>🏆 Resultado Final</h3>
+        <div class="puntaje-final" id="puntajeFinal">0/40</div>
+        <p id="mensajeFinal"></p>
+        <div class="desglose-temas" id="desgloseTemas"></div>
+        <button onclick="reiniciarQuiz()" class="btn-reset">🔄 Reiniciar Quiz</button>
+      </div>
+
+      <div style="text-align: center; margin-top: 1.5rem;">
+        <button onclick="verResultadoFinal()">📊 Ver Resultado Final</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>📝 Guía Didáctica - Contratos Administrativos</p>
+  <p>Guía 7 de 8 · Derecho Administrativo Colombiano</p>
+  <p style="margin-top: 1rem; opacity: 0.7;">© 2026 - Material educativo interactivo</p>
+</footer>
+
+<script>
+  function toggleAcordeon(header) {
+    header.classList.toggle('active');
+    const content = header.nextElementSibling;
+    content.classList.toggle('active');
+  }
+
+  let respuestas = {};
+  const totalPreguntas = 40;
+
+  function mostrarSeccion(id, tab) {
+    document.querySelectorAll('.quiz-section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.quiz-tab').forEach(t => t.classList.remove('active'));
+    
+    document.getElementById(id).classList.add('active');
+    tab.classList.add('active');
+  }
+
+  function seleccionar(opcion, preguntaNum) {
+    if (respuestas[preguntaNum] !== undefined) return;
+
+    const pregunta = opcion.closest('.pregunta');
+    const opciones = pregunta.querySelectorAll('.opcion');
+    const correcta = parseInt(pregunta.dataset.correcta);
+    const tema = parseInt(pregunta.dataset.tema);
+    const seleccionada = Array.from(opciones).indexOf(opcion);
+    const explicacion = pregunta.querySelector('.explicacion');
+
+    opciones.forEach(o => o.classList.add('disabled'));
+
+    if (seleccionada === correcta) {
+      opcion.classList.add('correcta');
+      respuestas[preguntaNum] = { correcta: true, tema: tema };
+    } else {
+      opcion.classList.add('incorrecta');
+      opciones[correcta].classList.add('correcta');
+      respuestas[preguntaNum] = { correcta: false, tema: tema };
+    }
+
+    explicacion.classList.add('visible');
+    pregunta.classList.add('answered');
+    actualizarEstadisticas();
+  }
+
+  function actualizarEstadisticas() {
+    const total = Object.keys(respuestas).length;
+    const correctas = Object.values(respuestas).filter(r => r.correcta).length;
+    const incorrectas = total - correctas;
+    const porcentaje = total > 0 ? Math.round((correctas / total) * 100) : 0;
+
+    document.getElementById('respondidas').textContent = total;
+    document.getElementById('correctas').textContent = correctas;
+    document.getElementById('incorrectas').textContent = incorrectas;
+    document.getElementById('porcentaje').textContent = porcentaje;
+
+    const progreso = (total / totalPreguntas) * 100;
+    document.getElementById('progressFill').style.width = progreso + '%';
+  }
+
+  function verResultadoFinal() {
+    const total = Object.keys(respuestas).length;
+    
+    if (total < totalPreguntas) {
+      alert(`⚠️ Aún te faltan ${totalPreguntas - total} preguntas por responder.`);
+      return;
+    }
+
+    const correctas = Object.values(respuestas).filter(r => r.correcta).length;
+    const porcentaje = Math.round((correctas / totalPreguntas) * 100);
+
+    const resultadoFinal = document.getElementById('resultadoFinal');
+    resultadoFinal.classList.add('visible');
+
+    document.getElementById('puntajeFinal').textContent = `${correctas}/${totalPreguntas}`;
+
+    let mensaje = '';
+    if (porcentaje === 100) mensaje = '🏆 ¡PERFECTO! Dominas los Contratos Administrativos.';
+    else if (porcentaje >= 90) mensaje = '🌟 ¡Excelente! Dominio sobresaliente.';
+    else if (porcentaje >= 75) mensaje = '✅ ¡Muy bien! Buen dominio.';
+    else if (porcentaje >= 60) mensaje = '📚 Aceptable. Repasa los temas donde fallaste.';
+    else if (porcentaje >= 40) mensaje = '📖 Necesitas reforzar varios conceptos.';
+    else mensaje = '🔍 Es necesario estudiar nuevamente todos los temas.';
+
+    document.getElementById('mensajeFinal').textContent = mensaje;
+
+    const temas = {
+      1: { nombre: 'T1: Noción', total: 4, correctas: 0 },
+      2: { nombre: 'T2: Características', total: 4, correctas: 0 },
+      3: { nombre: 'T3: Elementos', total: 4, correctas: 0 },
+      4: { nombre: 'T4: Principios', total: 4, correctas: 0 },
+      5: { nombre: 'T5: Partes', total: 4, correctas: 0 },
+      6: { nombre: 'T6: Escogencia', total: 4, correctas: 0 },
+      7: { nombre: 'T7: Contenido', total: 4, correctas: 0 },
+      8: { nombre: 'T8: Perfeccionamiento', total: 4, correctas: 0 },
+      9: { nombre: 'T9: Ejecución', total: 4, correctas: 0 },
+      10: { nombre: 'T10: Nulidades', total: 4, correctas: 0 }
+    };
+
+    Object.values(respuestas).forEach(r => {
+      if (r.correcta) temas[r.tema].correctas++;
+    });
+
+    const desgloseHTML = Object.values(temas).map(t => {
+      const pct = Math.round((t.correctas / t.total) * 100);
+      return `
+        <div class="desglose-item">
+          <h4>${t.nombre}</h4>
+          <p>${t.correctas}/${t.total} (${pct}%)</p>
+          <div class="mini-bar">
+            <div class="mini-bar-fill" style="width: ${pct}%"></div>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    document.getElementById('desgloseTemas').innerHTML = desgloseHTML;
+    resultadoFinal.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  function reiniciarQuiz() {
+    if (!confirm('¿Reiniciar el quiz?')) return;
+
+    respuestas = {};
+
+    document.querySelectorAll('.opcion').forEach(o => o.classList.remove('correcta', 'incorrecta', 'disabled'));
+    document.querySelectorAll('.explicacion').forEach(e => e.classList.remove('visible'));
+    document.querySelectorAll('.pregunta').forEach(p => p.classList.remove('answered'));
+    document.getElementById('resultadoFinal').classList.remove('visible');
+
+    actualizarEstadisticas();
+    mostrarSeccion('s1', document.querySelector('.quiz-tab'));
+    document.getElementById('quiz').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  document.querySelectorAll('nav a').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+</script>
+
+</body>
+</html>
