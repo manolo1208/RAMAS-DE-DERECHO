@@ -1,0 +1,2801 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Democracia, Estructura del Estado y Control Constitucional - Derecho Constitucional</title>
+<style>
+  :root {
+    --primary: #831843;
+    --secondary: #f472b6;
+    --accent: #be185d;
+    --light: #fdf2f8;
+    --dark: #1a202c;
+    --success: #059669;
+    --warning: #d97706;
+    --danger: #dc2626;
+    --card-bg: #ffffff;
+    --shadow: 0 4px 15px rgba(0,0,0,0.08);
+    --shadow-hover: 0 8px 25px rgba(0,0,0,0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    background: var(--light);
+    color: var(--dark);
+    line-height: 1.7;
+  }
+
+  header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    color: white;
+    padding: 2rem 1rem;
+    text-align: center;
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::before {
+    content: '🗳️';
+    position: absolute;
+    font-size: 15rem;
+    opacity: 0.05;
+    top: -30px;
+    right: -30px;
+  }
+
+  header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: 2px;
+  }
+
+  header p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    font-style: italic;
+  }
+
+  nav {
+    background: var(--dark);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow);
+  }
+
+  nav ul {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0.5rem;
+  }
+
+  nav a {
+    color: var(--light);
+    text-decoration: none;
+    padding: 0.7rem 1rem;
+    margin: 0.2rem;
+    border-radius: 5px;
+    font-size: 0.7rem;
+    transition: all 0.3s;
+    display: block;
+  }
+
+  nav a:hover {
+    background: var(--secondary);
+    color: var(--dark);
+    transform: translateY(-2px);
+  }
+
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+  }
+
+  section {
+    background: var(--card-bg);
+    margin-bottom: 2.5rem;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    border-left: 5px solid var(--secondary);
+    scroll-margin-top: 80px;
+  }
+
+  section h2 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--secondary);
+  }
+
+  section h3 {
+    color: var(--accent);
+    font-size: 1.4rem;
+    margin: 1.5rem 0 0.8rem;
+  }
+
+  section h4 {
+    color: var(--primary);
+    font-size: 1.15rem;
+    margin: 1rem 0 0.5rem;
+  }
+
+  p { margin-bottom: 1rem; text-align: justify; }
+
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.2rem;
+    margin: 1.5rem 0;
+  }
+
+  .card {
+    background: linear-gradient(135deg, #fff 0%, #fdf2f8 100%);
+    border: 2px solid var(--secondary);
+    border-radius: 10px;
+    padding: 1.2rem;
+    transition: all 0.3s;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--primary);
+  }
+
+  .card .icon {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .card h4 {
+    text-align: center;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+  }
+
+  .card .detail {
+    display: none;
+    margin-top: 0.8rem;
+    padding-top: 0.8rem;
+    border-top: 1px dashed var(--secondary);
+    font-size: 0.95rem;
+  }
+
+  .card.active .detail { display: block; }
+
+  .card .hint {
+    text-align: center;
+    color: var(--accent);
+    font-size: 0.85rem;
+    font-style: italic;
+  }
+
+  .mapa-container {
+    background: #fdf2f8;
+    border: 2px dashed var(--secondary);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    overflow-x: auto;
+  }
+
+  .mapa {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 600px;
+  }
+
+  .nodo {
+    background: var(--primary);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+    font-weight: bold;
+    text-align: center;
+    min-width: 180px;
+    box-shadow: var(--shadow);
+  }
+
+  .nodo.central {
+    background: linear-gradient(135deg, var(--secondary), #f9a8d4);
+    color: var(--dark);
+    font-size: 1.2rem;
+    padding: 1rem 2rem;
+  }
+
+  .nodo.sub {
+    background: var(--accent);
+    font-size: 0.95rem;
+  }
+
+  .linea {
+    width: 3px;
+    height: 25px;
+    background: var(--secondary);
+  }
+
+  .linea-h {
+    height: 3px;
+    background: var(--secondary);
+    width: 80%;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .rama {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 1rem;
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  .rama-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    min-width: 140px;
+  }
+
+  .ejemplo {
+    background: #ecfdf5;
+    border-left: 4px solid var(--success);
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .ejemplo strong { color: var(--success); }
+
+  .alerta {
+    background: #fffbeb;
+    border-left: 4px solid var(--warning);
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .alerta strong { color: var(--warning); }
+
+  .cita {
+    background: #fdf2f8;
+    border-left: 4px solid var(--accent);
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+    color: var(--primary);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    font-size: 0.9rem;
+  }
+
+  th {
+    background: var(--primary);
+    color: white;
+    padding: 0.8rem;
+    text-align: left;
+  }
+
+  td {
+    padding: 0.8rem;
+    border-bottom: 1px solid #eee;
+  }
+
+  tr:nth-child(even) { background: #fdf2f8; }
+  tr:hover { background: #fce7f3; }
+
+  .quiz-container {
+    background: linear-gradient(135deg, #fdf2f8 0%, #fff 100%);
+    padding: 1.5rem;
+    border-radius: 10px;
+    border: 2px solid var(--accent);
+  }
+
+  .quiz-header {
+    background: var(--primary);
+    color: white;
+    padding: 1.2rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .quiz-header h3 {
+    color: white;
+    margin: 0 0 0.5rem 0;
+  }
+
+  .progress-bar {
+    background: rgba(255,255,255,0.2);
+    height: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+  }
+
+  .progress-fill {
+    background: var(--secondary);
+    height: 100%;
+    width: 0%;
+    transition: width 0.4s ease;
+  }
+
+  .quiz-stats {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .stat {
+    background: rgba(255,255,255,0.1);
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    font-size: 0.9rem;
+  }
+
+  .stat strong { color: var(--secondary); }
+
+  .quiz-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    padding: 0.5rem;
+    background: #fce7f3;
+    border-radius: 8px;
+  }
+
+  .quiz-tab {
+    background: white;
+    border: 2px solid var(--accent);
+    color: var(--accent);
+    padding: 0.5rem 0.8rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.7rem;
+    transition: all 0.3s;
+    flex: 1;
+    min-width: 70px;
+    text-align: center;
+  }
+
+  .quiz-tab:hover {
+    background: var(--accent);
+    color: white;
+  }
+
+  .quiz-tab.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+  }
+
+  .quiz-section {
+    display: none;
+  }
+
+  .quiz-section.active {
+    display: block;
+    animation: fadeIn 0.4s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .pregunta {
+    margin-bottom: 1.5rem;
+    padding: 1.2rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    border-left: 4px solid var(--accent);
+    transition: all 0.3s;
+  }
+
+  .pregunta.answered {
+    border-left-color: var(--secondary);
+  }
+
+  .pregunta-num {
+    display: inline-block;
+    background: var(--accent);
+    color: white;
+    padding: 0.2rem 0.7rem;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    margin-right: 0.5rem;
+  }
+
+  .pregunta-tipo {
+    display: inline-block;
+    background: var(--secondary);
+    color: var(--dark);
+    padding: 0.2rem 0.7rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    margin-left: 0.3rem;
+    font-weight: bold;
+  }
+
+  .pregunta p { 
+    font-weight: bold; 
+    color: var(--primary); 
+    margin: 0.8rem 0;
+    text-align: left;
+  }
+
+  .opciones { display: flex; flex-direction: column; gap: 0.5rem; }
+
+  .opcion {
+    padding: 0.7rem 1rem;
+    background: #fdf2f8;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+  }
+
+  .opcion:hover:not(.disabled) {
+    border-color: var(--accent);
+    background: #fce7f3;
+  }
+
+  .opcion.disabled {
+    cursor: not-allowed;
+    opacity: 0.85;
+  }
+
+  .opcion.correcta {
+    background: #d1fae5;
+    border-color: var(--success);
+    color: var(--success);
+    font-weight: bold;
+  }
+
+  .opcion.incorrecta {
+    background: #fee2e2;
+    border-color: var(--danger);
+    color: var(--danger);
+  }
+
+  .opcion.correcta::after {
+    content: ' ✓';
+    font-weight: bold;
+  }
+
+  .opcion.incorrecta::after {
+    content: ' ✗';
+    font-weight: bold;
+  }
+
+  .explicacion {
+    margin-top: 0.8rem;
+    padding: 0.8rem;
+    background: #fdf2f8;
+    border-left: 3px solid var(--accent);
+    border-radius: 0 6px 6px 0;
+    font-size: 0.9rem;
+    display: none;
+    font-style: italic;
+  }
+
+  .explicacion.visible {
+    display: block;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .resultado-final {
+    margin-top: 2rem;
+    padding: 2rem;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    color: white;
+    border-radius: 12px;
+    text-align: center;
+    display: none;
+  }
+
+  .resultado-final.visible {
+    display: block;
+    animation: fadeIn 0.5s ease;
+  }
+
+  .resultado-final h3 {
+    color: var(--secondary);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .puntaje-final {
+    font-size: 3rem;
+    font-weight: bold;
+    color: var(--secondary);
+    margin: 1rem 0;
+  }
+
+  .desglose-temas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+    text-align: left;
+  }
+
+  .desglose-item {
+    background: rgba(255,255,255,0.1);
+    padding: 1rem;
+    border-radius: 8px;
+  }
+
+  .desglose-item h4 {
+    color: var(--secondary);
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+  }
+
+  .mini-bar {
+    background: rgba(255,255,255,0.2);
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+  }
+
+  .mini-bar-fill {
+    background: var(--secondary);
+    height: 100%;
+    transition: width 0.6s ease;
+  }
+
+  button {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 1rem;
+    transition: all 0.3s;
+  }
+
+  button:hover {
+    background: var(--secondary);
+    color: var(--dark);
+    transform: translateY(-2px);
+  }
+
+  .btn-reset {
+    background: var(--danger);
+    margin-left: 0.5rem;
+  }
+
+  .btn-reset:hover {
+    background: #991b1b;
+    color: white;
+  }
+
+  .acordeon-item {
+    margin-bottom: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .acordeon-header {
+    background: var(--accent);
+    color: white;
+    padding: 1rem;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.3s;
+  }
+
+  .acordeon-header:hover { background: var(--primary); }
+
+  .acordeon-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    background: white;
+  }
+
+  .acordeon-content.active {
+    max-height: 2000px;
+    padding: 1rem;
+  }
+
+  .flecha { transition: transform 0.3s; }
+  .acordeon-header.active .flecha { transform: rotate(180deg); }
+
+  footer {
+    background: var(--dark);
+    color: var(--light);
+    text-align: center;
+    padding: 2rem 1rem;
+    margin-top: 2rem;
+  }
+
+  footer p { margin-bottom: 0.5rem; }
+
+  @media (max-width: 768px) {
+    header h1 { font-size: 1.8rem; }
+    section { padding: 1.2rem; }
+    section h2 { font-size: 1.5rem; }
+    nav a { font-size: 0.6rem; padding: 0.3rem 0.4rem; }
+    .quiz-tab { font-size: 0.6rem; padding: 0.3rem 0.4rem; }
+    table { font-size: 0.8rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🗳️ Democracia, Estructura del Estado y Control Constitucional</h1>
+  <p>Módulos IX y X · Derecho Constitucional Colombiano · Guía Didáctica Interactiva 5</p>
+</header>
+
+<nav>
+  <ul>
+    <li><a href="#tema1">1. Participación</a></li>
+    <li><a href="#tema2">2. Voto</a></li>
+    <li><a href="#tema3">3. Iniciativa</a></li>
+    <li><a href="#tema4">4. Consulta</a></li>
+    <li><a href="#tema5">5. Referendo/Plebiscito</a></li>
+    <li><a href="#tema6">6. Cabildo/Revocatoria</a></li>
+    <li><a href="#tema7">7. Rama Legislativa</a></li>
+    <li><a href="#tema8">8. Ejecutiva/Judicial</a></li>
+    <li><a href="#tema9">9. Control Constitucional</a></li>
+    <li><a href="#tema10">10. Constitución Económica</a></li>
+    <li><a href="#quiz">Quiz (40)</a></li>
+  </ul>
+</nav>
+
+<main>
+
+  <section>
+    <h2>📚 Introducción</h2>
+    <p>Bienvenido a esta guía interactiva sobre la <strong>Democracia, Estructura del Estado y Control Constitucional</strong>. Aquí estudiarás los mecanismos de participación ciudadana (voto, iniciativa popular, consulta, referendo, plebiscito, cabildo abierto y revocatoria), la estructura de las ramas del poder público, los sistemas de control constitucional, los estados de excepción y la constitución económica colombiana.</p>
+    <div class="alerta">
+      <strong>💡 Cómo usar esta guía:</strong> Haz clic en las tarjetas para ver detalles, despliega los acordeones para información adicional y prueba tus conocimientos con el quiz de 40 preguntas al final.
+    </div>
+  </section>
+
+  <!-- TEMA 1: MECANISMOS DE PARTICIPACIÓN -->
+  <section id="tema1">
+    <h2>1. Mecanismos de Participación Ciudadana (Art. 103 C.P.)</h2>
+    <p>La Constitución de 1991 consagra a Colombia como una democracia participativa, estableciendo diversos mecanismos para que los ciudadanos intervengan directamente en las decisiones públicas.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">MECANISMOS DE PARTICIPACIÓN</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Voto</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Iniciativa Popular</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Consulta Popular</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Referendo</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Plebiscito</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Cabildo Abierto</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Revocatoria</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Fundamento Constitucional</h3>
+    <div class="cita">
+      <strong>"La soberanía reside exclusivamente en el pueblo, del cual emana el poder público. El pueblo la ejerce en forma directa o por medio de sus representantes, en los términos que establezca la Constitución."</strong> — Art. 3° C.P.
+    </div>
+
+    <h3>🔍 Los 7 Mecanismos Constitucionales</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Mecanismo</th>
+          <th>Art. C.P.</th>
+          <th>Finalidad</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>El Voto</strong></td>
+          <td>Art. 258</td>
+          <td>Derecho y deber ciudadano de elegir representantes</td>
+        </tr>
+        <tr>
+          <td><strong>Iniciativa Popular</strong></td>
+          <td>Art. 103</td>
+          <td>Presentar proyectos de ley, acuerdo u ordenanza</td>
+        </tr>
+        <tr>
+          <td><strong>Consulta Popular</strong></td>
+          <td>Art. 103</td>
+          <td>Pronunciamiento sobre asuntos de trascendencia nacional, departamental o local</td>
+        </tr>
+        <tr>
+          <td><strong>Referendo</strong></td>
+          <td>Art. 103</td>
+          <td>Aprobar o derogar normas jurídicas</td>
+        </tr>
+        <tr>
+          <td><strong>Plebiscito</strong></td>
+          <td>Art. 103</td>
+          <td>Pronunciamiento del pueblo sobre decisiones del Ejecutivo</td>
+        </tr>
+        <tr>
+          <td><strong>Cabildo Abierto</strong></td>
+          <td>Art. 103</td>
+          <td>Reunión pública de concejos o juntas para tratar asuntos de interés comunitario</td>
+        </tr>
+        <tr>
+          <td><strong>Revocatoria del Mandato</strong></td>
+          <td>Art. 103</td>
+          <td>Destitución de alcaldes o gobernadores por incumplimiento del programa</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si un grupo de ciudadanos quiere que se discuta una ley sobre protección ambiental, pueden usar la iniciativa popular para presentar el proyecto al Congreso. Si el Congreso no lo aprueba, pueden solicitar un referendo para que el pueblo decida directamente.
+    </div>
+  </section>
+
+  <!-- TEMA 2: EL VOTO -->
+  <section id="tema2">
+    <h2>2. El Voto (Art. 258 C.P.)</h2>
+    <p>El voto es el mecanismo fundamental de participación democrática, con una naturaleza dual de derecho y deber ciudadano.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">EL VOTO</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Derecho Subjetivo</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Deber Ciudadano</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Secreto</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Universal</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Naturaleza Dual del Voto</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🗳️</div>
+        <h4>Como Derecho Subjetivo</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Toda persona tiene el <strong>derecho</strong> a votar para elegir autoridades y decidir asuntos públicos.</p>
+          <p>Nadie puede ser obligado a votar en un sentido específico.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Como Deber Ciudadano</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Los ciudadanos tienen el <strong>deber</strong> cívico de participar en las elecciones.</p>
+          <p>El voto es una expresión de responsabilidad democrática.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🔒</div>
+        <h4>Carácter Secreto</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>El voto es <strong>secreto</strong> para garantizar la libertad del elector.</p>
+          <p>Nadie puede ser presionado sobre su decisión electoral.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🌎</div>
+        <h4>Carácter Universal</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Todos los ciudadanos mayores de 18 años pueden votar.</p>
+          <p>Sin discriminación de raza, sexo, religión o condición social.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>⚖️ Garantías Electorales (Art. 258 C.P.)</h3>
+    <div class="alerta">
+      <strong>📌 Principios del voto:</strong>
+      <ul>
+        <li><strong>Universal:</strong> Todos los ciudadanos pueden votar</li>
+        <li><strong>Igual:</strong> Cada voto tiene el mismo valor</li>
+        <li><strong>Secreto:</strong> Se garantiza la privacidad del elector</li>
+        <li><strong>Libre:</strong> Sin coerción ni presión</li>
+        <li><strong>Directo:</strong> El ciudadano vota directamente por sus representantes</li>
+      </ul>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> En las elecciones presidenciales, cada ciudadano colombiano mayor de 18 años tiene el derecho y el deber de votar. El voto es secreto (nadie sabe por quién votó) y universal (todos los ciudadanos pueden participar sin discriminación).
+    </div>
+  </section>
+
+  <!-- TEMA 3: INICIATIVA POPULAR -->
+  <section id="tema3">
+    <h2>3. Iniciativa Popular Legislativa y Normativa</h2>
+    <p>La iniciativa popular permite a los ciudadanos presentar proyectos de ley, acuerdos u ordenanzas, o reformas constitucionales.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">INICIATIVA POPULAR</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Comité Promotor</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Recolección Apoyos</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Verificación</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Presentación</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Etapas del Procedimiento</h3>
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>1️⃣ Conformación del Comité de Promotores</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Un grupo de ciudadanos se organiza para promover la iniciativa.</p>
+        <p>Deben designar un vocero y presentar los documentos requeridos.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>2️⃣ Inscripción del Comité</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Se inscribe ante la Registraduría Nacional del Estado Civil.</p>
+        <p>Requiere el respaldo del <strong>0.5% (cinco por mil)</strong> de los ciudadanos inscritos en el censo electoral.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>3️⃣ Recolección de Apoyos</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>El comité recolecta firmas de apoyo ciudadano.</p>
+        <p>Para proyectos de ley: <strong>5% del censo electoral</strong>.</p>
+        <p>Para reformas constitucionales: <strong>5% del censo electoral</strong>.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>4️⃣ Verificación y Certificación</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>La Registraduría verifica las firmas recolectadas.</p>
+        <p>Si se cumple el requisito, expide las certificaciones correspondientes.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>5️⃣ Presentación ante la Corporación Pública</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>El proyecto se presenta ante el Congreso (ley), Asamblea (ordenanza) o Concejo (acuerdo).</p>
+        <p>La corporación debe darle trámite legislativo ordinario.</p>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Un grupo de ciudadanos quiere presentar un proyecto de ley para proteger los páramos. Conforman un comité promotor, recogen el 5% de firmas del censo electoral (aproximadamente 1.5 millones de firmas), la Registraduría las verifica, y el proyecto se presenta al Congreso para su trámite.
+    </div>
+  </section>
+
+  <!-- TEMA 4: CONSULTA POPULAR -->
+  <section id="tema4">
+    <h2>4. La Consulta Popular (Art. 103 C.P.)</h2>
+    <p>La consulta popular es un mecanismo mediante el cual se le pregunta al pueblo sobre un asunto de trascendencia nacional, departamental, distrital, municipal o local.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">CONSULTA POPULAR</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Nacional</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Presidente</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Departamental</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Gobernador</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Municipal</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Alcalde</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Características Fundamentales</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🗳️</div>
+        <h4>Pronunciamiento Popular</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>El pueblo es convocado a pronunciarse sobre una <strong>pregunta específica</strong>.</p>
+          <p>La respuesta es obligatoria para la autoridad.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📊</div>
+        <h4>Quórum Decisorio</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Para que la consulta sea vinculante, debe votar al menos la <strong>mitad más uno</strong> del censo electoral.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Carácter Vinculante</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>La decisión del pueblo es <strong>obligatoria</strong> para la autoridad correspondiente.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>🎯 Casos Específicos de Consulta Obligatoria</h3>
+    <div class="alerta">
+      <strong>📌 La consulta popular es obligatoria en:</strong>
+      <ul>
+        <li><strong>Art. 297 C.P.:</strong> Formación de nuevos departamentos</li>
+        <li><strong>Art. 319 C.P.:</strong> Vinculación de municipios a áreas metropolitanas</li>
+        <li><strong>Art. 321 C.P.:</strong> Ingreso de un municipio a una provincia ya constituida</li>
+        <li><strong>Art. 334 C.P.:</strong> Actividades relacionadas con explotación de recursos naturales que puedan causar grave deterioro ambiental</li>
+      </ul>
+    </div>
+
+    <h3>⚠️ Diferencia con el Referendo</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Aspecto</th>
+          <th>Consulta Popular</th>
+          <th>Referendo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Objeto</strong></td>
+          <td>Pregunta sobre asunto de trascendencia</td>
+          <td>Aprobar o derogar una norma jurídica</td>
+        </tr>
+        <tr>
+          <td><strong>Resultado</strong></td>
+          <td>Decisión política vinculante</td>
+          <td>Modificación del ordenamiento jurídico</td>
+        </tr>
+        <tr>
+          <td><strong>Convocatoria</strong></td>
+          <td>Presidente, gobernador o alcalde</td>
+          <td>Presidente, con aprobación del Congreso</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si un municipio quiere permitir la explotación minera en su territorio, el alcalde debe convocar una consulta popular. Si la mayoría de los ciudadanos vota en contra, la decisión es vinculante y no se puede permitir la explotación.
+    </div>
+  </section>
+
+  <!-- TEMA 5: REFERENDO Y PLEBISCITO -->
+  <section id="tema5">
+    <h2>5. Referendo y Plebiscito</h2>
+    <p>Ambos son mecanismos de participación directa del pueblo, pero tienen objetos y efectos diferentes.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">REFERENDO vs PLEBISCITO</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Referendo</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Normas jurídicas</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Plebiscito</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Decisiones del Ejecutivo</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📜 El Referendo</h3>
+    <div class="cita">
+      <strong>"El referendo es el mecanismo mediante el cual el pueblo aprueba o rechaza las decisiones normativas de las autoridades, expresadas en un texto ya elaborado."</strong>
+    </div>
+
+    <h4>Clases de Referendo</h4>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">✅</div>
+        <h4>Referendo Aprobatorio</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>El pueblo <strong>aprueba</strong> una norma jurídica ya elaborada.</p>
+          <p>Procede para leyes, ordenanzas, acuerdos y reformas constitucionales.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">❌</div>
+        <h4>Referendo Derogatorio</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>El pueblo <strong>deroga</strong> total o parcialmente una norma vigente.</p>
+          <p>Procede contra leyes, ordenanzas, acuerdos y decretos.</p>
+        </div>
+      </div>
+    </div>
+
+    <h4>Requisitos del Referendo</h4>
+    <div class="alerta">
+      <strong>📌 Requisitos constitucionales:</strong>
+      <ul>
+        <li>Convocado por el <strong>Presidente de la República</strong> con aprobación del <strong>Congreso</strong></li>
+        <li>Para reformas constitucionales: requiere aprobación de la <strong>mitad más uno</strong> del censo electoral</li>
+        <li>Para leyes: requiere el <strong>25% del censo electoral</strong></li>
+        <li>No puede versar sobre temas de restricción de derechos fundamentales</li>
+      </ul>
+    </div>
+
+    <h3>🏛️ El Plebiscito</h3>
+    <div class="cita">
+      <strong>"El plebiscito es el pronunciamiento del pueblo, convocado por el Presidente de la República, acerca de una decisión del Ejecutivo."</strong>
+    </div>
+
+    <h4>Características del Plebiscito</h4>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">👨‍💼</div>
+        <h4>Convocatoria</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Convocado exclusivamente por el <strong>Presidente de la República</strong>.</p>
+          <p>Requiere firma de todos los ministros y aprobación previa del <strong>Senado</strong>.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📋</div>
+        <h4>Objeto</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Decisión sobre asuntos de trascendencia <strong>nacional</strong>.</p>
+          <p>No se refiere a normas jurídicas, sino a decisiones del Ejecutivo.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Efecto</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>El resultado <strong>vincula políticamente</strong> al Presidente.</p>
+          <p>No crea ni deroga normas jurídicas.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>📊 Comparativa: Referendo vs. Plebiscito</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Aspecto</th>
+          <th>Referendo</th>
+          <th>Plebiscito</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Objeto</strong></td>
+          <td>Norma jurídica (ley, reforma, etc.)</td>
+          <td>Decisión del Ejecutivo</td>
+        </tr>
+        <tr>
+          <td><strong>Efecto</strong></td>
+          <td>Crea, modifica o deroga normas</td>
+          <td>Vincula políticamente al Presidente</td>
+        </tr>
+        <tr>
+          <td><strong>Convocatoria</strong></td>
+          <td>Presidente + Congreso</td>
+          <td>Presidente + Senado</td>
+        </tr>
+        <tr>
+          <td><strong>Ejemplo histórico</strong></td>
+          <td>Referendo constitucional de 2003</td>
+          <td>Plebiscito por la paz de 2016</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo de plebiscito:</strong> En 2016, el Presidente Santos convocó un plebiscito para que el pueblo decidiera si aprobaba el Acuerdo de Paz con las FARC. El resultado fue vinculante políticamente para el Gobierno, aunque no creó ni modificó normas jurídicas.
+    </div>
+  </section>
+
+  <!-- TEMA 6: CABILDO ABIERTO Y REVOCATORIA -->
+  <section id="tema6">
+    <h2>6. Cabildo Abierto y Revocatoria del Mandato</h2>
+    <p>Son mecanismos de participación directa que fortalecen la democracia a nivel local.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">PARTICIPACIÓN LOCAL</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Cabildo Abierto</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Deliberación</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Revocatoria</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Destitución</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>🏛️ El Cabildo Abierto</h3>
+    <div class="cita">
+      <strong>"Es la reunión pública de los concejos distritales, municipales o de las juntas administradoras locales, en la cual los habitantes pueden participar directamente para discutir asuntos de interés para la comunidad."</strong>
+    </div>
+
+    <h4>Características del Cabildo Abierto</h4>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🗣️</div>
+        <h4>Reunión Pública</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Es una <strong>asamblea pública</strong> donde los ciudadanos participan directamente.</p>
+          <p>No es una votación, sino una deliberación.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📋</div>
+        <h4>Temas de Interés</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Se discuten asuntos que afectan a la <strong>comunidad local</strong>.</p>
+          <p>Ejemplos: servicios públicos, obras, planes de desarrollo.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Convocatoria</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Puede ser convocado por el alcalde, el concejo o por solicitud ciudadana.</p>
+          <p>Requiere el apoyo del <strong>5% o 1/5 del censo electoral</strong> (el que sea menor).</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>🔄 La Revocatoria del Mandato</h3>
+    <div class="alerta">
+      <strong>📌 Concepto:</strong>
+      <p>Es el derecho político por medio del cual se da por terminado el mandato conferido a un <strong>Gobernador o a un Alcalde</strong>.</p>
+    </div>
+
+    <h4>Requisitos de la Revocatoria</h4>
+    <table>
+      <thead>
+        <tr>
+          <th>Requisito</th>
+          <th>Descripción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Plazo mínimo</strong></td>
+          <td>Debe haber transcurrido al menos <strong>12 meses</strong> desde la posesión</td>
+        </tr>
+        <tr>
+          <td><strong>Plazo máximo</strong></td>
+          <td>No puede invocarse en los <strong>últimos 12 meses</strong> del período</td>
+        </tr>
+        <tr>
+          <td><strong>Firmas</strong></td>
+          <td>Requiere apoyo del <strong>40% de los votos</strong> válidos en la elección</td>
+        </tr>
+        <tr>
+          <td><strong>Quórum decisorio</strong></td>
+          <td>Debe votar al menos el <strong>55% de los votos válidos</strong> de la elección</td>
+        </tr>
+        <tr>
+          <td><strong>Causal</strong></td>
+          <td>Incumplimiento del <strong>programa de gobierno</strong> presentado en la inscripción</td>
+        </tr>
+        <tr>
+          <td><strong>Límite</strong></td>
+          <td>Solo puede invocarse <strong>una vez</strong> por cada período de mandato</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h4>Procedimiento de la Revocatoria</h4>
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>1️⃣ Solicitud Ciudadana</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Los ciudadanos presentan la solicitud ante la <strong>Registraduría Nacional</strong>.</p>
+        <p>Deben adjuntar las firmas del 40% de los votos válidos.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>2️⃣ Verificación por la Registraduría</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>La Registraduría verifica las firmas y cumple los requisitos.</p>
+        <p>Si todo está correcto, convoca a la votación.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>3️⃣ Votación</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Se realiza la votación con el quórum del 55% de los votos válidos.</p>
+        <p>Si se alcanza el quórum y la mayoría vota por la revocatoria, el mandatario es destituido.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>4️⃣ Consecuencias</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Si prospera la revocatoria, se convoca a <strong>elecciones anticipadas</strong> para elegir al nuevo gobernador o alcalde.</p>
+        <p>El revocado no puede ser candidato en las nuevas elecciones.</p>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo de cabildo abierto:</strong> Los vecinos de un barrio solicitan un cabildo abierto ante el Concejo Municipal para discutir la construcción de un parque. En la reunión pública, los ciudadanos exponen sus argumentos y el Concejo los escucha, aunque la decisión final corresponde a la corporación.
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo de revocatoria:</strong> Si un alcalde fue elegido con un programa de gobierno que incluía la construcción de un hospital, y después de 2 años no ha iniciado ninguna obra, los ciudadanos pueden solicitar su revocatoria reuniendo el 40% de las firmas de los votantes.
+    </div>
+  </section>
+
+  <!-- TEMA 7: RAMA LEGISLATIVA -->
+  <section id="tema7">
+    <h2>7. Rama Legislativa (Arts. 132-187 C.P.)</h2>
+    <p>La Rama Legislativa está integrada por el Congreso de la República, compuesto por el Senado y la Cámara de Representantes.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">RAMA LEGISLATIVA</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Congreso</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Bicameral</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Senado</div>
+            <div class="linea"></div>
+            <div class="nodo sub">108 senadores</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Cámara</div>
+            <div class="linea"></div>
+            <div class="nodo sub">188 representantes</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>🏛️ Estructura del Congreso</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🏛️</div>
+        <h4>Senado de la República</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p><strong>108 senadores</strong> elegidos en circunscripción nacional.</p>
+          <p>Período de 4 años con reelección prohibida (desde 2015).</p>
+          <h4>Funciones especiales:</h4>
+          <ul>
+            <li>Elegir al Defensor del Pueblo</li>
+            <li>Conocer de las acusaciones contra altos funcionarios</li>
+            <li>Conceder licencias al Presidente</li>
+            <li>Aprobar o improbar tratados internacionales</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📋</div>
+        <h4>Cámara de Representantes</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p><strong>188 representantes</strong> elegidos en circunscripciones territoriales.</p>
+          <p>2 por cada departamento y el Distrito Capital, más adicionales por población.</p>
+          <h4>Funciones especiales:</h4>
+          <ul>
+            <li>Elegir al Defensor del Pueblo (junto con el Senado)</li>
+            <li>Conocer de las acusaciones contra altos funcionarios</li>
+            <li>Presentar proyectos de ley sobre tributos o reclutamiento</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <h3>⚖️ Funciones Principales del Congreso</h3>
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📜 Función Legislativa</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <ul>
+          <li>Hacer leyes y ejercer control político sobre el gobierno</li>
+          <li>Reformar la Constitución mediante Actos Legislativos</li>
+          <li>Aprobar el Presupuesto General de la Nación</li>
+          <li>Decretar impuestos, contribuciones y rentas públicas</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>🔍 Función de Control Político</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <ul>
+          <li>Citar y requerir a ministros, directores administrativos y superintendentes</li>
+          <li>Moción de censura contra ministros y jefes de departamentos</li>
+          <li>Investigaciones especiales por comisión de las cámaras</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>🏛️ Función Judicial</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <ul>
+          <li>Juzgar a los altos funcionarios por delitos cometidos en ejercicio de sus funciones</li>
+          <li>Cámara de Representantes: investiga y acusa</li>
+          <li>Senado: juzga y decide</li>
+          <li>Funcionarios juzgados: Presidente, Magistrados de Altas Cortes, Fiscal General, etc.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>🗳️ Función Electoral</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <ul>
+          <li>Elegir al Contralor General de la República</li>
+          <li>Elegir Magistrados de la Corte Constitucional y Corte Suprema</li>
+          <li>Elegir al Defensor del Pueblo</li>
+          <li>Elegir Magistrados del Consejo Nacional Electoral</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>📝 Proceso de Formación de la Ley</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Etapa</th>
+          <th>Descripción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>1. Iniciativa</strong></td>
+          <p>Gobierno, congresistas, entidades territoriales o ciudadanos (iniciativa popular)</td>
+        </tr>
+        <tr>
+          <td><strong>2. Primer Debate</strong></td>
+          <p>En comisiones constitucionales permanentes de cada cámara</td>
+        </tr>
+        <tr>
+          <td><strong>3. Segundo Debate</strong></td>
+          <p>En plenarias de cada cámara (Senado y Cámara)</td>
+        </tr>
+        <tr>
+          <td><strong>4. Sanción Presidencial</strong></td>
+          <p>El Presidente sanciona, objeta o veta el proyecto</td>
+        </tr>
+        <tr>
+          <td><strong>5. Promulgación</strong></td>
+          <p>Publicación en el Diario Oficial como ley de la República</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Un senador presenta un proyecto de ley sobre protección de datos personales. El proyecto pasa a las comisiones cuartas (hacienda) de Senado y Cámara para primer debate. Si es aprobado, pasa a plenarias para segundo debate. Finalmente, el Presidente lo sanciona y se publica como ley.
+    </div>
+  </section>
+
+  <!-- TEMA 8: RAMA EJECUTIVA Y JUDICIAL -->
+  <section id="tema8">
+    <h2>8. Rama Ejecutiva y Judicial</h2>
+    <p>La Constitución organiza el poder público en tres ramas: legislativa, ejecutiva y judicial, con un sistema de pesos y contrapesos.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">RAMAS DEL PODER</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Ejecutiva</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Presidente</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Judicial</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Altas Cortes</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Legislativa</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Congreso</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>🏛️ Rama Ejecutiva</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">👨‍💼</div>
+        <h4>Presidente de la República</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p><strong>Jefe de Estado, Jefe de Gobierno y Suprema Autoridad Administrativa</strong>.</p>
+          <p>Elegido por voto popular para período de 4 años.</p>
+          <p>No puede ser reelegido (desde Acto Legislativo 02 de 2015).</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">👥</div>
+        <h4>Vicepresidente</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Elegido en la misma fórmula del Presidente.</p>
+          <p>Reemplaza al Presidente en caso de falta temporal o absoluta.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🏢</div>
+        <h4>Ministros y Directores</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Ministros del Despacho y Directores de Departamentos Administrativos.</p>
+          <p>Forman el Consejo de Ministros.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🗺️</div>
+        <h4>Gobernadores y Alcaldes</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Representantes del Ejecutivo a nivel departamental y municipal.</p>
+          <p>Elegidos por voto popular para períodos de 4 años.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>⚖️ Funciones del Presidente</h3>
+    <div class="alerta">
+      <strong>📌 Principales funciones (Art. 189 C.P.):</strong>
+      <ul>
+        <li>Cumplir y hacer cumplir la Constitución y las leyes</li>
+        <li>Dirigir las relaciones internacionales</li>
+        <li>Nombrar y remover ministros, embajadores y demás funcionarios</li>
+        <li>Dirigir la fuerza pública</li>
+        <li>Declarar la guerra y hacer la paz</li>
+        <li>Instalar y clausurar sesiones del Congreso</li>
+        <li>Sancionar las leyes, objetarlas o vetarlas</li>
+        <li>Reglamentar las leyes</li>
+        <li>Conceder indultos y amnistías por delitos políticos</li>
+      </ul>
+    </div>
+
+    <h3>🏛️ Rama Judicial</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Corte Constitucional</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p><strong>9 magistrados</strong> elegidos por el Senado para 8 años.</p>
+          <p>Guardiana de la Constitución y de los derechos fundamentales.</p>
+          <p>Control constitucional de leyes y tutelas.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🏛️</div>
+        <h4>Corte Suprema de Justicia</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p><strong>23 magistrados</strong> en 3 salas (Civil, Penal, Laboral).</p>
+          <p>Máximo tribunal de la jurisdicción ordinaria.</p>
+          <p>Juzga a altos funcionarios con fuero constitucional.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📋</div>
+        <h4>Consejo de Estado</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Máximo tribunal de la jurisdicción contencioso-administrativa.</p>
+          <p>Conoce de demandas contra actos del Estado.</p>
+          <p>Función consultiva del Gobierno.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🔍</div>
+        <h4>Consejo Superior de la Judicatura</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Administración de la Rama Judicial.</p>
+          <p>Disciplina judicial y presupuesto del sector.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>👥 Particulares que Administran Justicia (Art. 116 C.P.)</h3>
+    <div class="alerta">
+      <strong>📌 Transitoriamente, particulares ejercen funciones de administración de justicia:</strong>
+      <ul>
+        <li><strong>Conciliadores:</strong> Resuelven conflictos mediante acuerdos entre las partes</li>
+        <li><strong>Árbitros:</strong> Deciden controversias en derecho o en equidad</li>
+        <li><strong>Jurados en causas criminales:</strong> Participan en el juicio oral penal</li>
+      </ul>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Dos empresarios tienen una controversia contractual. En lugar de ir a un juez ordinario, deciden someterse a un tribunal de arbitramento. Los árbitros (particulares) administran justicia y emiten un laudo arbitral con efectos de sentencia judicial.
+    </div>
+  </section>
+
+  <!-- TEMA 9: CONTROL CONSTITUCIONAL -->
+  <section id="tema9">
+    <h2>9. Control Constitucional y Estados de Excepción</h2>
+    <p>Colombia adopta un sistema mixto de control constitucional, combinando el modelo concentrado (Corte Constitucional) con el modelo difuso (vía de excepción).</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">CONTROL CONSTITUCIONAL</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Concentrado</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Corte Constitucional</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Difuso</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Vía de excepción</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Sistemas de Control Constitucional</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🏛️</div>
+        <h4>Sistema Concentrado (Kelseniano)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Un único órgano (Corte Constitucional) tiene la competencia para declarar la inconstitucionalidad.</p>
+          <p>Origen: Austria, modelo europeo.</p>
+          <p>Las decisiones tienen efectos <strong>erga omnes</strong> (para todos).</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Sistema Difuso (Americano)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Cualquier juez puede inaplicar una norma por inconstitucionalidad en un caso concreto.</p>
+          <p>Origen: Estados Unidos (Caso Marbury vs. Madison, 1803).</p>
+          <p>Las decisiones tienen efectos <strong>inter partes</strong> (solo para las partes del caso).</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>🔍 Vías del Control Constitucional en Colombia</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Vía</th>
+          <th>Descripción</th>
+          <th>Competencia</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Control Abstracto Oficioso/Automático</strong></td>
+          <p>Revisión automática de ciertos actos (reformas constitucionales, leyes aprobatorias de tratados, decretos legislativos de estados de excepción)</p>
+        </tr>
+        <tr>
+          <td><strong>Control Abstracto por Demanda</strong></td>
+          <p>Cualquier ciudadano puede demandar leyes o decretos ante la Corte Constitucional</p>
+        </tr>
+        <tr>
+          <td><strong>Control Concreto (Vía de Excepción)</strong></td>
+          <p>Cualquier juez puede inaplicar una norma por inconstitucionalidad en un caso concreto</p>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>⚖️ Tipos de Sentencias de la Corte Constitucional</h3>
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📜 Sentencias Interpretativas o Condicionadas</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>La Corte declara exequible una norma <strong>bajo cierta interpretación</strong>.</p>
+        <p>Si se interpreta de otra forma, sería inconstitucional.</p>
+        <p>Ejemplo: "Exequible siempre que se entienda que..."</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>🔧 Sentencias Integradoras o Aditivas</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>La Corte agrega contenido a una norma para hacerla constitucional.</p>
+        <p>Se usa cuando una norma es incompleta o excluye injustamente a ciertos casos.</p>
+        <p>Ejemplo: "Exequible, siempre que se incluya también a..."</p>
+      </div>
+    </div>
+
+    <h3>⏰ Efectos Temporales de las Sentencias</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⏭️</div>
+        <h4>Efectos Ex Nunc (Hacia adelante)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>La norma derogada solo produce efectos hacia el futuro.</p>
+          <p>No afecta situaciones consolidadas en el pasado.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⏮️</div>
+        <h4>Efectos Retroactivos</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>La derogatoria se aplica hacia el pasado.</p>
+          <p>Revierte situaciones consolidadas bajo la norma anterior.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⏸️</div>
+        <h4>Efectos Diferidos</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>La Corte declara la inconstitucionalidad, pero difiere sus efectos por un tiempo determinado.</p>
+          <p>Da oportunidad al legislador para expedir una nueva norma.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>🚨 Régimen de Estados de Excepción</h3>
+    <div class="alerta">
+      <strong>📌 Artículos 212 a 215 C.P.:</strong>
+      <p>El Presidente, con la firma de todos los ministros, puede decretar estados de excepción en tres casos:</p>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Estado</th>
+          <th>Causal</th>
+          <th>Duración Máxima</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Guerra Exterior</strong></td>
+          <p>Art. 212</p>
+          <td>Conflicto bélico con potencia o nación extranjera</td>
+          <td>Hasta que cese la causa</td>
+        </tr>
+        <tr>
+          <td><strong>Conmoción Interior</strong></td>
+          <p>Art. 213</p>
+          <td>Grave perturbación del orden público</td>
+          <td>Hasta 90 días, prorrogables por 90 más</td>
+        </tr>
+        <tr>
+          <td><strong>Emergencia Económica, Social y Ecológica</strong></td>
+          <p>Art. 215</p>
+          <td>Hechos sobrevinientes que perturben gravemente la economía, la sociedad o el ambiente</td>
+          <td>Hasta 30 días con prórroga de 30 más (máximo 90 días en un año)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>⚖️ Control de los Estados de Excepción</h3>
+    <div class="alerta">
+      <strong>📌 Controles constitucionales:</strong>
+      <ul>
+        <li><strong>Control automático:</strong> La Corte Constitucional revisa de oficio la constitucionalidad de los decretos legislativos dentro de los 30 días siguientes</li>
+        <li><strong>Control político:</strong> El Congreso puede derogar, modificar o adicionar los decretos</li>
+        <li><strong>Límites materiales:</strong> No se pueden suspender derechos humanos fundamentales ni tratados internacionales</li>
+      </ul>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Durante la pandemia de COVID-19 en 2020, el Presidente decretó Estado de Emergencia Económica, Social y Ecológica. La Corte Constitucional revisó automáticamente los decretos legislativos y declaró algunos exequibles y otros inexequibles, garantizando el control constitucional incluso en situaciones excepcionales.
+    </div>
+  </section>
+
+  <!-- TEMA 10: CONSTITUCIÓN ECONÓMICA -->
+  <section id="tema10">
+    <h2>10. Constitución Económica y Presupuesto</h2>
+    <p>La Constitución establece las bases del modelo económico colombiano, regulando el Plan Nacional de Desarrollo, el sistema presupuestal y la banca central.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">CONSTITUCIÓN ECONÓMICA</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Plan Nacional de Desarrollo</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Presupuesto</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Banca Central</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Plan Nacional de Desarrollo (Arts. 339-344 C.P.)</h3>
+    <div class="cita">
+      <strong>"Habrá un Plan Nacional de Desarrollo conformado por una parte general y un plan de inversiones de las entidades públicas del orden nacional."</strong> — Art. 339 C.P.
+    </div>
+
+    <h4>Componentes del Plan</h4>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📜</div>
+        <h4>Parte General</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <ul>
+            <li>Propósitos y objetivos nacionales de largo plazo</li>
+            <li>Metas y prioridades de la acción estatal a mediano plazo</li>
+            <li>Estrategias y orientaciones generales de política económica, social y ambiental</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">💰</div>
+        <h4>Plan de Inversiones</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <ul>
+            <li>Presupuestos plurianuales de los principales programas y proyectos de inversión pública</li>
+            <li>Señalamiento de los recursos financieros para la ejecución del plan</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <h3>💵 Sistema Presupuestal (Arts. 345-354 C.P.)</h3>
+    <div class="alerta">
+      <strong>📌 Principios del sistema presupuestal:</strong>
+      <ul>
+        <li><strong>Planificación:</strong> El presupuesto es instrumento para el cumplimiento del Plan de Desarrollo</li>
+        <li><strong>Anualidad:</strong> El presupuesto se expide y ejecuta anualmente</li>
+        <li><strong>Universalidad:</strong> Comprende todos los ingresos y gastos del Estado</li>
+        <li><strong>Unidad de caja:</strong> Todos los recursos forman un fondo único</li>
+        <li><strong>Programación integral:</strong> Los gastos deben corresponder a programas autorizados</li>
+        <li><strong>Especialización:</strong> Cada gasto se imputa a la partida correspondiente</li>
+        <li><strong>Inembargabilidad:</strong> Los recursos públicos no pueden ser embargados</li>
+      </ul>
+    </div>
+
+    <h4>Estructura del Presupuesto General de la Nación</h4>
+    <table>
+      <thead>
+        <tr>
+          <th>Componente</th>
+          <th>Contenido</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Presupuesto de Rentas</strong></td>
+          <td>Estimación de ingresos corrientes de la Nación: impuestos, contribuciones parafiscales, fondos especiales, recursos de capital</td>
+        </tr>
+        <tr>
+          <td><strong>Ley de Apropiaciones (Gastos)</strong></td>
+          <td>Distribución de los recursos: gastos de funcionamiento, servicio de la deuda pública y gastos de inversión</td>
+        </tr>
+        <tr>
+          <td><strong>Disposiciones Generales</strong></td>
+          <td>Normas para asegurar la correcta ejecución del presupuesto, vigentes solo para el año fiscal respectivo</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>🏛️ Banca Central: Banco de la República (Art. 371-373 C.P.)</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">💎</div>
+        <h4>Naturaleza Jurídica</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Organización de <strong>persona jurídica de derecho público</strong>.</p>
+          <p>Con <strong>autonomía administrativa, patrimonial y técnica</strong>.</p>
+          <p>Sujeto a régimen legal propio.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🎯</div>
+        <h4>Función Principal</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="
+        <div class="detail">
+          <p><strong>Velar y mantener el poder adquisitivo de la moneda</strong> (control de la inflación).</p>
+          <p>Es la principal autoridad monetaria, cambiaria y crediticia del país.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚙️</div>
+        <h4>Funciones Básicas</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <ul>
+            <li>Regular la moneda, los cambios internacionales y el crédito</li>
+            <li>Emitir moneda legal</li>
+            <li>Administrar las reservas internacionales</li>
+            <li>Ser prestamista de última instancia y banquero de los establecimientos de crédito</li>
+            <li>Servir como agente fiscal del Gobierno</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <h3>⚖️ Relación con el Gobierno</h3>
+    <div class="alerta">
+      <strong>📌 Coordinación:</strong>
+      <ul>
+        <li>El Banco de la República ejerce sus funciones en <strong>coordinación con la política económica general</strong></li>
+        <li>Rinde informe al <strong>Congreso</strong> sobre la ejecución de las políticas a su cargo</li>
+        <li>La Junta Directiva del Banco es independiente en sus decisiones técnicas</li>
+      </ul>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> El Gobierno Nacional presenta el Plan Nacional de Desarrollo al Congreso, que incluye metas de reducción de pobreza, inversión en infraestructura y crecimiento económico. Para financiarlo, se expide el Presupuesto General de la Nación, que distribuye los recursos entre los diferentes sectores. El Banco de la República, de manera autónoma, regula la política monetaria para mantener la estabilidad dep>
+      <div class="icon">🎯</div>
+        <h4>Función Principal</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p><strong>Velar y mantener el poder adquisitivo de la moneda</strong> (control de la inflación).</p>
+          <p>Es la principal autoridad monetaria, cambiaria y crediticia del país.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚙️</div>
+        <h4>Funciones Básicas</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <ul>
+            <li>Regular la moneda, los cambios internacionales y el crédito</li>
+            <li>Emitir moneda legal</li>
+            <li>Administrar las reservas internacionales</li>
+            <li>Ser prestamista de última instancia yn la moneda, mientras el Gobierno diseña la política económica general.
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz">
+    <h2>🎯 Quiz Completo - 40 Preguntas</h2>
+    <p>Pon a prueba tus conocimientos sobre Democracia, Estructura del Estado y Control Constitucional.</p>
+
+    <div class="quiz-container">
+      <div class="quiz-header">
+        <h3>📊 Tu Progreso</h3>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="quiz-stats">
+          <div class="stat">Respondidas: <strong id="respondidas">0</strong>/40</div>
+          <div class="stat">Correctas: <strong id="correctas">0</strong></div>
+          <div class="stat">Incorrectas: <strong id="incorrectas">0</strong></div>
+          <div class="stat">Porcentaje: <strong id="porcentaje">0</strong>%</div>
+        </div>
+      </div>
+
+      <div class="quiz-tabs">
+        <div class="quiz-tab active" onclick="mostrarSeccion('s1', this)">T1 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s2', this)">T2 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s3', this)">T3 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s4', this)">T4 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s5', this)">T5 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s6', this)">T6 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s7', this)">T7 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s8', this)">T8 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s9', this)">T9 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s10', this)">T10 (4)</div>
+      </div>
+
+      <!-- SECCIÓN 1: PARTICIPACIÓN -->
+      <div class="quiz-section active" id="s1">
+        <div class="pregunta" data-correcta="1" data-tema="1">
+          <span class="pregunta-num">1</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La soberanía reside exclusivamente en:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 1)">a) El Presidente de la República</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">b) El pueblo, del cual emana el poder público</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">c) El Congreso de la República</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">d) La Corte Constitucional</div>
+          </div>
+          <div class="explicacion">La soberanía reside exclusivamente en el pueblo, del cual emana el poder público (Art. 3° C.P.).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="1">
+          <span class="pregunta-num">2</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los mecanismos de participación ciudadana están consagrados en:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 2)">a) Artículo 103 de la Constitución Política</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">b) Artículo 1° de la Constitución Política</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">c) Artículo 2° de la Constitución Política</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">d) Artículo 4° de la Constitución Política</div>
+          </div>
+          <div class="explicacion">Los mecanismos de participación ciudadana están consagrados en el artículo 103 de la Constitución Política.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="1">
+          <span class="pregunta-num">3</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Son mecanismos de participación ciudadana:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 3)">a) Solo el voto</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">b) Solo el referendo y el plebiscito</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">c) Voto, plebiscito, referendo, consulta popular, cabildo abierto, revocatoria del mandato e iniciativa popular</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">d) Solo la acción de tutela</div>
+          </div>
+          <div class="explicacion">Los mecanismos de participación ciudadana son: el voto, el plebiscito, el referendo, la consulta popular, el cabildo abierto, la revocatoria del mandato y la iniciativa popular legislativa y normativa (Art. 103 C.P.).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="1">
+          <span class="pregunta-num">4</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La democracia participativa en Colombia se fundamenta en:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 4)">a) Solo el voto</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">b) Solo las elecciones</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">c) Solo la representación política</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">d) La participación directa del pueblo en las decisiones públicas a través de múltiples mecanismos</div>
+          </div>
+          <div class="explicacion">La democracia participativa se fundamenta en la participación directa del pueblo en las decisiones públicas a través de múltiples mecanismos (Art. 103 C.P.).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 2: VOTO -->
+      <div class="quiz-section" id="s2">
+        <div class="pregunta" data-correcta="1" data-tema="2">
+          <span class="pregunta-num">5</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El voto en Colombia tiene una naturaleza:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 5)">a) Solo de derecho</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">b) Dual: derecho y deber ciudadano</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">c) Solo de deber</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">d) Opcional</div>
+          </div>
+          <div class="explicacion">El voto tiene una naturaleza dual: es un derecho subjetivo y un deber ciudadano (Art. 258 C.P.).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="2">
+          <span class="pregunta-num">6</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El voto es secreto para garantizar:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 6)">a) La publicidad del proceso electoral</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">b) La libertad del elector sin presión</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">c) La transparencia del conteo</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">d) La rapidez del proceso</div>
+          </div>
+          <div class="explicacion">El voto es secreto para garantizar la libertad del elector sin presión ni coerción.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="2">
+          <span class="pregunta-num">7</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Pueden votar en Colombia:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 7)">a) Solo los mayores de 21 años</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">b) Solo los propietarios de bienes</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">c) Todos los ciudadanos mayores de 18 años</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">d) Solo los hombres</div>
+          </div>
+          <div class="explicacion">Todos los ciudadanos mayores de 18 años pueden votar, sin discriminación de raza, sexo, religión o condición social.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="2">
+          <span class="pregunta-num">8</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los principios del voto son:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 8)">a) Solo universal y secreto</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">b) Solo igual y directo</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">c) Solo libre y público</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">d) Universal, igual, secreto, libre y directo</div>
+          </div>
+          <div class="explicacion">Los principios del voto son: universal, igual, secreto, libre y directo (Art. 258 C.P.).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 3: INICIATIVA POPULAR -->
+      <div class="quiz-section" id="s3">
+        <div class="pregunta" data-correcta="1" data-tema="3">
+          <span class="pregunta-num">9</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La iniciativa popular permite a los ciudadanos:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 9)">a) Solo votar en elecciones</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">b) Presentar proyectos de ley, acuerdo u ordenanza, o reformas constitucionales</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">c) Solo elegir representantes</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">d) Solo revocar mandatarios</div>
+          </div>
+          <div class="explicacion">La iniciativa popular permite a los ciudadanos presentar proyectos de ley, acuerdo u ordenanza, o reformas constitucionales.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="3">
+          <span class="pregunta-num">10</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Para inscribir el comité promotor de una iniciativa popular se requiere el respaldo del:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 10)">a) 0.5% (cinco por mil) de los ciudadanos inscritos en el censo electoral</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">b) 5% del censo electoral</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">c) 10% del censo electoral</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">d) 20% del censo electoral</div>
+          </div>
+          <div class="explicacion">Para inscribir el comité promotor se requiere el respaldo del 0.5% (cinco por mil) de los ciudadanos inscritos en el censo electoral.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="3">
+          <span class="pregunta-num">11</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Para presentar un proyecto de ley mediante iniciativa popular se requiere:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 11)">a) El 1% del censo electoral</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">b) El 3% del censo electoral</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">c) El 5% del censo electoral</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">d) El 10% del censo electoral</div>
+          </div>
+          <div class="explicacion">Para presentar un proyecto de ley mediante iniciativa popular se requiere el 5% del censo electoral.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="3">
+          <span class="pregunta-num">12</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La entidad encargada de verificar las firmas de la iniciativa popular es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 12)">a) El Congreso de la República</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">b) La Corte Constitucional</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">c) El Consejo Nacional Electoral</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">d) La Registraduría Nacional del Estado Civil</div>
+          </div>
+          <div class="explicacion">La Registraduría Nacional del Estado Civil es la encargada de verificar las firmas recolectadas por el comité promotor.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 4: CONSULTA POPULAR -->
+      <div class="quiz-section" id="s4">
+        <div class="pregunta" data-correcta="1" data-tema="4">
+          <span class="pregunta-num">13</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La consulta popular es un mecanismo mediante el cual:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 13)">a) Se deroga una ley</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">b) Se pregunta al pueblo sobre un asunto de trascendencia nacional, departamental o local</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">c) Se elige al Presidente</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">d) Se reforma la Constitución</div>
+          </div>
+          <div class="explicacion">La consulta popular es un mecanismo mediante el cual se pregunta al pueblo sobre un asunto de trascendencia nacional, departamental, distrital, municipal o local.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="4">
+          <span class="pregunta-num">14</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Para que la consulta popular sea vinculante, debe votar:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 14)">a) Al menos la mitad más uno del censo electoral</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">b) Al menos el 25% del censo electoral</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">c) Al menos el 10% del censo electoral</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">d) Cualquier número de votantes</div>
+          </div>
+          <div class="explicacion">Para que la consulta popular sea vinculante, debe votar al menos la mitad más uno del censo electoral.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="4">
+          <span class="pregunta-num">15</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La consulta popular es obligatoria para:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 15)">a) Elegir al Presidente</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">b) Reformar la Constitución</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">c) La formación de nuevos departamentos y la vinculación de municipios a áreas metropolitanas</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">d) Aprobar leyes</div>
+          </div>
+          <div class="explicacion">La consulta popular es obligatoria para la formación de nuevos departamentos (Art. 297 C.P.) y la vinculación de municipios a áreas metropolitanas (Art. 319 C.P.).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="4">
+          <span class="pregunta-num">16</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La diferencia entre consulta popular y referendo es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 16)">a) No hay diferencia</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">b) El referendo es más rápido</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">c) La consulta popular solo aplica a nivel nacional</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">d) La consulta popular pregunta sobre asuntos de trascendencia; el referendo aprueba o deroga normas jurídicas</div>
+          </div>
+          <div class="explicacion">La consulta popular pregunta sobre asuntos de trascendencia; el referendo aprueba o deroga normas jurídicas.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 5: REFERENDO Y PLEBISCITO -->
+      <div class="quiz-section" id="s5">
+        <div class="pregunta" data-correcta="1" data-tema="5">
+          <span class="pregunta-num">17</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El referendo es el mecanismo mediante el cual:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 17)">a) Se pregunta al pueblo sobre un asunto de trascendencia</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">b) El pueblo aprueba o rechaza decisiones normativas expresadas en un texto ya elaborado</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">c) Se eligen representantes</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">d) Se destituye a un mandatario</div>
+          </div>
+          <div class="explicacion">El referendo es el mecanismo mediante el cual el pueblo aprueba o rechaza las decisiones normativas de las autoridades, expresadas en un texto ya elaborado.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="5">
+          <span class="pregunta-num">18</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El referendo aprobatorio:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 18)">a) Deroga una norma</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">b) Aprueba una norma jurídica ya elaborada</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">c) Elige al Presidente</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">d) Convoca a una asamblea constituyente</div>
+          </div>
+          <div class="explicacion">El referendo aprobatorio es aquel mediante el cual el pueblo aprueba una norma jurídica ya elaborada.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="5">
+          <span class="pregunta-num">19</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El plebiscito es el pronunciamiento del pueblo convocado por:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 19)">a) El Congreso de la República</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">b) La Corte Constitucional</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">c) El Presidente de la República</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">d) Los alcaldes municipales</div>
+          </div>
+          <div class="explicacion">El plebiscito es el pronunciamiento del pueblo, convocado por el Presidente de la República, acerca de una decisión del Ejecutivo.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="5">
+          <span class="pregunta-num">20</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El plebiscito requiere la aprobación previa del:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 20)">a) Congreso de la República</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">b) Consejo de Estado</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">c) Consejo Nacional Electoral</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">d) Senado de la República</div>
+          </div>
+          <div class="explicacion">El plebiscito requiere la firma de todos los ministros y la aprobación previa del Senado de la República.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 6: CABILDO Y REVOCATORIA -->
+      <div class="quiz-section" id="s6">
+        <div class="pregunta" data-correcta="1" data-tema="6">
+          <span class="pregunta-num">21</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El cabildo abierto es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 21)">a) Una votación popular</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">b) La reunión pública de los concejos distritales, municipales o de las juntas administradoras locales</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">c) Una elección de alcalde</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">d) Un referendo local</div>
+          </div>
+          <div class="explicacion">El cabildo abierto es la reunión pública de los concejos distritales, municipales o de las juntas administradoras locales, en la cual los habitantes pueden participar directamente.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="6">
+          <span class="pregunta-num">22</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La revocatoria del mandato es el derecho político por medio del cual se da por terminado el mandato conferido a:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 22)">a) Un gobernador o a un alcalde</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">b) Al Presidente de la República</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">c) A un senador</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">d) A un representante a la Cámara</div>
+          </div>
+          <div class="explicacion">La revocatoria del mandato es el derecho político por medio del cual se da por terminado el mandato conferido a un gobernador o a un alcalde.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="6">
+          <span class="pregunta-num">23</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Para invocar la revocatoria del mandato se requiere el apoyo del:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 23)">a) 10% de los votos válidos</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">b) 25% de los votos válidos</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">c) 40% de los votos válidos de la elección</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">d) 50% de los votos válidos</div>
+          </div>
+          <div class="explicacion">Para invocar la revocatoria del mandato se requiere el apoyo del 40% de los votos válidos con los que se eligió al mandatario.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="6">
+          <span class="pregunta-num">24</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La revocatoria del mandato no puede invocarse en:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 24)">a) Los primeros 6 meses del mandato</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">b) Los primeros 3 meses del mandato</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">c) El último año del mandato</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">d) Los últimos 12 meses del período del mandato</div>
+          </div>
+          <div class="explicacion">La revocatoria del mandato no puede invocarse en los últimos 12 meses del período del mandato.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 7: RAMA LEGISLATIVA -->
+      <div class="quiz-section" id="s7">
+        <div class="pregunta" data-correcta="1" data-tema="7">
+          <span class="pregunta-num">25</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La Rama Legislativa está integrada por:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 25)">a) Solo el Senado</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">b) El Congreso de la República, compuesto por el Senado y la Cámara de Representantes</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">c) Solo la Cámara de Representantes</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">d) El Presidente y el Congreso</div>
+          </div>
+          <div class="explicacion">La Rama Legislativa está integrada por el Congreso de la República, que a su vez se compone del Senado y de la Cámara de Representantes.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="7">
+          <span class="pregunta-num">26</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El Senado de la República está compuesto por:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 26)">a) 100 senadores</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">b) 108 senadores elegidos en circunscripción nacional</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">c) 150 senadores</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">d) 200 senadores</div>
+          </div>
+          <div class="explicacion">El Senado de la República está compuesto por 108 senadores elegidos en circunscripción electoral nacional.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="7">
+          <span class="pregunta-num">27</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Una función especial del Senado es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 27)">a) Elegir al Presidente</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">b) Expedir leyes</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">c) Conocer de las acusaciones contra altos funcionarios y aprobar o improbar tratados internacionales</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">d) Nombrar ministros</div>
+          </div>
+          <div class="explicacion">Son funciones especiales del Senado: elegir al Defensor del Pueblo, conocer de las acusaciones contra altos funcionarios, conceder licencias al Presidente y aprobar o improbar tratados internacionales.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="7">
+          <span class="pregunta-num">28</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El proceso de formación de la ley incluye las siguientes etapas:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 28)">a) Solo sanción presidencial</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">b) Solo primer debate</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">c) Solo promulgación</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">d) Iniciativa, primer debate, segundo debate, sanción presidencial y promulgación</div>
+          </div>
+          <div class="explicacion">El proceso de formación de la ley incluye: iniciativa, primer debate en comisiones, segundo debate en plenarias, sanción presidencial y promulgación.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 8: EJECUTIVA Y JUDICIAL -->
+      <div class="quiz-section" id="s8">
+        <div class="pregunta" data-correcta="1" data-tema="8">
+          <span class="pregunta-num">29</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El Presidente de la República es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 29)">a) Solo Jefe de Estado</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">b) Jefe de Estado, Jefe de Gobierno y Suprema Autoridad Administrativa</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">c) Solo Jefe de Gobierno</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">d) Solo Suprema Autoridad Administrativa</div>
+          </div>
+          <div class="explicacion">El Presidente de la República es Jefe de Estado, Jefe de Gobierno y Suprema Autoridad Administrativa (Art. 188 C.P.).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="8">
+          <span class="pregunta-num">30</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La Corte Constitucional está compuesta por:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 30)">a) 7 magistrados</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">b) 9 magistrados elegidos por el Senado para períodos de 8 años</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">c) 11 magistrados</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">d) 23 magistrados</div>
+          </div>
+          <div class="explicacion">LaCorte Constitucional está compuesta por 9 magistrados elegidos por el Senado para períodos de 8 p>
+        <div class="pregunta" data-correcta="0" data-tema="8">
+          <span class="pregunta-num">30</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La Corte Constitucional está compuesta por:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 30)">a) 7 magistrados</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">b) 9 magistrados elegidos por el Senado para períodos de 8 años</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">c) 11 magistrados</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">d) 23 magistrados</div>
+          </div>
+          <div class="explicacion">La Corte Constitucional está compuesta por 9muestra de los recursos públicos no pueden ser embargados.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 8: EJECUTIVA Y JUDICIAL -->
+      <div class="quiz-section" id="s8">
+        <div class="pregunta" data-correcta="1" data-tema="8">
+          <span class="pregunta-num">29</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El Presidente de la República es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 29)">a) Solo Jefe de Estado</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">b) Jefe de Estado, Jefe de Gobierno y Suprema Autoridad Administrativa</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">c) Solo Jefe de Gobierno</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">d) Solo Suprema Autoridad Administrativa</div>
+          </div>
+          <div class="explicacion">El Presidente de la República es Jefe de Estado, Jefe de Gobierno y Suprema Autoridad Administrativa (Art. 188 C.P.).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="8">
+          <span class="pregunta-num">30</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La Corte Constitucional está compuesta por:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 30)">a) 7 magistrados</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">b) 9 magistrados elegidos por el Senado para períodos de 8 años</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">c) 11 magistrados</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">d) 23 magistrados</div>
+          </div>
+          <div class="explicacion">La Corte Constitucional está compuesta por 9 magistrados elegidos por el Senado para períodos de 8 años.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="8">
+          <span class="pregunta-num">31</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La Corte Suprema de Justicia está compuesta por:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 31)">a) 9 magistrados</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">b) 11 magistrados</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">c) 23 magistrados distribuidos en 3 salas</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">d) 30 magistrados</div>
+          </div>
+          <div class="explicacion">La Corte Suprema de Justicia está compuesta por 23 magistrados distribuidos en 3 salas: Civil, Penal y Laboral.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="8">
+          <span class="pregunta-num">32</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Transitoriamente, particulares que ejercen funciones de administración de justicia son:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 32)">a) Solo los jueces</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">b) Solo los magistrados</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">c) Solo los fiscales</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">d) Conciliadores, árbitros y jurados en causas criminales</div>
+          </div>
+          <div class="explicacion">Transitoriamente, particulares ejercen funciones de administración de justicia como conciliadores, árbitros en derecho y en equidad, y jurados en causas criminales (Art. 116 C.P.).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 9: CONTROL CONSTITUCIONAL -->
+      <div class="quiz-section" id="s9">
+        <div class="pregunta" data-correcta="1" data-tema="9">
+          <span class="pregunta-num">33</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Colombia adopta un sistema de control constitucional:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 33)">a) Solo concentrado</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">b) Mixto: concentrado y difuso</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">c) Solo difuso</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">d) Ningún sistema de control</div>
+          </div>
+          <div class="explicacion">Colombia adopta un sistema mixto de control constitucional, combinando el modelo concentrado (Corte Constitucional) con el modelo difuso (vía de excepción).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="9">
+          <span class="pregunta-num">34</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El sistema concentrado de control constitucional tiene su origen en:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 34)">a) Austria, modelo europeo (Hans Kelsen)</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">b) Estados Unidos</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">c) Francia</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">d) Inglaterra</div>
+          </div>
+          <div class="explicacion">El sistema concentrado tiene su origen en Austria, modelo europeo, desarrollado por Hans Kelsen.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="9">
+          <span class="pregunta-num">35</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El sistema difuso de control constitucional tiene su origen en:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 35)">a) Austria</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">b) Francia</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">c) Estados Unidos (Caso Marbury vs. Madison, 1803)</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">d) Alemania</div>
+          </div>
+          <div class="explicacion">El sistema difuso tiene su origen en Estados Unidos, específicamente en el Caso Marbury vs. Madison de 1803.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="9">
+          <span class="pregunta-num">36</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El Estado de Emergencia Económica, Social y Ecológica puede decretarse por un máximo de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 36)">a) 30 días sin prórroga</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">b) 60 días en total</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">c) 90 días en un año calendario</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">d) 30 días con prórroga de 30 más, hasta un máximo de 90 días en un año calendario</div>
+          </div>
+          <div class="explicacion">El Estado de Emergencia Económica, Social y Ecológica puede decretarse hasta por 30 días con prórroga de 30 más, hasta un máximo de 90 días en un año calendario (Art. 215 C.P.).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 10: CONSTITUCIÓN ECONÓMICA -->
+      <div class="quiz-section" id="s10">
+        <div class="pregunta" data-correcta="1" data-tema="10">
+          <span class="pregunta-num">37</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El Plan Nacional de Desarrollo está conformado por:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 37)">a) Solo la parte general</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">b) Una parte general y un plan de inversiones de las entidades públicas del orden nacional</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">c) Solo el plan de inversiones</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">d) Solo el presupuesto anual</div>
+          </div>
+          <div class="explicacion">El Plan Nacional de Desarrollo está conformado por una parte general y un plan de inversiones de las entidades públicas del orden nacional (Art. 339 C.P.).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="10">
+          <span class="pregunta-num">38</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los principios del sistema presupuestal incluyen:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 38)">a) Planificación, anualidad, universalidad, unidad de caja, programación integral, especialización e inembargabilidad</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">b) Solo anualidad</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">c) Solo universalidad</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">d) Solo planificación</div>
+          </div>
+          <div class="explicacion">Los principios del sistema presupuestal son: planificación, anualidad, universalidad, unidad de caja, programación integral, especialización e inembargabilidad.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="10">
+          <span class="pregunta-num">39</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El Banco de la República tiene como función principal:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 39)">a) Regular el comercio exterior</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">b) Administrar las reservas internacionales únicamente</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">c) Velar y mantener el poder adquisitivo de la moneda</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">d) Emitir moneda únicamente</div>
+          </div>
+          <div class="explicacion">La función principal del Banco de la República es velar y mantener el poder adquisitivo de la moneda (Art. 373 C.P.).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="10">
+          <span class="pregunta-num">40</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El Presupuesto General de la Nación está compuesto por:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 40)">a) Solo el presupuesto de rentas</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">b) Solo la ley de apropiaciones</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">c) Solo las disposiciones generales</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">d) Presupuesto de rentas, ley de apropiaciones y disposiciones generales</div>
+          </div>
+          <div class="explicacion">El Presupuesto General de la Nación está compuesto por tres partes: presupuesto de rentas, ley de apropiaciones y disposiciones generales.</div>
+        </div>
+      </div>
+
+      <div class="resultado-final" id="resultadoFinal">
+        <h3>🏆 Resultado Final</h3>
+        <div class="puntaje-final" id="puntajeFinal">0/40</div>
+        <p id="mensajeFinal"></p>
+        <div class="desglose-temas" id="desgloseTemas"></div>
+        <button onclick="reiniciarQuiz()" class="btn-reset">🔄 Reiniciar Quiz</button>
+      </div>
+
+      <div style="text-align: center; margin-top: 1.5rem;">
+        <button onclick="verResultadoFinal()">📊 Ver Resultado Final</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>🗳️ Guía Didáctica - Democracia, Estructura del Estado y Control Constitucional</p>
+  <p>Módulos IX y X · Derecho Constitucional Colombiano</p>
+  <p style="margin-top: 1rem; opacity: 0.7;">© 2026 - Material educativo interactivo</p>
+</footer>
+
+<script>
+  function toggleAcordeon(header) {
+    header.classList.toggle('active');
+    const content = header.nextElementSibling;
+    content.classList.toggle('active');
+  }
+
+  let respuestas = {};
+  const totalPreguntas = 40;
+
+  function mostrarSeccion(id, tab) {
+    document.querySelectorAll('.quiz-section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.quiz-tab').forEach(t => t.classList.remove('active'));
+    
+    document.getElementById(id).classList.add('active');
+    tab.classList.add('active');
+  }
+
+  function seleccionar(opcion, preguntaNum) {
+    if (respuestas[preguntaNum] !== undefined) return;
+
+    const pregunta = opcion.closest('.pregunta');
+    const opciones = pregunta.querySelectorAll('.opcion');
+    const correcta = parseInt(pregunta.dataset.correcta);
+    const tema = parseInt(pregunta.dataset.tema);
+    const seleccionada = Array.from(opciones).indexOf(opcion);
+    const explicacion = pregunta.querySelector('.explicacion');
+
+    opciones.forEach(o => o.classList.add('disabled'));
+
+    if (seleccionada === correcta) {
+      opcion.classList.add('correcta');
+      respuestas[preguntaNum] = { correcta: true, tema: tema };
+    } else {
+      opcion.classList.add('incorrecta');
+      opciones[correcta].classList.add('correcta');
+      respuestas[preguntaNum] = { correcta: false, tema: tema };
+    }
+
+    explicacion.classList.add('visible');
+    pregunta.classList.add('answered');
+    actualizarEstadisticas();
+  }
+
+  function actualizarEstadisticas() {
+    const total = Object.keys(respuestas).length;
+    const correctas = Object.values(respuestas).filter(r => r.correcta).length;
+    const incorrectas = total - correctas;
+    const porcentaje = total > 0 ? Math.round((correctas / total) * 100) : 0;
+
+    document.getElementById('respondidas').textContent = total;
+    document.getElementById('correctas').textContent = correctas;
+    document.getElementById('incorrectas').textContent = incorrectas;
+    document.getElementById('porcentaje').textContent = porcentaje;
+
+    const progreso = (total / totalPreguntas) * 100;
+    document.getElementById('progressFill').style.width = progreso + '%';
+  }
+
+  function verResultadoFinal() {
+    const total = Object.keys(respuestas).length;
+    
+    if (total < totalPreguntas) {
+      alert(`⚠️ Aún te faltan ${totalPreguntas - total} preguntas por responder.`);
+      return;
+    }
+
+    const correctas = Object.values(respuestas).filter(r => r.correcta).length;
+    const porcentaje = Math.round((correctas / totalPreguntas) * 100);
+
+    const resultadoFinal = document.getElementById('resultadoFinal');
+    resultadoFinal.classList.add('visible');
+
+    document.getElementById('puntajeFinal').textContent = `${correctas}/${totalPreguntas}`;
+
+    let mensaje = '';
+    if (porcentaje === 100) mensaje = '🏆 ¡PERFECTO! Dominas la Democracia, Estructura del Estado y Control Constitucional.';
+    else if (porcentaje >= 90) mensaje = '🌟 ¡Excelente! Dominio sobresaliente.';
+    else if (porcentaje >= 75) mensaje = '✅ ¡Muy bien! Buen dominio.';
+    else if (porcentaje >= 60) mensaje = '📚 Aceptable. Repasa los temas donde fallaste.';
+    else if (porcentaje >= 40) mensaje = '📖 Necesitas reforzar varios conceptos.';
+    else mensaje = '🔍 Es necesario estudiar nuevamente todos los temas.';
+
+    document.getElementById('mensajeFinal').textContent = mensaje;
+
+    const temas = {
+      1: { nombre: 'T1: Participación', total: 4, correctas: 0 },
+      2: { nombre: 'T2: Voto', total: 4, correctas: 0 },
+      3: { nombre: 'T3: Iniciativa', total: 4, correctas: 0 },
+      4: { nombre: 'T4: Consulta', total: 4, correctas: 0 },
+      5: { nombre: 'T5: Referendo/Plebiscito', total: 4, correctas: 0 },
+      6: { nombre: 'T6: Cabildo/Revocatoria', total: 4, correctas: 0 },
+      7: { nombre: 'T7: Rama Legislativa', total: 4, correctas: 0 },
+      8: { nombre: 'T8: Ejecutiva/Judicial', total: 4, correctas: 0 },
+      9: { nombre: 'T9: Control Constitucional', total: 4, correctas: 0 },
+      10: { nombre: 'T10: Constitución Económica', total: 4, correctas: 0 }
+    };
+
+    Object.values(respuestas).forEach(r => {
+      if (r.correcta) temas[r.tema].correctas++;
+    });
+
+    const desgloseHTML = Object.values(temas).map(t => {
+      const pct = Math.round((t.correctas / t.total) * 100);
+      return `
+        <div class="desglose-item">
+          <h4>${t.nombre}</h4>
+          <p>${t.correctas}/${t.total} (${pct}%)</p>
+          <div class="mini-bar">
+            <div class="mini-bar-fill" style="width: ${pct}%"></div>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    document.getElementById('desgloseTemas').innerHTML = desgloseHTML;
+    resultadoFinal.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  function reiniciarQuiz() {
+    if (!confirm('¿Reiniciar el quiz?')) return;
+
+    respuestas = {};
+
+    document.querySelectorAll('.opcion').forEach(o => o.classList.remove('correcta', 'incorrecta', 'disabled'));
+    document.querySelectorAll('.explicacion').forEach(e => e.classList.remove('visible'));
+    document.querySelectorAll('.pregunta').forEach(p => p.classList.remove('answered'));
+    document.getElementById('resultadoFinal').classList.remove('visible');
+
+    actualizarEstadisticas();
+    mostrarSeccion('s1', document.querySelector('.quiz-tab'));
+    document.getElementById('quiz').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  document.querySelectorAll('nav a').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+</script>
+
+</body>
+</html>
