@@ -1,0 +1,2114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Responsabilidad del Estado y Medios de Control - Derecho Administrativo</title>
+<style>
+  :root {
+    --primary: #065f46;
+    --secondary: #10b981;
+    --accent: #047857;
+    --light: #ecfdf5;
+    --dark: #064e3b;
+    --success: #059669;
+    --warning: #d97706;
+    --danger: #dc2626;
+    --card-bg: #ffffff;
+    --shadow: 0 4px 15px rgba(0,0,0,0.08);
+    --shadow-hover: 0 8px 25px rgba(0,0,0,0.15);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Georgia', 'Times New Roman', serif; background: var(--light); color: var(--dark); line-height: 1.7; }
+  header { background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%); color: white; padding: 2rem 1rem; text-align: center; box-shadow: var(--shadow); position: relative; overflow: hidden; }
+  header::before { content: '🏛️'; position: absolute; font-size: 15rem; opacity: 0.05; top: -30px; right: -30px; }
+  header h1 { font-size: 2.5rem; margin-bottom: 0.5rem; letter-spacing: 2px; }
+  header p { font-size: 1.1rem; opacity: 0.9; font-style: italic; }
+  nav { background: var(--dark); position: sticky; top: 0; z-index: 100; box-shadow: var(--shadow); }
+  nav ul { display: flex; justify-content: center; flex-wrap: wrap; list-style: none; padding: 0.5rem; }
+  nav a { color: var(--light); text-decoration: none; padding: 0.7rem 1rem; margin: 0.2rem; border-radius: 5px; font-size: 0.7rem; transition: all 0.3s; display: block; }
+  nav a:hover { background: var(--secondary); color: var(--dark); transform: translateY(-2px); }
+  main { max-width: 1200px; margin: 0 auto; padding: 2rem 1rem; }
+  section { background: var(--card-bg); margin-bottom: 2.5rem; padding: 2rem; border-radius: 12px; box-shadow: var(--shadow); border-left: 5px solid var(--secondary); scroll-margin-top: 80px; }
+  section h2 { color: var(--primary); font-size: 2rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--secondary); }
+  section h3 { color: var(--accent); font-size: 1.4rem; margin: 1.5rem 0 0.8rem; }
+  section h4 { color: var(--primary); font-size: 1.15rem; margin: 1rem 0 0.5rem; }
+  p { margin-bottom: 1rem; text-align: justify; }
+  .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.2rem; margin: 1.5rem 0; }
+  .card { background: linear-gradient(135deg, #fff 0%, #ecfdf5 100%); border: 2px solid var(--secondary); border-radius: 10px; padding: 1.2rem; transition: all 0.3s; cursor: pointer; position: relative; }
+  .card:hover { transform: translateY(-5px); box-shadow: var(--shadow-hover); border-color: var(--primary); }
+  .card .icon { font-size: 2.5rem; text-align: center; margin-bottom: 0.5rem; }
+  .card h4 { text-align: center; color: var(--primary); margin-bottom: 0.5rem; }
+  .card .detail { display: none; margin-top: 0.8rem; padding-top: 0.8rem; border-top: 1px dashed var(--secondary); font-size: 0.95rem; }
+  .card.active .detail { display: block; }
+  .card .hint { text-align: center; color: var(--accent); font-size: 0.85rem; font-style: italic; }
+  .mapa-container { background: #ecfdf5; border: 2px dashed var(--secondary); border-radius: 10px; padding: 1.5rem; margin: 1.5rem 0; overflow-x: auto; }
+  .mapa { display: flex; flex-direction: column; align-items: center; min-width: 600px; }
+  .nodo { background: var(--primary); color: white; padding: 0.8rem 1.5rem; border-radius: 25px; font-weight: bold; text-align: center; min-width: 180px; box-shadow: var(--shadow); }
+  .nodo.central { background: linear-gradient(135deg, var(--secondary), #34d399); color: var(--dark); font-size: 1.2rem; padding: 1rem 2rem; }
+  .nodo.sub { background: var(--accent); font-size: 0.95rem; }
+  .linea { width: 3px; height: 25px; background: var(--secondary); }
+  .linea-h { height: 3px; background: var(--secondary); width: 80%; max-width: 900px; margin: 0 auto; }
+  .rama { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 1rem; width: 100%; margin-top: 1rem; }
+  .rama-item { display: flex; flex-direction: column; align-items: center; flex: 1; min-width: 140px; }
+  .ejemplo { background: #ecfdf5; border-left: 4px solid var(--success); padding: 1rem 1.2rem; margin: 1rem 0; border-radius: 0 8px 8px 0; }
+  .ejemplo strong { color: var(--success); }
+  .alerta { background: #fffbeb; border-left: 4px solid var(--warning); padding: 1rem 1.2rem; margin: 1rem 0; border-radius: 0 8px 8px 0; }
+  .alerta strong { color: var(--warning); }
+  .cita { background: #ecfdf5; border-left: 4px solid var(--accent); padding: 1rem 1.2rem; margin: 1rem 0; border-radius: 0 8px 8px 0; font-style: italic; color: var(--primary); }
+  table { width: 100%; border-collapse: collapse; margin: 1rem 0; background: white; border-radius: 8px; overflow: hidden; box-shadow: var(--shadow); font-size: 0.9rem; }
+  th { background: var(--primary); color: white; padding: 0.8rem; text-align: left; }
+  td { padding: 0.8rem; border-bottom: 1px solid #eee; }
+  tr:nth-child(even) { background: #ecfdf5; }
+  tr:hover { background: #d1fae5; }
+  .quiz-container { background: linear-gradient(135deg, #ecfdf5 0%, #fff 100%); padding: 1.5rem; border-radius: 10px; border: 2px solid var(--accent); }
+  .quiz-header { background: var(--primary); color: white; padding: 1.2rem; border-radius: 8px; margin-bottom: 1.5rem; text-align: center; }
+  .quiz-header h3 { color: white; margin: 0 0 0.5rem 0; }
+  .progress-bar { background: rgba(255,255,255,0.2); height: 10px; border-radius: 5px; overflow: hidden; margin-top: 0.5rem; }
+  .progress-fill { background: var(--secondary); height: 100%; width: 0%; transition: width 0.4s ease; }
+  .quiz-stats { display: flex; justify-content: space-around; margin-top: 1rem; flex-wrap: wrap; gap: 0.5rem; }
+  .stat { background: rgba(255,255,255,0.1); padding: 0.5rem 1rem; border-radius: 5px; font-size: 0.9rem; }
+  .stat strong { color: var(--secondary); }
+  .quiz-tabs { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; padding: 0.5rem; background: #d1fae5; border-radius: 8px; }
+  .quiz-tab { background: white; border: 2px solid var(--accent); color: var(--accent); padding: 0.5rem 0.8rem; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 0.7rem; transition: all 0.3s; flex: 1; min-width: 70px; text-align: center; }
+  .quiz-tab:hover { background: var(--accent); color: white; }
+  .quiz-tab.active { background: var(--primary); color: white; border-color: var(--primary); }
+  .quiz-section { display: none; }
+  .quiz-section.active { display: block; animation: fadeIn 0.4s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  .pregunta { margin-bottom: 1.5rem; padding: 1.2rem; background: white; border-radius: 8px; box-shadow: var(--shadow); border-left: 4px solid var(--accent); transition: all 0.3s; }
+  .pregunta.answered { border-left-color: var(--secondary); }
+  .pregunta-num { display: inline-block; background: var(--accent); color: white; padding: 0.2rem 0.7rem; border-radius: 12px; font-size: 0.85rem; margin-right: 0.5rem; }
+  .pregunta-tipo { display: inline-block; background: var(--secondary); color: var(--dark); padding: 0.2rem 0.7rem; border-radius: 12px; font-size: 0.75rem; margin-left: 0.3rem; font-weight: bold; }
+  .pregunta p { font-weight: bold; color: var(--primary); margin: 0.8rem 0; text-align: left; }
+  .opciones { display: flex; flex-direction: column; gap: 0.5rem; }
+  .opcion { padding: 0.7rem 1rem; background: #ecfdf5; border: 2px solid transparent; border-radius: 6px; cursor: pointer; transition: all 0.2s; position: relative; }
+  .opcion:hover:not(.disabled) { border-color: var(--accent); background: #d1fae5; }
+  .opcion.disabled { cursor: not-allowed; opacity: 0.85; }
+  .opcion.correcta { background: #d1fae5; border-color: var(--success); color: var(--success); font-weight: bold; }
+  .opcion.incorrecta { background: #fee2e2; border-color: var(--danger); color: var(--danger); }
+  .opcion.correcta::after { content: ' ✓'; font-weight: bold; }
+  .opcion.incorrecta::after { content: ' ✗'; font-weight: bold; }
+  .explicacion { margin-top: 0.8rem; padding: 0.8rem; background: #ecfdf5; border-left: 3px solid var(--accent); border-radius: 0 6px 6px 0; font-size: 0.9rem; display: none; font-style: italic; }
+  .explicacion.visible { display: block; animation: fadeIn 0.3s ease; }
+  .resultado-final { margin-top: 2rem; padding: 2rem; background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%); color: white; border-radius: 12px; text-align: center; display: none; }
+  .resultado-final.visible { display: block; animation: fadeIn 0.5s ease; }
+  .resultado-final h3 { color: var(--secondary); font-size: 2rem; margin-bottom: 1rem; }
+  .puntaje-final { font-size: 3rem; font-weight: bold; color: var(--secondary); margin: 1rem 0; }
+  .desglose-temas { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1.5rem; text-align: left; }
+  .desglose-item { background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px; }
+  .desglose-item h4 { color: var(--secondary); margin-bottom: 0.5rem; font-size: 1rem; }
+  .mini-bar { background: rgba(255,255,255,0.2); height: 8px; border-radius: 4px; overflow: hidden; margin-top: 0.5rem; }
+  .mini-bar-fill { background: var(--secondary); height: 100%; transition: width 0.6s ease; }
+  button { background: var(--primary); color: white; border: none; padding: 0.8rem 1.5rem; border-radius: 6px; cursor: pointer; font-size: 1rem; margin-top: 1rem; transition: all 0.3s; }
+  button:hover { background: var(--secondary); color: var(--dark); transform: translateY(-2px); }
+  .btn-reset { background: var(--danger); margin-left: 0.5rem; }
+  .btn-reset:hover { background: #991b1b; color: white; }
+  .acordeon-item { margin-bottom: 0.5rem; border: 1px solid #ddd; border-radius: 6px; overflow: hidden; }
+  .acordeon-header { background: var(--accent); color: white; padding: 1rem; cursor: pointer; font-weight: bold; display: flex; justify-content: space-between; align-items: center; transition: background 0.3s; }
+  .acordeon-header:hover { background: var(--primary); }
+  .acordeon-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; background: white; }
+  .acordeon-content.active { max-height: 2000px; padding: 1rem; }
+  .flecha { transition: transform 0.3s; }
+  .acordeon-header.active .flecha { transform: rotate(180deg); }
+  footer { background: var(--dark); color: var(--light); text-align: center; padding: 2rem 1rem; margin-top: 2rem; }
+  footer p { margin-bottom: 0.5rem; }
+  @media (max-width: 768px) { header h1 { font-size: 1.8rem; } section { padding: 1.2rem; } section h2 { font-size: 1.5rem; } nav a { font-size: 0.6rem; padding: 0.3rem 0.4rem; } .quiz-tab { font-size: 0.6rem; padding: 0.3rem 0.4rem; } table { font-size: 0.8rem; } }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🏛️ Responsabilidad del Estado y Medios de Control</h1>
+  <p>Guía 8 de 8 · Derecho Administrativo Colombiano · Guía Didáctica Interactiva</p>
+</header>
+
+<nav>
+  <ul>
+    <li><a href="#tema1">1. Responsabilidad</a></li>
+    <li><a href="#tema2">2. Daño Antijurídico</a></li>
+    <li><a href="#tema3">3. Títulos Imputación</a></li>
+    <li><a href="#tema4">4. Nulidad Inconst.</a></li>
+    <li><a href="#tema5">5. Nulidad Simple</a></li>
+    <li><a href="#tema6">6. Nul. y Rest. Der.</a></li>
+    <li><a href="#tema7">7. Nul. Electoral</a></li>
+    <li><a href="#tema8">8. Rep. Directa</a></li>
+    <li><a href="#tema9">9. Cont. y Repetición</a></li>
+    <li><a href="#tema10">10. Acciones Colect.</a></li>
+    <li><a href="#quiz">Quiz (40)</a></li>
+  </ul>
+</nav>
+
+<main>
+
+  <section>
+    <h2>📚 Introducción</h2>
+    <p>Bienvenido a esta guía interactiva sobre la <strong>Responsabilidad del Estado y los Medios de Control</strong>. Aquí estudiarás la cláusula general de responsabilidad patrimonial del Estado consagrada en el artículo 90 de la Constitución Política, los elementos del daño antijurídico y la imputación, los títulos de imputación (falla del servicio, daño especial y riesgo excepcional), y los medios de control ante la Jurisdicción de lo Contencioso Administrativo conforme a la Ley 1437 de 2011 (CPACA).</p>
+    <div class="alerta">
+      <strong>💡 Cómo usar esta guía:</strong> Haz clic en las tarjetas para ver detalles, despliega los acordeones para información adicional y prueba tus conocimientos con el quiz de 40 preguntas al final.
+    </div>
+  </section>
+
+  <!-- TEMA 1: RESPONSABILIDAD DEL ESTADO -->
+  <section id="tema1">
+    <h2>1. Responsabilidad Patrimonial del Estado</h2>
+    <p>La <strong>responsabilidad patrimonial del Estado</strong> es la obligación jurídica que tiene el Estado de reparar los daños antijurídicos que le sean imputables, causados por la acción u omisión de las autoridades públicas. Su fundamento constitucional se encuentra en el artículo 90 de la Constitución Política.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">RESPONSABILIDAD DEL ESTADO (Art. 90 C.P.)</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Daño Antijurídico</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Imputación</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Acción u Omisión</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Reparación Integral</div></div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Fundamento Constitucional</h3>
+    <div class="cita">
+      <strong>"El Estado responderá patrimonialmente por los daños antijurídicos que le sean imputables, causados por la acción o la omisión de las autoridades públicas. En el evento de ser condenado a la reparación patrimonial de uno de tales daños, que haya sido consecuencia de la conducta dolosa o gravemente culposa de un agente suyo, aquél deberá repetir contra éste."</strong> — Art. 90 C.P.
+    </div>
+
+    <h3>🔍 Características</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Cláusula General</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Unifica todos los regímenes de responsabilidad bajo un mismo fundamento: el daño antijurídico imputable al Estado.</p>
+          <p>Supera el sistema anterior basado exclusivamente en la "falla del servicio".</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🛡️</div>
+        <h4>Objetiva</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>No se requiere probar culpa o dolo de la administración.</p>
+          <p>Basta con demostrar el daño antijurídico y su imputación al Estado.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">💰</div>
+        <h4>Patrimonial</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>La reparación se hace con los bienes del Estado.</p>
+          <p>Busca restablecer el equilibrio patrimonial del afectado.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🔄</div>
+        <h4>Acción de Repetición</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Si el daño fue causado por conducta dolosa o gravemente culposa de un agente, el Estado puede repetir contra éste.</p>
+          <p>Regulada en la Ley 678 de 2001.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>⚖️ Evolución Histórica</h3>
+    <table>
+      <thead>
+        <tr><th>Período</th><th>Régimen</th><th>Fundamento</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Pre-1886</strong></td>
+          <td>Irresponsabilidad estatal</td>
+          <td>"El Rey no puede equivocarse"</td>
+        </tr>
+        <tr>
+          <td><strong>1886-1989</strong></td>
+          <td>Subjetivo (falla del servicio)</td>
+          <td>Arts. 1141 y 2341 C.C.</td>
+        </tr>
+        <tr>
+          <td><strong>1989-1991</strong></td>
+          <td>Mixto (daño especial + riesgo)</td>
+          <td>Jurisprudencia del Consejo de Estado</td>
+        </tr>
+        <tr>
+          <td><strong>1991-presente</strong></td>
+          <td>Objetivo (daño antijurídico)</td>
+          <td>Art. 90 C.P.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si un vehículo oficial de la Policía causa un accidente de tránsito en el que resulta lesionada una persona, el Estado deberá responder patrimonialmente por los daños causados, independientemente de si hubo falla del servicio o no. Basta con demostrar el daño antijurídico y su imputación a la entidad pública.
+    </div>
+  </section>
+
+  <!-- TEMA 2: DAÑO ANTIJURÍDICO -->
+  <section id="tema2">
+    <h2>2. El Daño Antijurídico</h2>
+    <p>El <strong>daño antijurídico</strong> es el primer elemento esencial de la responsabilidad patrimonial del Estado. Se trata de un perjuicio que la víctima no está obligada a soportar conforme al ordenamiento jurídico.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">DAÑO ANTIJURÍDICO</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Cierto</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Actual o Futuro</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Determinado</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Anormal</div></div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Características del Daño Antijurídico</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">✓</div>
+        <h4>Cierto</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Debe ser real y efectivo, no hipotético o eventual.</p>
+          <p>Debe estar debidamente probado en el proceso.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⏰</div>
+        <h4>Actual o Futuro</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Puede ser presente (ya se produjo) o futuro (cierto que se producirá).</p>
+          <p>El lucro cesante es un ejemplo de daño futuro.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📊</div>
+        <h4>Determinado o Determinable</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Debe ser cuantificable económicamente.</p>
+          <p>Permite la reparación integral del perjuicio.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Anormal</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Excede las cargas ordinarias que debe soportar un ciudadano.</p>
+          <p>Rompe el equilibrio de las cargas públicas.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Clasificación del Daño</h3>
+    <table>
+      <thead>
+        <tr><th>Tipo de Daño</th><th>Descripción</th><th>Ejemplo</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Daño Emergente</strong></td>
+          <td>Pérdida o menoscabo patrimonial efectivo.</td>
+          <td>Gastos médicos por accidente causado por vehículo oficial.</td>
+        </tr>
+        <tr>
+          <td><strong>Lucro Cesante</strong></td>
+          <td>Ganancia dejada de obtener como consecuencia del daño.</td>
+          <td>Salarios dejados de percibir por incapacidad.</td>
+        </tr>
+        <tr>
+          <td><strong>Daño Moral</strong></td>
+          <td>Afectación a los sentimientos, dolores y sufrimientos.</td>
+          <td>Dolor por la pérdida de un ser querido.</td>
+        </tr>
+        <tr>
+          <td><strong>Daño a la Salud</strong></td>
+          <td>Afectación a la integridad psicofísica de la persona.</td>
+          <td>Lesiones permanentes que generan invalidez.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="alerta">
+      <strong>📌 No hay daño antijurídico cuando:</strong>
+      <ul>
+        <li>La víctima tiene el deber jurídico de soportarlo.</li>
+        <li>El daño es consecuencia de un hecho de un tercero por el cual el Estado no responde.</li>
+        <li>Existe una causa eximente como la fuerza mayor o el hecho exclusivo de la víctima.</li>
+        <li>El daño es consecuencia del normal ejercicio de una actividad lícita (daño especial no indemnizable).</li>
+      </ul>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si el Estado expropia un inmueble para construir una vía pública, el daño patrimonial sufrido por el propietario es antijurídico porque no está obligado a soportarlo sin una justa indemnización. En cambio, si el ruido de una vía pública afecta levemente a un vecino, ese daño es una carga ordinaria que debe soportar en virtud de la función social de la propiedad.
+    </div>
+  </section>
+
+  <!-- TEMA 3: TÍTULOS DE IMPUTACIÓN -->
+  <section id="tema3">
+    <h2>3. Títulos de Imputación</h2>
+    <p>Los <strong>títulos de imputación</strong> son los fundamentos jurídicos que permiten atribuir al Estado la responsabilidad por un daño antijurídico. Son el nexo causal entre la actividad estatal y el daño sufrido por la víctima.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">TÍTULOS DE IMPUTACIÓN</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Falla del Servicio</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Daño Especial</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Riesgo Excepcional</div></div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Los Tres Títulos</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚠️</div>
+        <h4>Falla del Servicio</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p><strong>Concepto:</strong> Funcionamiento deficiente, tardío o irregular del servicio público.</p>
+          <p><strong>Modalidades:</strong></p>
+          <ul>
+            <li>No funcionamiento del servicio</li>
+            <li>Funcionamiento tardío</li>
+            <li>Funcionamiento deficiente</li>
+          </ul>
+          <p><strong>Ejemplo:</strong> Un hospital público no atiende a un paciente en emergencia por falta de personal.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">💥</div>
+        <h4>Daño Especial</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p><strong>Concepto:</strong> Daño causado por una actividad lícita del Estado que impone una carga anormal a una persona determinada.</p>
+          <p><strong>Fundamento:</strong> Igualdad ante las cargas públicas.</p>
+          <p><strong>Ejemplo:</strong> Daños causados a un inmueble por obras públicas realizadas en una vía.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🎯</div>
+        <h4>Riesgo Excepcional</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p><strong>Concepto:</strong> Daño causado por una actividad peligrosa del Estado, sin que medie falla del servicio.</p>
+          <p><strong>Fundamento:</strong> Teoría del riesgo creado.</p>
+          <p><strong>Ejemplo:</strong> Daños causados por explosión de un depósito de armas de las Fuerzas Militares.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>📊 Comparativa de los Títulos</h3>
+    <table>
+      <thead>
+        <tr><th>Título</th><th>Naturaleza</th><th>Actividad Estatal</th><th>Fundamento</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Falla del Servicio</strong></td>
+          <td>Subjetiva</td>
+          <td>Deficiente, tardía o irregular</td>
+          <td>Culpa anónima</td>
+        </tr>
+        <tr>
+          <td><strong>Daño Especial</strong></td>
+          <td>Objetiva</td>
+          <td>Lícita pero gravosa</td>
+          <td>Igualdad ante cargas públicas</td>
+        </tr>
+        <tr>
+          <td><strong>Riesgo Excepcional</strong></td>
+          <td>Objetiva</td>
+          <td>Peligrosa</td>
+          <td>Riesgo creado</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>⚠️ Causas Eximentes de Responsabilidad</h3>
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📋 Fuerza Mayor o Caso Fortuito</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Evento imprevisible e irresistible que no puede imputarse al Estado.</p>
+        <p><strong>Ejemplo:</strong> Un terremoto que destruye un puente público.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📋 Hecho Exclusivo de la Víctima</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Cuando el daño es consecuencia directa de la conducta de la víctima.</p>
+        <p><strong>Ejemplo:</strong> Una persona que se lanza intencionalmente contra un vehículo oficial.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📋 Hecho de un Tercero</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Cuando el daño es causado por una persona ajena al Estado y a la víctima.</p>
+        <p><strong>Ejemplo:</strong> Un particular que daña un bien público y causa perjuicios a otro particular.</p>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si un policía, en ejercicio de sus funciones, dispara su arma de fuego y causa la muerte de un transeúnte inocente, el Estado responderá por <em>falla del servicio</em> (uso excesivo de la fuerza). Si durante una operación militar legítima, un civil resulta herido por una explosión, el Estado responderá por <em>riesgo excepcional</em> (actividad peligrosa). Si una obra pública de alcantarillado inunda una casa, el Estado responderá por <em>daño especial</em> (carga anormal).
+    </div>
+  </section>
+
+  <!-- TEMA 4: NULIDAD POR INCONSTITUCIONALIDAD -->
+  <section id="tema4">
+    <h2>4. Nulidad por Inconstitucionalidad</h2>
+    <p>La <strong>nulidad por inconstitucionalidad</strong> es un medio de control que permite declarar la nulidad de los decretos dictados por el Gobierno Nacional cuya competencia no corresponda a la Corte Constitucional, así como de los actos de carácter general expedidos por otras entidades cuando la Constitución les atribuya expresamente esa facultad.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">NULIDAD POR INCONSTITUCIONALIDAD (Art. 135 CPACA)</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Decretos del Gobierno</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Actos de Carácter General</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Control Residual</div></div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Fundamento Legal</h3>
+    <div class="cita">
+      <strong>"El Consejo de Estado conocerá de las acciones de nulidad por inconstitucionalidad de los decretos dictados por el Gobierno Nacional, cuya competencia no corresponda a la Corte Constitucional, y de los actos de carácter general que expidan entidades u organismos distintos del Gobierno Nacional, cuando la Constitución Política les atribuya en forma expresa la posibilidad de expedirlos."</strong> — Art. 135 CPACA
+    </div>
+
+    <h3>🔍 Características</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">👤</div>
+        <h4>Acción Pública</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Cualquier ciudadano puede ejercerla, sin necesidad de demostrar un interés directo.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⏰</div>
+        <h4>Intemporal</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Puede ejercerse en cualquier tiempo, no tiene término de caducidad.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Objeto</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Decretos del Gobierno Nacional no reservados a la Corte Constitucional.</p>
+          <p>Actos de carácter general de otras entidades con expresa atribución constitucional.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🏛️</div>
+        <h4>Competencia</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Conoce el Consejo de Estado en Sala Plena de lo Contencioso Administrativo.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>⚖️ Diferencia con la Corte Constitucional</h3>
+    <table>
+      <thead>
+        <tr><th>Aspecto</th><th>Corte Constitucional</th><th>Consejo de Estado</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Objeto</strong></td>
+          <td>Leyes, decretos con fuerza de ley, actos reformatorios de la Constitución</td>
+          <td>Decretos del Gobierno y actos generales de otras entidades</td>
+        </tr>
+        <tr>
+          <td><strong>Fundamento</strong></td>
+          <td>Art. 241 C.P.</td>
+          <td>Art. 237.2 C.P. y 135 CPACA</td>
+        </tr>
+        <tr>
+          <td><strong>Efectos</strong></td>
+          <td>Erga omnes, cosa juzgada constitucional</td>
+          <td>Erga omnes, cosa juzgada legal</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si el Gobierno Nacional expide un decreto reglamentario que viola la Constitución, cualquier ciudadano puede demandar su nulidad ante el Consejo de Estado mediante la acción de nulidad por inconstitucionalidad. Si se declara la nulidad, el decreto desaparece del ordenamiento jurídico con efectos generales.
+    </div>
+  </section>
+
+  <!-- TEMA 5: NULIDAD SIMPLE -->
+  <section id="tema5">
+    <h2>5. Nulidad Simple</h2>
+    <p>La <strong>nulidad simple</strong> es el medio de control objetivo que tiene por objeto restablecer el orden jurídico vulnerado por un acto administrativo de carácter general, sin que sea necesario demostrar un perjuicio individual.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">NULIDAD SIMPLE (Art. 137 CPACA)</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Actos Generales</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Causales de Nulidad</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Acción Pública</div></div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Causales de Nulidad (Art. 137 CPACA)</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Infracción de las normas en que debía fundarse</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>El acto contradice normas superiores (Constitución, ley, reglamento).</p>
+          <p>Es la causal más común de nulidad.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🚫</div>
+        <h4>Incompetencia</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>La autoridad que expidió el acto carece de competencia para hacerlo.</p>
+          <p>Puede ser por materia, territorio, tiempo o grado.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📝</div>
+        <h4>Forma Irregular</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>El acto no cumple con las formalidades esenciales exigidas por la ley.</p>
+          <p>Ejemplo: falta de motivación, firma, publicación.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🔇</div>
+        <h4>Desconocimiento del Derecho de Audiencia y Defensa</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>No se permitió al interesado presentar pruebas o alegatos.</p>
+          <p>Viola el debido proceso (Art. 29 C.P.).</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🎭</div>
+        <h4>Falsa Motivación</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Los fundamentos de hecho o de derecho expresados en el acto no corresponden con la realidad.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🎯</div>
+        <h4>Desviación de Poder</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>El acto se expidió con una finalidad distinta a la contemplada en la norma que confiere la competencia.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>⚠️ Excepciones: Actos Particulares</h3>
+    <div class="alerta">
+      <strong>📌 Regla General:</strong> La nulidad simple procede contra actos de carácter general.
+      <br><br>
+      <strong>📌 Excepciones (Art. 137 CPACA):</strong> También procede contra actos particulares cuando:
+      <ol>
+        <li>No se persiga el restablecimiento automático de un derecho subjetivo.</li>
+        <li>Se trate de recuperar bienes de uso público.</li>
+        <li>Los efectos nocivos del acto afecten gravemente el orden público, político, económico, social o ecológico.</li>
+        <li>La ley lo disponga expresamente.</li>
+      </ol>
+    </div>
+
+    <h3>📊 Características Procesales</h3>
+    <table>
+      <thead>
+        <tr><th>Aspecto</th><th>Regulación</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Legitimación</strong></td>
+          <td>Cualquier persona (acción pública)</td>
+        </tr>
+        <tr>
+          <td><strong>Caducidad</strong></td>
+          <td>Intemporal (no tiene término)</td>
+        </tr>
+        <tr>
+          <td><strong>Efectos</strong></td>
+          <td>Erga omnes (frente a todos)</td>
+        </tr>
+        <tr>
+          <td><strong>Competencia</strong></td>
+          <td>Consejo de Estado (orden nacional) o Tribunales Administrativos (orden territorial)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si un municipio expide un acuerdo que prohíbe la circulación de vehículos en el centro histórico sin fundamento legal, cualquier ciudadano puede demandar su nulidad simple ante el Tribunal Administrativo. Si se declara la nulidad, el acuerdo desaparece del ordenamiento jurídico con efectos generales.
+    </div>
+  </section>
+
+  <!-- TEMA 6: NULIDAD Y RESTABLECIMIENTO DEL DERECHO -->
+  <section id="tema6">
+    <h2>6. Nulidad y Restablecimiento del Derecho</h2>
+    <p>La <strong>nulidad y restablecimiento del derecho</strong> es un medio de control subjetivo que tiene por objeto no solo la anulación de un acto administrativo particular, sino también la reparación del daño causado al demandante.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">NULIDAD Y RESTABLECIMIENTO DEL DERECHO (Art. 138 CPACA)</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Actos Particulares</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Perjuicio Individual</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Reparación Integral</div></div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Fundamento Legal</h3>
+    <div class="cita">
+      <strong>"Toda persona que se crea lesionada en un derecho subjetivo amparado por una norma jurídica, podrá demandar la nulidad del acto particular, expreso o presunto, y pedir, en su caso, el restablecimiento del derecho o la reparación del daño."</strong> — Art. 138 CPACA
+    </div>
+
+    <h3>🔍 Características</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">👤</div>
+        <h4>Legitimación</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Solo puede ejercerla quien se considere lesionado en un derecho subjetivo.</p>
+          <p>Requiere interés directo y personal.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⏰</div>
+        <h4>Caducidad</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>4 meses contados desde la notificación, comunicación, ejecución o publicación del acto.</p>
+          <p>Para actos presuntos, en cualquier tiempo.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Pretensiones</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <ul>
+            <li>Nulidad del acto administrativo</li>
+            <li>Restablecimiento del derecho</li>
+            <li>Reparación del daño (indemnización)</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📋</div>
+        <h4>Requisito de Procedibilidad</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Agotamiento de la vía gubernativa (recursos administrativos).</p>
+          <p>Conciliación prejudicial (cuando sea conciliable).</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>⚖️ Diferencia con la Nulidad Simple</h3>
+    <table>
+      <thead>
+        <tr><th>Aspecto</th><th>Nulidad Simple</th><th>Nulidad y Restablecimiento</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Naturaleza</strong></td>
+          <td>Objetiva</td>
+          <td>Subjetiva</td>
+        </tr>
+        <tr>
+          <td><strong>Legitimación</strong></td>
+          <td>Cualquier persona</td>
+          <td>Solo el afectado</td>
+        </tr>
+        <tr>
+          <td><strong>Objeto</strong></td>
+          <td>Anular el acto</td>
+          <td>Anular el acto + reparar el daño</td>
+        </tr>
+        <tr>
+          <td><strong>Caducidad</strong></td>
+          <td>Intemporal</td>
+          <td>4 meses</td>
+        </tr>
+        <tr>
+          <td><strong>Actos</strong></td>
+          <td>Generales (excepcionalmente particulares)</td>
+          <td>Particulares (excepcionalmente generales)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>📋 Actos Generales Demandables</h3>
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📝 ¿Cuándo procede contra actos generales?</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Procede contra actos generales cuando:</p>
+        <ul>
+          <li>El acto general cause un perjuicio individual al demandante.</li>
+          <li>Se demande dentro de los 4 meses siguientes a su publicación.</li>
+          <li>Si existe un acto intermedio de ejecución, el término se cuenta desde su notificación.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si la DIAN expide una resolución que impone una sanción fiscal a un contribuyente por un valor indebido, el contribuyente puede demandar la nulidad de la resolución y solicitar el restablecimiento de su derecho (que se le devuelva el dinero pagado en exceso) o la reparación del daño (indemnización por los perjuicios causados).
+    </div>
+  </section>
+
+  <!-- TEMA 7: NULIDAD ELECTORAL -->
+  <section id="tema7">
+    <h2>7. Nulidad Electoral</h2>
+    <p>La <strong>nulidad electoral</strong> es el medio de control que tiene por objeto examinar la legalidad de los actos de elección por voto popular o por cuerpos electorales, y de los actos de nombramiento expedidos por las entidades y autoridades públicas.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">NULIDAD ELECTORAL (Art. 139 CPACA)</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Actos de Elección</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Actos de Nombramiento</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Causales Especiales</div></div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Objeto</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🗳️</div>
+        <h4>Actos de Elección</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Elecciones por voto popular (Presidente, Congreso, Gobernadores, Alcaldes, etc.).</p>
+          <p>Elecciones por cuerpos electorales (Contralores, Magistrados, etc.).</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📜</div>
+        <h4>Actos de Nombramiento</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Nombramientos expedidos por entidades y autoridades públicas de todo orden.</p>
+          <p>Actos de llamamiento para proveer vacantes en Corporaciones Públicas.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>⚖️ Causales de Nulidad (Art. 275 CPACA)</h3>
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📋 Causales Objetivas</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Relacionadas con el proceso de votación y escrutinio:</p>
+        <ol>
+          <li><strong>Violencia:</strong> Presión indebida sobre nominadores, electores o autoridades electorales.</li>
+          <li><strong>Fraude:</strong> Alteración de resultados, votos falsos, suplantación de electores.</li>
+          <li><strong>Irregularidades en votación:</strong> Mesas no instaladas, cierre anticipado, falta de urnas.</li>
+          <li><strong>Irregularidades en escrutinio:</strong> Errores en el conteo, alteración de actas.</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📋 Causales Subjetivas</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Relacionadas con el elegido o nombrado:</p>
+        <ol>
+          <li><strong>Inhabilidades:</strong> El elegido incurre en causal de inhabilidad.</li>
+          <li><strong>Incompatibilidades:</strong> El elegido incurre en causal de incompatibilidad.</li>
+          <li><strong>Doble militancia:</strong> El candidato pertenece a dos partidos simultáneamente.</li>
+          <li><strong>Falta de requisitos:</strong> No cumple con los requisitos de edad, residencia, etc.</li>
+          <li><strong>No residencia:</strong> Los electores no residen en el municipio o departamento correspondiente.</li>
+        </ol>
+      </div>
+    </div>
+
+    <h3>📊 Características Procesales</h3>
+    <table>
+      <thead>
+        <tr><th>Aspecto</th><th>Regulación</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Legitimación</strong></td>
+          <td>Cualquier ciudadano (acción pública)</td>
+        </tr>
+        <tr>
+          <td><strong>Caducidad</strong></td>
+          <td>30 días contados desde la audiencia pública de declaratoria de elección o publicación del acto</td>
+        </tr>
+        <tr>
+          <td><strong>Requisito de Procedibilidad</strong></td>
+          <td>Agotamiento de la vía gubernativa ante el CNE para causales objetivas</td>
+        </tr>
+        <tr>
+          <td><strong>Competencia</strong></td>
+          <td>Consejo de Estado (elecciones nacionales) o Tribunales Administrativos (elecciones territoriales)</td>
+        </tr>
+        <tr>
+          <td><strong>Duración del Proceso</strong></td>
+          <td>1 año en primera instancia, 6 meses en única instancia (Art. 264 C.P.)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si en una elección de alcalde se demuestra que hubo compra de votos (fraude electoral), cualquier ciudadano puede demandar la nulidad del acto de elección ante el Tribunal Administrativo dentro de los 30 días siguientes a la declaratoria de elección. Si se declara la nulidad, se ordenará repetir las elecciones.
+    </div>
+  </section>
+
+  <!-- TEMA 8: REPARACIÓN DIRECTA -->
+  <section id="tema8">
+    <h2>8. Reparación Directa</h2>
+    <p>La <strong>reparación directa</strong> es el medio de control que tiene por objeto obtener la reparación de los daños antijurídicos causados por la acción u omisión de las autoridades públicas, sin necesidad de demandar previamente un acto administrativo.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">REPARACIÓN DIRECTA (Art. 140 CPACA)</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Daño Antijurídico</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Acción u Omisión</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Imputación al Estado</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Reparación Integral</div></div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Fundamento Legal</h3>
+    <div class="cita">
+      <strong>"En los términos del artículo 90 de la Constitución Política, la persona interesada podrá demandar directamente la reparación del daño antijurídico producido por la acción u omisión de los agentes del Estado."</strong> — Art. 140 CPACA
+    </div>
+
+    <h3>🔍 Características</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🎯</div>
+        <h4>Objeto</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Reparación integral del daño antijurídico.</p>
+          <p>Incluye daño emergente, lucro cesante, daño moral y daño a la salud.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚡</div>
+        <h4>Hechos Generadores</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <ul>
+            <li>Un hecho (accidente de vehículo oficial)</li>
+            <li>Una omisión (falta de atención médica)</li>
+            <li>Una operación administrativa (expropiación)</li>
+            <li>Ocupación temporal o permanente de inmueble</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⏰</div>
+        <h4>Caducidad</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>2 años contados desde el día siguiente a la ocurrencia del daño o desde cuando se tuvo conocimiento del mismo.</p>
+          <p>En desaparición forzada, desde la aparición de la víctima o ejecutoria del fallo penal.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📋</div>
+        <h4>Requisito de Procedibilidad</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Conciliación prejudicial obligatoria (cuando sea conciliable).</p>
+          <p>Si la conciliación fracasa o no se presenta, se puede demandar.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>⚖️ Diferencia con la Nulidad y Restablecimiento</h3>
+    <table>
+      <thead>
+        <tr><th>Aspecto</th><th>Reparación Directa</th><th>Nulidad y Restablecimiento</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Objeto</strong></td>
+          <td>Reparar daño causado por hechos u omisiones</td>
+          <td>Anular acto + reparar daño</td>
+        </tr>
+        <tr>
+          <td><strong>Fuente del daño</strong></td>
+          <td>Hechos, omisiones, operaciones materiales</td>
+          <td>Actos administrativos</td>
+        </tr>
+        <tr>
+          <td><strong>Caducidad</strong></td>
+          <td>2 años</td>
+          <td>4 meses</td>
+        </tr>
+        <tr>
+          <td><strong>Vía gubernativa</strong></td>
+          <td>No requiere</td>
+          <td>Sí requiere (salvo excepciones)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si un vehículo de la Policía atropella a un peatón causándole lesiones permanentes, la víctima puede demandar directamente al Estado mediante la acción de reparación directa, sin necesidad de que exista un acto administrativo previo. Deberá probar el daño antijurídico (lesiones), la acción (conducción del vehículo) y la imputación al Estado (el conductor era agente estatal en ejercicio de sus funciones).
+    </div>
+  </section>
+
+  <!-- TEMA 9: CONTROVERSIAS CONTRACTUALES Y REPETICIÓN -->
+  <section id="tema9">
+    <h2>9. Controversias Contractuales y Acción de Repetición</h2>
+    <p>Estos medios de control regulan las controversias derivadas de los contratos estatales y la responsabilidad de los agentes públicos que causen daños al Estado.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">CONTROVERSIAS Y REPETICIÓN</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Controversias Contractuales (Art. 141)</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Repetición (Art. 142)</div></div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Controversias Contractuales</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📝</div>
+        <h4>Objeto</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Resolver las controversias derivadas de los contratos estatales.</p>
+          <p>Declarar la existencia o nulidad del contrato.</p>
+          <p>Ordenar su revisión o declarar su incumplimiento.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Pretensiones</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <ul>
+            <li>Declarar existencia o nulidad del contrato</li>
+            <li>Ordenar revisión del contrato</li>
+            <li>Declarar incumplimiento</li>
+            <li>Declarar nulidad de actos contractuales</li>
+            <li>Liquidación judicial del contrato</li>
+            <li>Indemnización de perjuicios</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⏰</div>
+        <h4>Caducidad</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>2 años contados desde el día siguiente a la ocurrencia de los motivos de hecho o de derecho que sirvan de fundamento a la pretensión.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📋</div>
+        <h4>Requisito de Procedibilidad</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Conciliación prejudicial obligatoria (cuando sea conciliable).</p>
+          <p>Agotamiento de la cláusula de arreglo directo si existe.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Acción de Repetición</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🔄</div>
+        <h4>Objeto</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Recuperar el pago de los perjuicios causados por la conducta dolosa o gravemente culposa de un servidor público o ex servidor público.</p>
+          <p>También procede contra particulares que cumplan funciones públicas.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Legitimación</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p><strong>Activa:</strong> La entidad pública que pagó la indemnización.</p>
+          <p><strong>Pasiva:</strong> El servidor o ex servidor público responsable, o el particular que cumplía funciones públicas.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⏰</div>
+        <h4>Caducidad</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>2 años contados desde el día siguiente al pago de la condena o desde el vencimiento del plazo que tiene la Administración para efectuar el pago.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📋</div>
+        <h4>Requisitos</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <ul>
+            <li>Condena, conciliación u otra forma de terminación del conflicto</li>
+            <li>Pago efectivo de la indemnización por el Estado</li>
+            <li>Conducta dolosa o gravemente culposa del agente</li>
+            <li>Nexo causal entre la conducta y el daño</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <h3>⚖️ Diferencia entre Reparación Directa y Repetición</h3>
+    <table>
+      <thead>
+        <tr><th>Aspecto</th><th>Reparación Directa</th><th>Repetición</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Finalidad</strong></td>
+          <td>Indemnizar a la víctima del daño</td>
+          <td>Recuperar lo pagado por el Estado</td>
+        </tr>
+        <tr>
+          <td><strong>Legitimación pasiva</strong></td>
+          <td>El Estado</td>
+          <td>El servidor o particular responsable</td>
+        </tr>
+        <tr>
+          <td><strong>Legitimación activa</strong></td>
+          <td>La víctima del daño</td>
+          <td>La entidad pública que pagó</td>
+        </tr>
+        <tr>
+          <td><strong>Conducta requerida</strong></td>
+          <td>Cualquier título de imputación</td>
+          <td>Dolo o culpa grave</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si un juez ordena la detención ilegal de una persona y el Estado es condenado a pagar una indemnización de 100 millones de pesos, el Estado podrá ejercer la acción de repetición contra el juez si se demuestra que actuó con dolo o culpa grave, recuperando así el dinero pagado.
+    </div>
+  </section>
+
+  <!-- TEMA 10: ACCIONES COLECTIVAS Y CUMPLIMIENTO -->
+  <section id="tema10">
+    <h2>10. Pérdida de Investidura, Acciones Colectivas y Cumplimiento</h2>
+    <p>Estos medios de control protegen derechos colectivos, garantizan el cumplimiento de normas y sancionan la pérdida de investidura de congresistas y otros servidores públicos.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">OTROS MEDIOS DE CONTROL</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Pérdida de Investidura</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Acción Popular</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Acción de Grupo</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Acción de Cumplimiento</div></div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Pérdida de Investidura (Art. 143 CPACA)</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🏛️</div>
+        <h4>Objeto</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Sancionar a congresistas, diputados, concejales y ediles por incurrir en las causales establecidas en la Constitución y la ley.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Causales (Art. 183 C.P.)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <ul>
+            <li>Violación del régimen de inhabilidades e incompatibilidades</li>
+            <li>Inasistencia a 6 sesiones plenarias en un período</li>
+            <li>No tomar posesión del cargo dentro de 8 días</li>
+            <li>Indebida destinación de dineros públicos</li>
+            <li>Tráfico de influencias debidamente comprobado</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">👤</div>
+        <h4>Legitimación</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p><strong>Activa:</strong> Mesa Directiva de la Corporación o cualquier ciudadano.</p>
+          <p><strong>Pasiva:</strong> El servidor público elegido.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🏛️</div>
+        <h4>Competencia</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Consejo de Estado (Congresistas).</p>
+          <p>Tribunales Administrativos (Diputados, Concejales, Ediles).</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Acción Popular (Art. 144 CPACA)</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">👥</div>
+        <h4>Objeto</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Proteger los derechos e intereses colectivos relacionados con el patrimonio, el espacio, la seguridad y la salubridad pública, la moral administrativa, el ambiente, la libre competencia económica, entre otros.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">👤</div>
+        <h4>Legitimación</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Cualquier persona natural o jurídica.</p>
+          <p>Organizaciones no gubernamentales, populares o cívicas.</p>
+          <p>Entidades públicas que cumplan funciones de control.</p>
+          <p>Procuraduría, Defensoría, Personeros.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⏰</div>
+        <h4>Caducidad</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Mientras subsista la amenaza o vulneración del derecho o interés colectivo.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📋</div>
+        <h4>Requisito de Procedibilidad</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Solicitud previa a la autoridad o particular para que adopte las medidas necesarias (15 días para responder).</p>
+          <p>Excepción: peligro inminente de perjuicio irremediable.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Acción de Grupo (Art. 145 CPACA)</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">👥</div>
+        <h4>Objeto</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Reclamar la reparación de perjuicios causados a un número plural de personas (20 o más) que reúnan condiciones uniformes respecto a una misma causa.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">👤</div>
+        <h4>Legitimación</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Cualquier persona perteneciente al grupo puede actuar en nombre de todos.</p>
+          <p>Requiere apoderado (abogado).</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⏰</div>
+        <h4>Caducidad</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>2 años contados desde el día siguiente a la fecha en que se causó el daño o cesó la acción que lo provocó.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Acción de Cumplimiento (Art. 146 CPACA)</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📜</div>
+        <h4>Objeto</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Hacer efectivo el cumplimiento de una ley o un acto administrativo ante la renuencia de la autoridad.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">👤</div>
+        <h4>Legitimación</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Cualquier persona.</p>
+          <p>Organizaciones cívicas o populares.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⏰</div>
+        <h4>Caducidad</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Intemporal mientras subsista el incumplimiento.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📋</div>
+        <h4>Requisito de Procedibilidad</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Constitución de renuencia: requerimiento previo a la autoridad para que cumpla (10 días).</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>📊 Cuadro Resumen de Medios de Control</h3>
+    <table>
+      <thead>
+        <tr><th>Medio de Control</th><th>Objeto</th><th>Caducidad</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Nulidad por Inconstitucionalidad</strong></td>
+          <td>Anular decretos del Gobierno y actos generales</td>
+          <td>Intemporal</td>
+        </tr>
+        <tr>
+          <td><strong>Control Inmediato de Legalidad</strong></td>
+          <td>Revisar actos en estados de excepción</td>
+          <td>48 horas</td>
+        </tr>
+        <tr>
+          <td><strong>Nulidad Simple</strong></td>
+          <td>Anular actos generales</td>
+          <td>Intemporal</td>
+        </tr>
+        <tr>
+          <td><strong>Nulidad y Restablecimiento</strong></td>
+          <td>Anular actos particulares + reparar daño</td>
+          <td>4 meses</td>
+        </tr>
+        <tr>
+          <td><strong>Nulidad Electoral</strong></td>
+          <td>Anular actos de elección o nombramiento</td>
+          <td>30 días</td>
+        </tr>
+        <tr>
+          <td><strong>Reparación Directa</strong></td>
+          <td>Reparar daños causados por hechos u omisiones</td>
+          <td>2 años</td>
+        </tr>
+        <tr>
+          <td><strong>Controversias Contractuales</strong></td>
+          <td>Resolver conflictos contractuales</td>
+          <td>2 años</td>
+        </tr>
+        <tr>
+          <td><strong>Repetición</strong></td>
+          <td>Recuperar lo pagado por el Estado</td>
+          <td>2 años</td>
+        </tr>
+        <tr>
+          <td><strong>Pérdida de Investidura</strong></td>
+          <td>Sancionar servidores elegidos</td>
+          <td>Según causal</td>
+        </tr>
+        <tr>
+          <td><strong>Acción Popular</strong></td>
+          <td>Proteger derechos colectivos</td>
+          <td>Mientras subsista</td>
+        </tr>
+        <tr>
+          <td><strong>Acción de Grupo</strong></td>
+          <td>Reparar daños a grupo de personas</td>
+          <td>2 años</td>
+        </tr>
+        <tr>
+          <td><strong>Acción de Cumplimiento</strong></td>
+          <td>Hacer cumplir leyes o actos</td>
+          <td>Intemporal</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si un grupo de 50 personas resulta afectado por la contaminación de un río causada por una empresa estatal, pueden ejercer una <em>acción de grupo</em> para obtener la reparación de sus perjuicios. Si la afectación es al medio ambiente en general (derecho colectivo), cualquier ciudadano puede ejercer una <em>acción popular</em> para ordenar la cesación de la contaminación. Si la empresa no cumple con una orden judicial de cesar la contaminación, se puede ejercer una <em>acción de cumplimiento</em>.
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz">
+    <h2>🎯 Quiz Completo - 40 Preguntas</h2>
+    <p>Pon a prueba tus conocimientos sobre la Responsabilidad del Estado y los Medios de Control.</p>
+
+    <div class="quiz-container">
+      <div class="quiz-header">
+        <h3>📊 Tu Progreso</h3>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="quiz-stats">
+          <div class="stat">Respondidas: <strong id="respondidas">0</strong>/40</div>
+          <div class="stat">Correctas: <strong id="correctas">0</strong></div>
+          <div class="stat">Incorrectas: <strong id="incorrectas">0</strong></div>
+          <div class="stat">Porcentaje: <strong id="porcentaje">0</strong>%</div>
+        </div>
+      </div>
+
+      <div class="quiz-tabs">
+        <div class="quiz-tab active" onclick="mostrarSeccion('s1', this)">T1 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s2', this)">T2 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s3', this)">T3 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s4', this)">T4 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s5', this)">T5 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s6', this)">T6 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s7', this)">T7 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s8', this)">T8 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s9', this)">T9 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s10', this)">T10 (4)</div>
+      </div>
+
+      <!-- SECCIÓN 1: RESPONSABILIDAD DEL ESTADO -->
+      <div class="quiz-section active" id="s1">
+        <div class="pregunta" data-correcta="1" data-tema="1">
+          <span class="pregunta-num">1</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La responsabilidad patrimonial del Estado se fundamenta constitucionalmente en:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 1)">a) Artículo 83 de la Constitución Política.</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">b) Artículo 90 de la Constitución Política.</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">c) Artículo 23 de la Constitución Política.</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">d) Artículo 209 de la Constitución Política.</div>
+          </div>
+          <div class="explicacion">El artículo 90 de la Constitución Política establece la cláusula general de responsabilidad patrimonial del Estado por los daños antijurídicos que le sean imputables.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="1">
+          <span class="pregunta-num">2</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La responsabilidad patrimonial del Estado es de naturaleza:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 2)">a) Objetiva.</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">b) Subjetiva.</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">c) Contractual.</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">d) Penal.</div>
+          </div>
+          <div class="explicacion">La responsabilidad patrimonial del Estado es objetiva, pues no requiere probar culpa o dolo de la administración, sino únicamente el daño antijurídico y su imputación al Estado.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="1">
+          <span class="pregunta-num">3</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Si un vehículo oficial de la Policía causa un accidente de tránsito, el Estado deberá responder:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 3)">a) Solo si se prueba la culpa del conductor.</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">b) Solo si el conductor actuó en ejercicio de sus funciones.</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">c) Por los daños causados, independientemente de si hubo falla del servicio.</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">d) Solo si la víctima demanda al conductor personalmente.</div>
+          </div>
+          <div class="explicacion">El Estado responde patrimonialmente por los daños antijurídicos causados por la acción u omisión de las autoridades públicas, independientemente de si hubo falla del servicio o no.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="1">
+          <span class="pregunta-num">4</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La acción de repetición procede cuando el daño fue causado por:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 4)">a) Cualquier conducta del servidor público.</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">b) Conducta culposa leve del agente.</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">c) Conducta dolosa o gravemente culposa del agente.</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">d) Conducta de un tercero ajeno al Estado.</div>
+          </div>
+          <div class="explicacion">La acción de repetición procede cuando el daño fue causado por conducta dolosa o gravemente culposa de un agente del Estado, conforme al artículo 90 de la Constitución Política.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 2: DAÑO ANTIJURÍDICO -->
+      <div class="quiz-section" id="s2">
+        <div class="pregunta" data-correcta="1" data-tema="2">
+          <span class="pregunta-num">5</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El daño antijurídico se caracteriza por ser:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 5)">a) Hipotético, eventual e indeterminado.</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">b) Cierto, actual o futuro, determinado o determinable, y anormal.</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">c) Solo patrimonial y cuantificable.</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">d) Exclusivamente moral y subjetivo.</div>
+          </div>
+          <div class="explicacion">El daño antijurídico debe ser cierto (real y efectivo), actual o futuro, determinado o determinable (cuantificable), y anormal (excede las cargas ordinarias que debe soportar un ciudadano).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="2">
+          <span class="pregunta-num">6</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Si el Estado expropia un inmueble para construir una vía pública, el daño patrimonial sufrido por el propietario es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 6)">a) Una carga ordinaria que debe soportar.</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">b) Un daño antijurídico que debe ser indemnizado.</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">c) Un daño especial no indemnizable.</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">d) Un daño causado por hecho de un tercero.</div>
+          </div>
+          <div class="explicacion">El daño patrimonial causado por la expropiación es antijurídico porque el propietario no está obligado a soportarlo sin una justa indemnización. El Estado debe reparar integralmente el perjuicio.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="2">
+          <span class="pregunta-num">7</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El lucro cesante es un tipo de daño:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 7)">a) Emergente.</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">b) Moral.</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">c) Futuro, consistente en la ganancia dejada de obtener.</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">d) A la salud.</div>
+          </div>
+          <div class="explicacion">El lucro cesante es la ganancia dejada de obtener como consecuencia del daño. Es un daño futuro que debe ser probado y cuantificado para su reparación integral.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="2">
+          <span class="pregunta-num">8</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Si el ruido de una vía pública afecta levemente a un vecino, ese daño es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 8)">a) Antijurídico y debe ser indemnizado.</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">b) Un daño especial indemnizable.</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">c) Un daño moral reparable.</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">d) Una carga ordinaria que debe soportar en virtud de la función social de la propiedad.</div>
+          </div>
+          <div class="explicacion">El ruido leve de una vía pública es una carga ordinaria que el vecino debe soportar en virtud de la función social de la propiedad. No constituye daño antijurídico porque no excede las molestias normales de la vida en sociedad.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 3: TÍTULOS DE IMPUTACIÓN -->
+      <div class="quiz-section" id="s3">
+        <div class="pregunta" data-correcta="1" data-tema="3">
+          <span class="pregunta-num">9</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La falla del servicio se presenta cuando:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 9)">a) El Estado realiza una actividad lícita pero gravosa.</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">b) El servicio público funciona de manera deficiente, tardía o irregular.</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">c) El Estado realiza una actividad peligrosa.</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">d) La víctima causa el daño por su propia conducta.</div>
+          </div>
+          <div class="explicacion">La falla del servicio se presenta cuando el servicio público funciona de manera deficiente, tardía o irregular, o cuando no funciona en absoluto. Es un título de imputación subjetivo.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="3">
+          <span class="pregunta-num">10</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Si un hospital público no atiende a un paciente en emergencia por falta de personal, el Estado responde por:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 10)">a) Falla del servicio.</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">b) Daño especial.</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">c) Riesgo excepcional.</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">d) Hecho de un tercero.</div>
+          </div>
+          <div class="explicacion">La falta de atención médica por falta de personal constituye una falla del servicio (no funcionamiento o funcionamiento deficiente), título de imputación subjetivo que genera responsabilidad estatal.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="3">
+          <span class="pregunta-num">11</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El daño especial se fundamenta en:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 11)">a) La culpa anónima de la administración.</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">b) La teoría del riesgo creado.</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">c) La igualdad ante las cargas públicas.</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">d) La responsabilidad objetiva por falla del servicio.</div>
+          </div>
+          <div class="explicacion">El daño especial se fundamenta en el principio de igualdad ante las cargas públicas. Cuando una actividad lícita del Estado impone una carga anormal a una persona determinada, debe indemnizarla.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="3">
+          <span class="pregunta-num">12</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Si durante una operación militar legítima, un civil resulta herido por una explosión, el Estado responde por:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 12)">a) Falla del servicio.</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">b) Daño especial.</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">c) Hecho de un tercero.</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">d) Riesgo excepcional.</div>
+          </div>
+          <div class="explicacion">La operación militar es una actividad peligrosa que genera riesgo excepcional. Si un civil resulta herido por una explosión, el Estado responde por este título de imputación objetivo, sin necesidad de probar falla del servicio.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 4: NULIDAD POR INCONSTITUCIONALIDAD -->
+      <div class="quiz-section" id="s4">
+        <div class="pregunta" data-correcta="1" data-tema="4">
+          <span class="pregunta-num">13</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La nulidad por inconstitucionalidad procede contra:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 13)">a) Leyes de la República.</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">b) Decretos del Gobierno Nacional cuya competencia no corresponda a la Corte Constitucional.</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">c) Actos administrativos particulares.</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">d) Sentencias judiciales.</div>
+          </div>
+          <div class="explicacion">La nulidad por inconstitucionalidad procede contra los decretos dictados por el Gobierno Nacional cuya competencia no corresponda a la Corte Constitucional, y contra actos de carácter general de otras entidades cuando la Constitución les atribuya expresamente esa facultad.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="4">
+          <span class="pregunta-num">14</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La acción de nulidad por inconstitucionalidad es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 14)">a) Pública e intemporal.</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">b) Privada y sujeta a caducidad.</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">c) Pública y con caducidad de 4 meses.</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">d) Privada e intemporal.</div>
+          </div>
+          <div class="explicacion">La acción de nulidad por inconstitucionalidad es pública (cualquier ciudadano puede ejercerla) e intemporal (no tiene término de caducidad), conforme al artículo 135 del CPACA.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="4">
+          <span class="pregunta-num">15</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Si el Gobierno Nacional expide un decreto reglamentario que viola la Constitución, cualquier ciudadano puede:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 15)">a) Demandar ante la Corte Constitucional.</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">b) Interponer acción de tutela.</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">c) Demandar su nulidad ante el Consejo de Estado.</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">d) Interponer recurso de reposición.</div>
+          </div>
+          <div class="explicacion">Si el decreto reglamentario del Gobierno Nacional viola la Constitución y su competencia no corresponde a la Corte Constitucional, cualquier ciudadano puede demandar su nulidad ante el Consejo de Estado mediante la acción de nulidad por inconstitucionalidad.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="4">
+          <span class="pregunta-num">16</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los efectos de la sentencia que declara la nulidad por inconstitucionalidad son:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 16)">a) Inter partes.</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">b) Solo frente al demandante.</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">c) Solo frente a la entidad demandada.</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">d) Erga omnes (frente a todos).</div>
+          </div>
+          <div class="explicacion">La sentencia que declara la nulidad por inconstitucionalidad tiene efectos erga omnes, es decir, frente a todos, porque el acto desaparece del ordenamiento jurídico con efectos generales.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 5: NULIDAD SIMPLE -->
+      <div class="quiz-section" id="s5">
+        <div class="pregunta" data-correcta="1" data-tema="5">
+          <span class="pregunta-num">17</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La nulidad simple procede contra:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 17)">a) Actos administrativos particulares.</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">b) Actos administrativos de carácter general.</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">c) Contratos estatales.</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">d) Sentencias judiciales.</div>
+          </div>
+          <div class="explicacion">La nulidad simple procede contra actos administrativos de carácter general, conforme al artículo 137 del CPACA. Excepcionalmente procede contra actos particulares en los casos previstos en la ley.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="5">
+          <span class="pregunta-num">18</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La acción de nulidad simple es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 18)">a) Pública e intemporal.</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">b) Privada y sujeta a caducidad.</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">c) Pública y con caducidad de 4 meses.</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">d) Privada e intemporal.</div>
+          </div>
+          <div class="explicacion">Laaction de nulidad simple es pública (cualquier persona puede ejercerla) e intemporal (no tiene término de caducidad), conforme al artículo 137 del CPACA.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="5">
+          <span class="pregunta-num">19</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Si un municipio expide un acuerdo que prohíbe la circulación de vehículos en el centro histórico sin fundamento legal, cualquier ciudadano puede:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 19)">a) Interponer acción de tutela.</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">b) Interponer recurso de reposición.</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">c) Demandar su nulidad simple ante el Tribunal Administrativo.</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">d) Demandar su nulidad por inconstitucionalidad ante el Consejo de Estado.</div>
+          </div>
+          <div class="explicacion">Si el acuerdo municipal viola la ley, cualquier ciudadano puede demandar su nulidad simple ante el Tribunal Administrativo, que es el competente para conocer de actos de carácter general del orden territorial.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="5">
+          <span class="pregunta-num">20</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La desviación de poder es una causal de nulidad que se presenta cuando:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 20)">a) El acto contradice normas superiores.</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">b) La autoridad carece de competencia.</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">c) El acto no cumple con las formalidades esenciales.</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">d) El acto se expidió con una finalidad distinta a la contemplada en la norma.</div>
+          </div>
+          <div class="explicacion">La desviación de poder se presenta cuando el acto administrativo se expidió con una finalidad distinta a la contemplada en la norma que confiere la competencia, conforme al artículo 137 del CPACA.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 6: NULIDAD Y RESTABLECIMIENTO -->
+      <div class="quiz-section" id="s6">
+        <div class="pregunta" data-correcta="1" data-tema="6">
+          <span class="pregunta-num">21</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La acción de nulidad y restablecimiento del derecho tiene por objeto:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 21)">a) Solo anular el acto administrativo.</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">b) Anular el acto administrativo y reparar el daño causado.</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">c) Solo reparar el daño causado.</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">d) Hacer cumplir una ley o acto administrativo.</div>
+          </div>
+          <div class="explicacion">La acción de nulidad y restablecimiento del derecho tiene por objeto no solo la anulación del acto administrativo particular, sino también la reparación del daño causado al demandante, conforme al artículo 138 del CPACA.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="6">
+          <span class="pregunta-num">22</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El término de caducidad de la acción de nulidad y restablecimiento del derecho es de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 22)">a) 4 meses contados desde la notificación, comunicación, ejecución o publicación del acto.</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">b) 2 años contados desde la ocurrencia del daño.</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">c) 30 días contados desde la publicación del acto.</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">d) Intemporal.</div>
+          </div>
+          <div class="explicacion">El término de caducidad de la acción de nulidad y restablecimiento del derecho es de 4 meses contados desde la notificación, comunicación, ejecución o publicación del acto, conforme al artículo 136 del CPACA.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="6">
+          <span class="pregunta-num">23</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Si la DIAN expide una resolución que impone una sanción fiscal indebida a un contribuyente, este puede:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 23)">a) Interponer acción de tutela.</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">b) Demandar la nulidad simple de la resolución.</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">c) Demandar la nulidad y restablecimiento del derecho.</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">d) Interponer acción popular.</div>
+          </div>
+          <div class="explicacion">Si la resolución de la DIAN causa un perjuicio individual al contribuyente, este puede demandar la nulidad y restablecimiento del derecho, solicitando la anulación de la resolución y la devolución del dinero pagado en exceso o la indemnización de perjuicios.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="6">
+          <span class="pregunta-num">24</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La diferencia entre la nulidad simple y la nulidad y restablecimiento del derecho radica en:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 24)">a) La nulidad simple es subjetiva y la nulidad y restablecimiento es objetiva.</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">b) La nulidad simple procede contra actos particulares y la nulidad y restablecimiento contra actos generales.</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">c) La nulidad simple tiene caducidad de 4 meses y la nulidad y restablecimiento es intemporal.</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">d) La nulidad simple es objetiva (procede contra actos generales) y la nulidad y restablecimiento es subjetiva (procede contra actos particulares que causan perjuicio individual).</div>
+          </div>
+          <div class="explicacion">La nulidad simple es objetiva (procede contra actos generales para restablecer el orden jurídico) y la nulidad y restablecimiento del derecho es subjetiva (procede contra actos particulares que causan perjuicio individual al demandante).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 7: NULIDAD ELECTORAL -->
+      <div class="quiz-section" id="s7">
+        <div class="pregunta" data-correcta="1" data-tema="7">
+          <span class="pregunta-num">25</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La nulidad electoral procede contra:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 25)">a) Actos administrativos generales.</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">b) Actos de elección por voto popular o por cuerpos electorales, y actos de nombramiento.</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">c) Contratos estatales.</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">d) Sentencias judiciales.</div>
+          </div>
+          <div class="explicacion">La nulidad electoral procede contra los actos de elección por voto popular o por cuerpos electorales, y contra los actos de nombramiento expedidos por las entidades y autoridades públicas, conforme al artículo 139 del CPACA.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="7">
+          <span class="pregunta-num">26</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El término de caducidad de la acción de nulidad electoral es de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 26)">a) 30 días contados desde la audiencia pública de declaratoria de elección o publicación del acto.</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">b) 4 meses contados desde la notificación del acto.</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">c) 2 años contados desde la elección.</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">d) Intemporal.</div>
+          </div>
+          <div class="explicacion">El término de caducidad de la acción de nulidad electoral es de 30 días contados desde el día siguiente a la audiencia pública de declaratoria de elección o a la publicación del acto de nombramiento, conforme al artículo 136 del CPACA.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="7">
+          <span class="pregunta-num">27</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Si en una elección de alcalde se demuestra que hubo compra de votos, cualquier ciudadano puede:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 27)">a) Interponer acción de tutela.</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">b) Demandar la nulidad simple del acto de elección.</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">c) Demandar la nulidad electoral dentro de los 30 días siguientes a la declaratoria de elección.</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">d) Interponer acción popular.</div>
+          </div>
+          <div class="explicacion">Si hubo fraude electoral (compra de votos), cualquier ciudadano puede demandar la nulidad electoral dentro de los 30 días siguientes a la declaratoria de elección, conforme al artículo 139 del CPACA.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="7">
+          <span class="pregunta-num">28</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Las causales de nulidad electoral se clasifican en:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 28)">a) Subjetivas y objetivas.</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">b) Absolutas y relativas.</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">c) Formales y de fondo.</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">d) Objetivas (relacionadas con el proceso de votación) y subjetivas (relacionadas con el elegido).</div>
+          </div>
+          <div class="explicacion">Las causales de nulidad electoral se clasifican en objetivas (relacionadas con el proceso de votación y escrutinio, como fraude o violencia) y subjetivas (relacionadas con el elegido, como inhabilidades, incompatibilidades o falta de requisitos).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 8: REPARACIÓN DIRECTA -->
+      <div class="quiz-section" id="s8">
+        <div class="pregunta" data-correcta="1" data-tema="8">
+          <span class="pregunta-num">29</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La acción de reparación directa tiene por objeto:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 29)">a) Anular actos administrativos.</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">b) Reparar los daños antijurídicos causados por la acción u omisión de las autoridades públicas.</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">c) Resolver controversias contractuales.</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">d) Proteger derechos colectivos.</div>
+          </div>
+          <div class="explicacion">La acción de reparación directa tiene por objeto obtener la reparación de los daños antijurídicos causados por la acción u omisión de las autoridades públicas, sin necesidad de demandar previamente un acto administrativo, conforme al artículo 140 del CPACA.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="8">
+          <span class="pregunta-num">30</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El término de caducidad de la acción de reparación directa es de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 30)">a) 2 años contados desde el día siguiente a la ocurrencia del daño o desde cuando se tuvo conocimiento del mismo.</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">b) 4 meses contados desde la notificación del acto.</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">c) 30 días contados desde la ocurrencia del daño.</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">d) Intemporal.</div>
+          </div>
+          <div class="explicacion">El término de caducidad de la acciónaction de reparación directa es de 2 años 2 años contados desde el día siguiente a la ocurrencia del daño o desde cuando se tuvo conocimiento del mismo, conforme al artículo 136 del CPACA.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="8">
+          <span class="pregunta-num">31</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Si un vehículo de la Policía atropella a un peatón causándole lesiones permanentes, la víctima puede:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 31)">a) Demandar la nulidad del acto administrativo que ordenó la operación.</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">b) Interponer acción de tutela.</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">c) Demandar directamente al Estado mediante la acción de reparación directa.</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">d) Demandar al conductor personalmente.</div>
+          </div>
+          <div class="explicacion">Si el vehículo oficial causa lesiones, la víctima puede demandar directamente al Estado mediante la acción de reparación directa, sin necesidad de que exista un acto administrativo previo, conforme al artículo 140 del CPACA.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="8">
+          <span class="pregunta-num">32</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La diferencia entre la reparación directa y la nulidad y restablecimiento del derecho radica en:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 32)">a) La reparación directa procede contra actos administrativos y la nulidad y restablecimiento contra hechos.</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">b) La reparación directa tiene caducidad de 4 meses y la nulidad y restablecimiento de 2 años.</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">c) La reparación directa requiere agotamiento de la vía gubernativa y la nulidad y restablecimiento no.</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">d) La reparación directa procede contra hechos, omisiones u operaciones materiales, y la nulidad y restablecimiento contra actos administrativos.</div>
+          </div>
+          <div class="explicacion">La reparación directa procede contra hechos, omisiones u operaciones materiales que causan daño, mientras que la nulidad y restablecimiento del derecho procede contra actos administrativos particulares que causan perjuicio individual.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 9: CONTROVERSIAS CONTRACTUALES Y REPETICIÓN -->
+      <div class="quiz-section" id="s9">
+        <div class="pregunta" data-correcta="1" data-tema="9">
+          <span class="pregunta-num">33</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La acción de controversias contractuales tiene por objeto:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 33)">a) Reparar daños causados por hechos u omisiones.</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">b) Resolver las controversias derivadas de los contratos estatales.</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">c) Anular actos administrativos.</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">d) Proteger derechos colectivos.</div>
+          </div>
+          <div class="explicacion">La acción de controversias contractuales tiene por objeto resolver las controversias derivadas de los contratos estatales, incluyendo la declaración de existencia o nulidad del contrato, su revisión, incumplimiento, liquidación judicial e indemnización de perjuicios, conforme al artículo 141 del CPACA.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="9">
+          <span class="pregunta-num">34</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La acción de repetición procede cuando:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 34)">a) El Estado es condenado a pagar una indemnización por daño causado por conducta dolosa o gravemente culposa de un agente.</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">b) Un particular causa daño a otro particular.</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">c) El Estado causa daño por falla del servicio.</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">d) Un servidor público actúa con culpa leve.</div>
+          </div>
+          <div class="explicacion">La acción de repetición procede cuando el Estado es condenado a pagar una indemnización por daño causado por conducta dolosa o gravemente culposa de un servidor público o particular que cumple funciones públicas, conforme al artículo 142 del CPACA y la Ley 678 de 2001.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="9">
+          <span class="pregunta-num">35</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Si un contratista incumple un contrato estatal, la entidad pública puede:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 35)">a) Interponer acción de tutela.</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">b) Demandar la nulidad del contrato.</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">c) Ejercer la acción de controversias contractuales para declarar el incumplimiento y obtener indemnización.</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">d) Ejercer la acción de repetición contra el contratista.</div>
+          </div>
+          <div class="explicacion">Si el contratista incumple el contrato, la entidad pública puede ejercer la acción de controversias contractuales para declarar el incumplimiento y obtener la indemnización de perjuicios, conforme al artículo 141 del CPACA.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="9">
+          <span class="pregunta-num">36</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El término de caducidad de la acción de controversias contractuales es de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 36)">a) 4 meses.</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">b) 30 días.</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">c) 1 año.</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">d) 2 años contados desde el día siguiente a la ocurrencia de los motivos de hecho o de derecho que sirvan de fundamento a la pretensión.</div>
+          </div>
+          <div class="explicacion">El término de caducidad de la acción 2 años contados desde el día siguiente aa la acción de controversias contractuales es de 2 años contados desde el día siguiente a la ocurrencia de los motivos de hecho o de derecho que sirvan de fundamento a la pretensión, conforme al artículo 136 del CPACA.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 10: ACCIONES COLECTIVAS Y CUMPLIMIENTO -->
+      <div class="quiz-section" id="s10">
+        <div class="pregunta" data-correcta="1" data-tema="10">
+          <span class="pregunta-num">37</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La acción popular tiene por objeto:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 37)">a) Reparar daños causados a un grupo de personas.</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">b) Proteger los derechos e intereses colectivos.</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">c) Hacer cumplir una ley o acto administrativo.</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">d) Sancionar a servidores públicos.</div>
+          </div>
+          <div class="explicacion">La acción popular tiene por objeto proteger los derechos e intereses colectivos relacionados con el patrimonio, el espacio, la seguridad y la salubridad pública, la moral administrativa, el ambiente, la libre competencia económica, entre otros, conforme al artículo 144 del CPACA y la Ley 472 de 1998.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="10">
+          <span class="pregunta-num">38</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Si un grupo de 50 personas resulta afectado por la contaminación de un río causada por una empresa estatal, pueden ejercer:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 38)">a) Acción de grupo para obtener la reparación de sus perjuicios individuales.</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">b) Acción popular para proteger el medio ambiente.</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">c) Acción de cumplimiento para obligar a la empresa a cesar la contaminación.</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">d) Acción de repetición contra los funcionarios responsables.</div>
+          </div>
+          <div class="explicacion">Si 50 personas resultan afectadas por la contaminación, pueden ejercer la acción de grupo para obtener la reparación de sus perjuicios individuales, conforme al artículo 145 del CPACA y la Ley 472 de 1998.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="10">
+          <span class="pregunta-num">39</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La acción de cumplimiento tiene por objeto:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 39)">a) Reparar daños causados por hechos u omisiones.</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">b) Proteger derechos colectivos.</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">c) Hacer efectivo el cumplimiento de una ley o un acto administrativo.</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">d) Resolver controversias contractuales.</div>
+          </div>
+          <div class="explicacion">La acción de cumplimiento tiene por objeto hacer efectivo el cumplimiento de una ley o un acto administrativo ante la renuencia de la autoridad, conforme al artículo 146 del CPACA y la Ley 393 de 1997.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="10">
+          <span class="pregunta-num">40</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Si una autoridad se niega a cumplir una orden judicial, cualquier persona puede:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 40)">a) Interponer acción de tutela.</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">b) Ejercer acción popular.</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">c) Ejercer acción de grupo.</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">d) Ejercer acción de cumplimiento.</div>
+          </div>
+          <div class="explicacion">Si la autoridad se niega a cumplir una orden judicial, cualquier persona puede ejercer la acción de cumplimiento para obligarla a cumplir, conforme al artículo 146 del CPACA y la Ley 393 de 1997.</div>
+        </div>
+      </div>
+
+      <div class="resultado-final" id="resultadoFinal">
+        <h3>🏆 Resultado Final</h3>
+        <div class="puntaje-final" id="puntajeFinal">0/40</div>
+        <p id="mensajeFinal"></p>
+        <div class="desglose-temas" id="desgloseTemas"></div>
+        <button onclick="reiniciarQuiz()" class="btn-reset">🔄 Reiniciar Quiz</button>
+      </div>
+
+      <div style="text-align: center; margin-top: 1.5rem;">
+        <button onclick="verResultadoFinal()">📊 Ver Resultado Final</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>🏛️ Guía Didáctica - Responsabilidad del Estado y Medios de Control</p>
+  <p>Guía 8 de 8 · Derecho Administrativo Colombiano</p>
+  <p style="margin-top: 1rem; opacity: 0.7;">© 2026 - Material educativo interactivo</p>
+</footer>
+
+<script>
+  function toggleAcordeon(header) {
+    header.classList.toggle('active');
+    const content = header.nextElementSibling;
+    content.classList.toggle('active');
+  }
+
+  let respuestas = {};
+  const totalPreguntas = 40;
+
+  function mostrarSeccion(id, tab) {
+    document.querySelectorAll('.quiz-section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.quiz-tab').forEach(t => t.classList.remove('active'));
+    
+    document.getElementById(id).classList.add('active');
+    tab.classList.add('active');
+  }
+
+  function seleccionar(opcion, preguntaNum) {
+    if (respuestas[preguntaNum] !== undefined) return;
+
+    const pregunta = opcion.closest('.pregunta');
+    const opciones = pregunta.querySelectorAll('.opcion');
+    const correcta = parseInt(pregunta.dataset.correcta);
+    const tema = parseInt(pregunta.dataset.tema);
+    const seleccionada = Array.from(opciones).indexOf(opcion);
+    const explicacion = pregunta.querySelector('.explicacion');
+
+    opciones.forEach(o => o.classList.add('disabled'));
+
+    if (seleccionada === correcta) {
+      opcion.classList.add('correcta');
+      respuestas[preguntaNum] = { correcta: true, tema: tema };
+    } else {
+      opcion.classList.add('incorrecta');
+      opciones[correcta].classList.add('correcta');
+      respuestas[preguntaNum] = { correcta: false, tema: tema };
+    }
+
+    explicacion.classList.add('visible');
+    pregunta.classList.add('answered');
+    actualizarEstadisticas();
+  }
+
+  function actualizarEstadisticas() {
+    const total = Object.keys(respuestas).length;
+    const correctas = Object.values(respuestas).filter(r => r.correcta).length;
+    const incorrectas = total - correctas;
+    const porcentaje = total > 0 ? Math.round((correctas / total) * 100) : 0;
+
+    document.getElementById('respondidas').textContent = total;
+    document.getElementById('correctas').textContent = correctas;
+    document.getElementById('incorrectas').textContent = incorrectas;
+    document.getElementById('porcentaje').textContent = porcentaje;
+
+    const progreso = (total / totalPreguntas) * 100;
+    document.getElementById('progressFill').style.width = progreso + '%';
+  }
+
+  function verResultadoFinal() {
+    const total = Object.keys(respuestas).length;
+    
+    if (total < totalPreguntas) {
+      alert(`⚠️ Aún te faltan ${totalPreguntas - total} preguntas por responder.`);
+      return;
+    }
+
+    const correctas = Object.values(respuestas).filter(r => r.correcta).length;
+    const porcentaje = Math.round((correctas / totalPreguntas) * 100);
+
+    const resultadoFinal = document.getElementById('resultadoFinal');
+    resultadoFinal.classList.add('visible');
+
+    document.getElementById('puntajeFinal').textContent = `${correctas}/${totalPreguntas}`;
+
+    let mensaje = '';
+    if (porcentaje === 100) mensaje = '🏆 ¡PERFECTO! Dominas la Responsabilidad del Estado y los Medios de Control.';
+    else if (porcentaje >= 90) mensaje = '🌟 ¡Excelente! Dominio sobresaliente.';
+    else if (porcentaje >= 75) mensaje = '✅ ¡Muy bien! Buen dominio.';
+    else if (porcentaje >= 60) mensaje = '📚 Aceptable. Repasa los temas donde fallaste.';
+    else if (porcentaje >= 40) mensaje = '📖 Necesitas reforzar varios conceptos.';
+    else mensaje = '🔍 Es necesario estudiar nuevamente todos los temas.';
+
+    document.getElementById('mensajeFinal').textContent = mensaje;
+
+    const temas = {
+      1: { nombre: 'T1: Responsabilidad', total: 4, correctas: 0 },
+      2: { nombre: 'T2: Daño Antijurídico', total: 4, correctas: 0 },
+      3: { nombre: 'T3: Títulos Imputación', total: 4, correctas: 0 },
+      4: { nombre: 'T4: Nul. Inconst.', total: 4, correctas: 0 },
+      5: { nombre: 'T5: Nulidad Simple', total: 4, correctas: 0 },
+      6: { nombre: 'T6: Nul. y Rest.', total: 4, correctas: 0 },
+      7: { nombre: 'T7: Nulidad Electoral', total: 4, correctas: 0 },
+      8: { nombre: 'T8: Rep. Directa', total: 4, correctas: 0 },
+      9: { nombre: 'T9: Cont. y Rep.', total: 4, correctas: 0 },
+      10: { nombre: 'T10: Acciones Colect.', total: 4, correctas: 0 }
+    };
+
+    Object.values(respuestas).forEach(r => {
+      if (r.correcta) temas[r.tema].correctas++;
+    });
+
+    const desgloseHTML = Object.values(temas).map(t => {
+      const pct = Math.round((t.correctas / t.total) * 100);
+      return `
+        <div class="desglose-item">
+          <h4>${t.nombre}</h4>
+          <p>${t.correctas}/${t.total} (${pct}%)</p>
+          <div class="mini-bar">
+            <div class="mini-bar-fill" style="width: ${pct}%"></div>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    document.getElementById('desgloseTemas').innerHTML = desgloseHTML;
+    resultadoFinal.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  function reiniciarQuiz() {
+    if (!confirm('¿Reiniciar el quiz?')) return;
+
+    respuestas = {};
+
+    document.querySelectorAll('.opcion').forEach(o => o.classList.remove('correcta', 'incorrecta', 'disabled'));
+    document.querySelectorAll('.explicacion').forEach(e => e.classList.remove('visible'));
+    document.querySelectorAll('.pregunta').forEach(p => p.classList.remove('answered'));
+    document.getElementById('resultadoFinal').classList.remove('visible');
+
+    actualizarEstadisticas();
+    mostrarSeccion('s1', document.querySelector('.quiz-tab'));
+    document.getElementById('quiz').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  document.querySelectorAll('nav a').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+</script>
+
+</body>
+</html>
