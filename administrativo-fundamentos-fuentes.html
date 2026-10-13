@@ -1,0 +1,3077 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fundamentos y Fuentes del Derecho Administrativo - Derecho Administrativo</title>
+<style>
+  :root {
+    --primary: #065f46;
+    --secondary: #10b981;
+    --accent: #047857;
+    --light: #ecfdf5;
+    --dark: #064e3b;
+    --success: #059669;
+    --warning: #d97706;
+    --danger: #dc2626;
+    --card-bg: #ffffff;
+    --shadow: 0 4px 15px rgba(0,0,0,0.08);
+    --shadow-hover: 0 8px 25px rgba(0,0,0,0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    background: var(--light);
+    color: var(--dark);
+    line-height: 1.7;
+  }
+
+  header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    color: white;
+    padding: 2rem 1rem;
+    text-align: center;
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::before {
+    content: '⚖️';
+    position: absolute;
+    font-size: 15rem;
+    opacity: 0.05;
+    top: -30px;
+    right: -30px;
+  }
+
+  header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: 2px;
+  }
+
+  header p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    font-style: italic;
+  }
+
+  nav {
+    background: var(--dark);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow);
+  }
+
+  nav ul {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0.5rem;
+  }
+
+  nav a {
+    color: var(--light);
+    text-decoration: none;
+    padding: 0.7rem 1rem;
+    margin: 0.2rem;
+    border-radius: 5px;
+    font-size: 0.7rem;
+    transition: all 0.3s;
+    display: block;
+  }
+
+  nav a:hover {
+    background: var(--secondary);
+    color: var(--dark);
+    transform: translateY(-2px);
+  }
+
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+  }
+
+  section {
+    background: var(--card-bg);
+    margin-bottom: 2.5rem;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    border-left: 5px solid var(--secondary);
+    scroll-margin-top: 80px;
+  }
+
+  section h2 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--secondary);
+  }
+
+  section h3 {
+    color: var(--accent);
+    font-size: 1.4rem;
+    margin: 1.5rem 0 0.8rem;
+  }
+
+  section h4 {
+    color: var(--primary);
+    font-size: 1.15rem;
+    margin: 1rem 0 0.5rem;
+  }
+
+  p { margin-bottom: 1rem; text-align: justify; }
+
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.2rem;
+    margin: 1.5rem 0;
+  }
+
+  .card {
+    background: linear-gradient(135deg, #fff 0%, #ecfdf5 100%);
+    border: 2px solid var(--secondary);
+    border-radius: 10px;
+    padding: 1.2rem;
+    transition: all 0.3s;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--primary);
+  }
+
+  .card .icon {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .card h4 {
+    text-align: center;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+  }
+
+  .card .detail {
+    display: none;
+    margin-top: 0.8rem;
+    padding-top: 0.8rem;
+    border-top: 1px dashed var(--secondary);
+    font-size: 0.95rem;
+  }
+
+  .card.active .detail { display: block; }
+
+  .card .hint {
+    text-align: center;
+    color: var(--accent);
+    font-size: 0.85rem;
+    font-style: italic;
+  }
+
+  .mapa-container {
+    background: #ecfdf5;
+    border: 2px dashed var(--secondary);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    overflow-x: auto;
+  }
+
+  .mapa {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 600px;
+  }
+
+  .nodo {
+    background: var(--primary);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+    font-weight: bold;
+    text-align: center;
+    min-width: 180px;
+    box-shadow: var(--shadow);
+  }
+
+  .nodo.central {
+    background: linear-gradient(135deg, var(--secondary), #34d399);
+    color: var(--dark);
+    font-size: 1.2rem;
+    padding: 1rem 2rem;
+  }
+
+  .nodo.sub {
+    background: var(--accent);
+    font-size: 0.95rem;
+  }
+
+  .linea {
+    width: 3px;
+    height: 25px;
+    background: var(--secondary);
+  }
+
+  .linea-h {
+    height: 3px;
+    background: var(--secondary);
+    width: 80%;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .rama {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 1rem;
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  .rama-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    min-width: 140px;
+  }
+
+  .ejemplo {
+    background: #ecfdf5;
+    border-left: 4px solid var(--success);
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .ejemplo strong { color: var(--success); }
+
+  .alerta {
+    background: #fffbeb;
+    border-left: 4px solid var(--warning);
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .alerta strong { color: var(--warning); }
+
+  .cita {
+    background: #ecfdf5;
+    border-left: 4px solid var(--accent);
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+    color: var(--primary);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    font-size: 0.9rem;
+  }
+
+  th {
+    background: var(--primary);
+    color: white;
+    padding: 0.8rem;
+    text-align: left;
+  }
+
+  td {
+    padding: 0.8rem;
+    border-bottom: 1px solid #eee;
+  }
+
+  tr:nth-child(even) { background: #ecfdf5; }
+  tr:hover { background: #d1fae5; }
+
+  .quiz-container {
+    background: linear-gradient(135deg, #ecfdf5 0%, #fff 100%);
+    padding: 1.5rem;
+    border-radius: 10px;
+    border: 2px solid var(--accent);
+  }
+
+  .quiz-header {
+    background: var(--primary);
+    color: white;
+    padding: 1.2rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .quiz-header h3 {
+    color: white;
+    margin: 0 0 0.5rem 0;
+  }
+
+  .progress-bar {
+    background: rgba(255,255,255,0.2);
+    height: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+  }
+
+  .progress-fill {
+    background: var(--secondary);
+    height: 100%;
+    width: 0%;
+    transition: width 0.4s ease;
+  }
+
+  .quiz-stats {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .stat {
+    background: rgba(255,255,255,0.1);
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    font-size: 0.9rem;
+  }
+
+  .stat strong { color: var(--secondary); }
+
+  .quiz-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    padding: 0.5rem;
+    background: #d1fae5;
+    border-radius: 8px;
+  }
+
+  .quiz-tab {
+    background: white;
+    border: 2px solid var(--accent);
+    color: var(--accent);
+    padding: 0.5rem 0.8rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.7rem;
+    transition: all 0.3s;
+    flex: 1;
+    min-width: 70px;
+    text-align: center;
+  }
+
+  .quiz-tab:hover {
+    background: var(--accent);
+    color: white;
+  }
+
+  .quiz-tab.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+  }
+
+  .quiz-section {
+    display: none;
+  }
+
+  .quiz-section.active {
+    display: block;
+    animation: fadeIn 0.4s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .pregunta {
+    margin-bottom: 1.5rem;
+    padding: 1.2rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    border-left: 4px solid var(--accent);
+    transition: all 0.3s;
+  }
+
+  .pregunta.answered {
+    border-left-color: var(--secondary);
+  }
+
+  .pregunta-num {
+    display: inline-block;
+    background: var(--accent);
+    color: white;
+    padding: 0.2rem 0.7rem;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    margin-right: 0.5rem;
+  }
+
+  .pregunta-tipo {
+    display: inline-block;
+    background: var(--secondary);
+    color: var(--dark);
+    padding: 0.2rem 0.7rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    margin-left: 0.3rem;
+    font-weight: bold;
+  }
+
+  .pregunta p { 
+    font-weight: bold; 
+    color: var(--primary); 
+    margin: 0.8rem 0;
+    text-align: left;
+  }
+
+  .opciones { display: flex; flex-direction: column; gap: 0.5rem; }
+
+  .opcion {
+    padding: 0.7rem 1rem;
+    background: #ecfdf5;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+  }
+
+  .opcion:hover:not(.disabled) {
+    border-color: var(--accent);
+    background: #d1fae5;
+  }
+
+  .opcion.disabled {
+    cursor: not-allowed;
+    opacity: 0.85;
+  }
+
+  .opcion.correcta {
+    background: #d1fae5;
+    border-color: var(--success);
+    color: var(--success);
+    font-weight: bold;
+  }
+
+  .opcion.incorrecta {
+    background: #fee2e2;
+    border-color: var(--danger);
+    color: var(--danger);
+  }
+
+  .opcion.correcta::after {
+    content: ' ✓';
+    font-weight: bold;
+  }
+
+  .opcion.incorrecta::after {
+    content: ' ✗';
+    font-weight: bold;
+  }
+
+  .explicacion {
+    margin-top: 0.8rem;
+    padding: 0.8rem;
+    background: #ecfdf5;
+    border-left: 3px solid var(--accent);
+    border-radius: 0 6px 6px 0;
+    font-size: 0.9rem;
+    display: none;
+    font-style: italic;
+  }
+
+  .explicacion.visible {
+    display: block;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .resultado-final {
+    margin-top: 2rem;
+    padding: 2rem;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    color: white;
+    border-radius: 12px;
+    text-align: center;
+    display: none;
+  }
+
+  .resultado-final.visible {
+    display: block;
+    animation: fadeIn 0.5s ease;
+  }
+
+  .resultado-final h3 {
+    color: var(--secondary);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .puntaje-final {
+    font-size: 3rem;
+    font-weight: bold;
+    color: var(--secondary);
+    margin: 1rem 0;
+  }
+
+  .desglose-temas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+    text-align: left;
+  }
+
+  .desglose-item {
+    background: rgba(255,255,255,0.1);
+    padding: 1rem;
+    border-radius: 8px;
+  }
+
+  .desglose-item h4 {
+    color: var(--secondary);
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+  }
+
+  .mini-bar {
+    background: rgba(255,255,255,0.2);
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+  }
+
+  .mini-bar-fill {
+    background: var(--secondary);
+    height: 100%;
+    transition: width 0.6s ease;
+  }
+
+  button {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 1rem;
+    transition: all 0.3s;
+  }
+
+  button:hover {
+    background: var(--secondary);
+    color: var(--dark);
+    transform: translateY(-2px);
+  }
+
+  .btn-reset {
+    background: var(--danger);
+    margin-left: 0.5rem;
+  }
+
+  .btn-reset:hover {
+    background: #991b1b;
+    color: white;
+  }
+
+  .acordeon-item {
+    margin-bottom: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .acordeon-header {
+    background: var(--accent);
+    color: white;
+    padding: 1rem;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.3s;
+  }
+
+  .acordeon-header:hover { background: var(--primary); }
+
+  .acordeon-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    background: white;
+  }
+
+  .acordeon-content.active {
+    max-height: 2000px;
+    padding: 1rem;
+  }
+
+  .flecha { transition: transform 0.3s; }
+  .acordeon-header.active .flecha { transform: rotate(180deg); }
+
+  footer {
+    background: var(--dark);
+    color: var(--light);
+    text-align: center;
+    padding: 2rem 1rem;
+    margin-top: 2rem;
+  }
+
+  footer p { margin-bottom: 0.5rem; }
+
+  @media (max-width: 768px) {
+    header h1 { font-size: 1.8rem; }
+    section { padding: 1.2rem; }
+    section h2 { font-size: 1.5rem; }
+    nav a { font-size: 0.6rem; padding: 0.3rem 0.4rem; }
+    .quiz-tab { font-size: 0.6rem; padding: 0.3rem 0.4rem; }
+    table { font-size: 0.8rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>⚖️ Fundamentos y Fuentes del Derecho Administrativo</h1>
+  <p>Guía 1 de 8 · Derecho Administrativo Colombiano · Guía Didáctica Interactiva</p>
+</header>
+
+<nav>
+  <ul>
+    <li><a href="#tema1">1. Origen</a></li>
+    <li><a href="#tema2">2. Concepto</a></li>
+    <li><a href="#tema3">3. Ramas Relacionadas</a></li>
+    <li><a href="#tema4">4. Fuentes</a></li>
+    <li><a href="#tema5">5. Principios Const.</a></li>
+    <li><a href="#tema6">6. Principios CPACA</a></li>
+    <li><a href="#tema7">7. Función Admin.</a></li>
+    <li><a href="#tema8">8. Actividad Admin.</a></li>
+    <li><a href="#tema9">9. Servicios Públicos</a></li>
+    <li><a href="#tema10">10. Comparado</a></li>
+    <li><a href="#quiz">Quiz (40)</a></li>
+  </ul>
+</nav>
+
+<main>
+
+  <section>
+    <h2>📚 Introducción</h2>
+    <p>Bienvenido a esta guía interactiva sobre los <strong>Fundamentos y Fuentes del Derecho Administrativo</strong>. Aquí estudiarás el origen histórico, el concepto, las fuentes, los principios y la función administrativa en el ordenamiento jurídico colombiano, con especial énfasis en el Código de Procedimiento Administrativo y de lo Contencioso Administrativo (CPACA - Ley 1437 de 2011).</p>
+    <div class="alerta">
+      <strong>💡 Cómo usar esta guía:</strong> Haz clic en las tarjetas para ver detalles, despliega los acordeones para información adicional y prueba tus conocimientos con el quiz de 40 preguntas al final.
+    </div>
+  </section>
+
+  <!-- TEMA 1: ORIGEN E HISTORIA -->
+  <section id="tema1">
+    <h2>1. Origen e Historia del Derecho Administrativo</h2>
+    <p>El Derecho Administrativo es una rama joven del derecho que surge como producto de la Revolución Francesa y la consolidación del Estado moderno.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">ORIGEN DEL D. ADMINISTRATIVO</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Antigüedad</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Roma, Grecia</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Edad Media</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Monarquía absoluta</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Revolución Francesa</div>
+            <div class="linea"></div>
+            <div class="nodo sub">1789</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Siglo XIX-XX</div>
+            <div class="linea"></div>
+            <div class="nodo sub">Estado Social</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📜 Etapas Históricas</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🏛️</div>
+        <h4>Antigüedad</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>En Roma y Grecia existían regulaciones sobre la administración pública, pero no como rama autónoma del derecho.</p>
+          <p>El derecho romano regulaba aspectos fiscales y de organización territorial.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">👑</div>
+        <h4>Edad Media</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>La monarquía absoluta concentraba el poder sin controles jurídicos sobre la administración.</p>
+          <p>El rey era la fuente de toda autoridad ("L'État c'est moi" - Luis XIV).</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚔️</div>
+        <h4>Revolución Francesa (1789)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p><strong>Hito fundacional</strong> del Derecho Administrativo moderno.</p>
+          <p>Se establece el principio de legalidad: la administración sometida a la ley.</p>
+          <p>Surge la distinción entre actos de gobierno y actos administrativos.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🏢</div>
+        <h4>Siglo XIX-XX</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Consolidación del Estado Social de Derecho.</p>
+          <p>La administración asume funciones de bienestar social (salud, educación, seguridad social).</p>
+          <p>Expansión del control judicial de la administración.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>🇫🇷 El Caso Francés: Cuna del Derecho Administrativo</h3>
+    <div class="cita">
+      <strong>"El Derecho Administrativo nació en Francia como respuesta a la necesidad de someter la administración al derecho, superando el absolutismo monárquico."</strong>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>🏛️ Consejo de Estado Francés (1799)</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Creado por Napoleón Bonaparte como órgano consultivo del gobierno y tribunal de lo contencioso-administrativo.</p>
+        <p>Desarrolló la jurisprudencia fundacional del derecho administrativo mediante sentencias emblemáticas.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>⚖️ Sentencia Blanco (8 de febrero de 1873)</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Célebre sentencia del Tribunal de Conflictos francés.</p>
+        <p>Estableció que <strong>"la responsabilidad que puede incumbir al Estado por los daños causados a los particulares por los individuos que emplea en el servicio público no puede estar regulada por los principios establecidos en el Código Civil para las relaciones entre particulares"</strong>.</p>
+        <p>Consagró la autonomía del derecho administrativo frente al derecho civil.</p>
+      </div>
+    </div>
+
+    <h3>🇨🇴 Evolución en Colombia</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Período</th>
+          <th>Hito</th>
+          <th>Importancia</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>1886</strong></td>
+          <td>Constitución Política</td>
+          <td>Primera regulación orgánica de la administración</td>
+        </tr>
+        <tr>
+          <td><strong>1914</strong></td>
+          <td>Creación del Consejo de Estado</td>
+          <td>Máximo tribunal de lo contencioso-administrativo</td>
+        </tr>
+        <tr>
+          <td><strong>1941</strong></td>
+          <td>Código Contencioso Administrativo (D.L. 01 de 1984)</td>
+          <td>Primera codificación procesal administrativa</td>
+        </tr>
+        <tr>
+          <td><strong>1991</strong></td>
+          <td>Constitución Política</td>
+          <td>Estado Social de Derecho, principios constitucionales</td>
+        </tr>
+        <tr>
+          <td><strong>1993</strong></td>
+          <td>Ley 80 (Estatuto General de Contratación)</td>
+          <td>Régimen de contratación estatal</td>
+        </tr>
+        <tr>
+          <td><strong>1998</strong></td>
+          <td>Ley 489 (Normas sobre organización)</td>
+          <td>Estructura de la administración pública</td>
+        </tr>
+        <tr>
+          <td><strong>2011</strong></td>
+          <td>CPACA (Ley 1437)</td>
+          <td>Nuevo Código de Procedimiento Administrativo</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> La Sentencia Blanco (1873) es considerada el "acta de nacimiento" del Derecho Administrativo moderno. En Colombia, el Consejo de Estado, creado en 1914, ha desarrollado jurisprudencia fundamental sobre responsabilidad del Estado, nulidad de actos administrativos y contratos estatales.
+    </div>
+  </section>
+
+  <!-- TEMA 2: CONCEPTO -->
+  <section id="tema2">
+    <h2>2. Concepto de Derecho Administrativo</h2>
+    <p>El Derecho Administrativo es una rama del derecho público que regula la actividad de la administración y sus relaciones con los particulares.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">DERECHO ADMINISTRATIVO</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Rama del Derecho Público</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Regula la Administración</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Principio de Legalidad</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Fines Esenciales del Estado</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Definición Dogmática</h3>
+    <div class="cita">
+      <strong>"Podemos definir el derecho administrativo como la rama del derecho público que tiene por objeto el estudio de la actividad de las autoridades administrativas encaminada a manejar en la práctica el Estado para el cumplimiento de sus fines esenciales y sometida al principio de legalidad."</strong>
+    </div>
+
+    <h3>🔍 Elementos de la Definición</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📚</div>
+        <h4>Rama del Derecho Público</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Regula relaciones en las que interviene el Estado ejerciendo potestades públicas.</p>
+          <p>Se diferencia del derecho privado, que regula relaciones entre particulares en pie de igualdad.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🏛️</div>
+        <h4>Objeto: Actividad Administrativa</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Estudia la actividad de las autoridades administrativas.</p>
+          <p>Incluye actos, contratos, procedimientos, organización y control.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🎯</div>
+        <h4>Finalidad: Cumplir Fines Esenciales</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>La administración busca cumplir los fines esenciales del Estado (Art. 2° C.P.):</p>
+          <ul>
+            <li>Servir a la comunidad</li>
+            <li>Promover la prosperidad general</li>
+            <li>Garantizar la efectividad de los derechos</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Principio de Legalidad</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>La administración está <strong>sometida al imperio de la ley</strong>.</p>
+          <p>A diferencia de los particulares, que pueden hacer todo lo que la ley no prohíbe, la administración solo puede hacer lo que la ley le permite.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>📊 Doble Sentido del Derecho Administrativo</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Sentido</th>
+          <th>Contenido</th>
+          <th>Ejemplo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Orgánico</strong></td>
+          <td>Conjunto de órganos y entidades que integran la administración</td>
+          <td>Ministerios, departamentos administrativos, superintendencias</td>
+        </tr>
+        <tr>
+          <td><strong>Material</strong></td>
+          <td>Actividad administrativa encaminada al cumplimiento de los fines del Estado</td>
+          <td>Expedición de actos, prestación de servicios públicos, contratación</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>🔗 Partes del Derecho Administrativo</h3>
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📖 Parte Orgánica</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Estudia la estructura y organización de la administración pública.</p>
+        <ul>
+          <li>Rama Ejecutiva del Poder Público</li>
+          <li>Entidades descentralizadas</li>
+          <li>Organismos autónomos e independientes</li>
+          <li>Competencias y funciones</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📖 Parte Material</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Estudia las formas de actuación de las autoridades administrativas.</p>
+        <ul>
+          <li>Actos administrativos</li>
+          <li>Contratos administrativos</li>
+          <li>Vías de hecho</li>
+          <li>Operaciones administrativas</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📖 Parte Procesal</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Estudia los medios de control y los procesos administrativos.</p>
+        <ul>
+          <li>Procedimiento administrativo (CPACA)</li>
+          <li>Recursos administrativos</li>
+          <li>Jurisdicción de lo contencioso-administrativo</li>
+          <li>Acciones constitucionales (tutela, cumplimiento, popular, grupo)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Cuando el Ministerio de Salud expide un decreto reglamentario, está ejerciendo la función administrativa en sentido material. La estructura del Ministerio (despacho del ministro, viceministerios, direcciones) corresponde al sentido orgánico. Si un ciudadano impugna el decreto ante los tribunales, se activa la parte procesal del derecho administrativo.
+    </div>
+  </section>
+
+  <!-- TEMA 3: RELACIÓN CON OTRAS RAMAS -->
+  <section id="tema3">
+    <h2>3. Relación con Otras Ramas del Derecho</h2>
+    <p>El Derecho Administrativo se relaciona estrechamente con otras ramas del derecho, especialmente con el derecho constitucional, el derecho penal y el derecho internacional.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">RELACIONES DEL D. ADMINISTRATIVO</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">D. Constitucional</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">D. Penal</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">D. Internacional</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">D. Laboral</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Relaciones Principales</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🏛️</div>
+        <h4>Derecho Constitucional</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p><strong>Relación fundamental:</strong> La Constitución es la norma de normas (Art. 4° C.P.).</p>
+          <p>El derecho administrativo desarrolla los principios y mandatos constitucionales.</p>
+          <p>Ejemplo: El principio de legalidad administrativa se deriva del Art. 6° C.P.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚔️</div>
+        <h4>Derecho Penal</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>El derecho administrativo consagra hechos punibles relacionados con la administración pública.</p>
+          <ul>
+            <li>Peculado</li>
+            <li>Concusión</li>
+            <li>Cohecho</li>
+            <li>Prevaricato</li>
+            <li>Interés indebido en la celebración de contratos</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🌎</div>
+        <h4>Derecho Internacional</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Los tratados internacionales forman parte del bloque de constitucionalidad.</p>
+          <p>La administración debe cumplir obligaciones internacionales del Estado.</p>
+          <p>Ejemplo: Tratados de libre comercio, convenios de la OIT.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">💼</div>
+        <h4>Derecho Laboral</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Los servidores públicos están vinculados al Estado mediante relación legal y reglamentaria (no contrato de trabajo).</p>
+          <p>El Art. 105.4 del CPACA excluye estos asuntos de la jurisdicción de lo contencioso-administrativo.</p>
+          <p>Existe un régimen especial de carrera administrativa.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">💰</div>
+        <h4>Derecho Tributario</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>La administración es la principal recaudadora de tributos.</p>
+          <p>Los actos administrativos que liquidan impuestos son objeto de control judicial.</p>
+          <p>Ejemplo: Actos de la DIAN que determinan obligaciones tributarias.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🏢</div>
+        <h4>Derecho Civil</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>La administración puede actuar como particular en ciertos casos (gestión privada).</p>
+          <p>Pero cuando ejerce funciones administrativas, se aplica el derecho administrativo.</p>
+          <p>La responsabilidad contractual del Estado tiene reglas especiales.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>📊 Cuadro Comparativo de Relaciones</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Rama</th>
+          <th>Tipo de Relación</th>
+          <th>Ejemplo Concreto</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Constitucional</strong></td>
+          <td>Supremacía constitucional</td>
+          <td>Principio de legalidad (Art. 6° C.P.)</td>
+        </tr>
+        <tr>
+          <td><strong>Penal</strong></td>
+          <td>Delitos contra la administración</td>
+          <td>Peculado, cohecho, prevaricato</td>
+        </tr>
+        <tr>
+          <td><strong>Internacional</strong></td>
+          <td>Obligaciones del Estado</td>
+          <td>Tratados de libre comercio</td>
+        </tr>
+        <tr>
+          <td><strong>Laboral</strong></td>
+          <td>Régimen de servidores públicos</td>
+          <td>Carrera administrativa</td>
+        </tr>
+        <tr>
+          <td><strong>Tributario</strong></td>
+          <td>Recaudo de impuestos</td>
+          <td>Actos de la DIAN</td>
+        </tr>
+        <tr>
+          <td><strong>Civil</strong></td>
+          <td>Actividad privada del Estado</td>
+          <td>Contratos de arrendamiento</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Un alcalde que recibe dinero de un contratista para adjudicarle una licitación comete: (1) un delito penal (cohecho), (2) una falta disciplinaria (derecho administrativo sancionador), (3) una responsabilidad fiscal (derecho fiscal), y (4) puede generar responsabilidad civil extracontractual del Estado. Así, un mismo hecho activa varias ramas del derecho.
+    </div>
+  </section>
+
+  <!-- TEMA 4: FUENTES -->
+  <section id="tema4">
+    <h2>4. Fuentes del Derecho Administrativo</h2>
+    <p>Las fuentes del derecho administrativo son los orígenes de las normas que regulan la actividad administrativa.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">FUENTES DEL D. ADMINISTRATIVO</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Constitución</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Ley</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Reglamentos</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Jurisprudencia</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Doctrina</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Costumbre</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Jerarquía de Fuentes</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🏛️</div>
+        <h4>Constitución Política</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p><strong>Fuente suprema</strong> del ordenamiento jurídico.</p>
+          <p>Norma de normas (Art. 4° C.P.).</p>
+          <p>Establece los principios fundamentales de la administración pública.</p>
+          <p>Artículos clave: 2°, 6°, 113 a 122, 209 a 211.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📜</div>
+        <h4>La Ley</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Fuente principal del derecho administrativo.</p>
+          <ul>
+            <li>Leyes estatutarias</li>
+            <li>Leyes orgánicas</li>
+            <li>Leyes ordinarias</li>
+            <li>Decretos con fuerza de ley</li>
+          </ul>
+          <p>Ejemplos: Ley 1437 de 2011 (CPACA), Ley 489 de 1998, Ley 80 de 1993.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📋</div>
+        <h4>Reglamentos</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Actos administrativos de carácter general expedidos por el Ejecutivo.</p>
+          <ul>
+            <li>Decretos del Presidente</li>
+            <li>Ordenanzas departamentales</li>
+            <li>Acuerdos municipales</li>
+            <li>Resoluciones ministeriales</li>
+          </ul>
+          <p>Desarrollan y reglamentan las leyes.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Jurisprudencia</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Conjunto de sentencias proferidas por los tribunales.</p>
+          <p>En Colombia tiene especial valor la <strong>doctrina probable</strong> (Art. 8.6 CPACA): 3 sentencias uniformes de la misma corporación sobre el mismo punto.</p>
+          <p>El Consejo de Estado ha desarrollado jurisprudencia fundamental.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📚</div>
+        <h4>Doctrina</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Opiniones de los estudiosos del derecho administrativo.</p>
+          <p>Aunque no es fuente formal, influye en la interpretación y aplicación del derecho.</p>
+          <p>Autores clásicos: Laubadere, Duguit, Hauriou, García de Enterría.</p>
+          <p>Autores colombianos: Betancur Jaramillo, Danós, Rodríguez R.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🕰️</div>
+        <h4>Costumbre</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Repetición constante y uniforme de actos con convicción de obligatoriedad.</p>
+          <p>En derecho administrativo tiene alcance limitado por el principio de legalidad.</p>
+          <p>Solo opera en casos donde la ley remite expresamente a la costumbre.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>📊 Jerarquía Normativa (Pirámide de Kelsen)</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Nivel</th>
+          <th>Fuente</th>
+          <th>Ejemplo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>1. Bloque de constitucionalidad</strong></td>
+          <td>Constitución + tratados de DDHH</td>
+          <td>Arts. 1-10 C.P., Pacto de San José</td>
+        </tr>
+        <tr>
+          <td><strong>2. Leyes</strong></td>
+          <td>Leyes estatutarias, orgánicas, ordinarias</td>
+          <td>CPACA, Ley 80/93, Ley 489/98</td>
+        </tr>
+        <tr>
+          <td><strong>3. Decretos</strong></td>
+          <td>Reglamentos del Ejecutivo</td>
+          <td>Decretos reglamentarios</td>
+        </tr>
+        <tr>
+          <td><strong>4. Ordenanzas y Acuerdos</strong></td>
+          <td>Actos de entidades territoriales</td>
+          <td>Ordenanzas departamentales, acuerdos municipales</td>
+        </tr>
+        <tr>
+          <td><strong>5. Resoluciones</strong></td>
+          <td>Actos de autoridades inferiores</td>
+          <td>Resoluciones ministeriales, directorales</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>⚖️ Doctrina Probable (Art. 8.6 CPACA)</h3>
+    <div class="alerta">
+      <strong>📌 Concepto:</strong>
+      <p>Son tres (3) sentencias uniformes proferidas por la misma Sala o Sección del Consejo de Estado o de los Tribunales Administrativos sobre el mismo punto de derecho.</p>
+      <br>
+      <strong>⚖️ Efecto:</strong>
+      <p>Permite a los jueces y autoridades administrativas aplicar el mismo criterio, evitando decisiones contradictorias.</p>
+      <br>
+      <strong>📌 Importancia:</strong>
+      <p>Garantiza la seguridad jurídica y la igualdad ante la ley.</p>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si el Consejo de Estado ha proferido tres sentencias uniformes estableciendo que la notificación personal de un acto administrativo debe hacerse en el domicilio real del interesado, esa doctrina probable debe ser aplicada por todos los jueces y autoridades administrativas en casos similares.
+    </div>
+  </section>
+
+  <!-- TEMA 5: PRINCIPIOS CONSTITUCIONALES -->
+  <section id="tema5">
+    <h2>5. Principios Constitucionales de la Función Administrativa</h2>
+    <p>La Constitución de 1991 estableció principios fundamentales que rigen la función administrativa, especialmente en su artículo 209.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">PRINCIPIOS CONSTITUCIONALES (Art. 209 C.P.)</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Igualdad</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Moralidad</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Eficacia</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Economía</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Celeridad</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Imparcialidad</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Artículo 209 de la Constitución</h3>
+    <div class="cita">
+      <strong>"La función administrativa está sujeta a los principios de igualdad, moralidad, eficacia, economía, celeridad, imparcialidad y publicidad, los cuales se desarrollarán mediante la participación ciudadana, la descentralización de funciones y la delegación de competencias."</strong> — Art. 209 C.P.
+    </div>
+
+    <h3>🔍 Los Principios Constitucionales</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Igualdad</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>La administración debe tratar de manera igual a quienes se encuentran en las mismas condiciones.</p>
+          <p>Prohibición de discriminación arbitraria.</p>
+          <p>Art. 13 C.P.: "Todas las personas nacen libres e iguales ante la ley".</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🕊️</div>
+        <h4>Moralidad</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Los servidores públicos deben actuar con ética y probidad.</p>
+          <p>Art. 209 C.P.: "Los particulares solo serán juzgados por comisiones judiciales o tribunales".</p>
+          <p>Relacionado con la moralidad administrativa como derecho colectivo.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🎯</div>
+        <h4>Eficacia</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>La administración debe lograr los fines para los cuales fue creada.</p>
+          <p>Los actos administrativos deben producir los efectos jurídicos pretendidos.</p>
+          <p>Busca resultados concretos y efectivos.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">💰</div>
+        <h4>Economía</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Optimización de los recursos públicos.</p>
+          <p>Relación costo-beneficio favorable.</p>
+          <p>Evitar gastos innecesarios o suntuarios.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚡</div>
+        <h4>Celeridad</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Las actuaciones administrativas deben tramitarse con prontitud.</p>
+          <p>Evitar dilaciones injustificadas.</p>
+          <p>Relacionado con el derecho fundamental al debido proceso.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Imparcialidad</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>La administración debe actuar sin favoritismos ni prejuicios.</p>
+          <p>Decisiones basadas en criterios objetivos y racionales.</p>
+          <p>Prohibición de conflictos de interés.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📢</div>
+        <h4>Publicidad</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Los actos administrativos deben ser conocidos por los interesados y el público.</p>
+          <p>Principio de transparencia (Ley 1712 de 2014).</p>
+          <p>Excepciones: información reservada por ley.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">👥</div>
+        <h4>Participación Ciudadana</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Los ciudadanos pueden intervenir en las decisiones administrativas.</p>
+          <p>Mecanismos: peticiones, consultas, audiencias públicas.</p>
+          <p>Art. 209 C.P.: "mediante la participación ciudadana".</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>📊 Principios Complementarios</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Principio</th>
+          <th>Art. C.P.</th>
+          <th>Contenido</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Legalidad</strong></td>
+          <td>Art. 6°</td>
+          <p>Los servidores públicos son responsables por infringir la Constitución y las leyes</p>
+        </tr>
+        <tr>
+          <td><strong>Buena fe</strong></td>
+          <td>Art. 83</td>
+          <p>Se presume la buena fe en las actuaciones de los particulares y las autoridades</p>
+        </tr>
+        <tr>
+          <td><strong>Debido proceso</strong></td>
+          <td>Art. 29</td>
+          <p>Toda actuación administrativa debe respetar las garantías procesales</p>
+        </tr>
+        <tr>
+          <td><strong>Coordinación</strong></td>
+          <td>Art. 209</td>
+          <p>Las autoridades deben actuar de manera armónica para el cumplimiento de los fines del Estado</p>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si una entidad pública convoca un concurso para proveer un cargo, debe aplicar el principio de igualdad (todos los aspirantes en las mismas condiciones), moralidad (el proceso debe ser ético), eficacia (seleccionar al más idóneo), economía (no gastar más de lo necesario), celeridad (resolver en términos razonables), imparcialidad (sin favoritismos) y publicidad (las bases del concurso deben ser públicas).
+    </div>
+  </section>
+
+  <!-- TEMA 6: PRINCIPIOS CPACA -->
+  <section id="tema6">
+    <h2>6. Principios del CPACA (Ley 1437 de 2011)</h2>
+    <p>El Código de Procedimiento Administrativo y de lo Contencioso Administrativo desarrolla los principios constitucionales y establece reglas específicas para las actuaciones administrativas.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">PRINCIPIOS CPACA (Arts. 3-7)</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Debido Proceso</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Igualdad</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Imparcialidad</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Buena Fe</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Moralidad</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Artículo 3 del CPACA</h3>
+    <div class="cita">
+      <strong>"Todas las autoridades deberán interpretar y aplicar las disposiciones que regulan las actuaciones y procedimientos administrativos a la luz de los principios consagrados en la Constitución Política, en la Parte Primera de este Código y en las leyes especiales."</strong>
+    </div>
+
+    <h3>🔍 Principios Específicos del CPACA</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Debido Proceso</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Toda actuación administrativa debe respetar las garantías procesales.</p>
+          <ul>
+            <li>Derecho de defensa</li>
+            <li>Derecho a ser oído</li>
+            <li>Derecho a presentar pruebas</li>
+            <li>Derecho a recurrir las decisiones</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Igualdad</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Las autoridades tratarán a los interesados con igualdad, sin discriminación.</p>
+          <p>Prohibición de tratos arbitrarios o injustificados.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Imparcialidad</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Los funcionarios deben actuar sin intereses personales o de grupo.</p>
+          <p>Obligación de declararse impedidos cuando exista causal.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🤝</div>
+        <h4>Boa Fe</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Se presume la buena fe en las actuaciones de particulares y autoridades.</p>
+          <p>Las autoridades deben actuar con lealtad y sinceridad.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🕊️</div>
+        <h4>Moralidad</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Las actuaciones administrativas deben ajustarse a la ética y la probidad.</p>
+          <p>Prohibición de actos contrarios a la moral pública.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">👥</div>
+        <h4>Participación</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Los interesados pueden intervenir en las actuaciones administrativas.</p>
+          <p>Derecho a presentar alegatos y pruebas.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📢</div>
+        <h4>Publicidad</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Las actuaciones administrativas son públicas, salvo excepciones legales.</p>
+          <p>Los interesados tienen derecho a acceder a los expedientes.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🎯</div>
+        <h4>Eficacia</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Las autoridades deben buscar la efectividad de los fines del Estado.</p>
+          <p>Los actos administrativos deben producir los efectos jurídicos pretendidos.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">💰</div>
+        <h4>Economía</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Optimización de recursos públicos.</p>
+          <p>Evitar trámites innecesarios o duplicados.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚡</div>
+        <h4>Celeridad</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Las actuaciones deben tramitarse con prontitud.</p>
+          <p>Respeto de términos legales.</p>
+          <p>Evitar dilaciones injustificadas.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🤝</div>
+        <h4>Coordinación</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Las autoridades deben actuar de manera armónica.</p>
+          <p>Evitar contradicciones entre decisiones de distintas entidades.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📋</div>
+        <h4>Responsabilidad</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Los servidores públicos son responsables por sus actuaciones.</p>
+          <p>Deben responder por los perjuicios causados por su actuación.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>📊 Principios del CPACA vs. Principios Constitucionales</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Principio Constitucional (Art. 209 C.P.)</th>
+          <th>Desarrollo en CPACA</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Igualdad</strong></td>
+          <td>Art. 3 CPACA: Trato igual a quienes están en las mismas condiciones</td>
+        </tr>
+        <tr>
+          <td><strong>Moralidad</strong></td>
+          <td>Art. 3 CPACA: Actuaciones ajustadas a la ética y probidad</td>
+        </tr>
+        <tr>
+          <td><strong>Eficacia</strong></td>
+          <td>Art. 3 CPACA: Búsqueda de la efectividad de los fines estatales</td>
+        </tr>
+        <tr>
+          <td><strong>Economía</strong></td>
+          <td>Art. 3 CPACA: Optimización de recursos públicos</td>
+        </tr>
+        <tr>
+          <td><strong>Celeridad</strong></td>
+          <td>Art. 3 CPACA: Prontitud en el trámite de actuaciones</td>
+        </tr>
+        <tr>
+          <td><strong>Imparcialidad</strong></td>
+          <td>Art. 3 CPACA: Actuación sin intereses personales o de grupo</td>
+        </tr>
+        <tr>
+          <td><strong>Publicidad</strong></td>
+          <td>Art. 3 CPACA: Acceso a los expedientes y actuaciones</td>
+        </tr>
+        <tr>
+          <td><strong>Participación</strong></td>
+          <td>Art. 3 CPACA: Intervención de los interesados</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si un ciudadano presenta una petición ante una entidad pública, la entidad debe: (1) respetar el debido proceso (darle oportunidad de presentar pruebas), (2) actuar con igualdad (sin discriminación), (3) ser imparcial (el funcionario no debe tener interés personal), (4) actuar de buena fe (no engañar al peticionario), (5) resolver con celeridad (dentro de los términos legales), y (6) notificar la decisión de manera pública.
+    </div>
+  </section>
+
+  <!-- TEMA 7: FUNCIÓN ADMINISTRATIVA -->
+  <section id="tema7">
+    <h2>7. La Función Administrativa</h2>
+    <p>La función administrativa es una de las funciones esenciales del Estado, consistente en el manejo práctico de los asuntos estatales para el cumplimiento de sus fines.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">FUNCIÓN ADMINISTRATIVA</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Manejo Práctico</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Fines Esenciales</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Principio de Legalidad</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Concepto de Función Administrativa</h3>
+    <div class="cita">
+      <strong>"La función administrativa consiste en el manejo práctico de los asuntos del Estado para el logro de sus fines esenciales."</strong>
+    </div>
+
+    <h3>🔍 Características Fundamentales</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🏛️</div>
+        <h4>Manejo Práctico</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>La función administrativa se ejerce en la práctica, mediante actos concretos.</p>
+          <p>Se diferencia de la función legislativa (crear normas abstractas) y la judicial (resolver conflictos).</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🎯</div>
+        <h4>Fines Esenciales del Estado</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>La función administrativa busca cumplir los fines del Art. 2° C.P.:</p>
+          <ul>
+            <li>Servir a la comunidad</li>
+            <li>Promover la prosperidad general</li>
+            <li>Garantizar la efectividad de los derechos</li>
+            <li>Facilitar la participación</li>
+            <li>Defender la independencia nacional</li>
+            <li>Mantener la integridad territorial</li>
+            <li>Asegurar la convivencia pacífica</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Sometimiento a la Ley</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>La función administrativa está sometida al principio de legalidad.</p>
+          <p>Los servidores públicos son responsables por infringir la Constitución y las leyes (Art. 6° C.P.).</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>👥 Titulares de la Función Administrativa</h3>
+    <div class="alerta">
+      <strong>📌 No solo la Rama Ejecutiva ejerce función administrativa:</strong>
+      <ul>
+        <li><strong>Rama Ejecutiva:</strong> Presidente, ministros, gobernadores, alcaldes, entidades descentralizadas</li>
+        <li><strong>Otras ramas:</strong> Cuando administran recursos, personal o bienes (ej: Consejo Superior de la Judicatura)</li>
+        <li><strong>Órganos autónomos:</strong> Banco de la República, Consejo Nacional Electoral, Fiscalía</li>
+        <li><strong>Particulares:</strong> Cuando ejercen funciones administrativas por delegación o concesión</li>
+      </ul>
+    </div>
+
+    <h3>📊 Criterio Orgánico vs. Criterio Material</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Criterio</th>
+          <th>Enfoque</th>
+          <th>Ejemplo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Orgánico</strong></td>
+          <td>Identifica los órganos que ejercen la función</td>
+          <td>Ministerios, departamentos, superintendencias</td>
+        </tr>
+        <tr>
+          <td><strong>Material</strong></td>
+          <td>Identifica las actividades que constituyen función administrativa</td>
+          <td>Expedición de actos, prestación de servicios, contratación</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>🏢 Rama Ejecutiva</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Es el principal titular de la función administrativa.</p>
+        <p>Se divide en:</p>
+        <ul>
+          <li><strong>Centralizada:</strong> Presidencia, ministerios, departamentos administrativos</li>
+          <li><strong>Descentralizada:</strong> Establecimientos públicos, empresas industriales y comerciales del Estado, sociedades de economía mixta</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>🏛️ Otras Ramas y Órganos</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Cuando ejercen funciones administrativas, se someten al derecho administrativo.</p>
+        <p>Ejemplos:</p>
+        <ul>
+          <li>Consejo Superior de la Judicatura (administra la Rama Judicial)</li>
+          <li>Congreso (administra su personal y recursos)</li>
+          <li>Banco de la República (autoridad monetaria)</li>
+          <li>Fiscalía General (administra recursos y personal)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>👤 Particulares</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Los particulares pueden ejercer funciones administrativas en casos excepcionales:</p>
+        <ul>
+          <li>Concesionarios de servicios públicos</li>
+          <li>Particulares que ejercen funciones públicas por delegación</li>
+          <li>Notarios y registradores (función pública delegada)</li>
+        </ul>
+        <p>Cuando actúan en ejercicio de funciones administrativas, se someten al derecho administrativo y sus actos son susceptibles de control judicial.</p>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Cuando el Ministerio de Salud expide un protocolo de atención médica, ejerce la función administrativa en sentido material. Cuando la Corte Constitucional administra su personal y presupuesto, también ejerce función administrativa, aunque pertenezca a la Rama Judicial. Cuando una empresa privada presta el servicio de acueducto por concesión, ejerce función administrativa delegada.
+    </div>
+  </section>
+
+  <!-- TEMA 8: ACTIVIDAD ADMINISTRATIVA -->
+  <section id="tema8">
+    <h2>8. Formas de la Actividad Administrativa</h2>
+    <p>La actividad administrativa se manifiesta a través de diversas formas jurídicas: actos administrativos, contratos, operaciones administrativas y vías de hecho.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">ACTIVIDAD ADMINISTRATIVA</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Actos Administrativos</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Contratos</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Operaciones</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Vías de Hecho</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Formas de la Actividad Administrativa</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📜</div>
+        <h4>Actos Administrativos</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Manifestaciones unilaterales de la voluntad de las autoridades administrativas que producen efectos jurídicos.</p>
+          <p>Ejemplos: decretos, resoluciones, ordenanzas, acuerdos.</p>
+          <p>Se regulan por el CPACA.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🤝</div>
+        <h4>Contratos Administrativos</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Acuerdos de voluntades entre la administración y particulares con régimen jurídico especial.</p>
+          <p>Se regulan por la Ley 80 de 1993 y el CPACA.</p>
+          <p>Ejemplos: contratos de obra, concesión, prestación de servicios.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚙️</div>
+        <h4>Operaciones Administrativas</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Actuaciones materiales de la administración que producen efectos jurídicos.</p>
+          <p>Ejemplos: allanamiento de un establecimiento, demolición de una obra, colocación de sellos.</p>
+          <p>No son actos administrativos, pero son objeto de control judicial.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚠️</div>
+        <h4>Vías de Hecho</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Actuaciones de la administración sin fundamento legal o que exceden manifiestamente sus competencias.</p>
+          <p>Dan lugar a la acción de nulidad y restablecimiento del derecho ante la jurisdicción contencioso-administrativa.</p>
+          <p>Ejemplo: un alcalde ordena la demolición de una vivienda sin proceso legal previo.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>📊 Comparativa de las Formas</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Forma</th>
+          <th>Naturaleza</th>
+          <th>Ejemplo</th>
+          <th>Control Judicial</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Acto administrativo</strong></td>
+          <td>Declaración unilateral de voluntad</td>
+          <td>Resolución que impone una multa</td>
+          <td>Nulidad y restablecimiento</td>
+        </tr>
+        <tr>
+          <td><strong>Contrato administrativo</strong></td>
+          <td>Acuerdo bilateral con régimen especial</td>
+          <td>Contrato de obra pública</td>
+          <td>Controversias contractuales</td>
+        </tr>
+        <tr>
+          <td><strong>Operación administrativa</strong></td>
+          <td>Actuación material</td>
+          <td>Demolición de una obra</td>
+          <td>Nulidad y restablecimiento</td>
+        </tr>
+        <tr>
+          <td><strong>Vía de hecho</strong></td>
+          <td>Actuación sin fundamento legal</td>
+          <td>Cierre arbitrario de un establecimiento</td>
+          <td>Nulidad y restablecimiento</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>🔍 Ejemplos Prácticos</h3>
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📜 Ejemplo de Acto Administrativo</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>La DIAN expide una resolución que liquida oficialmente un impuesto contra un contribuyente.</p>
+        <p>Es una declaración unilateral de voluntad que produce efectos jurídicos (obligación de pagar).</p>
+        <p>El contribuyente puede demandar el acto ante la jurisdicción contencioso-administrativa.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>🤝 Ejemplo de Contrato Administrativo</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>La Alcaldía de Bogotá celebra un contrato de obra con una empresa constructora para la construcción de un puente.</p>
+        <p>Es un acuerdo bilateral con cláusulas exorbitantes (la administración puede modificar unilateralmente el contrato).</p>
+        <p>Las controversias se resuelven ante la jurisdicción contencioso-administrativa.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>⚙️ Ejemplo de Operación Administrativa</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>La Secretaría de Gobierno de una alcaldía ordena, mediante resolución, el cierre de un establecimiento de venta de licores, y en cumplimiento de esta orden procede efectivamente al cierre, colocando los sellos respectivos.</p>
+        <p>La resolución es el acto administrativo; la colocación de los sellos es la operación administrativa.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>⚠️ Ejemplo de Vía de Hecho</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Un alcalde ordena la demolición de una vivienda sin proceso legal previo, sin notificar al propietario y sin oportunidad de defensa.</p>
+        <p>Es una actuación sin fundamento legal que constituye vía de hecho.</p>
+        <p>El afectado puede demandar ante la jurisdicción contencioso-administrativa para obtener la nulidad de la actuación y la reparación de perjuicios.</p>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo integrador:</strong> Si la Secretaría de Salud de un municipio expide una resolución ordenando el cierre de un restaurante por violación de normas sanitarias (acto administrativo), y procede a colocar los sellos en las puertas (operación administrativa), pero lo hace sin notificar al propietario ni darle oportunidad de defensa (vía de hecho), el propietario puede demandar la actuación ante la jurisdicción contencioso-administrativa.
+    </div>
+  </section>
+
+  <!-- TEMA 9: SERVICIOS PÚBLICOS -->
+  <section id="tema9">
+    <h2>9. Los Servicios Públicos</h2>
+    <p>Los servicios públicos son una de las manifestaciones más importantes de la actividad administrativa, orientada a satisfacer necesidades de interés general.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">SERVICIOS PÚBLICOS</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Interés General</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Regulación Estatal</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Prestación</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Control</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Concepto de Servicio Público</h3>
+    <div class="cita">
+      <strong>"Toda actividad de interés general que el Estado asume como propia y que, por ende, se encuentra bajo su regulación y control, independientemente de que sea prestada por entidades públicas o privadas."</strong>
+    </div>
+
+    <h3>🔍 Características Fundamentales</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🌐</div>
+        <h4>Interés General</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Los servicios públicos buscan satisfacer necesidades colectivas.</p>
+          <p>No persiguen fines de lucro, sino el bienestar de la comunidad.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🏛️</div>
+        <h4>Regulación Estatal</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>El Estado regula los servicios públicos mediante leyes, decretos y resoluciones.</p>
+          <p>Establece las condiciones de calidad, cobertura y tarifas.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚙️</div>
+        <h4>Prestación Directa o Indirecta</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Pueden ser prestados directamente por el Estado o por particulares mediante concesión, licencia o autorización.</p>
+          <p>Ejemplo: El servicio de acueducto puede ser prestado por una empresa pública o por un concesionario privado.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🔍</div>
+        <h4>Control Estatal</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>El Estado ejerce control sobre la prestación de los servicios públicos.</p>
+          <p>Superintendencias: Superservicios, Supersalud, Supersociedades.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>📊 Clasificación de los Servicios Públicos</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Tipo</th>
+          <th>Descripción</th>
+          <th>Ejemplo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Servicios públicos domiciliarios</strong></td>
+          <td>Acueducto, alcantarillado, aseo, energía, gas, telefonía</td>
+          <td>Empresa de acueducto de Bogotá</td>
+        </tr>
+        <tr>
+          <td><strong>Servicios de salud</strong></td>
+          <td>Prestación de servicios médicos y hospitalarios</td>
+          <td>Hospitales públicos, EPS</td>
+        </tr>
+        <tr>
+          <td><strong>Servicios educativos</strong></td>
+          <td>Educación en todos sus niveles</td>
+          <td>Colegios públicos, universidades estatales</td>
+        </tr>
+        <tr>
+          <td><strong>Servicios de transporte</strong></td>
+          <td>Transporte público de pasajeros y carga</td>
+          <td>TransMilenio, transporte intermunicipal</td>
+        </tr>
+        <tr>
+          <td><strong>Servicios financieros</strong></td>
+          <td>Intermediación financiera y seguros</td>
+          <td>Bancos estatales (Banco Agrario)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>⚖️ Régimen Jurídico</h3>
+    <div class="alerta">
+      <strong>📌 Art. 365 C.P.:</strong>
+      <p>"Los servicios públicos son inherentes a la finalidad social del Estado. Es deber del Estado asegurar su prestación eficiente a todos los habitantes del territorio nacional."</p>
+      <br>
+      <strong>📌 Principios:</strong>
+      <ul>
+        <li><strong>Continuidad:</strong> Los servicios deben prestarse sin interrupciones</li>
+        <li><strong>Universalidad:</strong> Deben llegar a todos los habitantes</li>
+        <li><strong>Calidad:</strong> Deben cumplir estándares técnicos</li>
+        <li><strong>Eficiencia:</strong> Uso óptimo de recursos</li>
+        <li><strong>Cobertura:</strong> Alcance a toda la población</li>
+      </ul>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> El servicio de acueducto y alcantarillado es un servicio público domiciliario. En Bogotá es prestado por la Empresa de Acueducto y Alcantarillado de Bogotá (EAAB), empresa industrial y comercial del Estado. La Superintendencia de Servicios Públicos Domiciliarios ejerce control sobre la calidad, tarifas y cobertura del servicio. Los usuarios tienen derecho a un servicio continuo, de calidad y a tarifas justas.
+    </div>
+  </section>
+
+  <!-- TEMA 10: DERECHO COMPARADO -->
+  <section id="tema10">
+    <h2>10. Derecho Administrativo Comparado</h2>
+    <p>El estudio comparado del derecho administrativo permite identificar tendencias comunes y particularidades de cada sistema jurídico.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">D. ADMINISTRATIVO COMPARADO</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Sistema Francés</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Sistema Anglosajón</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Sistema Alemán</div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo">Sistema Colombiano</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Sistemas de Derecho Administrativo</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🇫🇷</div>
+        <h4>Sistema Francés</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p><strong>Cuna del derecho administrativo moderno.</strong></p>
+          <ul>
+            <li>Consejo de Estado como máximo tribunal</li>
+            <li>Doble jurisdicción: judicial y administrativa</li>
+            <li>Desarrollo jurisprudencial autónomo</li>
+            <li>Influencia en América Latina</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🇬🇧</div>
+        <h4>Sistema Anglosajón (Common Law)</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p><strong>Tradición de unidad jurisdiccional.</strong></p>
+          <ul>
+            <li>No existe un derecho administrativo autónomo</li>
+            <li>Los tribunales ordinarios conocen de asuntos administrativos</li>
+            <li>Principio de "rule of law" (imperio de la ley)</li>
+            <li>Desarrollo jurisprudencial mediante precedentes</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🇩🇪</div>
+        <h4>Sistema Alemán</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p><strong>Desarrollo dogmático sistemático.</strong></p>
+          <ul>
+            <li>Codificación del derecho administrativo</li>
+            <li>Teoría del acto administrativo (Ley de Procedimiento Administrativo)</li>
+            <li>Tribunales administrativos especializados</li>
+            <li>Principio de proporcionalidad</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🇨🇴</div>
+        <h4>Sistema Colombiano</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p><strong>Mixto: influencia francesa y alemana.</strong></p>
+          <ul>
+            <li>Consejo de Estado como máximo tribunal (influencia francesa)</li>
+            <li>Codificación procesal (CPACA, influencia alemana)</li>
+            <li>Fuerte desarrollo jurisprudencial</li>
+            <li>Constitucionalización del derecho administrativo (1991)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <h3>📊 Cuadro Comparativo</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Aspecto</th>
+          <th>Francia</th>
+          <th>Reino Unido</th>
+          <th>Alemania</th>
+          <th>Colombia</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Origen</strong></td>
+          <td>Revolución Francesa (1789)</td>
+          <td>Common Law medieval</td>
+          <td>Siglo XIX (Estado de derecho)</td>
+          <td>Siglo XX (1914, Consejo de Estado)</td>
+        </tr>
+        <tr>
+          <td><strong>Jurisdicción</strong></td>
+          <td>Doble (judicial y administrativa)</td>
+          <td>Única (tribunales ordinarios)</td>
+          <td>Doble (judicial y administrativa)</td>
+          <td>Doble (judicial y contencioso-administrativa)</td>
+        </tr>
+        <tr>
+          <td><strong>Máximo tribunal</strong></td>
+          <td>Consejo de Estado</td>
+          <td>Suprema Corte</td>
+          <td>Tribunal Administrativo Federal</td>
+          <td>Consejo de Estado</td>
+        </tr>
+        <tr>
+          <td><strong>Codificación</strong></td>
+          <td>Código de Relaciones Público</td>
+          <td>No codificado (common law)</td>
+          <td>Ley de Procedimiento Administrativo</td>
+          <td>CPACA (Ley 1437/2011)</td>
+        </tr>
+        <tr>
+          <td><strong>Fuente principal</strong></td>
+          <td>Jurisprudencia</td>
+          <td>Jurisprudencia (precedentes)</td>
+          <td>Ley y doctrina</td>
+          <td>Constitución, ley y jurisprudencia</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>🌎 Tendencias Contemporáneas</h3>
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>🌐 Globalización del Derecho Administrativo</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Convergencia de sistemas jurídicos por influencia de organismos internacionales.</p>
+        <ul>
+          <li>Principios de buen gobierno (OCDE)</li>
+          <li>Estándares de transparencia y acceso a la información</li>
+          <li>Protección de datos personales</li>
+          <li>Contratación pública internacional</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>⚖️ Constitucionalización del Derecho Administrativo</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Los principios constitucionales se han convertido en el fundamento del derecho administrativo.</p>
+        <ul>
+          <li>Principio de legalidad</li>
+          <li>Debido proceso</li>
+          <li>Derechos fundamentales</li>
+          <li>Control constitucional de actos administrativos</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>🤝 Derecho Administrativo y Derecho Internacional</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>La administración debe cumplir obligaciones internacionales del Estado.</p>
+        <ul>
+          <li>Tratados de libre comercio</li>
+          <li>Convenios de la OIT</li>
+          <li>Acuerdos ambientales</li>
+          <li>Protección de derechos humanos (Sistema Interamericano)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo comparado:</strong> En Francia, si un ciudadano quiere demandar a la administración, acude al Consejo de Estado (jurisdicción administrativa). En el Reino Unido, acude a los tribunales ordinarios (Suprema Corte). En Alemania, acude a los tribunales administrativos especializados. En Colombia, acude a la jurisdicción contencioso-administrativa (Consejo de Estado, Tribunales Administrativos, jueces administrativos).
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz">
+    <h2>🎯 Quiz Completo - 40 Preguntas</h2>
+    <p>Pon a prueba tus conocimientos sobre Fundamentos y Fuentes del Derecho Administrativo.</p>
+
+    <div class="quiz-container">
+      <div class="quiz-header">
+        <h3>📊 Tu Progreso</h3>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="quiz-stats">
+          <div class="stat">Respondidas: <strong id="respondidas">0</strong>/40</div>
+          <div class="stat">Correctas: <strong id="correctas">0</strong></div>
+          <div class="stat">Incorrectas: <strong id="incorrectas">0</strong></div>
+          <div class="stat">Porcentaje: <strong id="porcentaje">0</strong>%</div>
+        </div>
+      </div>
+
+      <div class="quiz-tabs">
+        <div class="quiz-tab active" onclick="mostrarSeccion('s1', this)">T1 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s2', this)">T2 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s3', this)">T3 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s4', this)">T4 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s5', this)">T5 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s6', this)">T6 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s7', this)">T7 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s8', this)">T8 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s9', this)">T9 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s10', this)">T10 (4)</div>
+      </div>
+
+      <!-- SECCIÓN 1: ORIGEN -->
+      <div class="quiz-section active" id="s1">
+        <div class="pregunta" data-correcta="1" data-tema="1">
+          <span class="pregunta-num">1</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El Derecho Administrativo moderno surge como producto de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 1)">a) La Revolución Industrial</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">b) La Revolución Francesa (1789)</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">c) La Reforma Protestante</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">d) La Ilustración griega</div>
+          </div>
+          <div class="explicacion">El Derecho Administrativo moderno surge como producto de la Revolución Francesa (1789), que estableció el principio de legalidad y sometió la administración al derecho.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="1">
+          <span class="pregunta-num">2</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La célebre sentencia que marcó el nacimiento del Derecho Administrativo como rama autónoma fue:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 2)">a) Sentencia Blanco (1873)</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">b) Sentencia Marbury vs. Madison (1803)</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">c) Sentencia Roe vs. Wade (1973)</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">d) Sentencia Brown vs. Board of Education (1954)</div>
+          </div>
+          <div class="explicacion">La Sentencia Blanco, proferida el 8 de febrero de 1873 por el Tribunal de Conflictos francés, marcó el nacimiento del Derecho Administrativo como rama autónoma del derecho.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="1">
+          <span class="pregunta-num">3</span><span class="pregunta-tipo">Conceptual</span>
+          <p>En Colombia, el Consejo de Estado fue creado en:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 3)">a) 1886</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">b) 1991</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">c) 1914</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">d) 1819</div>
+          </div>
+          <div class="explicacion">El Consejo de Estado colombiano fue creado en 1914 como máximo tribunal de lo contencioso-administrativo.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="1">
+          <span class="pregunta-num">4</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El actual Código de Procedimiento Administrativo y de lo Contencioso Administrativo (CPACA) es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 4)">a) Decreto 01 de 1984</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">b) Ley 80 de 1993</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">c) Ley 489 de 1998</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">d) Ley 1437 de 2011</div>
+          </div>
+          <div class="explicacion">El CPACA es la Ley 1437 de 2011, que reemplazó al antiguo Código Contencioso Administrativo (Decreto 01 de 1984).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 2: CONCEPTO -->
+      <div class="quiz-section" id="s2">
+        <div class="pregunta" data-correcta="1" data-tema="2">
+          <span class="pregunta-num">5</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El Derecho Administrativo es una rama del:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 5)">a) Derecho privado</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">b) Derecho público</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">c) Derecho internacional</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">d) Derecho mercantil</div>
+          </div>
+          <div class="explicacion">El Derecho Administrativo es una rama del derecho público que regula la actividad de la administración pública.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="2">
+          <span class="pregunta-num">6</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El principio fundamental del Derecho Administrativo es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 6)">a) Principio de legalidad</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">b) Principio de autonomía de la voluntad</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">c) Principio de libertad contractual</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">d) Principio de propiedad privada</div>
+          </div>
+          <div class="explicacion">El principio fundamental del Derecho Administrativo es el principio de legalidad: la administración solo puede hacer lo que la ley le permite.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="2">
+          <span class="pregunta-num">7</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La parte orgánica del Derecho Administrativo estudia:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 7)">a) Los actos administrativos</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">b) Los contratos administrativos</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">c) La estructura y organización de la administración pública</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">d) Los procedimientos administrativos</div>
+          </div>
+          <div class="explicacion">La parte orgánica estudia la estructura y organización de la administración pública: ministerios, departamentos, entidades descentralizadas, etc.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="2">
+          <span class="pregunta-num">8</span><span class="pregunta-tipo">Conceptual</span>
+          <p>A diferencia de los particulares, la administración:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 8)">a) Puede hacer todo lo que la ley no prohíbe</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">b) No está sometida a la ley</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">c) Tiene autonomía absoluta</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">d) Solo puede hacer lo que la ley le permite</div>
+          </div>
+          <div class="explicacion">A diferencia de los particulares, que pueden hacer todo lo que la ley no prohíbe, la administración solo puede hacer lo que la ley le permite (principio de legalidad).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 3: RELACIONES -->
+      <div class="quiz-section" id="s3">
+        <div class="pregunta" data-correcta="1" data-tema="3">
+          <span class="pregunta-num">9</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La relación más importante del Derecho Administrativo es con:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 9)">a) Derecho mercantil</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">b) Derecho constitucional</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">c) Derecho internacional privado</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">d) Derecho canónico</div>
+          </div>
+          <div class="explicacion">La relación más importante es con el Derecho Constitucional, ya que la Constitución es la norma de normas y fundamento del derecho administrativo.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="3">
+          <span class="pregunta-num">10</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los delitos contra la administración pública (peculado, cohecho, prevaricato) son objeto de estudio de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 10)">a) Derecho penal y derecho administrativo</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">b) Solo derecho civil</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">c) Solo derecho constitucional</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">d) Solo derecho internacional</div>
+          </div>
+          <div class="explicacion">Los delitos contra la administración pública son estudiados tanto por el derecho penal (como hechos punibles) como por el derecho administrativo (como faltas disciplinarias).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="3">
+          <span class="pregunta-num">11</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los servidores públicos están vinculados al Estado mediante:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 11)">a) Contrato de trabajo</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">b) Contrato de prestación de servicios</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">c) Relación legal y reglamentaria</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">d) Relación comercial</div>
+          </div>
+          <div class="explicacion">Los servidores públicos están vinculados al Estado mediante relación legal y reglamentaria (no contrato de trabajo), conforme al Art. 105.4 del CPACA.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="3">
+          <span class="pregunta-num">12</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los tratados internacionales forman parte del:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 12)">a) Derecho interno únicamente</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">b) Derecho administrativo sancionador</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">c) Derecho privado</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">d) Bloque de constitucionalidad</div>
+          </div>
+          <div class="explicacion">Los tratados internacionales ratificados por Colombia forman parte del bloque de constitucionalidad (Art. 93 C.P.) y son fuente del derecho administrativo.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 4: FUENTES -->
+      <div class="quiz-section" id="s4">
+        <div class="pregunta" data-correcta="1" data-tema="4">
+          <span class="pregunta-num">13</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La fuente suprema del ordenamiento jurídico colombiano es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 13)">a) La ley</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">b) La Constitución Política</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">c) La jurisprudencia</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">d) La costumbre</div>
+          </div>
+          <div class="explicacion">La Constitución Política es la norma de normas y fuente suprema del ordenamiento jurídico (Art. 4° C.P.).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="4">
+          <span class="pregunta-num">14</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La doctrina probable en el derecho administrativo colombiano consiste en:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 14)">a) Tres sentencias uniformes de la misma corporación sobre el mismo punto de derecho</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">b) Una sola sentencia de la Corte Constitucional</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">c) Opiniones de la doctrina extranjera</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">d) Costumbres administrativas</div>
+          </div>
+          <div class="explicacion">La doctrina probable (Art. 8.6 CPACA) consiste en tres sentencias uniformes proferidas por la misma Sala o Sección del Consejo de Estado o Tribunales Administrativos sobre el mismo punto de derecho.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="4">
+          <span class="pregunta-num">15</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los reglamentos son:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 15)">a) Leyes expedidas por el Congreso</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">b) Sentencias de la Corte Constitucional</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">c) Actos administrativos de carácter general expedidos por el Ejecutivo</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">d) Tratados internacionales</div>
+          </div>
+          <div class="explicacion">Los reglamentos son actos administrativos de carácter general expedidos por el Ejecutivo (decretos, resoluciones ministeriales, etc.) que desarrollan y reglamentan las leyes.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="4">
+          <span class="pregunta-num">16</span><span class="pregunta-tipo">Conceptual</span>
+          <p>En derecho administrativo, la costumbre tiene:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 16)">a) Alcance ilimitado</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">b) El mismo valor que la ley</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">c) Valor superior a la Constitución</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">d) Alcance limitado, solo opera donde la ley remite expresamente</div>
+          </div>
+          <div class="explicacion">En derecho administrativo, la costumbre tiene alcance limitado por el principio de legalidad. Solo opera en casos donde la ley remite expresamente a la costumbre.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 5: PRINCIPIOS CONSTITUCIONALES -->
+      <div class="quiz-section" id="s5">
+        <div class="pregunta" data-correcta="1" data-tema="5">
+          <span class="pregunta-num">17</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los principios de la función administrativa están consagrados en:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 17)">a) Artículo 1° de la Constitución</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">b) Artículo 209 de la Constitución</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">c) Artículo 4° de la Constitución</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">d) Artículo 13 de la Constitución</div>
+          </div>
+          <div class="explicacion">Los principios de la función administrativa están consagrados en el artículo 209 de la Constitución Política.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="5">
+          <span class="pregunta-num">18</span><span class="pregunta-tipo">Conceptual</span>
+          <p>NO es un principio de la función administrativa según el Art. 209 C.P.:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 18)">a) Autonomía de la voluntad</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">b) Igualdad</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">c) Moralidad</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">d) Eficacia</div>
+          </div>
+          <div class="explicacion">La autonomía de la voluntad es un principio del derecho privado, no del derecho administrativo. Los principios del Art. 209 C.P. son: igualdad, moralidad, eficacia, economía, celeridad, imparcialidad y publicidad.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="5">
+          <span class="pregunta-num">19</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El principio que exige que la administración actúe sin favoritismos ni prejuicios es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 19)">a) Celeridad</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">b) Economía</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">c) Imparcialidad</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">d) Publicidad</div>
+          </div>
+          <div class="explicacion">El principio de imparcialidad exige que la administración actúe sin favoritismos ni prejuicios, con decisiones basadas en criterios objetivos y racionales.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="5">
+          <span class="pregunta-num">20</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El principio de celeridad busca:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 20)">a) Que la administración gaste lo mínimo</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">b) Que la administración actúe con ética</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">c) Que los actos sean públicos</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">d) Que las actuaciones se tramiten con prontitud, evitando dilaciones</div>
+          </div>
+          <div class="explicacion">El principio de celeridad busca que las actuaciones administrativas se tramiten con prontitud, evitando dilaciones injustificadas.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 6: PRINCIPIOS CPACA -->
+      <div class="quiz-section" id="s6">
+        <div class="pregunta" data-correcta="1" data-tema="6">
+          <span class="pregunta-num">21</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El CPACA (Ley 1437 de 2011) regula sus principios en:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 21)">a) Artículo 1°</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">b) Artículos 3° a 7°</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">c) Artículo 100</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">d) Disposiciones finales</div>
+          </div>
+          <div class="explicacion">El CPACA regula sus principios en los artículos 3° a 7°, desarrollando los principios constitucionales del Art. 209 C.P.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="6">
+          <span class="pregunta-num">22</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El principio de buena fe en el CPACA significa:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 22)">a) Se presume la buena fe en las actuaciones de particulares y autoridades</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">b) Solo aplica a los particulares</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">c) Solo aplica a las autoridades</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">d) No tiene aplicación práctica</div>
+          </div>
+          <div class="explicacion">El principio de buena fe significa que se presume la buena fe en las actuaciones de particulares y autoridades. Las autoridades deben actuar con lealtad y sinceridad.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="6">
+          <span class="pregunta-num">23</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El principio de participación en el CPACA implica:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 23)">a) Que los ciudadanos votan en elecciones</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">b) Que las autoridades deciden unilateralmente</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">c) Que los interesados pueden intervenir en las actuaciones administrativas</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">d) Que solo los abogados pueden participar</div>
+          </div>
+          <div class="explicacion">El principio de participación implica que los interesados pueden intervenir en las actuaciones administrativas, presentar alegatos y pruebas.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="6">
+          <span class="pregunta-num">24</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El principio de responsabilidad en el CPACA establece que:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 24)">a) Solo los particulares son responsables</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">b) Solo las autoridades son responsables</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">c) Nadie es responsable</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">d) Los servidores públicos son responsables por sus actuaciones y deben responder por los perjuicios causados</div>
+          </div>
+          <div class="explicacion">El principio de responsabilidad establece que los servidores públicos son responsables por sus actuaciones y deben responder por los perjuicios causados por su actuación.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 7: FUNCIÓN ADMINISTRATIVA -->
+      <div class="quiz-section" id="s7">
+        <div class="pregunta" data-correcta="1" data-tema="7">
+          <span class="pregunta-num">25</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La función administrativa consiste en:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 25)">a) Crear normas abstractas</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">b) El manejo práctico de los asuntos del Estado para el logro de sus fines esenciales</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">c) Resolver conflictos entre particulares</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">d) Interpretar la Constitución</div>
+          </div>
+          <div class="explicacion">La función administrativa consiste en el manejo práctico de los asuntos del Estado para el logro de sus fines esenciales.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="7">
+          <span class="pregunta-num">26</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los fines esenciales del Estado están consagrados en:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 26)">a) Artículo 2° de la Constitución</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">b) Artículo 1° de la Constitución</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">c) Artículo 4° de la Constitución</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">d) Artículo 13 de la Constitución</div>
+          </div>
+          <div class="explicacion">Los fines esenciales del Estado están consagrados en el artículo 2° de la Constitución: servir a la comunidad, promover la prosperidad general, garantizar la efectividad de los derechos, etc.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="7">
+          <span class="pregunta-num">27</span><span class="pregunta-tipo">Conceptual</span>
+          <p>¿Quién ejerce la función administrativa?</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 27)">a) Solo la Rama Ejecutiva</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">b) Solo el Presidente</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">c) La Rama Ejecutiva, otras ramas cuando administran, órganos autónomos y particulares cuando ejercen funciones administrativas</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">d) Solo los ministerios</div>
+          </div>
+          <div class="explicacion">La función administrativa es ejercida por la Rama Ejecutiva, otras ramas cuando administran recursos, órganos autónomos y particulares cuando ejercen funciones administrativas por delegación o concesión.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="7">
+          <span class="pregunta-num">28</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El criterio material para identificar la función administrativa se refiere a:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 28)">a) Los órganos que la ejercen</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">b) La estructura de la administración</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">c) El personal que la integra</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">d) Las actividades que constituyen función administrativa</div>
+          </div>
+          <div class="explicacion">El criterio material identifica las actividades que constituyen función administrativa: expedición de actos, prestación de servicios, contratación, etc.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 8: ACTIVIDAD ADMINISTRATIVA -->
+      <div class="quiz-section" id="s8">
+        <div class="pregunta" data-correcta="1" data-tema="8">
+          <span class="pregunta-num">29</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los actos administrativos son:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 29)">a) Acuerdos bilaterales</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">b) Manifestaciones unilaterales de la voluntad de las autoridades administrativas que producen efectos jurídicos</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">c) Actuaciones materiales sin efectos jurídicos</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">d) Contratos entre particulares</div>
+          </div>
+          <div class="explicacion">Los actos administrativos son manifestaciones unilaterales de la voluntad de las autoridades administrativas que producen efectos jurídicos.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="8">
+          <span class="pregunta-num">30</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Las operaciones administrativas son:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 30)">a) Actuaciones materiales de la administración que producen efectos jurídicos</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">b) Actos administrativos de carácter general</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">c) Contratos administrativos</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">d) Leyes expedidas por el Congreso</div>
+          </div>
+          <div class="explicacion">Las operaciones administrativas son actuaciones materiales de la administración que producen efectos jurídicos, como el allanamiento de un establecimiento o la demolición de una obra.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="8">
+          <span class="pregunta-num">31</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Las vías de hecho son:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 31)">a) Actos administrativos legales</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">b) Contratos administrativos válidos</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">c) Actuaciones de la administración sin fundamento legal o que exceden manifiestamente sus competencias</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">d) Leyes expedidas por el Congreso</div>
+          </div>
+          <div class="explicacion">Las vías de hecho son actuaciones de la administración sin fundamento legal o que exceden manifiestamente sus competencias, dando lugar a la acción de nulidad y restablecimiento del derecho.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="8">
+          <span class="pregunta-num">32</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los contratos administrativos se regulan principalmente por:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 32)">a) El Código Civil</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">b) El Código de Comercio</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">c) El Código Sustantivo del Trabajo</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">d) La Ley 80 de 1993 y el CPACA</div>
+          </div>
+          <div class="explicacion">Los contratos administrativos se regulan principalmente por la Ley 80 de 1993 (Estatuto General de Contratación) y el CPACA.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 9: SERVICIOS PÚBLICOS -->
+      <div class="quiz-section" id="s9">
+        <div class="pregunta" data-correcta="1" data-tema="9">
+          <span class="pregunta-num">33</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los servicios públicos están consagrados en:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 33)">a) Artículo 1° de la Constitución</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">b) Artículo 365 de la Constitución</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">c) Artículo 4° de la Constitución</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">d) Artículo 13 de la Constitución</div>
+          </div>
+          <div class="explicacion">Los servicios públicos están consagrados en el artículo 365 de la Constitución Política.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="9">
+          <span class="pregunta-num">34</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los servicios públicos son:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 34)">a) Inherentes a la finalidad social del Estado</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">b) Solo prestados por el Estado</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">c) Actividades con fines de lucro</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">d) Solo prestados por particulares</div>
+          </div>
+          <div class="explicacion">Los servicios públicos son inherentes a la finalidad social del Estado (Art. 365 C.P.) y buscan satisfacer necesidades de interés general.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="9">
+          <span class="pregunta-num">35</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Son servicios públicos domiciliarios:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 35)">a) Salud y educación</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">b) Transporte y comunicaciones</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">c) Acueducto, alcantarillado, aseo, energía, gas, telefonía</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">d) Seguridad y justicia</div>
+          </div>
+          <div class="explicacion">Los servicios públicos domiciliarios son: acueducto, alcantarillado, aseo, energía eléctrica, distribución de gas combustible y telefonía.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="9">
+          <span class="pregunta-num">36</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El control de los servicios públicos domiciliarios lo ejerce:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 36)">a) La Fiscalía General</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">b) La Contraloría General</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">c) La Procuraduría General</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">d) La Superintendencia de Servicios Públicos Domiciliarios</div>
+          </div>
+          <div class="explicacion">El control de los servicios públicos domiciliarios lo ejerce la Superintendencia de Servicios Públicos Domiciliarios (Superservicios).</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 10: COMPARADO -->
+      <div class="quiz-section" id="s10">
+        <div class="pregunta" data-correcta="1" data-tema="10">
+          <span class="pregunta-num">37</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El sistema de derecho administrativo que se caracteriza por la doble jurisdicción (judicial y administrativa) es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 37)">a) Sistema anglosajón</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">b) Sistema francés</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">c) Sistema escandinavo</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">d) Sistema islámico</div>
+          </div>
+          <div class="explicacion">El sistema francés se caracteriza por la doble jurisdicción: tribunales judiciales y tribunales administrativos (Consejo de Estado).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="10">
+          <span class="pregunta-num">38</span><span class="pregunta-tipo">Conceptual</span>
+          <p>En el sistema anglosajón (common law), los asuntos administrativos son conocidos por:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 38)">a) Tribunales ordinarios</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">b) Tribunales administrativos especializados</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">c) El Consejo de Estado</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">d) El Parlamento</div>
+          </div>
+          <div class="explicacion">En el sistema anglosajón, los asuntos administrativos son conocidos por los tribunales ordinarios, no existen tribunales administrativos especializados.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="10">
+          <span class="pregunta-num">39</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El sistema colombiano de derecho administrativo tiene influencia de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 39)">a) Solo el sistema anglosajón</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">b) Solo el sistema francés</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">c) El sistema francés y el sistema alemán</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">d) Solo el sistema italiano</div>
+          </div>
+          <div class="explicacion">El sistema colombiano tiene influencia del sistema francés (Consejo de Estado como máximo tribunal) y del sistema alemán (codificación procesal, teoría del acto administrativo).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="10">
+          <span class="pregunta-num">40</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Una tendencia contemporánea del derecho administrativo es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 40)">a) La eliminación del principio de legalidad</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">b) La supresión del control judicial</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">c) La privatización total de los servicios públicos</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">d) La constitucionalización del derecho administrativo</div>
+          </div>
+          <div class="explicacion">Una tendencia contemporánea es la constitucionalización del derecho administrativo, donde los principios constitucionales se han convertido en el fundamento del derecho administrativo.</div>
+        </div>
+      </div>
+
+      <div class="resultado-final" id="resultadoFinal">
+        <h3>🏆 Resultado Final</h3>
+        <div class="puntaje-final" id="puntajeFinal">0/40</div>
+        <p id="mensajeFinal"></p>
+        <div class="desglose-temas" id="desgloseTemas"></div>
+        <button onclick="reiniciarQuiz()" class="btn-reset">🔄 Reiniciar Quiz</button>
+      </div>
+
+      <div style="text-align: center; margin-top: 1.5rem;">
+        <button onclick="verResultadoFinal()">📊 Ver Resultado Final</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>⚖️ Guía Didáctica - Fundamentos y Fuentes del Derecho Administrativo</p>
+  <p>Guía 1 de 8 · Derecho Administrativo Colombiano</p>
+  <p style="margin-top: 1rem; opacity: 0.7;">© 2026 - Material educativo interactivo</p>
+</footer>
+
+<script>
+  function toggleAcordeon(header) {
+    header.classList.toggle('active');
+    const content = header.nextElementSibling;
+    content.classList.toggle('active');
+  }
+
+  let respuestas = {};
+  const totalPreguntas = 40;
+
+  function mostrarSeccion(id, tab) {
+    document.querySelectorAll('.quiz-section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.quiz-tab').forEach(t => t.classList.remove('active'));
+    
+    document.getElementById(id).classList.add('active');
+    tab.classList.add('active');
+  }
+
+  function seleccionar(opcion, preguntaNum) {
+    if (respuestas[preguntaNum] !== undefined) return;
+
+    const pregunta = opcion.closest('.pregunta');
+    const opciones = pregunta.querySelectorAll('.opcion');
+    const correcta = parseInt(pregunta.dataset.correcta);
+    const tema = parseInt(pregunta.dataset.tema);
+    const seleccionada = Array.from(opciones).indexOf(opcion);
+    const explicacion = pregunta.querySelector('.explicacion');
+
+    opciones.forEach(o => o.classList.add('disabled'));
+
+    if (seleccionada === correcta) {
+      opcion.classList.add('correcta');
+      respuestas[preguntaNum] = { correcta: true, tema: tema };
+    } else {
+      opcion.classList.add('incorrecta');
+      opciones[correcta].classList.add('correcta');
+      respuestas[preguntaNum] = { correcta: false, tema: tema };
+    }
+
+    explicacion.classList.add('visible');
+    pregunta.classList.add('answered');
+    actualizarEstadisticas();
+  }
+
+  function actualizarEstadisticas() {
+    const total = Object.keys(respuestas).length;
+    const correctas = Object.values(respuestas).filter(r => r.correcta).length;
+    const incorrectas = total - correctas;
+    const porcentaje = total > 0 ? Math.round((correctas / total) * 100) : 0;
+
+    document.getElementById('respondidas').textContent = total;
+    document.getElementById('correctas').textContent = correctas;
+    document.getElementById('incorrectas').textContent = incorrectas;
+    document.getElementById('porcentaje').textContent = porcentaje;
+
+    const progreso = (total / totalPreguntas) * 100;
+    document.getElementById('progressFill').style.width = progreso + '%';
+  }
+
+  function verResultadoFinal() {
+    const total = Object.keys(respuestas).length;
+    
+    if (total < totalPreguntas) {
+      alert(`⚠️ Aún te faltan ${totalPreguntas - total} preguntas por responder.`);
+      return;
+    }
+
+    const correctas = Object.values(respuestas).filter(r => r.correcta).length;
+    const porcentaje = Math.round((correctas / totalPreguntas) * 100);
+
+    const resultadoFinal = document.getElementById('resultadoFinal');
+    resultadoFinal.classList.add('visible');
+
+    document.getElementById('puntajeFinal').textContent = `${correctas}/${totalPreguntas}`;
+
+    let mensaje = '';
+    if (porcentaje === 100) mensaje = '🏆 ¡PERFECTO! Dominas los Fundamentos y Fuentes del Derecho Administrativo.';
+    else if (porcentaje >= 90) mensaje = '🌟 ¡Excelente! Dominio sobresaliente.';
+    else if (porcentaje >= 75) mensaje = '✅ ¡Muy bien! Buen dominio.';
+    else if (porcentaje >= 60) mensaje = '📚 Aceptable. Repasa los temas donde fallaste.';
+    else if (porcentaje >= 40) mensaje = '📖 Necesitas reforzar varios conceptos.';
+    else mensaje = '🔍 Es necesario estudiar nuevamente todos los temas.';
+
+    document.getElementById('mensajeFinal').textContent = mensaje;
+
+    const temas = {
+      1: { nombre: 'T1: Origen', total: 4, correctas: 0 },
+      2: { nombre: 'T2: Concepto', total: 4, correctas: 0 },
+      3: { nombre: 'T3: Relaciones', total: 4, correctas: 0 },
+      4: { nombre: 'T4: Fuentes', total: 4, correctas: 0 },
+      5: { nombre: 'T5: Principios Const.', total: 4, correctas: 0 },
+      6: { nombre: 'T6: Principios CPACA', total: 4, correctas: 0 },
+      7: { nombre: 'T7: Función Admin.', total: 4, correctas: 0 },
+      8: { nombre: 'T8: Actividad Admin.', total: 4, correctas: 0 },
+      9: { nombre: 'T9: Servicios Públicos', total: 4, correctas: 0 },
+      10: { nombre: 'T10: Comparado', total: 4, correctas: 0 }
+    };
+
+    Object.values(respuestas).forEach(r => {
+      if (r.correcta) temas[r.tema].correctas++;
+    });
+
+    const desgloseHTML = Object.values(temas).map(t => {
+      const pct = Math.round((t.correctas / t.total) * 100);
+      return `
+        <div class="desglose-item">
+          <h4>${t.nombre}</h4>
+          <p>${t.correctas}/${t.total} (${pct}%)</p>
+          <div class="mini-bar">
+            <div class="mini-bar-fill" style="width: ${pct}%"></div>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    document.getElementById('desgloseTemas').innerHTML = desgloseHTML;
+    resultadoFinal.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  function reiniciarQuiz() {
+    if (!confirm('¿Reiniciar el quiz?')) return;
+
+    respuestas = {};
+
+    document.querySelectorAll('.opcion').forEach(o => o.classList.remove('correcta', 'incorrecta', 'disabled'));
+    document.querySelectorAll('.explicacion').forEach(e => e.classList.remove('visible'));
+    document.querySelectorAll('.pregunta').forEach(p => p.classList.remove('answered'));
+    document.getElementById('resultadoFinal').classList.remove('visible');
+
+    actualizarEstadisticas();
+    mostrarSeccion('s1', document.querySelector('.quiz-tab'));
+    document.getElementById('quiz').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  document.querySelectorAll('nav a').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+</script>
+
+</body>
+</html>
