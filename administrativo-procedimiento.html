@@ -1,0 +1,1904 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Procedimiento Administrativo y Derechos Fundamentales - Derecho Administrativo</title>
+<style>
+  :root {
+    --primary: #065f46;
+    --secondary: #10b981;
+    --accent: #047857;
+    --light: #ecfdf5;
+    --dark: #064e3b;
+    --success: #059669;
+    --warning: #d97706;
+    --danger: #dc2626;
+    --card-bg: #ffffff;
+    --shadow: 0 4px 15px rgba(0,0,0,0.08);
+    --shadow-hover: 0 8px 25px rgba(0,0,0,0.15);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Georgia', 'Times New Roman', serif; background: var(--light); color: var(--dark); line-height: 1.7; }
+  header { background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%); color: white; padding: 2rem 1rem; text-align: center; box-shadow: var(--shadow); position: relative; overflow: hidden; }
+  header::before { content: '📋'; position: absolute; font-size: 15rem; opacity: 0.05; top: -30px; right: -30px; }
+  header h1 { font-size: 2.5rem; margin-bottom: 0.5rem; letter-spacing: 2px; }
+  header p { font-size: 1.1rem; opacity: 0.9; font-style: italic; }
+  nav { background: var(--dark); position: sticky; top: 0; z-index: 100; box-shadow: var(--shadow); }
+  nav ul { display: flex; justify-content: center; flex-wrap: wrap; list-style: none; padding: 0.5rem; }
+  nav a { color: var(--light); text-decoration: none; padding: 0.7rem 1rem; margin: 0.2rem; border-radius: 5px; font-size: 0.7rem; transition: all 0.3s; display: block; }
+  nav a:hover { background: var(--secondary); color: var(--dark); transform: translateY(-2px); }
+  main { max-width: 1200px; margin: 0 auto; padding: 2rem 1rem; }
+  section { background: var(--card-bg); margin-bottom: 2.5rem; padding: 2rem; border-radius: 12px; box-shadow: var(--shadow); border-left: 5px solid var(--secondary); scroll-margin-top: 80px; }
+  section h2 { color: var(--primary); font-size: 2rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--secondary); }
+  section h3 { color: var(--accent); font-size: 1.4rem; margin: 1.5rem 0 0.8rem; }
+  section h4 { color: var(--primary); font-size: 1.15rem; margin: 1rem 0 0.5rem; }
+  p { margin-bottom: 1rem; text-align: justify; }
+  .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.2rem; margin: 1.5rem 0; }
+  .card { background: linear-gradient(135deg, #fff 0%, #ecfdf5 100%); border: 2px solid var(--secondary); border-radius: 10px; padding: 1.2rem; transition: all 0.3s; cursor: pointer; position: relative; }
+  .card:hover { transform: translateY(-5px); box-shadow: var(--shadow-hover); border-color: var(--primary); }
+  .card .icon { font-size: 2.5rem; text-align: center; margin-bottom: 0.5rem; }
+  .card h4 { text-align: center; color: var(--primary); margin-bottom: 0.5rem; }
+  .card .detail { display: none; margin-top: 0.8rem; padding-top: 0.8rem; border-top: 1px dashed var(--secondary); font-size: 0.95rem; }
+  .card.active .detail { display: block; }
+  .card .hint { text-align: center; color: var(--accent); font-size: 0.85rem; font-style: italic; }
+  .mapa-container { background: #ecfdf5; border: 2px dashed var(--secondary); border-radius: 10px; padding: 1.5rem; margin: 1.5rem 0; overflow-x: auto; }
+  .mapa { display: flex; flex-direction: column; align-items: center; min-width: 600px; }
+  .nodo { background: var(--primary); color: white; padding: 0.8rem 1.5rem; border-radius: 25px; font-weight: bold; text-align: center; min-width: 180px; box-shadow: var(--shadow); }
+  .nodo.central { background: linear-gradient(135deg, var(--secondary), #34d399); color: var(--dark); font-size: 1.2rem; padding: 1rem 2rem; }
+  .nodo.sub { background: var(--accent); font-size: 0.95rem; }
+  .linea { width: 3px; height: 25px; background: var(--secondary); }
+  .linea-h { height: 3px; background: var(--secondary); width: 80%; max-width: 900px; margin: 0 auto; }
+  .rama { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 1rem; width: 100%; margin-top: 1rem; }
+  .rama-item { display: flex; flex-direction: column; align-items: center; flex: 1; min-width: 140px; }
+  .ejemplo { background: #ecfdf5; border-left: 4px solid var(--success); padding: 1rem 1.2rem; margin: 1rem 0; border-radius: 0 8px 8px 0; }
+  .ejemplo strong { color: var(--success); }
+  .alerta { background: #fffbeb; border-left: 4px solid var(--warning); padding: 1rem 1.2rem; margin: 1rem 0; border-radius: 0 8px 8px 0; }
+  .alerta strong { color: var(--warning); }
+  .cita { background: #ecfdf5; border-left: 4px solid var(--accent); padding: 1rem 1.2rem; margin: 1rem 0; border-radius: 0 8px 8px 0; font-style: italic; color: var(--primary); }
+  table { width: 100%; border-collapse: collapse; margin: 1rem 0; background: white; border-radius: 8px; overflow: hidden; box-shadow: var(--shadow); font-size: 0.9rem; }
+  th { background: var(--primary); color: white; padding: 0.8rem; text-align: left; }
+  td { padding: 0.8rem; border-bottom: 1px solid #eee; }
+  tr:nth-child(even) { background: #ecfdf5; }
+  tr:hover { background: #d1fae5; }
+  .quiz-container { background: linear-gradient(135deg, #ecfdf5 0%, #fff 100%); padding: 1.5rem; border-radius: 10px; border: 2px solid var(--accent); }
+  .quiz-header { background: var(--primary); color: white; padding: 1.2rem; border-radius: 8px; margin-bottom: 1.5rem; text-align: center; }
+  .quiz-header h3 { color: white; margin: 0 0 0.5rem 0; }
+  .progress-bar { background: rgba(255,255,255,0.2); height: 10px; border-radius: 5px; overflow: hidden; margin-top: 0.5rem; }
+  .progress-fill { background: var(--secondary); height: 100%; width: 0%; transition: width 0.4s ease; }
+  .quiz-stats { display: flex; justify-content: space-around; margin-top: 1rem; flex-wrap: wrap; gap: 0.5rem; }
+  .stat { background: rgba(255,255,255,0.1); padding: 0.5rem 1rem; border-radius: 5px; font-size: 0.9rem; }
+  .stat strong { color: var(--secondary); }
+  .quiz-tabs { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; padding: 0.5rem; background: #d1fae5; border-radius: 8px; }
+  .quiz-tab { background: white; border: 2px solid var(--accent); color: var(--accent); padding: 0.5rem 0.8rem; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 0.7rem; transition: all 0.3s; flex: 1; min-width: 70px; text-align: center; }
+  .quiz-tab:hover { background: var(--accent); color: white; }
+  .quiz-tab.active { background: var(--primary); color: white; border-color: var(--primary); }
+  .quiz-section { display: none; }
+  .quiz-section.active { display: block; animation: fadeIn 0.4s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  .pregunta { margin-bottom: 1.5rem; padding: 1.2rem; background: white; border-radius: 8px; box-shadow: var(--shadow); border-left: 4px solid var(--accent); transition: all 0.3s; }
+  .pregunta.answered { border-left-color: var(--secondary); }
+  .pregunta-num { display: inline-block; background: var(--accent); color: white; padding: 0.2rem 0.7rem; border-radius: 12px; font-size: 0.85rem; margin-right: 0.5rem; }
+  .pregunta-tipo { display: inline-block; background: var(--secondary); color: var(--dark); padding: 0.2rem 0.7rem; border-radius: 12px; font-size: 0.75rem; margin-left: 0.3rem; font-weight: bold; }
+  .pregunta p { font-weight: bold; color: var(--primary); margin: 0.8rem 0; text-align: left; }
+  .opciones { display: flex; flex-direction: column; gap: 0.5rem; }
+  .opcion { padding: 0.7rem 1rem; background: #ecfdf5; border: 2px solid transparent; border-radius: 6px; cursor: pointer; transition: all 0.2s; position: relative; }
+  .opcion:hover:not(.disabled) { border-color: var(--accent); background: #d1fae5; }
+  .opcion.disabled { cursor: not-allowed; opacity: 0.85; }
+  .opcion.correcta { background: #d1fae5; border-color: var(--success); color: var(--success); font-weight: bold; }
+  .opcion.incorrecta { background: #fee2e2; border-color: var(--danger); color: var(--danger); }
+  .opcion.correcta::after { content: ' ✓'; font-weight: bold; }
+  .opcion.incorrecta::after { content: ' ✗'; font-weight: bold; }
+  .explicacion { margin-top: 0.8rem; padding: 0.8rem; background: #ecfdf5; border-left: 3px solid var(--accent); border-radius: 0 6px 6px 0; font-size: 0.9rem; display: none; font-style: italic; }
+  .explicacion.visible { display: block; animation: fadeIn 0.3s ease; }
+  .resultado-final { margin-top: 2rem; padding: 2rem; background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%); color: white; border-radius: 12px; text-align: center; display: none; }
+  .resultado-final.visible { display: block; animation: fadeIn 0.5s ease; }
+  .resultado-final h3 { color: var(--secondary); font-size: 2rem; margin-bottom: 1rem; }
+  .puntaje-final { font-size: 3rem; font-weight: bold; color: var(--secondary); margin: 1rem 0; }
+  .desglose-temas { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1.5rem; text-align: left; }
+  .desglose-item { background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px; }
+  .desglose-item h4 { color: var(--secondary); margin-bottom: 0.5rem; font-size: 1rem; }
+  .mini-bar { background: rgba(255,255,255,0.2); height: 8px; border-radius: 4px; overflow: hidden; margin-top: 0.5rem; }
+  .mini-bar-fill { background: var(--secondary); height: 100%; transition: width 0.6s ease; }
+  button { background: var(--primary); color: white; border: none; padding: 0.8rem 1.5rem; border-radius: 6px; cursor: pointer; font-size: 1rem; margin-top: 1rem; transition: all 0.3s; }
+  button:hover { background: var(--secondary); color: var(--dark); transform: translateY(-2px); }
+  .btn-reset { background: var(--danger); margin-left: 0.5rem; }
+  .btn-reset:hover { background: #991b1b; color: white; }
+  .acordeon-item { margin-bottom: 0.5rem; border: 1px solid #ddd; border-radius: 6px; overflow: hidden; }
+  .acordeon-header { background: var(--accent); color: white; padding: 1rem; cursor: pointer; font-weight: bold; display: flex; justify-content: space-between; align-items: center; transition: background 0.3s; }
+  .acordeon-header:hover { background: var(--primary); }
+  .acordeon-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; background: white; }
+  .acordeon-content.active { max-height: 2000px; padding: 1rem; }
+  .flecha { transition: transform 0.3s; }
+  .acordeon-header.active .flecha { transform: rotate(180deg); }
+  footer { background: var(--dark); color: var(--light); text-align: center; padding: 2rem 1rem; margin-top: 2rem; }
+  footer p { margin-bottom: 0.5rem; }
+  @media (max-width: 768px) { header h1 { font-size: 1.8rem; } section { padding: 1.2rem; } section h2 { font-size: 1.5rem; } nav a { font-size: 0.6rem; padding: 0.3rem 0.4rem; } .quiz-tab { font-size: 0.6rem; padding: 0.3rem 0.4rem; } table { font-size: 0.8rem; } }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>📋 Procedimiento Administrativo y Derechos Fundamentales</h1>
+  <p>Guía 5 de 8 · Derecho Administrativo Colombiano · Guía Didáctica Interactiva</p>
+</header>
+
+<nav>
+  <ul>
+    <li><a href="#tema1">1. Noción</a></li>
+    <li><a href="#tema2">2. Principios</a></li>
+    <li><a href="#tema3">3. Derechos</a></li>
+    <li><a href="#tema4">4. Deberes Autor.</a></li>
+    <li><a href="#tema5">5. Petición</a></li>
+    <li><a href="#tema6">6. Silencio</a></li>
+    <li><a href="#tema7">7. Trámite</a></li>
+    <li><a href="#tema8">8. Sancionatorio</a></li>
+    <li><a href="#tema9">9. Electrónico</a></li>
+    <li><a href="#tema10">10. Casos</a></li>
+    <li><a href="#quiz">Quiz (40)</a></li>
+  </ul>
+</nav>
+
+<main>
+
+  <section>
+    <h2>📚 Introducción</h2>
+    <p>Bienvenido a esta guía interactiva sobre el <strong>Procedimiento Administrativo y los Derechos Fundamentales</strong>. Aquí estudiarás la noción, principios, derechos y deberes de las partes, el derecho de petición, el silencio administrativo, el trámite y decisión, el procedimiento sancionatorio y los medios electrónicos, conforme a la Ley 1437 de 2011 (CPACA).</p>
+    <div class="alerta">
+      <strong>💡 Cómo usar esta guía:</strong> Haz clic en las tarjetas para ver detalles, despliega los acordeones para información adicional y prueba tus conocimientos con el quiz de 40 preguntas al final.
+    </div>
+  </section>
+
+  <!-- TEMA 1: NOCIÓN -->
+  <section id="tema1">
+    <h2>1. Noción y Formas de Iniciación</h2>
+    <p>El <strong>procedimiento administrativo</strong> es el conjunto de actuaciones a las cuales está sujeta la autoridad para la expedición válida de decisiones administrativas. Su finalidad esencial es garantizar los derechos de los asociados frente al poder público.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">PROCEDIMIENTO ADMINISTRATIVO</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item"><div class="linea"></div><div class="nodo">De Oficio</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">A Solicitud de Parte</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Por Cumplimiento de Deber Legal</div></div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Fundamento Legal</h3>
+    <div class="cita">
+      <strong>"Las normas de esta Parte Primera tienen como finalidad proteger y garantizar los derechos y libertades de las personas, la primacía de los intereses generales, la sujeción de las autoridades a la Constitución y demás preceptos del ordenamiento jurídico..."</strong> — Art. 1 CPACA
+    </div>
+
+    <h3>🔍 Formas de Iniciación</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🏛️</div>
+        <h4>De Oficio</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>La autoridad inicia la actuación por iniciativa propia.</p>
+          <p>Requiere escrito o medios electrónicos autorizados.</p>
+          <p>Art. 4 CPACA.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">👤</div>
+        <h4>A Solicitud de Parte</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Se inicia mediante el ejercicio del derecho de petición (Art. 23 C.P.).</p>
+          <p>Puede ser verbal, escrita o por medios electrónicos.</p>
+          <p>No requiere abogado.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📜</div>
+        <h4>Por Cumplimiento de Deber Legal</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>El particular inicia el procedimiento para cumplir una exigencia normativa.</p>
+          <p>Ejemplo: solicitud de licencia de construcción, declaración de renta.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>📊 Naturaleza del Procedimiento</h3>
+    <table>
+      <thead>
+        <tr><th>Aspecto</th><th>Descripción</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Naturaleza</strong></td><td>Garantista: protege derechos de los asociados frente al poder público.</td></tr>
+        <tr><td><strong>Finalidad</strong></td><td>Lograr decisiones ajustadas a derecho, respetando el debido proceso.</td></tr>
+        <tr><td><strong>Carácter</strong></td><td>Escrito, verbal o por medios electrónicos (Art. 35 CPACA).</td></tr>
+        <tr><td><strong>Principio general</strong></td><td>Impulso oficioso: la autoridad debe adelantar el trámite sin necesidad de que el particular lo solicite.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Cuando la DIAN inicia una investigación fiscalizadora de oficio, está actuando por iniciativa propia. Cuando un ciudadano solicita una licencia de construcción, el procedimiento se inicia a solicitud de parte. Cuando un empleador reporta un accidente laboral, el procedimiento se inicia por cumplimiento de un deber legal.
+    </div>
+  </section>
+
+  <!-- TEMA 2: PRINCIPIOS -->
+  <section id="tema2">
+    <h2>2. Principios del Procedimiento Administrativo</h2>
+    <p>El artículo 3 del CPACA establece los principios que rigen las actuaciones administrativas, desarrollando los mandatos constitucionales del Art. 209 C.P.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">PRINCIPIOS CPACA (Art. 3)</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Debido Proceso</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Igualdad</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Imparcialidad</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Buena Fe</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Moralidad</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Participación</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Transparencia</div></div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Los Principios del Art. 3 CPACA</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Debido Proceso</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Las actuaciones se adelantarán conforme a las normas de procedimiento y competencia.</p>
+          <p>Plena garantía de derechos de representación, defensa y contradicción.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🤝</div>
+        <h4>Igualdad</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Mismo trato y protección a todas las personas.</p>
+          <p>Atención especial a personas en situación de debilidad manifiesta (Art. 13 C.P.).</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🎯</div>
+        <h4>Imparcialidad</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Las autoridades actuarán sin factores de afecto o interés.</p>
+          <p>Idéntico trato en situaciones de intereses diversos u opuestos.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🕊️</div>
+        <h4>Buena Fe</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Se presume el comportamiento leal y fiel de autoridades y particulares.</p>
+          <p>Art. 83 C.P.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🌟</div>
+        <h4>Moralidad</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Todas las personas y servidores públicos están obligados a actuar con rectitud, lealtad y honestidad.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">👥</div>
+        <h4>Participación</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Las autoridades promoverán y atenderán las iniciativas de ciudadanos, organizaciones y comunidades.</p>
+          <p>Intervención en procesos de deliberación, formulación, ejecución, control y evaluación.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📢</div>
+        <h4>Transparencia</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>La actividad administrativa es del dominio público.</p>
+          <p>Toda persona puede conocer las actuaciones, salvo reserva legal.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📰</div>
+        <h4>Publicidad</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Las autoridades darán a conocer al público sus actos, contratos y resoluciones.</p>
+          <p>Incluye el uso de tecnologías masivas.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>📊 Principios Complementarios</h3>
+    <table>
+      <thead>
+        <tr><th>Principio</th><th>Contenido</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Responsabilidad</strong></td><td>Las autoridades y sus agentes asumirán las consecuencias por sus decisiones, omisiones o extralimitación.</td></tr>
+        <tr><td><strong>Coordinación</strong></td><td>Las autoridades administrativas deben coordinar sus actuaciones para el adecuado cumplimiento de los fines del Estado.</td></tr>
+        <tr><td><strong>Eficacia</strong></td><td>Las autoridades buscarán que los procedimientos logren su finalidad, removerán obstáculos formales y evitarán decisiones inhibitorias.</td></tr>
+        <tr><td><strong>Economía</strong></td><td>Racionalización de trámites, tiempos y recursos.</td></tr>
+        <tr><td><strong>Celeridad</strong></td><td>Impulso oficioso del procedimiento, evitando dilaciones injustificadas.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si una autoridad administrativa decide negar una licencia ambiental sin permitir que el peticionario presente pruebas ni se defienda, está violando el principio de debido proceso. Si decide favorablemente a un amigo sin justificación objetiva, viola los principios de imparcialidad y moralidad.
+    </div>
+  </section>
+
+  <!-- TEMA 3: DERECHOS -->
+  <section id="tema3">
+    <h2>3. Derechos de las Personas ante las Autoridades</h2>
+    <p>El artículo 5 del CPACA establece los derechos de las personas en sus relaciones con las autoridades, desarrollando el mandato constitucional del Art. 23 (derecho de petición).</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">DERECHOS (Art. 5 CPACA)</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Petición</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Información</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Respuesta Oportuna</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Trato Digno</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Defensa</div></div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Derechos Fundamentales</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📝</div>
+        <h4>Presentar Peticiones</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>En cualquiera de sus modalidades: verbal, escrita o por cualquier medio idóneo.</p>
+          <p>Sin necesidad de apoderado.</p>
+          <p>Incluye solicitud de información, consultas, quejas, denuncias y recursos.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">💻</div>
+        <h4>Medios Tecnológicos</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Las actuaciones podrán adelantarse por cualquier medio tecnológico o electrónico disponible en la entidad.</p>
+          <p>Incluso fuera de las horas de atención al público.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📂</div>
+        <h4>Conocer Actuaciones</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Salvo expresa reserva legal, obtener información que repose en registros y archivos públicos.</p>
+          <p>Obtener copias a su costo.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⏰</div>
+        <h4>Respuesta Oportuna</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Obtener respuesta oportuna y eficaz a sus peticiones en los plazos establecidos.</p>
+          <p>Art. 14 CPACA.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🙏</div>
+        <h4>Trato Digno</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Ser tratado con el respeto y la consideración debida a la dignidad de la persona humana.</p>
+          <p>Atención especial a personas en situación de discapacidad, niños, mujeres gestantes o adultos mayores.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🛡️</div>
+        <h4>Defensa y Contradicción</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Formular alegaciones y aportar documentos u otros elementos de prueba.</p>
+          <p>Que dichos documentos sean valorados por las autoridades.</p>
+          <p>Que se le informe el resultado de su participación.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>⚠️ Atención Prioritaria</h3>
+    <div class="alerta">
+      <strong>📌 Art. 20 CPACA:</strong>
+      <p>Las autoridades darán <strong>atención prioritaria</strong> a las peticiones de reconocimiento de un derecho fundamental cuando deban ser resueltas para evitar un perjuicio irremediable al peticionario.</p>
+      <br>
+      <strong>📌 Situaciones especiales:</strong>
+      <ul>
+        <li>Cuando por razones de salud o seguridad personal esté en peligro inminente la vida o integridad del destinatario, la autoridad deberá adoptar de inmediato las medidas de urgencia.</li>
+        <li>Personas en situación de discapacidad, niños, niñas, adolescentes, mujeres gestantes y adultos mayores reciben atención preferente.</li>
+      </ul>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Una persona enferma terminal solicita a su EPS la autorización de un tratamiento médico. Esta petición debe recibir atención prioritaria, pues de su resolución depende evitar un perjuicio irremediable a su derecho fundamental a la salud y a la vida.
+    </div>
+  </section>
+
+  <!-- TEMA 4: DEBERES -->
+  <section id="tema4">
+    <h2>4. Deberes y Prohibiciones de las Autoridades</h2>
+    <p>Los artículos 7, 8 y 9 del CPACA establecen los deberes de las autoridades en la atención al público, el deber de información y las prohibiciones expresas.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">DEBERES AUTORIDADES</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Atención al Público</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Información</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Prohibiciones</div></div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Deberes en la Atención al Público (Art. 7)</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🤝</div>
+        <h4>Trato Respetuoso</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Dar trato respetuoso, considerado y diligente a todas las personas sin distinción.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🕐</div>
+        <h4>Atención Personal</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Garantizar atención personal al público, como mínimo durante 40 horas a la semana.</p>
+          <p>Horarios que satisfagan las necesidades del servicio.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">👥</div>
+        <h4>Atención a Todos</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Atender a todas las personas que hubieran ingresado a sus oficinas dentro del horario normal de atención.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📋</div>
+        <h4>Sistema de Turnos</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Establecer un sistema de turnos acorde con las necesidades del servicio y las nuevas tecnologías.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📄</div>
+        <h4>Carta de Trato Digno</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Expedir, hacer visible y actualizar anualmente una carta de trato digno al usuario.</p>
+          <p>Especifique todos los derechos de los usuarios y los medios para garantizarlos.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">💻</div>
+        <h4>Medios Tecnológicos</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Tramitar peticiones vía fax o medios electrónicos.</p>
+          <p>Adoptar medios tecnológicos para el trámite y resolución de peticiones.</p>
+          <p>Permitir uso de medios alternativos para quienes no dispongan de aquellos.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Deber de Información (Art. 8)</h3>
+    <p>Las autoridades deberán mantener a disposición de toda persona información completa y actualizada sobre:</p>
+    <ul>
+      <li>Las normas básicas que determinan su competencia</li>
+      <li>Las funciones de sus distintas dependencias y servicios que prestan</li>
+      <li>Las regulaciones, procedimientos, trámites y términos a que están sujetas las actuaciones</li>
+      <li>Los actos administrativos de carácter general que expidan</li>
+      <li>Los documentos que deben ser suministrados por las personas</li>
+      <li>Las dependencias responsables, su localización, horarios de trabajo</li>
+      <li>La dependencia, cargo o nombre del servidor a quien debe dirigirse en caso de queja o reclamo</li>
+      <li>Los proyectos específicos de regulación y la información en que se fundamenten</li>
+    </ul>
+
+    <h3>⚠️ Prohibiciones Expresas (Art. 9)</h3>
+    <div class="alerta">
+      <strong>📌 Las autoridades tienen prohibido:</strong>
+      <ol>
+        <li>Rechazar peticiones presentadas por escrito o a través de medios electrónicos, o no expedir constancias cuando se formulen verbalmente.</li>
+        <li>Exigir actos administrativos, constancias, certificaciones o documentos que ya reposen en la entidad.</li>
+        <li>Exigir constancias, certificaciones o documentos que ellos mismos tengan o puedan conseguir en los archivos de la respectiva entidad.</li>
+        <li>Reproducir actos administrativos que hayan sido suspendidos o anulados.</li>
+        <li>Asignar personal no capacitado en la orientación y atención al público.</li>
+        <li>Demorar en forma injustificada la expedición de actos o su publicación o notificación.</li>
+        <li>Dilatar o entrabar el cumplimiento material de las decisiones ejecutoriadas o en firme.</li>
+        <li>No practicar las pruebas decretadas o denegarlas en forma injustificada.</li>
+        <li>No incluir en el presupuesto las partidas necesarias para cumplir con las sentencias que condenen a la administración.</li>
+      </ol>
+    </div>
+
+    <h3>📊 Política Anticorrupción</h3>
+    <table>
+      <thead>
+        <tr><th>Norma</th><th>Contenido</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>D.L. 2150/95</strong></td><td>Supresión de trámites innecesarios en la administración pública.</td></tr>
+        <tr><td><strong>Ley 962/05</strong></td><td>Racionalización de trámites y procedimientos administrativos.</td></tr>
+        <tr><td><strong>Ley 1474/11</strong></td><td>Estatuto Anticorrupción: obligación de sustentar la justificación de cualquier procedimiento.</td></tr>
+        <tr><td><strong>D.L. 19/12</strong></td><td>Supresión o reforma de regulaciones, procedimientos y trámites innecesarios.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Si un ciudadano solicita una copia de su cédula de ciudadanía a la Alcaldía, la autoridad NO puede exigirle que presente una constancia de residencia, porque ese documento ya reposa en los archivos de la entidad. Exigirlo constituiría una violación al Art. 9 CPACA y una falta disciplinaria.
+    </div>
+  </section>
+
+  <!-- TEMA 5: DERECHO DE PETICIÓN -->
+  <section id="tema5">
+    <h2>5. El Derecho de Petición</h2>
+    <p>El derecho de petición es un derecho fundamental consagrado en el artículo 23 de la Constitución Política, regulado en los artículos 13 a 33 del CPACA.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">DERECHO DE PETICIÓN (Art. 23 C.P.)</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Interés General</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Interés Particular</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Información</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Consulta</div></div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Fundamento Constitucional</h3>
+    <div class="cita">
+      <strong>"Toda persona tiene derecho a presentar peticiones respetuosas a las autoridades por motivos de interés general o particular y a obtener pronta resolución."</strong> — Art. 23 C.P.
+    </div>
+
+    <h3>🔍 Modalidades del Derecho de Petición (Art. 13 CPACA)</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🌐</div>
+        <h4>Interés General</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Cuando la finalidad está encaminada a producir un efecto indeterminado y colectivo.</p>
+          <p>Ejemplo: solicitar al alcalde el arreglo de una vía pública.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">👤</div>
+        <h4>Interés Particular</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Cuando la finalidad está encaminada a obtener efectos concretos, determinados o personales.</p>
+          <p>Ejemplo: solicitar una licencia de construcción.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📊</div>
+        <h4>Información</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Encaminado a acceder a los documentos públicos o conocer acerca de las acciones de la autoridad.</p>
+          <p>Ejemplo: solicitar copia de un contrato o información sobre inversiones.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">❓</div>
+        <h4>Consulta</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Busca conocer la opinión autorizada de las autoridades sobre asuntos materia a su cargo.</p>
+          <p>Ejemplo: consultar a la Superintendencia de Servicios Públicos sobre la procedencia de un cobro.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>⏰ Términos de Respuesta (Art. 14 CPACA)</h3>
+    <table>
+      <thead>
+        <tr><th>Tipo de Petición</th><th>Término</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Interés general o particular</strong></td><td>15 días hábiles siguientes a su recepción.</td></tr>
+        <tr><td><strong>Información y documentos</strong></td><td>10 días siguientes a su recepción.</td></tr>
+        <tr><td><strong>Consulta</strong></td><td>30 días siguientes a su recepción.</td></tr>
+        <tr><td><strong>Peticiones entre autoridades</strong></td><td>Término especial según la norma que regula la competencia.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>📋 Contenido de las Peticiones (Art. 16 CPACA)</h3>
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📝 Requisitos mínimos</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <ol>
+          <li>Designación de la autoridad a la que se dirige</li>
+          <li>Nombres y apellidos del solicitante y de su representante, si es el caso, con identificación del documento de identidad y domicilio</li>
+          <li>Dirección electrónica o física para recibir notificaciones</li>
+          <li>Objeto de la petición</li>
+          <li>Razones en que se apoya la petición</li>
+          <li>Documentos que desee presentar</li>
+          <li>Firma del peticionario (cuando fuere el caso)</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📝 Peticiones incompletas (Art. 17)</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Cuando la petición sea incompleta, la autoridad deberá requerir al peticionario dentro de los <strong>10 días siguientes</strong> a la recepción para que complete la información.</p>
+        <p>El peticionario tendrá <strong>1 mes</strong> para completar la información.</p>
+        <p>Si no cumple, se entenderá que ha <strong>desistido tácitamente</strong> de la petición.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📝 Desistimiento (Art. 18)</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p><strong>Expreso:</strong> El peticionario puede desistir en cualquier tiempo de su petición.</p>
+        <p><strong>Tácito:</strong> Se produce cuando el peticionario no completa la información requerida dentro del plazo.</p>
+        <p>La autoridad puede continuar con la actuación de oficio cuando lo considere necesario para el interés general.</p>
+      </div>
+    </div>
+
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📝 Peticiones irrespetuosas (Art. 19)</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>Las peticiones deben ser respetuosas.</p>
+        <p>Las autoridades pueden rechazar las peticiones que contengan expresiones injuriosas o groseras.</p>
+        <p>Sin embargo, el incumplimiento de este deber no puede ser invocado por la administración como pretexto para desconocer el derecho reclamado.</p>
+      </div>
+    </div>
+
+    <h3>⚖️ Petición ante Organizaciones Privadas (Arts. 32 y 33)</h3>
+    <p>El derecho de petición también puede ejercerse ante organizaciones privadas para garantizar derechos fundamentales:</p>
+    <ul>
+      <li>Sociedades, corporaciones, fundaciones, asociaciones</li>
+      <li>Organizaciones religiosas</li>
+      <li>Cooperativas</li>
+      <li>Instituciones financieras</li>
+      <li>Clubes</li>
+    </ul>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Un ciudadano presenta una petición ante la DIAN solicitando información sobre su situación tributaria. La DIAN tiene 10 días para responder, pues se trata de una petición de información. Si no responde, se configura el silencio administrativo negativo y el ciudadano puede acudir ante la jurisdicción contenciosa administrativa.
+    </div>
+  </section>
+
+  <!-- TEMA 6: SILENCIO -->
+  <section id="tema6">
+    <h2>6. El Silencio Administrativo</h2>
+    <p>El silencio administrativo es una ficción jurídica mediante la cual, en los eventos en que la autoridad omita dar respuesta a las peticiones, la ley otorga un valor jurídico, negativo o positivo, a tal omisión.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">SILENCIO ADMINISTRATIVO</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Negativo</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Positivo</div></div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Silencio Administrativo Negativo (Art. 83 CPACA)</h3>
+    <div class="cita">
+      <strong>"Transcurridos tres (3) meses, contados a partir de la presentación de una petición, sin que se haya notificado decisión que la resuelva, se entenderá que ésta es negativa..."</strong> — Art. 83 CPACA
+    </div>
+
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">❌</div>
+        <h4>Naturaleza</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Ficción jurídica que equivale a una decisión negativa.</p>
+          <p>No constituye respuesta material.</p>
+          <p>Regla general en el CPACA.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>Efectos</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Abre al peticionario dos opciones:</p>
+          <ul>
+            <li>Interponer recursos en cualquier tiempo</li>
+            <li>Acudir directamente ante la jurisdicción contenciosa administrativa</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚠️</div>
+        <h4>Responsabilidad</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>La ocurrencia del silencio no exime a la autoridad de responsabilidad.</p>
+          <p>Constituye causal de mala conducta para el funcionario omisivo.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>✅ Silencio Administrativo Positivo</h3>
+    <p>Excepcionalmente, la ley otorga al silencio el valor de decisión favorable. Opera en los siguientes casos:</p>
+
+    <table>
+      <thead>
+        <tr><th>Caso</th><th>Norma</th><th>Término</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Petición de información</strong></td><td>Art. 14.1 CPACA</td><td>10 días sin respuesta → debe entregarse en 3 días</td></tr>
+        <tr><td><strong>Revisión de estratos socioeconómicos</strong></td><td>Art. 104 L. 142/94</td><td>2 meses sin respuesta del alcalde</td></tr>
+        <tr><td><strong>Servicios públicos domiciliarios</strong></td><td>Art. 158 L. 142/94</td><td>15 días hábiles sin respuesta</td></tr>
+        <tr><td><strong>Licencias de construcción</strong></td><td>Art. 34 D. 1469/10</td><td>45 días sin respuesta</td></tr>
+        <tr><td><strong>Declaración privada de impuestos</strong></td><td>Art. 714 E.T.</td><td>2 años sin requerimiento especial de la DIAN</td></tr>
+        <tr><td><strong>Revocatoria directa tributaria</strong></td><td>Art. 738-1 E.T.</td><td>1 año sin respuesta</td></tr>
+        <tr><td><strong>Inscripción de sindicato</strong></td><td>Art. 366 C.S.T.</td><td>15 días hábiles sin pronunciamiento</td></tr>
+        <tr><td><strong>Petición en ejecución de contrato</strong></td><td>Art. 25.16 L. 80/93</td><td>3 meses sin respuesta</td></tr>
+      </tbody>
+    </table>
+
+    <h3>📋 Protocolización del Silencio Positivo</h3>
+    <div class="acordeon-item">
+      <div class="acordeon-header" onclick="toggleAcordeon(this)">
+        <span>📝 ¿Cómo se invoca?</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="acordeon-content">
+        <p>El silencio positivo se invoca y prueba a través de la <strong>protocolización</strong> de la constancia o copia de la solicitud, junto con la <strong>declaración jurada</strong> de no haber obtenido respuesta en el término indicado en la ley.</p>
+        <p>La <strong>protocolización</strong> consiste en «incorporar en el protocolo por medio de escritura pública las actuaciones, expedientes o documentos que la ley o el juez ordenen insertar en él para su guarda y conservación».</p>
+        <p>La escritura pública que expide el notario hará las veces del acto administrativo, adquiriendo fuerza obligatoria.</p>
+      </div>
+    </div>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Un ciudadano presenta una solicitud de revisión de estrato socioeconómico ante el alcalde. Transcurridos 2 meses sin respuesta, se configura el silencio administrativo positivo. El ciudadano puede protocolizar su solicitud ante notario y esta escritura pública hará las veces del acto administrativo favorable, obligando a la entidad a reconocer el cambio de estrato.
+    </div>
+  </section>
+
+  <!-- TEMA 7: TRÁMITE -->
+  <section id="tema7">
+    <h2>7. Trámite y Decisión</h2>
+    <p>Una vez presentada la petición, la autoridad debe adelantar el procedimiento administrativo conforme a las reglas del CPACA.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">TRÁMITE</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Formación Expediente</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Terceros</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Audiencias</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Pruebas</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Decisión</div></div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Formación del Expediente (Art. 36)</h3>
+    <p>Todos los documentos relativos a una actuación administrativa deben integrarse en un solo cuerpo (expediente).</p>
+    <ul>
+      <li>Si varias autoridades están vinculadas, el expediente completo debe ser llevado por la autoridad que primero conoció.</li>
+      <li>No se requiere ser abogado para acceder a los expedientes.</li>
+      <li>Cualquier persona puede solicitar copias y certificaciones, salvo reserva legal.</li>
+      <li>Las copias deben entregarse en el plazo general de 10 días.</li>
+    </ul>
+
+    <h3>👥 Intervención de Terceros (Arts. 37 y 38)</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🎯</div>
+        <h4>Terceros Determinados</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>La autoridad debe comunicarles la existencia de la actuación.</p>
+          <p>Se les informa el nombre del peticionario y el objeto de la solicitud.</p>
+          <p>Pueden constituirse como parte y hacer valer sus derechos.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🌐</div>
+        <h4>Terceros Indeterminados</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>La información se divulgará a través de medio masivo de comunicación nacional o local.</p>
+          <p>O mediante cualquier otro mecanismo eficaz.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>🎤 Audiencias (Art. 35)</h3>
+    <p>Las autoridades podrán decretar la práctica de audiencias en el curso de las actuaciones con objeto de:</p>
+    <ul>
+      <li>Promover la participación ciudadana</li>
+      <li>Asegurar el derecho de contradicción</li>
+      <li>Contribuir a la pronta adopción de decisiones</li>
+    </ul>
+    <p>De toda audiencia se dejará constancia de lo acontecido.</p>
+
+    <h3>🔍 Pruebas (Art. 40)</h3>
+    <p>Durante la actuación administrativa y hasta antes de que se profiera la decisión de fondo, puede aportarse, pedirse o practicarse cualquier clase de pruebas.</p>
+    <ul>
+      <li>No están sujetas a requisitos ni términos especiales</li>
+      <li>Se debe cumplir con los principios de publicidad y contradicción</li>
+      <li>Los costos son asumidos por quien las solicitó</li>
+      <li>Son admisibles todos los medios de prueba del Código de Procedimiento Civil</li>
+    </ul>
+
+    <h3>⚖️ Decisión (Art. 42)</h3>
+    <div class="alerta">
+      <strong>📌 Requisitos de la decisión:</strong>
+      <ul>
+        <li>Debe ser <strong>motivada</strong>: expresar los fundamentos de hecho y de derecho</li>
+        <li>Resolver <strong>todas las peticiones</strong> oportunamente planteadas</li>
+        <li>Considerar las <strong>pruebas e informes</strong> disponibles</li>
+        <li>Incluir los <strong>recursos</strong> que proceden, la autoridad ante quien interponerlos y los plazos</li>
+      </ul>
+    </div>
+
+    <h3>⏰ Términos para Decidir</h3>
+    <table>
+      <thead>
+        <tr><th>Tipo de Petición</th><th>Término</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Interés general o particular</strong></td><td>15 días hábiles</td></tr>
+        <tr><td><strong>Información</strong></td><td>10 días</td></tr>
+        <tr><td><strong>Consulta</strong></td><td>30 días</td></tr>
+        <tr><td><strong>Peticiones entre autoridades</strong></td><td>10 días</td></tr>
+      </tbody>
+    </table>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Un ciudadano presenta una petición solicitando información sobre un contrato estatal. La autoridad tiene 10 días para responder. Si no lo hace, se configura el silencio administrativo positivo y la información debe ser entregada dentro de los 3 días siguientes. Si la autoridad se niega a entregarla invocando reserva legal, debe motivar su decisión y el ciudadano puede acudir a la jurisdicción contenciosa administrativa.
+    </div>
+  </section>
+
+  <!-- TEMA 8: SANCIONATORIO -->
+  <section id="tema8">
+    <h2>8. Procedimiento Administrativo Sancionatorio</h2>
+    <p>El CPACA regula el procedimiento administrativo sancionatorio en los artículos 47 a 52, aplicable a los casos no regulados por normas especiales o por el Estatuto Disciplinario.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">PROCEDIMIENTO SANCIONATORIO</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Indagación Preliminar</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Formulación de Cargos</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Descargos</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Pruebas</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Alegatos</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Decisión</div></div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Principios del Debido Proceso Sancionatorio</h3>
+    <div class="alerta">
+      <strong>📌 Principios aplicables (Art. 3 CPACA):</strong>
+      <ul>
+        <li><strong>Legalidad de las faltas y sanciones:</strong> Nullum crimen, nulla poena sine praevia lege poenali</li>
+        <li><strong>Presunción de inocencia:</strong> Toda persona se presume inocente mientras no se le haya declarado judicialmente culpable</li>
+        <li><strong>No reformatio in pejus:</strong> El superior no podrá agravar la pena impuesta cuando el condenado sea apelante único</li>
+        <li><strong>Non bis in ídem:</strong> Nadie puede ser juzgado dos veces por la misma causa</li>
+      </ul>
+    </div>
+
+    <h3>🔍 Etapas del Procedimiento</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🔍</div>
+        <h4>1. Indagación Preliminar</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>La autoridad adelanta una indagación para establecer si existen méritos para adelantar el procedimiento.</p>
+          <p>En caso positivo, se comunica la existencia del procedimiento al interesado.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📋</div>
+        <h4>2. Formulación de Cargos</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Mediante acto administrativo motivado.</p>
+          <p>Indica con precisión los hechos, las normas presuntamente violadas y las sanciones procedentes.</p>
+          <p>Se notifica personalmente al investigado.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🛡️</div>
+        <h4>3. Descargos</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Dentro de los 15 días siguientes a la notificación, el investigado puede presentar sus descargos.</p>
+          <p>Puede aportar y solicitar las pruebas que considere pertinentes.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🔬</div>
+        <h4>4. Pruebas</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>La autoridad puede decretar de oficio las pruebas que estime pertinentes.</p>
+          <p>Período probatorio: 30 días (60 días si son más de 3 investigados o se requieren pruebas en el exterior).</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📝</div>
+        <h4>5. Alegatos</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Vencido el período probatorio, se da traslado al investigado por 10 días para presentar sus alegatos.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">⚖️</div>
+        <h4>6. Decisión</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Dentro de los 30 días siguientes, la autoridad decide mediante acto administrativo motivado.</p>
+          <p>El acto debe contener: identificación del sancionado, análisis de hechos y pruebas, normas infringidas, decisión final y fundamentación.</p>
+          <p>Se notifica personalmente y procede recurso de reposición.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>⏰ Términos de Caducidad y Prescripción</h3>
+    <table>
+      <thead>
+        <tr><th>Instituto</th><th>Término</th><th>Efecto</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Caducidad de la facultad sancionatoria</strong></td><td>3 años desde la ocurrencia del hecho</td><td>La autoridad pierde competencia para imponer la sanción.</td></tr>
+        <tr><td><strong>Decisión de recursos</strong></td><td>1 año desde su interposición</td><td>Si no se decide, opera silencio a favor del recurrente.</td></tr>
+        <tr><td><strong>Prescripción de la sanción</strong></td><td>5 años desde la ejecutoria del acto sancionatorio</td><td>La autoridad pierde competencia para hacer efectiva la sanción.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> La Superintendencia de Industria y Comercio abre una investigación contra una empresa por publicidad engañosa. Inicia con una indagación preliminar, formula cargos mediante acto administrativo motivado, notifica a la empresa, le concede 15 días para presentar descargos, decreta pruebas, da traslado para alegatos y finalmente decide imponer una multa. Contra esta decisión procede recurso de reposición.
+    </div>
+  </section>
+
+  <!-- TEMA 9: MEDIOS ELECTRÓNICOS -->
+  <section id="tema9">
+    <h2>9. Procedimientos por Medios Electrónicos</h2>
+    <p>El CPACA regula en los artículos 53 a 64 la utilización de medios electrónicos en los procedimientos administrativos, desarrollando la noción de ciudadanía digital.</p>
+
+    <h3>🗺️ Mapa Conceptual</h3>
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">MEDIOS ELECTRÓNICOS</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Sede Electrónica</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Registro</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Expediente Electrónico</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Notificación Electrónica</div></div>
+        </div>
+      </div>
+    </div>
+
+    <h3>📋 Reglas Generales</h3>
+    <div class="alerta">
+      <strong>📌 Principios:</strong>
+      <ul>
+        <li>Todas las autoridades deberán tener al menos una dirección electrónica</li>
+        <li>Deben garantizar calidad, seguridad, disponibilidad, accesibilidad, neutralidad e interoperabilidad</li>
+        <li>Se debe garantizar el acceso de todos, estableciendo mecanismos gratuitos o alternativos</li>
+      </ul>
+    </div>
+
+    <h3>🔍 Instrumentos Electrónicos</h3>
+    <div class="cards-grid">
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">🌐</div>
+        <h4>Sede Electrónica</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Dirección electrónica a disposición de los ciudadanos.</p>
+          <p>Permite realizar trámites, presentar peticiones y recibir notificaciones.</p>
+          <p>Debe cumplir estándares técnicos del Gobierno nacional.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📝</div>
+        <h4>Registro</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>La persona que decida actuar electrónicamente debe registrar su correo electrónico.</p>
+          <p>Las notificaciones se harán por este medio.</p>
+          <p>Los trámites se entienden hechos si se registran antes de la medianoche del día correspondiente.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📂</div>
+        <h4>Expediente Electrónico</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Conjunto de documentos electrónicos correspondientes a un procedimiento administrativo.</p>
+          <p>Debe garantizar autenticidad e integridad.</p>
+          <p>Las reproducciones se presumen auténticas.</p>
+        </div>
+      </div>
+      <div class="card" onclick="this.classList.toggle('active')">
+        <div class="icon">📧</div>
+        <h4>Notificación Electrónica</h4>
+        <p class="hint">Toca para ver detalles</p>
+        <div class="detail">
+          <p>Procede cuando el interesado ha convenido en ello o no ha expresado su deseo de ser notificado por otros medios.</p>
+          <p>Se surte enviando el acto al correo registrado.</p>
+          <p>La notificación solo se surte cuando el interesado accede al documento.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>🎤 Sesiones Virtuales</h3>
+    <p>Los comités, consejos, juntas o cualquier otro cuerpo colegiado pueden efectuar sesiones mediante conferencias virtuales, dejando evidencia de las mismas con las seguridades requeridas (Art. 63 CPACA).</p>
+
+    <h3>📊 Comparativa con la Notificación Tradicional</h3>
+    <table>
+      <thead>
+        <tr><th>Aspecto</th><th>Tradicional</th><th>Electrónica</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Medio</strong></td><td>Personal, por aviso, por edicto, correo certificado</td><td>Correo electrónico, sede electrónica</td></tr>
+        <tr><td><strong>Consentimiento</strong></td><td>No se requiere</td><td>Se requiere convenio o ausencia de oposición</td></tr>
+        <tr><td><strong>Surto</strong></td><td>Según el medio utilizado</td><td>Cuando el interesado accede al documento</td></tr>
+        <tr><td><strong>Prueba</strong></td><td>Constancia escrita</td><td>Certificación electrónica con fecha y hora</td></tr>
+      </tbody>
+    </table>
+
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> La DIAN notifica electrónicamente un acto administrativo a un contribuyente que ha registrado su correo electrónico en la base de datos de la entidad. La notificación se surte cuando el contribuyente accede al documento enviado. Si el contribuyente no ha registrado su correo o ha manifestado su deseo de ser notificado por otros medios, la notificación debe hacerse por los medios tradicionales.
+    </div>
+  </section>
+
+  <!-- TEMA 10: CASOS PRÁCTICOS -->
+  <section id="tema10">
+    <h2>10. Casos Prácticos y Comparativa</h2>
+    <p>Análisis de situaciones reales para consolidar el aprendizaje.</p>
+
+    <div class="alerta">
+      <strong>🎯 Caso 1: Petición Incompleta</strong>
+      <p>Un ciudadano presenta una petición ante la Alcaldía solicitando una licencia de construcción, pero no adjunta los planos del inmueble.</p>
+      <br>
+      <strong>📌 Solución:</strong>
+      <ul>
+        <li>La Alcaldía debe requerir al ciudadano dentro de los 10 días siguientes a la recepción</li>
+        <li>El ciudadano tiene 1 mes para completar la información</li>
+        <li>Si no cumple, se entenderá que ha desistido tácitamente de la petición</li>
+        <li>La Alcaldía deberá expedir acto administrativo motivado declarando el desistimiento y ordenando el archivo</li>
+      </ul>
+    </div>
+
+    <div class="alerta">
+      <strong>🎯 Caso 2: Silencio Administrativo Positivo</strong>
+      <p>Un ciudadano presenta una solicitud de revisión de estrato socioeconómico ante el alcalde. Transcurridos 2 meses sin respuesta.</p>
+      <br>
+      <strong>📌 Solución:</strong>
+      <ul>
+        <li>Se configura el silencio administrativo positivo (Art. 104 L. 142/94)</li>
+        <li>El ciudadano puede protocolizar su solicitud ante notario</li>
+        <li>La escritura pública hará las veces del acto administrativo favorable</li>
+        <li>La entidad está obligada a reconocer el cambio de estrato</li>
+      </ul>
+    </div>
+
+    <div class="alerta">
+      <strong>🎯 Caso 3: Procedimiento Sancionatorio</strong>
+      <p>La Superintendencia de Industria y Comercio abre investigación contra una empresa por publicidad engañosa.</p>
+      <br>
+      <strong>📌 Solución:</strong>
+      <ul>
+        <li>Indagación preliminar para establecer méritos</li>
+        <li>Formulación de cargos mediante acto administrativo motivado</li>
+        <li>Notificación personal a la empresa</li>
+        <li>15 días para presentar descargos y solicitar pruebas</li>
+        <li>Período probatorio de 30 días (prorrogable)</li>
+        <li>10 días para alegatos</li>
+        <li>Decisión dentro de los 30 días siguientes</li>
+        <li>Notificación personal y recurso de reposición</li>
+      </ul>
+    </div>
+
+    <div class="alerta">
+      <strong>🎯 Caso 4: Notificación Electrónica</strong>
+      <p>La DIAN notifica electrónicamente un acto administrativo a un contribuyente que ha registrado su correo electrónico.</p>
+      <br>
+      <strong>📌 Solución:</strong>
+      <ul>
+        <li>La notificación se surte cuando el contribuyente accede al documento</li>
+        <li>Si el contribuyente no accede, la notificación no se surte</li>
+        <li>La DIAN debe certificar la fecha y hora de acceso</li>
+        <li>Si el contribuyente no ha registrado su correo, la notificación debe hacerse por medios tradicionales</li>
+      </ul>
+    </div>
+
+    <h3>📊 Cuadro Resumen: Términos del Procedimiento</h3>
+    <table>
+      <thead>
+        <tr><th>Etapa</th><th>Término</th><th>Norma</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Respuesta a petición de interés general o particular</strong></td><td>15 días hábiles</td><td>Art. 14 CPACA</td></tr>
+        <tr><td><strong>Respuesta a petición de información</strong></td><td>10 días</td><td>Art. 14 CPACA</td></tr>
+        <tr><td><strong>Respuesta a consulta</strong></td><td>30 días</td><td>Art. 14 CPACA</td></tr>
+        <tr><td><strong>Silencio administrativo negativo</strong></td><td>3 meses</td><td>Art. 83 CPACA</td></tr>
+        <tr><td><strong>Requerimiento para completar petición</strong></td><td>10 días</td><td>Art. 17 CPACA</td></tr>
+        <tr><td><strong>Completar petición incompleta</strong></td><td>1 mes</td><td>Art. 17 CPACA</td></tr>
+        <tr><td><strong>Descargos en procedimiento sancionatorio</strong></td><td>15 días</td><td>Art. 49 CPACA</td></tr>
+        <tr><td><strong>Período probatorio</strong></td><td>30 días (60 si aplica)</td><td>Art. 49 CPACA</td></tr>
+        <tr><td><strong>Alegatos</strong></td><td>10 días</td><td>Art. 49 CPACA</td></tr>
+        <tr><td><strong>Decisión sancionatoria</strong></td><td>30 días</td><td>Art. 49 CPACA</td></tr>
+        <tr><td><strong>Caducidad de facultad sancionatoria</strong></td><td>3 años</td><td>Art. 48 CPACA</td></tr>
+        <tr><td><strong>Prescripción de sanción</strong></td><td>5 años</td><td>Art. 48 CPACA</td></tr>
+      </tbody>
+    </table>
+
+    <div class="ejemplo">
+      <strong>📝 Reflexión final:</strong> El procedimiento administrativo es el instrumento a través del cual la autoridad ejerce sus funciones, pero también es la garantía de los derechos de los ciudadanos. El CPACA, al desarrollar los principios constitucionales, busca hacer de la administración una entidad al servicio de los ciudadanos, respetuosa de sus derechos y sometida al ordenamiento jurídico.
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz">
+    <h2>🎯 Quiz Completo - 40 Preguntas</h2>
+    <p>Pon a prueba tus conocimientos sobre el Procedimiento Administrativo y los Derechos Fundamentales.</p>
+
+    <div class="quiz-container">
+      <div class="quiz-header">
+        <h3>📊 Tu Progreso</h3>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="quiz-stats">
+          <div class="stat">Respondidas: <strong id="respondidas">0</strong>/40</div>
+          <div class="stat">Correctas: <strong id="correctas">0</strong></div>
+          <div class="stat">Incorrectas: <strong id="incorrectas">0</strong></div>
+          <div class="stat">Porcentaje: <strong id="porcentaje">0</strong>%</div>
+        </div>
+      </div>
+
+      <div class="quiz-tabs">
+        <div class="quiz-tab active" onclick="mostrarSeccion('s1', this)">T1 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s2', this)">T2 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s3', this)">T3 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s4', this)">T4 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s5', this)">T5 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s6', this)">T6 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s7', this)">T7 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s8', this)">T8 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s9', this)">T9 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion('s10', this)">T10 (4)</div>
+      </div>
+
+      <!-- SECCIÓN 1: NOCIÓN -->
+      <div class="quiz-section active" id="s1">
+        <div class="pregunta" data-correcta="1" data-tema="1">
+          <span class="pregunta-num">1</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El procedimiento administrativo se define como:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 1)">a) El conjunto de sanciones que puede imponer la autoridad.</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">b) El conjunto de actuaciones a las cuales está sujeta la autoridad para la expedición válida de decisiones administrativas.</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">c) El trámite judicial ante la jurisdicción contenciosa administrativa.</div>
+            <div class="opcion" onclick="seleccionar(this, 1)">d) La regulación de los contratos estatales.</div>
+          </div>
+          <div class="explicacion">El procedimiento administrativo es el conjunto de actuaciones a las cuales está sujeta la autoridad para la expedición válida de decisiones administrativas, con el fin de garantizar los derechos de los asociados.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="1">
+          <span class="pregunta-num">2</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La forma de iniciación del procedimiento administrativo en la que la autoridad actúa por iniciativa propia se denomina:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 2)">a) De oficio.</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">b) A solicitud de parte.</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">c) Por cumplimiento de deber legal.</div>
+            <div class="opcion" onclick="seleccionar(this, 2)">d) Por silencio administrativo.</div>
+          </div>
+          <div class="explicacion">La iniciación de oficio se presenta cuando la autoridad administrativa inicia la actuación por iniciativa propia, sin necesidad de petición de parte.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="1">
+          <span class="pregunta-num">3</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Cuando un ciudadano solicita una licencia de construcción, el procedimiento se inicia:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 3)">a) De oficio.</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">b) Por cumplimiento de deber legal.</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">c) A solicitud de parte.</div>
+            <div class="opcion" onclick="seleccionar(this, 3)">d) Por silencio administrativo.</div>
+          </div>
+          <div class="explicacion">Cuando un ciudadano solicita una licencia de construcción, el procedimiento se inicia a solicitud de parte, mediante el ejercicio del derecho de petición.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="1">
+          <span class="pregunta-num">4</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La finalidad esencial del procedimiento administrativo es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 4)">a) Sancionar a los infractores.</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">b) Recaudar impuestos.</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">c) Agilizar los trámites burocráticos.</div>
+            <div class="opcion" onclick="seleccionar(this, 4)">d) Garantizar los derechos de los asociados frente al poder público.</div>
+          </div>
+          <div class="explicacion">La finalidad esencial del procedimiento administrativo es garantizar los derechos de los asociados frente al poder público, asegurando que las decisiones se adopten conforme a derecho.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 2: PRINCIPIOS -->
+      <div class="quiz-section" id="s2">
+        <div class="pregunta" data-correcta="1" data-tema="2">
+          <span class="pregunta-num">5</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El principio que establece que las actuaciones administrativas se adelantarán conforme a las normas de procedimiento y competencia, con plena garantía de los derechos de representación, defensa y contradicción, es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 5)">a) Igualdad.</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">b) Debido proceso.</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">c) Imparcialidad.</div>
+            <div class="opcion" onclick="seleccionar(this, 5)">d) Buena fe.</div>
+          </div>
+          <div class="explicacion">El principio de debido proceso establece que las actuaciones administrativas se adelantarán conforme a las normas de procedimiento y competencia, con plena garantía de los derechos de representación, defensa y contradicción.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="2">
+          <span class="pregunta-num">6</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El principio que establece que se presumirá el comportamiento leal y fiel de autoridades y particulares en el ejercicio de sus competencias, derechos y deberes, es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 6)">a) Buena fe.</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">b) Moralidad.</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">c) Transparencia.</div>
+            <div class="opcion" onclick="seleccionar(this, 6)">d) Participación.</div>
+          </div>
+          <div class="explicacion">El principio de buena fe establece que se presumirá el comportamiento leal y fiel de autoridades y particulares en el ejercicio de sus competencias, derechos y deberes.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="2">
+          <span class="pregunta-num">7</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Si una autoridad administrativa decide favorablemente a un amigo sin justificación objetiva, está violando los principios de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 7)">a) Economía y celeridad.</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">b) Transparencia y publicidad.</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">c) Imparcialidad y moralidad.</div>
+            <div class="opcion" onclick="seleccionar(this, 7)">d) Coordinación y eficacia.</div>
+          </div>
+          <div class="explicacion">Si una autoridad administrativa decide favorablemente a un amigo sin justificación objetiva, está violando los principios de imparcialidad (actuar sin factores de afecto o interés) y moralidad (actuar con rectitud, lealtad y honestidad).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="2">
+          <span class="pregunta-num">8</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El principio que establece que las autoridades buscarán que los procedimientos logren su finalidad, removerán obstáculos formales y evitarán decisiones inhibitorias, es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 8)">a) Celeridad.</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">b) Economía.</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">c) Coordinación.</div>
+            <div class="opcion" onclick="seleccionar(this, 8)">d) Eficacia.</div>
+          </div>
+          <div class="explicacion">El principio de eficacia establece que las autoridades buscarán que los procedimientos logren su finalidad, removerán obstáculos formales y evitarán decisiones inhibitorias, dilaciones o retardos.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 3: DERECHOS -->
+      <div class="quiz-section" id="s3">
+        <div class="pregunta" data-correcta="1" data-tema="3">
+          <span class="pregunta-num">9</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El artículo 5 del CPACA establece los derechos de las personas en sus relaciones con las autoridades. ¿Cuál de los siguientes NO es un derecho reconocido?</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 9)">a) Presentar peticiones en cualquiera de sus modalidades.</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">b) Obtener respuesta oportuna y eficaz a sus peticiones.</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">c) Exigir que las autoridades actúen sin motivación.</div>
+            <div class="opcion" onclick="seleccionar(this, 9)">d) Ser tratado con el respeto y la consideración debida a la dignidad de la persona humana.</div>
+          </div>
+          <div class="explicacion">El artículo 5 del CPACA establece los derechos de las personas, pero NO incluye el derecho a exigir que las autoridades actúen sin motivación. Por el contrario, las decisiones deben ser motivadas.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="3">
+          <span class="pregunta-num">10</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Una persona enferma terminal solicita a su EPS la autorización de un tratamiento médico. Esta petición debe recibir:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 10)">a) Atención prioritaria.</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">b) Atención ordinaria.</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">c) Atención diferida.</div>
+            <div class="opcion" onclick="seleccionar(this, 10)">d) No requiere atención especial.</div>
+          </div>
+          <div class="explicacion">Conforme al Art. 20 CPACA, las autoridades darán atención prioritaria a las peticiones de reconocimiento de un derecho fundamental cuando deban ser resueltas para evitar un perjuicio irremediable al peticionario.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="3">
+          <span class="pregunta-num">11</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El derecho de las personas a formular alegaciones y aportar documentos u otros elementos de prueba en cualquier actuación administrativa en la cual tengan interés, hace parte del derecho a:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 11)">a) Información.</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">b) Respuesta oportuna.</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">c) Defensa y contradicción.</div>
+            <div class="opcion" onclick="seleccionar(this, 11)">d) Trato digno.</div>
+          </div>
+          <div class="explicacion">El derecho a formular alegaciones y aportar documentos u otros elementos de prueba hace parte del derecho a la defensa y contradicción, consagrado en el numeral 9 del artículo 5 del CPACA.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="3">
+          <span class="pregunta-num">12</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Las personas en situación de discapacidad, niños, niñas, adolescentes, mujeres gestantes y adultos mayores reciben:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 12)">a) Atención ordinaria.</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">b) Atención diferida.</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">c) No requieren atención especial.</div>
+            <div class="opcion" onclick="seleccionar(this, 12)">d) Atención preferente.</div>
+          </div>
+          <div class="explicacion">Conforme al numeral 7 del artículo 5 del CPACA, las personas en situación de discapacidad, niños, niñas, adolescentes, mujeres gestantes y adultos mayores reciben atención preferente.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 4: DEBERES -->
+      <div class="quiz-section" id="s4">
+        <div class="pregunta" data-correcta="1" data-tema="4">
+          <span class="pregunta-num">13</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El artículo 7 del CPACA establece los deberes de las autoridades en la atención al público. ¿Cuál de los siguientes es un deber?</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 13)">a) Exigir documentos que reposen en la propia entidad.</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">b) Garantizar atención personal al público, como mínimo durante 40 horas a la semana.</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">c) Rechazar peticiones presentadas por escrito.</div>
+            <div class="opcion" onclick="seleccionar(this, 13)">d) Demorar en forma injustificada la expedición de actos.</div>
+          </div>
+          <div class="explicacion">El artículo 7 del CPACA establece como deber de las autoridades garantizar atención personal al público, como mínimo durante 40 horas a la semana, las cuales se distribuirán en horarios que satisfagan las necesidades del servicio.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="4">
+          <span class="pregunta-num">14</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Si un ciudadano solicita una copia de su cédula de ciudadanía a la Alcaldía, la autoridad:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 14)">a) NO puede exigirle que presente una constancia de residencia, porque ese documento ya reposa en los archivos de la entidad.</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">b) Puede exigirle que presente una constancia de residencia.</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">c) Debe exigirle que presente una constancia de residencia y un certificado de antecedentes.</div>
+            <div class="opcion" onclick="seleccionar(this, 14)">d) Puede rechazar la petición por cualquier motivo.</div>
+          </div>
+          <div class="explicacion">Conforme al numeral 2 del artículo 9 del CPACA, está prohibido exigir actos administrativos, constancias, certificaciones o documentos que ya reposen en la entidad ante la cual se está tramitando la respectiva actuación.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="4">
+          <span class="pregunta-num">15</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El deber de información establecido en el artículo 8 del CPACA obliga a las autoridades a mantener a disposición de toda persona información completa y actualizada sobre:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 15)">a) Solo los actos administrativos de carácter general.</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">b) Solo las normas básicas que determinan su competencia.</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">c) Las normas básicas que determinan su competencia, las funciones de sus distintas dependencias, los procedimientos, trámites y términos, los actos administrativos de carácter general, los documentos que deben ser suministrados por las personas, las dependencias responsables, la dependencia a quien debe dirigirse en caso de queja o reclamo, y los proyectos específicos de regulación.</div>
+            <div class="opcion" onclick="seleccionar(this, 15)">d) Solo los proyectos específicos de regulación.</div>
+          </div>
+          <div class="explicacion">El artículo 8 del CPACA establece un deber amplio de información que incluye todos los aspectos mencionados en la opción c).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="4">
+          <span class="pregunta-num">16</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La política anticorrupción en la racionalización de trámites se fundamenta en:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 16)">a) La Ley 100 de 1993.</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">b) La Ley 489 de 1998.</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">c) La Ley 1437 de 2011.</div>
+            <div class="opcion" onclick="seleccionar(this, 16)">d) El D.L. 2150 de 1995, la Ley 962 de 2005, la Ley 1474 de 2011 y el D.L. 19 de 2012.</div>
+          </div>
+          <div class="explicacion">La política anticorrupción en la racionalización de trámites se fundamenta en el D.L. 2150 de 1995 (Estatuto Antitrámite), la Ley 962 de 2005, la Ley 1474 de 2011 (Estatuto Anticorrupción) y el D.L. 19 de 2012.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 5: PETICIÓN -->
+      <div class="quiz-section" id="s5">
+        <div class="pregunta" data-correcta="1" data-tema="5">
+          <span class="pregunta-num">17</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El derecho de petición está consagrado en el artículo:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 17)">a) 22 de la Constitución Política.</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">b) 23 de la Constitución Política.</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">c) 24 de la Constitución Política.</div>
+            <div class="opcion" onclick="seleccionar(this, 17)">d) 25 de la Constitución Política.</div>
+          </div>
+          <div class="explicacion">El derecho de petición está consagrado en el artículo 23 de la Constitución Política: "Toda persona tiene derecho a presentar peticiones respetuosas a las autoridades por motivos de interés general o particular y a obtener pronta resolución".</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="5">
+          <span class="pregunta-num">18</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El término para responder una petición de interés general o particular es de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 18)">a) 15 días hábiles siguientes a su recepción.</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">b) 10 días siguientes a su recepción.</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">c) 30 días siguientes a su recepción.</div>
+            <div class="opcion" onclick="seleccionar(this, 18)">d) 3 meses siguientes a su recepción.</div>
+          </div>
+          <div class="explicacion">Conforme al artículo 14 del CPACA, el término para resolver las peticiones de interés general o particular es de 15 días hábiles siguientes a su recepción.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="5">
+          <span class="pregunta-num">19</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El término para responder una petición de información es de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 19)">a) 15 días hábiles.</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">b) 30 días.</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">c) 10 días.</div>
+            <div class="opcion" onclick="seleccionar(this, 19)">d) 3 meses.</div>
+          </div>
+          <div class="explicacion">Conforme al artículo 14 del CPACA, el término para resolver las peticiones de información es de 10 días siguientes a su recepción.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="5">
+          <span class="pregunta-num">20</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El término para responder una consulta es de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 20)">a) 15 días hábiles.</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">b) 10 días.</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">c) 3 meses.</div>
+            <div class="opcion" onclick="seleccionar(this, 20)">d) 30 días.</div>
+          </div>
+          <div class="explicacion">Conforme al artículo 14 del CPACA, el término para resolver las consultas es de 30 días siguientes a su recepción.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 6: SILENCIO -->
+      <div class="quiz-section" id="s6">
+        <div class="pregunta" data-correcta="1" data-tema="6">
+          <span class="pregunta-num">21</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El silencio administrativo negativo se configura cuando:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 21)">a) La autoridad responde favorablemente la petición.</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">b) Transcurridos tres meses sin que se haya notificado decisión que resuelva la petición.</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">c) La autoridad responde negativamente la petición.</div>
+            <div class="opcion" onclick="seleccionar(this, 21)">d) El ciudadano retira la petición.</div>
+          </div>
+          <div class="explicacion">Conforme al artículo 83 del CPACA, el silencio administrativo negativo se configura cuando transcurridos tres meses, contados a partir de la presentación de una petición, sin que se haya notificado decisión que la resuelva, se entenderá que ésta es negativa.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="6">
+          <span class="pregunta-num">22</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El silencio administrativo positivo opera excepcionalmente en los siguientes casos:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 22)">a) Petición de información, revisión de estratos, servicios públicos domiciliarios, licencias de construcción, declaración privada de impuestos, inscripción de sindicato, petición en ejecución de contrato.</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">b) Todas las peticiones de interés general.</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">c) Todas las peticiones de interés particular.</div>
+            <div class="opcion" onclick="seleccionar(this, 22)">d) Todas las consultas.</div>
+          </div>
+          <div class="explicacion">El silencio administrativo positivo opera excepcionalmente en los casos expresamente señalados en la ley, como los mencionados en la opción a).</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="6">
+          <span class="pregunta-num">23</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Un ciudadano presenta una solicitud de revisión de estrato socioeconómico ante el alcalde. Transcurridos 2 meses sin respuesta:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 23)">a) Se configura el silencio administrativo negativo.</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">b) El ciudadano debe esperar 3 meses para que se configure el silencio.</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">c) Se configura el silencio administrativo positivo.</div>
+            <div class="opcion" onclick="seleccionar(this, 23)">d) El ciudadano debe interponer recurso de reposición.</div>
+          </div>
+          <div class="explicacion">Conforme al artículo 104 de la Ley 142 de 1994, si transcurridos 2 meses sin respuesta del alcalde, se configura el silencio administrativo positivo a favor del peticionario.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="6">
+          <span class="pregunta-num">24</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La protocolización del silencio administrativo positivo consiste en:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 24)">a) Presentar la petición nuevamente ante la autoridad.</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">b) Interponer recurso de reposición.</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">c) Acudir directamente ante la jurisdicción contenciosa administrativa.</div>
+            <div class="opcion" onclick="seleccionar(this, 24)">d) Incorporar en escritura pública la constancia o copia de la solicitud, junto con la declaración jurada de no haber obtenido respuesta.</div>
+          </div>
+          <div class="explicacion">La protocolización del silencio administrativo positivo consiste en incorporar en escritura pública la constancia o copia de la solicitud, junto con la declaración jurada de no haber obtenido respuesta en el término indicado en la ley.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 7: TRÁMITE -->
+      <div class="quiz-section" id="s7">
+        <div class="pregunta" data-correcta="1" data-tema="7">
+          <span class="pregunta-num">25</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La formación del expediente administrativo consiste en:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 25)">a) Presentar la petición ante la autoridad.</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">b) Integrar todos los documentos relativos a una actuación administrativa en un solo cuerpo.</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">c) Notificar la decisión al interesado.</div>
+            <div class="opcion" onclick="seleccionar(this, 25)">d) Interponer recursos contra la decisión.</div>
+          </div>
+          <div class="explicacion">La formación del expediente administrativo consiste en integrar todos los documentos relativos a una actuación administrativa en un solo cuerpo, conforme al artículo 36 del CPACA.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="7">
+          <span class="pregunta-num">26</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los terceros determinados son:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 26)">a) Aquellos que la autoridad debe comunicarles la existencia de la actuación.</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">b) Aquellos cuya información se divulga a través de medio masivo de comunicación.</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">c) Aquellos que no tienen interés en la actuación.</div>
+            <div class="opcion" onclick="seleccionar(this, 26)">d) Aquellos que presentan la petición.</div>
+          </div>
+          <div class="explicacion">Conforme al artículo 37 del CPACA, los terceros determinados son aquellos que la autoridad debe comunicarles la existencia de la actuación, el objeto de la misma y el nombre del peticionario.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="7">
+          <span class="pregunta-num">27</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Las audiencias en el procedimiento administrativo tienen por objeto:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 27)">a) Sancionar a los infractores.</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">b) Recaudar impuestos.</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">c) Promover la participación ciudadana, asegurar el derecho de contradicción y contribuir a la pronta adopción de decisiones.</div>
+            <div class="opcion" onclick="seleccionar(this, 27)">d) Notificar las decisiones a los interesados.</div>
+          </div>
+          <div class="explicacion">Conforme al artículo 35 del CPACA, las audiencias tienen por objeto promover la participación ciudadana, asegurar el derecho de contradicción y contribuir a la pronta adopción de decisiones.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="7">
+          <span class="pregunta-num">28</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La decisión administrativa debe ser:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 28)">a) Oral y sin motivación.</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">b) Escrita, pero sin fundamentos de hecho o de derecho.</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">c) Oral y motivada.</div>
+            <div class="opcion" onclick="seleccionar(this, 28)">d) Escrita y motivada, expresando los fundamentos de hecho y de derecho.</div>
+          </div>
+          <div class="explicacion">Conforme al artículo 42 del CPACA, la decisión debe ser motivada, es decir, expresar los fundamentos de hecho y de derecho que la sustentan.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 8: SANCIONATORIO -->
+      <div class="quiz-section" id="s8">
+        <div class="pregunta" data-correcta="1" data-tema="8">
+          <span class="pregunta-num">29</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El procedimiento administrativo sancionatorio se regula en los artículos:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 29)">a) 1 a 10 del CPACA.</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">b) 47 a 52 del CPACA.</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">c) 100 a 110 del CPACA.</div>
+            <div class="opcion" onclick="seleccionar(this, 29)">d) 200 a 210 del CPACA.</div>
+          </div>
+          <div class="explicacion">El procedimiento administrativo sancionatorio se regula en los artículos 47 a 52 del CPACA.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="8">
+          <span class="pregunta-num">30</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El principio que establece que toda persona se presume inocente mientras no se le haya declarado judicialmente culpable, es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 30)">a) Presunción de inocencia.</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">b) Legalidad de las faltas y sanciones.</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">c) No reformatio in pejus.</div>
+            <div class="opcion" onclick="seleccionar(this, 30)">d) Non bis in ídem.</div>
+          </div>
+          <div class="explicacion">El principio de presunción de inocencia establece que toda persona se presume inocente mientras no se le haya declarado judicialmente culpable.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="8">
+          <span class="pregunta-num">31</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El término de caducidad de la facultad sancionatoria es de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 31)">a) 1 año desde la ocurrencia del hecho.</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">b) 2 años desde la ocurrencia del hecho.</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">c) 3 años desde la ocurrencia del hecho.</div>
+            <div class="opcion" onclick="seleccionar(this, 31)">d) 5 años desde la ocurrencia del hecho.</div>
+          </div>
+          <div class="explicacion">Conforme al artículo 48 del CPACA, el término de caducidad de la facultad sancionatoria es de 3 años, contados a partir de la ocurrencia del hecho, la conducta u omisión que motivó su imposición.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="8">
+          <span class="pregunta-num">32</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El término de prescripción de la sanción es de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 32)">a) 1 año desde la ejecutoria del acto sancionatorio.</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">b) 2 años desde la ejecutoria del acto sancionatorio.</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">c) 3 años desde la ejecutoria del acto sancionatorio.</div>
+            <div class="opcion" onclick="seleccionar(this, 32)">d) 5 años desde la ejecutoria del acto sancionatorio.</div>
+          </div>
+          <div class="explicacion">Conforme al artículo 48 del CPACA, el término de prescripción de la sanción es de 5 años, contados a partir de la ejecutoria del acto sancionatorio.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 9: ELECTRÓNICO -->
+      <div class="quiz-section" id="s9">
+        <div class="pregunta" data-correcta="1" data-tema="9">
+          <span class="pregunta-num">33</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La sede electrónica se define como:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 33)">a) El lugar físico donde se atiende al público.</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">b) La dirección electrónica a disposición de los ciudadanos para realizar trámites, presentar peticiones y recibir notificaciones.</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">c) El expediente físico de la actuación.</div>
+            <div class="opcion" onclick="seleccionar(this, 33)">d) La notificación personal del acto administrativo.</div>
+          </div>
+          <div class="explicacion">La sede electrónica se define como la dirección electrónica a disposición de los ciudadanos para realizar trámites, presentar peticiones y recibir notificaciones.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="9">
+          <span class="pregunta-num">34</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El expediente electrónico se define como:</p>
+          <div class="opcion" onclick="seleccionar(this, 34)">a) El conjunto de documentos electrónicos correspondientes a un procedimiento administrativo.</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">b) El lugar físico donde se atiende al público.</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">c) La notificación personal del acto administrativo.</div>
+            <div class="opcion" onclick="seleccionar(this, 34)">d) La dirección electrónica a disposición de los ciudadanos.</div>
+          </div>
+          <div class="explicacion">El expediente electrónico se define como el conjunto de documentos electrónicos correspondientes a un procedimiento administrativo.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="9">
+          <span class="pregunta-num">35</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La notificación electrónica se surte:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 35)">a) Cuando se envía el correo electrónico.</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">b) Cuando se publica en la sede electrónica.</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">c) Cuando el interesado accede al documento.</div>
+            <div class="opcion" onclick="seleccionar(this, 35)">d) Cuando se imprime el documento.</div>
+          </div>
+          <div class="explicacion">Conforme al artículo 61 del CPACA, la notificación electrónica se surte cuando el interesado accede al documento enviado a su correo electrónico registrado.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="9">
+          <span class="pregunta-num">36</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Las sesiones virtuales de comités, consejos, juntas o cualquier otro cuerpo colegiado:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 36)">a) No están permitidas en el procedimiento administrativo.</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">b) Solo están permitidas en casos excepcionales.</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">c) Requieren autorización previa del Ministerio del Interior.</div>
+            <div class="opcion" onclick="seleccionar(this, 36)">d) Pueden efectuarse mediante conferencias virtuales, dejando evidencia de las mismas con las seguridades requeridas.</div>
+          </div>
+          <div class="explicacion">Conforme al artículo 63 del CPACA, los comités, consejos, juntas o cualquier otro cuerpo colegiado pueden efectuar sesiones mediante conferencias virtuales, dejando evidencia de las mismas con las seguridades requeridas.</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 10: CASOS -->
+      <div class="quiz-section" id="s10">
+        <div class="pregunta" data-correcta="1" data-tema="10">
+          <span class="pregunta-num">37</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Un ciudadano presenta una petición ante la Alcaldía solicitando una licencia de construcción, pero no adjunta los planos del inmueble. La Alcaldía debe:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 37)">a) Rechazar la petición inmediatamente.</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">b) Requerir al ciudadano dentro de los 10 días siguientes a la recepción para que complete la información.</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">c) Esperar 3 meses para configurar el silencio administrativo negativo.</div>
+            <div class="opcion" onclick="seleccionar(this, 37)">d) Resolver favorablemente la petición sin los planos.</div>
+          </div>
+          <div class="explicacion">Conforme al artículo 17 del CPACA, cuando la petición sea incompleta, la autoridad debe requerir al peticionario dentro de los 10 días siguientes a la recepción para que complete la información.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="10">
+          <span class="pregunta-num">38</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Un ciudadano presenta una solicitud de revisión de estrato socioeconómico ante el alcalde. Transcurridos 2 meses sin respuesta:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 38)">a) Se configura el silencio administrativo positivo y el ciudadano puede protocolizar su solicitud ante notario.</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">b) Se configura el silencio administrativo negativo.</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">c) El ciudadano debe esperar 3 meses para que se configure el silencio.</div>
+            <div class="opcion" onclick="seleccionar(this, 38)">d) El ciudadano debe interponer recurso de reposición.</div>
+          </div>
+          <div class="explicacion">Conforme al artículo 104 de la Ley 142 de 1994, si transcurridos 2 meses sin respuesta del alcalde, se configura el silencio administrativo positivo a favor del peticionario, quien puede protocolizar su solicitud ante notario.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="10">
+          <span class="pregunta-num">39</span><span class="pregunta-tipo">Aplicación</span>
+          <p>La Superintendencia de Industria y Comercio abre investigación contra una empresa por publicidad engañosa. El procedimiento sancionatorio debe seguir las siguientes etapas:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 39)">a) Indagación preliminar, formulación de cargos, descargos, pruebas, alegatos, decisión.</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">b) Formulación de cargos, decisión inmediata.</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">c) Notificación personal, sanción inmediata.</div>
+            <div class="opcion" onclick="seleccionar(this, 39)">d) Decisión, notificación, recurso de reposición.</div>
+          </div>
+          <div class="explicacion">El procedimiento sancionatorio debe seguir las etapas establecidas en los artículos 47 a 52 del CPACA: indagación preliminar, formulación de cargos, descargos, pruebas, alegatos y decisión.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="10">
+          <span class="pregunta-num">40</span><span class="pregunta-tipo">Aplicación</span>
+          <p>La DIAN notifica electrónicamente un acto administrativo a un contribuyente que ha registrado su correo electrónico en la base de datos de la entidad. La notificación se surte:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar(this, 40)">a) Cuando se envía el correo electrónico.</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">b) Cuando se publica en la sede electrónica.</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">c) Cuando se imprime el documento.</div>
+            <div class="opcion" onclick="seleccionar(this, 40)">d) Cuando el contribuyente accede al documento.</div>
+          </div>
+          <div class="explicacion">Conforme al artículo 61 del CPACA, la notificación electrónica se surte cuando el interesado accede al documento enviado a su correo electrónico registrado.</div>
+        </div>
+      </div>
+
+      <div class="resultado-final" id="resultadoFinal">
+        <h3>🏆 Resultado Final</h3>
+        <div class="puntaje-final" id="puntajeFinal">0/40</div>
+        <p id="mensajeFinal"></p>
+        <div class="desglose-temas" id="desgloseTemas"></div>
+        <button onclick="reiniciarQuiz()" class="btn-reset">🔄 Reiniciar Quiz</button>
+      </div>
+
+      <div style="text-align: center; margin-top: 1.5rem;">
+        <button onclick="verResultadoFinal()">📊 Ver Resultado Final</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>📋 Guía Didáctica - Procedimiento Administrativo y Derechos Fundamentales</p>
+  <p>Guía 5 de 8 · Derecho Administrativo Colombiano</p>
+  <p style="margin-top: 1rem; opacity: 0.7;">© 2026 - Material educativo interactivo</p>
+</footer>
+
+<script>
+  function toggleAcordeon(header) {
+    header.classList.toggle('active');
+    const content = header.nextElementSibling;
+    content.classList.toggle('active');
+  }
+
+  let respuestas = {};
+  const totalPreguntas = 40;
+
+  function mostrarSeccion(id, tab) {
+    document.querySelectorAll('.quiz-section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.quiz-tab').forEach(t => t.classList.remove('active'));
+    
+    document.getElementById(id).classList.add('active');
+    tab.classList.add('active');
+  }
+
+  function seleccionar(opcion, preguntaNum) {
+    if (respuestas[preguntaNum] !== undefined) return;
+
+    const pregunta = opcion.closest('.pregunta');
+    const opciones = pregunta.querySelectorAll('.opcion');
+    const correcta = parseInt(pregunta.dataset.correcta);
+    const tema = parseInt(pregunta.dataset.tema);
+    const seleccionada = Array.from(opciones).indexOf(opcion);
+    const explicacion = pregunta.querySelector('.explicacion');
+
+    opciones.forEach(o => o.classList.add('disabled'));
+
+    if (seleccionada === correcta) {
+      opcion.classList.add('correcta');
+      respuestas[preguntaNum] = { correcta: true, tema: tema };
+    } else {
+      opcion.classList.add('incorrecta');
+      opciones[correcta].classList.add('correcta');
+      respuestas[preguntaNum] = { correcta: false, tema: tema };
+    }
+
+    explicacion.classList.add('visible');
+    pregunta.classList.add('answered');
+    actualizarEstadisticas();
+  }
+
+  function actualizarEstadisticas() {
+    const total = Object.keys(respuestas).length;
+    const correctas = Object.values(respuestas).filter(r => r.correcta).length;
+    const incorrectas = total - correctas;
+    const porcentaje = total > 0 ? Math.round((correctas / total) * 100) : 0;
+
+    document.getElementById('respondidas').textContent = total;
+    document.getElementById('correctas').textContent = correctas;
+    document.getElementById('incorrectas').textContent = incorrectas;
+    document.getElementById('porcentaje').textContent = porcentaje;
+
+    const progreso = (total / totalPreguntas) * 100;
+    document.getElementById('progressFill').style.width = progreso + '%';
+  }
+
+  function verResultadoFinal() {
+    const total = Object.keys(respuestas).length;
+    
+    if (total < totalPreguntas) {
+      alert(`⚠️ Aún te faltan ${totalPreguntas - total} preguntas por responder.`);
+      return;
+    }
+
+    const correctas = Object.values(respuestas).filter(r => r.correcta).length;
+    const porcentaje = Math.round((correctas / totalPreguntas) * 100);
+
+    const resultadoFinal = document.getElementById('resultadoFinal');
+    resultadoFinal.classList.add('visible');
+
+    document.getElementById('puntajeFinal').textContent = `${correctas}/${totalPreguntas}`;
+
+    let mensaje = '';
+    if (porcentaje === 100) mensaje = '🏆 ¡PERFECTO! Dominas el Procedimiento Administrativo y los Derechos Fundamentales.';
+    else if (porcentaje >= 90) mensaje = '🌟 ¡Excelente! Dominio sobresaliente.';
+    else if (porcentaje >= 75) mensaje = '✅ ¡Muy bien! Buen dominio.';
+    else if (porcentaje >= 60) mensaje = '📚 Aceptable. Repasa los temas donde fallaste.';
+    else if (porcentaje >= 40) mensaje = '📖 Necesitas reforzar varios conceptos.';
+    else mensaje = '🔍 Es necesario estudiar nuevamente todos los temas.';
+
+    document.getElementById('mensajeFinal').textContent = mensaje;
+
+    const temas = {
+      1: { nombre: 'T1: Noción', total: 4, correctas: 0 },
+      2: { nombre: 'T2: Principios', total: 4, correctas: 0 },
+      3: { nombre: 'T3: Derechos', total: 4, correctas: 0 },
+      4: { nombre: 'T4: Deberes', total: 4, correctas: 0 },
+      5: { nombre: 'T5: Petición', total: 4, correctas: 0 },
+      6: { nombre: 'T6: Silencio', total: 4, correctas: 0 },
+      7: { nombre: 'T7: Trámite', total: 4, correctas: 0 },
+      8: { nombre: 'T8: Sancionatorio', total: 4, correctas: 0 },
+      9: { nombre: 'T9: Electrónico', total: 4, correctas: 0 },
+      10: { nombre: 'T10: Casos', total: 4, correctas: 0 }
+    };
+
+    Object.values(respuestas).forEach(r => {
+      if (r.correcta) temas[r.tema].correctas++;
+    });
+
+    const desgloseHTML = Object.values(temas).map(t => {
+      const pct = Math.round((t.correctas / t.total) * 100);
+      return `
+        <div class="desglose-item">
+          <h4>${t.nombre}</h4>
+          <p>${t.correctas}/${t.total} (${pct}%)</p>
+          <div class="mini-bar">
+            <div class="mini-bar-fill" style="width: ${pct}%"></div>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    document.getElementById('desgloseTemas').innerHTML = desgloseHTML;
+    resultadoFinal.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  function reiniciarQuiz() {
+    if (!confirm('¿Reiniciar el quiz?')) return;
+
+    respuestas = {};
+
+    document.querySelectorAll('.opcion').forEach(o => o.classList.remove('correcta', 'incorrecta', 'disabled'));
+    document.querySelectorAll('.explicacion').forEach(e => e.classList.remove('visible'));
+    document.querySelectorAll('.pregunta').forEach(p => p.classList.remove('answered'));
+    document.getElementById('resultadoFinal').classList.remove('visible');
+
+    actualizarEstadisticas();
+    mostrarSeccion('s1', document.querySelector('.quiz-tab'));
+    document.getElementById('quiz').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  document.querySelectorAll('nav a').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+</script>
+
+</body>
+</html>
