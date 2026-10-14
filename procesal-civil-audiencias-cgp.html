@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Audiencias del CGP - Procesal Civil</title>
+<style>
+  :root {
+    --primary: #065f46;
+    --secondary: #10b981;
+    --accent: #047857;
+    --light: #ecfdf5;
+    --dark: #064e3b;
+    --success: #059669;
+    --warning: #d97706;
+    --danger: #dc2626;
+    --card-bg: #ffffff;
+    --shadow: 0 4px 15px rgba(0,0,0,0.08);
+    --shadow-hover: 0 8px 25px rgba(0,0,0,0.15);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Georgia', 'Times New Roman', serif; background: var(--light); color: var(--dark); line-height: 1.7; }
+  header { background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%); color: white; padding: 2rem 1rem; text-align: center; box-shadow: var(--shadow); position: relative; overflow: hidden; }
+  header::before { content: '⚖️'; position: absolute; font-size: 15rem; opacity: 0.05; top: -30px; right: -30px; }
+  header h1 { font-size: 2.5rem; margin-bottom: 0.5rem; letter-spacing: 2px; }
+  header p { font-size: 1.1rem; opacity: 0.9; font-style: italic; }
+  main { max-width: 1200px; margin: 0 auto; padding: 2rem 1rem; }
+  section { background: var(--card-bg); margin-bottom: 2.5rem; padding: 2rem; border-radius: 12px; box-shadow: var(--shadow); border-left: 5px solid var(--secondary); }
+  section h2 { color: var(--primary); font-size: 2rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--secondary); }
+  section h3 { color: var(--accent); font-size: 1.4rem; margin: 1.5rem 0 0.8rem; }
+  p { margin-bottom: 1rem; text-align: justify; }
+  
+  /* Mapas Conceptuales CSS */
+  .mapa-container { background: #f0fdf4; border: 2px dashed var(--secondary); border-radius: 10px; padding: 2rem 1rem; margin: 1.5rem 0; overflow-x: auto; }
+  .mapa { display: flex; flex-direction: column; align-items: center; min-width: 700px; }
+  .nodo { background: var(--primary); color: white; padding: 0.8rem 1.5rem; border-radius: 25px; font-weight: bold; text-align: center; min-width: 200px; box-shadow: var(--shadow); font-size: 0.95rem; }
+  .nodo.central { background: linear-gradient(135deg, var(--secondary), #34d399); color: var(--dark); font-size: 1.2rem; padding: 1rem 2rem; border-radius: 12px; }
+  .nodo.fase { background: var(--accent); font-size: 0.9rem; min-width: 160px; }
+  .linea { width: 3px; height: 25px; background: var(--secondary); }
+  .linea-h { height: 3px; background: var(--secondary); width: 90%; max-width: 1000px; margin: 0 auto; }
+  .rama { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 1.5rem; width: 100%; margin-top: 1rem; }
+  .rama-item { display: flex; flex-direction: column; align-items: center; flex: 1; min-width: 180px; }
+  .sub-rama { background: white; border: 2px solid var(--accent); border-radius: 8px; padding: 0.8rem; margin-top: 0.8rem; width: 100%; font-size: 0.85rem; text-align: left; color: var(--dark); }
+  .sub-rama ul { padding-left: 1.2rem; }
+  .sub-rama li { margin-bottom: 0.3rem; }
+
+  /* Tarjetas de Fases */
+  .fases-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin: 1.5rem 0; }
+  .fase-card { background: white; border: 2px solid var(--secondary); border-radius: 10px; padding: 1.5rem; transition: all 0.3s; position: relative; overflow: hidden; }
+  .fase-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-hover); border-color: var(--primary); }
+  .fase-card .icon { font-size: 2.5rem; margin-bottom: 0.5rem; }
+  .fase-card h4 { color: var(--primary); margin-bottom: 0.5rem; font-size: 1.2rem; }
+  .fase-card p { font-size: 0.9rem; margin-bottom: 0.5rem; }
+  .fase-card .articulo { display: inline-block; background: var(--light); color: var(--accent); padding: 0.2rem 0.6rem; border-radius: 12px; font-size: 0.8rem; font-weight: bold; margin-top: 0.5rem; }
+
+  /* Alertas y Notas */
+  .alerta { background: #fffbeb; border-left: 4px solid var(--warning); padding: 1rem 1.2rem; margin: 1rem 0; border-radius: 0 8px 8px 0; }
+  .alerta strong { color: var(--warning); }
+  .mejora { background: #eff6ff; border-left: 4px solid #2563eb; padding: 1rem 1.2rem; margin: 1.5rem 0; border-radius: 0 8px 8px 0; }
+  .mejora strong { color: #2563eb; }
+  .mejora ul { margin-top: 0.5rem; padding-left: 1.2rem; }
+
+  table { width: 100%; border-collapse: collapse; margin: 1rem 0; background: white; border-radius: 8px; overflow: hidden; box-shadow: var(--shadow); font-size: 0.9rem; }
+  th { background: var(--primary); color: white; padding: 0.8rem; text-align: left; }
+  td { padding: 0.8rem; border-bottom: 1px solid #eee; }
+  tr:nth-child(even) { background: #ecfdf5; }
+  tr:hover { background: #d1fae5; }
+
+  footer { background: var(--dark); color: var(--light); text-align: center; padding: 2rem 1rem; margin-top: 2rem; }
+  @media (max-width: 768px) { header h1 { font-size: 1.8rem; } section { padding: 1.2rem; } section h2 { font-size: 1.5rem; } }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>⚖️ Audiencias del Proceso Ordinario</h1>
+  <p>Código General del Proceso (Ley 1564 de 2012) · Mapas Conceptuales Mejorados</p>
+</header>
+
+<main>
+  <section>
+    <h2>📌 Mejoras y Ajustes Legales Realizados</h2>
+    <div class="mejora">
+      <strong>🛠️ ¿Qué se corrigió respecto a los apuntes originales?</strong>
+      <ul>
+        <li><strong>Orden de las Fases:</strong> Se ajustó estrictamente a los artículos 375 (Audiencia Inicial) y 376 (Audiencia de Instrucción y Juzgamiento) del CGP.</li>
+        <li><strong>Interrogatorio de Parte:</strong> En el CGP, el interrogatorio de parte se practica <em>exclusivamente</em> en la Audiencia de Instrucción y Juzgamiento (Art. 376), no en la inicial (salvo reprogramación por inasistencia justificada).</li>
+        <li><strong>Control de Legalidad:</strong> Se eliminó de la audiencia inicial, ya que el CGP no contempla esta figura en este proceso (es propia de otros procesos o del antiguo CPC).</li>
+        <li><strong>Sentencia:</strong> Se precisó que el juez puede proferirla de forma <em>oral</em> en la misma audiencia de juzgamiento, o <em>escrita</em> en un plazo máximo de 10 días hábiles (Art. 376).</li>
+        <li><strong>Incomparecencia:</strong> Se estructuró claramente el Art. 372 del CGP, que es transversal a ambas audiencias.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- MAPA 1: AUDIENCIA INICIAL -->
+  <section>
+    <h2>🗺️ Mapa Conceptual 1: Audiencia Inicial</h2>
+    <p>Regulada en el <strong>Artículo 375 del CGP</strong>. Es la primera audiencia oral donde se depura el proceso, se intenta conciliar y se fija el marco probatorio.</p>
+    
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">AUDIENCIA INICIAL (Art. 375 CGP)</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo fase">1. Saneamiento</div>
+            <div class="sub-rama">
+              <ul>
+                <li>Resolución de excepciones previas.</li>
+                <li>Verificación de requisitos y presupuestos procesales.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo fase">2. Conciliación</div>
+            <div class="sub-rama">
+              <ul>
+                <li>Deber del juez de promoverla.</li>
+                <li>Solo sobre hechos anteriores a la audiencia.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo fase">3. Objeto del Litigio</div>
+            <div class="sub-rama">
+              <ul>
+                <li>Hechos no controvertidos (acuerdo).</li>
+                <li>Hechos que requieren prueba.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo fase">4. Pruebas y Cierre</div>
+            <div class="sub-rama">
+              <ul>
+                <li>Anuncio y decreto de pruebas.</li>
+                <li>Señalamiento de fecha para Instrucción y Juzgamiento.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="alerta">
+      <strong>⚠️ Regla de Oro (Art. 375 CGP):</strong> Si en esta audiencia no hay hechos que requieran prueba, o las pruebas son solo documentales, el juez podrá <strong>dictar sentencia en la misma audiencia</strong>, omitiendo la fase de instrucción.
+    </div>
+  </section>
+
+  <!-- MAPA 2: AUDIENCIA DE INSTRUCCIÓN Y JUZGAMIENTO -->
+  <section>
+    <h2>🗺️ Mapa Conceptual 2: Audiencia de Instrucción y Juzgamiento</h2>
+    <p>Regulada en el <strong>Artículo 376 del CGP</strong>. Es la fase donde se practican las pruebas diferidas (testigos, peritos, interrogatorio) y se resuelve el fondo del asunto.</p>
+    
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">AUDIENCIA DE INSTRUCCIÓN Y JUZGAMIENTO (Art. 376 CGP)</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo fase">1. Instrucción (Pruebas)</div>
+            <div class="sub-rama">
+              <ul>
+                <li>Declaración de testigos.</li>
+                <li>Interrogatorio de partes.</li>
+                <li>Dictamen pericial (si se pidió).</li>
+                <li>Exhibición de documentos.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo fase">2. Alegatos</div>
+            <div class="sub-rama">
+              <ul>
+                <li>Conclusión oral (20 min c/u).</li>
+                <li>O por escrito (si el juez lo dispone).</li>
+              </ul>
+            </div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo fase">3. Juzgamiento (Sentencia)</div>
+            <div class="sub-rama">
+              <ul>
+                <li><strong>Oral:</strong> En la misma audiencia.</li>
+                <li><strong>Escrita:</strong> Plazo máximo de 10 días hábiles.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAPA 3: INCOMPARECENCIA -->
+  <section>
+    <h2>🗺️ Mapa Conceptual 3: Efectos de la Incomparecencia</h2>
+    <p>El <strong>Artículo 372 del CGP</strong> establece sanciones procesales severas para garantizar la asistencia a las audiencias. Aplica tanto a la Inicial como a la de Instrucción.</p>
+    
+    <div class="mapa-container">
+      <div class="mapa">
+        <div class="nodo central">INCOMPARECENCIA A LA AUDIENCIA (Art. 372 CGP)</div>
+        <div class="linea"></div>
+        <div class="linea-h"></div>
+        <div class="rama">
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo fase">Demandante</div>
+            <div class="sub-rama">
+              <ul>
+                <li>Si no asiste ni justifica: <strong>Desistimiento</strong> del proceso.</li>
+                <li>Condena en costas.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo fase">Demandado</div>
+            <div class="sub-rama">
+              <ul>
+                <li>Si no asiste ni justifica: <strong>Presunción cierta</strong> de los hechos de la demanda.</li>
+                <li>Se le tienen por ciertos los hechos.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo fase">Ambas Partes</div>
+            <div class="sub-rama">
+              <ul>
+                <li>Se realiza la audiencia con quien asista.</li>
+                <li><strong>Multa</strong> de 5 a 10 SMLMV para ambos.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="rama-item">
+            <div class="linea"></div>
+            <div class="nodo fase">Justificación</div>
+            <div class="sub-rama">
+              <ul>
+                <li><strong>Anterior:</strong> Se reprograma la audiencia.</li>
+                <li><strong>Posterior:</strong> Se realiza con los presentes. El ausiente asume las consecuencias.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESUMEN EN TARJETAS -->
+  <section>
+    <h2>📋 Fases Detalladas del Proceso Ordinario (CGP)</h2>
+    <div class="fases-grid">
+      <div class="fase-card">
+        <div class="icon">🏛️</div>
+        <h4>Audiencia Inicial</h4>
+        <p>Depuración del proceso. El juez resuelve excepciones previas, intenta conciliar, fija los hechos que no se discuten y los que requieren prueba. Decreta las pruebas y agenda la siguiente audiencia.</p>
+        <span class="articulo">Art. 375 CGP</span>
+      </div>
+      <div class="fase-card">
+        <div class="icon">🔍</div>
+        <h4>Audiencia de Instrucción</h4>
+        <p>Práctica de pruebas diferidas. Se escucha a los testigos, se realiza el interrogatorio de partes, se presentan peritazgos y se exhiben documentos que no estaban en el expediente.</p>
+        <span class="articulo">Art. 376 CGP</span>
+      </div>
+      <div class="fase-card">
+        <div class="icon">🗣️</div>
+        <h4>Alegatos de Conclusión</h4>
+        <p>Una vez practicadas las pruebas, las partes tienen 20 minutos cada una para presentar sus conclusiones orales sobre los hechos probados y el derecho aplicable. El juez puede pedirlos por escrito.</p>
+        <span class="articulo">Art. 376 CGP</span>
+      </div>
+      <div class="fase-card">
+        <div class="icon">⚖️</div>
+        <h4>Sentencia</h4>
+        <p>El juez resuelve el fondo del litigio. Puede dictarla de forma <strong>oral</strong> al terminar la audiencia, o de forma <strong>escrita</strong> dentro de los 10 días hábiles siguientes. Debe ser motivada y congruente.</p>
+        <span class="articulo">Art. 376 CGP</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- TABLA COMPARATIVA -->
+  <section>
+    <h2>📊 Cuadro Resumen: Inicial vs. Instrucción y Juzgamiento</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Aspecto</th>
+          <th>Audiencia Inicial (Art. 375)</th>
+          <th>Audiencia de Instrucción y Juzgamiento (Art. 376)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Finalidad</strong></td>
+          <td>Depurar el proceso, conciliar y fijar el objeto del litigio.</td>
+          <td>Practicar pruebas, alegar y fallar.</td>
+        </tr>
+        <tr>
+          <td><strong>Excepciones Previas</strong></td>
+          <td>Se resuelven aquí.</td>
+          <td>Ya no se pueden proponer ni resolver.</td>
+        </tr>
+        <tr>
+          <td><strong>Conciliación</strong></td>
+          <td>Es obligatoria intentar la conciliación.</td>
+          <td>No aplica (ya pasó la etapa).</td>
+        </tr>
+        <tr>
+          <td><strong>Interrogatorio de Parte</strong></td>
+          <td>No se practica (salvo reprogramación).</td>
+          <td>Se practica en esta etapa.</td>
+        </tr>
+        <tr>
+          <td><strong>Sentencia</strong></td>
+          <td>Solo si no hay pruebas que practicar o son solo documentales.</td>
+          <td>Es la regla general (Oral o escrita en 10 días).</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+</main>
+
+<footer>
+  <p>⚖️ Guía Didáctica - Derecho Procesal Civil Colombiano</p>
+  <p>Mapas Conceptuales Mejorados · Código General del Proceso (Ley 1564 de 2012)</p>
+  <p style="margin-top: 1rem; opacity: 0.7;">© 2026 - Material educativo interactivo</p>
+</footer>
+
+</body>
+</html>
