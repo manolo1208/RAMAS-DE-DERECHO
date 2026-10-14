@@ -1,6 +1,588 @@
-  <!-- ========================================================== -->
-  <!-- SECCIÓN VII: CONTRATACIÓN ESTATAL Y ADMINISTRATIVA -->
-  <!-- ========================================================== -->
+<!-- ========================================================== -->
+<!-- SECCIÓN VII: CONTRATACIÓN ESTATAL Y ADMINISTRATIVA -->
+<!-- ========================================================== -->
+
+<style>
+  /* Estilos específicos para la Sección VII */
+  .seccion-contratacion {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    font-family: 'Georgia', 'Times New Roman', serif;
+    color: #064e3b;
+    line-height: 1.7;
+  }
+  
+  .seccion-contratacion section {
+    background: #ffffff;
+    margin-bottom: 2.5rem;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    border-left: 5px solid #10b981;
+  }
+  
+  .seccion-contratacion h2 {
+    color: #065f46;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #10b981;
+  }
+  
+  .seccion-contratacion h3 {
+    color: #047857;
+    font-size: 1.4rem;
+    margin: 1.5rem 0 0.8rem;
+  }
+  
+  .seccion-contratacion h4 {
+    color: #065f46;
+    font-size: 1.15rem;
+    margin: 1rem 0 0.5rem;
+  }
+  
+  .seccion-contratacion p {
+    margin-bottom: 1rem;
+    text-align: justify;
+  }
+  
+  .seccion-contratacion .cita {
+    background: #ecfdf5;
+    border-left: 4px solid #047857;
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+    color: #065f46;
+  }
+  
+  .seccion-contratacion .alerta {
+    background: #fffbeb;
+    border-left: 4px solid #d97706;
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+  }
+  
+  .seccion-contratacion .alerta strong {
+    color: #d97706;
+  }
+  
+  .seccion-contratacion .ejemplo {
+    background: #ecfdf5;
+    border-left: 4px solid #059669;
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+  }
+  
+  .seccion-contratacion .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.2rem;
+    margin: 1.5rem 0;
+  }
+  
+  .seccion-contratacion .card {
+    background: linear-gradient(135deg, #fff 0%, #ecfdf5 100%);
+    border: 2px solid #10b981;
+    border-radius: 10px;
+    padding: 1.2rem;
+    transition: all 0.3s;
+    cursor: pointer;
+    position: relative;
+  }
+  
+  .seccion-contratacion .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    border-color: #065f46;
+  }
+  
+  .seccion-contratacion .card .icon {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+  
+  .seccion-contratacion .card h4 {
+    text-align: center;
+    color: #065f46;
+    margin-bottom: 0.5rem;
+  }
+  
+  .seccion-contratacion .card .detail {
+    display: none;
+    margin-top: 0.8rem;
+    padding-top: 0.8rem;
+    border-top: 1px dashed #10b981;
+    font-size: 0.95rem;
+  }
+  
+  .seccion-contratacion .card.active .detail {
+    display: block;
+  }
+  
+  .seccion-contratacion .card .hint {
+    text-align: center;
+    color: #047857;
+    font-size: 0.85rem;
+    font-style: italic;
+  }
+  
+  .seccion-contratacion .mapa-container {
+    background: #f0fdf4;
+    border: 2px dashed #10b981;
+    border-radius: 10px;
+    padding: 2rem 1rem;
+    margin: 1.5rem 0;
+    overflow-x: auto;
+  }
+  
+  .seccion-contratacion .mapa {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 700px;
+  }
+  
+  .seccion-contratacion .nodo {
+    background: #065f46;
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+    font-weight: bold;
+    text-align: center;
+    min-width: 200px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    font-size: 0.95rem;
+  }
+  
+  .seccion-contratacion .nodo.central {
+    background: linear-gradient(135deg, #10b981, #34d399);
+    color: #064e3b;
+    font-size: 1.2rem;
+    padding: 1rem 2rem;
+    border-radius: 12px;
+  }
+  
+  .seccion-contratacion .linea {
+    width: 3px;
+    height: 25px;
+    background: #10b981;
+  }
+  
+  .seccion-contratacion .linea-h {
+    height: 3px;
+    background: #10b981;
+    width: 90%;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  
+  .seccion-contratacion .rama {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    width: 100%;
+    margin-top: 1rem;
+  }
+  
+  .seccion-contratacion .rama-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    min-width: 160px;
+  }
+  
+  .seccion-contratacion table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    font-size: 0.9rem;
+  }
+  
+  .seccion-contratacion th {
+    background: #065f46;
+    color: white;
+    padding: 0.8rem;
+    text-align: left;
+  }
+  
+  .seccion-contratacion td {
+    padding: 0.8rem;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .seccion-contratacion tr:nth-child(even) {
+    background: #ecfdf5;
+  }
+  
+  .seccion-contratacion tr:hover {
+    background: #d1fae5;
+  }
+  
+  .seccion-contratacion .acordeon-item {
+    margin-bottom: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  
+  .seccion-contratacion .acordeon-header {
+    background: #047857;
+    color: white;
+    padding: 1rem;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.3s;
+  }
+  
+  .seccion-contratacion .acordeon-header:hover {
+    background: #065f46;
+  }
+  
+  .seccion-contratacion .acordeon-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    background: white;
+  }
+  
+  .seccion-contratacion .acordeon-content.active {
+    max-height: 2000px;
+    padding: 1rem;
+  }
+  
+  .seccion-contratacion .flecha {
+    transition: transform 0.3s;
+  }
+  
+  .seccion-contratacion .acordeon-header.active .flecha {
+    transform: rotate(180deg);
+  }
+  
+  /* Quiz Styles */
+  .seccion-contratacion .quiz-container {
+    background: linear-gradient(135deg, #ecfdf5 0%, #fff 100%);
+    padding: 1.5rem;
+    border-radius: 10px;
+    border: 2px solid #047857;
+  }
+  
+  .seccion-contratacion .quiz-header {
+    background: #065f46;
+    color: white;
+    padding: 1.2rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+  
+  .seccion-contratacion .quiz-header h3 {
+    color: white;
+    margin: 0 0 0.5rem 0;
+  }
+  
+  .seccion-contratacion .progress-bar {
+    background: rgba(255,255,255,0.2);
+    height: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+  }
+  
+  .seccion-contratacion .progress-fill {
+    background: #10b981;
+    height: 100%;
+    width: 0%;
+    transition: width 0.4s ease;
+  }
+  
+  .seccion-contratacion .quiz-stats {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  
+  .seccion-contratacion .stat {
+    background: rgba(255,255,255,0.1);
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    font-size: 0.9rem;
+  }
+  
+  .seccion-contratacion .stat strong {
+    color: #10b981;
+  }
+  
+  .seccion-contratacion .quiz-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    padding: 0.5rem;
+    background: #d1fae5;
+    border-radius: 8px;
+  }
+  
+  .seccion-contratacion .quiz-tab {
+    background: white;
+    border: 2px solid #047857;
+    color: #047857;
+    padding: 0.5rem 0.8rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.85rem;
+    transition: all 0.3s;
+    flex: 1;
+    min-width: 80px;
+    text-align: center;
+  }
+  
+  .seccion-contratacion .quiz-tab:hover {
+    background: #047857;
+    color: white;
+  }
+  
+  .seccion-contratacion .quiz-tab.active {
+    background: #065f46;
+    color: white;
+    border-color: #065f46;
+  }
+  
+  .seccion-contratacion .quiz-section {
+    display: none;
+  }
+  
+  .seccion-contratacion .quiz-section.active {
+    display: block;
+    animation: fadeIn 0.4s ease;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .seccion-contratacion .pregunta {
+    margin-bottom: 1.5rem;
+    padding: 1.2rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    border-left: 4px solid #047857;
+    transition: all 0.3s;
+  }
+  
+  .seccion-contratacion .pregunta.answered {
+    border-left-color: #10b981;
+  }
+  
+  .seccion-contratacion .pregunta-num {
+    display: inline-block;
+    background: #047857;
+    color: white;
+    padding: 0.2rem 0.7rem;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    margin-right: 0.5rem;
+  }
+  
+  .seccion-contratacion .pregunta-tipo {
+    display: inline-block;
+    background: #10b981;
+    color: #064e3b;
+    padding: 0.2rem 0.7rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    margin-left: 0.3rem;
+    font-weight: bold;
+  }
+  
+  .seccion-contratacion .pregunta p {
+    font-weight: bold;
+    color: #065f46;
+    margin: 0.8rem 0;
+    text-align: left;
+  }
+  
+  .seccion-contratacion .opciones {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .seccion-contratacion .opcion {
+    padding: 0.7rem 1rem;
+    background: #ecfdf5;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+  }
+  
+  .seccion-contratacion .opcion:hover:not(.disabled) {
+    border-color: #047857;
+    background: #d1fae5;
+  }
+  
+  .seccion-contratacion .opcion.disabled {
+    cursor: not-allowed;
+    opacity: 0.85;
+  }
+  
+  .seccion-contratacion .opcion.correcta {
+    background: #d1fae5;
+    border-color: #059669;
+    color: #059669;
+    font-weight: bold;
+  }
+  
+  .seccion-contratacion .opcion.incorrecta {
+    background: #fee2e2;
+    border-color: #dc2626;
+    color: #dc2626;
+  }
+  
+  .seccion-contratacion .opcion.correcta::after {
+    content: ' ✓';
+    font-weight: bold;
+  }
+  
+  .seccion-contratacion .opcion.incorrecta::after {
+    content: ' ✗';
+    font-weight: bold;
+  }
+  
+  .seccion-contratacion .explicacion {
+    margin-top: 0.8rem;
+    padding: 0.8rem;
+    background: #ecfdf5;
+    border-left: 3px solid #047857;
+    border-radius: 0 6px 6px 0;
+    font-size: 0.9rem;
+    display: none;
+    font-style: italic;
+  }
+  
+  .seccion-contratacion .explicacion.visible {
+    display: block;
+    animation: fadeIn 0.3s ease;
+  }
+  
+  .seccion-contratacion .resultado-final {
+    margin-top: 2rem;
+    padding: 2rem;
+    background: linear-gradient(135deg, #065f46 0%, #047857 100%);
+    color: white;
+    border-radius: 12px;
+    text-align: center;
+    display: none;
+  }
+  
+  .seccion-contratacion .resultado-final.visible {
+    display: block;
+    animation: fadeIn 0.5s ease;
+  }
+  
+  .seccion-contratacion .resultado-final h3 {
+    color: #10b981;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .seccion-contratacion .puntaje-final {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #10b981;
+    margin: 1rem 0;
+  }
+  
+  .seccion-contratacion .desglose-temas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+    text-align: left;
+  }
+  
+  .seccion-contratacion .desglose-item {
+    background: rgba(255,255,255,0.1);
+    padding: 1rem;
+    border-radius: 8px;
+  }
+  
+  .seccion-contratacion .desglose-item h4 {
+    color: #10b981;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+  }
+  
+  .seccion-contratacion .mini-bar {
+    background: rgba(255,255,255,0.2);
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+  }
+  
+  .seccion-contratacion .mini-bar-fill {
+    background: #10b981;
+    height: 100%;
+    transition: width 0.6s ease;
+  }
+  
+  .seccion-contratacion button {
+    background: #065f46;
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 1rem;
+    transition: all 0.3s;
+  }
+  
+  .seccion-contratacion button:hover {
+    background: #10b981;
+    color: #064e3b;
+    transform: translateY(-2px);
+  }
+  
+  .seccion-contratacion .btn-reset {
+    background: #dc2626;
+    margin-left: 0.5rem;
+  }
+  
+  .seccion-contratacion .btn-reset:hover {
+    background: #991b1b;
+    color: white;
+  }
+  
+  @media (max-width: 768px) {
+    .seccion-contratacion h2 { font-size: 1.5rem; }
+    .seccion-contratacion section { padding: 1.2rem; }
+    .seccion-contratacion table { font-size: 0.8rem; }
+  }
+</style>
+
+<div class="seccion-contratacion">
 
   <section>
     <h2>📚 Sección VII: Contratación Estatal y Administrativa</h2>
@@ -12,9 +594,9 @@
 
   <!-- TEMA 41: FUNDAMENTOS Y PRINCIPIOS -->
   <section id="tema41">
-    <h2>41. Fundamentos y Principios de la Contratación Estatal (Arts. 361-364)</h2>
+    <h2>41. Fundamentos y Principios de la Contratación Estatal</h2>
     <div class="cita">
-      <strong>"La contratación estatal se regirá por los principios de transparencia, economía, responsabilidad, moralidad, celeridad e imparcialidad."</strong> — Art. 2, Ley 80 de 1993
+      <strong>"La contratación estatal se regirá por los principios de transparencia, economía, responsabilidad, selección objetiva, moralidad, celeridad e imparcialidad."</strong> — Art. 2, Ley 80 de 1993
     </div>
     <h3>🗺️ Mapa Conceptual de los Principios</h3>
     <div class="mapa-container">
@@ -26,40 +608,66 @@
           <div class="rama-item"><div class="linea"></div><div class="nodo">Transparencia</div></div>
           <div class="rama-item"><div class="linea"></div><div class="nodo">Economía</div></div>
           <div class="rama-item"><div class="linea"></div><div class="nodo">Responsabilidad</div></div>
+          <div class="rama-item"><div class="linea"></div><div class="nodo">Selección Objetiva</div></div>
           <div class="rama-item"><div class="linea"></div><div class="nodo">Moralidad</div></div>
           <div class="rama-item"><div class="linea"></div><div class="nodo">Celeridad</div></div>
-          <div class="rama-item"><div class="linea"></div><div class="nodo">Imparcialidad</div></div>
         </div>
       </div>
     </div>
     <div class="alerta">
       <strong>📌 Ámbito de aplicación (Art. 2 Ley 80/93):</strong> Aplica a la Nación, departamentos, distritos, municipios, entidades descentralizadas, empresas industriales y comerciales del Estado, sociedades de economía mixta con participación estatal superior al 50%, y en general a quienes tengan la calidad de contratistas del Estado.
     </div>
+    <div class="ejemplo">
+      <strong>📝 Ejemplo:</strong> Una alcaldía municipal que desea construir un colegio público debe aplicar estos principios en todo el proceso: desde la planeación, pasando por la selección del contratista, hasta la ejecución y liquidación del contrato.
+    </div>
   </section>
 
   <!-- TEMA 42: MODALIDADES DE SELECCIÓN -->
   <section id="tema42">
-    <h2>42. Modalidades de Selección de Contratistas (Arts. 365-370)</h2>
+    <h2>42. Modalidades de Selección de Contratistas</h2>
     <table>
-      <thead><tr><th>Modalidad</th><th>Características y Causales Principales</th></tr></thead>
+      <thead>
+        <tr><th>Modalidad</th><th>Características y Causales Principales</th><th>Base Legal</th></tr>
+      </thead>
       <tbody>
-        <tr><td><strong>Licitación Pública</strong></td><td>Regla general. Etapas: preparatoria, de selección y de ejecución. Pliegos de condiciones definitivos.</td></tr>
-        <tr><td><strong>Selección Abreviada</strong></td><td>Para contratos de menor complejidad. Incluye subasta inversa y procedimientos dinámicos.</td></tr>
-        <tr><td><strong>Concurso de Méritos</strong></td><td>Para consultorías y servicios intelectuales. Se prioriza la calidad técnica y experiencia sobre el precio.</td></tr>
-        <tr><td><strong>Contratación Directa</strong></td><td>Causales taxativas: urgencia manifiesta, empréstitos, ausencia de pluralidad de oferentes, contratación de menor cuantía específica.</td></tr>
-        <tr><td><strong>Mínima Cuantía</strong></td><td>Trámite simplificado para contratos de baja cuantía. Máxima publicidad y celeridad en la plataforma SECOP.</td></tr>
+        <tr>
+          <td><strong>Licitación Pública</strong></td>
+          <td>Regla general. Etapas: preparatoria, de selección y de ejecución. Pliegos de condiciones definitivos.</td>
+          <td>Art. 30 Ley 80/93</td>
+        </tr>
+        <tr>
+          <td><strong>Selección Abreviada</strong></td>
+          <td>Para contratos de menor complejidad. Incluye subasta inversa y procedimientos dinámicos.</td>
+          <td>Art. 2 Ley 1150/07</td>
+        </tr>
+        <tr>
+          <td><strong>Concurso de Méritos</strong></td>
+          <td>Para consultorías y servicios intelectuales. Se prioriza la calidad técnica y experiencia sobre el precio.</td>
+          <td>Art. 2 Ley 1150/07</td>
+        </tr>
+        <tr>
+          <td><strong>Contratación Directa</strong></td>
+          <td>Causales taxativas: urgencia manifiesta, empréstitos, ausencia de pluralidad de oferentes, contratación de menor cuantía específica.</td>
+          <td>Art. 2 Ley 1150/07</td>
+        </tr>
+        <tr>
+          <td><strong>Mínima Cuantía</strong></td>
+          <td>Trámite simplificado para contratos de baja cuantía. Máxima publicidad y celeridad en la plataforma SECOP.</td>
+          <td>Art. 2 Ley 1150/07</td>
+        </tr>
       </tbody>
     </table>
   </section>
 
   <!-- TEMA 43: PROCESO DE SELECCIÓN Y ADJUDICACIÓN -->
   <section id="tema43">
-    <h2>43. Proceso de Selección y Adjudicación (Arts. 371-376)</h2>
+    <h2>43. Proceso de Selección y Adjudicación</h2>
     <div class="acordeon-item">
       <div class="acordeon-header" onclick="toggleAcordeon(this)"><span>📋 Pliegos Tipo y Modificaciones</span><span class="flecha">▼</span></div>
       <div class="acordeon-content">
-        <p><strong>Pliegos tipo:</strong> Adoptados por el Gobierno Nacional (Colombia Compra Eficiente), de uso obligatorio para unificar criterios y garantizar la selección objetiva.</p>
+        <p><strong>Pliegos tipo:</strong> Adoptados por Colombia Compra Eficiente, de uso obligatorio para unificar criterios y garantizar la selección objetiva.</p>
         <p><strong>Adendas y aclaraciones:</strong> Permitidas durante el proceso, pero deben otorgar un plazo razonable para que los proponentes ajusten sus ofertas.</p>
+        <p><strong>Audiencia de aclaración:</strong> Obligatoria en licitaciones públicas, donde los proponentes pueden solicitar precisiones sobre los pliegos.</p>
       </div>
     </div>
     <div class="acordeon-item">
@@ -74,7 +682,7 @@
 
   <!-- TEMA 44: PERFECCIONAMIENTO E INHABILIDADES -->
   <section id="tema44">
-    <h2>44. Perfeccionamiento, Ejecución e Inhabilidades (Arts. 377-381)</h2>
+    <h2>44. Perfeccionamiento, Ejecución e Inhabilidades</h2>
     <div class="cards-grid">
       <div class="card" onclick="this.classList.toggle('active')">
         <div class="icon">📝</div>
@@ -82,6 +690,7 @@
         <p class="hint">Toca para ver detalles</p>
         <div class="detail">
           <p>Requiere: forma escrita, aprobación de garantías y disponibilidad presupuestal (CDP y RP). Sin estos requisitos, el contrato no puede ejecutarse.</p>
+          <p><strong>Base legal:</strong> Arts. 41-44 Ley 80/93</p>
         </div>
       </div>
       <div class="card" onclick="this.classList.toggle('active')">
@@ -90,6 +699,7 @@
         <p class="hint">Toca para ver detalles</p>
         <div class="detail">
           <p>Inscripción obligatoria en la Cámara de Comercio. La veracidad de la información es responsabilidad del proponente; la falsedad genera inhabilidad.</p>
+          <p><strong>Base legal:</strong> Arts. 22-23 Ley 80/93</p>
         </div>
       </div>
       <div class="card" onclick="this.classList.toggle('active')">
@@ -98,6 +708,7 @@
         <p class="hint">Toca para ver detalles</p>
         <div class="detail">
           <p>Art. 8 Ley 80/93. Se extienden a consorcios, uniones temporales, socios y administradores de personas jurídicas. Conflicto de interés y tráfico de influencias son causales de nulidad.</p>
+          <p><strong>Base legal:</strong> Arts. 8-13 Ley 80/93</p>
         </div>
       </div>
     </div>
@@ -105,22 +716,44 @@
 
   <!-- TEMA 45: TIPOS DE CONTRATOS Y ASOCIACIONES -->
   <section id="tema45">
-    <h2>45. Tipos de Contratos Estatales y Asociaciones (Arts. 382-388)</h2>
+    <h2>45. Tipos de Contratos Estatales y Asociaciones</h2>
     <table>
-      <thead><tr><th>Tipo de Contrato</th><th>Características Clave</th></tr></thead>
+      <thead>
+        <tr><th>Tipo de Contrato</th><th>Características Clave</th><th>Base Legal</th></tr>
+      </thead>
       <tbody>
-        <tr><td><strong>Obra Pública</strong></td><td>Interventoría, supervisión, anticipos y manejo de cuentas especiales. Responsabilidad decenal del constructor.</td></tr>
-        <tr><td><strong>Consultoría</strong></td><td>Estudios, diseños, interventoría y asesoría técnica. Selección preferente por concurso de méritos.</td></tr>
-        <tr><td><strong>Prestación de Servicios</strong></td><td>Profesionales y apoyo a la gestión. <strong>Prohibición</strong> de configurar relaciones laborales encubiertas (elementos de subordinación y continuidad).</td></tr>
-        <tr><td><strong>Concesión</strong></td><td>Obra y servicios públicos. Requiere equilibrio financiero. El concesionario cobra peajes o tarifas a usuarios.</td></tr>
-        <tr><td><strong>Consorcios y Uniones Temporales</strong></td><td>Responsabilidad solidaria ante la entidad estatal (Art. 7 Ley 80/93). Subcontratación limitada y prohibida la cesión total sin consentimiento.</td></tr>
+        <tr>
+          <td><strong>Obra Pública</strong></td>
+          <td>Interventoría, supervisión, anticipos y manejo de cuentas especiales. Responsabilidad decenal del constructor.</td>
+          <td>Art. 32 Ley 80/93</td>
+        </tr>
+        <tr>
+          <td><strong>Consultoría</strong></td>
+          <td>Estudios, diseños, interventoría y asesoría técnica. Selección preferente por concurso de méritos.</td>
+          <td>Art. 32 Ley 80/93</td>
+        </tr>
+        <tr>
+          <td><strong>Prestación de Servicios</strong></td>
+          <td>Profesionales y apoyo a la gestión. <strong>Prohibición</strong> de configurar relaciones laborales encubiertas.</td>
+          <td>Art. 32 Ley 80/93</td>
+        </tr>
+        <tr>
+          <td><strong>Concesión</strong></td>
+          <td>Obra y servicios públicos. Requiere equilibrio financiero. El concesionario cobra peajes o tarifas a usuarios.</td>
+          <td>Art. 32 Ley 80/93</td>
+        </tr>
+        <tr>
+          <td><strong>Consorcios y Uniones Temporales</strong></td>
+          <td>Responsabilidad solidaria ante la entidad estatal. Subcontratación limitada y prohibida la cesión total sin consentimiento.</td>
+          <td>Art. 7 Ley 80/93</td>
+        </tr>
       </tbody>
     </table>
   </section>
 
   <!-- TEMA 46: PODERES EXORBITANTES -->
   <section id="tema46">
-    <h2>46. Poderes Exorbitantes de la Administración (Arts. 389-393)</h2>
+    <h2>46. Poderes Exorbitantes de la Administración</h2>
     <div class="alerta">
       <strong>⚠️ Cláusulas Exorbitantes:</strong> Son facultades unilaterales de la entidad estatal que no existen en el derecho privado. Su ejercicio está sujeto al debido proceso y al respeto del equilibrio económico.
     </div>
@@ -130,7 +763,9 @@
         <h4>Caducidad</h4>
         <p class="hint">Toca para ver detalles</p>
         <div class="detail">
-          <p>Terminación unilateral por incumplimiento grave del contratista. Causales taxativas. Procedimiento con debido proceso. Efecto: inhabilidad por 5 años para contratar con el Estado.</p>
+          <p>Terminación unilateral por incumplimiento grave del contratista. Causales taxativas. Procedimiento con debido proceso.</p>
+          <p><strong>Efecto:</strong> Inhabilidad por 5 años para contratar con el Estado.</p>
+          <p><strong>Base legal:</strong> Art. 18 Ley 80/93</p>
         </div>
       </div>
       <div class="card" onclick="this.classList.toggle('active')">
@@ -139,6 +774,7 @@
         <p class="hint">Toca para ver detalles</p>
         <div class="detail">
           <p>Por razones de interés público. La entidad debe compensar económicamente al contratista por las variaciones impuestas.</p>
+          <p><strong>Base legal:</strong> Art. 15 Ley 80/93</p>
         </div>
       </div>
       <div class="card" onclick="this.classList.toggle('active')">
@@ -147,6 +783,7 @@
         <p class="hint">Toca para ver detalles</p>
         <div class="detail">
           <p>Para evitar paralización o deficiencia grave en el servicio. No puede alterar el equilibrio económico ni imponer nuevas obligaciones.</p>
+          <p><strong>Base legal:</strong> Art. 16 Ley 80/93</p>
         </div>
       </div>
       <div class="card" onclick="this.classList.toggle('active')">
@@ -155,6 +792,7 @@
         <p class="hint">Toca para ver detalles</p>
         <div class="detail">
           <p>Por motivos de orden público o interés general. Genera derecho a indemnización integral para el contratista.</p>
+          <p><strong>Base legal:</strong> Art. 14 Ley 80/93</p>
         </div>
       </div>
     </div>
@@ -162,17 +800,31 @@
 
   <!-- TEMA 47: EQUILIBRIO ECONÓMICO -->
   <section id="tema47">
-    <h2>47. Equilibrio Económico del Contrato (Arts. 394-396)</h2>
+    <h2>47. Equilibrio Económico del Contrato</h2>
     <div class="cita">
       <strong>"Las entidades estatales mantendrán durante la ejecución del contrato la ecuación económica o financiera inicial."</strong> — Art. 27, Ley 80 de 1993
     </div>
     <h3>📊 Causales de Alteración</h3>
     <table>
-      <thead><tr><th>Causal</th><th>Descripción</th><th>Mecanismo de Restablecimiento</th></tr></thead>
+      <thead>
+        <tr><th>Causal</th><th>Descripción</th><th>Mecanismo de Restablecimiento</th></tr>
+      </thead>
       <tbody>
-        <tr><td><strong>Factum Principis</strong></td><td>Acto o decisión de la entidad contratante que altera el equilibrio.</td><td>Indemnización o ajuste directo.</td></tr>
-        <tr><td><strong>Teoría de la Imprevisión</strong></td><td>Hechos extraordinarios, imprevisibles e irresistibles (alea anormal).</td><td>Revisión judicial o acuerdo de las partes.</td></tr>
-        <tr><td><strong>Fuerza Mayor</strong></td><td>Eventos externos, irresistibles e imprevisibles (terremotos, guerras).</td><td>Suspensión o terminación sin responsabilidad.</td></tr>
+        <tr>
+          <td><strong>Factum Principis</strong></td>
+          <td>Acto o decisión de la entidad contratante que altera el equilibrio.</td>
+          <td>Indemnización o ajuste directo.</td>
+        </tr>
+        <tr>
+          <td><strong>Teoría de la Imprevisión</strong></td>
+          <td>Hechos extraordinarios, imprevisibles e irresistibles (alea anormal).</td>
+          <td>Revisión judicial o acuerdo de las partes.</td>
+        </tr>
+        <tr>
+          <td><strong>Fuerza Mayor</strong></td>
+          <td>Eventos externos, irresistibles e imprevisibles (terremotos, guerras).</td>
+          <td>Suspensión o terminación sin responsabilidad.</td>
+        </tr>
       </tbody>
     </table>
     <div class="alerta">
@@ -182,20 +834,20 @@
 
   <!-- TEMA 48: SOLUCIÓN DE CONTROVERSIAS Y RESPONSABILIDAD -->
   <section id="tema48">
-    <h2>48. Solución de Controversias y Responsabilidad (Arts. 397-404)</h2>
+    <h2>48. Solución de Controversias y Responsabilidad</h2>
     <div class="acordeon-item">
       <div class="acordeon-header" onclick="toggleAcordeon(this)"><span>⚖️ Mecanismos de Solución de Controversias</span><span class="flecha">▼</span></div>
       <div class="acordeon-content">
         <p><strong>Amigable composición:</strong> Tercero imparcial decide en equidad.</p>
         <p><strong>Transacción:</strong> Acuerdo entre las partes para poner fin al conflicto.</p>
-        <p><strong>Conciliación prejudicial obligatoria:</strong> Requisito de procedibilidad antes de acudir a la jurisdicción.</p>
+        <p><strong>Conciliación prejudicial obligatoria:</strong> Requisito de procedibilidad antes de acudir a la jurisdicción (Art. 72 Ley 1150/07).</p>
         <p><strong>Arbitraje:</strong> Nacional o internacional. Cláusula compromisoria obligatoria en contratos de cuantía relevante.</p>
       </div>
     </div>
     <div class="acordeon-item">
       <div class="acordeon-header" onclick="toggleAcordeon(this)"><span>🛡️ Tipos de Responsabilidad</span><span class="flecha">▼</span></div>
       <div class="acordeon-content">
-        <p><strong>Extracontractual del Estado:</strong> Daños antijurídicos causados por la actividad contractual.</p>
+        <p><strong>Extracontractual del Estado:</strong> Daños antijurídicos causados por la actividad contractual (Art. 90 C.P.).</p>
         <p><strong>Patrimonial del contratista:</strong> Frente al Estado y terceros por incumplimiento o deficiencias.</p>
         <p><strong>Fiscal (Contraloría):</strong> Control posterior y selectivo. Determinación de responsabilidad fiscal.</p>
         <p><strong>Disciplinaria (Procuraduría):</strong> Sobre servidores públicos y particulares con funciones públicas.</p>
@@ -207,7 +859,7 @@
 
   <!-- TEMA 49: PLANEACIÓN, LIQUIDACIÓN Y NULIDAD -->
   <section id="tema49">
-    <h2>49. Planeación, Liquidación y Nulidad (Arts. 405-411)</h2>
+    <h2>49. Planeación, Liquidación y Nulidad</h2>
     <div class="cards-grid">
       <div class="card" onclick="this.classList.toggle('active')">
         <div class="icon">💰</div>
@@ -216,6 +868,7 @@
         <div class="detail">
           <p><strong>CDP:</strong> Reserva de recursos. <strong>RP:</strong> Afectación definitiva.</p>
           <p><strong>Vigencias futuras:</strong> Autorización para comprometer recursos de vigencias fiscales futuras en contratos de tracto sucesivo (ordinarias hasta 5 años, excepcionales más de 5).</p>
+          <p><strong>Base legal:</strong> Ley 819/03</p>
         </div>
       </div>
       <div class="card" onclick="this.classList.toggle('active')">
@@ -226,6 +879,7 @@
           <p><strong>Bilateral:</strong> Acuerdo entre las partes (plazo: 4 meses).</p>
           <p><strong>Unilateral:</strong> La entidad liquida si el contratista no lo hace (plazo: 2 meses adicionales).</p>
           <p><strong>Judicial:</strong> El juez contencioso-administrativo liquida si hay controversia.</p>
+          <p><strong>Base legal:</strong> Arts. 60-61 Ley 80/93</p>
         </div>
       </div>
       <div class="card" onclick="this.classList.toggle('active')">
@@ -233,7 +887,9 @@
         <h4>Nulidad Absoluta</h4>
         <p class="hint">Toca para ver detalles</p>
         <div class="detail">
-          <p>Causales especiales: celebración con personas inhabilitadas, objeto ilícito, adición indebida de cuantías o plazos. La buena fe del contratista no incurso en culpa protege las restituciones.</p>
+          <p>Causales especiales: celebración con personas inhabilitadas, objeto ilícito, adición indebida de cuantías o plazos.</p>
+          <p>La buena fe del contratista no incurso en culpa protege las restituciones.</p>
+          <p><strong>Base legal:</strong> Art. 44 Ley 80/93</p>
         </div>
       </div>
     </div>
@@ -241,21 +897,38 @@
 
   <!-- TEMA 50: REGÍMENES ESPECIALES Y TRANSPARENCIA -->
   <section id="tema50">
-    <h2>50. Regímenes Especiales, Transparencia y Tendencias (Arts. 412-420)</h2>
+    <h2>50. Regímenes Especiales, Transparencia y Tendencias</h2>
     <table>
-      <thead><tr><th>Figura</th><th>Regulación y Características</th></tr></thead>
+      <thead>
+        <tr><th>Figura</th><th>Regulación y Características</th></tr>
+      </thead>
       <tbody>
-        <tr><td><strong>Convenios Internacionales</strong></td><td>Cooperación internacional. Pueden estar excluidos del Estatuto General si así lo establecen los tratados.</td></tr>
-        <tr><td><strong>Empresas Estatales y Mixtas</strong></td><td>Régimen privado de contratación (C.Co.), con excepciones públicas cuando usen recursos del Estado o superen el 50% de participación estatal.</td></tr>
-        <tr><td><strong>Servicios Públicos (Ley 142/94)</strong></td><td>Régimen privado con principios constitucionales de eficiencia, continuidad y universalidad.</td></tr>
-        <tr><td><strong>SECOP I y II</strong></td><td>Sistema Electrónico de Contratación Pública. Publicidad y transparencia digital obligatoria. Tienda Virtual del Estado.</td></tr>
-        <tr><td><strong>Contratación Sostenible</strong></td><td>Criterios ambientales, sociales y de gobernanza (ASG) en los pliegos modernos. Compras de economía popular.</td></tr>
+        <tr>
+          <td><strong>Convenios Internacionales</strong></td>
+          <td>Cooperación internacional. Pueden estar excluidos del Estatuto General si así lo establecen los tratados.</td>
+        </tr>
+        <tr>
+          <td><strong>Empresas Estatales y Mixtas</strong></td>
+          <td>Régimen privado de contratación (C.Co.), con excepciones públicas cuando usen recursos del Estado o superen el 50% de participación estatal.</td>
+        </tr>
+        <tr>
+          <td><strong>Servicios Públicos (Ley 142/94)</strong></td>
+          <td>Régimen privado con principios constitucionales de eficiencia, continuidad y universalidad.</td>
+        </tr>
+        <tr>
+          <td><strong>SECOP I y II</strong></td>
+          <td>Sistema Electrónico de Contratación Pública. Publicidad y transparencia digital obligatoria. Tienda Virtual del Estado.</td>
+        </tr>
+        <tr>
+          <td><strong>Contratación Sostenible</strong></td>
+          <td>Criterios ambientales, sociales y de gobernanza (ASG) en los pliegos modernos. Compras de economía popular.</td>
+        </tr>
       </tbody>
     </table>
   </section>
 
   <!-- ========================================================== -->
-  <!-- QUIZ SECCIÓN VII (Preguntas 161 a 200) -->
+  <!-- QUIZ SECCIÓN VII (40 Preguntas Completas) -->
   <!-- ========================================================== -->
   <section id="quiz-seccion7">
     <h2>🎯 Quiz Sección VII - 40 Preguntas</h2>
@@ -273,57 +946,533 @@
       </div>
 
       <div class="quiz-tabs">
-        <div class="quiz-tab active" onclick="mostrarSeccion7('s41', this)">T41-42</div>
-        <div class="quiz-tab" onclick="mostrarSeccion7('s43', this)">T43-44</div>
-        <div class="quiz-tab" onclick="mostrarSeccion7('s45', this)">T45-46</div>
-        <div class="quiz-tab" onclick="mostrarSeccion7('s47', this)">T47-48</div>
-        <div class="quiz-tab" onclick="mostrarSeccion7('s49', this)">T49-50</div>
+        <div class="quiz-tab active" onclick="mostrarSeccion7('s41', this)">T41 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion7('s42', this)">T42 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion7('s43', this)">T43 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion7('s44', this)">T44 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion7('s45', this)">T45 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion7('s46', this)">T46 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion7('s47', this)">T47 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion7('s48', this)">T48 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion7('s49', this)">T49 (4)</div>
+        <div class="quiz-tab" onclick="mostrarSeccion7('s50', this)">T50 (4)</div>
       </div>
 
-      <!-- T41-42 -->
+      <!-- TEMA 41: FUNDAMENTOS Y PRINCIPIOS (Preguntas 161-164) -->
       <div class="quiz-section active" id="s41">
-        <div class="pregunta" data-correcta="2" data-tema="41"><span class="pregunta-num">161</span><span class="pregunta-tipo">Conceptual</span><p>El Estatuto General de Contratación de la Administración Pública está regulado principalmente por:</p><div class="opciones"><div class="opcion" onclick="seleccionar7(this, 161)">a) Ley 142 de 1994</div><div class="opcion" onclick="seleccionar7(this, 161)">b) Ley 1150 de 2007</div><div class="opcion" onclick="seleccionar7(this, 161)">c) Ley 80 de 1993</div><div class="opcion" onclick="seleccionar7(this, 161)">d) Ley 1474 de 2011</div></div><div class="explicacion">La Ley 80 de 1993 es el Estatuto General de Contratación de la Administración Pública en Colombia.</div></div>
-        <div class="pregunta" data-correcta="0" data-tema="42"><span class="pregunta-num">162</span><span class="pregunta-tipo">Conceptual</span><p>La modalidad de selección que constituye la regla general en la contratación estatal es:</p><div class="opciones"><div class="opcion" onclick="seleccionar7(this, 162)">a) Licitación pública</div><div class="opcion" onclick="seleccionar7(this, 162)">b) Contratación directa</div><div class="opcion" onclick="seleccionar7(this, 162)">c) Selección abreviada</div><div class="opcion" onclick="seleccionar7(this, 162)">d) Mínima cuantía</div></div><div class="explicacion">La licitación pública es la regla general de selección, salvo las excepciones previstas en la ley.</div></div>
-        <div class="pregunta" data-correcta="1" data-tema="42"><span class="pregunta-num">163</span><span class="pregunta-tipo">Conceptual</span><p>El concurso de méritos se utiliza preferentemente para contratar:</p><div class="opciones"><div class="opcion" onclick="seleccionar7(this, 163)">a) Obras públicas</div><div class="opcion" onclick="seleccionar7(this, 163)">b) Consultorías y servicios intelectuales</div><div class="opcion" onclick="seleccionar7(this, 163)">c) Suministros</div><div class="opcion" onclick="seleccionar7(this, 163)">d) Empréstitos</div></div><div class="explicacion">El concurso de méritos prioriza la calidad técnica y la experiencia sobre el precio, siendo ideal para consultorías.</div></div>
-        <div class="pregunta" data-correcta="3" data-tema="41"><span class="pregunta-num">164</span><span class="pregunta-tipo">Conceptual</span><p>El principio de selección objetiva implica:</p><div class="opciones"><div class="opcion" onclick="seleccionar7(this, 164)">a) Elegir al contratista por afinidad política</div><div class="opcion" onclick="seleccionar7(this, 164)">b) Elegir al contratista por su relación personal con el funcionario</div><div class="opcion" onclick="seleccionar7(this, 164)">c) Elegir al contratista que ofrezca el precio más bajo siempre</div><div class="opcion" onclick="seleccionar7(this, 164)">d) Elegir la oferta más favorable según criterios objetivos y preestablecidos</div></div><div class="explicacion">La selección objetiva exige que la elección se base en criterios objetivos, preestablecidos en los pliegos, buscando la oferta más favorable.</div></div>
+        <div class="pregunta" data-correcta="2" data-tema="41">
+          <span class="pregunta-num">161</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El Estatuto General de Contratación de la Administración Pública está regulado principalmente por:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar7(this, 161)">a) Ley 142 de 1994</div>
+            <div class="opcion" onclick="seleccionar7(this, 161)">b) Ley 1150 de 2007</div>
+            <div class="opcion" onclick="seleccionar7(this, 161)">c) Ley 80 de 1993</div>
+            <div class="opcion" onclick="seleccionar7(this, 161)">d) Ley 1474 de 2011</div>
+          </div>
+          <div class="explicacion">La Ley 80 de 1993 es el Estatuto General de Contratación de la Administración Pública en Colombia.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="41">
+          <span class="pregunta-num">162</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El principio de selección objetiva implica:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar7(this, 162)">a) Elegir al contratista por afinidad política</div>
+            <div class="opcion" onclick="seleccionar7(this, 162)">b) Elegir al contratista por su relación personal con el funcionario</div>
+            <div class="opcion" onclick="seleccionar7(this, 162)">c) Elegir al contratista que ofrezca el precio más bajo siempre</div>
+            <div class="opcion" onclick="seleccionar7(this, 162)">d) Elegir la oferta más favorable según criterios objetivos y preestablecidos</div>
+          </div>
+          <div class="explicacion">La selección objetiva exige que la elección se base en criterios objetivos, preestablecidos en los pliegos, buscando la oferta más favorable.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="41">
+          <span class="pregunta-num">163</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El ámbito de aplicación de la Ley 80 de 1993 incluye a:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar7(this, 163)">a) Solo entidades del orden nacional</div>
+            <div class="opcion" onclick="seleccionar7(this, 163)">b) Todas las entidades estatales, incluyendo descentralizadas y sociedades de economía mixta con más del 50% de participación estatal</div>
+            <div class="opcion" onclick="seleccionar7(this, 163)">c) Solo empresas privadas</div>
+            <div class="opcion" onclick="seleccionar7(this, 163)">d) Solo organismos internacionales</div>
+          </div>
+          <div class="explicacion">El Art. 2 de la Ley 80/93 establece que aplica a todas las entidades estatales en los distintos órdenes y niveles.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="41">
+          <span class="pregunta-num">164</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El principio de transparencia en la contratación estatal busca:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar7(this, 164)">a) Garantizar la publicidad y acceso a la información de los procesos contractuales</div>
+            <div class="opcion" onclick="seleccionar7(this, 164)">b) Ocultar información a los proponentes</div>
+            <div class="opcion" onclick="seleccionar7(this, 164)">c) Permitir la discrecionalidad absoluta</div>
+            <div class="opcion" onclick="seleccionar7(this, 164)">d) Negociar en privado con un solo contratista</div>
+          </div>
+          <div class="explicacion">El principio de transparencia implica publicidad de los procedimientos y acceso a la información contractual por parte de los interesados.</div>
+        </div>
       </div>
 
-      <!-- T43-44 -->
+      <!-- TEMA 42: MODALIDADES DE SELECCIÓN (Preguntas 165-168) -->
+      <div class="quiz-section" id="s42">
+        <div class="pregunta" data-correcta="0" data-tema="42">
+          <span class="pregunta-num">165</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La modalidad de selección que constituye la regla general en la contratación estatal es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar7(this, 165)">a) Licitación pública</div>
+            <div class="opcion" onclick="seleccionar7(this, 165)">b) Contratación directa</div>
+            <div class="opcion" onclick="seleccionar7(this, 165)">c) Selección abreviada</div>
+            <div class="opcion" onclick="seleccionar7(this, 165)">d) Mínima cuantía</div>
+          </div>
+          <div class="explicacion">La licitación pública es la regla general de selección, salvo las excepciones previstas en la ley.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="42">
+          <span class="pregunta-num">166</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El concurso de méritos se utiliza preferentemente para contratar:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar7(this, 166)">a) Obras públicas</div>
+            <div class="opcion" onclick="seleccionar7(this, 166)">b) Consultorías y servicios intelectuales</div>
+            <div class="opcion" onclick="seleccionar7(this, 166)">c) Suministros</div>
+            <div class="opcion" onclick="seleccionar7(this, 166)">d) Empréstitos</div>
+          </div>
+          <div class="explicacion">El concurso de méritos prioriza la calidad técnica y la experiencia sobre el precio, siendo ideal para consultorías.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="42">
+          <span class="pregunta-num">167</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Una entidad estatal necesita contratar la construcción de un puente. La modalidad más adecuada es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar7(this, 167)">a) Contratación directa</div>
+            <div class="opcion" onclick="seleccionar7(this, 167)">b) Concurso de méritos</div>
+            <div class="opcion" onclick="seleccionar7(this, 167)">c) Licitación pública</div>
+            <div class="opcion" onclick="seleccionar7(this, 167)">d) Mínima cuantía</div>
+          </div>
+          <div class="explicacion">La construcción de un puente es una obra pública de gran envergadura, por lo que requiere licitación pública como regla general.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="42">
+          <span class="pregunta-num">168</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La contratación directa procede en casos de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar7(this, 168)">a) Todos los contratos estatales</div>
+            <div class="opcion" onclick="seleccionar7(this, 168)">b) Solo obras públicas</div>
+            <div class="opcion" onclick="seleccionar7(this, 168)">c) Contratos de mayor cuantía</div>
+            <div class="opcion" onclick="seleccionar7(this, 168)">d) Urgencia manifiesta, monopolios, contratos interadministrativos, servicios profesionales</div>
+          </div>
+          <div class="explicacion">La contratación directa procede en casos excepcionales y taxativamente establecidos en la ley.</div>
+        </div>
+      </div>
+
+      <!-- TEMA 43: PROCESO DE SELECCIÓN (Preguntas 169-172) -->
       <div class="quiz-section" id="s43">
-        <div class="pregunta" data-correcta="1" data-tema="43"><span class="pregunta-num">165</span><span class="pregunta-tipo">Conceptual</span><p>Para el perfeccionamiento y ejecución del contrato estatal se requiere esencialmente:</p><div class="opciones"><div class="opcion" onclick="seleccionar7(this, 165)">a) Solo la firma de las partes</div><div class="opcion" onclick="seleccionar7(this, 165)">b) Forma escrita, aprobación de garantías y disponibilidad presupuestal</div><div class="opcion" onclick="seleccionar7(this, 165)">c) Solo la inscripción en el RUP</div><div class="opcion" onclick="seleccionar7(this, 165)">d) Solo la aprobación del Concejo Municipal</div></div><div class="explicacion">El contrato estatal requiere forma escrita, aprobación de garantías y disponibilidad presupuestal (CDP y RP) para su perfeccionamiento y ejecución.</div></div>
-        <div class="pregunta" data-correcta="2" data-tema="45"><span class="pregunta-num">166</span><span class="pregunta-tipo">Conceptual</span><p>En los consorcios y uniones temporales, la responsabilidad ante la entidad estatal es:</p><div class="opciones"><div class="opcion" onclick="seleccionar7(this, 166)">a) Mancomunada</div><div class="opcion" onclick="seleccionar7(this, 166)">b) Limitada al aporte de cada miembro</div><div class="opcion" onclick="seleccionar7(this, 166)">c) Solidaria</div><div class="opcion" onclick="seleccionar7(this, 166)">d) Inexistente</div></div><div class="explicacion">El Art. 7 de la Ley 80/93 establece que los miembros de consorcios y uniones temporales responden solidariamente frente a la entidad estatal.</div></div>
-        <div class="pregunta" data-correcta="0" data-tema="44"><span class="pregunta-num">167</span><span class="pregunta-tipo">Conceptual</span><p>Las inhabilidades para contratar con el Estado se extienden a:</p><div class="opciones"><div class="opcion" onclick="seleccionar7(this, 167)">a) Consorcios, uniones temporales, socios y administradores de personas jurídicas</div><div class="opcion" onclick="seleccionar7(this, 167)">b) Solo al representante legal</div><div class="opcion" onclick="seleccionar7(this, 167)">c) Solo a las personas naturales</div><div class="opcion" onclick="seleccionar7(this, 167)">d) Solo a los contratistas principales</div></div><div class="explicacion">Las inhabilidades se extienden a todos los integrantes de consorcios, uniones temporales, socios y administradores de personas jurídicas proponentes.</div></div>
-        <div class="pregunta" data-correcta="3" data-tema="45"><span class="pregunta-num">168</span><span class="pregunta-tipo">Conceptual</span><p>En los contratos de prestación de servicios profesionales con el Estado está expresamente prohibido:</p><div class="opciones"><div class="opcion" onclick="seleccionar7(this, 168)">a) Que el contratista tenga título profesional</div><div class="opcion" onclick="seleccionar7(this, 168)">b) Que el contrato tenga duración determinada</div><div class="opcion" onclick="seleccionar7(this, 168)">c) Que el contratista reciba pagos mensuales</div><div class="opcion" onclick="seleccionar7(this, 168)">d) Configurar relaciones laborales encubiertas</div></div><div class="explicacion">Está prohibida la configuración de relaciones laborales encubiertas mediante contratos de prestación de servicios. Si existe subordinación y continuidad, se configura el vínculo laboral.</div></div>
+        <div class="pregunta" data-correcta="1" data-tema="43">
+          <span class="pregunta-num">169</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los pliegos tipo en la contratación estatal son:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar7(this, 169)">a) Documentos opcionales</div>
+            <div class="opcion" onclick="seleccionar7(this, 169)">b) Documentos obligatorios adoptados por Colombia Compra Eficiente para unificar criterios</div>
+            <div class="opcion" onclick="seleccionar7(this, 169)">c) Documentos privados</div>
+            <div class="opcion" onclick="seleccionar7(this, 169)">d) Documentos internacionales</div>
+          </div>
+          <div class="explicacion">Los pliegos tipo son obligatorios y buscan unificar criterios para garantizar la selección objetiva.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="43">
+          <span class="pregunta-num">170</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La audiencia de aclaración en la licitación pública tiene como objetivo:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar7(this, 170)">a) Que los proponentes soliciten precisiones sobre los pliegos</div>
+            <div class="opcion" onclick="seleccionar7(this, 170)">b) Rechazar todas las propuestas</div>
+            <div class="opcion" onclick="seleccionar7(this, 170)">c) Adjudicar directamente el contrato</div>
+            <div class="opcion" onclick="seleccionar7(this, 170)">d) Cancelar el proceso</div>
+          </div>
+          <div class="explicacion">La audiencia de aclaración permite a los proponentes solicitar precisiones sobre los pliegos de condiciones.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="43">
+          <span class="pregunta-num">171</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La adjudicación del contrato es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar7(this, 171)">a) Un acto privado</div>
+            <div class="opcion" onclick="seleccionar7(this, 171)">b) Una recomendación</div>
+            <div class="opcion" onclick="seleccionar7(this, 171)">c) Un acto administrativo definitivo con efectos vinculantes</div>
+            <div class="opcion" onclick="seleccionar7(this, 171)">d) Un acto opcional</div>
+          </div>
+          <div class="explicacion">La adjudicación es un acto administrativo definitivo que obliga a las partes a celebrar el contrato.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="43">
+          <span class="pregunta-num">172</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Si en una licitación pública no se presentan oferentes, la entidad debe:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar7(this, 172)">a) Adjudicar al proponente que mejor le parezca</div>
+            <div class="opcion" onclick="seleccionar7(this, 172)">b) Cancelar definitivamente el proceso</div>
+            <div class="opcion" onclick="seleccionar7(this, 172)">c) Contratar directamente sin justificación</div>
+            <div class="opcion" onclick="seleccionar7(this, 172)">d) Declarar desierta la licitación y modificar el pliego para reiniciar</div>
+          </div>
+          <div class="explicacion">Cuando no hay oferentes, se declara desierta la licitación y se puede modificar el pliego para reiniciar el proceso.</div>
+        </div>
       </div>
 
-      <!-- T45-46 -->
+      <!-- TEMA 44: PERFECCIONAMIENTO (Preguntas 173-176) -->
+      <div class="quiz-section" id="s44">
+        <div class="pregunta" data-correcta="1" data-tema="44">
+          <span class="pregunta-num">173</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Para el perfeccionamiento y ejecución del contrato estatal se requiere esencialmente:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar7(this, 173)">a) Solo la firma de las partes</div>
+            <div class="opcion" onclick="seleccionar7(this, 173)">b) Forma escrita, aprobación de garantías y disponibilidad presupuestal</div>
+            <div class="opcion" onclick="seleccionar7(this, 173)">c) Solo la inscripción en el RUP</div>
+            <div class="opcion" onclick="seleccionar7(this, 173)">d) Solo la aprobación del Concejo Municipal</div>
+          </div>
+          <div class="explicacion">El contrato estatal requiere forma escrita, aprobación de garantías y disponibilidad presupuestal (CDP y RP) para su perfeccionamiento y ejecución.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="44">
+          <span class="pregunta-num">174</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El Registro Único de Proponentes (RUP) es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar7(this, 174)">a) Una inscripción obligatoria en la Cámara de Comercio para contratar con el Estado</div>
+            <div class="opcion" onclick="seleccionar7(this, 174)">b) Un registro opcional</div>
+            <div class="opcion" onclick="seleccionar7(this, 174)">c) Un registro internacional</div>
+            <div class="opcion" onclick="seleccionar7(this, 174)">d) Un registro privado</div>
+          </div>
+          <div class="explicacion">El RUP es obligatorio para contratar con el Estado y se lleva en las Cámaras de Comercio.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="44">
+          <span class="pregunta-num">175</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Las inhabilidades para contratar con el Estado se extienden a:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar7(this, 175)">a) Solo al representante legal</div>
+            <div class="opcion" onclick="seleccionar7(this, 175)">b) Solo a las personas naturales</div>
+            <div class="opcion" onclick="seleccionar7(this, 175)">c) Consorcios, uniones temporales, socios y administradores de personas jurídicas</div>
+            <div class="opcion" onclick="seleccionar7(this, 175)">d) Solo a los contratistas principales</div>
+          </div>
+          <div class="explicacion">Las inhabilidades se extienden a todos los integrantes de consorcios, uniones temporales, socios y administradores de personas jurídicas proponentes.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="44">
+          <span class="pregunta-num">176</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Si un proponente presenta información falsa en el RUP, la consecuencia es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar7(this, 176)">a) Una multa económica</div>
+            <div class="opcion" onclick="seleccionar7(this, 176)">b) Una advertencia</div>
+            <div class="opcion" onclick="seleccionar7(this, 176)">c) La suspensión temporal del registro</div>
+            <div class="opcion" onclick="seleccionar7(this, 176)">d) La inhabilidad para contratar con el Estado</div>
+          </div>
+          <div class="explicacion">La falsedad en la información del RUP genera inhabilidad para contratar con el Estado.</div>
+        </div>
+      </div>
+
+      <!-- TEMA 45: TIPOS DE CONTRATOS (Preguntas 177-180) -->
       <div class="quiz-section" id="s45">
-        <div class="pregunta" data-correcta="1" data-tema="46"><span class="pregunta-num">169</span><span class="pregunta-tipo">Conceptual</span><p>La caducidad administrativa del contrato estatal genera como efecto principal, además de la terminación:</p><div class="opciones"><div class="opcion" onclick="seleccionar7(this, 169)">a) Una multa económica</div><div class="opcion" onclick="seleccionar7(this, 169)">b) Inhabilidad por 5 años para contratar con el Estado</div><div class="opcion" onclick="seleccionar7(this, 169)">c) La terminación amistosa del contrato</div><div class="opcion" onclick="seleccionar7(this, 169)">d) La prórroga automática del contrato</div></div><div class="explicacion">La caducidad es una sanción drástica que genera inhabilidad por 5 años para contratar con el Estado, además de la terminación del contrato.</div></div>
-        <div class="pregunta" data-correcta="0" data-tema="47"><span class="pregunta-num">170</span><span class="pregunta-tipo">Conceptual</span><p>El principio de intangibilidad de la ecuación financiera del contrato estatal protege:</p><div class="opciones"><div class="opcion" onclick="seleccionar7(this, 170)">a) El equilibrio económico inicial del contrato</div><div class="opcion" onclick="seleccionar7(this, 170)">b) Las utilidades del contratista</div><div class="opcion" onclick="seleccionar7(this, 170)">c) El presupuesto de la entidad</div><div class="opcion" onclick="seleccionar7(this, 170)">d) Los intereses de los terceros</div></div><div class="explicacion">El principio de intangibilidad protege el equilibrio económico o financiero inicial del contrato, garantizando que no sea alterado unilateralmente.</div></div>
-        <div class="pregunta" data-correcta="2" data-tema="46"><span class="pregunta-num">171</span><span class="pregunta-tipo">Conceptual</span><p>La modificación unilateral del contrato estatal por la entidad requiere:</p><div class="opciones"><div class="opcion" onclick="seleccionar7(this, 171)">a) El consentimiento del contratista</div><div class="opcion" onclick="seleccionar7(this, 171)">b) Una sentencia judicial previa</div><div class="opcion" onclick="seleccionar7(this, 171)">c) Compensación económica al contratista</div><div class="opcion" onclick="seleccionar7(this, 171)">d) La aprobación del Congreso</div></div><div class="explicacion">La modificación unilateral por interés público es un poder exorbitante, pero la entidad debe compensar económicamente al contratista por las variaciones.</div></div>
-        <div class="pregunta" data-correcta="3" data-tema="47"><span class="pregunta-num">172</span><span class="pregunta-tipo">Conceptual</span><p>El "factum principis" en la contratación estatal se refiere a:</p><div class="opciones"><div class="opcion" onclick="seleccionar7(this, 172)">a) La fuerza mayor externa</div><div class="opcion" onclick="seleccionar7(this, 172)">b) El riesgo comercial normal</div><div class="opcion" onclick="seleccionar7(this, 172)">c) La imprevisión anormal</div><div class="opcion" onclick="seleccionar7(this, 172)">d) El acto o decisión de la entidad contratante que altera el equilibrio</div></div><div class="explicacion">El factum principis (hecho del príncipe) es la alteración del equilibrio económico causada por un acto o decisión de la propia entidad contratante.</div></div>
+        <div class="pregunta" data-correcta="0" data-tema="45">
+          <span class="pregunta-num">177</span><span class="pregunta-tipo">Conceptual</span>
+          <p>En los contratos de obra pública, la responsabilidad del constructor es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar7(this, 177)">a) Decenal (10 años)</div>
+            <div class="opcion" onclick="seleccionar7(this, 177)">b) Quinquenal (5 años)</div>
+            <div class="opcion" onclick="seleccionar7(this, 177)">c) Anual (1 año)</div>
+            <div class="opcion" onclick="seleccionar7(this, 177)">d) Indefinida</div>
+          </div>
+          <div class="explicacion">El constructor de obra pública tiene responsabilidad decenal por los defectos de la construcción.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="45">
+          <span class="pregunta-num">178</span><span class="pregunta-tipo">Conceptual</span>
+          <p>En los consorcios y uniones temporales, la responsabilidad ante la entidad estatal es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar7(this, 178)">a) Mancomunada</div>
+            <div class="opcion" onclick="seleccionar7(this, 178)">b) Solidaria</div>
+            <div class="opcion" onclick="seleccionar7(this, 178)">c) Limitada al aporte de cada miembro</div>
+            <div class="opcion" onclick="seleccionar7(this, 178)">d) Inexistente</div>
+          </div>
+          <div class="explicacion">El Art. 7 de la Ley 80/93 establece que los miembros de consorcios y uniones temporales responden solidariamente frente a la entidad estatal.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="45">
+          <span class="pregunta-num">179</span><span class="pregunta-tipo">Conceptual</span>
+          <p>En los contratos de prestación de servicios profesionales con el Estado está expresamente prohibido:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar7(this, 179)">a) Que el contratista tenga título profesional</div>
+            <div class="opcion" onclick="seleccionar7(this, 179)">b) Que el contrato tenga duración determinada</div>
+            <div class="opcion" onclick="seleccionar7(this, 179)">c) Que el contratista reciba pagos mensuales</div>
+            <div class="opcion" onclick="seleccionar7(this, 179)">d) Configurar relaciones laborales encubiertas</div>
+          </div>
+          <div class="explicacion">Está prohibida la configuración de relaciones laborales encubiertas mediante contratos de prestación de servicios.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="45">
+          <span class="pregunta-num">180</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Una entidad estatal necesita contratar un estudio de factibilidad para un proyecto de infraestructura. La modalidad más adecuada es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar7(this, 180)">a) Licitación pública</div>
+            <div class="opcion" onclick="seleccionar7(this, 180)">b) Contratación directa</div>
+            <div class="opcion" onclick="seleccionar7(this, 180)">c) Selección abreviada</div>
+            <div class="opcion" onclick="seleccionar7(this, 180)">d) Concurso de méritos</div>
+          </div>
+          <div class="explicacion">Los estudios de factibilidad son consultorías, por lo que se contrata preferentemente mediante concurso de méritos.</div>
+        </div>
       </div>
 
-      <!-- T47-48 -->
+      <!-- TEMA 46: PODERES EXORBITANTES (Preguntas 181-184) -->
+      <div class="quiz-section" id="s46">
+        <div class="pregunta" data-correcta="1" data-tema="46">
+          <span class="pregunta-num">181</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La caducidad administrativa del contrato estatal genera como efecto principal, además de la terminación:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar7(this, 181)">a) Una multa económica</div>
+            <div class="opcion" onclick="seleccionar7(this, 181)">b) Inhabilidad por 5 años para contratar con el Estado</div>
+            <div class="opcion" onclick="seleccionar7(this, 181)">c) La terminación amistosa del contrato</div>
+            <div class="opcion" onclick="seleccionar7(this, 181)">d) La prórroga automática del contrato</div>
+          </div>
+          <div class="explicacion">La caducidad es una sanción drástica que genera inhabilidad por 5 años para contratar con el Estado, además de la terminación del contrato.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="46">
+          <span class="pregunta-num">182</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La modificación unilateral del contrato estatal por la entidad requiere:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar7(this, 182)">a) Compensación económica al contratista</div>
+            <div class="opcion" onclick="seleccionar7(this, 182)">b) El consentimiento del contratista</div>
+            <div class="opcion" onclick="seleccionar7(this, 182)">c) Una sentencia judicial previa</div>
+            <div class="opcion" onclick="seleccionar7(this, 182)">d) La aprobación del Congreso</div>
+          </div>
+          <div class="explicacion">La modificación unilateral por interés público es un poder exorbitante, pero la entidad debe compensar económicamente al contratista por las variaciones.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="46">
+          <span class="pregunta-num">183</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La interpretación unilateral del contrato estatal tiene como límite:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar7(this, 183)">a) La voluntad de las partes</div>
+            <div class="opcion" onclick="seleccionar7(this, 183)">b) La ley</div>
+            <div class="opcion" onclick="seleccionar7(this, 183)">c) No puede alterar el equilibrio económico ni imponer nuevas obligaciones</div>
+            <div class="opcion" onclick="seleccionar7(this, 183)">d) El presupuesto de la entidad</div>
+          </div>
+          <div class="explicacion">La interpretación unilateral no puede alterar el equilibrio económico ni imponer nuevas obligaciones al contratista.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="46">
+          <span class="pregunta-num">184</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Una entidad estatal necesita modificar unilateralmente un contrato de obra pública por razones de interés público. Debe:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar7(this, 184)">a) Hacerlo sin compensación</div>
+            <div class="opcion" onclick="seleccionar7(this, 184)">b) Solicitar autorización judicial</div>
+            <div class="opcion" onclick="seleccionar7(this, 184)">c) Terminar el contrato</div>
+            <div class="opcion" onclick="seleccionar7(this, 184)">d) Compensar económicamente al contratista por las variaciones</div>
+          </div>
+          <div class="explicacion">La modificación unilateral requiere compensación económica al contratista por las variaciones impuestas.</div>
+        </div>
+      </div>
+
+      <!-- TEMA 47: EQUILIBRIO ECONÓMICO (Preguntas 185-188) -->
       <div class="quiz-section" id="s47">
-        <div class="pregunta" data-correcta="1" data-tema="49"><span class="pregunta-num">173</span><span class="pregunta-tipo">Conceptual</span><p>La acción de controversias contractuales ante la jurisdicción contencioso-administrativa tiene un término de caducidad de:</p><div class="opciones"><div class="opcion" onclick="seleccionar7(this, 173)">a) 1 año</div><div class="opcion" onclick="seleccionar7(this, 173)">b) 2 años</div><div class="opcion" onclick="seleccionar7(this, 173)">c) 5 años</div><div class="opcion" onclick="seleccionar7(this, 173)">d) 10 años</div></div><div class="explicacion">La acción de controversias contractuales caduca en 2 años contados desde el día siguiente a la liquidación o terminación del contrato.</div></div>
-        <div class="pregunta" data-correcta="0" data-tema="48"><span class="pregunta-num">174</span><span class="pregunta-tipo">Conceptual</span><p>El control fiscal posterior y selectivo sobre los contratos estatales lo ejerce:</p><div class="opciones"><div class="opcion" onclick="seleccionar7(this, 174)">a) La Procuraduría General</div><div class="opcion" onclick="seleccionar7(this, 174)">b) La Contraloría General de la República</div><div class="opcion" onclick="seleccionar7(this, 174)">c) La Fiscalía General</div><div class="opcion" onclick="seleccionar7(this, 174)">d) La Defensoría del Pueblo</div></div><div class="explicacion">La Contraloría General ejerce el control fiscal posterior y selectivo sobre la gestión fiscal de la administración, incluyendo la ejecución de contratos.</div></div>
-        <div class="pregunta" data-correcta="2" data-tema="49"><span class="pregunta-num">175</span><span class="pregunta-tipo">Conceptual</span><p>La liquidación bilateral del contrato estatal debe realizarse, por regla general, en un plazo de:</p><div class="opciones"><div class="opcion" onclick="seleccionar7(this, 175)">a) 1 mes</div><div class="opcion" onclick="seleccionar7(this, 175)">b) 2 meses</div><div class="opcion" onclick="seleccionar7(this, 175)">c) 4 meses</div><div class="opcion" onclick="seleccionar7(this, 175)">d) 6 meses</div></div><div class="explicacion">La liquidación bilateral debe realizarse dentro de los 4 meses siguientes a la terminación del contrato, según el Art. 60 de la Ley 80/93.</div></div>
-        <div class="pregunta" data-correcta="3" data-tema="48"><span class="pregunta-num">176</span><span class="pregunta-tipo">Conceptual</span><p>El Estatuto Anticorrupción, que fortalece los mecanismos de prevención y sanción, está regulado por:</p><div class="opciones"><div class="opcion" onclick="seleccionar7(this, 176)">a) Ley 80 de 1993</div><div class="opcion" onclick="seleccionar7(this, 176)">b) Ley 1150 de 2007</div><div class="opcion" onclick="seleccionar7(this, 176)">c) Ley 142 de 1994</div><div class="opcion" onclick="seleccionar7(this, 176)">d) Ley 1474 de 2011</div></div><div class="explicacion">La Ley 1474 de 2011 es el Estatuto Anticorrupción, que introduce herramientas como la responsabilidad de personas jurídicas por delitos de corrupción.</div></div>
+        <div class="pregunta" data-correcta="0" data-tema="47">
+          <span class="pregunta-num">185</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El principio de intangibilidad de la ecuación financiera del contrato estatal protege:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar7(this, 185)">a) El equilibrio económico inicial del contrato</div>
+            <div class="opcion" onclick="seleccionar7(this, 185)">b) Las utilidades del contratista</div>
+            <div class="opcion" onclick="seleccionar7(this, 185)">c) El presupuesto de la entidad</div>
+            <div class="opcion" onclick="seleccionar7(this, 185)">d) Los intereses de los terceros</div>
+          </div>
+          <div class="explicacion">El principio de intangibilidad protege el equilibrio económico o financiero inicial del contrato, garantizando que no sea alterado unilateralmente.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="47">
+          <span class="pregunta-num">186</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El "factum principis" en la contratación estatal se refiere a:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar7(this, 186)">a) La fuerza mayor externa</div>
+            <div class="opcion" onclick="seleccionar7(this, 186)">b) El riesgo comercial normal</div>
+            <div class="opcion" onclick="seleccionar7(this, 186)">c) La imprevisión anormal</div>
+            <div class="opcion" onclick="seleccionar7(this, 186)">d) El acto o decisión de la entidad contratante que altera el equilibrio</div>
+          </div>
+          <div class="explicacion">El factum principis (hecho del príncipe) es la alteración del equilibrio económico causada por un acto o decisión de la propia entidad contratante.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="47">
+          <span class="pregunta-num">187</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La teoría de la imprevisión se aplica cuando:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar7(this, 187)">a) Hay fuerza mayor externa</div>
+            <div class="opcion" onclick="seleccionar7(this, 187)">b) Se presentan hechos extraordinarios, imprevisibles e irresistibles que alteran el equilibrio</div>
+            <div class="opcion" onclick="seleccionar7(this, 187)">c) La entidad modifica unilateralmente el contrato</div>
+            <div class="opcion" onclick="seleccionar7(this, 187)">d) El contratista incumple</div>
+          </div>
+          <div class="explicacion">La teoría de la imprevisión se aplica ante hechos extraordinarios, imprevisibles e irresistibles que alteran el equilibrio económico del contrato.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="47">
+          <span class="pregunta-num">188</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Si durante la ejecución de un contrato de obra pública se presenta un terremoto que daña parcialmente la obra, se aplica:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar7(this, 188)">a) La teoría de la imprevisión</div>
+            <div class="opcion" onclick="seleccionar7(this, 188)">b) El factum principis</div>
+            <div class="opcion" onclick="seleccionar7(this, 188)">c) La fuerza mayor</div>
+            <div class="opcion" onclick="seleccionar7(this, 188)">d) La modificación unilateral</div>
+          </div>
+          <div class="explicacion">El terremoto es un evento externo, irresistible e imprevisible, por lo que se aplica la fuerza mayor.</div>
+        </div>
       </div>
 
-      <!-- T49-50 -->
+      <!-- TEMA 48: CONTROVERSIAS (Preguntas 189-192) -->
+      <div class="quiz-section" id="s48">
+        <div class="pregunta" data-correcta="1" data-tema="48">
+          <span class="pregunta-num">189</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La conciliación prejudicial en la contratación estatal es:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar7(this, 189)">a) Opcional</div>
+            <div class="opcion" onclick="seleccionar7(this, 189)">b) Requisito de procedibilidad obligatorio antes de acudir a la jurisdicción</div>
+            <div class="opcion" onclick="seleccionar7(this, 189)">c) Prohibida</div>
+            <div class="opcion" onclick="seleccionar7(this, 189)">d) Solo aplicable a contratos internacionales</div>
+          </div>
+          <div class="explicacion">La conciliación prejudicial es un requisito de procedibilidad obligatorio antes de acudir a la jurisdicción contencioso-administrativa.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="48">
+          <span class="pregunta-num">190</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El control fiscal posterior y selectivo sobre los contratos estatales lo ejerce:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar7(this, 190)">a) La Contraloría General de la República</div>
+            <div class="opcion" onclick="seleccionar7(this, 190)">b) La Procuraduría General</div>
+            <div class="opcion" onclick="seleccionar7(this, 190)">c) La Fiscalía General</div>
+            <div class="opcion" onclick="seleccionar7(this, 190)">d) La Defensoría del Pueblo</div>
+          </div>
+          <div class="explicacion">La Contraloría General ejerce el control fiscal posterior y selectivo sobre la gestión fiscal de la administración, incluyendo la ejecución de contratos.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="48">
+          <span class="pregunta-num">191</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La responsabilidad disciplinaria en la contratación estatal recae sobre:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar7(this, 191)">a) Solo el contratista</div>
+            <div class="opcion" onclick="seleccionar7(this, 191)">b) Solo la entidad estatal</div>
+            <div class="opcion" onclick="seleccionar7(this, 191)">c) Servidores públicos y particulares con funciones públicas</div>
+            <div class="opcion" onclick="seleccionar7(this, 191)">d) Solo los terceros</div>
+          </div>
+          <div class="explicacion">La responsabilidad disciplinaria recae sobre servidores públicos y particulares que cumplan funciones públicas.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="48">
+          <span class="pregunta-num">192</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El Estatuto Anticorrupción, que fortalece los mecanismos de prevención y sanción, está regulado por:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar7(this, 192)">a) Ley 80 de 1993</div>
+            <div class="opcion" onclick="seleccionar7(this, 192)">b) Ley 1150 de 2007</div>
+            <div class="opcion" onclick="seleccionar7(this, 192)">c) Ley 142 de 1994</div>
+            <div class="opcion" onclick="seleccionar7(this, 192)">d) Ley 1474 de 2011</div>
+          </div>
+          <div class="explicacion">La Ley 1474 de 2011 es el Estatuto Anticorrupción, que introduce herramientas como la responsabilidad de personas jurídicas por delitos de corrupción.</div>
+        </div>
+      </div>
+
+      <!-- TEMA 49: LIQUIDACIÓN (Preguntas 193-196) -->
       <div class="quiz-section" id="s49">
-        <div class="pregunta" data-correcta="1" data-tema="50"><span class="pregunta-num">177</span><span class="pregunta-tipo">Conceptual</span><p>El SECOP (Sistema Electrónico de Contratación Pública) tiene como finalidad principal:</p><div class="opciones"><div class="opcion" onclick="seleccionar7(this, 177)">a) Cobrar impuestos a los contratistas</div><div class="opcion" onclick="seleccionar7(this, 177)">b) Garantizar la publicidad y transparencia digital de los procesos contractuales</div><div class="opcion" onclick="seleccionar7(this, 177)">c) Eliminar la participación de la empresa privada</div><div class="opcion" onclick="seleccionar7(this, 177)">d) Centralizar todos los pagos del Estado</div></div><div class="explicacion">El SECOP I y II son plataformas digitales que garantizan la publicidad, transparencia y acceso a la información de los procesos contractuales públicos.</div></div>
-        <div class="pregunta" data-correcta="0" data-tema="50"><span class="pregunta-num">178</span><span class="pregunta-tipo">Conceptual</span><p>Las empresas de servicios públicos domiciliarios se rigen principalmente por:</p><div class="opciones"><div class="opcion" onclick="seleccionar7(this, 178)">a) Ley 142 de 1994</div><div class="opcion" onclick="seleccionar7(this, 178)">b) Ley 80 de 1993</div><div class="opcion" onclick="seleccionar7(this, 178)">c) Código de Comercio</div><div class="opcion" onclick="seleccionar7(this, 178)">d) Código Civil</div></div><div class="explicacion">La Ley 142 de 1994 establece el régimen de los servicios públicos domiciliarios, con aplicación del derecho privado y principios constitucionales.</div></div>
-        <div class="pregunta" data-correcta="2" data-tema="50"><span class="pregunta-num">179</span><span class="pregunta-tipo">Conceptual</span><p>La contratación pública sostenible incorpora en los pliegos modernos criterios:</p><div class="opciones"><div class="opcion" onclick="seleccionar7(this, 179)">a) Solo económicos</div><div class="opcion" onclick="seleccionar7(this, 179)">b) Solo técnicos</div><div class="opcion" onclick="seleccionar7(this, 179)">c) Ambientales, sociales y de gobernanza (ASG)</div><div class="opcion" onclick="seleccionar7(this, 179)">d) Solo políticos</div></div><div class="explicacion">La contratación sostenible incorpora criterios ASG (ambientales, sociales y de gobernanza) para fomentar compras verdes y responsables.</div></div>
-        <div class="pregunta" data-correcta="3" data-tema="50"><span class="pregunta-num">180</span><span class="pregunta-tipo">Conceptual</span><p>Los convenios de cooperación internacional:</p><div class="opciones"><div class="opcion" onclick="seleccionar7(this, 180)">a) Siempre se rigen por la Ley 80 de 1993</div><div class="opcion" onclick="seleccionar7(this, 180)">b) Nunca pueden celebrarse con el Estado colombiano</div><div class="opcion" onclick="seleccionar7(this, 180)">c) Solo pueden celebrarse con organismos multilaterales</div><div class="opcion" onclick="seleccionar7(this, 180)">d) Pueden estar excluidos del Estatuto General si así lo establecen los tratados</div></div><div class="explicacion">Los convenios de cooperación internacional pueden estar excluidos del Estatuto General de Contratación cuando los tratados así lo establezcan.</div></div>
+        <div class="pregunta" data-correcta="2" data-tema="49">
+          <span class="pregunta-num">193</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La liquidación bilateral del contrato estatal debe realizarse, por regla general, en un plazo de:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar7(this, 193)">a) 1 mes</div>
+            <div class="opcion" onclick="seleccionar7(this, 193)">b) 2 meses</div>
+            <div class="opcion" onclick="seleccionar7(this, 193)">c) 4 meses</div>
+            <div class="opcion" onclick="seleccionar7(this, 193)">d) 6 meses</div>
+          </div>
+          <div class="explicacion">La liquidación bilateral debe realizarse dentro de los 4 meses siguientes a la terminación del contrato, según el Art. 60 de la Ley 80/93.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="1" data-tema="49">
+          <span class="pregunta-num">194</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Si el contratista no liquida el contrato, la entidad estatal puede:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar7(this, 194)">a) Esperar indefinidamente</div>
+            <div class="opcion" onclick="seleccionar7(this, 194)">b) Liquidar unilateralmente dentro de los 2 meses siguientes</div>
+            <div class="opcion" onclick="seleccionar7(this, 194)">c) Cancelar el contrato</div>
+            <div class="opcion" onclick="seleccionar7(this, 194)">d) Demandar al contratista</div>
+          </div>
+          <div class="explicacion">Si el contratista no liquida, la entidad puede liquidar unilateralmente dentro de los 2 meses siguientes.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="49">
+          <span class="pregunta-num">195</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La nulidad absoluta del contrato estatal procede cuando:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar7(this, 195)">a) Se celebra con personas inhabilitadas</div>
+            <div class="opcion" onclick="seleccionar7(this, 195)">b) Hay un error en los cálculos</div>
+            <div class="opcion" onclick="seleccionar7(this, 195)">c) El contratista no cumple los plazos</div>
+            <div class="opcion" onclick="seleccionar7(this, 195)">d) La entidad modifica unilateralmente el contrato</div>
+          </div>
+          <div class="explicacion">La nulidad absoluta procede cuando se celebra el contrato con personas inhabilitadas, entre otras causales.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="49">
+          <span class="pregunta-num">196</span><span class="pregunta-tipo">Aplicación</span>
+          <p>Si hay controversia sobre la liquidación del contrato, las partes pueden:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar7(this, 196)">a) Esperar indefinidamente</div>
+            <div class="opcion" onclick="seleccionar7(this, 196)">b) Cancelar el contrato</div>
+            <div class="opcion" onclick="seleccionar7(this, 196)">c) Modificar unilateralmente el contrato</div>
+            <div class="opcion" onclick="seleccionar7(this, 196)">d) Acudir a la jurisdicción contencioso-administrativa para que el juez liquide</div>
+          </div>
+          <div class="explicacion">Si hay controversia sobre la liquidación, las partes pueden acudir a la jurisdicción contencioso-administrativa para que el juez liquide.</div>
+        </div>
+      </div>
+
+      <!-- TEMA 50: REGÍMENES ESPECIALES (Preguntas 197-200) -->
+      <div class="quiz-section" id="s50">
+        <div class="pregunta" data-correcta="1" data-tema="50">
+          <span class="pregunta-num">197</span><span class="pregunta-tipo">Conceptual</span>
+          <p>El SECOP (Sistema Electrónico de Contratación Pública) tiene como finalidad principal:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar7(this, 197)">a) Cobrar impuestos a los contratistas</div>
+            <div class="opcion" onclick="seleccionar7(this, 197)">b) Garantizar la publicidad y transparencia digital de los procesos contractuales</div>
+            <div class="opcion" onclick="seleccionar7(this, 197)">c) Eliminar la participación de la empresa privada</div>
+            <div class="opcion" onclick="seleccionar7(this, 197)">d) Centralizar todos los pagos del Estado</div>
+          </div>
+          <div class="explicacion">El SECOP I y II son plataformas digitales que garantizan la publicidad, transparencia y acceso a la información de los procesos contractuales públicos.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="0" data-tema="50">
+          <span class="pregunta-num">198</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Las empresas de servicios públicos domiciliarios se rigen principalmente por:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar7(this, 198)">a) Ley 142 de 1994</div>
+            <div class="opcion" onclick="seleccionar7(this, 198)">b) Ley 80 de 1993</div>
+            <div class="opcion" onclick="seleccionar7(this, 198)">c) Código de Comercio</div>
+            <div class="opcion" onclick="seleccionar7(this, 198)">d) Código Civil</div>
+          </div>
+          <div class="explicacion">La Ley 142 de 1994 establece el régimen de los servicios públicos domiciliarios, con aplicación del derecho privado y principios constitucionales.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="2" data-tema="50">
+          <span class="pregunta-num">199</span><span class="pregunta-tipo">Conceptual</span>
+          <p>La contratación pública sostenible incorpora en los pliegos modernos criterios:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar7(this, 199)">a) Solo económicos</div>
+            <div class="opcion" onclick="seleccionar7(this, 199)">b) Solo técnicos</div>
+            <div class="opcion" onclick="seleccionar7(this, 199)">c) Ambientales, sociales y de gobernanza (ASG)</div>
+            <div class="opcion" onclick="seleccionar7(this, 199)">d) Solo políticos</div>
+          </div>
+          <div class="explicacion">La contratación sostenible incorpora criterios ASG (ambientales, sociales y de gobernanza) para fomentar compras verdes y responsables.</div>
+        </div>
+
+        <div class="pregunta" data-correcta="3" data-tema="50">
+          <span class="pregunta-num">200</span><span class="pregunta-tipo">Conceptual</span>
+          <p>Los convenios de cooperación internacional:</p>
+          <div class="opciones">
+            <div class="opcion" onclick="seleccionar7(this, 200)">a) Siempre se rigen por la Ley 80 de 1993</div>
+            <div class="opcion" onclick="seleccionar7(this, 200)">b) Nunca pueden celebrarse con el Estado colombiano</div>
+            <div class="opcion" onclick="seleccionar7(this, 200)">c) Solo pueden celebrarse con organismos multilaterales</div>
+            <div class="opcion" onclick="seleccionar7(this, 200)">d) Pueden estar excluidos del Estatuto General si así lo establecen los tratados</div>
+          </div>
+          <div class="explicacion">Los convenios de cooperación internacional pueden estar excluidos del Estatuto General de Contratación cuando los tratados así lo establezcan.</div>
+        </div>
       </div>
 
       <div class="resultado-final" id="resultadoFinal7">
         <h3>🏆 Resultado Final Sección VII</h3>
         <div class="puntaje-final" id="puntajeFinal7">0/40</div>
         <p id="mensajeFinal7"></p>
+        <div class="desglose-temas" id="desgloseTemas7"></div>
         <button onclick="reiniciarQuiz7()" class="btn-reset">🔄 Reiniciar Quiz</button>
       </div>
 
@@ -333,12 +1482,20 @@
     </div>
   </section>
 
+</div>
+
 <script>
   // ==========================================
   // SCRIPT ESPECÍFICO PARA EL QUIZ DE SECCIÓN VII
   // ==========================================
   let respuestas7 = {};
-  const totalPreguntas7 = 40; 
+  const totalPreguntas7 = 40;
+
+  function toggleAcordeon(header) {
+    header.classList.toggle('active');
+    const content = header.nextElementSibling;
+    content.classList.toggle('active');
+  }
 
   function mostrarSeccion7(id, tab) {
     const container = document.getElementById('quiz-seccion7');
@@ -387,8 +1544,52 @@
       return;
     }
     const correctas = Object.values(respuestas7).filter(r => r.correcta).length;
+    const porcentaje = Math.round((correctas / totalPreguntas7) * 100);
+    
     document.getElementById('puntajeFinal7').textContent = `${correctas}/${totalPreguntas7}`;
-    document.getElementById('mensajeFinal7').textContent = correctas === totalPreguntas7 ? '🏆 ¡PERFECTO! Dominas la contratación estatal.' : (correctas >= 30 ? '✅ ¡Muy bien!' : '📚 Necesitas repasar los principios y modalidades de selección.');
+    
+    let mensaje = '';
+    if (porcentaje === 100) mensaje = '🏆 ¡PERFECTO! Dominas la contratación estatal.';
+    else if (porcentaje >= 90) mensaje = '🌟 ¡Excelente! Dominio sobresaliente.';
+    else if (porcentaje >= 75) mensaje = '✅ ¡Muy bien! Buen dominio.';
+    else if (porcentaje >= 60) mensaje = '📚 Aceptable. Repasa los temas donde fallaste.';
+    else if (porcentaje >= 40) mensaje = '📖 Necesitas reforzar varios conceptos.';
+    else mensaje = '🔍 Es necesario estudiar nuevamente todos los temas.';
+    
+    document.getElementById('mensajeFinal7').textContent = mensaje;
+
+    // Desglose por temas
+    const temas = {
+      41: { nombre: 'T41: Fundamentos', total: 4, correctas: 0 },
+      42: { nombre: 'T42: Modalidades', total: 4, correctas: 0 },
+      43: { nombre: 'T43: Selección', total: 4, correctas: 0 },
+      44: { nombre: 'T44: Perfeccionamiento', total: 4, correctas: 0 },
+      45: { nombre: 'T45: Tipos Contratos', total: 4, correctas: 0 },
+      46: { nombre: 'T46: Poderes Exorbitantes', total: 4, correctas: 0 },
+      47: { nombre: 'T47: Equilibrio Económico', total: 4, correctas: 0 },
+      48: { nombre: 'T48: Controversias', total: 4, correctas: 0 },
+      49: { nombre: 'T49: Liquidación', total: 4, correctas: 0 },
+      50: { nombre: 'T50: Regímenes Especiales', total: 4, correctas: 0 }
+    };
+
+    Object.values(respuestas7).forEach(r => {
+      if (r.correcta) temas[r.tema].correctas++;
+    });
+
+    const desgloseHTML = Object.values(temas).map(t => {
+      const pct = Math.round((t.correctas / t.total) * 100);
+      return `
+        <div class="desglose-item">
+          <h4>${t.nombre}</h4>
+          <p>${t.correctas}/${t.total} (${pct}%)</p>
+          <div class="mini-bar">
+            <div class="mini-bar-fill" style="width: ${pct}%"></div>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    document.getElementById('desgloseTemas7').innerHTML = desgloseHTML;
     document.getElementById('resultadoFinal7').classList.add('visible');
     document.getElementById('resultadoFinal7').scrollIntoView({ behavior: 'smooth' });
   }
