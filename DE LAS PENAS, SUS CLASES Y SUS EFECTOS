@@ -1,0 +1,1276 @@
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Consecuencias jurídicas de la conducta punible · Arts. 34–53 CP Colombiano</title>
+<style>
+:root{
+  --bg:#f7f5ef;
+  --paper:#ffffff;
+  --ink:#22303f;
+  --muted:#5b6675;
+  --razon:#9b2c2c;
+  --proc:#2c5282;
+  --gold:#975a16;
+  --line:#e3e0d6;
+  --shadow:0 6px 24px rgba(30,40,60,.06);
+  --shadow-hover:0 14px 34px rgba(30,40,60,.10);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
+  background:var(--bg);color:var(--ink);line-height:1.75;
+}
+h1,h2,h3,h4,.serif{font-family:Georgia,'Times New Roman',serif}
+a{color:inherit}
+::selection{background:#9b2c2c;color:#fff}
+
+#progress{
+  position:fixed;top:0;left:0;height:3px;width:0%;
+  background:linear-gradient(90deg,var(--razon),var(--proc));
+  z-index:1000;transition:width .1s linear;
+}
+
+header{
+  background:
+    repeating-linear-gradient(135deg,rgba(255,255,255,.025) 0 2px,transparent 2px 22px),
+    linear-gradient(135deg,#16202c 0%,#2b3a4d 100%);
+  color:#fff;padding:5rem 2rem 4rem;text-align:center;
+  border-bottom:5px solid var(--razon);
+}
+.eyebrow{
+  font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;
+  color:#c9b98a;margin-bottom:1.4rem;font-weight:600;
+}
+header h1{
+  font-size:clamp(2rem,5vw,3.4rem);line-height:1.2;
+  font-weight:400;letter-spacing:-.5px;margin-bottom:1.2rem;
+}
+header h1 em{font-style:italic;color:#e6d9b8}
+header p{
+  max-width:760px;margin:0 auto;font-size:1.05rem;
+  color:#c3cbd6;font-style:italic;
+}
+.header-meta{
+  margin-top:2rem;display:inline-flex;gap:1.6rem;flex-wrap:wrap;
+  justify-content:center;font-size:.78rem;letter-spacing:.12em;
+  text-transform:uppercase;color:#93a1b3;
+}
+.header-meta span{display:flex;align-items:center;gap:.5rem}
+.header-meta b{color:#e6d9b8;font-weight:600}
+
+.method{max-width:1180px;margin:0 auto;padding:3.5rem 2rem 1rem}
+.section-kicker{
+  font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--muted);font-weight:700;margin-bottom:.6rem;
+}
+.method h2{font-size:1.9rem;margin-bottom:1.6rem;font-weight:400}
+.method-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.4rem}
+.method-card{
+  background:var(--paper);padding:1.8rem;border-radius:10px;
+  box-shadow:var(--shadow);border-left:4px solid var(--line);
+}
+.method-card.r{border-color:var(--razon)}
+.method-card.p{border-color:var(--proc)}
+.method-card h3{font-size:1.2rem;margin-bottom:.4rem}
+.method-card.r h3{color:var(--razon)}
+.method-card.p h3{color:var(--proc)}
+.method-card .subtitle{
+  font-size:.72rem;text-transform:uppercase;letter-spacing:.16em;
+  color:var(--muted);display:block;margin-bottom:.8rem;
+}
+.method-card p{font-size:.92rem;color:var(--muted)}
+.method-card .formula{
+  margin-top:1rem;padding:.9rem 1rem;background:#faf9f6;
+  border-radius:6px;border:1px solid var(--line);
+  font-family:Georgia,serif;font-style:italic;font-size:.9rem;color:var(--ink);
+}
+
+nav{
+  position:sticky;top:0;z-index:200;background:var(--paper);
+  border-bottom:1px solid var(--line);box-shadow:0 2px 12px rgba(0,0,0,.04);
+}
+.nav-inner{
+  max-width:1180px;margin:0 auto;display:flex;overflow-x:auto;
+  padding:0 1rem;scrollbar-width:thin;
+}
+nav a{
+  text-decoration:none;padding:1.05rem 1.15rem;font-size:.85rem;
+  font-weight:600;white-space:nowrap;border-bottom:3px solid transparent;
+  transition:.25s;color:var(--muted);
+}
+nav a:hover{color:var(--razon);background:#faf6f6}
+nav a.active{color:var(--razon);border-color:var(--razon)}
+
+main{max-width:1180px;margin:0 auto;padding:0 2rem}
+.mapa{padding:3.5rem 0 1rem}
+.pipeline{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:.7rem;margin-top:1.4rem;
+}
+.pipe-node{
+  background:var(--paper);border:1px solid var(--line);
+  border-radius:10px;padding:1.2rem;text-decoration:none;
+  transition:.25s;position:relative;display:block;
+}
+.pipe-node:hover{transform:translateY(-4px);box-shadow:var(--shadow-hover);border-color:#c9b98a}
+.pipe-node .num{
+  font-family:Georgia,serif;font-size:1.6rem;color:#c9b98a;display:block;line-height:1;
+}
+.pipe-node strong{display:block;font-size:1rem;margin:.5rem 0 .3rem}
+.pipe-node small{font-size:.8rem;color:var(--muted);display:block}
+
+.section-divider{
+  margin:5rem 0 2rem;padding:2rem 0;border-top:2px solid var(--line);
+  border-bottom:2px solid var(--line);text-align:center;
+}
+.section-divider .num{
+  font-family:Georgia,serif;font-size:3rem;color:var(--gold);
+  display:block;line-height:1;margin-bottom:.5rem;
+}
+.section-divider h2{
+  font-size:1.8rem;font-weight:400;margin-bottom:.5rem;
+}
+.section-divider p{
+  color:var(--muted);max-width:720px;margin:0 auto;font-size:.95rem;
+}
+
+.article-section{padding:3.5rem 0 1rem;scroll-margin-top:75px}
+.article-header{display:flex;align-items:center;gap:1.4rem;margin-bottom:1.6rem}
+.roman{
+  font-family:Georgia,serif;font-size:1.5rem;font-weight:bold;
+  color:var(--razon);background:#f1e6e2;border:1px solid #e4cfc9;
+  width:72px;height:72px;display:flex;align-items:center;justify-content:center;
+  border-radius:8px;flex-shrink:0;
+}
+.article-header h2{font-size:2rem;font-weight:400;line-height:1.25}
+.article-header .tagline{
+  display:block;font-family:'Segoe UI',sans-serif;font-size:.9rem;
+  color:var(--muted);font-style:italic;margin-top:.4rem;font-weight:400;
+}
+.legal-text{
+  background:var(--paper);border-left:5px solid var(--razon);
+  padding:1.6rem 1.9rem;margin-bottom:1.2rem;border-radius:0 10px 10px 0;
+  box-shadow:var(--shadow);font-family:Georgia,serif;
+  font-size:1.02rem;color:#3d4756;
+}
+.legal-text p+p{margin-top:.9rem}
+.legal-text ol,.legal-text ul{margin-top:.8rem;padding-left:1.3rem}
+.legal-text ol li,.legal-text ul li{margin-bottom:.5rem}
+.legal-label{
+  display:block;font-family:'Segoe UI',sans-serif;font-size:.65rem;
+  letter-spacing:.22em;text-transform:uppercase;color:var(--muted);
+  margin-bottom:.8rem;font-weight:700;
+}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:2rem}
+.chip{
+  font-size:.72rem;letter-spacing:.04em;padding:.3rem .8rem;
+  background:#eceae2;border:1px solid var(--line);border-radius:30px;color:#5c6470;
+}
+
+.dual-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:1.5rem}
+.perspective-card{
+  background:var(--paper);border-radius:12px;padding:1.8rem;
+  box-shadow:var(--shadow);border-top:4px solid transparent;
+  transition:transform .3s,box-shadow .3s;display:flex;flex-direction:column;
+}
+.perspective-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-hover)}
+.perspective-card.razon{border-top-color:var(--razon)}
+.perspective-card.proc{border-top-color:var(--proc)}
+.card-header{display:flex;align-items:center;gap:.7rem;margin-bottom:.3rem}
+.card-icon{font-size:1.35rem}
+.card-title{font-size:.95rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em}
+.razon .card-title{color:var(--razon)}
+.proc .card-title{color:var(--proc)}
+.card-sub{font-size:.72rem;color:var(--muted);font-style:italic;margin-bottom:1.2rem;letter-spacing:.02em}
+.card-content p{font-size:.92rem;color:#4a5563;margin-bottom:1rem;text-align:justify}
+.card-content p:last-child{margin-bottom:0}
+.card-content strong{color:var(--ink);font-weight:650}
+.card-content ul{margin-top:.6rem;padding-left:1.3rem}
+.card-content ul li{margin-bottom:.5rem;font-size:.9rem;color:#4a5563}
+
+.callout{
+  margin-top:1.6rem;background:#fbf6ea;border:1px solid #ecdfbf;
+  border-left:4px solid var(--gold);border-radius:0 8px 8px 0;
+  padding:1.2rem 1.5rem;
+}
+.callout .label{
+  font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--gold);font-weight:700;display:block;margin-bottom:.5rem;
+}
+.callout p{font-size:.9rem;color:#6b5b3a}
+
+.case-study{
+  margin-top:1.2rem;background:var(--paper);border:1px solid var(--line);
+  border-radius:10px;overflow:hidden;
+}
+.case-study summary{
+  cursor:pointer;padding:1.1rem 1.5rem;font-weight:600;font-size:.92rem;
+  list-style:none;display:flex;align-items:center;gap:.7rem;transition:.2s;
+}
+.case-study summary::-webkit-details-marker{display:none}
+.case-study summary:hover{background:#faf9f5}
+.case-study summary .marker{
+  width:22px;height:22px;border:1px solid var(--line);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;font-size:.8rem;
+  color:var(--razon);flex-shrink:0;transition:.3s;
+}
+.case-study[open] summary .marker{transform:rotate(45deg);background:var(--razon);color:#fff;border-color:var(--razon)}
+.case-study .case-body{padding:0 1.5rem 1.4rem;font-size:.92rem;color:var(--muted)}
+.case-study .case-body p+p{margin-top:.7rem}
+
+.sintesis{padding:4.5rem 0 2rem;scroll-margin-top:75px;border-top:1px solid var(--line)}
+.sintesis h2{font-size:2.1rem;font-weight:400;margin-bottom:.8rem}
+.sintesis .intro{color:var(--muted);max-width:820px;margin-bottom:2rem}
+.table-wrap{overflow-x:auto;border-radius:12px;box-shadow:var(--shadow);background:var(--paper)}
+table{width:100%;border-collapse:collapse;min-width:820px;font-size:.86rem}
+thead{background:#22303f;color:#fff}
+th{padding:1rem;text-align:left;font-weight:600;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase}
+th:nth-child(2){color:#f0b9b9}
+th:nth-child(3){color:#a9c6e8}
+td{padding:1.1rem 1rem;border-bottom:1px solid var(--line);vertical-align:top;color:var(--muted)}
+td:first-child{font-weight:700;color:var(--ink);white-space:nowrap}
+tbody tr:hover{background:#faf9f5}
+.closing{
+  margin-top:2rem;background:var(--paper);border:1px solid var(--line);
+  border-radius:12px;padding:2rem;text-align:center;
+}
+.closing .serif{font-size:1.5rem;font-style:italic;color:var(--razon);margin-bottom:.8rem}
+.closing p{color:var(--muted);max-width:760px;margin:0 auto;font-size:.95rem}
+
+.glosario{padding:3rem 0 1rem;scroll-margin-top:75px}
+.glosario details{
+  background:var(--paper);border:1px solid var(--line);border-radius:12px;
+  padding:0 1.6rem;box-shadow:var(--shadow);
+}
+.glosario summary{
+  cursor:pointer;padding:1.4rem 0;font-family:Georgia,serif;
+  font-size:1.3rem;list-style:none;display:flex;justify-content:space-between;align-items:center;
+}
+.glosario summary::-webkit-details-marker{display:none}
+.glosario summary span{font-size:1.4rem;color:var(--razon);transition:.3s}
+.glosario details[open] summary span{transform:rotate(45deg)}
+.gloss-list{padding-bottom:1.6rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.4rem}
+.gloss-list dt{font-weight:700;font-size:.92rem;color:var(--ink);margin-bottom:.3rem}
+.gloss-list dd{font-size:.88rem;color:var(--muted)}
+
+.refs{padding:3rem 0 4rem}
+.refs h3{font-size:1.4rem;font-weight:400;margin-bottom:1.4rem}
+.ref-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1rem}
+.ref{
+  background:var(--paper);border:1px solid var(--line);border-radius:8px;
+  padding:1.1rem 1.3rem;font-size:.87rem;color:var(--muted);
+}
+.ref b{color:var(--ink);display:block;margin-bottom:.25rem;font-weight:650}
+.ref i{color:#7a8391}
+
+footer{
+  background:#16202c;color:#8b98a9;text-align:center;padding:3rem 2rem;
+}
+footer strong{color:#d8dde5;display:block;font-family:Georgia,serif;font-size:1.1rem;margin-bottom:.6rem;font-weight:400}
+footer p{font-size:.82rem;max-width:760px;margin:0 auto .5rem}
+footer .fine{font-size:.72rem;opacity:.65;margin-top:1.2rem}
+
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+
+@media(max-width:900px){
+  .dual-grid{grid-template-columns:1fr}
+  .article-header{gap:1rem}
+  .article-header h2{font-size:1.6rem}
+  .roman{width:58px;height:58px;font-size:1.2rem}
+  header{padding:3.5rem 1.5rem}
+}
+@media(max-width:600px){
+  main{padding:0 1.1rem}
+  .method{padding:2.5rem 1.1rem 1rem}
+  .legal-text{padding:1.2rem}
+  .card-content p{text-align:left}
+}
+@media print{
+  nav,#progress{display:none}
+  body{background:#fff;color:#000}
+  header{background:#fff;color:#000;border-bottom:2px solid #000;padding:2rem 0}
+  .perspective-card,.legal-text{box-shadow:none;break-inside:avoid}
+  .article-section{break-before:page}
+  .reveal{opacity:1!important;transform:none!important}
+}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+
+<header>
+  <div class="eyebrow">Libro Primero · Parte General · Capítulo Primero</div>
+  <h1>Las consecuencias jurídicas de la<br><em>conducta punible</em></h1>
+  <p>Una lectura desde la <strong>razonabilidad</strong> y el <strong>procedimiento</strong>
+     de los artículos 34 a 53 del Código Penal colombiano: de la clasificación de las penas
+     a su ejecución, control y extinción.</p>
+  <div class="header-meta">
+    <span><b>Ley 599 de 2000</b></span>
+    <span>Modificado por <b>Leyes 1709/2014, 2098/2021, 2197/2022, 2292/2023, 2455/2025</b></span>
+    <span>Artículos <b>34 — 53</b></span>
+    <span>Razonabilidad · Procedimiento</span>
+  </div>
+</header>
+
+<section class="method">
+  <div class="section-kicker">La clave de lectura</div>
+  <h2>Dos preguntas frente a cada consecuencia jurídica</h2>
+  <div class="method-grid">
+    <div class="method-card r">
+      <h3>Razonabilidad</h3>
+      <span class="subtitle">¿Es razonable esta pena?</span>
+      <p>Examina si la consecuencia jurídica cumple los principios de
+         <strong>necesidad, proporcionalidad y razonabilidad</strong> del artículo 3.
+         Pregunta si la pena es idónea para el fin, si no existe otra menos lesiva,
+         si guarda relación con el injusto y la culpabilidad, y si respeta la dignidad humana.</p>
+      <div class="formula">
+        Necesidad + Proporcionalidad + Razonabilidad + Dignidad = Pena legítima
+      </div>
+    </div>
+    <div class="method-card p">
+      <h3>Procedimiento</h3>
+      <span class="subtitle">¿Cómo se aplica, ejecuta y controla?</span>
+      <p>Reconstruye el <strong>iter procedimental</strong> de la consecuencia jurídica:
+         qué autoridad la impone, cómo se individualiza, qué garantías procesales
+         la rodean, quién la ejecuta, cómo se controla su cumplimiento, y cómo se
+         extingue o se transforma.</p>
+      <div class="formula">
+        Imposición → Individualización → Ejecución → Control → Extinción
+      </div>
+    </div>
+  </div>
+</section>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#s1">I · Clasificación general</a>
+    <a href="#s2">II · Penas principales</a>
+    <a href="#s3">III · Penas sustitutivas</a>
+    <a href="#s4">IV · Prisión domiciliaria</a>
+    <a href="#s5">V · Servicios utilidad pública</a>
+    <a href="#s6">VI · Multa</a>
+    <a href="#s7">VII · Penas privativas de otros derechos</a>
+    <a href="#s8">VIII · Penas accesorias</a>
+    <a href="#sintesis">Síntesis</a>
+    <a href="#glosario">Glosario</a>
+  </div>
+</nav>
+
+<main>
+
+<section class="mapa">
+  <div class="section-kicker">Recorrido del análisis</div>
+  <h2 class="serif" style="font-size:1.7rem;font-weight:400">Veinte artículos. Ocho estaciones procedimentales.</h2>
+  <div class="pipeline">
+    <a href="#s1" class="pipe-node">
+      <span class="num">I</span>
+      <strong>Clasificación general</strong>
+      <small>Art. 34<br>Principales, sustitutivas, accesorias.</small>
+    </a>
+    <a href="#s2" class="pipe-node">
+      <span class="num">II</span>
+      <strong>Penas principales</strong>
+      <small>Arts. 35–37<br>Prisión, perpetua revisable, multa.</small>
+    </a>
+    <a href="#s3" class="pipe-node">
+      <span class="num">III</span>
+      <strong>Penas sustitutivas</strong>
+      <small>Art. 36<br>Domiciliaria, arresto fin de semana, servicios.</small>
+    </a>
+    <a href="#s4" class="pipe-node">
+      <span class="num">IV</span>
+      <strong>Prisión domiciliaria</strong>
+      <small>Arts. 38–38G<br>Requisitos, control, ejecución, redención.</small>
+    </a>
+    <a href="#s5" class="pipe-node">
+      <span class="num">V</span>
+      <strong>Servicios utilidad pública</strong>
+      <small>Arts. 38H–38Ñ<br>Mujeres cabeza de familia.</small>
+    </a>
+    <a href="#s6" class="pipe-node">
+      <span class="num">VI</span>
+      <strong>Multa</strong>
+      <small>Arts. 39–42<br>Unidad multa, pago, conversión, coactivo.</small>
+    </a>
+    <a href="#s7" class="pipe-node">
+      <span class="num">VII</span>
+      <strong>Penas privativas de otros derechos</strong>
+      <small>Arts. 43–51<br>Inhabilitaciones y prohibiciones.</small>
+    </a>
+    <a href="#s8" class="pipe-node">
+      <span class="num">VIII</span>
+      <strong>Penas accesorias</strong>
+      <small>Arts. 52–53<br>Concurrencia con la principal.</small>
+    </a>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECCIÓN I: CLASIFICACIÓN GENERAL
+     ============================================================ -->
+<div id="s1" class="section-divider">
+  <span class="num">I</span>
+  <h2>Clasificación general de las penas</h2>
+  <p>Art. 34 · Principales, sustitutivas, accesorias · Principio de insignificancia familiar</p>
+</div>
+
+<section class="article-section">
+  <div class="article-header">
+    <div class="roman">XXXIV</div>
+    <h2>De las penas
+      <span class="tagline">La clasificación general y el principio de mínima intervención familiar.</span>
+    </h2>
+  </div>
+
+  <blockquote class="legal-text">
+    <span class="legal-label">Texto normativo · Artículo 34°</span>
+    <p>Las penas que se pueden imponer con arreglo a este código son principales, sustitutivas
+       y accesorias privativas de otros derechos cuando no obren como principales.</p>
+    <p>En los eventos de delitos culposos o con penas no privativas de la libertad, cuando las
+       consecuencias de la conducta han alcanzado exclusivamente al autor o a sus ascendientes,
+       descendientes, cónyuge, compañero o compañera permanente, hermano, adoptante o adoptivo,
+       o pariente hasta el segundo grado de afinidad, se podrá prescindir de la imposición de
+       la sanción penal cuando ella no resulte necesaria.</p>
+  </blockquote>
+
+  <div class="chips">
+    <span class="chip">Penas principales</span>
+    <span class="chip">Penas sustitutivas</span>
+    <span class="chip">Penas accesorias</span>
+    <span class="chip">Principio de insignificancia familiar</span>
+    <span class="chip">Última ratio</span>
+  </div>
+
+  <div class="dual-grid">
+    <article class="perspective-card razon">
+      <div class="card-header"><span class="card-icon">⚖️</span><h3 class="card-title">Razonabilidad</h3></div>
+      <div class="card-sub">¿Es razonable castigar cuando el daño ya recayó en la familia?</div>
+      <div class="card-content">
+        <p>El segundo inciso del artículo 34 consagra un <strong>principio de razonabilidad material</strong>:
+        cuando el daño del delito culposo o de pena no privativa de la libertad recae exclusivamente
+        en el círculo familiar del autor (ascendientes, descendientes, cónyuge, hermanos, parientes
+        hasta segundo grado de afinidad), la pena puede ser innecesaria.</p>
+
+        <p>La razonabilidad aquí opera en tres dimensiones:</p>
+        <ul>
+          <li><strong>Necesidad</strong>: si el autor ya sufrió el daño (ejemplo: perdió a su hijo en un accidente culposo), la pena no añade nada útil.</li>
+          <li><strong>Proporcionalidad</strong>: castigar a quien ya carga con la consecuencia más grave sería desproporcionado.</li>
+          <li><strong>Razonabilidad</strong>: el derecho penal no debe duplicar el castigo cuando la vida ya impuso el suyo.</li>
+        </ul>
+
+        <p>Este principio es la expresión más clara del carácter de <em>última ratio</em> del derecho
+        penal: la pena sólo es razonable cuando es necesaria para algún fin legítimo. Si el daño
+        ya se produjo, la pena se vuelve irrazonable.</p>
+      </div>
+    </article>
+
+    <article class="perspective-card proc">
+      <div class="card-header"><span class="card-icon">📋</span><h3 class="card-title">Procedimiento</h3></div>
+      <div class="card-sub">¿Cómo se aplica el principio de insignificancia familiar?</div>
+      <div class="card-content">
+        <p>El procedimiento para aplicar el principio de insignificancia familiar sigue estos pasos:</p>
+        <ul>
+          <li><strong>1. Verificación del tipo de delito</strong>: sólo aplica a delitos culposos o con penas no privativas de la libertad. No opera en delitos dolosos graves.</li>
+          <li><strong>2. Identificación del círculo familiar</strong>: el juez debe verificar que la víctima pertenezca al círculo taxativo del inciso (ascendientes, descendientes, cónyuge, compañero permanente, hermanos, parientes hasta segundo grado de afinidad).</li>
+          <li><strong>3. Prueba del daño exclusivo</strong>: debe acreditarse que las consecuencias alcanzaron <em>exclusivamente</em> al autor o a su familia. Si hay víctimas externas, no opera.</li>
+          <li><strong>4. Juicio de necesidad</strong>: el juez valora si la pena es necesaria para algún fin (prevención, reinserción). Si no lo es, prescinde de ella.</li>
+          <li><strong>5. Decisión motivada</strong>: la sentencia debe explicar por qué la pena no es necesaria, no es una renuncia automática.</li>
+        </ul>
+
+        <p>La Corte Constitucional (Sentencia C-029 de 2009) declaró exequible el artículo en el
+        entendido de que incluye a las parejas del mismo sexo en igualdad de condiciones.</p>
+      </div>
+    </article>
+  </div>
+
+  <div class="callout">
+    <span class="label">Nodo de razonabilidad</span>
+    <p><strong>¿Por qué sólo delitos culposos o de pena no privativa de libertad?</strong>
+    La razonabilidad del principio se limita a casos de menor gravedad. En delitos dolosos,
+    el daño familiar no absorbe el injusto: hay una voluntad criminal que merece reproche
+    independiente. En delitos de pena privativa de libertad, la gravedad del bien jurídico
+    afectado exige respuesta penal aunque el autor ya sufra.</p>
+  </div>
+
+  <details class="case-study">
+    <summary><span class="marker">+</span> Caso aplicado · El padre que pierde a su hijo</summary>
+    <div class="case-body">
+      <p>Un conductor, por descuido, atropella y mata a su propio hijo menor. Se le imputa
+      homicidio culposo. Las únicas víctimas son el niño y la familia del conductor.</p>
+      <p><strong>Lectura de razonabilidad:</strong> el padre ya carga con la consecuencia más
+      grave (la muerte de su hijo). Imponerle una pena adicional no cumple ningún fin legítimo:
+      no previene, no retribuye proporcionalmente, no reinserca. La pena sería irrazonable.</p>
+      <p><strong>Lectura procedimental:</strong> el juez verifica que el delito es culposo,
+      que la víctima es descendiente, que no hay otras víctimas, y que la pena no es necesaria.
+      Prescinde de la imposición de la sanción penal, con motivación expresa.</p>
+    </div>
+  </details>
+</section>
+
+<!-- ============================================================
+     SECCIÓN II: PENAS PRINCIPALES
+     ============================================================ -->
+<div id="s2" class="section-divider">
+  <span class="num">II</span>
+  <h2>Penas principales</h2>
+  <p>Arts. 35–37 · Prisión, prisión perpetua revisable, multa</p>
+</div>
+
+<section class="article-section">
+  <div class="article-header">
+    <div class="roman">XXXV</div>
+    <h2>Penas principales
+      <span class="tagline">El catálogo de las respuestas penales primarias.</span>
+    </h2>
+  </div>
+
+  <blockquote class="legal-text">
+    <span class="legal-label">Texto normativo · Artículo 35° (modificado por Ley 2098 de 2021)</span>
+    <p>Son penas principales la privativa de la libertad de prisión; la prisión perpetua revisable;
+       la pecuniaria de multa y las demás privativas de otros derechos que como tal se consagran
+       en la parte especial.</p>
+    <p><strong>NOTA:</strong> Artículo declarado EXEQUIBLE por la Corte Constitucional mediante
+       Sentencia C-383 de 2022.</p>
+  </blockquote>
+
+  <div class="chips">
+    <span class="chip">Prisión</span>
+    <span class="chip">Prisión perpetua revisable</span>
+    <span class="chip">Multa</span>
+    <span class="chip>Privativas de otros derechos</span>
+  </div>
+
+  <div class="dual-grid">
+    <article class="perspective-card razon">
+      <div class="card-header"><span class="card-icon">⚖️</span><h3 class="card-title">Razonabilidad</h3></div>
+      <div class="card-sub">¿Son razonables las cuatro penas principales?</div>
+      <div class="card-content">
+        <p>Las cuatro penas principales deben cumplir los principios del artículo 3:</p>
+        <ul>
+          <li><strong>Prisión</strong>: razonable para delitos graves que afecten bienes jurídicos esenciales (vida, libertad). Irrazonable para delitos menores o culposos.</li>
+          <li><strong>Prisión perpetua revisable</strong>: introducida en 2021 para delitos de lesa humanidad, genocidio, crimes against humanity. Su razonabilidad depende de que sea <em>revisable</em>: el condenado debe tener posibilidad real de obtener libertad tras cierto tiempo si demuestra rehabilitación. Sin revisión, sería inconstitucional por cruel e inhumana.</li>
+          <li><strong>Multa</strong>: razonable para delitos patrimoniales, económicos o de menor gravedad. Debe ser proporcional a la capacidad económica del condenado (unidad multa).</li>
+          <li><strong>Privativas de otros derechos</strong>: razonables cuando guardan relación directa con el delito (ejemplo: inhabilitación profesional para quien abusa de su profesión).</li>
+        </ul>
+
+        <p>La Corte Constitucional (C-383 de 2022) declaró exequible la prisión perpetua revisable
+        bajo el entendido de que debe ser realmente revisable, no perpetua sin esperanza.</p>
+      </div>
+    </article>
+
+    <article class="perspective-card proc">
+      <div class="card-header"><span class="card-icon">📋</span><h3 class="card-title">Procedimiento</h3></div>
+      <div class="card-sub">¿Cómo se imponen las penas principales?</div>
+      <div class="card-content">
+        <p>El procedimiento de imposición sigue estos pasos:</p>
+        <ul>
+          <li><strong>1. Sentencia condenatoria</strong>: el juez de conocimiento impone la pena principal en la sentencia, después de establecer responsabilidad.</li>
+          <li><strong>2. Individualización</strong>: el juez dosifica la pena dentro del marco legal (mínimo y máximo), atendiendo a las circunstancias de mayor o menor punibilidad (arts. 60–65 CP).</li>
+          <li><strong>3. Motivación</strong>: la sentencia debe explicar por qué se eligió esa pena y no otra, y por qué se dosificó en ese punto.</li>
+          <li><strong>4. Ejecución</strong>: la pena principal se ejecuta según su naturaleza: prisión en establecimiento carcelario, multa mediante pago o conversión, inhabilitación mediante registro.</li>
+          <li><strong>5. Control</strong>: el Juez de Ejecución de Penas y Medidas de Seguridad vigila el cumplimiento, concede beneficios penitenciarios, resuelve incidentes.</li>
+        </ul>
+
+        <p>La prisión perpetua revisable tiene un procedimiento especial: después de 30 años,
+        el condenado puede solicitar revisión ante el Juez de Ejecución, quien evalúa si
+        demuestra rehabilitación.</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="article-section">
+  <div class="article-header">
+    <div class="roman">XXXVII</div>
+    <h2>La prisión
+      <span class="tagline">La pena privativa de la libertad por excelencia.</span>
+    </h2>
+  </div>
+
+  <blockquote class="legal-text">
+    <span class="legal-label">Texto normativo · Artículo 37° (modificado por Ley 2197 de 2022)</span>
+    <p>La pena de prisión se sujetará a las siguientes reglas:</p>
+    <ol>
+      <li>La pena de prisión para los tipos penales tendrá una duración máxima de sesenta (60) años, excepto en los casos de concurso.</li>
+      <li>Su cumplimiento, así como los beneficios penitenciarios que supongan la reducción de la condena, se ajustarán a lo dispuesto en las leyes y en el presente código.</li>
+      <li>La detención preventiva no se reputa como pena. Sin embargo, en caso de condena, el tiempo cumplido bajo tal circunstancia se computará como parte cumplida de la pena.</li>
+    </ol>
+  </blockquote>
+
+  <div class="chips">
+    <span class="chip">Tope de 60 años</span>
+    <span class="chip">Beneficios penitenciarios</span>
+    <span class="chip">Detención preventiva</span>
+    <span class="chip">Cómputo de la pena</span>
+  </div>
+
+  <div class="dual-grid">
+    <article class="perspective-card razon">
+      <div class="card-header"><span class="card-icon">⚖️</span><h3 class="card-title">Razonabilidad</h3></div>
+      <div class="card-sub">¿Es razonable un tope de 60 años?</div>
+      <div class="card-content">
+        <p>El tope de 60 años es una <strong>regla de razonabilidad</strong> que limita el poder
+        punitivo del Estado. Su fundamento es triple:</p>
+        <ul>
+          <li><strong>Proporcionalidad</strong>: ninguna pena privativa de libertad puede ser infinita. La vida humana tiene un límite biológico; la pena debe respetarlo.</li>
+          <li><strong>Reinserción</strong>: después de cierto tiempo, la reinserción social se vuelve ilusoria. Una pena de 60 años es, en la práctica, perpetua sin esperanza.</li>
+          <li><strong>Dignidad</strong>: la Constitución prohíbe las penas perpetuas e irreversibles. El tope de 60 años es una forma de respetar ese mandato.</li>
+        </ul>
+
+        <p>La excepción es el concurso de conductas punibles (art. 31), donde puede superarse
+        el tope si alguna disposición contempla prisión perpetua revisable. Pero incluso en
+        ese caso, la perpetua debe ser revisable.</p>
+
+        <p>La detención preventiva no es pena pero se computa: esto es razonable porque el
+        condenado ya sufrió privación de libertad. No contarla sería una doble sanción.</p>
+      </div>
+    </article>
+
+    <article class="perspective-card proc">
+      <div class="card-header"><span class="card-icon">📋</span><h3 class="card-title">Procedimiento</h3></div>
+      <div class="card-sub">¿Cómo se cumple la prisión?</div>
+      <div class="card-content">
+        <p>El procedimiento de cumplimiento sigue estos pasos:</p>
+        <ul>
+          <li><strong>1. Ejecutoria de la sentencia</strong>: la sentencia queda en firme tras agotar recursos.</li>
+          <li><strong>2. Orden de cumplimiento</strong>: el juez de conocimiento ordena al INPEC recibir al condenado.</li>
+          <li><strong>3. Ubicación en establecimiento</strong>: el INPEC asigna el centro carcelario según gravedad, peligrosidad, género, edad.</li>
+          <li><strong>4. Programa de tratamiento</strong>: el condenado ingresa al programa de resocialización (trabajo, educación, salud).</li>
+          <li><strong>5. Beneficios penitenciarios</strong>: el Juez de Ejecución puede conceder redención por trabajo/educación, prisión domiciliaria, libertad condicional, según los requisitos legales.</li>
+          <li><strong>6. Cómputo</strong>: se descuenta el tiempo de detención preventiva y el tiempo cumplido. La pena se extingue cuando se cumple el total.</li>
+        </ul>
+
+        <p>El Código Penitenciario y Carcelario (Ley 65 de 1993) regula los detalles del
+        cumplimiento: régimen disciplinario, derechos del condenado, vigilancia.</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECCIÓN III: PENAS SUSTITUTIVAS
+     ============================================================ -->
+<div id="s3" class="section-divider">
+  <span class="num">III</span>
+  <h2>Penas sustitutivas</h2>
+  <p>Art. 36 · Domiciliaria, arresto fin de semana, servicios utilidad pública</p>
+</div>
+
+<section class="article-section">
+  <div class="article-header">
+    <div class="roman">XXXVI</div>
+    <h2>Penas sustitutivas
+      <span class="tagline">Alternativas a la prisión: la razonabilidad de la mínima intervención.</span>
+    </h2>
+  </div>
+
+  <blockquote class="legal-text">
+    <span class="legal-label">Texto normativo · Artículo 36°</span>
+    <p>La prisión domiciliaria es sustitutiva de la pena de prisión y el arresto de fin de semana
+       convertible en arresto ininterrumpido es sustitutivo de la multa.</p>
+    <p>La prestación de servicios de utilidad pública para mujeres cabeza de familia será
+       sustitutiva de la pena de prisión, de conformidad con los parámetros previstos en la
+       presente ley.</p>
+    <p>(Modificado por el Art. 3 de la Ley 2292 de 2023)</p>
+  </blockquote>
+
+  <div class="chips">
+    <span class="chip">Prisión domiciliaria</span>
+    <span class="chip">Arresto de fin de semana</span>
+    <span class="chip">Servicios de utilidad pública</span>
+    <span class="chip">Mujeres cabeza de familia</span>
+    <span class="chip">Principio de mínima intervención</span>
+  </div>
+
+  <div class="dual-grid">
+    <article class="perspective-card razon">
+      <div class="card-header"><span class="card-icon">⚖️</span><h3 class="card-title">Razonabilidad</h3></div>
+      <div class="card-sub">¿Por qué sustituir la prisión?</div>
+      <div class="card-content">
+        <p>Las penas sustitutivas expresan el <strong>principio de mínima intervención</strong>:
+        la prisión es la última ratio. Cuando existen alternativas menos lesivas que cumplen
+        los mismos fines, la prisión se vuelve irrazonable.</p>
+
+        <p>La razonabilidad de cada sustituto:</p>
+        <ul>
+          <li><strong>Prisión domiciliaria</strong>: razonable para condenados con arraigo familiar, sin peligrosidad, condenas cortas. Evita los efectos criminógenos de la cárcel.</li>
+          <li><strong>Arresto de fin de semana</strong>: razonable para multas no pagadas. Permite al condenado trabajar durante la semana y cumplir la pena los fines de semana.</li>
+          <li><strong>Servicios de utilidad pública para mujeres cabeza de familia</strong>: razonable por razones de género y protección familiar. Evita que los hijos queden desamparados. Respeta la dignidad de la mujer y su rol de cuidado.</li>
+        </ul>
+
+        <p>La Ley 2292 de 2023 amplió los sustitutivos para mujeres cabeza de familia,
+        reconociendo que la prisión de la madre afecta desproporcionadamente a los hijos.</p>
+      </div>
+    </article>
+
+    <article class="perspective-card proc">
+      <div class="card-header"><span class="card-icon">📋</span><h3 class="card-title">Procedimiento</h3></div>
+      <div class="card-sub">¿Cómo se solicitan y conceden los sustitutivos?</div>
+      <div class="card-content">
+        <p>El procedimiento varía según el sustituto:</p>
+        <ul>
+          <li><strong>Prisión domiciliaria</strong>: el condenado solicita ante el Juez de Ejecución, demostrando requisitos (pena ≤ 8 años, arraigo, caución). El juez concede o niega con motivación. El INPEC vigila.</li>
+          <li><strong>Arresto de fin de semana</strong>: se convierte de la multa no pagada. El juez ordena la conversión y el INPEC ejecuta. Si el arrestado incumple, se convierte en arresto ininterrumpido.</li>
+          <li><strong>Servicios de utilidad pública (mujeres cabeza de familia)</strong>: la condenada presenta un plan de servicios ante el juez, quien lo aprueba. El Ministerio de Justicia coordina con entidades receptoras. El Juez de Ejecución controla el cumplimiento.</li>
+        </ul>
+
+        <p>Todos los sustitutivos son revocables si el condenado incumple las obligaciones.
+        En ese caso, se vuelve a la pena original (prisión o arresto ininterrumpido).</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECCIÓN IV: PRISIÓN DOMICILIARIA
+     ============================================================ -->
+<div id="s4" class="section-divider">
+  <span class="num">IV</span>
+  <h2>Prisión domiciliaria</h2>
+  <p>Arts. 38–38G · Requisitos, control, ejecución, redención, vigilancia electrónica</p>
+</div>
+
+<section class="article-section">
+  <div class="article-header">
+    <div class="roman">XXXVIII</div>
+    <h2>Prisión domiciliaria
+      <span class="tagline">La privación de la libertad en el hogar: entre la razonabilidad y el control.</span>
+    </h2>
+  </div>
+
+  <blockquote class="legal-text">
+    <span class="legal-label">Texto normativo · Artículos 38, 38B–38G (Ley 1709 de 2014)</span>
+    <p>La prisión domiciliaria como sustitutiva de la prisión consistirá en la privación de la
+       libertad en el lugar de residencia o morada del condenado o en el lugar que el Juez determine.</p>
+    <p><strong>Requisitos (art. 38B):</strong> pena mínima ≤ 8 años; no delitos excluidos; arraigo
+       familiar y social; caución (no cambiar residencia, reparar daños, comparecer, permitir visitas).</p>
+    <p><strong>Control (art. 38C):</strong> Juez de Ejecución con apoyo del INPEC; visitas periódicas;
+       información a la Policía Nacional.</p>
+    <p><strong>Ejecución (art. 38D):</strong> en el lugar de residencia, excepto si pertenece al grupo
+       familiar de la víctima. Puede acompañarse de vigilancia electrónica. El juez puede autorizar
+       trabajo o estudio fuera del domicilio con brazalete.</p>
+    <p><strong>Redención (art. 38E):</strong> la persona sometida a prisión domiciliaria puede redimir
+       pena por trabajo o educación, con las mismas garantías que los privados de la libertad.</p>
+    <p><strong>Vigilancia electrónica (art. 38F):</strong> el costo del brazalete lo sufragará el
+       beneficiario según su capacidad económica; si carece de medios, lo paga el Gobierno Nacional.</p>
+    <p><strong>Cumplimiento de la mitad de la pena (art. 38G):</strong> si el condenado cumple la
+       mitad de la condena y reúne los requisitos, puede cumplir el resto en su domicilio, excepto
+       para delitos graves (genocidio, secuestro, tortura, terrorismo, lavado de activos, etc.).</p>
+  </blockquote>
+
+  <div class="chips">
+    <span class="chip">Arraigo familiar y social</span>
+    <span class="chip">Caución</span>
+    <span class="chip">Vigilancia electrónica</span>
+    <span class="chip">Redención por trabajo/educación</span>
+    <span class="chip">Delitos excluidos</span>
+  </div>
+
+  <div class="dual-grid">
+    <article class="perspective-card razon">
+      <div class="card-header"><span class="card-icon">⚖️</span><h3 class="card-title">Razonabilidad</h3></div>
+      <div class="card-sub">¿Es razonable sustituir la prisión por el domicilio?</div>
+      <div class="card-content">
+        <p>La prisión domiciliaria es razonable cuando concurren estos elementos:</p>
+        <ul>
+          <li><strong>Pena corta</strong> (≤ 8 años): la gravedad del delito no exige cárcel.</li>
+          <li><strong>Arraigo</strong>: el condenado tiene vínculos familiares y sociales que garantizan que no fugirá ni reincidirá.</li>
+          <li><strong>No peligrosidad</strong>: no se trata de delitos graves que exijan aislamiento.</li>
+          <li><strong>Reparación</strong>: el condenado garantiza la indemnización a la víctima.</li>
+        </ul>
+
+        <p>Es irrazonable cuando:</p>
+        <ul>
+          <li>El delito es grave (genocidio, secuestro, terrorismo, etc.): la sociedad exige aislamiento.</li>
+          <li>No hay arraigo: el condenado puede fugarse o reincidir.</li>
+          <li>El condenado pertenece al grupo familiar de la víctima: el domicilio no protege a la víctima.</li>
+        </ul>
+
+        <p>La vigilancia electrónica es razonable cuando el brazalete es proporcional a la
+        peligrosidad y el condenado puede costearlo (o el Estado lo provee si es indigente).</p>
+      </div>
+    </article>
+
+    <article class="perspective-card proc">
+      <div class="card-header"><span class="card-icon">📋</span><h3 class="card-title">Procedimiento</h3></div>
+      <div class="card-sub">¿Cómo se solicita, concede y controla?</div>
+      <div class="card-content">
+        <p>El procedimiento sigue estos pasos:</p>
+        <ul>
+          <li><strong>1. Solicitud</strong>: el condenado (o su defensor) solicita ante el Juez de Ejecución, independientemente de si está con orden de captura o ya privado de la libertad.</li>
+          <li><strong>2. Prueba de requisitos</strong>: el condenado demuestra arraigo (testimonios, certificados), caución (garantía económica), y que no está en la lista de delitos excluidos.</li>
+          <li><strong>3. Decisión judicial</strong>: el juez concede o niega con motivación. Si concede, fija las obligaciones (no cambiar residencia, reparar daños, comparecer, permitir visitas).</li>
+          <li><strong>4. Instalación del brazalete</strong>: si el juez ordena vigilancia electrónica, el INPEC instala el brazalete. El condenado paga según su capacidad.</li>
+          <li><strong>5. Control</strong>: el INPEC realiza visitas periódicas a la residencia; la Policía recibe información para vigilancia adicional.</li>
+          <li><strong>6. Redención</strong>: el condenado puede redimir pena por trabajo o educación, presentando certificados ante el Juez de Ejecución.</li>
+          <li><strong>7. Revocatoria</strong>: si incumple las obligaciones, el juez revoca el sustituto y ordena el ingreso a prisión.</li>
+        </ul>
+      </div>
+    </article>
+  </div>
+
+  <div class="callout">
+    <span class="label">Nodo de razonabilidad</span>
+    <p><strong>¿Por qué excluir ciertos delitos?</strong>
+    El artículo 38G excluye delitos graves (genocidio, secuestro, tortura, terrorismo,
+    lavado de activos, etc.) porque la razonabilidad de la prisión domiciliaria depende
+    de la gravedad del injusto. Para delitos que afectan bienes jurídicos esenciales o
+    la estructura misma del Estado, la sociedad exige aislamiento. La exclusión es una
+    regla de proporcionalidad material.</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECCIÓN V: SERVICIOS UTILIDAD PÚBLICA
+     ============================================================ -->
+<div id="s5" class="section-divider">
+  <span class="num">V</span>
+  <h2>Prestación de servicios de utilidad pública</h2>
+  <p>Arts. 38H–38Ñ · Mujeres cabeza de familia</p>
+</div>
+
+<section class="article-section">
+  <div class="article-header">
+    <div class="roman">XXXVIII<sup>H–Ñ</sup></div>
+    <h2>Servicios de utilidad pública
+      <span class="tagline">Una pena con perspectiva de género: la protección del cuidado familiar.</span>
+    </h2>
+  </div>
+
+  <blockquote class="legal-text">
+    <span class="legal-label">Texto normativo · Artículos 38H–38Ñ (Ley 2292 de 2023)</span>
+    <p><strong>38H.</strong> La prestación de servicios de utilidad pública como sustitutiva de la
+       prisión para mujeres cabeza de familia consistirá en el servicio no remunerado que, en
+       libertad, ha de prestar las mujeres condenadas, a favor de instituciones públicas,
+       organizaciones sin ánimo de lucro y no gubernamentales, mediante trabajos de utilidad
+       pública en el lugar de su domicilio.</p>
+    <p><strong>Dosificación:</strong> 5 horas de servicio por cada semana de prisión; máximo 8 horas
+       diarias; entre 5 y 20 horas semanales; no interferir con jornada laboral o educativa;
+       en el lugar de domicilio del núcleo familiar; tener en cuenta responsabilidades de cuidado.</p>
+    <p><strong>38I. Requisitos:</strong> pena ≤ 8 años o delitos específicos (arts. 239–241, 375–377);
+       sin antecedentes judiciales (salvo culposos, multa o mismos delitos); voluntad libre;
+       madre cabeza de familia (jefatura del hogar con hijos menores o personas con discapacidad);
+       delito no sea el art. 188-D (trata de personas); delito asociado a condiciones de
+       marginalidad; comparecencia personal.</p>
+    <p><strong>38J. Ejecución:</strong> la condenada presenta plan de servicios; el juez lo aprueba;
+       el Juez de Ejecución define lugar, horario y plan; inicio inmediato (máximo 5 días hábiles).</p>
+    <p><strong>38M. Requisitos adicionales:</strong> no residir en determinados lugares; no salir del
+       país; tratamiento por dependencia; tratamiento médico/psicológico; colaboración con víctimas;
+       dejar armas; buena conducta.</p>
+    <p><strong>38N. Faltas:</strong> si incumple injustificadamente, el juez evalúa gravedad; si
+       renuncia o incumple más de 3 veces, se revoca el sustituto y cumple prisión.</p>
+  </blockquote>
+
+  <div class="chips">
+    <span class="chip">Mujeres cabeza de familia</span>
+    <span class="chip">Perspectiva de género</span>
+    <span class="chip">Plan de servicios</span>
+    <span class="chip">Requisitos adicionales</span>
+    <span class="chip">Revocatoria</span>
+  </div>
+
+  <div class="dual-grid">
+    <article class="perspective-card razon">
+      <div class="card-header"><span class="card-icon">⚖️</span><h3 class="card-title">Razonabilidad</h3></div>
+      <div class="card-sub">¿Es razonable un sustituto específico para mujeres cabeza de familia?</div>
+      <div class="card-content">
+        <p>La Ley 2292 de 2023 introduce un sustituto con <strong>perspectiva de género</strong>,
+        reconociendo que la prisión de la madre afecta desproporcionadamente a los hijos y al
+        cuidado familiar. Su razonabilidad descansa en:</p>
+        <ul>
+          <li><strong>Proporcionalidad material</strong>: la prisión de la madre no sólo castiga a ella: castiga a los hijos que quedan desamparados. El sustituto evita ese daño colateral.</li>
+          <li><strong>Necesidad</strong>: si la madre es cabeza de familia y el delito está asociado a marginalidad, la prisión no es necesaria para la reinserción: el servicio comunitario cumple los mismos fines sin destruir el tejido familiar.</li>
+          <li><strong>Razonabilidad</strong>: es razonable que el derecho penal reconozca las realidades diferenciadas de mujeres y hombres. La igualdad material exige tratar distinto a quienes están en situaciones distintas.</li>
+        </ul>
+
+        <p>El requisito de que el delito esté asociado a condiciones de marginalidad es clave:
+        no es un privilegio para todas las mujeres cabeza de familia, sino para aquellas cuyo
+        delito es expresión de vulnerabilidad.</p>
+      </div>
+    </article>
+
+    <article class="perspective-card proc">
+      <div class="card-header"><span class="card-icon">📋</span><h3 class="card-title">Procedimiento</h3></div>
+      <div class="card-sub">¿Cómo se solicita, concede y ejecuta?</div>
+      <div class="card-content">
+        <p>El procedimiento sigue estos pasos:</p>
+        <ul>
+          <li><strong>1. Solicitud</strong>: la condenada (o su defensor) solicita ante el juez de conocimiento o el Juez de Ejecución, demostrando que es madre cabeza de familia y que el delito está asociado a marginalidad.</li>
+          <li><strong>2. Presentación del plan de servicios</strong>: la condenada propone un plan de trabajo comunitario (lugar, horario, actividades), que no interfiera con su jornada laboral o educativa y que respete sus responsabilidades de cuidado.</li>
+          <li><strong>3. Aprobación judicial</strong>: el juez aprueba el plan, fija el número de horas (5 horas por semana de prisión), y ordena iniciar la ejecución.</li>
+          <li><strong>4. Coordinación con entidades</strong>: el Ministerio de Justicia mantiene un listado de entidades receptoras. Si no hay entidades en el domicilio, la autoridad territorial debe proveer un servicio.</li>
+          <li><strong>5. Ejecución</strong>: la condenada inicia el servicio inmediatamente (máximo 5 días hábiles). Las entidades reportan mensualmente al Juez de Ejecución.</li>
+          <li><strong>6. Control</strong>: el Juez de Ejecución vigila el cumplimiento. Si hay faltas injustificadas, requiere a la condenada; si renuncia o incumple más de 3 veces, revoca el sustituto.</li>
+          <li><strong>7. Extinción</strong>: cumplido el plan, el juez declara extinguida la condena.</li>
+        </ul>
+      </div>
+    </article>
+  </div>
+
+  <details class="case-study">
+    <summary><span class="marker">+</span> Caso aplicado · La madre que hurtó por necesidad</summary>
+    <div class="case-body">
+      <p>Una madre cabeza de familia, en condiciones de marginalidad, hurta alimentos de un
+      supermercado para alimentar a sus tres hijos menores. Es condenada a 4 años de prisión.</p>
+      <p><strong>Lectura de razonabilidad:</strong> la prisión de la madre dejaría a los hijos
+      desamparados. El delito está asociado a marginalidad. El sustituto es razonable: evita
+      el daño colateral y cumple los fines de la pena.</p>
+      <p><strong>Lectura procedimental:</strong> la madre solicita el sustituto, demuestra que
+      es cabeza de familia, que el delito está asociado a marginalidad, y presenta un plan de
+      servicios (por ejemplo, apoyo en un comedor comunitario). El juez aprueba el plan, fija
+      1.040 horas de servicio (4 años × 52 semanas × 5 horas), y ordena iniciar. La madre
+      cumple el plan sin interferir con su jornada laboral o educativa. Al finalizar, el juez
+      declara extinguida la condena.</p>
+    </div>
+  </details>
+</section>
+
+<!-- ============================================================
+     SECCIÓN VI: MULTA
+     ============================================================ -->
+<div id="s6" class="section-divider">
+  <span class="num">VI</span>
+  <h2>La multa</h2>
+  <p>Arts. 39–42 · Unidad multa, pago, conversión, ejecución coactiva</p>
+</div>
+
+<section class="article-section">
+  <div class="article-header">
+    <div class="roman">XXXIX</div>
+    <h2>La multa
+      <span class="tagline">La pena pecuniaria: entre la proporcionalidad económica y la ejecución coactiva.</span>
+    </h2>
+  </div>
+
+  <blockquote class="legal-text">
+    <span class="legal-label">Texto normativo · Artículo 39° (modificado por Ley 1453 de 2011)</span>
+    <p><strong>1. Clases de multa:</strong> acompañante de la prisión (hasta 50.000 SMLMV) o unidad
+       multa (primer grado: 1–10 SMLMV; segundo grado: 10–100 SMLMV; tercer grado: 100–1.000 SMLMV).</p>
+    <p><strong>2. Unidad multa:</strong> se duplica si el condenado tiene antecedente por delito doloso
+       o preterintencional en los últimos 10 años.</p>
+    <p><strong>3. Determinación:</strong> el juez fija la cuantía motivadamente, atendiendo al daño,
+       culpabilidad, beneficio reportado, situación económica del condenado.</p>
+    <p><strong>4. Acumulación:</strong> en concurso, las multas se suman pero no exceden el máximo legal.</p>
+    <p><strong>5. Pago:</strong> íntegro e inmediato, salvo sustitutivos.</p>
+    <p><strong>6. Amortización a plazos:</strong> si el condenado demuestra incapacidad material, el
+       juez puede fraccionar en hasta 24 cuotas mensuales.</p>
+    <p><strong>7. Amortización mediante trabajo:</strong> si no puede pagar, el juez puede autorizar
+       trabajo no remunerado (1 unidad multa = 15 días de trabajo).</p>
+  </blockquote>
+
+  <div class="chips">
+    <span class="chip">Unidad multa</span>
+    <span class="chip">Grados según ingresos</span>
+    <span class="chip">Determinación motivada</span>
+    <span class="chip">Amortización a plazos</span>
+    <span class="chip">Amortización mediante trabajo</span>
+  </div>
+
+  <div class="dual-grid">
+    <article class="perspective-card razon">
+      <div class="card-header"><span class="card-icon">⚖️</span><h3 class="card-title">Razonabilidad</h3></div>
+      <div class="card-sub">¿Es razonable una multa que empobrece o que es irrisoria?</div>
+      <div class="card-content">
+        <p>La razonabilidad de la multa depende de su <strong>proporcionalidad económica</strong>:</p>
+        <ul>
+          <li><strong>Proporcionalidad al daño</strong>: la multa debe guardar relación con el perjuicio causado o el beneficio obtenido.</li>
+          <li><strong>Proporcionalidad a la capacidad</strong>: la unidad multa se gradúa según los ingresos del condenado. Una multa de 100 SMLMV para un indigente es irrazonable: lo empobrece sin cumplir ningún fin. Una multa de 1 SMLMV para un millonario es irrazonable: es irrisoria, no disuade.</li>
+          <li><strong>Proporcionalidad a la culpabilidad</strong>: la intensidad del dolo o la culpa debe reflejarse en la cuantía.</li>
+        </ul>
+
+        <p>El sistema de unidad multa busca evitar que la multa sea irrazonable: se adapta a
+        la capacidad económica del condenado. Pero la duplicación por reincidencia puede volverla
+        desproporcionada si el condenado ya pagó una multa anterior.</p>
+
+        <p>La amortización mediante trabajo es razonable cuando el condenado no puede pagar:
+        evita que la multa se convierta en una pena perpetua por insolvencia.</p>
+      </div>
+    </article>
+
+    <article class="perspective-card proc">
+      <div class="card-header"><span class="card-icon">📋</span><h3 class="card-title">Procedimiento</h3></div>
+      <div class="card-sub">¿Cómo se determina, paga y ejecuta?</div>
+      <div class="card-content">
+        <p>El procedimiento sigue estos pasos:</p>
+        <ul>
+          <li><strong>1. Determinación judicial</strong>: el juez fija la cuantía en la sentencia, motivando según el daño, culpabilidad, beneficio, situación económica.</li>
+          <li><strong>2. Notificación</strong>: el condenado es notificado y debe pagar íntegro e inmediato.</li>
+          <li><strong>3. Solicitud de fraccionamiento</strong>: si no puede pagar, solicita al juez fraccionar en hasta 24 cuotas o autorizar amortización mediante trabajo.</li>
+          <li><strong>4. Pago o trabajo</strong>: el condenado paga las cuotas o trabaja las horas asignadas (1 unidad multa = 15 días de trabajo).</li>
+          <li><strong>5. Conversión en arresto</strong>: si no paga ni trabaja, la multa se convierte en arresto de fin de semana (art. 40). Cada unidad multa = 5 arrestos de fin de semana. Si incumple, se convierte en arresto ininterrumpido.</li>
+          <li><strong>6. Ejecución coactiva</strong>: si la multa concurre con prisión y el condenado se sustrae, el juez remite el asunto a los Jueces de Ejecuciones Fiscales para cobro coactivo (art. 41).</li>
+          <li><strong>7. Destinación</strong>: los recursos ingresan al Fondo cuenta especial del Ministerio de Justicia para prevención del delito y fortalecimiento carcelario (art. 42).</li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECCIÓN VII: PENAS PRIVATIVAS DE OTROS DERECHOS
+     ============================================================ -->
+<div id="s7" class="section-divider">
+  <span class="num">VII</span>
+  <h2>Penas privativas de otros derechos</h2>
+  <p>Arts. 43–51 · Inhabilitaciones y prohibiciones</p>
+</div>
+
+<section class="article-section">
+  <div class="article-header">
+    <div class="roman">XLIII</div>
+    <h2>Penas privativas de otros derechos
+      <span class="tagline">La pena que no priva la libertad pero restringe derechos específicos.</span>
+    </h2>
+  </div>
+
+  <blockquote class="legal-text">
+    <span class="legal-label">Texto normativo · Artículo 43°</span>
+    <p>Son penas privativas de otros derechos:</p>
+    <ol>
+      <li>Inhabilitación para el ejercicio de derechos y funciones públicas.</li>
+      <li>Pérdida del empleo o cargo público.</li>
+      <li>Inhabilitación para el ejercicio de profesión, arte, oficio, industria o comercio.</li>
+      <li>Inhabilitación para el ejercicio de la patria potestad, tutela y curaduría.</li>
+      <li>Privación del derecho a conducir vehículos automotores y motocicletas.</li>
+      <li>Privación del derecho a la tenencia y porte de arma.</li>
+      <li>Privación del derecho a residir en determinados lugares o de acudir a ellos.</li>
+      <li>Prohibición de consumir bebidas alcohólicas o sustancias estupefacientes o psicotrópicas.</li>
+      <li>Expulsión del territorio nacional para los extranjeros.</li>
+      <li>Prohibición de aproximarse a la víctima y/o a integrantes de su grupo familiar.</li>
+      <li>Prohibición de comunicarse con la víctima y/o con integrantes de su grupo familiar.</li>
+      <li>Prohibición de adquisición, tenencia, cuidado o albergue de animales (Ley 2455 de 2025).</li>
+    </ol>
+  </blockquote>
+
+  <div class="chips">
+    <span class="chip">Inhabilitación política</span>
+    <span class="chip">Inhabilitación profesional</span>
+    <span class="chip">Patria potestad</span>
+    <span class="chip">Conducción</span>
+    <span class="chip">Porte de armas</span>
+    <span class="chip">Residencia</span>
+    <span class="chip">Consumo de sustancias</span>
+    <span class="chip">Expulsión</span>
+    <span class="chip">Aproximación y comunicación</span>
+    <span class="chip">Tenencia de animales</span>
+  </div>
+
+  <div class="dual-grid">
+    <article class="perspective-card razon">
+      <div class="card-header"><span class="card-icon">⚖️</span><h3 class="card-title">Razonabilidad</h3></div>
+      <div class="card-sub">¿Es razonable restringir un derecho específico?</div>
+      <div class="card-content">
+        <p>Las penas privativas de otros derechos son razonables cuando guardan <strong>relación
+        directa con el delito</strong>:</p>
+        <ul>
+          <li><strong>Inhabilitación profesional</strong>: razonable si el delito se cometió abusando de la profesión (ejemplo: médico que practica abortos ilegales). Irrazonable si no hay relación (ejemplo: contador que hurta no debe ser inhabilitado como médico).</li>
+          <li><strong>Privación de conducción</strong>: razonable en delitos de tránsito. Irrazonable en delitos patrimoniales.</li>
+          <li><strong>Prohibición de aproximación</strong>: razonable en violencia intrafamiliar o delitos sexuales. Irrazonable en delitos económicos.</li>
+          <li><strong>Prohibición de tenencia de animales</strong> (Ley 2455 de 2025): razonable en maltrato animal. Irrazonable en otros delitos.</li>
+        </ul>
+
+        <p>El principio de razonabilidad exige que la restricción sea <em>idónea, necesaria y
+        proporcional</em> para prevenir conductas similares. Una inhabilitación perpetua para
+        un delito menor es irrazonable.</p>
+      </div>
+    </article>
+
+    <article class="perspective-card proc">
+      <div class="card-header"><span class="card-icon">📋</span><h3 class="card-title">Procedimiento</h3></div>
+      <div class="card-sub">¿Cómo se imponen y ejecutan?</div>
+      <div class="card-content">
+        <p>El procedimiento sigue estos pasos:</p>
+        <ul>
+          <li><strong>1. Imposición</strong>: el juez impone la pena privativa de otros derechos en la sentencia, como principal o accesoria.</li>
+          <li><strong>2. Duración</strong>: el juez fija la duración dentro de los límites legales (art. 51): inhabilitación política (5–20 años); profesional (6 meses–20 años); patria potestad (6 meses–15 años); conducción (6 meses–10 años); armas (1–15 años); residencia (6 meses–5 años); aproximación (pena principal + 12 meses); animales (doble de la pena principal).</li>
+          <li><strong>3. Comunicación</strong>: el juez oficiosamente comunica a la autoridad correspondiente (Cámara de Comercio, Registro Único Empresarial, autoridades de tránsito, etc.) para que registren la inhabilitación.</li>
+          <li><strong>4. Ejecución simultánea</strong>: si concurre con prisión, se ejecuta simultáneamente (art. 53).</li>
+          <li><strong>5. Control</strong>: la autoridad registral vigila el cumplimiento. Si el condenado ejerce el derecho prohibido, incurre en nuevo delito (violación de inhabilitación).</li>
+          <li><strong>6. Extinción</strong>: cumplido el tiempo, la autoridad levanta la inhabilitación.</li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECCIÓN VIII: PENAS ACCESORIAS
+     ============================================================ -->
+<div id="s8" class="section-divider">
+  <span class="num">VIII</span>
+  <h2>Penas accesorias</h2>
+  <p>Arts. 52–53 · Concurrencia con la pena principal</p>
+</div>
+
+<section class="article-section">
+  <div class="article-header">
+    <div class="roman">LII</div>
+    <h2>Las penas accesorias
+      <span class="tagline">La pena que acompaña a la principal: prevención y relación directa.</span>
+    </h2>
+  </div>
+
+  <blockquote class="legal-text">
+    <span class="legal-label">Texto normativo · Artículos 52–53°</span>
+    <p><strong>52.</strong> Las penas privativas de otros derechos, que pueden imponerse como
+       principales, serán accesorias y las impondrá el Juez cuando tengan relación directa con
+       la realización de la conducta punible, por haber abusado de ellos o haber facilitado su
+       comisión, o cuando la restricción del derecho contribuya a la prevención de conductas
+       similares a la que fue objeto de condena.</p>
+    <p>En la imposición de las penas accesorias se observará estrictamente lo dispuesto en el
+       Artículo 59 (criterios de dosificación).</p>
+    <p>En todo caso, la pena de prisión conllevará la accesoria de inhabilitación para el ejercicio
+       de derechos y funciones públicas, por un tiempo igual al de la pena a que accede y hasta
+       por una tercera parte más, sin exceder el máximo fijado en la Ley.</p>
+    <p><strong>53.</strong> Las penas privativas de otros derechos concurrentes con una privativa de
+       la libertad, se aplicarán y ejecutarán simultáneamente con esta.</p>
+    <p>A su cumplimiento, el Juez oficiosamente dará la información respectiva a la autoridad
+       correspondiente.</p>
+  </blockquote>
+
+  <div class="chips">
+    <span class="chip">Relación directa</span>
+    <span class="chip">Abuso del derecho</span>
+    <span class="chip">Prevención especial</span>
+    <span class="chip>Inhabilitación política automática</span>
+    <span class="chip">Ejecución simultánea</span>
+  </div>
+
+  <div class="dual-grid">
+    <article class="perspective-card razon">
+      <div class="card-header"><span class="card-icon">⚖️</span><h3 class="card-title">Razonabilidad</h3></div>
+      <div class="card-sub">¿Es razonable imponer una pena accesoria?</div>
+      <div class="card-content">
+        <p>Las penas accesorias son razonables cuando concurren estos elementos:</p>
+        <ul>
+          <li><strong>Relación directa</strong>: el derecho restringido debe haber sido abusado para cometer el delito o haber facilitado su comisión. Ejemplo: un servidor público que se enriquece ilícitamente debe ser inhabilitado políticamente porque abusó de su cargo.</li>
+          <li><strong>Prevención especial</strong>: la restricción debe contribuir a prevenir conductas similares. Ejemplo: inhabilitar profesionalmente a un médico que cometió homicidio culposo previene que vuelva a ejercer negligentemente.</li>
+          <li><strong>Proporcionalidad</strong>: la duración de la accesoria debe ser proporcional a la gravedad del delito y a la pena principal.</li>
+        </ul>
+
+        <p>La inhabilitación política automática (pena de prisión conlleva inhabilitación
+        política por el mismo tiempo más una tercera parte) es razonable porque quien comete
+        un delito grave pierde temporalmente la confianza para ejercer derechos políticos.</p>
+      </div>
+    </article>
+
+    <article class="perspective-card proc">
+      <div class="card-header"><span class="card-icon">📋</span><h3 class="card-title">Procedimiento</h3></div>
+      <div class="card-sub">¿Cómo se imponen y ejecutan las accesorias?</div>
+      <div class="card-content">
+        <p>El procedimiento sigue estos pasos:</p>
+        <ul>
+          <li><strong>1. Imposición</strong>: el juez impone la pena accesoria en la sentencia, motivando la relación directa con el delito y la contribución a la prevención.</li>
+          <li><strong>2. Dosificación</strong>: el juez aplica los criterios del artículo 59 (daño, culpabilidad, necesidad de prevención).</li>
+          <li><strong>3. Inhabilitación política automática</strong>: si se impone prisión, el juez debe imponer también la inhabilitación política por el mismo tiempo más una tercera parte (hasta el máximo legal).</li>
+          <li><strong>4. Ejecución simultánea</strong>: si concurre con prisión, se ejecuta simultáneamente. La accesoria comienza a regir desde la ejecutoria de la sentencia.</li>
+          <li><strong>5. Comunicación oficiosa</strong>: el juez comunica a la autoridad correspondiente (Registraduría, Cámara de Comercio, etc.) para que registren la inhabilitación.</li>
+          <li><strong>6. Control</strong>: la autoridad registral vigila el cumplimiento. Si el condenado ejerce el derecho prohibido, incurre en nuevo delito.</li>
+          <li><strong>7. Extinción</strong>: cumplido el tiempo, la autoridad levanta la inhabilitación.</li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============================================================
+     SÍNTESIS
+     ============================================================ -->
+<section id="sintesis" class="sintesis">
+  <div class="section-kicker">Lectura transversal</div>
+  <h2>Veinte artículos, dos preguntas</h2>
+  <p class="intro">
+    Los artículos 34 a 53 no son preceptos independientes: son las articulaciones de un
+    mismo mecanismo de imposición, ejecución y control de las consecuencias jurídicas.
+    La tabla siguiente reconstruye, para cada grupo, la pregunta de razonabilidad y la
+    pregunta procedimental.
+  </p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Grupo</th>
+          <th>Razonabilidad · ¿Es razonable?</th>
+          <th>Procedimiento · ¿Cómo se aplica?</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Art. 34</td>
+          <td>¿Es razonable castigar cuando el daño ya recayó en la familia?</td>
+          <td>Verificación del tipo de delito, círculo familiar, daño exclusivo, juicio de necesidad, decisión motivada.</td>
+        </tr>
+        <tr>
+          <td>Arts. 35–37</td>
+          <td>¿Son razonables las penas principales? ¿La perpetua revisable es realmente revisable?</td>
+          <td>Sentencia condenatoria, individualización, motivación, ejecución, control del Juez de Ejecución.</td>
+        </tr>
+        <tr>
+          <td>Art. 36</td>
+          <td>¿Es razonable sustituir la prisión por alternativas menos lesivas?</td>
+          <td>Solicitud, prueba de requisitos, decisión judicial, ejecución, control, revocatoria si incumple.</td>
+        </tr>
+        <tr>
+          <td>Arts. 38–38G</td>
+          <td>¿Es razonable la prisión domiciliaria? ¿Para qué delitos? ¿Con qué controles?</td>
+          <td>Solicitud, prueba de arraigo y caución, instalación de brazalete, visitas del INPEC, redención, revocatoria.</td>
+        </tr>
+        <tr>
+          <td>Arts. 38H–38Ñ</td>
+          <td>¿Es razonable un sustituto específico para mujeres cabeza de familia?</td>
+          <td>Solicitud, plan de servicios, aprobación judicial, coordinación con entidades, ejecución, control, extinción.</td>
+        </tr>
+        <tr>
+          <td>Arts. 39–42</td>
+          <td>¿Es razonable una multa que empobrece o que es irrisoria?</td>
+          <td>Determinación motivada, pago o fraccionamiento, conversión en arresto, ejecución coactiva, destinación al Fondo.</td>
+        </tr>
+        <tr>
+          <td>Arts. 43–51</td>
+          <td>¿Es razonable restringir un derecho específico? ¿Guarda relación con el delito?</td>
+          <td>Imposición, duración, comunicación a autoridad registral, ejecución simultánea con prisión, control, extinción.</td>
+        </tr>
+        <tr>
+          <td>Arts. 52–53</td>
+          <td>¿Es razonable imponer una pena accesoria? ¿Contribuye a la prevención?</td>
+          <td>Imposición motivada, dosificación según art. 59, inhabilitación política automática, ejecución simultánea, comunicación oficiosa.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="closing">
+    <div class="serif">"Las penas que se pueden imponer con arreglo a este código son principales, sustitutivas y accesorias."</div>
+    <p>
+      En esa fórmula del artículo 34 se condensa todo el proyecto. El derecho penal no se agota
+      en la declaración de responsabilidad: debe imponer una consecuencia jurídica que sea
+      <strong>razonable</strong> (necesaria, proporcional, digna) y que siga un <strong>procedimiento</strong>
+      claro (imposición, ejecución, control, extinción). <strong>Razonabilidad y procedimiento
+      convergen en un mismo punto: la pena como respuesta limitada, controlada y respetuosa de
+      la dignidad humana.</strong>
+    </p>
+  </div>
+</section>
+
+<!-- ============================================================
+     GLOSARIO
+     ============================================================ -->
+<section id="glosario" class="glosario">
+  <details>
+    <summary>Glosario mínimo de las consecuencias jurídicas <span>+</span></summary>
+    <dl class="gloss-list">
+      <div><dt>Pena principal</dt><dd>La pena impuesta directamente por el delito: prisión, prisión perpetua revisable, multa, privativas de otros derechos.</dd></div>
+      <div><dt>Pena sustitutiva</dt><dd>Alternativa a la prisión: domiciliaria, arresto de fin de semana, servicios de utilidad pública.</dd></div>
+      <div><dt>Pena accesoria</dt><dd>Pena que acompaña a la principal, cuando hay relación directa con el delito.</dd></div>
+      <div><dt>Prisión perpetua revisable</dt><dd>Pena máxima para delitos graves, con posibilidad de revisión después de 30 años.</dd></div>
+      <div><dt>Unidad multa</dt><dd>Medida de la pena pecuniaria, graduada según los ingresos del condenado.</dd></div>
+      <div><dt>Prisión domiciliaria</dt><dd>Sustituto de la prisión que se cumple en el lugar de residencia, con vigilancia electrónica.</dd></div>
+      <div><dt>Arraigo familiar y social</dt><dd>Requisito para la prisión domiciliaria: vínculos que garantizan que el condenado no fugirá ni reincidirá.</dd></div>
+      <div><dt>Caución</dt><dd>Garantía económica que el condenado debe prestar para obtener la prisión domiciliaria.</dd></div>
+      <div><dt>Vigilancia electrónica</dt><dd>Mecanismo de control mediante brazalete, cuyo costo sufrag
