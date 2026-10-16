@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análisis Tridimensional del Código Penal Colombiano</title>
+    <style>
+        :root {
+            --bg-primary: #f8f6f0;
+            --bg-secondary: #ffffff;
+            --text-main: #2d3748;
+            --text-light: #4a5568;
+            --accent-dogma: #9b2c2c; /* Rojo jurídico */
+            --accent-onto: #2c5282;  /* Azul filosófico */
+            --accent-herm: #2f855a;  /* Verde hermenéutico */
+            --border-color: #e2e8f0;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 10px 15px rgba(0, 0, 0, 0.03);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            line-height: 1.7;
+            scroll-behavior: smooth;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+            color: #fff;
+            padding: 4rem 2rem;
+            text-align: center;
+            border-bottom: 5px solid var(--accent-dogma);
+        }
+
+        header h1 {
+            font-family: 'Georgia', serif;
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            letter-spacing: 1px;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        nav {
+            background-color: var(--bg-secondary);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            overflow-x: auto;
+            padding: 0 1rem;
+        }
+
+        nav a {
+            color: var(--text-main);
+            text-decoration: none;
+            padding: 1.2rem 1.5rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--accent-dogma);
+            border-bottom: 3px solid var(--accent-dogma);
+            background-color: rgba(155, 44, 44, 0.05);
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .article-section {
+            margin-bottom: 5rem;
+            scroll-margin-top: 80px;
+        }
+
+        .article-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 1rem;
+        }
+
+        .article-number {
+            font-family: 'Georgia', serif;
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--accent-dogma);
+            line-height: 1;
+        }
+
+        .article-title {
+            font-family: 'Georgia', serif;
+            font-size: 2rem;
+            color: var(--text-main);
+        }
+
+        .legal-text {
+            background-color: var(--bg-secondary);
+            border-left: 5px solid var(--accent-dogma);
+            padding: 1.5rem 2rem;
+            margin-bottom: 2.5rem;
+            font-family: 'Georgia', serif;
+            font-size: 1.05rem;
+            color: var(--text-light);
+            box-shadow: var(--shadow);
+            border-radius: 0 8px 8px 0;
+        }
+
+        .perspectives-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .perspective-card {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-top: 4px solid transparent;
+        }
+
+        .perspective-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+        }
+
+        .perspective-card.dogma { border-top-color: var(--accent-dogma); }
+        .perspective-card.onto { border-top-color: var(--accent-onto); }
+        .perspective-card.herm { border-top-color: var(--accent-herm); }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .card-icon {
+            font-size: 1.5rem;
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .dogma .card-title { color: var(--accent-dogma); }
+        .onto .card-title { color: var(--accent-onto); }
+        .herm .card-title { color: var(--accent-herm); }
+
+        .card-content p {
+            margin-bottom: 1rem;
+            text-align: justify;
+            font-size: 0.95rem;
+            color: var(--text-light);
+        }
+        
+        .card-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        footer {
+            background-color: #1a202c;
+            color: #a0aec0;
+            text-align: center;
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+        }
+
+        footer p {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 { font-size: 2rem; }
+            .article-header { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+            .article-number { font-size: 2rem; }
+            .article-title { font-size: 1.5rem; }
+            .perspectives-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>El Código Penal Colombiano</h1>
+    <p>Un análisis tridimensional de los Artículos 1 al 8: Dogmática, Ontología y Hermenéutica del Derecho Penal.</p>
+</header>
+
+<nav>
+    <div class="nav-container">
+        <a href="#art1">Art. 1</a>
+        <a href="#art2">Art. 2</a>
+        <a href="#art3">Art. 3</a>
+        <a href="#art4">Art. 4</a>
+        <a href="#art5">Art. 5</a>
+        <a href="#art6">Art. 6</a>
+        <a href="#art7">Art. 7</a>
+        <a href="#art8">Art. 8</a>
+    </div>
+</nav>
+
+<main>
+
+    <!-- ARTÍCULO 1 -->
+    <section id="art1" class="article-section">
+        <div class="article-header">
+            <span class="article-number">I</span>
+            <h2 class="article-title">Dignidad Humana</h2>
+        </div>
+        <blockquote class="legal-text">
+            "El derecho penal tendrá como fundamento el respeto a la dignidad humana."
+        </blockquote>
+        <div class="perspectives-grid">
+            <div class="perspective-card dogma">
+                <div class="card-header">
+                    <span class="card-icon">⚖️</span>
+                    <h3 class="card-title">Dogmática</h3>
+                </div>
+                <div class="card-content">
+                    <p>En la estructura sistemática del derecho penal, la dignidad humana actúa como el límite infranqueable del <em>ius puniendi</em> del Estado. Dogmáticamente, impide que el individuo sea tratado meramente como un objeto de prevención o intimidación. Condiciona la teoría del delito y la teoría de la pena, exigiendo que la culpabilidad sea el único fundamento y límite de la sanción.</p>
+                </div>
+            </div>
+            <div class="perspective-card onto">
+                <div class="card-header">
+                    <span class="card-icon">🌌</span>
+                    <h3 class="card-title">Ontología</h3>
+                </div>
+                <div class="card-content">
+                    <p>Desde el ser del derecho, la dignidad no es una concesión del Estado, sino la esencia misma de la condición humana. Siguiendo a Kant, el ser humano es un "fin en sí mismo". Ontológicamente, el derecho penal reconoce que la realidad del sujeto de derecho es inalienable; su valor es intrínseco, absoluto y no admite ponderación utilitaria frente a los fines sociales de la pena.</p>
+                </div>
+            </div>
+            <div class="perspective-card herm">
+                <div class="card-header">
+                    <span class="card-icon">📜</span>
+                    <h3 class="card-title">Hermenéutica</h3>
+                </div>
+                <div class="card-content">
+                    <p>La interpretación de este artículo exige una lectura integradora con el Artículo 1 de la Constitución Política. Hermenéuticamente, la dignidad es un "concepto abierto" que evoluciona. El juez constitucional y penal debe aplicarlo para invalidar normas o prácticas penales que resulten crueles, infamantes o que anulen la agencia moral del condenado, sirviendo como regla de clausura del sistema.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ARTÍCULO 2 -->
+    <section id="art2" class="article-section">
+        <div class="article-header">
+            <span class="article-number">II</span>
+            <h2 class="article-title">Integración</h2>
+        </div>
+        <blockquote class="legal-text">
+            "Las normas y postulados que sobre derechos humanos se encuentren consignados en la Constitución Política, en los tratados y convenios internacionales ratificados por Colombia, harán parte integral de este código."
+        </blockquote>
+        <div class="perspectives-grid">
+            <div class="perspective-card dogma">
+                <div class="card-header">
+                    <span class="card-icon">⚖️</span>
+                    <h3 class="card-title">Dogmática</h3>
+                </div>
+                <div class="card-content">
+                    <p>Supera el dualismo clásico (derecho interno vs. derecho internacional) adoptando una postura monista. Dogmáticamente, configura el "Bloque de Constitucionalidad" en materia penal. Los tratados de DD.HH. (como el PIDCP o la CADH) no son mera fuente subsidiaria, sino norma penal directa que integra la Parte General, modificando o complementando los tipos y las garantías.</p>
+                </div>
+            </div>
+            <div class="perspective-card onto">
+                <div class="card-header">
+                    <span class="card-icon">🌌</span>
+                    <h3 class="card-title">Ontología</h3>
+                </div>
+                <div class="card-content">
+                    <p>Revela la naturaleza universalista de los derechos humanos. El ser del derecho penal colombiano no es autosuficiente ni aislado; es un nodo dentro de una red jurídica global. Ontológicamente, reconoce que la realidad del sufrimiento humano y la necesidad de justicia trascienden las fronteras soberanas, haciendo del derecho penal un sistema abierto a la ética global.</p>
+                </div>
+            </div>
+            <div class="perspective-card herm">
+                <div class="card-header">
+                    <span class="card-icon">📜</span>
+                    <h3 class="card-title">Hermenéutica</h3>
+                </div>
+                <div class="card-content">
+                    <p>Exige la aplicación del <em>principio pro persona</em>. Ante una duda interpretativa entre la ley interna y el tratado, el intérprete debe optar por la norma que mayor protección otorgue al individuo. La hermenéutica de este artículo obliga al juez a realizar un "control de convencionalidad" ex officio, asegurando que la aplicación del código no vulnere los estándares interamericanos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ARTÍCULO 3 -->
+    <section id="art3" class="article-section">
+        <div class="article-header">
+            <span class="article-number">III</span>
+            <h2 class="article-title">Principios de las Sanciones Penales</h2>
+        </div>
+        <blockquote class="legal-text">
+            "La imposición de la pena o de la medida de seguridad responderá a los principios de necesidad, proporcionalidad y razonabilidad."
+        </blockquote>
+        <div class="perspectives-grid">
+            <div class="perspective-card dogma">
+                <div class="card-header">
+                    <span class="card-icon">⚖️</span>
+                    <h3 class="card-title">Dogmática</h3>
+                </div>
+                <div class="card-content">
+                    <p>Constituyen los límites materiales al legislador y al juez. La <em>necesidad</em> exige que el derecho penal sea la <em>ultima ratio</em>; la <em>proporcionalidad</em> requiere equivalencia entre injusto y pena; la <em>razonabilidad</em> prohíbe el arbitrio. Dogmáticamente, estos principios estructuran la dosimetría penal y son causa de nulidad si se vulneran en la sentencia.</p>
+                </div>
+            </div>
+            <div class="perspective-card onto">
+                <div class="card-header">
+                    <span class="card-icon">🌌</span>
+                    <h3 class="card-title">Ontología</h3>
+                </div>
+                <div class="card-content">
+                    <p>Refleja la búsqueda ontológica del equilibrio y la justicia como "dar a cada uno lo suyo". La realidad del castigo (que implica la imposición de un mal, el dolor de la pena) solo es legítima si existe una correspondencia exacta con la gravedad de la ruptura del pacto social. Es la materialización del principio de justicia conmutativa en el ámbito del castigo estatal.</p>
+                </div>
+            </div>
+            <div class="perspective-card herm">
+                <div class="card-header">
+                    <span class="card-icon">📜</span>
+                    <h3 class="card-title">Hermenéutica</h3>
+                </div>
+                <div class="card-content">
+                    <p>Se interpreta mediante el "test de proporcionalidad" de tres pasos: idoneidad (si la pena sirve para el fin), necesidad (si no hay otra medida menos lesiva) y proporcionalidad en sentido estricto (ponderación entre el beneficio social y el sacrificio de la libertad). El juez debe motivar explícitamente cómo la pena elegida satisface estos tres subprincipios.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ARTÍCULO 4 -->
+    <section id="art4" class="article-section">
+        <div class="article-header">
+            <span class="article-number">IV</span>
+            <h2 class="article-title">Funciones de la Pena</h2>
+        </div>
+        <blockquote class="legal-text">
+            "La pena cumplirá las funciones de prevención general, retribución justa, prevención especial, reinserción social y protección al condenado."
+        </blockquote>
+        <div class="perspectives-grid">
+            <div class="perspective-card dogma">
+                <div class="card-header">
+                    <span class="card-icon">⚖️</span>
+                    <h3 class="card-title">Dogmática</h3>
+                </div>
+                <div class="card-content">
+                    <p>Adopta la teoría mixta o unitaria de la pena. Supera el debate histórico entre las teorías absolutas (retribución) y relativas (prevención). Dogmáticamente, la retribución marca el límite superior (no se puede castigar más de lo merecido), mientras que la prevención y la reinserción justifican la necesidad del castigo dentro de ese límite, orientando la ejecución penitenciaria.</p>
+                </div>
+            </div>
+            <div class="perspective-card onto">
+                <div class="card-header">
+                    <span class="card-icon">🌌</span>
+                    <h3 class="card-title">Ontología</h3>
+                </div>
+                <div class="card-content">
+                    <p>La pena es la dialéctica entre la culpa y la redención. Ontológicamente, reconoce al infractor como un ser racional capaz de comprender el mensaje normativo (prevención general) y capaz de transformarse (reinserción). La "protección al condenado" revela que el Estado no anula la humanidad del recluso; su ser sigue siendo sujeto de derechos incluso en la privación de libertad.</p>
+                </div>
+            </div>
+            <div class="perspective-card herm">
+                <div class="card-header">
+                    <span class="card-icon">📜</span>
+                    <h3 class="card-title">Hermenéutica</h3>
+                </div>
+                <div class="card-content">
+                    <p>La Corte Constitucional ha hermenéuticamente elevado la "reinserción social" a la categoría de derecho fundamental del condenado, no solo como una política pública. Se interpreta que si el Estado falla en proveer las condiciones para la reinserción (salud, educación, trabajo), está vulnerando el fin constitucional de la pena, lo que puede derivar en mecanismos como la tutela o la sustitución de la pena.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ARTÍCULO 5 -->
+    <section id="art5" class="article-section">
+        <div class="article-header">
+            <span class="article-number">V</span>
+            <h2 class="article-title">Funciones de la Medida de Seguridad</h2>
+        </div>
+        <blockquote class="legal-text">
+            "En el momento de la ejecución de la medida de seguridad operan las funciones de protección, curación, tutela y rehabilitación."
+        </blockquote>
+        <div class="perspectives-grid">
+            <div class="perspective-card dogma">
+                <div class="card-header">
+                    <span class="card-icon">⚖️</span>
+                    <h3 class="card-title">Dogmática</h3>
+                </div>
+                <div class="card-content">
+                    <p>Se ubica en el sistema vicarial (o dual). A diferencia de la pena que se funda en la <em>culpabilidad</em>, la medida de seguridad se funda en la <em>peligrosidad</em> del inimputable. Dogmáticamente, no es un castigo, sino un tratamiento. Su duración y naturaleza dependen de la evolución clínica del sujeto, no de la gravedad del acto cometido.</p>
+                </div>
+            </div>
+            <div class="perspective-card onto">
+                <div class="card-header">
+                    <span class="card-icon">🌌</span>
+                    <h3 class="card-title">Ontología</h3>
+                </div>
+                <div class="card-content">
+                    <p>Cambia el paradigma del "sujeto culpable" al "sujeto enfermo o alterado". Ontológicamente, reconoce que la desviación conductual a veces no nace de una decisión libre y racional (el ser moral), sino de alteraciones de la psique o la biología (el ser natural/clínico). El derecho penal aquí se encuentra con la psiquiatría y la criminología clínica.</p>
+                </div>
+            </div>
+            <div class="perspective-card herm">
+                <div class="card-header">
+                    <span class="card-icon">📜</span>
+                    <h3 class="card-title">Hermenéutica</h3>
+                </div>
+                <div class="card-content">
+                    <p>La interpretación de este artículo está fuertemente condicionada por los DD.HH. Hermenéuticamente, se prohíbe que las medidas de seguridad se conviertan en penas encubiertas o en privaciones de libertad perpetuas e indefinidas sin revisión. El juez debe interpretar los fines de "curación y rehabilitación" exigiendo que el tratamiento sea real, efectivo y proporcional a la patología.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ARTÍCULO 6 -->
+    <section id="art6" class="article-section">
+        <div class="article-header">
+            <span class="article-number">VI</span>
+            <h2 class="article-title">Legalidad</h2>
+        </div>
+        <blockquote class="legal-text">
+            "Nadie podrá ser juzgado sino conforme a las leyes preexistentes... La ley permisiva o favorable, aun cuando sea posterior se aplicará... La analogía solo se aplicará en materias permisivas."
+        </blockquote>
+        <div class="perspectives-grid">
+            <div class="perspective-card dogma">
+                <div class="card-header">
+                    <span class="card-icon">⚖️</span>
+                    <h3 class="card-title">Dogmática</h3>
+                </div>
+                <div class="card-content">
+                    <p>Es el dogma fundamental: <em>nullum crimen, nulla poena sine lege</em>. Despliega cuatro subprincipios: ley escrita (prohibición de costumbre), ley estricta (prohibición de analogía <em>in malam partem</em> y tipos penales en blanco abiertos), ley previa (irretroactividad) y ley cierta (taxatividad). Es la garantía de seguridad jurídica del ciudadano frente al poder punitivo.</p>
+                </div>
+            </div>
+            <div class="perspective-card onto">
+                <div class="card-header">
+                    <span class="card-icon">🌌</span>
+                    <h3 class="card-title">Ontología</h3>
+                </div>
+                <div class="card-content">
+                    <p>La legalidad es la condición de posibilidad de la libertad humana. Ontológicamente, el ser humano solo puede ser libre si conoce de antemano los límites de su actuar. La ley previa y cierta transforma el miedo arbitrario al Leviatán en certeza racional. La retroactividad favorable refleja la naturaleza evolutiva de la ética social: si el Estado hoy considera que algo no es malo, no puede castigar el ayer.</p>
+                </div>
+            </div>
+            <div class="perspective-card herm">
+                <div class="card-header">
+                    <span class="card-icon">📜</span>
+                    <h3 class="card-title">Hermenéutica</h3>
+                </div>
+                <div class="card-content">
+                    <p>Exige una interpretación restrictiva de las leyes penales. Ante la ambigüedad, se aplica el <em>in dubio pro reo</em>. En los tipos penales en blanco, la hermenéutica exige que la remisión a otras normas sea homogénea y preexistente. El principio de favorabilidad requiere que el juez compare la norma vigente al momento del hecho con la posterior, aplicando íntegramente la que sea más benigna.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ARTÍCULO 7 -->
+    <section id="art7" class="article-section">
+        <div class="article-header">
+            <span class="article-number">VII</span>
+            <h2 class="article-title">Igualdad</h2>
+        </div>
+        <blockquote class="legal-text">
+            "La ley penal se aplicará a las personas sin tener en cuenta consideraciones diferentes a las establecidas en ella. El funcionario judicial tendrá especial consideración... en relación con las personas que se encuentren en las situaciones descritas en el inciso final del Artículo 13 de la Constitución Política."
+        </blockquote>
+        <div class="perspectives-grid">
+            <div class="perspective-card dogma">
+                <div class="card-header">
+                    <span class="card-icon">⚖️</span>
+                    <h3 class="card-title">Dogmática</h3>
+                </div>
+                <div class="card-content">
+                    <p>Transita de la igualdad formal a la igualdad material o sustancial. Dogmáticamente, obliga al juez a valorar el injusto y la culpabilidad contextualmente. Introduce las condiciones socioeconómicas, de vulnerabilidad o marginalidad (Art. 13 C.P.) como criterios dogmáticos obligatorios en la determinación de la pena y en la valoración de la antijuridicidad y culpabilidad.</p>
+                </div>
+            </div>
+            <div class="perspective-card onto">
+                <div class="card-header">
+                    <span class="card-icon">🌌</span>
+                    <h3 class="card-title">Ontología</h3>
+                </div>
+                <div class="card-content">
+                    <p>Reconoce la asimetría ontológica de la sociedad. No todos los seres humanos habitan la misma realidad material. Tratar igual a los desiguales es una forma de violencia ontológica. Este artículo exige que el derecho penal reconozca las "realidades situadas": la existencia material de un sujeto marginado condiciona sus posibilidades de acción y, por ende, su exigibilidad de comportamiento.</p>
+                </div>
+            </div>
+            <div class="perspective-card herm">
+                <div class="card-header">
+                    <span class="card-icon">📜</span>
+                    <h3 class="card-title">Hermenéutica</h3>
+                </div>
+                <div class="card-content">
+                    <p>Exige una hermenéutica interseccional y contextual. El juez no puede aplicar la ley de forma mecánica o abstracta. Debe interpretar la culpabilidad a la luz de las circunstancias de debilidad manifiesta. Por ejemplo, hermenéuticamente, la pena para un sujeto que comete un delito por extrema pobreza o perteneciente a una minoría étnica desprotegida debe ser reducida o sustituida, aplicando el principio de mínima intervención.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ARTÍCULO 8 -->
+    <section id="art8" class="article-section">
+        <div class="article-header">
+            <span class="article-number">VIII</span>
+            <h2 class="article-title">Prohibición de Doble Incriminación</h2>
+        </div>
+        <blockquote class="legal-text">
+            "A nadie se le podrá imputar más de una vez la misma conducta punible, cualquiera sea la denominación jurídica que se le dé o haya dado, salvo lo establecido en los instrumentos internacionales."
+        </blockquote>
+        <div class="perspectives-grid">
+            <div class="perspective-card dogma">
+                <div class="card-header">
+                    <span class="card-icon">⚖️</span>
+                    <h3 class="card-title">Dogmática</h3>
+                </div>
+                <div class="card-content">
+                    <p>Consagra el <em>non bis in idem</em> como garantía de la cosa juzgada material. Dogmáticamente, opera como un límite procesal y sustancial al ejercicio de la acción penal. Impide que el Estado someta al individuo al desgaste, la angustia y el gasto de múltiples procesos por el mismo hecho, blindando la autoridad de las decisiones judiciales definitivas.</p>
+                </div>
+            </div>
+            <div class="perspective-card onto">
+                <div class="card-header">
+                    <span class="card-icon">🌌</span>
+                    <h3 class="card-title">Ontología</h3>
+                </div>
+                <div class="card-content">
+                    <p>Establece la finitud del juicio humano y la seguridad del individuo frente al poder infinito del Estado. Ontológicamente, el hecho histórico ya ocurrió y fue juzgado; no puede ser revivido indefinidamente. Garantiza que la identidad del sujeto no sea fragmentada eternamente por el estigma penal, permitiendo la reconstrucción de su proyecto de vida tras el cierre del conflicto.</p>
+                </div>
+            </div>
+            <div class="perspective-card herm">
+                <div class="card-header">
+                    <span class="card-icon">📜</span>
+                    <h3 class="card-title">Hermenéutica</h3>
+                </div>
+                <div class="card-content">
+                    <p>La interpretación exige la identidad triple: <em>idem persona</em> (mismo sujeto), <em>idem factum</em> (mismo hecho histórico, sin importar la calificación jurídica) y <em>idem causa</em> (mimo bien jurídico o fundamento). La hermenéutica moderna, guiada por la Corte IDH, exceptúa la revisión de fallos en favor de los DD.HH. o la jurisdicción de la Corte Penal Internacional, rompiendo la cosa juzgada solo para proteger a la víctima o la humanidad.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<footer>
+    <p><strong>Análisis Tridimensional del Código Penal Colombiano (Ley 599 de 2000)</strong></p>
+    <p>Libro Primero, Parte General, Título I. Fundamentos de Dogmática, Ontología y Hermenéutica Jurídica.</p>
+    <p style="margin-top: 1rem; font-size: 0.8rem; opacity: 0.7;">Documento académico de estudio y reflexión filosófico-jurídica.</p>
+</footer>
+
+</body>
+</html>
