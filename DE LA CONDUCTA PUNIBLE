@@ -1,0 +1,1834 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>De la conducta punible · Arts. 19–33A CP Colombiano</title>
+<style>
+:root{
+  --bg:#f7f5ef;
+  --paper:#ffffff;
+  --ink:#22303f;
+  --muted:#5b6675;
+  --dogma:#9b2c2c;
+  --onto:#2c5282;
+  --herm:#276749;
+  --gold:#975a16;
+  --line:#e3e0d6;
+  --shadow:0 6px 24px rgba(30,40,60,.06);
+  --shadow-hover:0 14px 34px rgba(30,40,60,.10);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
+  background:var(--bg);color:var(--ink);line-height:1.75;
+}
+h1,h2,h3,h4,.serif{font-family:Georgia,'Times New Roman',serif}
+a{color:inherit}
+::selection{background:#9b2c2c;color:#fff}
+
+#progress{
+  position:fixed;top:0;left:0;height:3px;width:0%;
+  background:linear-gradient(90deg,var(--dogma),var(--onto),var(--herm));
+  z-index:1000;transition:width .1s linear;
+}
+
+header{
+  background:
+    repeating-linear-gradient(135deg,rgba(255,255,255,.025) 0 2px,transparent 2px 22px),
+    linear-gradient(135deg,#16202c 0%,#2b3a4d 100%);
+  color:#fff;padding:5rem 2rem 4rem;text-align:center;
+  border-bottom:5px solid var(--dogma);
+}
+.eyebrow{
+  font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;
+  color:#c9b98a;margin-bottom:1.4rem;font-weight:600;
+}
+header h1{
+  font-size:clamp(2rem,5vw,3.4rem);line-height:1.2;
+  font-weight:400;letter-spacing:-.5px;margin-bottom:1.2rem;
+}
+header h1 em{font-style:italic;color:#e6d9b8}
+header p{
+  max-width:760px;margin:0 auto;font-size:1.05rem;
+  color:#c3cbd6;font-style:italic;
+}
+.header-meta{
+  margin-top:2rem;display:inline-flex;gap:1.6rem;flex-wrap:wrap;
+  justify-content:center;font-size:.78rem;letter-spacing:.12em;
+  text-transform:uppercase;color:#93a1b3;
+}
+.header-meta span{display:flex;align-items:center;gap:.5rem}
+.header-meta b{color:#e6d9b8;font-weight:600}
+
+.method{max-width:1180px;margin:0 auto;padding:3.5rem 2rem 1rem}
+.section-kicker{
+  font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--muted);font-weight:700;margin-bottom:.6rem;
+}
+.method h2{font-size:1.9rem;margin-bottom:1.6rem;font-weight:400}
+.method-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.4rem}
+.method-card{
+  background:var(--paper);padding:1.6rem;border-radius:10px;
+  box-shadow:var(--shadow);border-left:4px solid var(--line);
+}
+.method-card.d{border-color:var(--dogma)}
+.method-card.o{border-color:var(--onto)}
+.method-card.h{border-color:var(--herm)}
+.method-card h3{font-size:1.15rem;margin-bottom:.4rem}
+.method-card.d h3{color:var(--dogma)}
+.method-card.o h3{color:var(--onto)}
+.method-card.h h3{color:var(--herm)}
+.method-card .subtitle{
+  font-size:.72rem;text-transform:uppercase;letter-spacing:.16em;
+  color:var(--muted);display:block;margin-bottom:.8rem;
+}
+.method-card p{font-size:.92rem;color:var(--muted)}
+
+nav{
+  position:sticky;top:0;z-index:200;background:var(--paper);
+  border-bottom:1px solid var(--line);box-shadow:0 2px 12px rgba(0,0,0,.04);
+}
+.nav-inner{
+  max-width:1180px;margin:0 auto;display:flex;overflow-x:auto;
+  padding:0 1rem;scrollbar-width:thin;
+}
+nav a{
+  text-decoration:none;padding:1.05rem 1.15rem;font-size:.85rem;
+  font-weight:600;white-space:nowrap;border-bottom:3px solid transparent;
+  transition:.25s;color:var(--muted);
+}
+nav a:hover{color:var(--dogma);background:#faf6f6}
+nav a.active{color:var(--dogma);border-color:var(--dogma)}
+
+main{max-width:1180px;margin:0 auto;padding:0 2rem}
+.mapa{padding:3.5rem 0 1rem}
+.pipeline{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:.7rem;margin-top:1.4rem;
+}
+.pipe-node{
+  background:var(--paper);border:1px solid var(--line);
+  border-radius:10px;padding:1.2rem;text-decoration:none;
+  transition:.25s;position:relative;display:block;
+}
+.pipe-node:hover{transform:translateY(-4px);box-shadow:var(--shadow-hover);border-color:#c9b98a}
+.pipe-node .num{
+  font-family:Georgia,serif;font-size:1.6rem;color:#c9b98a;display:block;line-height:1;
+}
+.pipe-node strong{display:block;font-size:1rem;margin:.5rem 0 .3rem}
+.pipe-node small{font-size:.8rem;color:var(--muted);display:block}
+
+.section-divider{
+  margin:5rem 0 2rem;padding:2rem 0;border-top:2px solid var(--line);
+  border-bottom:2px solid var(--line);text-align:center;
+}
+.section-divider .num{
+  font-family:Georgia,serif;font-size:3rem;color:var(--gold);
+  display:block;line-height:1;margin-bottom:.5rem;
+}
+.section-divider h2{
+  font-size:1.8rem;font-weight:400;margin-bottom:.5rem;
+}
+.section-divider p{
+  color:var(--muted);max-width:720px;margin:0 auto;font-size:.95rem;
+}
+
+.article-section{padding:3.5rem 0 1rem;scroll-margin-top:75px}
+.article-header{display:flex;align-items:center;gap:1.4rem;margin-bottom:1.6rem}
+.roman{
+  font-family:Georgia,serif;font-size:1.5rem;font-weight:bold;
+  color:var(--dogma);background:#f1e6e2;border:1px solid #e4cfc9;
+  width:72px;height:72px;display:flex;align-items:center;justify-content:center;
+  border-radius:8px;flex-shrink:0;
+}
+.article-header h2{font-size:2rem;font-weight:400;line-height:1.25}
+.article-header .tagline{
+  display:block;font-family:'Segoe UI',sans-serif;font-size:.9rem;
+  color:var(--muted);font-style:italic;margin-top:.4rem;font-weight:400;
+}
+.legal-text{
+  background:var(--paper);border-left:5px solid var(--dogma);
+  padding:1.6rem 1.9rem;margin-bottom:1.2rem;border-radius:0 10px 10px 0;
+  box-shadow:var(--shadow);font-family:Georgia,serif;
+  font-size:1.02rem;color:#3d4756;
+}
+.legal-text p+p{margin-top:.9rem}
+.legal-text ol,.legal-text ul{margin-top:.8rem;padding-left:1.3rem}
+.legal-text ol li,.legal-text ul li{margin-bottom:.5rem}
+.legal-label{
+  display:block;font-family:'Segoe UI',sans-serif;font-size:.65rem;
+  letter-spacing:.22em;text-transform:uppercase;color:var(--muted);
+  margin-bottom:.8rem;font-weight:700;
+}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:2rem}
+.chip{
+  font-size:.72rem;letter-spacing:.04em;padding:.3rem .8rem;
+  background:#eceae2;border:1px solid var(--line);border-radius:30px;color:#5c6470;
+}
+
+.perspectives-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:1.5rem}
+.perspective-card{
+  background:var(--paper);border-radius:12px;padding:1.8rem;
+  box-shadow:var(--shadow);border-top:4px solid transparent;
+  transition:transform .3s,box-shadow .3s;display:flex;flex-direction:column;
+}
+.perspective-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-hover)}
+.perspective-card.dogma{border-top-color:var(--dogma)}
+.perspective-card.onto{border-top-color:var(--onto)}
+.perspective-card.herm{border-top-color:var(--herm)}
+.card-header{display:flex;align-items:center;gap:.7rem;margin-bottom:.3rem}
+.card-icon{font-size:1.35rem}
+.card-title{font-size:.95rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em}
+.dogma .card-title{color:var(--dogma)}
+.onto .card-title{color:var(--onto)}
+.herm .card-title{color:var(--herm)}
+.card-sub{font-size:.72rem;color:var(--muted);font-style:italic;margin-bottom:1.2rem;letter-spacing:.02em}
+.card-content p{font-size:.92rem;color:#4a5563;margin-bottom:1rem;text-align:justify}
+.card-content p:last-child{margin-bottom:0}
+.card-content strong{color:var(--ink);font-weight:650}
+
+.callout{
+  margin-top:1.6rem;background:#fbf6ea;border:1px solid #ecdfbf;
+  border-left:4px solid var(--gold);border-radius:0 8px 8px 0;
+  padding:1.2rem 1.5rem;
+}
+.callout .label{
+  font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--gold);font-weight:700;display:block;margin-bottom:.5rem;
+}
+.callout p{font-size:.9rem;color:#6b5b3a}
+
+.case-study{
+  margin-top:1.2rem;background:var(--paper);border:1px solid var(--line);
+  border-radius:10px;overflow:hidden;
+}
+.case-study summary{
+  cursor:pointer;padding:1.1rem 1.5rem;font-weight:600;font-size:.92rem;
+  list-style:none;display:flex;align-items:center;gap:.7rem;transition:.2s;
+}
+.case-study summary::-webkit-details-marker{display:none}
+.case-study summary:hover{background:#faf9f5}
+.case-study summary .marker{
+  width:22px;height:22px;border:1px solid var(--line);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;font-size:.8rem;
+  color:var(--dogma);flex-shrink:0;transition:.3s;
+}
+.case-study[open] summary .marker{transform:rotate(45deg);background:var(--dogma);color:#fff;border-color:var(--dogma)}
+.case-study .case-body{padding:0 1.5rem 1.4rem;font-size:.92rem;color:var(--muted)}
+.case-study .case-body p+p{margin-top:.7rem}
+
+.sintesis{padding:4.5rem 0 2rem;scroll-margin-top:75px;border-top:1px solid var(--line)}
+.sintesis h2{font-size:2.1rem;font-weight:400;margin-bottom:.8rem}
+.sintesis .intro{color:var(--muted);max-width:820px;margin-bottom:2rem}
+.table-wrap{overflow-x:auto;border-radius:12px;box-shadow:var(--shadow);background:var(--paper)}
+table{width:100%;border-collapse:collapse;min-width:820px;font-size:.86rem}
+thead{background:#22303f;color:#fff}
+th{padding:1rem;text-align:left;font-weight:600;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase}
+td{padding:1.1rem 1rem;border-bottom:1px solid var(--line);vertical-align:top;color:var(--muted)}
+td:first-child{font-weight:700;color:var(--ink);white-space:nowrap}
+tbody tr:hover{background:#faf9f5}
+.closing{
+  margin-top:2rem;background:var(--paper);border:1px solid var(--line);
+  border-radius:12px;padding:2rem;text-align:center;
+}
+.closing .serif{font-size:1.5rem;font-style:italic;color:var(--dogma);margin-bottom:.8rem}
+.closing p{color:var(--muted);max-width:760px;margin:0 auto;font-size:.95rem}
+
+.glosario{padding:3rem 0 1rem;scroll-margin-top:75px}
+.glosario details{
+  background:var(--paper);border:1px solid var(--line);border-radius:12px;
+  padding:0 1.6rem;box-shadow:var(--shadow);
+}
+.glosario summary{
+  cursor:pointer;padding:1.4rem 0;font-family:Georgia,serif;
+  font-size:1.3rem;list-style:none;display:flex;justify-content:space-between;align-items:center;
+}
+.glosario summary::-webkit-details-marker{display:none}
+.glosario summary span{font-size:1.4rem;color:var(--dogma);transition:.3s}
+.glosario details[open] summary span{transform:rotate(45deg)}
+.gloss-list{padding-bottom:1.6rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.4rem}
+.gloss-list dt{font-weight:700;font-size:.92rem;color:var(--ink);margin-bottom:.3rem}
+.gloss-list dd{font-size:.88rem;color:var(--muted)}
+
+.refs{padding:3rem 0 4rem}
+.refs h3{font-size:1.4rem;font-weight:400;margin-bottom:1.4rem}
+.ref-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1rem}
+.ref{
+  background:var(--paper);border:1px solid var(--line);border-radius:8px;
+  padding:1.1rem 1.3rem;font-size:.87rem;color:var(--muted);
+}
+.ref b{color:var(--ink);display:block;margin-bottom:.25rem;font-weight:650}
+.ref i{color:#7a8391}
+
+footer{
+  background:#16202c;color:#8b98a9;text-align:center;padding:3rem 2rem;
+}
+footer strong{color:#d8dde5;display:block;font-family:Georgia,serif;font-size:1.1rem;margin-bottom:.6rem;font-weight:400}
+footer p{font-size:.82rem;max-width:760px;margin:0 auto .5rem}
+footer .fine{font-size:.72rem;opacity:.65;margin-top:1.2rem}
+
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+
+@media(max-width:900px){
+  .perspectives-grid{grid-template-columns:1fr}
+  .article-header{gap:1rem}
+  .article-header h2{font-size:1.6rem}
+  .roman{width:58px;height:58px;font-size:1.2rem}
+  header{padding:3.5rem 1.5rem}
+}
+@media(max-width:600px){
+  main{padding:0 1.1rem}
+  .method{padding:2.5rem 1.1rem 1rem}
+  .legal-text{padding:1.2rem}
+  .card-content p{text-align:left}
+}
+@media print{
+  nav,#progress{display:none}
+  body{background:#fff;color:#000}
+  header{background:#fff;color:#000;border-bottom:2px solid #000;padding:2rem 0}
+  .perspective-card,.legal-text{box-shadow:none;break-inside:avoid}
+  .article-section{break-before:page}
+  .reveal{opacity:1!important;transform:none!important}
+}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+
+<header>
+  <div class="eyebrow">Libro Primero · Parte General · Título III</div>
+  <h1>De la <em>conducta punible</em><br>en sus múltiples formas</h1>
+  <p>Una lectura tridimensional de los artículos 19 a 33A del Código Penal colombiano:
+     de las clasificaciones básicas a la responsabilidad, de la tentativa al concurso,
+     de las causales de ausencia a la inimputabilidad y sus medidas pedagógicas.</p>
+  <div class="header-meta">
+    <span><b>Ley 599 de 2000</b></span>
+    <span>Modificado por <b>Leyes 2098/2021, 2197/2022, 2098/2021</b></span>
+    <span>Artículos <b>19 — 33A</b></span>
+    <span>Dogmática · Ontología · Hermenéutica</span>
+  </div>
+</header>
+
+<section class="method">
+  <div class="section-kicker">La clave de lectura</div>
+  <h2>Tres preguntas frente a cada norma</h2>
+  <div class="method-grid">
+    <div class="method-card d">
+      <h3>Dogmática</h3>
+      <span class="subtitle">La estructura · ¿Qué significa?</span>
+      <p>La ciencia del derecho positivo. Reconstruye los conceptos, la sistematización
+         y las consecuencias jurídicas: modalidades de la conducta, formas de autoría,
+         causales de ausencia de responsabilidad.</p>
+    </div>
+    <div class="method-card o">
+      <h3>Ontología</h3>
+      <span class="subtitle">El fundamento · ¿Qué es?</span>
+      <p>La pregunta por el ser de lo que la norma nombra. ¿Qué realidad tiene el dolo,
+         la culpa, la tentativa, la posición de garante, la inimputabilidad? Aquí el
+         derecho dialoga con la filosofía de la acción y de la persona.</p>
+    </div>
+    <div class="method-card h">
+      <h3>Hermenéutica</h3>
+      <span class="subtitle">El sentido · ¿Cómo se aplica?</span>
+      <p>La teoría de la interpretación y de la aplicación. Cómo se resuelven las
+         tensiones entre las causales, cómo se armoniza la ley con la Constitución
+         y los tratados, cómo se traduce la norma en decisión judicial.</p>
+    </div>
+  </div>
+</section>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#s1">I · Clasificaciones</a>
+    <a href="#s2">II · Modalidades</a>
+    <a href="#s3">III · Iter criminis</a>
+    <a href="#s4">IV · Autoría</a>
+    <a href="#s5">V · Concurso</a>
+    <a href="#s6">VI · Ausencia de responsabilidad</a>
+    <a href="#s7">VII · Inimputabilidad</a>
+    <a href="#sintesis">Síntesis</a>
+    <a href="#glosario">Glosario</a>
+  </div>
+</nav>
+
+<main>
+
+<section class="mapa">
+  <div class="section-kicker">Recorrido del análisis</div>
+  <h2 class="serif" style="font-size:1.7rem;font-weight:400">Quince artículos. Siete estaciones conceptuales.</h2>
+  <div class="pipeline">
+    <a href="#s1" class="pipe-node">
+      <span class="num">I</span>
+      <strong>Clasificaciones básicas</strong>
+      <small>Arts. 19–20<br>Delitos, contravenciones, servidores públicos.</small>
+    </a>
+    <a href="#s2" class="pipe-node">
+      <span class="num">II</span>
+      <strong>Modalidades de la conducta</strong>
+      <small>Arts. 21–26<br>Dolo, culpa, preterintención, acción/omisión, tiempo.</small>
+    </a>
+    <a href="#s3" class="pipe-node">
+      <span class="num">III</span>
+      <strong>Iter criminis</strong>
+      <small>Art. 27<br>Tentativa y desistimiento eficaz.</small>
+    </a>
+    <a href="#s4" class="pipe-node">
+      <span class="num">IV</span>
+      <strong>Autoría y participación</strong>
+      <small>Arts. 28–30<br>Autores, coautores, determinadores, cómplices.</small>
+    </a>
+    <a href="#s5" class="pipe-node">
+      <span class="num">V</span>
+      <strong>Concurso de conductas</strong>
+      <small>Art. 31<br>Concurso real, ideal, continuado y masa.</small>
+    </a>
+    <a href="#s6" class="pipe-node">
+      <span class="num">VI</span>
+      <strong>Ausencia de responsabilidad</strong>
+      <small>Art. 32<br>Doce causales: justificación y excusa.</small>
+    </a>
+    <a href="#s7" class="pipe-node">
+      <span class="num">VII</span>
+      <strong>Inimputabilidad</strong>
+      <small>Arts. 33–33A<br>Capacidad, diversidad sociocultural, medidas pedagógicas.</small>
+    </a>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECCIÓN I: CLASIFICACIONES BÁSICAS
+     ============================================================ -->
+<div id="s1" class="section-divider">
+  <span class="num">I</span>
+  <h2>Clasificaciones básicas</h2>
+  <p>Arts. 19–20 · Delitos y contravenciones · Servidores públicos</p>
+</div>
+
+<section class="article-section">
+  <div class="article-header">
+    <div class="roman">XIX</div>
+    <h2>Delitos y contravenciones
+      <span class="tagline">La gran división del derecho penal colombiano.</span>
+    </h2>
+  </div>
+
+  <blockquote class="legal-text">
+    <span class="legal-label">Texto normativo · Artículo 19°</span>
+    <p>Las conductas punibles se dividen en delitos y contravenciones.</p>
+  </blockquote>
+
+  <div class="chips">
+    <span class="chip">Clasificación bipartita</span>
+    <span class="chip">Gravedad diferencial</span>
+    <span class="chip">Régimen procesal distinto</span>
+    <span class="chip">Principio de mínima intervención</span>
+  </div>
+
+  <div class="perspectives-grid">
+    <article class="perspective-card dogma">
+      <div class="card-header"><span class="card-icon">⚖️</span><h3 class="card-title">Dogmática</h3></div>
+      <div class="card-sub">La distinción funcional</div>
+      <div class="card-content">
+        <p>El artículo 19 adopta una <strong>clasificación bipartita</strong> de las conductas
+        punibles. El delito protege bienes jurídicos de mayor entidad mediante penas
+        privativas de libertad y multas severas; la contravención protege bienes de menor
+        entidad mediante penas de multa, arresto de fines de semana o trabajos comunitarios.
+        La distinción tiene consecuencias dogmáticas: distinto régimen procesal, distintos
+        requisitos de punibilidad, distinta intensidad del reproche.</p>
+      </div>
+    </article>
+    <article class="perspective-card onto">
+      <div class="card-header"><span class="card-icon">🌌</span><h3 class="card-title">Ontología</h3></div>
+      <div class="card-sub">Gravedad como cualidad, no como cantidad</div>
+      <div class="card-content">
+        <p>La distinción no es meramente cuantitativa. Ontológicamente, el delito y la
+        contravención expresan <strong>dos modos distintos de ruptura del pacto social</strong>.
+        El delito afecta bienes cuya lesión compromete la estructura misma de la convivencia;
+        la contravención afecta bienes cuya lesión perturba pero no desestabiliza. La
+        gravedad es una cualidad del injusto, no sólo una medida del daño.</p>
+      </div>
+    </article>
+    <article class="perspective-card herm">
+      <div class="card-header"><span class="card-icon">📜</span><h3 class="card-title">Hermenéutica</h3></div>
+      <div class="card-sub">La frontera entre ambas categorías</div>
+      <div class="card-content">
+        <p>La hermenéutica exige determinar la naturaleza de la conducta atendiendo al
+        bien jurídico tutelado y a la pena prevista, no al título del capítulo. Una
+        conducta descrita en el libro de contravenciones pero con pena de prisión es
+        delito; una descrita en el libro de delitos pero con pena de multa es, en la
+        práctica, contravención. <strong>La clasificación es material, no formal.</strong></p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="article-section">
+  <div class="article-header">
+    <div class="roman">XX</div>
+    <h2>Servidores públicos
+      <span class="tagline">La ampliación del concepto: del empleado al garante funcional.</span>
+    </h2>
+  </div>
+
+  <blockquote class="legal-text">
+    <span class="legal-label">Texto normativo · Artículo 20°</span>
+    <p>Para todos los efectos de la ley penal, son servidores públicos los miembros de las
+       corporaciones públicas, los empleados y trabajadores del Estado y de sus entidades
+       descentralizadas territorialmente y por servicios.</p>
+    <p>Para los mismos efectos se consideran servidores públicos los miembros de la fuerza
+       pública, los particulares que ejerzan funciones públicas en forma permanente o
+       transitoria, los funcionarios y trabajadores del Banco de la República, los integrantes
+       de la Comisión Nacional Ciudadana para la Lucha contra la Corrupción y las personas
+       que administren los recursos de que trata el Artículo 338 de la Constitución Política.</p>
+  </blockquote>
+
+  <div class="chips">
+    <span class="chip">Concepto funcional</span>
+    <span class="chip">Particulares con funciones públicas</span>
+    <span class="chip">Fuerza pública</span>
+    <span class="chip">Administradores de recursos públicos</span>
+    <span class="chip">Servidor público por extensión</span>
+  </div>
+
+  <div class="perspectives-grid">
+    <article class="perspective-card dogma">
+      <div class="card-header"><span class="card-icon">⚖️</span><h3 class="card-title">Dogmática</h3></div>
+      <div class="card-sub">El concepto ampliado de funcionario</div>
+      <div class="card-content">
+        <p>El artículo 20 adopta un <strong>concepto funcional</strong> de servidor público.
+        No basta el vínculo laboral: lo decisivo es el ejercicio de funciones públicas.
+        Por eso se equiparan los particulares que ejercen funciones públicas transitoriamente
+        (contratistas, concessionarios) y quienes administran recursos públicos. La
+        dogmática distingue entre <em>servidor público stricto sensu</em> (vinculación
+        permanente) y <em>servidor público por extensión</em> (vinculación funcional).</p>
+      </div>
+    </article>
+    <article class="perspective-card onto">
+      <div class="card-header"><span class="card-icon">🌌</span><h3 class="card-title">Ontología</h3></div>
+      <div class="card-sub">La función pública como ser jurídico</div>
+      <div class="card-content">
+        <p>Lo que define al servidor público no es su persona sino la <strong>función</strong>
+        que desempeña. Ontológicamente, es un <em>rol</em>: quien lo ocupa asume deberes
+        especiales de lealtad, probidad y diligencia. La función pública existe
+        independientemente de quien la ejerce; el servidor es su portador temporal.
+        Por eso la corrupción de un particular con funciones públicas es tan grave
+        como la de un funcionario de carrera: traiciona la misma función.</p>
+      </div>
+    </article>
+    <article class="perspective-card herm">
+      <div class="card-header"><span class="card-icon">📜</span><h3 class="card-title">Hermenéutica</h3></div>
+      <div class="card-sub">Interpretar la extensión sin desbordarla</div>
+      <div class="card-content">
+        <p>La hermenéutica exige determinar caso por caso si el particular ejerce
+        <strong>funciones públicas</strong> o simplemente presta un servicio al Estado.
+        Un contratista de aseo no es servidor público; un particular al que se le
+        delega la inspección de policía sí lo es. La clave es la <em>potestad</em>:
+        quien ejerce potestades públicas (decidir, sancionar, autorizar) es servidor
+        público; quien sólo ejecuta tareas materiales no lo es.</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECCIÓN II: MODALIDADES DE LA CONDUCTA
+     ============================================================ -->
+<div id="s2" class="section-divider">
+  <span class="num">II</span>
+  <h2>Modalidades de la conducta punible</h2>
+  <p>Arts. 21–26 · Dolo, culpa, preterintención · Acción y omisión · Tiempo</p>
+</div>
+
+<section class="article-section">
+  <div class="article-header">
+    <div class="roman">XXI</div>
+    <h2>Modalidades de la conducta
+      <span class="tagline">La tríada clásica: dolo, culpa, preterintención.</span>
+    </h2>
+  </div>
+
+  <blockquote class="legal-text">
+    <span class="legal-label">Texto normativo · Artículo 21°</span>
+    <p>La conducta es dolosa, culposa o preterintencional. La culpa y la preterintención
+       sólo son punibles en los casos expresamente señalados por la ley.</p>
+  </blockquote>
+
+  <div class="chips">
+    <span class="chip">Principio de responsabilidad subjetiva</span>
+    <span class="chip">Dolo como regla</span>
+    <span class="chip">Culpa como excepción</span>
+    <span class="chip">Preterintención como híbrido</span>
+  </div>
+
+  <div class="perspectives-grid">
+    <article class="perspective-card dogma">
+      <div class="card-header"><span class="card-icon">⚖️</span><h3 class="card-title">Dogmática</h3></div>
+      <div class="card-sub">La regla y sus excepciones</div>
+      <div class="card-content">
+        <p>El artículo 21 consagra el <strong>principio de responsabilidad subjetiva</strong>:
+        toda conducta punible requiere una forma de relación psicológica entre autor y
+        resultado. El <em>dolo</em> es la regla general; la <em>culpa</em> y la
+        <em>preterintención</em> son excepciones que requieren previsión legal expresa.
+        Dogmáticamente, esto significa que no hay responsabilidad penal por el mero
+        resultado: se requiere dolo o culpa previstos en el tipo.</p>
+      </div>
+    </article>
+    <article class="perspective-card onto">
+      <div class="card-header"><span class="card-icon">🌌</span><h3 class="card-title">Ontología</h3></div>
+      <div class="card-sub">Tres modos de relacionarse con el resultado</div>
+      <div class="card-content">
+        <p>Las tres modalidades expresan <strong>tres formas distintas de agencia humana</strong>.
+        El dolo es la acción dirigida: el autor quiere el resultado. La culpa es la acción
+        desviada: el autor no quiere el resultado pero lo causa por no observar el cuidado
+        debido. La preterintención es la acción excedida: el autor quiere un resultado
+        menor pero produce uno mayor previsible. Cada modalidad refleja una estructura
+        distinta de la voluntad humana frente a las consecuencias de sus actos.</p>
+      </div>
+    </article>
+    <article class="perspective-card herm">
+      <div class="card-header"><span class="card-icon">📜</span><h3 class="card-title">Hermenéutica</h3></div>
+      <div class="card-sub">La carga de la prueba</div>
+      <div class="card-content">
+        <p>La hermenéutica del artículo 21 exige que el Estado pruebe la modalidad de la
+        conducta. No se presume el dolo: se demuestra. Si el Estado no puede probar dolo
+        pero sí culpa, y el tipo prevé la modalidad culposa, se condena por culpa. Si
+        el tipo sólo prevé dolo y no se prueba, hay absolución. <strong>La modalidad no
+        se infiere del resultado</strong>: se prueba con elementos subjetivos (declaraciones,
+        circunstancias, medios empleados).</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="article-section">
+  <div class="article-header">
+    <div class="roman">XXII</div>
+    <h2>Dolo
+      <span class="tagline">Conocimiento y voluntad: la acción dirigida.</span>
+    </h2>
+  </div>
+
+  <blockquote class="legal-text">
+    <span class="legal-label">Texto normativo · Artículo 22°</span>
+    <p>La conducta es dolosa cuando el agente conoce los hechos constitutivos de la infracción
+       penal y quiere su realización. También será dolosa la conducta cuando la realización
+       de la infracción penal ha sido prevista como probable y su no producción se deja librada
+       al azar.</p>
+  </blockquote>
+
+  <div class="chips">
+    <span class="chip">Dolo directo de primer grado</span>
+    <span class="chip">Dolo directo de segundo grado</span>
+    <span class="chip">Dolo eventual</span>
+    <span class="chip">Elemento cognitivo</span>
+    <span class="chip">Elemento volitivo</span>
+  </div>
+
+  <div class="perspectives-grid">
+    <article class="perspective-card dogma">
+      <div class="card-header"><span class="card-icon">⚖️</span><h3 class="card-title">Dogmática</h3></div>
+      <div class="card-sub">Tres formas de dolo</div>
+      <div class="card-content">
+        <p>El artículo 22 reconoce tres formas de dolo. <strong>Dolo directo de primer
+        grado</strong>: el agente quiere el resultado como fin (primera frase). <strong>Dolo
+        directo de segundo grado</strong>: el resultado es medio necesario para el fin
+        perseguido. <strong>Dolo eventual</strong>: el agente prevé el resultado como
+        probable y lo acepta (segunda frase). La diferencia con la culpa consciente es
+        fina: en el dolo eventual el agente <em>se conforma</em> con el resultado; en la
+        culpa consciente confía seriamente en evitarlo.</p>
+      </div>
+    </article>
+    <article class="perspective-card onto">
+      <div class="card-header"><span class="card-icon">🌌</span><h3 class="card-title">Ontología</h3></div>
+      <div class="card-sub">La voluntad como estructura</div>
+      <div class="card-content">
+        <p>El dolo no es un "sentimiento" sino una <strong>estructura de la acción</strong>.
+        Ontológicamente, el agente doloso es alguien que <em>se proyecta</em> hacia un
+        resultado: lo representa, lo quiere, lo hace suyo. El dolo eventual revela algo
+        inquietante: el agente no quiere el resultado pero lo acepta como precio de su
+        acción. Esa aceptación es lo que lo hace doloso: no es indiferencia, es
+        <em>asunción del riesgo</em>.</p>
+      </div>
+    </article>
+    <article class="perspective-card herm">
+      <div class="card-header"><span class="card-icon">📜</span><h3 class="card-title">Hermenéutica</h3></div>
+      <div class="card-sub">Distinguir dolo eventual de culpa consciente</div>
+      <div class="card-content">
+        <p>La frontera entre dolo eventual y culpa con previsión es la más difícil del
+        derecho penal. La hermenéutica exige examinar si el agente <strong>realmente
+        confió</strong> en evitar el resultado (culpa) o si simplemente <strong>se
+        resignó</strong> a que ocurriera (dolo eventual). Los indicadores son objetivos:
+        medios empleados, circunstancias, conducta posterior. Quien frena ante el peligro
+        probablemente tiene culpa; quien continúa probablemente tiene dolo eventual.</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="article-section">
+  <div class="article-header">
+    <div class="roman">XXIII</div>
+    <h2>Culpa
+      <span class="tagline">La infracción al deber objetivo de cuidado.</span>
+    </h2>
+  </div>
+
+  <blockquote class="legal-text">
+    <span class="legal-label">Texto normativo · Artículo 23°</span>
+    <p>La conducta es culposa cuando el resultado típico es producto de la infracción al deber
+       objetivo de cuidado y el agente debió haberlo previsto por ser previsible, o habiéndolo
+       previsto, confió en poder evitarlo.</p>
+  </blockquote>
+
+  <div class="chips">
+    <span class="chip">Deber objetivo de cuidado</span>
+    <span class="chip">Previsibilidad objetiva</span>
+    <span class="chip">Culpa con representación</span>
+    <span class="chip">Culpa sin representación</span>
+    <span class="chip">Principio de confianza</span>
+  </div>
+
+  <div class="perspectives-grid">
+    <article class="perspective-card dogma">
+      <div class="card-header"><span class="card-icon">⚖️</span><h3 class="card-title">Dogmática</h3></div>
+      <div class="card-sub">Estructura de la culpa</div>
+      <div class="card-content">
+        <p>La culpa tiene cuatro elementos: <strong>infracción del deber objetivo de
+        cuidado</strong> (no actuar como el modelo de persona diligente), <strong>previsibilidad
+        objetiva</strong> (el resultado era previsible para el modelo), <strong>imputación
+        del resultado</strong> (el resultado se produce precisamente por la infracción) y
+        <strong>relación de realización del riesgo</strong> (se realiza el riesgo no
+        permitido, no un riesgo permitido). La culpa puede ser <em>con representación</em>
+        (el agente prevé pero confía en evitar) o <em>sin representación</em> (el agente
+        debió prever pero no lo hizo).</p>
+      </div>
+    </article>
+    <article class="perspective-card onto">
+      <div class="card-header"><span class="card-icon">🌌</span><h3 class="card-title">Ontología</h3></div>
+      <div class="card-sub">La negligencia como modo de ser</div>
+      <div class="card-content">
+        <p>La culpa no es un defecto psicológico sino una <strong>falta de atención al
+        deber</strong>. Ontológicamente, el agente culposo es alguien que no se orienta
+        por los cuidados que la vida social exige. No es malvado: es descuidado. Pero
+        esa descuidancia, cuando causa daño, revela una <em>falta de consideración</em>
+        por los bienes ajenos. La culpa es la forma más cotidiana de la responsabilidad
+        penal: la mayoría de los accidentes de tránsito, errores médicos y siniestros
+        industriales son culposos.</p>
+      </div>
+    </article>
+    <article class="perspective-card herm">
+      <div class="card-header"><span class="card-icon">📜</span><h3 class="card-title">Hermenéutica</h3></div>
+      <div class="card-sub">Determinar el deber de cuidado</div>
+      <div class="card-content">
+        <p>El deber objetivo de cuidado se determina por la <strong>función desempeñada</strong>
+        y los <strong>protocolos de la actividad</strong>. Un médico debe observar los
+        protocolos médicos; un conductor, las reglas de tránsito. La hermenéutica exige
+        probar la infracción con pericias, reglamentos, usos. No basta el resultado:
+        debe probarse que el agente se desvió del modelo de conducta exigible. El
+        <em>principio de confianza</em> limita el deber: quien actúa conforme a las
+        reglas puede confiar en que los demás también lo harán.</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="article-section">
+  <div class="article-header">
+    <div class="roman">XXIV</div>
+    <h2>Preterintención
+      <span class="tagline">El resultado excede la intención.</span>
+    </h2>
+  </div>
+
+  <blockquote class="legal-text">
+    <span class="legal-label">Texto normativo · Artículo 24°</span>
+    <p>La conducta es preterintencional cuando su resultado, siendo previsible, excede la
+       intención del agente.</p>
+  </blockquote>
+
+  <div class="chips">
+    <span class="chip">Preterintención</span>
+    <span class="chip">Dolo + culpa</span>
+    <span class="chip">Resultado excedido</span>
+    <span class="chip">Previsibilidad</span>
+  </div>
+
+  <div class="perspectives-grid">
+    <article class="perspective-card dogma">
+      <div class="card-header"><span class="card-icon">⚖️</span><h3 class="card-title">Dogmática</h3></div>
+      <div class="card-sub">La modalidad híbrida</div>
+      <div class="card-content">
+        <p>La preterintención es una <strong>estructura híbrida</strong>: el agente quiere
+        un resultado menor (dolo) pero produce uno mayor previsible (culpa). El ejemplo
+        clásico es la preterintención de lesiones a muerte: el agente quiere lesionar
+        (dolo de lesiones) pero causa la muerte (culpa en la muerte). Dogmáticamente,
+        se castiga más que el delito doloso menor pero menos que el delito doloso mayor.</p>
+      </div>
+    </article>
+    <article class="perspective-card onto">
+      <div class="card-header"><span class="card-icon">🌌</span><h3 class="card-title">Ontología</h3></div>
+      <div class="card-sub">La acción que se desborda</div>
+      <div class="card-content">
+        <p>La preterintención revela la <strong>finitud de la agencia humana</strong>.
+        El agente se proyecta hacia un resultado pero la acción adquiere dimensiones
+        que no quiso. Ontológicamente, es la acción que <em>se desborda</em>: el agente
+        es responsable de más de lo que quiso pero de menos de lo que podría haber
+        querido si hubiera previsto. Es la forma más trágica de la responsabilidad:
+        el agente no es un criminal pero tampoco es inocente.</p>
+      </div>
+    </article>
+    <article class="perspective-card herm">
+      <div class="card-header"><span class="card-icon">📜</span><h3 class="card-title">Hermenéutica</h3></div>
+      <div class="card-sub">Probar la intención y la previsibilidad</div>
+      <div class="card-content">
+        <p>La hermenéutica exige probar dos cosas: la <strong>intención del resultado
+        menor</strong> (dolo) y la <strong>previsibilidad del resultado mayor</strong>
+        (culpa). Si no se prueba la intención del resultado menor, no hay preterintención:
+        hay dolo del resultado mayor o culpa del resultado mayor. Si no se prueba la
+        previsibilidad, hay dolo del resultado menor y el resultado mayor es fortuito.
+        La preterintención es una <em>excepción</em> que requiere prueba estricta.</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="article-section">
+  <div class="article-header">
+    <div class="roman">XXV</div>
+    <h2>Acción y omisión
+      <span class="tagline">Hacer y no hacer: dos caras de la misma moneda.</span>
+    </h2>
+  </div>
+
+  <blockquote class="legal-text">
+    <span class="legal-label">Texto normativo · Artículo 25°</span>
+    <p>La conducta punible puede ser realizada por acción o por omisión.</p>
+    <p>Quien tuviere el deber jurídico de impedir un resultado perteneciente a una descripción
+       típica y no lo llevare a cabo, estando en posibilidad de hacerlo, quedará sujeto a la
+       pena contemplada en la respectiva norma penal. A tal efecto, se requiere que el agente
+       tenga a su cargo la protección en concreto del bien jurídico protegido, o que se le
+       haya encomendado como garante la vigilancia de una determinada fuente de riesgo, conforme
+       a la Constitución o a la ley.</p>
+    <p>Son constitutivas de posiciones de garantía las siguientes situaciones:</p>
+    <ol>
+      <li>Cuando se asuma voluntariamente la protección real de una persona o de una fuente de riesgo, dentro del propio ámbito de dominio.</li>
+      <li>Cuando exista una estrecha comunidad de vida entre personas.</li>
+      <li>Cuando se emprenda la realización de una actividad riesgosa por varias personas.</li>
+      <li>Cuando se haya creado precedentemente una situación antijurídica de riesgo próximo para el bien jurídico correspondiente.</li>
+    </ol>
+    <p><strong>PARÁGRAFO.</strong> Los numerales 1, 2, 3 y 4 sólo se tendrán en cuenta en
+       relación con las conductas punibles delictuales que atenten contra la vida e integridad
+       personal, la libertad individual, y la libertad y formación sexuales.</p>
+  </blockquote>
+
+  <div class="chips">
+    <span class="chip">Comisión por omisión</span>
+    <span class="chip">Posición de garante</span>
+    <span class="chip">Garante de protección</span>
+    <span class="chip">Garante de vigilancia</span>
+    <span class="chip">Comunidad de vida</span>
+    <span class="chip">Actividad riesgosa conjunta</span>
+    <span class="chip">Actio libera in causa</span>
+  </div>
+
+  <div class="perspectives-grid">
+    <article class="perspective-card dogma">
+      <div class="card-header"><span class="card-icon">⚖️</span><h3 class="card-title">Dogmática</h3></div>
+      <div class="card-sub">La teoría de la posición de garante</div>
+      <div class="card-content">
+        <p>El artículo 25 adopta la <strong>teoría material de la posición de garante</strong>.
+        No cualquiera responde por no evitar un resultado: sólo quien tiene un deber jurídico
+        especial de actuar. Ese deber nace de dos fuentes: la <em>protección de un bien
+        jurídico</em> (garante de protección: padres, médicos, socorristas) o la
+        <em>vigilancia de una fuente de riesgo</em> (garante de vigilancia: propietario de
+        un perro bravo, conductor de vehículo, empresario de actividad peligrosa). Los
+        numerales 1 a 4 enumeran situaciones típicas de posición de garante.</p>
+      </div>
+    </article>
+    <article class="perspective-card onto">
+      <div class="card-header"><span class="card-icon">🌌</span><h3 class="card-title">Ontología</h3></div>
+      <div class="card-sub">El no-hacer como causa</div>
+      <div class="card-content">
+        <p>La omisión plantea el problema ontológico más delicado: ¿cómo puede un
+        <strong>no-hacer</strong> ser causa de un resultado? Físicamente, quien no actúa
+        no produce nada. La solución es normativa: no se imputa un "no hacer" como evento
+        físico, sino el <em>incumplimiento de un deber previamente asignado</em>. La omisión
+        punible es un concepto jurídico, no un fenómeno natural. Quien tenía el deber de
+        actuar y no lo hizo es responsable como si hubiera causado el resultado.</p>
+      </div>
+    </article>
+    <article class="perspective-card herm">
+      <div class="card-header"><span class="card-icon">📜</span><h3 class="card-title">Hermenéutica</h3></div>
+      <div class="card-sub">El parágrafo restrictivo</div>
+      <div class="card-content">
+        <p>El parágrafo del artículo 25 es una <strong>restricción garantista</strong>:
+        las posiciones de garantía de los numerales 1 a 4 sólo operan para delitos contra
+        la vida, integridad, libertad individual y libertad sexual. No operan para delitos
+        patrimoniales o contra la administración pública. La hermenéutica exige interpretar
+        restrictivamente: un padre que no impide que su hijo hurte no responde por hurto
+        en comisión por omisión, aunque sí respondería si el hijo agrediera a alguien.</p>
+      </div>
+    </article>
+  </div>
+
+  <details class="case-study">
+    <summary><span class="marker">+</span> Caso aplicado · El padre y el hijo agresor</summary>
+    <div class="case-body">
+      <p>Un padre observa cómo su hijo menor agrede a un vecino. Puede impedirlo sin riesgo
+      pero no lo hace. ¿Responde el padre por lesiones en comisión por omisión?</p>
+      <p><strong>Lectura:</strong> sí. El padre tiene posición de garante por comunidad de
+      vida (numeral 2) y por protección de un bien jurídico (vigilancia del menor). Tenía
+      el deber jurídico de impedir el resultado, podía hacerlo y no lo hizo. Responde por
+      lesiones en modalidad de comisión por omisión, con la misma pena que si hubiera
+      agredido él mismo.</p>
+    </div>
+  </details>
+</section>
+
+<section class="article-section">
+  <div class="article-header">
+    <div class="roman">XXVI</div>
+    <h2>Tiempo de la conducta punible
+      <span class="tagline">La ejecución, no el resultado, fija el tiempo.</span>
+    </h2>
+  </div>
+
+  <blockquote class="legal-text">
+    <span class="legal-label">Texto normativo · Artículo 26°</span>
+    <p>La conducta punible se considera realizada en el tiempo de la ejecución de la acción
+       o en aquel en que debió tener lugar la acción omitida, aun cuando sea otro el del resultado.</p>
+  </blockquote>
+
+  <div class="chips">
+    <span class="chip">Teoría de la actividad</span>
+    <span class="chip">Ley aplicable</span>
+    <span class="chip">Prescripción</span>
+    <span class="chip">Irretroactividad</span>
+  </div>
+
+  <div class="perspectives-grid">
+    <article class="perspective-card dogma">
+      <div class="card-header"><span class="card-icon">⚖️</span><h3 class="card-title">Dogmática</h3></div>
+      <div class="card-sub">La teoría de la actividad</div>
+      <div class="card-content">
+        <p>El artículo 26 adopta la <strong>teoría de la actividad</strong>: el tiempo del
+        delito es el de la acción (o el de la omisión debida), no el del resultado. Esta
+        regla tiene consecuencias dogmáticas decisivas: determina la <em>ley aplicable</em>
+        (la vigente al tiempo de la acción, no del resultado), el <em>inicio de la
+        prescripción</em> y la <em>competencia temporal</em> del juez.</p>
+      </div>
+    </article>
+    <article class="perspective-card onto">
+      <div class="card-header"><span class="card-icon">🌌</span><h3 class="card-title">Ontología</h3></div>
+      <div class="card-sub">El delito como acción, no como resultado</div>
+      <div class="card-content">
+        <p>La teoría de la actividad revela que el delito es esencialmente una
+        <strong>acción</strong>, no un resultado. Ontológicamente, lo que el agente hace
+        (o deja de hacer) es lo jurídicamente relevante; el resultado es la proyección
+        de esa acción en el mundo. Por eso el tiempo del delito es el de la acción:
+        es el momento en que el agente se decide y actúa, no el momento en que las
+        consecuencias se despliegan.</p>
+      </div>
+    </article>
+    <article class="perspective-card herm">
+      <div class="card-header"><span class="card-icon">📜</span><h3 class="card-title">Hermenéutica</h3></div>
+      <div class="card-sub">La ley aplicable en el tiempo</div>
+      <div class="card-content">
+        <p>La hermenéutica del artículo 26 se articula con el artículo 6 (legalidad) y
+        el artículo 29 de la Constitución (irretroactividad). Si entre la acción y el
+        resultado cambia la ley, se aplica la vigente al tiempo de la acción. Excepción:
+        si la ley posterior es más favorable, se aplica por el principio de favorabilidad.
+        La hermenéutica exige determinar con precisión el momento de la acción: en delitos
+        permanentes (secuestro), el tiempo se prolonga; en delitos instantáneos (homicidio),
+        se fija en el momento de la acción letal.</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECCIÓN III: ITER CRIMINIS
+     ============================================================ -->
+<div id="s3" class="section-divider">
+  <span class="num">III</span>
+  <h2>Iter criminis</h2>
+  <p>Art. 27 · Tentativa y desistimiento eficaz</p>
+</div>
+
+<section class="article-section">
+  <div class="article-header">
+    <div class="roman">XXVII</div>
+    <h2>Tentativa
+      <span class="tagline">El delito que no llega a consumarse.</span>
+    </h2>
+  </div>
+
+  <blockquote class="legal-text">
+    <span class="legal-label">Texto normativo · Artículo 27°</span>
+    <p>El que iniciare la ejecución de una conducta punible mediante actos idóneos e
+       inequívocamente dirigidos a su consumación, y esta no se produjere por circunstancias
+       ajenas a su voluntad, incurrirá en pena no menor de la mitad del mínimo ni mayor de
+       las tres cuartas partes del máximo de la señalada para la conducta punible consumada.</p>
+    <p>Cuando la conducta punible no se consuma por circunstancias ajenas a la voluntad del
+       autor o partícipe, incurrirá en pena no menor de la tercera parte del mínimo ni mayor
+       de las dos terceras partes del máximo de la señalada para su consumación, si
+       voluntariamente ha realizado todos los esfuerzos necesarios para impedirla.</p>
+  </blockquote>
+
+  <div class="chips">
+    <span class="chip">Tentativa inacabada</span>
+    <span class="chip">Tentativa acabada</span>
+    <span class="chip">Desistimiento eficaz</span>
+    <span class="chip">Arrepentimiento activo</span>
+    <span class="chip">Pena atenuada</span>
+  </div>
+
+  <div class="perspectives-grid">
+    <article class="perspective-card dogma">
+      <div class="card-header"><span class="card-icon">⚖️</span><h3 class="card-title">Dogmática</h3></div>
+      <div class="card-sub">Dos formas de tentativa y el desistimiento</div>
+      <div class="card-content">
+        <p>El artículo 27 distingue dos formas de tentativa. La <strong>tentativa acabada</strong>
+        (primer inciso): el agente agota todos los actos de ejecución pero el resultado no
+        se produce por causas ajenas a su voluntad. Pena: entre la mitad del mínimo y las
+        tres cuartas partes del máximo. La <strong>tentativa inacabada con desistimiento
+        eficaz</strong> (segundo inciso): el agente no agota los actos pero voluntariamente
+        hace todos los esfuerzos para impedir el resultado. Pena más benigna: entre la
+        tercera parte del mínimo y las dos terceras partes del máximo.</p>
+      </div>
+    </article>
+    <article class="perspective-card onto">
+      <div class="card-header"><span class="card-icon">🌌</span><h3 class="card-title">Ontología</h3></div>
+      <div class="card-sub">La voluntad que se retracta</div>
+      <div class="card-content">
+        <p>La tentativa revela la <strong>temporalidad de la voluntad criminal</strong>.
+        El agente se proyecta hacia el delito pero el proceso se interrumpe. El desistimiento
+        revela algo más profundo: la voluntad puede <em>retractarse</em>. Ontológicamente,
+        el agente que desiste voluntariamente no es el mismo que inició la ejecución: ha
+        cambiado. El derecho penal reconoce esa transformación atenuando la pena: premia
+        la <em>reversión de la voluntad</em>.</p>
+      </div>
+    </article>
+    <article class="perspective-card herm">
+      <div class="card-header"><span class="card-icon">📜</span><h3 class="card-title">Hermenéutica</h3></div>
+      <div class="card-sub">Probar la idoneidad y la voluntariedad</div>
+      <div class="card-content">
+        <p>La hermenéutica exige probar dos elementos: la <strong>idoneidad de los actos</strong>
+        (eran objetivamente aptos para producir el resultado) y la <strong>inequivocidad</strong>
+        (no admitían otra interpretación que la ejecución del delito). Un acto inidóneo
+        (disparar con un arma descargada creyéndola cargada) no es tentativa: es delito
+        imposible. El desistimiento exige <strong>voluntariedad</strong>: el agente desiste
+        porque quiere, no porque cree que será descubierto. La hermenéutica examina las
+        razones internas del desistimiento.</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECCIÓN IV: AUTORÍA Y PARTICIPACIÓN
+     ============================================================ -->
+<div id="s4" class="section-divider">
+  <span class="num">IV</span>
+  <h2>Autoría y participación</h2>
+  <p>Arts. 28–30 · Autores, coautores, determinadores, cómplices</p>
+</div>
+
+<section class="article-section">
+  <div class="article-header">
+    <div class="roman">XXVIII</div>
+    <h2>Concurso de personas
+      <span class="tagline">La autoría compartida y la participación accesoria.</span>
+    </h2>
+  </div>
+
+  <blockquote class="legal-text">
+    <span class="legal-label">Texto normativo · Artículo 28°</span>
+    <p>Concurren en la realización de la conducta punible los autores y los partícipes.</p>
+  </blockquote>
+
+  <div class="chips">
+    <span class="chip">Autor</span>
+    <span class="chip">Coautor</span>
+    <span class="chip">Autor mediato</span>
+    <span class="chip">Determinador</span>
+    <span class="chip">Cómplice</span>
+  </div>
+
+  <div class="perspectives-grid">
+    <article class="perspective-card dogma">
+      <div class="card-header"><span class="card-icon">⚖️</span><h3 class="card-title">Dogmática</h3></div>
+      <div class="card-sub">La distinción entre autor y partícipe</div>
+      <div class="card-content">
+        <p>El artículo 28 establece la distinción fundamental entre <strong>autores</strong>
+        (quienes realizan el tipo) y <strong>partícipes</strong> (quienes contribuyen sin
+        realizarlo). La distinción tiene consecuencias dogmáticas: el autor responde por
+        el hecho entero; el partícipe responde en la medida de su contribución. La pena
+        del partícipe es atenuada respecto a la del autor.</p>
+      </div>
+    </article>
+    <article class="perspective-card onto">
+      <div class="card-header"><span class="card-icon">🌌</span><h3 class="card-title">Ontología</h3></div>
+      <div class="card-sub">La autoría como dominio del hecho</div>
+      <div class="card-content">
+        <p>La autoría no es una cualidad psicológica sino una <strong>relación de dominio</strong>.
+        Ontológicamente, autor es quien tiene el <em>dominio del hecho</em>: quien decide
+        si se realiza o no, cómo se realiza, cuándo se realiza. El partícipe no tiene ese
+        dominio: contribuye pero no decide. La autoría mediata (usar a otro como instrumento)
+        revela que el dominio puede ejercerse sin ejecución material: quien manipula al
+        ejecutor es autor aunque no toque la víctima.</p>
+      </div>
+    </article>
+    <article class="perspective-card herm">
+      <div class="card-header"><span class="card-icon">📜</span><h3 class="card-title">Hermenéutica</h3></div>
+      <div class="card-sub">Determinar la autoría en la práctica</div>
+      <div class="card-content">
+        <p>La hermenéutica exige examinar tres criterios: el <strong>dominio del hecho</strong>
+        (quien decide), la <strong>importancia del aporte</strong> (quien contribuye
+        esencialmente) y el <strong>interés en el resultado</strong> (quien se beneficia).
+        En la coautoría, todos los coautores tienen dominio compartido: actúan con acuerdo
+        común y división del trabajo. En la participación, el partícipe contribuye pero no
+        decide. La frontera es fina y se resuelve caso por caso.</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="article-section">
+  <div class="article-header">
+    <div class="roman">XXIX</div>
+    <h2>Autores
+      <span class="tagline">El dominio del hecho en sus múltiples formas.</span>
+    </h2>
+  </div>
+
+  <blockquote class="legal-text">
+    <span class="legal-label">Texto normativo · Artículo 29°</span>
+    <p>Es autor quien realice la conducta punible por sí mismo o utilizando a otro como instrumento.</p>
+    <p>Son coautores los que, mediando un acuerdo común, actúan con división del trabajo
+       criminal atendiendo la importancia del aporte.</p>
+    <p>También es autor quien actúa como miembro u órgano de representación autorizado o de
+       hecho de una persona jurídica, de un ente colectivo sin tal atributo, o de una persona
+       natural cuya representación voluntaria se detente, y realiza la conducta punible, aunque
+       los elementos especiales que fundamentan la penalidad de la figura punible respectiva
+       no concurran en él, pero sí en la persona o ente colectivo representado.</p>
+    <p>El autor en sus diversas modalidades incurrirá en la pena prevista para la conducta punible.</p>
+  </blockquote>
+
+  <div class="chips">
+    <span class="chip">Autor inmediato</span>
+    <span class="chip">Autor mediato</span>
+    <span class="chip">Coautoría</span>
+    <span class="chip">Autoría por representación</span>
+    <span class="chip">Dominio del hecho</span>
+  </div>
+
+  <div class="perspectives-grid">
+    <article class="perspective-card dogma">
+      <div class="card-header"><span class="card-icon">⚖️</span><h3 class="card-title">Dogmática</h3></div>
+      <div class="card-sub">Cuatro formas de autoría</div>
+      <div class="card-content">
+        <p>El artículo 29 reconoce cuatro formas de autoría. <strong>Autor inmediato</strong>:
+        quien ejecuta materialmente el tipo. <strong>Autor mediato</strong>: quien utiliza
+        a otro como instrumento (menor de edad, inimputable, error del ejecutor).
+        <strong>Coautor</strong>: quien actúa con acuerdo común y división del trabajo.
+        <strong>Autor por representación</strong>: quien actúa en nombre de una persona
+        jurídica o ente colectivo, aunque los elementos especiales del tipo concurran en
+        el representado, no en él.</p>
+      </div>
+    </article>
+    <article class="perspective-card onto">
+      <div class="card-header"><span class="card-icon">🌌</span><h3 class="card-title">Ontología</h3></div>
+      <div class="card-sub">El dominio como esencia de la autoría</div>
+      <div class="card-content">
+        <p>Las cuatro formas de autoría comparten un elemento común: el <strong>dominio
+        del hecho</strong>. Ontológicamente, autor es quien tiene el poder de decisión
+        sobre la realización del delito. El autor inmediato tiene dominio ejecutivo; el
+        autor mediato, dominio voluntario; el coautor, dominio compartido; el autor por
+        representación, dominio funcional. La autoría no es ejecutar: es <em>dominar</em>.</p>
+      </div>
+    </article>
+    <article class="perspective-card herm">
+      <div class="card-header"><span class="card-icon">📜</span><h3 class="card-title">Hermenéutica</h3></div>
+      <div class="card-sub">La autoría por representación</div>
+      <div class="card-content">
+        <p>El tercer inciso del artículo 29 es una <strong>ficción jurídica</strong> que
+        resuelve un problema práctico: cuando una persona jurídica o un ente colectivo
+        comete un delito a través de su representante, ¿quién responde? La hermenéutica
+        responde: el representante responde como autor, aunque los elementos especiales
+        (calidades, deberes) concurran en el representado. Esto evita la impunidad de
+        quienes cometen delitos "en nombre de" una persona jurídica.</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="article-section">
+  <div class="article-header">
+    <div class="roman">XXX</div>
+    <h2>Partícipes
+      <span class="tagline">Determinadores y cómplices: la contribución accesoria.</span>
+    </h2>
+  </div>
+
+  <blockquote class="legal-text">
+    <span class="legal-label">Texto normativo · Artículo 30°</span>
+    <p>Son partícipes el determinador y el cómplice.</p>
+    <p>Quien determine a otro a realizar la conducta antijurídica incurrirá en la pena prevista
+       para la infracción.</p>
+    <p>Quien contribuya a la realización de la conducta antijurídica o preste una ayuda posterior,
+       por concierto previo o concomitante a la misma, incurrirá en la pena prevista para la
+       correspondiente infracción disminuida de una sexta parte a la mitad.</p>
+    <p>Al interviniente que no teniendo las calidades especiales exigidas en el tipo penal
+       concurra en su realización, se le rebajará la pena en una cuarta parte.</p>
+    <p><strong>NOTA:</strong> Artículo declarado EXEQUIBLE por la Corte Constitucional mediante
+       Sentencia C-015 de 2018.</p>
+  </blockquote>
+
+  <div class="chips">
+    <span class="chip">Determinador</span>
+    <span class="chip">Cómplice</span>
+    <span class="chip">Cómplice primario</span>
+    <span class="chip">Cómplice secundario</span>
+    <span class="chip">Encubridor</span>
+    <span class="chip">Partícipe sin calidades especiales</span>
+  </div>
+
+  <div class="perspectives-grid">
+    <article class="perspective-card dogma">
+      <div class="card-header"><span class="card-icon">⚖️</span><h3 class="card-title">Dogmática</h3></div>
+      <div class="card-sub">Dos formas de participación</div>
+      <div class="card-content">
+        <p>El artículo 30 distingue dos formas de participación. <strong>Determinador</strong>:
+        quien decide al autor a cometer el delito. Responde con la misma pena del autor
+        porque su contribución es psicológicamente esencial. <strong>Cómplice</strong>: quien
+        contribuye materialmente o presta ayuda posterior por concierto previo. Responde con
+        pena atenuada (entre una sexta parte y la mitad de rebaja). La doctrina distingue
+        entre cómplice <em>primario</em> (aporte esencial) y <em>secundario</em> (aporte
+        no esencial), aunque el código no lo hace expresamente.</p>
+      </div>
+    </article>
+    <article class="perspective-card onto">
+      <div class="card-header"><span class="card-icon">🌌</span><h3 class="card-title">Ontología</h3></div>
+      <div class="card-sub">La contribución como forma de agencia</div>
+      <div class="card-content">
+        <p>La participación revela que la agencia criminal puede ser <strong>compartida</strong>.
+        Ontológicamente, el determinador ejerce una agencia psicológica: decide la voluntad
+        del autor. El cómplice ejerce una agencia material: facilita la ejecución. Ambos
+        son agentes del delito, pero no tienen el dominio: contribuyen sin decidir. La
+        penalidad atenuada refleja esa diferencia: quien contribuye es menos responsable
+        que quien domina.</p>
+      </div>
+    </article>
+    <article class="perspective-card herm">
+      <div class="card-header"><span class="card-icon">📜</span><h3 class="card-title">Hermenéutica</h3></div>
+      <div class="card-sub">La ayuda posterior y el encubrimiento</div>
+      <div class="card-content">
+        <p>El segundo inciso del artículo 30 incluye la <strong>ayuda posterior por concierto
+        previo</strong>: quien ayuda después del delito pero había acordado hacerlo antes.
+        Esto se distingue del <em>encubrimiento</em> (ayuda sin concierto previo), que no
+        es participación sino delito autónomo. La hermenéutica exige probar el
+        <strong>concierto previo</strong>: si no hay acuerdo anterior, hay encubrimiento;
+        si hay acuerdo, hay complicidad. La diferencia es relevante para la pena.</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECCIÓN V: CONCURSO DE CONDUCTAS
+     ============================================================ -->
+<div id="s5" class="section-divider">
+  <span class="num">V</span>
+  <h2>Concurso de conductas punibles</h2>
+  <p>Art. 31 · Concurso real, ideal, continuado y masa</p>
+</div>
+
+<section class="article-section">
+  <div class="article-header">
+    <div class="roman">XXXI</div>
+    <h2>Concurso de conductas punibles
+      <span class="tagline">Cuando un hecho o varios hechos configuran varios delitos.</span>
+    </h2>
+  </div>
+
+  <blockquote class="legal-text">
+    <span class="legal-label">Texto normativo · Artículo 31° (modificado por Ley 2098 de 2021)</span>
+    <p>El que con una sola acción u omisión o con varias acciones u omisiones infrinja varias
+       disposiciones de la ley penal o varias veces la misma disposición quedará sometido a la
+       que establezca la pena más grave según su naturaleza, aumentada hasta en otro tanto, sin
+       que fuere superior a la suma aritmética de las que correspondan a las respectivas conductas
+       punibles debidamente dosificadas cada una de ellas.</p>
+    <p>En los eventos de concurso, la pena privativa de la libertad no podrá exceder de sesenta
+       (60) años, salvo cuando al menos una de las disposiciones de la ley penal infringidas
+       contemple como pena hasta la prisión perpetua revisable, caso en el cual; de ser esta la
+       condena impuesta, esta última será la única pena de prisión aplicable, sin perjuicio de
+       las otras penas principales o accesorias que apliquen al caso.</p>
+    <p>Cuando cualquiera de las conductas punibles concurrentes con la que tenga señalada la pena
+       más grave contemplare sanciones distintas a las establecidas en esta, dichas consecuencias
+       jurídicas se tendrán en cuenta a efectos de hacer la tasación de la pena correspondiente.</p>
+    <p><strong>PARÁGRAFO.</strong> En los eventos de los delitos continuados y masa se impondrá
+       la pena correspondiente al tipo respectivo aumentada en una tercera parte.</p>
+    <p><strong>NOTA:</strong> Artículo declarado EXEQUIBLE por la Corte Constitucional mediante
+       Sentencia C-383 de 2022.</p>
+  </blockquote>
+
+  <div class="chips">
+    <span class="chip">Concurso ideal</span>
+    <span class="chip">Concurso real</span>
+    <span class="chip">Delito continuado</span>
+    <span class="chip">Delito masa</span>
+    <span class="chip">Prisión perpetua revisable</span>
+    <span class="chip">Tope de 60 años</span>
+  </div>
+
+  <div class="perspectives-grid">
+    <article class="perspective-card dogma">
+      <div class="card-header"><span class="card-icon">⚖️</span><h3 class="card-title">Dogmática</h3></div>
+      <div class="card-sub">Cuatro formas de concurso</div>
+      <div class="card-content">
+        <p>El artículo 31 regula cuatro formas de concurso. <strong>Concurso ideal</strong>:
+        una sola acción infringe varias disposiciones (ejemplo: un disparo mata a A y lesiona
+        a B). <strong>Concurso real</strong>: varias acciones infringen varias disposiciones
+        (ejemplo: robar y luego violar). <strong>Delito continuado</strong>: varias acciones
+        del mismo tipo contra el mismo bien jurídico (ejemplo: hurtar diariamente de la caja
+        fuerte). <strong>Delito masa</strong>: varias acciones contra varios bienes jurídicos
+        de la misma especie (ejemplo: estafar a múltiples víctimas con el mismo modus operandi).
+        La pena se determina aplicando la más grave aumentada hasta en otro tanto, con tope
+        de 60 años (o prisión perpetua revisable si alguna disposición la contempla).</p>
+      </div>
+    </article>
+    <article class="perspective-card onto">
+      <div class="card-header"><span class="card-icon">🌌</span><h3 class="card-title">Ontología</h3></div>
+      <div class="card-sub">La unidad y la pluralidad del injusto</div>
+      <div class="card-content">
+        <p>El concurso revela la <strong>tensión entre unidad y pluralidad</strong> del
+        injusto. Ontológicamente, ¿cuántos delitos hay cuando un hecho afecta múltiples
+        bienes? El concurso ideal responde: uno solo, porque la acción es una. El concurso
+        real responde: tantos como acciones, porque cada acción es un injusto autónomo.
+        El delito continuado es una ficción: trata varias acciones como una sola por
+        economía procesal y por unidad de intención. El delito masa es una acumulación:
+        suma de injustos homogéneos.</p>
+      </div>
+    </article>
+    <article class="perspective-card herm">
+      <div class="card-header"><span class="card-icon">📜</span><h3 class="card-title">Hermenéutica</h3></div>
+      <div class="card-sub">La prisión perpetua revisable</div>
+      <div class="card-content">
+        <p>La modificación de 2021 introdujo la <strong>prisión perpetua revisable</strong>
+        como excepción al tope de 60 años. La hermenéutica exige que al menos una de las
+        disposiciones infringidas contemple esa pena. Si ninguna la contempla, el tope
+        es 60 años. La "revisable" significa que la pena puede revisarse después de cierto
+        tiempo (30 años según la ley de ejecución). La hermenéutica constitucional exige
+        que la revisión sea efectiva, no formal: el condenado debe tener posibilidad real
+        de obtener la libertad si demuestra rehabilitación.</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECCIÓN VI: AUSENCIA DE RESPONSABILIDAD
+     ============================================================ -->
+<div id="s6" class="section-divider">
+  <span class="num">VI</span>
+  <h2>Ausencia de responsabilidad</h2>
+  <p>Art. 32 · Doce causales: justificación y excusa</p>
+</div>
+
+<section class="article-section">
+  <div class="article-header">
+    <div class="roman">XXXII</div>
+    <h2>Ausencia de responsabilidad
+      <span class="tagline">Doce causales que excluyen el reproche penal.</span>
+    </h2>
+  </div>
+
+  <blockquote class="legal-text">
+    <span class="legal-label">Texto normativo · Artículo 32° (modificado por Ley 2197 de 2022)</span>
+    <p>No habrá lugar a responsabilidad penal cuando:</p>
+    <ol>
+      <li>En los eventos de caso fortuito y fuerza mayor.</li>
+      <li>Se actúe con el consentimiento válidamente emitido por parte del titular del bien jurídico, en los casos en que se puede disponer del mismo.</li>
+      <li>Se obre en estricto cumplimiento de un deber legal.</li>
+      <li>Se obre en cumplimiento de orden legítima de autoridad competente emitida con las formalidades legales. No se podrá reconocer la obediencia debida cuando se trate de delitos de genocidio, desaparición forzada y tortura.</li>
+      <li>Se obre en legítimo ejercicio de un derecho, de una actividad lícita o de un cargo público.</li>
+      <li>Se obre por la necesidad de defender un derecho propio o ajeno contra injusta agresión actual o inminente, siempre que la defensa sea proporcionada a la agresión.
+        <br><strong>6.1. Legítima defensa privilegiada.</strong> Se presume también como legítima la defensa que se ejerza para rechazar al extraño que usando maniobras o mediante violencia penetre o permanezca arbitrariamente en habitación o dependencias inmediatas, o vehículo ocupado. La fuerza letal se podrá ejercer de forma excepcional para repeler la agresión al derecho propio o ajeno.
+        <br><strong>PARÁGRAFO.</strong> En los casos del ejercicio de la legítima defensa privilegiada, la valoración de la defensa se deberá aplicar un estándar de proporcionalidad en el elemento de racionalidad de la conducta.</li>
+      <li>Se obre por la necesidad de proteger un derecho propio o ajeno de un peligro actual o inminente, inevitable de otra manera, que el agente no haya causado intencionalmente o por imprudencia y que no tenga el deber jurídico de afrontar.</li>
+      <li>Se obre bajo insuperable coacción ajena.</li>
+      <li>Se obre impulsado por miedo insuperable.</li>
+      <li>Se obre con error invencible de que no concurre en su conducta un hecho constitutivo de la descripción típica o de que concurren los presupuestos objetivos de una causal que excluya la responsabilidad. Si el error fuere vencible la conducta será punible cuando la ley la hubiere previsto como culposa. Cuando el agente obre en un error sobre los elementos que posibilitarían un tipo penal más benigno, responderá por la realización del supuesto de hecho privilegiado.</li>
+      <li>Se obre con error invencible de la licitud de su conducta. Si el error fuere vencible la pena se rebajará en la mitad. Para estimar cumplida la conciencia de la antijuridicidad basta que la persona haya tenido la oportunidad, en términos razonables, de actualizar el conocimiento de lo injusto de su conducta.</li>
+      <li>El error invencible sobre una circunstancia que diere lugar a la atenuación de la punibilidad dará lugar a la aplicación de la diminuente.</li>
+    </ol>
+    <p>El que exceda los límites propios de las causales consagradas en los numerales 3, 4, 5, 6 y 7 precedentes, incurrirá en una pena no menor de la sexta parte del mínimo ni mayor de la mitad del máximo de la señalada para la respectiva conducta punible.</p>
+  </blockquote>
+
+  <div class="chips">
+    <span class="chip">Causales de justificación</span>
+    <span class="chip">Causales de inculpabilidad</span>
+    <span class="chip">Legítima defensa</span>
+    <span class="chip">Estado de necesidad</span>
+    <span class="chip">Consentimiento</span>
+    <span class="chip">Cumplimiento de deber</span>
+    <span class="chip">Obediencia debida</span>
+    <span class="chip">Coacción</span>
+    <span class="chip">Miedo insuperable</span>
+    <span class="chip">Error de tipo</span>
+    <span class="chip">Error de prohibición</span>
+    <span class="chip">Exceso en la causal</span>
+  </div>
+
+  <div class="perspectives-grid">
+    <article class="perspective-card dogma">
+      <div class="card-header"><span class="card-icon">⚖️</span><h3 class="card-title">Dogmática</h3></div>
+      <div class="card-sub">Doce causales en dos grupos</div>
+      <div class="card-content">
+        <p>El artículo 32 consagra doce causales de ausencia de responsabilidad. Dogmáticamente
+        se dividen en dos grupos. <strong>Causales de justificación</strong> (numerales 2, 3,
+        4, 5, 6, 7): excluyen la antijuridicidad. El hecho es típico pero permitido.
+        <strong>Causales de inculpabilidad</strong> (numerales 1, 8, 9, 10, 11, 12): excluyen
+        la culpabilidad. El hecho es típico y antijurídico pero no reprochable. La distinción
+        es decisiva: lo justificado es lícito; lo inculpable es ilícito pero no punible.</p>
+      </div>
+    </article>
+    <article class="perspective-card onto">
+      <div class="card-header"><span class="card-icon">🌌</span><h3 class="card-title">Ontología</h3></div>
+      <div class="card-sub">Justificación: el hecho permitido; excusa: el hecho no reprochable</div>
+      <div class="card-content">
+        <p>Las causales de justificación revelan que el derecho reconoce <strong>conflictos
+        de bienes</strong> donde ningún bien puede preservarse íntegro. La legítima defensa,
+        el estado de necesidad, el consentimiento son permisos: el ordenamiento autoriza el
+        daño en esa situación. Las causales de inculpabilidad revelan la <strong>fragilidad
+        humana</strong>: la coacción, el miedo, el error son situaciones donde no puede
+        exigirse otra conducta. El derecho no justifica pero tampoco reprocha: reconoce que
+        el agente no pudo actuar de otro modo.</p>
+      </div>
+    </article>
+    <article class="perspective-card herm">
+      <div class="card-header"><span class="card-icon">📜</span><h3 class="card-title">Hermenéutica</h3></div>
+      <div class="card-sub">La legítima defensa privilegiada y el error</div>
+      <div class="card-content">
+        <p>La modificación de 2022 introdujo la <strong>legítima defensa privilegiada</strong>
+        (numeral 6.1): se presume legítima la defensa contra quien penetra violentamente
+        habitación o vehículo. La hermenéutica exige que la fuerza letal sea <em>excepcional</em>
+        y que se aplique un estándar de <em>racionalidad</em>. No es una licencia para matar:
+        es una presunción de proporcionalidad que admite prueba en contrario. Los numerales
+        10, 11 y 12 regulan el <strong>error</strong>: error de tipo (sobre los hechos),
+        error de prohibición (sobre la ilicitud), error sobre circunstancias atenuantes.
+        La hermenéutica distingue entre error invencible (excluye responsabilidad) y
+        vencible (atenúa o convierte en culposo).</p>
+      </div>
+    </article>
+  </div>
+
+  <div class="callout">
+    <span class="label">Nodo de tensión doctrinal</span>
+    <p><strong>¿La legítima defensa privilegiada es una presunción iuris tantum o iuris et de iure?</strong>
+    La hermenéutica constitucional exige que sea <em>iuris tantum</em>: admite prueba en
+    contrario. Si se prueba que la defensa fue desproporcionada (ejemplo: disparar a quien
+    huye), la presunción se destruye. No es una licencia para matar: es una presunción de
+    proporcionalidad que puede destruirse con prueba.</p>
+  </div>
+
+  <details class="case-study">
+    <summary><span class="marker">+</span> Caso aplicado · El error de prohibición cultural</summary>
+    <div class="case-body">
+      <p>Un indígena de una comunidad aislada realiza un ritual que implica lesiones leves
+      a un menor, práctica tradicional en su cultura. No sabe que la ley penal colombiana
+      prohíbe las lesiones.</p>
+      <p><strong>Lectura:</strong> concurre el numeral 11 del artículo 32: error invencible
+      de la licitud de su conducta. El agente no tenía oportunidad razonable de conocer
+      la ilicitud. No hay responsabilidad penal. Pero según el artículo 33A, el fiscal
+      debe ordenar medidas pedagógicas y diálogo con el agente, respetando la diversidad
+      sociocultural. Si insiste en la práctica, las nuevas acciones no se amparan en la
+      causal.</p>
+    </div>
+  </details>
+</section>
+
+<!-- ============================================================
+     SECCIÓN VII: INIMPUTABILIDAD
+     ============================================================ -->
+<div id="s7" class="section-divider">
+  <span class="num">VII</span>
+  <h2>Inimputabilidad</h2>
+  <p>Arts. 33–33A · Capacidad, diversidad sociocultural, medidas pedagógicas</p>
+</div>
+
+<section class="article-section">
+  <div class="article-header">
+    <div class="roman">XXXIII</div>
+    <h2>Inimputabilidad
+      <span class="tagline">La incapacidad de comprender o determinarse.</span>
+    </h2>
+  </div>
+
+  <blockquote class="legal-text">
+    <span class="legal-label">Texto normativo · Artículo 33° (modificado por Ley 2098 de 2021)</span>
+    <p>Es inimputable quien en el momento de ejecutar la conducta típica y antijurídica no
+       tuviera la capacidad de comprender su ilicitud o de determinarse de acuerdo con esa
+       comprensión, por inmadurez sicológica, trastorno mental, diversidad sociocultural o
+       estados similares.</p>
+    <p>No será inimputable el agente que hubiere preordenado su trastorno mental.</p>
+    <p><strong>NOTA:</strong> El texto subrayado fue declarado EXEQUIBLE por la Corte
+       Constitucional mediante Sentencia C-370 de 2002.</p>
+  </blockquote>
+
+  <div class="chips">
+    <span class="chip">Inimputabilidad</span>
+    <span class="chip">Inmadurez sicológica</span>
+    <span class="chip">Trastorno mental</span>
+    <span class="chip">Diversidad sociocultural</span>
+    <span class="chip">Actio libera in causa</span>
+    <span class="chip">Medida de seguridad</span>
+  </div>
+
+  <div class="perspectives-grid">
+    <article class="perspective-card dogma">
+      <div class="card-header"><span class="card-icon">⚖️</span><h3 class="card-title">Dogmática</h3></div>
+      <div class="card-sub">Cuatro causas de inimputabilidad</div>
+      <div class="card-content">
+        <p>El artículo 33 reconoce cuatro causas de inimputabilidad. <strong>Inmadurez
+        sicológica</strong>: menores de 18 años (sistema de responsabilidad penal juvenil).
+        <strong>Trastorno mental</strong>: alteración psíquica que impide comprender o
+        determinarse. <strong>Diversidad sociocultural</strong>: pertenencia a comunidades
+        indígenas o afrodescendientes con cosmovisión distinta. <strong>Estados similares</strong>:
+        cláusula abierta para otras alteraciones transitorias (embriaguez patológica,
+        sonambulismo). La segunda frase consagra la <em>actio libera in causa</em>: quien
+        preordena su trastorno (ejemplo: embriagarse para cometer el delito) no es inimputable.</p>
+      </div>
+    </article>
+    <article class="perspective-card onto">
+      <div class="card-header"><span class="card-icon">🌌</span><h3 class="card-title">Ontología</h3></div>
+      <div class="card-sub">La capacidad como condición de la responsabilidad</div>
+      <div class="card-content">
+        <p>La inimputabilidad revela que la responsabilidad presupone <strong>capacidad</strong>.
+        Ontológicamente, sólo puede reprochársele algo a quien puede comprender y
+        autodeterminarse. El inimputable no es un agente moral pleno: es un ser humano
+        cuya capacidad está alterada. La diversidad sociocultural introduce una dimensión
+        nueva: no es una patología sino una <em>alteridad</em>. El indígena que actúa según
+        su cosmovisión no está enfermo: piensa distinto. El derecho penal reconoce esa
+        alteridad declarándolo inimputable, no por enfermedad sino por diferencia.</p>
+      </div>
+    </article>
+    <article class="perspective-card herm">
+      <div class="card-header"><span class="card-icon">📜</span><h3 class="card-title">Hermenéutica</h3></div>
+      <div class="card-sub">La diversidad sociocultural</div>
+      <div class="card-content">
+        <p>La inclusión de la <strong>diversidad sociocultural</strong> como causa de
+        inimputabilidad es una conquista hermenéutica. Antes sólo se reconocía la
+        inimputabilidad por patología; ahora se reconoce por <em>alteridad cultural</em>.
+        La hermenéutica exige probar que el agente actuó según su cosmovisión, no por
+        ignorancia o desprecio de la ley. No todo indígena que comete un delito es
+        inimputable: sólo quien actúa según los mandatos de su comunidad. La prueba
+        es antropológica: pericias culturales, testimonios de autoridades indígenas.</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="article-section">
+  <div class="article-header">
+    <div class="roman">XXXIII<sup>A</sup></div>
+    <h2>Medidas en caso de inimputabilidad
+      <span class="tagline">Pedagogía y diálogo: la respuesta intercultural.</span>
+    </h2>
+  </div>
+
+  <blockquote class="legal-text">
+    <span class="legal-label">Texto normativo · Artículo 33A (adicionado por Ley 2197 de 2022)</span>
+    <p>En los casos de declaratoria de inimputabilidad por diversidad sociocultural o de
+       inculpabilidad por error de prohibición culturalmente condicionado, el fiscal delegado
+       que haya asumido la dirección, coordinación y control de la investigación ordenará a
+       la autoridad competente la implementación de medidas pedagógicas y diálogo con el agente
+       y dejará registro de estas.</p>
+    <p>Si con posterioridad a la implementación de las medidas de pedagogía y diálogo, el agente
+       insiste en el desarrollo de conductas punibles contra el mismo bien jurídico tutelado, las
+       nuevas acciones no se entenderán amparadas conforme con las causales de ausencia de
+       responsabilidad o de imputabilidad.</p>
+    <p>En todo caso, se aplicarán las acciones policivas y de restitución de bienes previstas en
+       el Código de Procedimiento Penal a las que haya lugar, a fin de garantizar el restablecimiento
+       de los derechos de la víctima y las medidas de no repetición necesarias.</p>
+    <p><strong>Parágrafo.</strong> El Gobierno Nacional reglamentará y proveerá los programas de
+       pedagogía y diálogo. Estos deberán respetar la diversidad sociocultural.</p>
+  </blockquote>
+
+  <div class="chips">
+    <span class="chip">Medidas pedagógicas</span>
+    <span class="chip">Diálogo intercultural</span>
+    <span class="chip">Error culturalmente condicionado</span>
+    <span class="chip">Restitución de bienes</span>
+    <span class="chip">No repetición</span>
+    <span class="chip">Pluralismo jurídico</span>
+  </div>
+
+  <div class="perspectives-grid">
+    <article class="perspective-card dogma">
+      <div class="card-header"><span class="card-icon">⚖️</span><h3 class="card-title">Dogmática</h3></div>
+      <div class="card-sub">Una respuesta distinta al derecho penal clásico</div>
+      <div class="card-content">
+        <p>El artículo 33A introduce una <strong>respuesta pedagógica</strong> a la
+        inimputabilidad por diversidad sociocultural. No es una medida de seguridad
+        clásica (internación, tratamiento): es <em>pedagogía y diálogo</em>. Dogmáticamente,
+        es una innovación: el derecho penal colombiano reconoce que la respuesta a la
+        alteridad cultural no puede ser la misma que a la patología. El fiscal ordena
+        medidas pedagógicas; si el agente insiste, pierde el beneficio. Se aplican además
+        acciones policivas y de restitución para proteger a la víctima.</p>
+      </div>
+    </article>
+    <article class="perspective-card onto">
+      <div class="card-header"><span class="card-icon">🌌</span><h3 class="card-title">Ontología</h3></div>
+      <div class="card-sub">El pluralismo jurídico como realidad</div>
+      <div class="card-content">
+        <p>El artículo 33A reconoce ontológicamente el <strong>pluralismo jurídico</strong>:
+        en Colombia coexisten múltiples órdenes normativos (derecho estatal, derecho
+        indígena, derecho afrodescendiente). La inimputabilidad por diversidad sociocultural
+        no es una concesión: es el reconocimiento de una realidad. Las medidas pedagógicas
+        no son imposición del derecho estatal: son <em>diálogo</em> entre órdenes normativos.
+        El derecho penal renuncia a su pretensión de universalidad y acepta la interculturalidad.</p>
+      </div>
+    </article>
+    <article class="perspective-card herm">
+      <div class="card-header"><span class="card-icon">📜</span><h3 class="card-title">Hermenéutica</h3></div>
+      <div class="card-sub">El diálogo intercultural</div>
+      <div class="card-content">
+        <p>La hermenéutica del artículo 33A es delicada: exige <strong>diálogo intercultural</strong>,
+        no imposición. Las medidas pedagógicas deben respetar la diversidad sociocultural
+        (parágrafo). Esto significa que el fiscal no puede imponer la cosmovisión estatal:
+        debe dialogar con las autoridades indígenas o afrodescendientes. La hermenéutica
+        constitucional exige armonizar el derecho penal con el artículo 330 de la Constitución
+        (jurisdicción indígena). Si hay conflicto, prevalece la jurisdicción indígena sobre
+        sus miembros, salvo delitos graves contra la humanidad.</p>
+      </div>
+    </article>
+  </div>
+
+  <div class="callout">
+    <span class="label">Nodo de tensión doctrinal</span>
+    <p><strong>¿Las medidas pedagógicas son una sanción disfrazada?</strong>
+    La hermenéutica constitucional exige que no lo sean. Si las medidas pedagógicas se
+    convierten en internación coercitiva o en imposición cultural, violan la dignidad
+    y la diversidad. Deben ser realmente pedagógicas: diálogo, no adoctrinamiento.
+    La prueba es la participación de las autoridades indígenas en su diseño y ejecución.</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     SÍNTESIS
+     ============================================================ -->
+<section id="sintesis" class="sintesis">
+  <div class="section-kicker">Lectura transversal</div>
+  <h2>Quince artículos, una sola arquitectura</h2>
+  <p class="intro">
+    Los artículos 19 a 33A no son preceptos independientes: son las articulaciones de un
+    mismo mecanismo de determinación de la responsabilidad penal. La tabla siguiente
+    reconstruye, para cada grupo, la pregunta rectora y sus tres dimensiones.
+  </p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Grupo</th>
+          <th>Pregunta rectora</th>
+          <th>Dogmática</th>
+          <th>Ontología</th>
+          <th>Hermenéutica</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Arts. 19–20</td>
+          <td>¿Qué tipo de conducta y quién la realiza?</td>
+          <td>Delito vs. contravención; servidor público funcional.</td>
+          <td>Gravedad como cualidad; función pública como rol.</td>
+          <td>Clasificación material; potestad pública.</td>
+        </tr>
+        <tr>
+          <td>Arts. 21–24</td>
+          <td>¿Cómo se relaciona el agente con el resultado?</td>
+          <td>Dolo, culpa, preterintención; regla y excepciones.</td>
+          <td>Tres modos de agencia: dirigida, desviada, excedida.</td>
+          <td>Prueba de la modalidad; frontera dolo/culpa.</td>
+        </tr>
+        <tr>
+          <td>Arts. 25–26</td>
+          <td>¿Cómo y cuándo se realiza la conducta?</td>
+          <td>Acción y omisión; posición de garante; teoría de la actividad.</td>
+          <td>El no-hacer como causa normativa; el delito como acción.</td>
+          <td>Garante de protección vs. vigilancia; ley aplicable.</td>
+        </tr>
+        <tr>
+          <td>Art. 27</td>
+          <td>¿El delito se consumó?</td>
+          <td>Tentativa acabada e inacabada; desistimiento eficaz.</td>
+          <td>Temporalidad de la voluntad; reversión de la voluntad.</td>
+          <td>Idoneidad y equivocidad; voluntariedad del desistimiento.</td>
+        </tr>
+        <tr>
+          <td>Arts. 28–30</td>
+          <td>¿Quién realizó el delito?</td>
+          <td>Autor, coautor, autor mediato, determinador, cómplice.</td>
+          <td>Dominio del hecho; agencia compartida.</td>
+          <td>Criterios de autoría; concierto previo vs. encubrimiento.</td>
+        </tr>
+        <tr>
+          <td>Art. 31</td>
+          <td>¿Cuántos delitos hay?</td>
+          <td>Concurso ideal, real, continuado, masa; tope de 60 años.</td>
+          <td>Unidad y pluralidad del injusto.</td>
+          <td>Prisión perpetua revisable; dosificación.</td>
+        </tr>
+        <tr>
+          <td>Art. 32</td>
+          <td>¿Puede reprochársele el hecho?</td>
+          <td>Doce causales: justificación e inculpabilidad.</td>
+          <td>Conflictos de bienes; fragilidad humana.</td>
+          <td>Legítima defensa privilegiada; error invencible/vencible.</td>
+        </tr>
+        <tr>
+          <td>Arts. 33–33A</td>
+          <td>¿Tiene capacidad de comprender?</td>
+          <td>Inimputabilidad por inmadurez, trastorno, diversidad; actio libera in causa.</td>
+          <td>Capacidad como condición; pluralismo jurídico.</td>
+          <td>Diversidad sociocultural; medidas pedagógicas; diálogo intercultural.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="closing">
+    <div class="serif">"La conducta es dolosa, culposa o preterintencional."</div>
+    <p>
+      En esa fórmula del artículo 21 se condensa todo el proyecto. El derecho penal no castiga
+      el mero resultado: castiga la <em>relación</em> entre el agente y el resultado. Esa
+      relación puede ser de conocimiento y voluntad (dolo), de descuido (culpa) o de excedencia
+      (preterintención). <strong>Dogmática, ontología y hermenéutica convergen en un mismo
+      punto: la persona como centro del sistema, con sus múltiples formas de agencia, sus
+      límites de capacidad, sus conflictos de bienes y su diversidad cultural.</strong>
+    </p>
+  </div>
+</section>
+
+<!-- ============================================================
+     GLOSARIO
+     ============================================================ -->
+<section id="glosario" class="glosario">
+  <details>
+    <summary>Glosario mínimo de la conducta punible <span>+</span></summary>
+    <dl class="gloss-list">
+      <div><dt>Dolo</dt><dd>Conocimiento y voluntad de los elementos del tipo. Incluye dolo directo (primer y segundo grado) y dolo eventual.</dd></div>
+      <div><dt>Dolo eventual</dt><dd>El agente prevé el resultado como probable y lo acepta, dejando su no producción al azar.</dd></div>
+      <div><dt>Culpa</dt><dd>Infracción al deber objetivo de cuidado con producción de un resultado previsible. Puede ser con o sin representación.</dd></div>
+      <div><dt>Preterintención</dt><dd>El resultado excede la intención del agente, siendo previsible. Estructura híbrida de dolo + culpa.</dd></div>
+      <div><dt>Posición de garante</dt><dd>Situación jurídica que asigna a alguien la protección de un bien o el control de una fuente de riesgo.</dd></div>
+      <div><dt>Comisión por omisión</dt><dd>Realización de un tipo de resultado mediante el no-evitarlo, cuando se era garante y se podía hacerlo.</dd></div>
+      <div><dt>Tentativa</dt><dd>Inicio de ejecución de un delito que no se consuma por causas ajenas a la voluntad del autor.</dd></div>
+      <div><dt>Desistimiento eficaz</dt><dd>El autor realiza voluntariamente todos los esfuerzos para impedir la consumación. Pena atenuada.</dd></div>
+      <div><dt>Autor</dt><dd>Quien realiza el tipo por sí mismo o utilizando a otro como instrumento. Tiene dominio del hecho.</dd></div>
+      <div><dt>Coautor</dt><dd>Quien actúa con acuerdo común y división del trabajo criminal.</dd></div>
+      <div><dt>Autor mediato</dt><dd>Quien utiliza a otro como instrumento (menor, inimputable, error del ejecutor).</dd></div>
+      <div><dt>Determinador</dt><dd>Quien decide a otro a realizar la conducta antijurídica. Responde con la misma pena del autor.</dd></div>
+      <div><dt>Cómplice</dt><dd>Quien contribuye materialmente o presta ayuda posterior por concierto previo. Pena atenuada.</dd></div>
+      <div><dt>Concurso ideal</dt><dd>Una sola acción infringe varias disposiciones penales.</dd></div>
+      <div><dt>Concurso real</dt><dd>Varias acciones infringen varias disposiciones penales.</dd></div>
+      <div><dt>Delito continuado</dt><dd>Varias acciones del mismo tipo contra el mismo bien jurídico.</dd></div>
+      <div><dt>Delito masa</dt><dd>Varias acciones contra varios bienes jurídicos de la misma especie.</dd></div>
+      <div><dt>Justificación</dt><dd>Causal que excluye la antijuridicidad: el hecho es permitido.</dd></div>
+      <div><dt>Inculpabilidad</dt><dd>Causal que excluye la culpabilidad: el hecho es ilícito pero no reprochable.</dd></div>
+      <div><dt>Legítima defensa</dt><dd>Defensa de un derecho propio o ajeno contra injusta agresión actual o inminente, proporcionada.</dd></div>
+      <div><dt>Estado de necesidad</dt><dd>Protección de un derecho contra un peligro actual o inminente, inevitable de otra manera.</dd></div>
+      <div><dt>Error de tipo</dt><dd>Error invencible sobre los elementos del tipo o de una causal de justificación.</dd></div>
+      <div><dt>Error de prohibición</dt><dd>Error invencible sobre la ilicitud de la conducta. Si es vencible, atenúa la pena.</dd></div>
+      <div><dt>Inimputabilidad</dt><dd>Incapacidad de comprender la ilicitud o determinarse de acuerdo con esa comprensión.</dd></div>
+      <div><dt>Diversidad sociocultural</dt><dd>Causa de inimputabilidad por pertenencia a comunidades con cosmovisión distinta.</dd></div>
+      <div><dt>Actio libera in causa</dt><dd>Quien preordena su trastorno mental no es inimputable.</dd></div>
+      <div><dt>Medidas pedagógicas</dt><dd>Respuesta a la inimputabilidad por diversidad sociocultural: diálogo intercultural, no sanción.</dd></div>
+    </dl>
+  </details>
+</section>
+
+<!-- ============================================================
+     REFERENCIAS
+     ============================================================ -->
+<section class="refs">
+  <h3>Claves doctrinales para profundizar</h3>
+  <div class="ref-grid">
+    <div class="ref"><b>Claus Roxin</b><i>Derecho Penal. Parte General</i><br>Dominio del hecho, autoría mediata, posición de garante.</div>
+    <div class="ref"><b>Günther Jakobs</b><i>Derecho Penal. Parte General</i><br>Imputación objetiva, roles sociales, comunicación normativa.</div>
+    <div class="ref"><b>Hans Welzel</b><i>Derecho Penal Alemán</i><br>Finalismo, dolo, culpa, estructura de la acción.</div>
+    <div class="ref"><b>Eugenio Raúl Zaffaroni</b><i>Tratado de Derecho Penal</i><br>Imputación por dominio, tipicidad conglobante, crítica al autoritarismo.</div>
+    <div class="ref"><b>Fernando Velásquez Velásquez</b><i>Manual de Derecho Penal Colombiano</i><br>Recepción dogmática de la estructura del delito en Colombia.</div>
+    <div class="ref"><b>Gustavo Emilio Malo Fernández</b><i>Derecho Penal. Parte General</i><br>Concurso de personas, autoría y participación.</div>
+    <div class="ref"><b>Corte Constitucional de Colombia</b><i>Sentencias C-370 de 2002, C-015 de 2018, C-383 de 2022</i><br>Inimputabilidad, participación, prisión perpetua revisable.</div>
+    <div class="ref"><b>Corte Suprema de Justicia</b><i>Sala de Casación Penal</i><br>Dolo eventual, culpa, tentativa, posición de garante, concurso.</div>
+    <div class="ref"><b>Convención 169 OIT</b><i>Sobre Pueblos Indígenas y Tribales</i><br>Consulta previa, jurisdicción indígena, diversidad sociocultural.</div>
+    <div class="ref"><b>Declaración de la ONU sobre Derechos de los Pueblos Indígenas (2007)</b><i>Tratado internacional</i><br>Autonomía, justicia indígena, pluralismo jurídico.</div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <strong>De la conducta punible · Código Penal colombiano</strong>
+  <p>Análisis tridimensional de los artículos 19 a 33A, Ley 599 de 2000, modificados por
+     Leyes 2098 de 2021 y 2197 de 2022. Continuación del estudio del Libro Primero, Parte General.</p>
+  <p class="fine">Material académico de estudio y reflexión filosófico-jurídica.
+     No constituye asesoría legal.</p>
+</footer>
+
+<script>
+const progress = document.getElementById('progress');
+function updateProgress(){
+  const h = document.documentElement;
+  const total = h.scrollHeight - h.clientHeight;
+  progress.style.width = (total > 0 ? (h.scrollTop / total) * 100 : 0) + '%';
+}
+window.addEventListener('scroll', updateProgress, {passive:true});
+window.addEventListener('resize', updateProgress);
+updateProgress();
+
+if ('IntersectionObserver' in window) {
+  const targets = document.querySelectorAll(
+    '.perspective-card, .callout, .case-study, .method-card, .pipe-node, .closing, .ref'
+  );
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, {threshold: 0.08, rootMargin: '0px 0px -40px 0px'});
+
+  targets.forEach((el, i) => {
+    el.classList.add('reveal');
+    el.style.transitionDelay = (i % 3) * 70 + 'ms';
+    revealObserver.observe(el);
+  });
+}
+
+const navLinks = document.querySelectorAll('nav a');
+const sections = [...navLinks].map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+
+if ('IntersectionObserver' in window) {
+  const navObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(a => {
+          a.classList.toggle('active', a.getAttribute('href') === '#' + entry.target.id);
+        });
+      }
+    });
+  }, {rootMargin: '-15% 0px -65% 0px', threshold: 0});
+  sections.forEach(s => navObserver.observe(s));
+}
+</script>
+</body>
+</html>
