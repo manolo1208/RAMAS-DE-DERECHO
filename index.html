@@ -392,6 +392,71 @@
     letter-spacing: 1px;
   }
 
+  /* CSS para tarjeta con múltiples botones */
+  .card-multi-guia {
+    position: relative;
+  }
+
+  .card-buttons-multi {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    padding: 0.8rem;
+    background: #f7fafc;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+  }
+
+  .card-btn-mini {
+    display: block;
+    padding: 0.6rem 0.5rem;
+    background: #ffffff;
+    color: #1a202c;
+    text-decoration: none;
+    text-align: center;
+    border-radius: 6px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    border: 1.5px solid #cbd5e0;
+    transition: all 0.25s ease;
+    line-height: 1.2;
+  }
+
+  .card-btn-mini:hover {
+    background: #9b2c2c;
+    color: #ffffff;
+    border-color: #9b2c2c;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(155, 44, 44, 0.3);
+  }
+
+  .card-btn-mini:nth-child(1):hover { background: #9b2c2c; }
+  .card-btn-mini:nth-child(2):hover { background: #2c5282; border-color: #2c5282; }
+  .card-btn-mini:nth-child(3):hover { background: #276749; border-color: #276749; }
+  .card-btn-mini:nth-child(4):hover { background: #975a16; border-color: #975a16; }
+  .card-btn-mini:nth-child(5):hover { background: #6b46c1; border-color: #6b46c1; }
+  .card-btn-mini:nth-child(6):hover { background: #b83280; border-color: #b83280; }
+  .card-btn-mini:nth-child(7):hover { background: #2b6cb0; border-color: #2b6cb0; }
+  .card-btn-mini:nth-child(8):hover { background: #744210; border-color: #744210; }
+  .card-btn-mini:nth-child(9):hover { background: #285e61; border-color: #285e61; }
+
+  @media (max-width: 768px) {
+    .card-buttons-multi {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .card-btn-mini {
+      font-size: 0.72rem;
+      padding: 0.5rem 0.4rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .card-buttons-multi {
+      grid-template-columns: 1fr;
+    }
+  }
+
   .card-proximamente {
     background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
     border: 2px dashed #bbb;
@@ -619,7 +684,7 @@
 <body>
 
 <header>
-  <h1>️ Portal Jurídico Interactivo</h1>
+  <h1>⚖️ Portal Jurídico Interactivo</h1>
   <p class="subtitle">Guías Didácticas del Derecho Colombiano</p>
   <p class="description">
     Plataforma educativa integral que reúne todas las ramas del derecho en un solo lugar. 
@@ -629,7 +694,7 @@
 
 <div class="search-container">
   <div class="search-box">
-    <input type="text" id="searchInput" placeholder="🔍 Buscar tema, concepto o rama del derecho..." onkeyup="filtrarContenido()">
+    <input type="text" id="searchInput" placeholder=" Buscar tema, concepto o rama del derecho..." onkeyup="filtrarContenido()">
     <button onclick="filtrarContenido()">Buscar</button>
   </div>
 </div>
@@ -659,19 +724,19 @@
 
 <div class="quick-nav">
   <a href="#civil">📜 Derecho Civil</a>
-  <a href="#penal">️ Derecho Penal</a>
+  <a href="#penal">⚔️ Derecho Penal</a>
   <a href="#procesal">⚖️ Derecho Procesal</a>
   <a href="#laboral">👷 Derecho Laboral</a>
   <a href="#admin">🏛️ Derecho Administrativo</a>
   <a href="#sociedades">💼 Derecho de Sociedades</a>
-  <a href="#constitucional">📖 Derecho Constitucional</a>
+  <a href="#constitucional"> Derecho Constitucional</a>
   <a href="#contratos">📝 Contratos</a>
 </div>
 
 <main>
 
   <div class="alerta-info">
-    <strong>📌 Bienvenido al Portal Jurídico</strong>
+    <strong> Bienvenido al Portal Jurídico</strong>
     Este portal conecta todas las guías didácticas del derecho colombiano. Las guías marcadas como <span style="background: var(--success); color: white; padding: 0.2rem 0.6rem; border-radius: 10px; font-size: 0.85rem;">DISPONIBLE</span> ya están completas. Las marcadas como <span style="background: var(--warning); color: white; padding: 0.2rem 0.6rem; border-radius: 10px; font-size: 0.85rem;">PRÓXIMAMENTE</span> están en desarrollo.
   </div>
 
@@ -698,8 +763,8 @@
           <div><strong>40</strong>Preguntas</div>
         </div>
         <div class="card-buttons">
-          <a href="titulo-preliminar.html" class="card-btn"> Guía</a>
-          <a href="titulo-preliminar.pdf" class="card-btn pdf-btn" target="_blank">📄 PDF</a>
+          <a href="titulo-preliminar.html" class="card-btn">📖 Guía</a>
+          <a href="titulo-preliminar.pdf" class="card-btn pdf-btn" target="_blank"> PDF</a>
         </div>
       </div>
 
@@ -715,13 +780,13 @@
         </div>
         <div class="card-buttons">
           <a href="libro1-personas.html" class="card-btn">📖 Guía</a>
-          <a href="libro1-personas.pdf" class="card-btn pdf-btn" target="_blank">📄 PDF</a>
+          <a href="libro1-personas.pdf" class="card-btn pdf-btn" target="_blank"> PDF</a>
         </div>
       </div>
 
       <div class="card-disponible" data-search="bienes dominio propiedad muebles inmuebles posesión modos de adquirir servidumbres usufructo libro ii">
         <span class="badge-disponible">✓ Disponible</span>
-        <div class="card-icon"></div>
+        <div class="card-icon">🏠</div>
         <h3 class="card-title">Libro II: De los Bienes</h3>
         <p class="card-description">Clases de bienes, dominio, modos de adquirir, limitaciones del dominio y protección de la propiedad y posesión.</p>
         <div class="card-meta">
@@ -731,13 +796,13 @@
         </div>
         <div class="card-buttons">
           <a href="libro2-bienes.html" class="card-btn">📖 Guía</a>
-          <a href="libro2-bienes.pdf" class="card-btn pdf-btn" target="_blank">📄 PDF</a>
+          <a href="libro2-bienes.pdf" class="card-btn pdf-btn" target="_blank"> PDF</a>
         </div>
       </div>
 
       <div class="card-disponible" data-search="sucesión testamento herencia legado asignaciones forzosas legítimas partición donaciones libro iii">
         <span class="badge-disponible">✓ Disponible</span>
-        <div class="card-icon"></div>
+        <div class="card-icon">📜</div>
         <h3 class="card-title">Libro III: Sucesiones</h3>
         <p class="card-description">Sucesión por causa de muerte, testamentos, asignaciones hereditarias, legítimas, partición y donaciones entre vivos.</p>
         <div class="card-meta">
@@ -747,7 +812,7 @@
         </div>
         <div class="card-buttons">
           <a href="libro3-sucesiones.html" class="card-btn">📖 Guía</a>
-          <a href="libro3-sucesiones.pdf" class="card-btn pdf-btn" target="_blank"> PDF</a>
+          <a href="libro3-sucesiones.pdf" class="card-btn pdf-btn" target="_blank">📄 PDF</a>
         </div>
       </div>
 
@@ -772,7 +837,7 @@
 <!-- DERECHO PENAL -->
 <section class="rama-section rama-penal" id="penal">
   <div class="rama-header">
-    <div class="rama-icon">️</div>
+    <div class="rama-icon">⚔️</div>
     <div>
       <h2>Derecho Penal</h2>
       <p class="rama-subtitle">Normas sustantivas sobre delitos, penas y medidas de seguridad</p>
@@ -782,51 +847,34 @@
 
   <div class="cards-grid">
 
-    <!-- Guía: Código Penal Completo - 9 Temas -->
-<div class="card-disponible card-multi-guia" data-search="código penal colombiano ley 599 2000 normas rectoras aplicación espacial conducta punible penas consecuencias jurídicas determinación punibilidad mecanismos sustitutivos medidas seguridad extinción acción sanción responsabilidad civil libro primero parte general">
-  <span class="badge-disponible">✓ Disponible</span>
-  <div class="card-icon">⚔️</div>
-  <h3 class="card-title">Código Penal (Ley 599/2000)</h3>
-  <p class="card-description">Normas rectoras, aplicación de la ley penal, conducta punible, consecuencias jurídicas, extinción y responsabilidad civil.</p>
-  <div class="card-meta">
-    <div><strong>9</strong>Temas</div>
-    <div><strong>Arts. 1-100</strong>Artículos</div>
-    <div><strong>40+</strong>Preguntas</div>
-  </div>
-  <div class="card-buttons-multi">
-    <a href="penal-normas-rectorales.html" class="card-btn-mini">1. Normas Rectoras</a>
-    <a href="penal-aplicacion-espacio.html" class="card-btn-mini">2. Aplicación Espacial</a>
-    <a href="penal-conducta-punible.html" class="card-btn-mini">3. Conducta Punible</a>
-    <a href="penal-penas-clases-efectos.html" class="card-btn-mini">4. Penas y Efectos</a>
-    <a href="penal-determinacion-punibilidad.html" class="card-btn-mini">5. Determinación</a>
-    <a href="penal-mecanismos-sustitutivos.html" class="card-btn-mini">6. Mecanismos Sust.</a>
-    <a href="penal-medidas-seguridad.html" class="card-btn-mini">7. Medidas Seg.</a>
-    <a href="penal-extincion.html" class="card-btn-mini">8. Extinción</a>
-    <a href="penal-responsabilidad-civil.html" class="card-btn-mini">9. Resp. Civil</a>
-  </div>
-  <div class="card-buttons">
-    <a href="penal-index.pdf" class="card-btn pdf-btn" target="_blank">📄 PDF Completo</a>
-  </div>
-</div>
-    
-    <!-- Guía 1: Código Penal (Ley 599/2000) - UNIFICADA -->
-    <div class="card-disponible" data-search="código penal colombiano ley 599 2000 normas rectoras aplicación espacial conducta punible penas consecuencias jurídicas determinación punibilidad mecanismos sustitutivos medidas seguridad extinción acción sanción responsabilidad civil libro primero parte general">
+    <!-- Guía: Derecho Penal General - Enfoque Ontológico, Hermenéutico y Dogmático -->
+    <div class="card-disponible card-multi-guia" data-search="derecho penal general ontología hermenéutica dogmática ley 599 2000 normas rectoras aplicación espacial conducta punible penas consecuencias jurídicas determinación punibilidad mecanismos sustitutivos medidas seguridad extinción acción sanción responsabilidad civil libro primero parte general">
       <span class="badge-disponible">✓ Disponible</span>
       <div class="card-icon">⚔️</div>
-      <h3 class="card-title">Código Penal (Ley 599/2000)</h3>
-      <p class="card-description">Normas rectoras, aplicación de la ley penal, conducta punible, consecuencias jurídicas, extinción y responsabilidad civil.</p>
+      <h3 class="card-title">Derecho Penal General</h3>
+      <p class="card-description">Análisis desde la ontología, hermenéutica y dogmática: normas rectoras, aplicación espacial, conducta punible, penas, determinación de la punibilidad, mecanismos sustitutivos, medidas de seguridad, extinción y responsabilidad civil.</p>
       <div class="card-meta">
-        <div><strong>9</strong> Temas</div>
-        <div><strong>Arts. 1-100</strong> Artículos</div>
-        <div><strong>40+</strong> Preguntas</div>
+        <div><strong>9</strong>Temas</div>
+        <div><strong>Arts. 1-100</strong>Artículos</div>
+        <div><strong>40+</strong>Preguntas</div>
+      </div>
+      <div class="card-buttons-multi">
+        <a href="penal-normas-rectorales.html" class="card-btn-mini">1. Normas Rectoras</a>
+        <a href="penal-aplicacion-espacio.html" class="card-btn-mini">2. Aplicación Espacial</a>
+        <a href="penal-conducta-punible.html" class="card-btn-mini">3. Conducta Punible</a>
+        <a href="penal-penas-clases-efectos.html" class="card-btn-mini">4. Penas y Efectos</a>
+        <a href="penal-determinacion-punibilidad.html" class="card-btn-mini">5. Determinación</a>
+        <a href="penal-mecanismos-sustitutivos.html" class="card-btn-mini">6. Mecanismos Sust.</a>
+        <a href="penal-medidas-seguridad.html" class="card-btn-mini">7. Medidas Seg.</a>
+        <a href="penal-extincion.html" class="card-btn-mini">8. Extinción</a>
+        <a href="penal-responsabilidad-civil.html" class="card-btn-mini">9. Resp. Civil</a>
       </div>
       <div class="card-buttons">
-        <a href="penal-index.html" class="card-btn">📖 Guía</a>
-        <a href="penal-index.pdf" class="card-btn pdf-btn" target="_blank">📄 PDF</a>
+        <a href="penal-index.pdf" class="card-btn pdf-btn" target="_blank">📄 PDF Completo</a>
       </div>
     </div>
     
-    <!-- Guía 2: Parte General Dogmática -->
+    <!-- Guía 1: Parte General Dogmática -->
     <div class="card-disponible" data-search="derecho penal parte general dogmática teorías ius puniendi escuelas imputación objetiva causalismo finalismo funcionalismo">
       <span class="badge-disponible">✓ Disponible</span>
       <div class="card-icon">🎓</div>
@@ -843,7 +891,7 @@
       </div>
     </div>
     
-    <!-- Guía 3: Teoría del Delito - Velásquez V. -->
+    <!-- Guía 2: Teoría del Delito - Velásquez V. -->
     <div class="card-disponible" data-search="derecho penal teoría del delito iter criminis tentativa dosificación punitiva sistema de tercios concurso delitos legalidad imputación objetiva">
       <span class="badge-disponible">✓ Disponible</span>
       <div class="card-icon">📚</div>
@@ -855,12 +903,12 @@
         <div><strong>40</strong> Preguntas</div>
       </div>
       <div class="card-buttons">
-        <a href="penal-teoria-delito.html" class="card-btn">📖 Guía</a>
+        <a href="penal-teoria-delito.html" class="card-btn"> Guía</a>
         <a href="penal-teoria-delito.pdf" class="card-btn pdf-btn" target="_blank">📄 PDF</a>
       </div>
     </div>
     
-    <!-- Guía 4: Parte Especial - Tipos Emblemáticos -->
+    <!-- Guía 3: Parte Especial - Tipos Emblemáticos -->
     <div class="card-disponible" data-search="derecho penal parte especial tipos penales homicidio hurto peculado extorsión acceso carnal">
       <span class="badge-disponible">✓ Disponible</span>
       <div class="card-icon">🎯</div>
@@ -872,12 +920,12 @@
         <div><strong>40</strong> Preguntas</div>
       </div>
       <div class="card-buttons">
-        <a href="penal-parte-especial.html" class="card-btn">📖 Guía</a>
+        <a href="penal-parte-especial.html" class="card-btn"> Guía</a>
         <a href="penal-parte-especial.pdf" class="card-btn pdf-btn" target="_blank">📄 PDF</a>
       </div>
     </div>
 
-    <!-- Guía 5: Parte Especial - Tipos Adicionales -->
+    <!-- Guía 4: Parte Especial - Tipos Adicionales -->
     <div class="card-disponible" data-search="derecho penal parte especial adicional lesiones estafa abuso confianza concierto secuestro cohecho prevaricato falsedad">
       <span class="badge-disponible">✓ Disponible</span>
       <div class="card-icon">🔍</div>
@@ -890,11 +938,11 @@
       </div>
       <div class="card-buttons">
         <a href="penal-parte-especial-2.html" class="card-btn">📖 Guía</a>
-        <a href="penal-parte-especial-2.pdf" class="card-btn pdf-btn" target="_blank"> PDF</a>
+        <a href="penal-parte-especial-2.pdf" class="card-btn pdf-btn" target="_blank">📄 PDF</a>
       </div>
     </div>
 
-    <!-- Guía 6: Delitos contra la Persona y la Familia -->
+    <!-- Guía 5: Delitos contra la Persona y la Familia -->
     <div class="card-disponible" data-search="derecho penal persona familia homicidio culposo lesiones sexuales desaparición tráfico amenazas bigamia violencia intrafamiliar">
       <span class="badge-disponible">✓ Disponible</span>
       <div class="card-icon">👩‍👧</div>
@@ -907,14 +955,14 @@
       </div>
       <div class="card-buttons">
         <a href="penal-persona-familia.html" class="card-btn">📖 Guía</a>
-        <a href="penal-persona-familia.pdf" class="card-btn pdf-btn" target="_blank"> PDF</a>
+        <a href="penal-persona-familia.pdf" class="card-btn pdf-btn" target="_blank">📄 PDF</a>
       </div>
     </div>
 
-    <!-- Guía 7: Delitos contra el Patrimonio y la Fe Pública -->
+    <!-- Guía 6: Delitos contra el Patrimonio y la Fe Pública -->
     <div class="card-disponible" data-search="derecho penal patrimonio fe publica fraude defraudación usurpación administración desleal falsedad moneda títulos valores">
       <span class="badge-disponible">✓ Disponible</span>
-      <div class="card-icon">💰</div>
+      <div class="card-icon"></div>
       <h3 class="card-title">Patrimonio y Fe Pública</h3>
       <p class="card-description">Fraude, defraudación de fluidos, usurpación, administración desleal, falsedad material, moneda y títulos valores.</p>
       <div class="card-meta">
@@ -923,12 +971,12 @@
         <div><strong>40</strong> Preguntas</div>
       </div>
       <div class="card-buttons">
-        <a href="penal-patrimonio-fepublica.html" class="card-btn"> Guía</a>
+        <a href="penal-patrimonio-fepublica.html" class="card-btn">📖 Guía</a>
         <a href="penal-patrimonio-fepublica.pdf" class="card-btn pdf-btn" target="_blank">📄 PDF</a>
       </div>
     </div>
 
-    <!-- Guía 8: Delitos contra la Administración Pública y la Justicia -->
+    <!-- Guía 7: Delitos contra la Administración Pública y la Justicia -->
     <div class="card-disponible" data-search="derecho penal administración pública justicia peculado concusión tráfico influencias enriquecimiento ilícito testaferrato falso testimonio receptación evasión desacato">
       <span class="badge-disponible">✓ Disponible</span>
       <div class="card-icon">🏛️</div>
@@ -945,10 +993,10 @@
       </div>
     </div>
 
-    <!-- Guía 9: Delitos contra la Seguridad Pública y el Medio Ambiente -->
+    <!-- Guía 8: Delitos contra la Seguridad Pública y el Medio Ambiente -->
     <div class="card-disponible" data-search="derecho penal seguridad pública medio ambiente terrorismo estupefacientes armas contaminación recursos naturales piratería">
       <span class="badge-disponible">✓ Disponible</span>
-      <div class="card-icon">🛡️</div>
+      <div class="card-icon">️</div>
       <h3 class="card-title">Seguridad Pública y Medio Ambiente</h3>
       <p class="card-description">Terrorismo, tráfico de estupefacientes, armas, salud pública, contaminación ambiental y recursos naturales.</p>
       <div class="card-meta">
@@ -974,7 +1022,7 @@
     <!-- Guía 1: Sujetos del Proceso -->
     <div class="card-disponible" data-search="sujetos del proceso competencia comisión jueces ministerio público auxiliares capacidad litisconsorcio terceros apoderados deberes">
       <span class="badge-disponible">✓ Disponible</span>
-      <div class="card-icon"></div>
+      <div class="card-icon">👥</div>
       <h3 class="card-title">Sujetos del Proceso</h3>
       <p class="card-description">Competencia, comisión, jueces, Ministerio Público, auxiliares, capacidad, litisconsorcio, terceros y apoderados.</p>
       <div class="card-meta">
@@ -991,7 +1039,7 @@
     <!-- Guía 2: Actos Procesales -->
     <div class="card-disponible" data-search="actos procesales demanda contestación excepciones términos expedientes incidentes nulidades conflictos competencia impedimentos recusaciones acumulación amparo pobreza">
       <span class="badge-disponible">✓ Disponible</span>
-      <div class="card-icon"></div>
+      <div class="card-icon">📋</div>
       <h3 class="card-title">Actos Procesales</h3>
       <p class="card-description">Demanda, contestación, excepciones previas, términos, expedientes, incidentes, nulidades, conflictos de competencia e impedimentos.</p>
       <div class="card-meta">
@@ -1000,7 +1048,7 @@
         <div><strong>40</strong> Preguntas</div>
       </div>
       <div class="card-buttons">
-        <a href="procesal-actos.html" class="card-btn">📖 Guía</a>
+        <a href="procesal-actos.html" class="card-btn"> Guía</a>
         <a href="procesal-actos.pdf" class="card-btn pdf-btn" target="_blank">📄 PDF</a>
       </div>
     </div>
@@ -1008,7 +1056,7 @@
     <!-- Guía 3: Régimen Probatorio -->
     <div class="card-disponible" data-search="régimen probatorio pruebas extraprocesales confesión juramento testimonial pericial inspección indicios documentos informes">
       <span class="badge-disponible">✓ Disponible</span>
-      <div class="card-icon"></div>
+      <div class="card-icon">🔍</div>
       <h3 class="card-title">Régimen Probatorio</h3>
       <p class="card-description">Disposiciones generales, pruebas extraprocesales, confesión, juramento, testimonial, pericial, inspección, indicios, documentos e informes.</p>
       <div class="card-meta">
@@ -1035,7 +1083,7 @@
       </div>
       <div class="card-buttons">
         <a href="procesal-civil-audiencias-cgp.html" class="card-btn">📖 Guía</a>
-        <a href="procesal-civil-audiencias-cgp.pdf" class="card-btn pdf-btn" target="_blank">📄 PDF</a>
+        <a href="procesal-civil-audiencias-cgp.pdf" class="card-btn pdf-btn" target="_blank"> PDF</a>
       </div>
     </div>
 
@@ -1076,7 +1124,7 @@
     <!-- Guía 7: Cautelares, Cauciones y Cuestiones Varias -->
     <div class="card-disponible" data-search="medidas cautelares cauciones exequátur sentencias extranjeras comisiones rogatorias ANDJE trámites notariales implementación derogaciones vigencia">
       <span class="badge-disponible">✓ Disponible</span>
-      <div class="card-icon">️</div>
+      <div class="card-icon">🛡️</div>
       <h3 class="card-title">Cautelares, Cauciones y Cuestiones Varias</h3>
       <p class="card-description">Medidas cautelares, cauciones, exequátur, comisiones rogatorias, ANDJE, trámites notariales, implementación y vigencia del CGP.</p>
       <div class="card-meta">
@@ -1086,7 +1134,7 @@
       </div>
       <div class="card-buttons">
         <a href="procesal-cautelares-cuestiones.html" class="card-btn">📖 Guía</a>
-        <a href="procesal-cautelares-cuestiones.pdf" class="card-btn pdf-btn" target="_blank"> PDF</a>
+        <a href="procesal-cautelares-cuestiones.pdf" class="card-btn pdf-btn" target="_blank">📄 PDF</a>
       </div>
     </div>
 
@@ -1101,7 +1149,7 @@
     <!-- Guía 1: Libro I - Principios y Sujetos -->
     <div class="card-disponible" data-search="ley 906 principios rectores jurisdicción competencia acción penal comiso reparación víctimas ministerio público partes deberes audiencias recursos">
       <span class="badge-disponible">✓ Disponible</span>
-      <div class="card-icon">️</div>
+      <div class="card-icon">⚖️</div>
       <h3 class="card-title">Libro I: Principios y Sujetos</h3>
       <p class="card-description">Principios rectores, jurisdicción, competencia, acción penal, comiso, reparación integral, Ministerio Público, partes, deberes, audiencias y recursos.</p>
       <div class="card-meta">
@@ -1145,7 +1193,7 @@
       </div>
       <div class="card-buttons">
         <a href="procesal-penal-juicio.html" class="card-btn">📖 Guía</a>
-        <a href="procesal-penal-juicio.pdf" class="card-btn pdf-btn" target="_blank"> PDF</a>
+        <a href="procesal-penal-juicio.pdf" class="card-btn pdf-btn" target="_blank">📄 PDF</a>
       </div>
     </div>
 
@@ -1179,14 +1227,14 @@
       </div>
       <div class="card-buttons">
         <a href="procesal-penal-cooperacion.html" class="card-btn">📖 Guía</a>
-        <a href="procesal-penal-cooperacion.pdf" class="card-btn pdf-btn" target="_blank">📄 PDF</a>
+        <a href="procesal-penal-cooperacion.pdf" class="card-btn pdf-btn" target="_blank"> PDF</a>
       </div>
     </div>
 
     <!-- Guía 6: Procedimientos Especiales -->
     <div class="card-disponible" data-search="ley 906 procedimiento especial abreviado acción penal privada acusador privado conversión reversión reparación audiencia concentrada">
       <span class="badge-disponible">✓ Disponible</span>
-      <div class="card-icon">⚡</div>
+      <div class="card-icon"></div>
       <h3 class="card-title">Procedimiento Abreviado y Acción Privada</h3>
       <p class="card-description">Procedimiento especial abreviado, acusador privado, conversión de acción penal, facultades investigativas, reversión y reparación.</p>
       <div class="card-meta">
@@ -1252,15 +1300,15 @@
         <div><strong>40</strong>Preguntas</div>
       </div>
       <div class="card-buttons">
-        <a href="constitucional-bloque-interpretacion.html" class="card-btn">📖 Guía</a>
-        <a href="constitucional-bloque-interpretacion.pdf" class="card-btn pdf-btn" target="_blank">📄 PDF</a>
+        <a href="constitucional-bloque-interpretacion.html" class="card-btn"> Guía</a>
+        <a href="constitucional-bloque-interpretacion.pdf" class="card-btn pdf-btn" target="_blank"> PDF</a>
       </div>
     </div>
 
     <!-- Guía 3: Elementos del Estado y Sistemas de Gobierno -->
     <div class="card-disponible" data-search="derecho constitucional territorio nacional dominio marítimo nacionalidad ciudadanía descentralización sistemas de gobierno parlamentario presidencial">
       <span class="badge-disponible">✓ Disponible</span>
-      <div class="card-icon">🏛️</div>
+      <div class="card-icon">️</div>
       <h3 class="card-title">Elementos del Estado y Sistemas de Gobierno</h3>
       <p class="card-description">Territorio, dominio marítimo, nacionalidad, ciudadanía, descentralización territorial y por servicios, sistemas parlamentario y presidencial.</p>
       <div class="card-meta">
@@ -1287,7 +1335,7 @@
       </div>
       <div class="card-buttons">
         <a href="constitucional-derechos-proteccion.html" class="card-btn">📖 Guía</a>
-        <a href="constitucional-derechos-proteccion.pdf" class="card-btn pdf-btn" target="_blank">📄 PDF</a>
+        <a href="constitucional-derechos-proteccion.pdf" class="card-btn pdf-btn" target="_blank"> PDF</a>
       </div>
     </div>
 
@@ -1359,12 +1407,12 @@
       </div>
 
       <div class="card-proximamente" data-search="seguridad social salud pensión riesgos laborales arl">
-        <span class="badge-proximamente">🔜 Próximamente</span>
-        <div class="card-icon"></div>
+        <span class="badge-proximamente"> Próximamente</span>
+        <div class="card-icon">🏥</div>
         <h3 class="card-title">Seguridad Social</h3>
         <p class="card-description">Sistema de salud, pensiones, riesgos laborales y prestaciones económicas.</p>
         <div class="card-topics">
-          <strong>📋 Temas que incluirá:</strong>
+          <strong> Temas que incluirá:</strong>
           <ul>
             <li>Sistema General de Salud</li>
             <li>Sistema de Pensiones</li>
@@ -1396,7 +1444,7 @@
       </div>
       <div class="card-buttons">
         <a href="administrativo-fundamentos-fuentes.html" class="card-btn">📖 Guía</a>
-        <a href="administrativo-fundamentos-fuentes.pdf" class="card-btn pdf-btn" target="_blank"> PDF</a>
+        <a href="administrativo-fundamentos-fuentes.pdf" class="card-btn pdf-btn" target="_blank">📄 PDF</a>
       </div>
     </div>
 
@@ -1413,7 +1461,7 @@
       </div>
       <div class="card-buttons">
         <a href="administrativo-organizacion.html" class="card-btn">📖 Guía</a>
-        <a href="administrativo-organizacion.pdf" class="card-btn pdf-btn" target="_blank"> PDF</a>
+        <a href="administrativo-organizacion.pdf" class="card-btn pdf-btn" target="_blank">📄 PDF</a>
       </div>
     </div>
 
@@ -1437,7 +1485,7 @@
     <!-- Guía 4: Actos Administrativos II -->
     <div class="card-disponible" data-search="extinción actos administrativos pérdida fuerza ejecutoria suspensión provisional desaparición fundamentos hecho derecho decaimiento acto caducidad condición resolutoria pérdida vigencia principio legalidad causales ilegalidad nulidad incompetencia vicios forma procedimiento violación derechos audiencia defensa falsa motivación desviación poder convalidación incomunicación invalidez">
       <span class="badge-disponible">✓ Disponible</span>
-      <div class="card-icon">⚡</div>
+      <div class="card-icon"></div>
       <h3 class="card-title">Actos Administrativos II</h3>
       <p class="card-description">Extinción de los actos administrativos, pérdida de fuerza ejecutoria, suspensión provisional, decaimiento del acto, caducidad, revocatoria, nulidad. Principio de legalidad, causales de ilegalidad (incompetencia, vicios de forma, violación de derechos de audiencia y defensa, falsa motivación, desviación de poder, ilegalidad del objeto), convalidación e incomunicación de invalidez.</p>
       <div class="card-meta">
@@ -1447,14 +1495,14 @@
       </div>
       <div class="card-buttons">
         <a href="administrativo-actos-2.html" class="card-btn">📖 Guía</a>
-        <a href="administrativo-actos-2.pdf" class="card-btn pdf-btn" target="_blank"> PDF</a>
+        <a href="administrativo-actos-2.pdf" class="card-btn pdf-btn" target="_blank">📄 PDF</a>
       </div>
     </div>
 
     <!-- Guía 5: Procedimiento Administrativo -->
     <div class="card-disponible" data-search="procedimiento administrativo ley 1437 de 2011 cpaca derecho petición modalidades interés general particular información consulta términos respuesta requisitos peticiones incompletas desistimiento expreso tácito peticiones irrespetuosas atención prioritaria deberes autoridades prohibiciones silencio administrativo negativo positivo protocolización trámite formación expediente terceros audiencias pruebas decisión procedimiento sancionatorio medios electrónicos">
       <span class="badge-disponible">✓ Disponible</span>
-      <div class="card-icon"></div>
+      <div class="card-icon">📋</div>
       <h3 class="card-title">Procedimiento Administrativo</h3>
       <p class="card-description">Noción y formas de iniciación, principios del procedimiento (Art. 3 CPACA), derechos y deberes de las partes, derecho de petición (Art. 23 C.P.), modalidades, términos de respuesta, silencio administrativo (negativo y positivo), trámite y decisión, procedimiento sancionatorio y medios electrónicos conforme a la Ley 1437 de 2011.</p>
       <div class="card-meta">
@@ -1488,7 +1536,7 @@
     <!-- Guía 7: Contratos Administrativos -->
     <div class="card-disponible" data-search="contratos administrativos estatales ley 80 de 1993 ley 1150 de 2007 estatuto contratación noción características bilaterales oneroso conmutativo solemne adhesión cláusulas excepcionales elementos esenciales naturales accidentales principios transparencia economía responsabilidad selección objetiva equilibrio económico partes entidad contratista inhabilidades incompatibilidades licitación pública selección abreviada concurso méritos contratación directa contenido perfeccionamiento legalización ejecución nulidades liquidación responsabilidad">
       <span class="badge-disponible">✓ Disponible</span>
-      <div class="card-icon"></div>
+      <div class="card-icon">📝</div>
       <h3 class="card-title">Contratos Administrativos</h3>
       <p class="card-description">Noción y fundamento legal (Ley 80/93 y Ley 1150/07), características, elementos esenciales, principios (transparencia, economía, responsabilidad, selección objetiva, equilibrio económico), partes, procedimiento de escogencia del contratista, contenido, perfeccionamiento, legalización, ejecución, nulidades, liquidación y responsabilidad contractual.</p>
       <div class="card-meta">
@@ -1498,14 +1546,14 @@
       </div>
       <div class="card-buttons">
         <a href="administrativo-contratos.html" class="card-btn">📖 Guía</a>
-        <a href="administrativo-contratos.pdf" class="card-btn pdf-btn" target="_blank">📄 PDF</a>
+        <a href="administrativo-contratos.pdf" class="card-btn pdf-btn" target="_blank"> PDF</a>
       </div>
     </div>
 
     <!-- Guía 8: Responsabilidad del Estado y Medios de Control -->
     <div class="card-disponible" data-search="responsabilidad patrimonial estado artículo 90 constitución política daño antijurídico títulos imputación falla servicio daño especial riesgo excepcional causas eximentes medios control nulidad inconstitucionalidad nulidad simple nulidad restablecimiento derecho nulidad electoral reparación directa controversias contractuales repetición pérdida investidura acción popular acción grupo acción cumplimiento ley 1437 de 2011 cpaca">
       <span class="badge-disponible">✓ Disponible</span>
-      <div class="card-icon">️</div>
+      <div class="card-icon">⚖️</div>
       <h3 class="card-title">Responsabilidad del Estado y Medios de Control</h3>
       <p class="card-description">Responsabilidad patrimonial del Estado (Art. 90 C.P.), daño antijurídico, títulos de imputación (falla del servicio, daño especial, riesgo excepcional), medios de control ante la Jurisdicción Contencioso Administrativa: nulidad por inconstitucionalidad, nulidad simple, nulidad y restablecimiento del derecho, nulidad electoral, reparación directa, controversias contractuales, repetición, pérdida de investidura, acciones populares, de grupo y de cumplimiento.</p>
       <div class="card-meta">
@@ -1535,7 +1583,7 @@
     <div class="cards-grid">
       <div class="card-proximamente" data-search="sociedades comerciales sas limitada anónima comerciante">
         <span class="badge-proximamente">🔜 Próximamente</span>
-        <div class="card-icon"></div>
+        <div class="card-icon">🏢</div>
         <h3 class="card-title">Sociedades Comerciales</h3>
         <p class="card-description">Tipos societarios, constitución, administración, transformación y disolución.</p>
         <div class="card-topics">
@@ -1614,7 +1662,7 @@
       </div>
       <div class="card-buttons">
         <a href="teoria-contrato-civil-parte2.html#tema2" class="card-btn">📖 Guía</a>
-        <a href="civil-contrato-teoria.pdf" class="card-btn pdf-btn" target="_blank"> PDF</a>
+        <a href="civil-contrato-teoria.pdf" class="card-btn pdf-btn" target="_blank">📄 PDF</a>
       </div>
     </div>
 
@@ -1631,14 +1679,14 @@
       </div>
       <div class="card-buttons">
         <a href="civil-contrato-teoria.html#tema4" class="card-btn">📖 Guía</a>
-        <a href="civil-contrato-teoria.pdf" class="card-btn pdf-btn" target="_blank">📄 PDF</a>
+        <a href="civil-contrato-teoria.pdf" class="card-btn pdf-btn" target="_blank"> PDF</a>
       </div>
     </div>
 
     <!-- Guía 4: Contratación Estatal y Fuentes del Derecho -->
     <div class="card-disponible" data-search="contratación estatal ley 80 transparencia selección objetiva cláusulas exorbitantes contratación pública fuentes derecho UNIDROIT lex mercatoria código civil comercio">
       <span class="badge-disponible">✓ Disponible</span>
-      <div class="card-icon">️</div>
+      <div class="card-icon">🏛️</div>
       <h3 class="card-title">Contratación Estatal y Fuentes del Derecho</h3>
       <p class="card-description">Régimen especial de derecho público, principios de la Ley 80 de 1993, cláusulas exorbitantes, codificación civil-comercial y fuentes internacionales.</p>
       <div class="card-meta">
