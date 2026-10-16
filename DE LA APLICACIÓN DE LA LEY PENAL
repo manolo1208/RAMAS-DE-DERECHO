@@ -1,0 +1,1285 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La aplicación espacial del ius puniendi · Arts. 14–18 CP Colombiano</title>
+<style>
+:root{
+  --bg:#f7f5ef;
+  --paper:#ffffff;
+  --ink:#22303f;
+  --muted:#5b6675;
+  --dogma:#9b2c2c;
+  --onto:#2c5282;
+  --herm:#276749;
+  --gold:#975a16;
+  --line:#e3e0d6;
+  --shadow:0 6px 24px rgba(30,40,60,.06);
+  --shadow-hover:0 14px 34px rgba(30,40,60,.10);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
+  background:var(--bg);color:var(--ink);line-height:1.75;
+}
+h1,h2,h3,h4,.serif{font-family:Georgia,'Times New Roman',serif}
+a{color:inherit}
+::selection{background:#9b2c2c;color:#fff}
+
+#progress{
+  position:fixed;top:0;left:0;height:3px;width:0%;
+  background:linear-gradient(90deg,var(--dogma),var(--onto),var(--herm));
+  z-index:1000;transition:width .1s linear;
+}
+
+/* PORTADA */
+header{
+  background:
+    repeating-linear-gradient(135deg,rgba(255,255,255,.025) 0 2px,transparent 2px 22px),
+    linear-gradient(135deg,#16202c 0%,#2b3a4d 100%);
+  color:#fff;padding:5rem 2rem 4rem;text-align:center;
+  border-bottom:5px solid var(--dogma);
+}
+.eyebrow{
+  font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;
+  color:#c9b98a;margin-bottom:1.4rem;font-weight:600;
+}
+header h1{
+  font-size:clamp(2rem,5vw,3.4rem);line-height:1.2;
+  font-weight:400;letter-spacing:-.5px;margin-bottom:1.2rem;
+}
+header h1 em{font-style:italic;color:#e6d9b8}
+header p{
+  max-width:760px;margin:0 auto;font-size:1.05rem;
+  color:#c3cbd6;font-style:italic;
+}
+.header-meta{
+  margin-top:2rem;display:inline-flex;gap:1.6rem;flex-wrap:wrap;
+  justify-content:center;font-size:.78rem;letter-spacing:.12em;
+  text-transform:uppercase;color:#93a1b3;
+}
+.header-meta span{display:flex;align-items:center;gap:.5rem}
+.header-meta b{color:#e6d9b8;font-weight:600}
+
+/* MÉTODO */
+.method{max-width:1180px;margin:0 auto;padding:3.5rem 2rem 1rem}
+.section-kicker{
+  font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--muted);font-weight:700;margin-bottom:.6rem;
+}
+.method h2{font-size:1.9rem;margin-bottom:1.6rem;font-weight:400}
+.method-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.4rem}
+.method-card{
+  background:var(--paper);padding:1.6rem;border-radius:10px;
+  box-shadow:var(--shadow);border-left:4px solid var(--line);
+}
+.method-card.d{border-color:var(--dogma)}
+.method-card.o{border-color:var(--onto)}
+.method-card.h{border-color:var(--herm)}
+.method-card h3{font-size:1.15rem;margin-bottom:.4rem}
+.method-card.d h3{color:var(--dogma)}
+.method-card.o h3{color:var(--onto)}
+.method-card.h h3{color:var(--herm)}
+.method-card .subtitle{
+  font-size:.72rem;text-transform:uppercase;letter-spacing:.16em;
+  color:var(--muted);display:block;margin-bottom:.8rem;
+}
+.method-card p{font-size:.92rem;color:var(--muted)}
+
+/* NAVEGACIÓN */
+nav{
+  position:sticky;top:0;z-index:200;background:var(--paper);
+  border-bottom:1px solid var(--line);box-shadow:0 2px 12px rgba(0,0,0,.04);
+}
+.nav-inner{
+  max-width:1180px;margin:0 auto;display:flex;overflow-x:auto;
+  padding:0 1rem;scrollbar-width:thin;
+}
+nav a{
+  text-decoration:none;padding:1.05rem 1.15rem;font-size:.85rem;
+  font-weight:600;white-space:nowrap;border-bottom:3px solid transparent;
+  transition:.25s;color:var(--muted);
+}
+nav a:hover{color:var(--dogma);background:#faf6f6}
+nav a.active{color:var(--dogma);border-color:var(--dogma)}
+
+/* MAPA */
+main{max-width:1180px;margin:0 auto;padding:0 2rem}
+.mapa{padding:3.5rem 0 1rem}
+.pipeline{
+  display:flex;align-items:stretch;gap:.7rem;flex-wrap:wrap;margin-top:1.4rem;
+}
+.pipe-node{
+  flex:1;min-width:180px;background:var(--paper);border:1px solid var(--line);
+  border-radius:10px;padding:1.2rem;text-decoration:none;
+  transition:.25s;position:relative;display:block;
+}
+.pipe-node:hover{transform:translateY(-4px);box-shadow:var(--shadow-hover);border-color:#c9b98a}
+.pipe-node .num{
+  font-family:Georgia,serif;font-size:1.6rem;color:#c9b98a;display:block;line-height:1;
+}
+.pipe-node strong{display:block;font-size:1rem;margin:.5rem 0 .3rem}
+.pipe-node small{font-size:.8rem;color:var(--muted);display:block}
+.pipe-arrow{align-self:center;color:#b9b3a3;font-size:1.3rem}
+
+/* ARTÍCULOS */
+.article-section{padding:4.5rem 0 1rem;scroll-margin-top:75px;border-top:1px solid var(--line)}
+.article-section:first-of-type{border-top:none}
+.article-header{display:flex;align-items:center;gap:1.4rem;margin-bottom:1.6rem}
+.roman{
+  font-family:Georgia,serif;font-size:1.5rem;font-weight:bold;
+  color:var(--dogma);background:#f1e6e2;border:1px solid #e4cfc9;
+  width:72px;height:72px;display:flex;align-items:center;justify-content:center;
+  border-radius:8px;flex-shrink:0;
+}
+.article-header h2{font-size:2rem;font-weight:400;line-height:1.25}
+.article-header .tagline{
+  display:block;font-family:'Segoe UI',sans-serif;font-size:.9rem;
+  color:var(--muted);font-style:italic;margin-top:.4rem;font-weight:400;
+}
+.legal-text{
+  background:var(--paper);border-left:5px solid var(--dogma);
+  padding:1.6rem 1.9rem;margin-bottom:1.2rem;border-radius:0 10px 10px 0;
+  box-shadow:var(--shadow);font-family:Georgia,serif;
+  font-size:1.02rem;color:#3d4756;
+}
+.legal-text p+p{margin-top:.9rem}
+.legal-text ol{margin-top:.8rem;padding-left:1.3rem}
+.legal-text ol li{margin-bottom:.5rem}
+.legal-label{
+  display:block;font-family:'Segoe UI',sans-serif;font-size:.65rem;
+  letter-spacing:.22em;text-transform:uppercase;color:var(--muted);
+  margin-bottom:.8rem;font-weight:700;
+}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:2rem}
+.chip{
+  font-size:.72rem;letter-spacing:.04em;padding:.3rem .8rem;
+  background:#eceae2;border:1px solid var(--line);border-radius:30px;color:#5c6470;
+}
+
+.perspectives-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:1.5rem}
+.perspective-card{
+  background:var(--paper);border-radius:12px;padding:1.8rem;
+  box-shadow:var(--shadow);border-top:4px solid transparent;
+  transition:transform .3s,box-shadow .3s;display:flex;flex-direction:column;
+}
+.perspective-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-hover)}
+.perspective-card.dogma{border-top-color:var(--dogma)}
+.perspective-card.onto{border-top-color:var(--onto)}
+.perspective-card.herm{border-top-color:var(--herm)}
+.card-header{display:flex;align-items:center;gap:.7rem;margin-bottom:.3rem}
+.card-icon{font-size:1.35rem}
+.card-title{font-size:.95rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em}
+.dogma .card-title{color:var(--dogma)}
+.onto .card-title{color:var(--onto)}
+.herm .card-title{color:var(--herm)}
+.card-sub{font-size:.72rem;color:var(--muted);font-style:italic;margin-bottom:1.2rem;letter-spacing:.02em}
+.card-content p{font-size:.92rem;color:#4a5563;margin-bottom:1rem;text-align:justify}
+.card-content p:last-child{margin-bottom:0}
+.card-content strong{color:var(--ink);font-weight:650}
+
+.callout{
+  margin-top:1.6rem;background:#fbf6ea;border:1px solid #ecdfbf;
+  border-left:4px solid var(--gold);border-radius:0 8px 8px 0;
+  padding:1.2rem 1.5rem;
+}
+.callout .label{
+  font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--gold);font-weight:700;display:block;margin-bottom:.5rem;
+}
+.callout p{font-size:.9rem;color:#6b5b3a}
+
+.case-study{
+  margin-top:1.2rem;background:var(--paper);border:1px solid var(--line);
+  border-radius:10px;overflow:hidden;
+}
+.case-study summary{
+  cursor:pointer;padding:1.1rem 1.5rem;font-weight:600;font-size:.92rem;
+  list-style:none;display:flex;align-items:center;gap:.7rem;transition:.2s;
+}
+.case-study summary::-webkit-details-marker{display:none}
+.case-study summary:hover{background:#faf9f5}
+.case-study summary .marker{
+  width:22px;height:22px;border:1px solid var(--line);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;font-size:.8rem;
+  color:var(--dogma);flex-shrink:0;transition:.3s;
+}
+.case-study[open] summary .marker{transform:rotate(45deg);background:var(--dogma);color:#fff;border-color:var(--dogma)}
+.case-study .case-body{padding:0 1.5rem 1.4rem;font-size:.92rem;color:var(--muted)}
+.case-study .case-body p+p{margin-top:.7rem}
+
+/* SÍNTESIS */
+.sintesis{padding:4.5rem 0 2rem;scroll-margin-top:75px;border-top:1px solid var(--line)}
+.sintesis h2{font-size:2.1rem;font-weight:400;margin-bottom:.8rem}
+.sintesis .intro{color:var(--muted);max-width:820px;margin-bottom:2rem}
+.table-wrap{overflow-x:auto;border-radius:12px;box-shadow:var(--shadow);background:var(--paper)}
+table{width:100%;border-collapse:collapse;min-width:820px;font-size:.86rem}
+thead{background:#22303f;color:#fff}
+th{padding:1rem;text-align:left;font-weight:600;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase}
+th:nth-child(3){color:#f0b9b9}
+th:nth-child(4){color:#a9c6e8}
+th:nth-child(5){color:#a3d4b6}
+td{padding:1.1rem 1rem;border-bottom:1px solid var(--line);vertical-align:top;color:var(--muted)}
+td:first-child{font-weight:700;color:var(--ink);white-space:nowrap}
+td:nth-child(2){color:var(--ink);font-style:italic}
+tbody tr:hover{background:#faf9f5}
+.closing{
+  margin-top:2rem;background:var(--paper);border:1px solid var(--line);
+  border-radius:12px;padding:2rem;text-align:center;
+}
+.closing .serif{font-size:1.5rem;font-style:italic;color:var(--dogma);margin-bottom:.8rem}
+.closing p{color:var(--muted);max-width:760px;margin:0 auto;font-size:.95rem}
+
+.glosario{padding:3rem 0 1rem;scroll-margin-top:75px}
+.glosario details{
+  background:var(--paper);border:1px solid var(--line);border-radius:12px;
+  padding:0 1.6rem;box-shadow:var(--shadow);
+}
+.glosario summary{
+  cursor:pointer;padding:1.4rem 0;font-family:Georgia,serif;
+  font-size:1.3rem;list-style:none;display:flex;justify-content:space-between;align-items:center;
+}
+.glosario summary::-webkit-details-marker{display:none}
+.glosario summary span{font-size:1.4rem;color:var(--dogma);transition:.3s}
+.glosario details[open] summary span{transform:rotate(45deg)}
+.gloss-list{padding-bottom:1.6rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.4rem}
+.gloss-list dt{font-weight:700;font-size:.92rem;color:var(--ink);margin-bottom:.3rem}
+.gloss-list dd{font-size:.88rem;color:var(--muted)}
+
+.refs{padding:3rem 0 4rem}
+.refs h3{font-size:1.4rem;font-weight:400;margin-bottom:1.4rem}
+.ref-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1rem}
+.ref{
+  background:var(--paper);border:1px solid var(--line);border-radius:8px;
+  padding:1.1rem 1.3rem;font-size:.87rem;color:var(--muted);
+}
+.ref b{color:var(--ink);display:block;margin-bottom:.25rem;font-weight:650}
+.ref i{color:#7a8391}
+
+footer{
+  background:#16202c;color:#8b98a9;text-align:center;padding:3rem 2rem;
+}
+footer strong{color:#d8dde5;display:block;font-family:Georgia,serif;font-size:1.1rem;margin-bottom:.6rem;font-weight:400}
+footer p{font-size:.82rem;max-width:760px;margin:0 auto .5rem}
+footer .fine{font-size:.72rem;opacity:.65;margin-top:1.2rem}
+
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+
+@media(max-width:900px){
+  .perspectives-grid{grid-template-columns:1fr}
+  .article-header{gap:1rem}
+  .article-header h2{font-size:1.6rem}
+  .roman{width:58px;height:58px;font-size:1.2rem}
+  .pipe-arrow{display:none}
+  header{padding:3.5rem 1.5rem}
+}
+@media(max-width:600px){
+  main{padding:0 1.1rem}
+  .method{padding:2.5rem 1.1rem 1rem}
+  .legal-text{padding:1.2rem}
+  .card-content p{text-align:left}
+}
+@media print{
+  nav,#progress{display:none}
+  body{background:#fff;color:#000}
+  header{background:#fff;color:#000;border-bottom:2px solid #000;padding:2rem 0}
+  header p,header h1 em,.eyebrow,.header-meta{color:#000}
+  .perspective-card,.legal-text{box-shadow:none;break-inside:avoid}
+  .article-section{break-before:page}
+  .reveal{opacity:1!important;transform:none!important}
+}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+
+<header>
+  <div class="eyebrow">Libro Primero · Parte General · Título II</div>
+  <h1>La aplicación espacial del<br><em>ius puniendi</em></h1>
+  <p>Una lectura tridimensional de los artículos 14 a 18 del Código Penal colombiano:
+     del territorio a la extraterritorialidad, de la soberanía flotante a la cooperación internacional.</p>
+  <div class="header-meta">
+    <span><b>Ley 599 de 2000</b></span>
+    <span>Modificado por <b>Ley 1121 de 2006</b></span>
+    <span>Artículos <b>14 — 18</b></span>
+    <span>Dogmática · Ontología · Hermenéutica</span>
+  </div>
+</header>
+
+<section class="method">
+  <div class="section-kicker">La clave de lectura</div>
+  <h2>Tres preguntas frente a cada norma</h2>
+  <div class="method-grid">
+    <div class="method-card d">
+      <h3>Dogmática</h3>
+      <span class="subtitle">La estructura · ¿Qué significa?</span>
+      <p>La ciencia del derecho positivo. Reconstruye los principios de aplicación espacial,
+         sus criterios de conexión y las consecuencias jurídicas: ¿cuándo y ante qué juez
+         se ejerce el poder punitivo?</p>
+    </div>
+    <div class="method-card o">
+      <h3>Ontología</h3>
+      <span class="subtitle">El fundamento · ¿Qué es?</span>
+      <p>La pregunta por el ser del territorio, la soberanía y la frontera jurídica.
+         ¿Qué realidad tiene un “territorio nacional” cuando el hecho ocurre en altamar,
+         en el aire o en otro Estado?</p>
+    </div>
+    <div class="method-card h">
+      <h3>Hermenéutica</h3>
+      <span class="subtitle">El sentido · ¿Cómo se aplica?</span>
+      <p>La teoría de la interpretación y de la aplicación. Cómo se resuelven los conflictos
+         de jurisdicción, cómo se articulan tratados y ley interna, cómo se armoniza la
+         soberanía con la cooperación internacional.</p>
+    </div>
+  </div>
+</section>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#art14">Art. 14 · Territorialidad</a>
+    <a href="#art15">Art. 15 · Extensión</a>
+    <a href="#art16">Art. 16 · Extraterritorialidad</a>
+    <a href="#art17">Art. 17 · Sentencia extranjera</a>
+    <a href="#art18">Art. 18 · Extradición</a>
+    <a href="#sintesis">Síntesis</a>
+    <a href="#glosario">Glosario</a>
+  </div>
+</nav>
+
+<main>
+
+<section class="mapa">
+  <div class="section-kicker">Recorrido del análisis</div>
+  <h2 class="serif" style="font-size:1.7rem;font-weight:400">Cinco principios. Una sola pregunta: ¿qué juez puede castigar?</h2>
+  <div class="pipeline">
+    <a href="#art14" class="pipe-node">
+      <span class="num">XIV</span>
+      <strong>Territorialidad</strong>
+      <small>El principio rector.<br>La ley rige donde rige el Estado.</small>
+    </a>
+    <span class="pipe-arrow">→</span>
+    <a href="#art15" class="pipe-node">
+      <span class="num">XV</span>
+      <strong>Extensión</strong>
+      <small>La soberanía flotante.<br>Naves y aeronaves del Estado.</small>
+    </a>
+    <span class="pipe-arrow">→</span>
+    <a href="#art16" class="pipe-node">
+      <span class="num">XVI</span>
+      <strong>Extraterritorialidad</strong>
+      <small>La ley más allá de la frontera.<br>Protección, personalidad, universalidad.</small>
+    </a>
+    <span class="pipe-arrow">→</span>
+    <a href="#art17" class="pipe-node">
+      <span class="num">XVII</span>
+      <strong>Sentencia extranjera</strong>
+      <small>La cosa juzgada transnacional.<br>Ne bis in idem internacional.</small>
+    </a>
+    <span class="pipe-arrow">→</span>
+    <a href="#art18" class="pipe-node">
+      <span class="num">XVIII</span>
+      <strong>Extradición</strong>
+      <small>Cooperación y límites.<br>Colombianos por nacimiento.</small>
+    </a>
+  </div>
+</section>
+
+<!-- ============================================================
+     ARTÍCULO 14
+     ============================================================ -->
+<section id="art14" class="article-section">
+  <div class="article-header">
+    <div class="roman">XIV</div>
+    <h2>Territorialidad
+      <span class="tagline">El principio rector: la ley rige donde rige el Estado.</span>
+    </h2>
+  </div>
+
+  <blockquote class="legal-text">
+    <span class="legal-label">Texto normativo · Artículo 14°</span>
+    <p>La ley penal colombiana se aplicará a toda persona que la infrinja en el territorio nacional,
+       salvo las excepciones consagradas en el derecho internacional.</p>
+    <p>La conducta punible se considera realizada:</p>
+    <ol>
+      <li>En el lugar donde se desarrolló total o parcialmente la acción.</li>
+      <li>En el lugar donde debió realizarse la acción omitida.</li>
+      <li>En el lugar donde se produjo o debió producirse el resultado.</li>
+    </ol>
+  </blockquote>
+
+  <div class="chips">
+    <span class="chip">Principio de territorialidad</span>
+    <span class="chip">Ubi lex, ubi factum</span>
+    <span class="chip">Teoría de la ubicuidad</span>
+    <span class="chip">Delito de distancia</span>
+    <span class="chip">Soberanía territorial</span>
+    <span class="chip">Inmunidades diplomáticas</span>
+  </div>
+
+  <div class="perspectives-grid">
+
+    <article class="perspective-card dogma">
+      <div class="card-header"><span class="card-icon">⚖️</span><h3 class="card-title">Dogmática</h3></div>
+      <div class="card-sub">El principio rector y sus tres reglas de ubicación</div>
+      <div class="card-content">
+        <p>El artículo 14 consagra el <strong>principio de territorialidad</strong> como regla
+        general de aplicación espacial del derecho penal. Es el fundamento primario del
+        <em>ius puniendi</em>: el Estado ejerce su poder punitivo sobre los hechos ocurridos
+        dentro de sus fronteras. Este principio descansa en la soberanía territorial y en
+        la presunción de que quien se somete voluntariamente al territorio se somete a su
+        orden jurídico.</p>
+
+        <p>La excepción del derecho internacional remite a las <strong>inmunidades diplomáticas</strong>,
+        las fuerzas armadas extranjeras en tránsito, y los regímenes especiales de organizaciones
+        internacionales. No son lagunas del sistema, sino límites reconocidos por la propia
+        soberanía.</p>
+
+        <p>Los tres numerales adoptan la <strong>teoría de la ubicuidad</strong>: el delito se
+        considera cometido en cualquiera de los lugares donde se manifiestan sus elementos
+        constitutivos. Esto resuelve el problema del <em>delito de distancia</em> (acción en un
+        lugar, resultado en otro) y evita conflictos negativos de jurisdicción. La regla
+        sobre omisión es técnicamente precisa: la acción omitida debe realizarse donde
+        existía el deber de garante, no donde el resultado se produce.</p>
+      </div>
+    </article>
+
+    <article class="perspective-card onto">
+      <div class="card-header"><span class="card-icon">🌌</span><h3 class="card-title">Ontología</h3></div>
+      <div class="card-sub">¿Qué es un territorio jurídico?</div>
+      <div class="card-content">
+        <p>El territorio no es sólo una extensión geográfica: es una <strong>construcción
+        normativa</strong>. Lo que convierte un espacio en “territorio nacional” no es la tierra
+        o el agua, sino la atribución de soberanía sobre ellos. Las fronteras jurídicas
+        no coinciden siempre con las físicas: el subsuelo, el mar territorial, la zona
+        económica exclusiva y el espacio aéreo tienen regímenes distintos.</p>
+
+        <p>La teoría de la ubicuidad revela algo profundo sobre la <strong>ontología del hecho
+        punible</strong>: el delito no es un punto, sino un proceso que se despliega en el
+        espacio y el tiempo. Acción, omisión y resultado son momentos de una misma realidad
+        jurídica. Preguntar “dónde se cometió” no tiene una respuesta única; tiene tantas
+        respuestas como elementos constitutivos.</p>
+
+        <p>La excepción del derecho internacional reconoce que la soberanía no es absoluta.
+        El territorio colombiano contiene espacios donde la ley penal no rige plenamente:
+        embajadas, buques de guerra extranjeros en visita, bases militares bajo acuerdos
+        especiales. La soberanía se <em>autolimita</em> en reconocimiento de otras soberanías.
+        La ontología del territorio es por eso <strong>relacional</strong>: existe en diálogo
+        con otros territorios soberanos.</p>
+      </div>
+    </article>
+
+    <article class="perspective-card herm">
+      <div class="card-header"><span class="card-icon">📜</span><h3 class="card-title">Hermenéutica</h3></div>
+      <div class="card-sub">Interpretar la excepción y la regla</div>
+      <div class="card-content">
+        <p>La cláusula “salvo las excepciones consagradas en el derecho internacional” exige
+        una <strong>interpretación sistemática</strong> con la Constitución (art. 9, 102, 214),
+        los tratados de Viena sobre relaciones diplomáticas y consulares, y el derecho
+        internacional consuetudinario. No basta invocar una inmunidad: debe probarse su
+        existencia, alcance y vigencia.</p>
+
+        <p>En los delitos transnacionales, la hermenéutica del artículo 14 se articula con
+        los <strong>tratados de cooperación judicial</strong>. Cuando un hecho se comete
+        parcialmente en Colombia y parcialmente en otro Estado, ambos pueden reclamar
+        jurisdicción. La solución no es técnica sino política: <em>principio de oportunidad</em>,
+        <em>non bis in idem</em> internacional, o acuerdos de determinación del juez competente.</p>
+
+        <p>La regla sobre omisión exige una hermenéutica cuidadosa: “el lugar donde debió
+        realizarse la acción omitida” no es donde el resultado se produjo, sino donde
+        existía el <strong>deber jurídico de actuar</strong>. Un garante que omite socorrer
+        desde Bogotá a una víctima en Cartagena comete el delito en Cartagena, no en Bogotá,
+        aunque desde allí pudiera haber actuado. La ubicación del deber, no la ubicación
+        del garante, determina la jurisdicción.</p>
+      </div>
+    </article>
+  </div>
+
+  <div class="callout">
+    <span class="label">Nodo de tensión doctrinal</span>
+    <p><strong>¿Delito de distancia: teoría de la actividad, del resultado o de la ubicuidad?</strong>
+    El artículo 14 adopta la ubicuidad: el delito se considera cometido en cualquiera de
+    los lugares donde se manifiestan sus elementos. Esto favorece la persecución penal
+    pero puede generar conflictos positivos de jurisdicción. La solución práctica es la
+    cooperación internacional y el principio de <em>non bis in idem</em>.</p>
+  </div>
+
+  <details class="case-study">
+    <summary><span class="marker">+</span> Caso aplicado · El correo envenenado</summary>
+    <div class="case-body">
+      <p>A envía desde Bogotá un paquete con veneno a B en Nueva York. B lo abre y muere.
+      ¿Dónde se cometió el homicidio?</p>
+      <p><strong>Lectura:</strong> según el numeral 1, la acción se desarrolló en Bogotá.
+      Según el numeral 3, el resultado se produjo en Nueva York. <strong>Ambos Estados
+      tienen jurisdicción</strong>. Colombia la ejerce por territorialidad (acción);
+      Estados Unidos la ejerce por territorialidad (resultado). La cooperación judicial
+      y el <em>non bis in idem</em> internacional evitarán la doble persecución.</p>
+    </div>
+  </details>
+</section>
+
+<!-- ============================================================
+     ARTÍCULO 15
+     ============================================================ -->
+<section id="art15" class="article-section">
+  <div class="article-header">
+    <div class="roman">XV</div>
+    <h2>Territorialidad por extensión
+      <span class="tagline">La soberanía flotante: naves y aeronaves como territorio ficticio.</span>
+    </h2>
+  </div>
+
+  <blockquote class="legal-text">
+    <span class="legal-label">Texto normativo · Artículo 15° (modificado por Ley 1121 de 2006)</span>
+    <p>La ley penal colombiana se aplicará a la persona que cometa la conducta punible a bordo
+       de nave o aeronave del Estado o explotada por este, que se encuentre fuera del territorio
+       nacional, salvo las excepciones consagradas en los tratados o convenios internacionales
+       ratificados por Colombia.</p>
+    <p>Se aplicará igualmente al que cometa la conducta a bordo de cualquier otra nave o aeronave
+       nacional, que se halle en altamar, cuando no se hubiere iniciado la acción penal en el exterior.</p>
+  </blockquote>
+
+  <div class="chips">
+    <span class="chip">Soberanía flotante</span>
+    <span class="chip">Naves del Estado</span>
+    <span class="chip">Aeronaves nacionales</span>
+    <span class="chip">Altamar</span>
+    <span class="chip">Principio de la bandera</span>
+    <span class="chip">Jurisdicción concurrente</span>
+  </div>
+
+  <div class="perspectives-grid">
+
+    <article class="perspective-card dogma">
+      <div class="card-header"><span class="card-icon">⚖️</span><h3 class="card-title">Dogmática</h3></div>
+      <div class="card-sub">Ficción jurídica y jurisdicción exclusiva</div>
+      <div class="card-content">
+        <p>El artículo 15 extiende la territorialidad a las <strong>naves y aeronaves del Estado</strong>
+        o explotadas por él, aunque se encuentren fuera del territorio nacional. Es una
+        <em>ficción jurídica</em>: el buque o aeronave se considera “territorio nacional flotante”.
+        Esta ficción descansa en el <strong>principio de la bandera</strong> del derecho internacional
+        marítimo y aéreo.</p>
+
+        <p>La primera regla es absoluta: la ley colombiana rige a bordo de naves o aeronaves
+        del Estado (buques de guerra, aeronaves militares, buques de servicio público) donde
+        quiera que se encuentren. La excepción son los tratados: acuerdos de visita, ejercicios
+        conjuntos o regímenes especiales pueden modificar esta regla.</p>
+
+        <p>La segunda regla es subsidiaria: en naves o aeronaves <strong>privadas nacionales</strong>
+        en altamar, la ley colombiana rige <em>cuando no se hubiere iniciado la acción penal
+        en el exterior</em>. Esto reconoce que el Estado del pabellón tiene jurisdicción primaria,
+        pero no exclusiva. Si otro Estado (por ejemplo, el Estado de nacionalidad del autor o
+        de la víctima) inicia la persecución, Colombia declina su competencia.</p>
+      </div>
+    </article>
+
+    <article class="perspective-card onto">
+      <div class="card-header"><span class="card-icon">🌌</span><h3 class="card-title">Ontología</h3></div>
+      <div class="card-sub">¿Qué es un buque de guerra en aguas extranjeras?</div>
+      <div class="card-content">
+        <p>La ficción de la “soberanía flotante” es una de las construcciones jurídicas más
+        antiguas. Ontológicamente, el buque de guerra no es territorio del Estado pabellón:
+        es un <strong>objeto soberano</strong> que goza de inmunidad en aguas extranjeras.
+        No es que el buque “sea” Colombia; es que el Estado ribereño renuncia a ejercer
+        jurisdicción sobre él por cortesía internacional y reciprocidad.</p>
+
+        <p>La altamar plantea un problema ontológico distinto: es un espacio <em>sin soberano</em>.
+        Nadie puede reclamar soberanía sobre la altamar, pero todo Estado ejerce jurisdicción
+        sobre sus nacionales y sus naves. La jurisdicción del Estado del pabellón no deriva
+        de la territorialidad sino de la <strong>nacionalidad del buque</strong>. El buque es
+        una extensión de la persona jurídica del Estado, no de su territorio.</p>
+
+        <p>La distinción entre naves del Estado y naves privadas revela dos fundamentos distintos:
+        las primeras son <strong>órganos del Estado</strong> y gozan de inmunidad absoluta;
+        las segundas son <strong>objetos nacionales</strong> sujetos a jurisdicción del pabellón
+        pero no a inmunidad. La ontología jurídica distingue entre lo que el Estado <em>es</em>
+        (naves de guerra) y lo que el Estado <em>protege</em> (naves privadas).</p>
+      </div>
+    </article>
+
+    <article class="perspective-card herm">
+      <div class="card-header"><span class="card-icon">📜</span><h3 class="card-title">Hermenéutica</h3></div>
+      <div class="card-sub">Interpretar la ficción y la subsidiariedad</div>
+      <div class="card-content">
+        <p>La hermenéutica del artículo 15 exige distinguir cuidadosamente entre naves del Estado
+        y naves privadas. <strong>Nave del Estado</strong> es aquella destinada a servicio público
+        (guerra, policía, aduanas, investigación científica oficial). No basta con que sea
+        propiedad del Estado: debe cumplir funciones soberanas. Una nave estatal de transporte
+        comercial no goza de inmunidad.</p>
+
+        <p>La cláusula “cuando no se hubiere iniciado la acción penal en el exterior” exige
+        una interpretación restrictiva. No basta con que exista una investigación preliminar:
+        debe haberse <strong>formalizado la persecución</strong> mediante imputación, acusación
+        o medida cautelar. Si la acción penal extranjera se inicia después de que Colombia
+        haya comenzado, prevalece la jurisdicción colombiana (principio de <em>prevensión</em>).</p>
+
+        <p>Los tratados internacionales son clave. La Convención de las Naciones Unidas sobre
+        el Derecho del Mar (CONVEMAR), los convenios de Chicago sobre aviación civil, y los
+        tratados bilaterales de cooperación judicial modifican la regla general. La hermenéutica
+        exige un <strong>control de convencionalidad</strong>: la ley interna debe interpretarse
+        conforme a los tratados ratificados por Colombia.</p>
+      </div>
+    </article>
+  </div>
+
+  <div class="callout">
+    <span class="label">Nodo de tensión doctrinal</span>
+    <p><strong>¿El buque es territorio o es un objeto soberano?</strong> La doctrina clásica
+    habla de “territorio ficticio”; la doctrina moderna prefiere hablar de “jurisdicción
+    exclusiva del Estado del pabellón”. La diferencia no es meramente semántica: si el
+    buque es territorio, rige la territorialidad plena; si es un objeto soberano, rige
+    la jurisdicción personal sobre los nacionales a bordo. La práctica internacional
+    adopta la segunda.</p>
+  </div>
+
+  <details class="case-study">
+    <summary><span class="marker">+</span> Caso aplicado · El crimen en el crucero</summary>
+    <div class="case-body">
+      <p>Un ciudadano colombiano comete homicidio a bordo de un crucero turístico de bandera
+      panameña, navegando en aguas internacionales del Caribe. La víctima es estadounidense.</p>
+      <p><strong>Lectura:</strong> el crucero es una nave privada de bandera panameña. Panamá
+      tiene jurisdicción primaria por el principio de la bandera. Estados Unidos puede
+      ejercer jurisdicción por el principio de personalidad pasiva (víctima nacional).
+      Colombia no tiene jurisdicción salvo que el autor sea colombiano y Colombia inicie
+      la persecución antes que Panamá o Estados Unidos (principio de personalidad activa
+      subsidiario). La solución es la cooperación judicial internacional.</p>
+    </div>
+  </details>
+</section>
+
+<!-- ============================================================
+     ARTÍCULO 16
+     ============================================================ -->
+<section id="art16" class="article-section">
+  <div class="article-header">
+    <div class="roman">XVI</div>
+    <h2>Extraterritorialidad
+      <span class="tagline">La ley más allá de la frontera: protección, personalidad y universalidad.</span>
+    </h2>
+  </div>
+
+  <blockquote class="legal-text">
+    <span class="legal-label">Texto normativo · Artículo 16° (modificado por Ley 1121 de 2006)</span>
+    <p>La ley penal colombiana se aplicará:</p>
+    <ol>
+      <li>A la persona que cometa en el extranjero delito contra la existencia y seguridad del Estado,
+          contra el régimen constitucional, contra el orden económico social excepto la conducta definida
+          en el artículo 323 del presente Código, contra la administración pública, o falsifique moneda
+          nacional o incurra en el delito de financiación de terrorismo y administración de recursos
+          relacionados con actividades terroristas, aun cuando hubiere sido absuelta o condenada en el
+          exterior a una pena menor que la prevista en la ley colombiana. En todo caso se tendrá como
+          parte cumplida de la pena el tiempo que hubiere estado privada de su libertad.</li>
+      <li>A la persona que esté al servicio del Estado colombiano, goce de inmunidad reconocida por el
+          derecho internacional y cometa delito en el extranjero.</li>
+      <li>A la persona que esté al servicio del Estado colombiano, no goce de inmunidad reconocida por
+          el derecho internacional y cometa en el extranjero delito distinto de los mencionados en el
+          numeral 1°, cuando no hubiere sido juzgada en el exterior.</li>
+      <li>Al nacional que fuera de los casos previstos en los numerales anteriores, se encuentre en
+          Colombia después de haber cometido un delito en territorio extranjero, cuando la ley penal
+          colombiana lo reprima con pena privativa de la libertad cuyo mínimo no sea inferior a dos (2)
+          años y no hubiere sido juzgado en el exterior. Si se trata de pena inferior, no se procederá
+          sino por querella de parte o petición del Procurador General de la Nación.</li>
+      <li>Al extranjero que fuera de los casos previstos en los numerales 1, 2 y 3, se encuentre en
+          Colombia después de haber cometido en el exterior un delito en perjuicio del Estado o de un
+          nacional colombiano, que la ley colombiana reprima con pena privativa de la libertad cuyo
+          mínimo no sea inferior a dos años (2) y no hubiere sido juzgado en el exterior. En este caso
+          sólo se procederá por querella de parte o petición del Procurador General de la Nación.</li>
+      <li>Al extranjero que haya cometido en el exterior un delito en perjuicio de extranjero, siempre
+          que se reúnan estas condiciones:
+          <ol type="a">
+            <li>Que se halle en territorio colombiano;</li>
+            <li>Que el delito tenga señalada en Colombia pena privativa de la libertad cuyo mínimo no
+                sea inferior a tres (3) años;</li>
+            <li>Que no se trate de delito político, y</li>
+            <li>Que solicitada la extradición no hubiere sido concedida por el gobierno colombiano.</li>
+          </ol>
+          En el caso a que se refiere el presente numeral no se procederá sino mediante querella o
+          petición del Procurador General de la Nación y siempre que no hubiere sido juzgado en el exterior.
+      </li>
+    </ol>
+  </blockquote>
+
+  <div class="chips">
+    <span class="chip">Principio de protección</span>
+    <span class="chip">Principio de personalidad activa</span>
+    <span class="chip">Principio de personalidad pasiva</span>
+    <span class="chip">Justicia universal subsidiaria</span>
+    <span class="chip">Doble incriminación</span>
+    <span class="chip">Ne bis in idem internacional</span>
+  </div>
+
+  <div class="perspectives-grid">
+
+    <article class="perspective-card dogma">
+      <div class="card-header"><span class="card-icon">⚖️</span><h3 class="card-title">Dogmática</h3></div>
+      <div class="card-sub">Seis principios de jurisdicción extraterritorial</div>
+      <div class="card-content">
+        <p>El artículo 16 consagra los principios de <strong>protección</strong> (numeral 1),
+        <strong>personalidad activa</strong> (numerales 2, 3 y 4), <strong>personalidad pasiva</strong>
+        (numeral 5) y <strong>justicia universal subsidiaria</strong> (numeral 6). Cada uno
+        responde a un fundamento distinto.</p>
+
+        <p>El <strong>principio de protección</strong> (numeral 1) justifica la jurisdicción
+        sobre delitos que afectan bienes jurídicos esenciales del Estado: existencia, seguridad,
+        régimen constitucional, orden económico, administración pública, moneda, terrorismo.
+        No importa la nacionalidad del autor ni el lugar del hecho: lo que importa es la
+        naturaleza del bien protegido. La excepción del artículo 323 (lavado de activos) fue
+        introducida por la Ley 1121 de 2006 para evitar duplicación con tratados internacionales.</p>
+
+        <p>El <strong>principio de personalidad activa</strong> (numerales 2, 3 y 4) ejerce
+        jurisdicción sobre nacionales colombianos que cometen delitos en el extranjero. Los
+        numerales 2 y 3 distinguen entre funcionarios con y sin inmunidad. El numeral 4
+        establece un límite de gravedad: pena mínima no inferior a dos años. Si la pena es
+        inferior, sólo se procede por querella de parte o petición del Procurador.</p>
+
+        <p>El <strong>principio de personalidad pasiva</strong> (numeral 5) ejerce jurisdicción
+        sobre extranjeros que cometen delitos en el extranjero en perjuicio del Estado o de
+        nacionales colombianos. Requiere que el autor se encuentre en Colombia, que el delito
+        tenga pena mínima de dos años, y que no haya sido juzgado en el exterior. Sólo procede
+        por querella de parte o petición del Procurador.</p>
+
+        <p>El <strong>principio de justicia universal subsidiaria</strong> (numeral 6) ejerce
+        jurisdicción sobre extranjeros que cometen delitos en el extranjero en perjuicio de
+        extranjeros. Es la jurisdicción más amplia pero más condicionada: requiere que el
+        autor se halle en Colombia, que el delito tenga pena mínima de tres años, que no sea
+        delito político, que se haya solicitado extradición y no haya sido concedida, y que
+        no haya sido juzgado en el exterior. Sólo procede por querella o petición del Procurador.</p>
+      </div>
+    </article>
+
+    <article class="perspective-card onto">
+      <div class="card-header"><span class="card-icon">🌌</span><h3 class="card-title">Ontología</h3></div>
+      <div class="card-sub">¿Qué fundamenta la jurisdicción más allá de la frontera?</div>
+      <div class="card-content">
+        <p>Los principios de extraterritorialidad revelan que la soberanía no es sólo territorial
+        sino <strong>personal y protectora</strong>. El Estado ejerce jurisdicción no sólo sobre
+        su territorio sino sobre sus nacionales (personalidad activa), sobre quienes afectan
+        a sus nacionales (personalidad pasiva), sobre quienes amenazan sus bienes esenciales
+        (protección), y sobre quienes cometen crímenes contra la humanidad (universalidad).</p>
+
+        <p>El principio de protección descansa en una ontología del <strong>bien jurídico colectivo</strong>:
+        el Estado, la Constitución, el orden económico son realidades que trascienden las fronteras.
+        Su protección no se limita al territorio porque su existencia no se limita al territorio.
+        Un ataque contra la seguridad del Estado desde el extranjero es tan grave como un ataque
+        desde dentro.</p>
+
+        <p>El principio de justicia universal revela una ontología de la <strong>humanidad como
+        comunidad jurídica</strong>. Crímenes como el genocidio, la tortura, el terrorismo
+        internacional no son sólo ofensas contra un Estado: son ofensas contra la humanidad.
+        Todo Estado puede y debe perseguirlos. La jurisdicción universal es la expresión
+        jurídica de la conciencia de que ciertos males trascienden las fronteras.</p>
+
+        <p>La condición de que el autor “no haya sido juzgado en el exterior” expresa el
+        principio de <strong>ne bis in idem internacional</strong>. Ontológicamente, el hecho
+        ya fue juzgado: la identidad del hecho, del autor y del bien jurídico protegido
+        impide una segunda persecución. La soberanía no es ilimitada: reconoce la autoridad
+        de otras soberanías.</p>
+      </div>
+    </article>
+
+    <article class="perspective-card herm">
+      <div class="card-header"><span class="card-icon">📜</span><h3 class="card-title">Hermenéutica</h3></div>
+      <div class="card-sub">Interpretar los límites y las condiciones</div>
+      <div class="card-content">
+        <p>La hermenéutica del artículo 16 es compleja porque cada numeral tiene condiciones
+        distintas. La condición común es la <strong>doble incriminación</strong>: el hecho
+        debe ser delito tanto en Colombia como en el lugar donde se cometió (salvo el numeral 1,
+        que no la exige expresamente pero la jurisprudencia la requiere por analogía con los
+        demás numerales).</p>
+
+        <p>La condición de “no haber sido juzgado en el exterior” exige una interpretación
+        cuidadosa. ¿Qué significa “juzgado”? La jurisprudencia colombiana exige que haya
+        habido un <strong>proceso contradictorio</strong> con garantías mínimas. Una sentencia
+        dictada en ausencia, sin defensa, o por un tribunal no independiente no impide la
+        persecución en Colombia. La hermenéutica exige un <strong>control de convencionalidad</strong>:
+        la sentencia extranjera debe respetar los estándares del artículo 8 de la Convención
+        Americana sobre Derechos Humanos.</p>
+
+        <p>La condición de “querella de parte o petición del Procurador” (numerales 4, 5 y 6)
+        introduce un elemento de <strong>oportunidad</strong>. No es obligatorio perseguir:
+        depende de la víctima o del Ministerio Público. Esto refleja que la jurisdicción
+        extraterritorial es subsidiaria: sólo se ejerce cuando el Estado interesado no
+        puede o no quiere hacerlo.</p>
+
+        <p>El numeral 6 exige que “se haya solicitado la extradición y no haya sido concedida”.
+        Esto significa que la jurisdicción universal es <strong>última ratio</strong>: sólo
+        se ejerce cuando la extradición falla. La hermenéutica exige probar que se agotaron
+        las vías de cooperación internacional antes de iniciar la persecución en Colombia.</p>
+      </div>
+    </article>
+  </div>
+
+  <div class="callout">
+    <span class="label">Nodo de tensión doctrinal</span>
+    <p><strong>¿El principio de protección justifica jurisdicción ilimitada?</strong>
+    El numeral 1 permite perseguir delitos contra el Estado cometidos en el extranjero
+    por cualquier persona, incluso si ya fue juzgada en el exterior. Esto tensiona el
+    principio de <em>ne bis in idem</em>. La solución es la compensación: se descuenta
+    el tiempo de privación de libertad cumplido en el exterior. La soberanía protege
+    sus bienes esenciales pero reconoce el sacrificio ya sufrido.</p>
+  </div>
+
+  <details class="case-study">
+    <summary><span class="marker">+</span> Caso aplicado · El terrorista extranjero</summary>
+    <div class="case-body">
+      <p>Un ciudadano francés comete un atentado terrorista en París contra intereses
+      colombianos. Viaja a Colombia como turista. Francia solicita su extradición pero
+      Colombia la niega por razones de nacionalidad de la víctima.</p>
+      <p><strong>Lectura:</strong> Colombia puede ejercer jurisdicción por el numeral 5
+      (personalidad pasiva: delito en perjuicio de un nacional colombiano, pena mínima
+      de dos años, autor en Colombia, no juzgado en el exterior). Procederá por querella
+      de parte o petición del Procurador. Si no hay querella ni petición, Colombia no
+      puede perseguir ni extraditar: el autor queda en libertad.</p>
+    </div>
+  </details>
+</section>
+
+<!-- ============================================================
+     ARTÍCULO 17
+     ============================================================ -->
+<section id="art17" class="article-section">
+  <div class="article-header">
+    <div class="roman">XVII</div>
+    <h2>Sentencia extranjera
+      <span class="tagline">La cosa juzgada transnacional: respeto y límites.</span>
+    </h2>
+  </div>
+
+  <blockquote class="legal-text">
+    <span class="legal-label">Texto normativo · Artículo 17°</span>
+    <p>La sentencia absolutoria o condenatoria pronunciada en el extranjero tendrá valor de cosa
+       juzgada para todos los efectos legales.</p>
+    <p>No tendrán el valor de cosa juzgada ante la ley colombiana las sentencias que se pronuncien
+       en el extranjero respecto de los delitos señalados en los Artículos 15 y 16, numerales 1 y 2.</p>
+    <p>La pena o parte de ella que el condenado hubiere cumplido en virtud de tales sentencias se
+       descontará de la que se impusiere de acuerdo con la ley colombiana, si ambas son de igual
+       naturaleza y si no, se harán las conversiones pertinentes, comparando las legislaciones
+       correspondientes y observando los postulados orientadores de la tasación de la pena
+       contemplados en este código.</p>
+  </blockquote>
+
+  <div class="chips">
+    <span class="chip">Cosa juzgada transnacional</span>
+    <span class="chip">Ne bis in idem internacional</span>
+    <span class="chip">Compensación de pena</span>
+    <span class="chip">Control de convencionalidad</span>
+    <span class="chip">Excepciones de soberanía</span>
+  </div>
+
+  <div class="perspectives-grid">
+
+    <article class="perspective-card dogma">
+      <div class="card-header"><span class="card-icon">⚖️</span><h3 class="card-title">Dogmática</h3></div>
+      <div class="card-sub">Reconocimiento, excepciones y compensación</div>
+      <div class="card-content">
+        <p>El artículo 17 consagra el principio de <strong>cosa juzgada transnacional</strong>:
+        las sentencias extranjeras tienen valor de cosa juzgada en Colombia. Esto significa
+        que no se puede perseguir dos veces el mismo hecho, aunque haya sido juzgado en el
+        extranjero. Es la expresión del principio <em>non bis in idem</em> en el ámbito
+        internacional.</p>
+
+        <p>La primera excepción son los delitos de los artículos 15 (territorialidad por
+        extensión) y 16, numerales 1 y 2 (protección del Estado y funcionarios con inmunidad).
+        Estos delitos afectan bienes jurídicos tan esenciales que Colombia se reserva el
+        derecho de juzgarlos aunque ya hayan sido juzgados en el extranjero. La soberanía
+        protege sus intereses fundamentales.</p>
+
+        <p>La regla de compensación es técnicamente precisa: si el condenado cumplió pena en
+        el extranjero y luego es condenado en Colombia por el mismo hecho, se descuenta el
+        tiempo cumplido. Si las penas son de igual naturaleza (ambas privativas de libertad),
+        se descuenta directamente. Si son de naturaleza distinta (por ejemplo, multa en el
+        extranjero y prisión en Colombia), se hacen conversiones comparando las legislaciones
+        y observando los principios de tasación de la pena del código.</p>
+      </div>
+    </article>
+
+    <article class="perspective-card onto">
+      <div class="card-header"><span class="card-icon">🌌</span><h3 class="card-title">Ontología</h3></div>
+      <div class="card-sub">¿Qué realidad tiene una sentencia extranjera?</div>
+      <div class="card-content">
+        <p>La cosa juzgada transnacional revela que el hecho punible tiene una <strong>identidad
+        jurídica</strong> que trasciende las fronteras. No importa qué Estado lo juzgue: lo
+        que importa es que ya fue juzgado. La ontología del hecho es <strong>unitaria</strong>:
+        el hecho es el mismo aunque se juzgue en Colombia, en Francia o en Japón.</p>
+
+        <p>Las excepciones revelan que la soberanía no es absoluta: reconoce la autoridad de
+        otras soberanías pero se reserva el derecho de proteger sus bienes esenciales. La
+        ontología de la soberanía es <strong>relacional</strong>: existe en diálogo con otras
+        soberanías. El respeto a la cosa juzgada extranjera es un acto de cortesía internacional
+        y de reciprocidad.</p>
+
+        <p>La compensación de pena revela una ontología de la <strong>justicia conmutativa</strong>:
+        el castigo ya sufrido debe contarse. No se puede castigar dos veces por el mismo hecho.
+        La justicia no es venganza: es proporcionalidad. Si el Estado extranjero ya castigó,
+        el Estado colombiano debe reconocer ese castigo y compensarlo.</p>
+      </div>
+    </article>
+
+    <article class="perspective-card herm">
+      <div class="card-header"><span class="card-icon">📜</span><h3 class="card-title">Hermenéutica</h3></div>
+      <div class="card-sub">Interpretar el reconocimiento y las excepciones</div>
+      <div class="card-content">
+        <p>La hermenéutica del artículo 17 exige un <strong>control de convencionalidad</strong>:
+        la sentencia extranjera debe respetar las garantías del debido proceso (artículo 8 de
+        la Convención Americana sobre Derechos Humanos). Una sentencia dictada en ausencia,
+        sin defensa, o por un tribunal no independiente no merece reconocimiento. La cosa
+        juzgada transnacional presupone un proceso justo.</p>
+
+        <p>Las excepciones de los artículos 15 y 16, numerales 1 y 2, exigen interpretación
+        restrictiva. No basta con que el hecho afecte indirectamente al Estado: debe afectarlo
+        <strong>directa y esencialmente</strong>. Un delito común cometido por un funcionario
+        colombiano en el extranjero no justifica una segunda persecución en Colombia si ya
+        fue juzgado en el extranjero. La excepción es para delitos contra la existencia del
+        Estado, no para delitos comunes.</p>
+
+        <p>La compensación de pena exige una <strong>interpretación favorable al condenado</strong>.
+        Si hay duda sobre la conversión, se aplica la pena más benigna. Los principios de
+        tasación de la pena del código (necesidad, proporcionalidad, razonabilidad) orientan
+        la conversión. No se puede convertir una multa extranjera en una pena de prisión
+        desproporcionada en Colombia.</p>
+      </div>
+    </article>
+  </div>
+
+  <div class="callout">
+    <span class="label">Nodo de tensión doctrinal</span>
+    <p><strong>¿Reconocimiento automático o control de convencionalidad?</strong>
+    La doctrina clásica exige reconocimiento automático de la sentencia extranjera.
+    La doctrina moderna exige control de convencionalidad: la sentencia debe respetar
+    las garantías del debido proceso. La jurisprudencia colombiana adopta la segunda:
+    no se reconoce una sentencia extranjera dictada sin garantías.</p>
+  </div>
+
+  <details class="case-study">
+    <summary><span class="marker">+</span> Caso aplicado · El funcionario condenado en el exterior</summary>
+    <div class="case-body">
+      <p>Un diplomático colombiano comete homicidio en el extranjero. Goza de inmunidad
+      pero el Estado renuncia a ella. Es juzgado y condenado a 10 años de prisión en el
+      país donde cometió el hecho. Cumple 5 años y es trasladado a Colombia.</p>
+      <p><strong>Lectura:</strong> según el artículo 17, inciso segundo, la sentencia
+      extranjera no tiene valor de cosa juzgada porque se trata de un delito cometido
+      por un funcionario con inmunidad (artículo 16, numeral 2). Colombia puede juzgarlo
+      nuevamente. Pero según el inciso tercero, se descontarán los 5 años cumplidos en
+      el extranjero. Si Colombia lo condena a 15 años, cumplirá 10 años adicionales.</p>
+    </div>
+  </details>
+</section>
+
+<!-- ============================================================
+     ARTÍCULO 18
+     ============================================================ -->
+<section id="art18" class="article-section">
+  <div class="article-header">
+    <div class="roman">XVIII</div>
+    <h2>Extradición
+      <span class="tagline">Cooperación internacional y límites constitucionales.</span>
+    </h2>
+  </div>
+
+  <blockquote class="legal-text">
+    <span class="legal-label">Texto normativo · Artículo 18°</span>
+    <p>La extradición se podrá solicitar, conceder u ofrecer de acuerdo con los tratados públicos
+       y, en su defecto, con la ley.</p>
+    <p>Además, la extradición de los colombianos por nacimiento se concederá por delitos cometidos
+       en el exterior, considerados como tales en la legislación penal colombiana.</p>
+    <p>La extradición no procederá por delitos políticos.</p>
+    <p>No procederá la extradición cuando se trate de hechos cometidos con anterioridad a la
+       promulgación del Acto Legislativo 01 de 1997.</p>
+  </blockquote>
+
+  <div class="chips">
+    <span class="chip">Cooperación judicial internacional</span>
+    <span class="chip">Colombianos por nacimiento</span>
+    <span class="chip">Delitos políticos</span>
+    <span class="chip">Irretroactividad</span>
+    <span class="chip">Acto Legislativo 01 de 1997</span>
+    <span class="chip">Tratados públicos</span>
+  </div>
+
+  <div class="perspectives-grid">
+
+    <article class="perspective-card dogma">
+      <div class="card-header"><span class="card-icon">⚖️</span><h3 class="card-title">Dogmática</h3></div>
+      <div class="card-sub">Regla general, excepciones y límites temporales</div>
+      <div class="card-content">
+        <p>El artículo 18 regula la <strong>extradición</strong> como mecanismo de cooperación
+        judicial internacional. La regla general es que procede de acuerdo con los tratados
+        públicos y, en su defecto, con la ley. Esto significa que la extradición es un acto
+        de soberanía que requiere base jurídica: tratado o ley.</p>
+
+        <p>La regla sobre colombianos por nacimiento fue introducida por el Acto Legislativo
+        01 de 1997, que modificó el artículo 35 de la Constitución. Antes de esa reforma,
+        los colombianos por nacimiento no podían ser extraditados. La reforma permitió la
+        extradición por delitos cometidos en el exterior, considerados como tales en la
+        legislación penal colombiana. Esto significa que el hecho debe ser delito tanto en
+        Colombia como en el Estado requirente (doble incriminación).</p>
+
+        <p>La prohibición de extradición por delitos políticos es una tradición constitucional
+        colombiana. Los delitos políticos (rebelión, sedición, asonada) no son extraditables
+        porque son expresiones de la lucha política y no del derecho penal común. Esta
+        prohibición protege la libertad política y el derecho de resistencia.</p>
+
+        <p>La cláusula de irretroactividad protege los derechos adquiridos antes de la reforma
+        de 1997. Los hechos cometidos antes del Acto Legislativo 01 de 1997 no pueden dar
+        lugar a extradición, aunque se soliciten después. Esto respeta el principio de
+        legalidad y la confianza legítima.</p>
+      </div>
+    </article>
+
+    <article class="perspective-card onto">
+      <div class="card-header"><span class="card-icon">🌌</span><h3 class="card-title">Ontología</h3></div>
+      <div class="card-sub">¿Qué es extraditar a un nacional?</div>
+      <div class="card-content">
+        <p>La extradición de nacionales es un acto de <strong>soberanía compartida</strong>.
+        El Estado entrega a uno de sus miembros a otra soberanía. Esto tensiona la relación
+        entre el Estado y el nacional: el nacional es miembro de la comunidad política, no
+        un objeto de intercambio. La extradición de nacionales sólo se justifica cuando el
+        hecho se cometió en el extranjero: el nacional se sustrajo voluntariamente a la
+        jurisdicción colombiana al actuar en otro territorio.</p>
+
+        <p>La prohibición de extradición por delitos políticos revela una ontología de la
+        <strong>libertad política</strong>. Los delitos políticos no son crímenes: son actos
+        de resistencia contra el orden establecido. Extraditar por delitos políticos sería
+        entregar a un luchador político a un régimen que lo persigue por sus ideas. La
+        prohibición protege la dignidad política del ciudadano.</p>
+
+        <p>La irretroactividad revela una ontología de la <strong>confianza legítima</strong>.
+        El ciudadano confía en que las reglas no cambiarán retroactivamente. Si antes de
+        1997 los colombianos por nacimiento no podían ser extraditados, esa expectativa
+        merece protección. La soberanía no puede romper la confianza que ella misma generó.</p>
+      </div>
+    </article>
+
+    <article class="perspective-card herm">
+      <div class="card-header"><span class="card-icon">📜</span><h3 class="card-title">Hermenéutica</h3></div>
+      <div class="card-sub">Interpretar la reforma constitucional y sus límites</div>
+      <div class="card-content">
+        <p>La hermenéutica del artículo 18 exige armonizar la ley con la Constitución (artículo 35)
+        y con los tratados internacionales. La extradición de colombianos por nacimiento sólo
+        procede por delitos cometidos en el exterior. Si el delito se cometió en Colombia,
+        no procede la extradición: Colombia tiene jurisdicción primaria y debe juzgar.</p>
+
+        <p>La definición de “delito político” exige interpretación restrictiva. No todo delito
+        con móvil político es delito político. La jurisprudencia constitucional exige que el
+        delito sea <strong>esencialmente político</strong>: dirigido contra el orden constitucional,
+        con finalidad política, sin crueldad atroz. El terrorismo, el genocidio y los crímenes
+        de lesa humanidad no son delitos políticos aunque tengan móvil político.</p>
+
+        <p>La cláusula de irretroactividad exige determinar la <strong>fecha del hecho</strong>,
+        no la fecha de la solicitud. Si el hecho se cometió antes de 1997, no procede extradición
+        aunque se solicite después. Si el hecho se cometió después de 1997, procede aunque se
+        solicite muchos años después. La fecha relevante es la del hecho, no la de la solicitud.</p>
+
+        <p>Los tratados públicos son la fuente principal. La hermenéutica exige <strong>control
+        de convencionalidad</strong>: el tratado debe respetar los derechos humanos. Un tratado
+        que permita extraditar por delitos políticos o que no garantice el debido proceso en
+        el Estado requirente es inconvencional y no puede aplicarse.</p>
+      </div>
+    </article>
+  </div>
+
+  <div class="callout">
+    <span class="label">Nodo de tensión doctrinal</span>
+    <p><strong>¿La extradición de nacionales es una excepción o una regla?</strong>
+    Antes de 1997, la extradición de nacionales estaba prohibida. Después de 1997, está
+    permitida por delitos cometidos en el exterior. La doctrina discute si esto es una
+    excepción al principio de no extradición de nacionales o una nueva regla general.
+    La jurisprudencia constitucional adopta la segunda: la extradición de nacionales
+    es la regla; la no extradición es la excepción.</p>
+  </div>
+
+  <details class="case-study">
+    <summary><span class="marker">+</span> Caso aplicado · El narcotraficante extraditable</summary>
+    <div class="case-body">
+      <p>Un colombiano por nacimiento comete tráfico internacional de drogas entre Colombia
+      y Estados Unidos en 2005. Estados Unidos solicita su extradición en 2010.</p>
+      <p><strong>Lectura:</strong> la extradición procede porque el hecho se cometió en el
+      exterior (Estados Unidos), es delito en Colombia (tráfico de drogas), y se cometió
+      después de 1997. No es delito político. El tratado bilateral Colombia-Estados Unidos
+      regula el procedimiento. Si el hecho se hubiera cometido antes de 1997, no procedería
+      la extradición por la cláusula de irretroactividad.</p>
+    </div>
+  </details>
+</section>
+
+<!-- ============================================================
+     SÍNTESIS
+     ============================================================ -->
+<section id="sintesis" class="sintesis">
+  <div class="section-kicker">Lectura transversal</div>
+  <h2>Cinco normas, una sola arquitectura</h2>
+  <p class="intro">
+    Los artículos 14 a 18 no son preceptos independientes: son las cinco articulaciones
+    de un mismo mecanismo de determinación de la jurisdicción penal. La tabla siguiente
+    reconstruye, para cada uno, la pregunta rectora y sus tres dimensiones.
+  </p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Norma</th>
+          <th>Pregunta rectora</th>
+          <th>Dogmática · estructura</th>
+          <th>Ontología · fundamento</th>
+          <th>Hermenéutica · sentido</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Art. 14</td>
+          <td>¿Dónde se cometió el hecho?</td>
+          <td>Principio de territorialidad; teoría de la ubicuidad; tres reglas de ubicación.</td>
+          <td>El territorio como construcción normativa; el hecho como proceso espacial.</td>
+          <td>Interpretación sistemática con derecho internacional; delitos de distancia.</td>
+        </tr>
+        <tr>
+          <td>Art. 15</td>
+          <td>¿La soberanía flota?</td>
+          <td>Territorialidad por extensión; naves y aeronaves del Estado; altamar.</td>
+          <td>La ficción de la soberanía flotante; el buque como objeto soberano.</td>
+          <td>Control de convencionalidad; tratados internacionales; jurisdicción concurrente.</td>
+        </tr>
+        <tr>
+          <td>Art. 16</td>
+          <td>¿La ley rige más allá de la frontera?</td>
+          <td>Extraterritorialidad; protección, personalidad activa, pasiva, universalidad.</td>
+          <td>La soberanía personal y protectora; la humanidad como comunidad jurídica.</td>
+          <td>Doble incriminación; ne bis in idem internacional; control de convencionalidad.</td>
+        </tr>
+        <tr>
+          <td>Art. 17</td>
+          <td>¿La sentencia extranjera vale aquí?</td>
+          <td>Cosa juzgada transnacional; excepciones de soberanía; compensación de pena.</td>
+          <td>La identidad jurídica del hecho; la justicia conmutativa; la soberanía relacional.</td>
+          <td>Control de convencionalidad; interpretación restrictiva de excepciones.</td>
+        </tr>
+        <tr>
+          <td>Art. 18</td>
+          <td>¿Puede extraditarse a un nacional?</td>
+          <td>Extradición; colombianos por nacimiento; delitos políticos; irretroactividad.</td>
+          <td>La soberanía compartida; la libertad política; la confianza legítima.</td>
+          <td>Armonización con Constitución y tratados; definición restrictiva de delito político.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="closing">
+    <div class="serif">“La ley penal colombiana se aplicará…”</div>
+    <p>
+      En esa fórmula del artículo 14 se condensa todo el proyecto. El derecho penal no es
+      un sistema cerrado dentro de las fronteras: es un lenguaje que se proyecta más allá,
+      que reconoce otras soberanías, que respeta la cosa juzgada extranjera, que coopera
+      mediante la extradición. <strong>Dogmática, ontología y hermenéutica convergen en un
+      mismo punto: la soberanía como poder limitado, relacional y respetuoso de la dignidad
+      humana más allá de las fronteras.</strong>
+    </p>
+  </div>
+</section>
+
+<!-- ============================================================
+     GLOSARIO
+     ============================================================ -->
+<section id="glosario" class="glosario">
+  <details>
+    <summary>Glosario mínimo de la aplicación espacial <span>+</span></summary>
+    <dl class="gloss-list">
+      <div><dt>Territorialidad</dt><dd>Principio según el cual la ley penal rige sobre todos los hechos cometidos dentro del territorio nacional, salvo excepciones del derecho internacional.</dd></div>
+      <div><dt>Teoría de la ubicuidad</dt><dd>Doctrina según la cual el delito se considera cometido en cualquiera de los lugares donde se manifiestan sus elementos constitutivos: acción, omisión o resultado.</dd></div>
+      <div><dt>Delito de distancia</dt><dd>Aquel en que la acción se realiza en un lugar y el resultado se produce en otro. La teoría de la ubicuidad permite que ambos Estados ejerzan jurisdicción.</dd></div>
+      <div><dt>Soberanía flotante</dt><dd>Ficción jurídica según la cual las naves y aeronaves del Estado se consideran territorio nacional dondequiera que se encuentren.</dd></div>
+      <div><dt>Principio de la bandera</dt><dd>Principio del derecho internacional marítimo y aéreo según el cual el Estado del pabellón ejerce jurisdicción sobre la nave o aeronave.</dd></div>
+      <div><dt>Principio de protección</dt><dd>Principio de jurisdicción extraterritorial que permite perseguir delitos contra bienes jurídicos esenciales del Estado, sin importar la nacionalidad del autor ni el lugar del hecho.</dd></div>
+      <div><dt>Principio de personalidad activa</dt><dd>Principio de jurisdicción extraterritorial que permite perseguir delitos cometidos en el extranjero por nacionales del Estado.</dd></div>
+      <div><dt>Principio de personalidad pasiva</dt><dd>Principio de jurisdicción extraterritorial que permite perseguir delitos cometidos en el extranjero en perjuicio de nacionales del Estado.</dd></div>
+      <div><dt>Justicia universal</dt><dd>Principio de jurisdicción que permite a todo Estado perseguir crímenes contra la humanidad, sin importar la nacionalidad del autor, de la víctima ni el lugar del hecho.</dd></div>
+      <div><dt>Doble incriminación</dt><dd>Requisito según el cual el hecho debe ser delito tanto en el Estado que ejerce jurisdicción como en el Estado donde se cometió.</dd></div>
+      <div><dt>Ne bis in idem internacional</dt><dd>Principio según el cual no se puede perseguir dos veces el mismo hecho, aunque haya sido juzgado en el extranjero.</dd></div>
+      <div><dt>Cosa juzgada transnacional</dt><dd>Reconocimiento del valor de cosa juzgada de las sentencias extranjeras en el ordenamiento interno.</dd></div>
+      <div><dt>Extradición</dt><dd>Mecanismo de cooperación judicial internacional mediante el cual un Estado entrega a una persona a otro Estado para que sea juzgada o cumpla pena.</dd></div>
+      <div><dt>Delito político</dt><dd>Delito esencialmente dirigido contra el orden constitucional, con finalidad política y sin crueldad atroz. No es extraditable.</dd></div>
+      <div><dt>Control de convencionalidad</dt><dd>Obligación de interpretar el derecho interno conforme a los tratados internacionales de derechos humanos ratificados por el Estado.</dd></div>
+    </dl>
+  </details>
+</section>
+
+<!-- ============================================================
+     REFERENCIAS
+     ============================================================ -->
+<section class="refs">
+  <h3>Claves doctrinales para profundizar</h3>
+  <div class="ref-grid">
+    <div class="ref"><b>Kai Ambos</b><i>Derecho Penal. Parte General</i><br>Aplicación espacial del derecho penal; principios de jurisdicción.</div>
+    <div class="ref"><b>Jesús-María Silva Sánchez</b><i>La expansión del Derecho Penal</i><br>Extraterritorialidad y globalización del derecho penal.</div>
+    <div class="ref"><b>Antonio Cassese</b><i>Derecho Internacional</i><br>Soberanía, jurisdicción y cooperación judicial internacional.</div>
+    <div class="ref"><b>Malcolm N. Shaw</b><i>International Law</i><br>Jurisdicción extraterritorial; extradición; inmunidades.</div>
+    <div class="ref"><b>Corte Constitucional de Colombia</b><i>Sentencias C-179 de 2001, C-879 de 2003, C-197 de 2004</i><br>Extradición de colombianos por nacimiento; delitos políticos; control de convencionalidad.</div>
+    <div class="ref"><b>Corte Suprema de Justicia de Colombia</b><i>Sala de Casación Penal</i><br>Conflictos de jurisdicción; cosa juzgada extranjera; extradición.</div>
+    <div class="ref"><b>Convención de Viena sobre Relaciones Diplomáticas (1961)</b><i>Tratado internacional</i><br>Inmunidades diplomáticas; excepciones a la territorialidad.</div>
+    <div class="ref"><b>Convención de las Naciones Unidas sobre el Derecho del Mar (1982)</b><i>Tratado internacional</i><br>Jurisdicción sobre naves en altamar; principio de la bandera.</div>
+    <div class="ref"><b>Estatuto de Roma de la Corte Penal Internacional (1998)</b><i>Tratado internacional</i><br>Justicia universal; crímenes internacionales; cooperación.</div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <strong>Aplicación espacial del ius puniendi · Código Penal colombiano</strong>
+  <p>Análisis tridimensional de los artículos 14 a 18, Ley 599 de 2000, modificados por Ley 1121 de 2006.
+     Continuación del estudio del Libro Primero, Parte General.</p>
+  <p class="fine">Material académico de estudio y reflexión filosófico-jurídica.
+     No constituye asesoría legal.</p>
+</footer>
+
+<script>
+const progress = document.getElementById('progress');
+function updateProgress(){
+  const h = document.documentElement;
+  const total = h.scrollHeight - h.clientHeight;
+  progress.style.width = (total > 0 ? (h.scrollTop / total) * 100 : 0) + '%';
+}
+window.addEventListener('scroll', updateProgress, {passive:true});
+window.addEventListener('resize', updateProgress);
+updateProgress();
+
+if ('IntersectionObserver' in window) {
+  const targets = document.querySelectorAll(
+    '.perspective-card, .callout, .case-study, .method-card, .pipe-node, .closing, .ref'
+  );
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, {threshold: 0.08, rootMargin: '0px 0px -40px 0px'});
+
+  targets.forEach((el, i) => {
+    el.classList.add('reveal');
+    el.style.transitionDelay = (i % 3) * 70 + 'ms';
+    revealObserver.observe(el);
+  });
+}
+
+const navLinks = document.querySelectorAll('nav a');
+const sections = [...navLinks].map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+
+if ('IntersectionObserver' in window) {
+  const navObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(a => {
+          a.classList.toggle('active', a.getAttribute('href') === '#' + entry.target.id);
+        });
+      }
+    });
+  }, {rootMargin: '-15% 0px -65% 0px', threshold: 0});
+  sections.forEach(s => navObserver.observe(s));
+}
+</script>
+</body>
+</html>
