@@ -1,0 +1,1787 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>De las medidas de seguridad · Arts. 69–81 CP Colombiano</title>
+<style>
+:root{
+  --bg:#f7f5ef;
+  --paper:#ffffff;
+  --ink:#22303f;
+  --muted:#5b6675;
+  --dogma:#9b2c2c;
+  --onto:#2c5282;
+  --herm:#276749;
+  --proc:#975a16;
+  --line:#e3e0d6;
+  --shadow:0 6px 24px rgba(30,40,60,.06);
+  --shadow-hover:0 14px 34px rgba(30,40,60,.10);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
+  background:var(--bg);color:var(--ink);line-height:1.75;
+}
+h1,h2,h3,h4,.serif{font-family:Georgia,'Times New Roman',serif}
+a{color:inherit}
+::selection{background:#9b2c2c;color:#fff}
+
+#progress{
+  position:fixed;top:0;left:0;height:3px;width:0%;
+  background:linear-gradient(90deg,var(--dogma),var(--onto),var(--herm),var(--proc));
+  z-index:1000;transition:width .1s linear;
+}
+
+header{
+  background:
+    repeating-linear-gradient(135deg,rgba(255,255,255,.025) 0 2px,transparent 2px 22px),
+    linear-gradient(135deg,#16202c 0%,#2b3a4d 100%);
+  color:#fff;padding:5rem 2rem 4rem;text-align:center;
+  border-bottom:5px solid var(--dogma);
+}
+.eyebrow{
+  font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;
+  color:#c9b98a;margin-bottom:1.4rem;font-weight:600;
+}
+header h1{
+  font-size:clamp(2rem,5vw,3.4rem);line-height:1.2;
+  font-weight:400;letter-spacing:-.5px;margin-bottom:1.2rem;
+}
+header h1 em{font-style:italic;color:#e6d9b8}
+header p{
+  max-width:760px;margin:0 auto;font-size:1.05rem;
+  color:#c3cbd6;font-style:italic;
+}
+.header-meta{
+  margin-top:2rem;display:inline-flex;gap:1.6rem;flex-wrap:wrap;
+  justify-content:center;font-size:.78rem;letter-spacing:.12em;
+  text-transform:uppercase;color:#93a1b3;
+}
+.header-meta span{display:flex;align-items:center;gap:.5rem}
+.header-meta b{color:#e6d9b8;font-weight:600}
+
+.method{max-width:1180px;margin:0 auto;padding:3.5rem 2rem 1rem}
+.section-kicker{
+  font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--muted);font-weight:700;margin-bottom:.6rem;
+}
+.method h2{font-size:1.9rem;margin-bottom:1.6rem;font-weight:400}
+.method-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.4rem}
+.method-card{
+  background:var(--paper);padding:1.6rem;border-radius:10px;
+  box-shadow:var(--shadow);border-left:4px solid var(--line);
+}
+.method-card.d{border-color:var(--dogma)}
+.method-card.o{border-color:var(--onto)}
+.method-card.h{border-color:var(--herm)}
+.method-card.p{border-color:var(--proc)}
+.method-card h3{font-size:1.15rem;margin-bottom:.4rem}
+.method-card.d h3{color:var(--dogma)}
+.method-card.o h3{color:var(--onto)}
+.method-card.h h3{color:var(--herm)}
+.method-card.p h3{color:var(--proc)}
+.method-card .subtitle{
+  font-size:.72rem;text-transform:uppercase;letter-spacing:.16em;
+  color:var(--muted);display:block;margin-bottom:.8rem;
+}
+.method-card p{font-size:.92rem;color:var(--muted)}
+
+nav{
+  position:sticky;top:0;z-index:200;background:var(--paper);
+  border-bottom:1px solid var(--line);box-shadow:0 2px 12px rgba(0,0,0,.04);
+}
+.nav-inner{
+  max-width:1180px;margin:0 auto;display:flex;overflow-x:auto;
+  padding:0 1rem;scrollbar-width:thin;
+}
+nav a{
+  text-decoration:none;padding:1.05rem 1.15rem;font-size:.85rem;
+  font-weight:600;white-space:nowrap;border-bottom:3px solid transparent;
+  transition:.25s;color:var(--muted);
+}
+nav a:hover{color:var(--dogma);background:#faf6f6}
+nav a.active{color:var(--dogma);border-color:var(--dogma)}
+
+main{max-width:1180px;margin:0 auto;padding:0 2rem}
+.mapa{padding:3.5rem 0 1rem}
+.pipeline{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:.7rem;margin-top:1.4rem;
+}
+.pipe-node{
+  background:var(--paper);border:1px solid var(--line);
+  border-radius:10px;padding:1.2rem;text-decoration:none;
+  transition:.25s;position:relative;display:block;
+}
+.pipe-node:hover{transform:translateY(-4px);box-shadow:var(--shadow-hover);border-color:#c9b98a}
+.pipe-node .num{
+  font-family:Georgia,serif;font-size:1.6rem;color:#c9b98a;display:block;line-height:1;
+}
+.pipe-node strong{display:block;font-size:1rem;margin:.5rem 0 .3rem}
+.pipe-node small{font-size:.8rem;color:var(--muted);display:block}
+
+.section-divider{
+  margin:5rem 0 2rem;padding:2rem 0;border-top:2px solid var(--line);
+  border-bottom:2px solid var(--line);text-align:center;
+}
+.section-divider .num{
+  font-family:Georgia,serif;font-size:3rem;color:var(--proc);
+  display:block;line-height:1;margin-bottom:.5rem;
+}
+.section-divider h2{
+  font-size:1.8rem;font-weight:400;margin-bottom:.5rem;
+}
+.section-divider p{
+  color:var(--muted);max-width:720px;margin:0 auto;font-size:.95rem;
+}
+
+.article-section{padding:3.5rem 0 1rem;scroll-margin-top:75px}
+.article-header{display:flex;align-items:center;gap:1.4rem;margin-bottom:1.6rem}
+.roman{
+  font-family:Georgia,serif;font-size:1.5rem;font-weight:bold;
+  color:var(--dogma);background:#f1e6e2;border:1px solid #e4cfc9;
+  width:72px;height:72px;display:flex;align-items:center;justify-content:center;
+  border-radius:8px;flex-shrink:0;
+}
+.article-header h2{font-size:2rem;font-weight:400;line-height:1.25}
+.article-header .tagline{
+  display:block;font-family:'Segoe UI',sans-serif;font-size:.9rem;
+  color:var(--muted);font-style:italic;margin-top:.4rem;font-weight:400;
+}
+.legal-text{
+  background:var(--paper);border-left:5px solid var(--dogma);
+  padding:1.6rem 1.9rem;margin-bottom:1.2rem;border-radius:0 10px 10px 0;
+  box-shadow:var(--shadow);font-family:Georgia,serif;
+  font-size:1.02rem;color:#3d4756;
+}
+.legal-text p+p{margin-top:.9rem}
+.legal-text ol,.legal-text ul{margin-top:.8rem;padding-left:1.3rem}
+.legal-text ol li,.legal-text ul li{margin-bottom:.5rem}
+.legal-label{
+  display:block;font-family:'Segoe UI',sans-serif;font-size:.65rem;
+  letter-spacing:.22em;text-transform:uppercase;color:var(--muted);
+  margin-bottom:.8rem;font-weight:700;
+}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:2rem}
+.chip{
+  font-size:.72rem;letter-spacing:.04em;padding:.3rem .8rem;
+  background:#eceae2;border:1px solid var(--line);border-radius:30px;color:#5c6470;
+}
+
+.quad-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.4rem}
+.perspective-card{
+  background:var(--paper);border-radius:12px;padding:1.7rem;
+  box-shadow:var(--shadow);border-top:4px solid transparent;
+  transition:transform .3s,box-shadow .3s;display:flex;flex-direction:column;
+}
+.perspective-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-hover)}
+.perspective-card.dogma{border-top-color:var(--dogma)}
+.perspective-card.onto{border-top-color:var(--onto)}
+.perspective-card.herm{border-top-color:var(--herm)}
+.perspective-card.proc{border-top-color:var(--proc)}
+.card-header{display:flex;align-items:center;gap:.7rem;margin-bottom:.3rem}
+.card-icon{font-size:1.35rem}
+.card-title{font-size:.92rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em}
+.dogma .card-title{color:var(--dogma)}
+.onto .card-title{color:var(--onto)}
+.herm .card-title{color:var(--herm)}
+.proc .card-title{color:var(--proc)}
+.card-sub{font-size:.72rem;color:var(--muted);font-style:italic;margin-bottom:1.1rem;letter-spacing:.02em}
+.card-content p{font-size:.9rem;color:#4a5563;margin-bottom:.9rem;text-align:justify}
+.card-content p:last-child{margin-bottom:0}
+.card-content strong{color:var(--ink);font-weight:650}
+.card-content ul{margin-top:.5rem;padding-left:1.2rem}
+.card-content ul li{margin-bottom:.4rem;font-size:.88rem;color:#4a5563}
+
+.callout{
+  margin-top:1.6rem;background:#fbf6ea;border:1px solid #ecdfbf;
+  border-left:4px solid var(--proc);border-radius:0 8px 8px 0;
+  padding:1.2rem 1.5rem;
+}
+.callout .label{
+  font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--proc);font-weight:700;display:block;margin-bottom:.5rem;
+}
+.callout p{font-size:.9rem;color:#6b5b3a}
+
+.case-study{
+  margin-top:1.2rem;background:var(--paper);border:1px solid var(--line);
+  border-radius:10px;overflow:hidden;
+}
+.case-study summary{
+  cursor:pointer;padding:1.1rem 1.5rem;font-weight:600;font-size:.92rem;
+  list-style:none;display:flex;align-items:center;gap:.7rem;transition:.2s;
+}
+.case-study summary::-webkit-details-marker{display:none}
+.case-study summary:hover{background:#faf9f5}
+.case-study summary .marker{
+  width:22px;height:22px;border:1px solid var(--line);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;font-size:.8rem;
+  color:var(--dogma);flex-shrink:0;transition:.3s;
+}
+.case-study[open] summary .marker{transform:rotate(45deg);background:var(--dogma);color:#fff;border-color:var(--dogma)}
+.case-study .case-body{padding:0 1.5rem 1.4rem;font-size:.92rem;color:var(--muted)}
+.case-study .case-body p+p{margin-top:.7rem}
+
+.sintesis{padding:4.5rem 0 2rem;scroll-margin-top:75px;border-top:1px solid var(--line)}
+.sintesis h2{font-size:2.1rem;font-weight:400;margin-bottom:.8rem}
+.sintesis .intro{color:var(--muted);max-width:820px;margin-bottom:2rem}
+.table-wrap{overflow-x:auto;border-radius:12px;box-shadow:var(--shadow);background:var(--paper)}
+table{width:100%;border-collapse:collapse;min-width:900px;font-size:.85rem}
+thead{background:#22303f;color:#fff}
+th{padding:1rem .8rem;text-align:left;font-weight:600;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase}
+th:nth-child(2){color:#f0b9b9}
+th:nth-child(3){color:#a9c6e8}
+th:nth-child(4){color:#a3d4b6}
+th:nth-child(5){color:#e6d9b8}
+td{padding:1rem .8rem;border-bottom:1px solid var(--line);vertical-align:top;color:var(--muted)}
+td:first-child{font-weight:700;color:var(--ink);white-space:nowrap}
+tbody tr:hover{background:#faf9f5}
+.closing{
+  margin-top:2rem;background:var(--paper);border:1px solid var(--line);
+  border-radius:12px;padding:2rem;text-align:center;
+}
+.closing .serif{font-size:1.5rem;font-style:italic;color:var(--dogma);margin-bottom:.8rem}
+.closing p{color:var(--muted);max-width:760px;margin:0 auto;font-size:.95rem}
+
+.glosario{padding:3rem 0 1rem;scroll-margin-top:75px}
+.glosario details{
+  background:var(--paper);border:1px solid var(--line);border-radius:12px;
+  padding:0 1.6rem;box-shadow:var(--shadow);
+}
+.glosario summary{
+  cursor:pointer;padding:1.4rem 0;font-family:Georgia,serif;
+  font-size:1.3rem;list-style:none;display:flex;justify-content:space-between;align-items:center;
+}
+.glosario summary::-webkit-details-marker{display:none}
+.glosario summary span{font-size:1.4rem;color:var(--dogma);transition:.3s}
+.glosario details[open] summary span{transform:rotate(45deg)}
+.gloss-list{padding-bottom:1.6rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.4rem}
+.gloss-list dt{font-weight:700;font-size:.92rem;color:var(--ink);margin-bottom:.3rem}
+.gloss-list dd{font-size:.88rem;color:var(--muted)}
+
+.refs{padding:3rem 0 4rem}
+.refs h3{font-size:1.4rem;font-weight:400;margin-bottom:1.4rem}
+.ref-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1rem}
+.ref{
+  background:var(--paper);border:1px solid var(--line);border-radius:8px;
+  padding:1.1rem 1.3rem;font-size:.87rem;color:var(--muted);
+}
+.ref b{color:var(--ink);display:block;margin-bottom:.25rem;font-weight:650}
+.ref i{color:#7a8391}
+
+footer{
+  background:#16202c;color:#8b98a9;text-align:center;padding:3rem 2rem;
+}
+footer strong{color:#d8dde5;display:block;font-family:Georgia,serif;font-size:1.1rem;margin-bottom:.6rem;font-weight:400}
+footer p{font-size:.82rem;max-width:760px;margin:0 auto .5rem}
+footer .fine{font-size:.72rem;opacity:.65;margin-top:1.2rem}
+
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+
+@media(max-width:900px){
+  .quad-grid{grid-template-columns:1fr}
+  .article-header{gap:1rem}
+  .article-header h2{font-size:1.6rem}
+  .roman{width:58px;height:58px;font-size:1.2rem}
+  header{padding:3.5rem 1.5rem}
+}
+@media(max-width:600px){
+  main{padding:0 1.1rem}
+  .method{padding:2.5rem 1.1rem 1rem}
+  .legal-text{padding:1.2rem}
+  .card-content p{text-align:left}
+}
+@media print{
+  nav,#progress{display:none}
+  body{background:#fff;color:#000}
+  header{background:#fff;color:#000;border-bottom:2px solid #000;padding:2rem 0}
+  .perspective-card,.legal-text{box-shadow:none;break-inside:avoid}
+  .article-section{break-before:page}
+  .reveal{opacity:1!important;transform:none!important}
+}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+
+<header>
+  <div class="eyebrow">Libro Primero · Parte General · Capítulo Cuarto</div>
+  <h1>De las <em>medidas de seguridad</em><br>entre la protección y la libertad</h1>
+  <p>Una lectura tetradimensional de los artículos 69 a 81 del Código Penal colombiano:
+     del sistema vicarial a la internación, de la libertad vigilada al control judicial
+     trimestral, de la suspensión condicional a la extinción.</p>
+  <div class="header-meta">
+    <span><b>Ley 599 de 2000</b></span>
+    <span>Modificado por <b>Sentencia C-370 de 2002</b></span>
+    <span>Artículos <b>69 — 81</b></span>
+    <span>Dogmática · Ontología · Hermenéutica · Razonabilidad procedimental</span>
+  </div>
+</header>
+
+<section class="method">
+  <div class="section-kicker">La clave de lectura</div>
+  <h2>Cuatro preguntas frente a cada norma</h2>
+  <div class="method-grid">
+    <div class="method-card d">
+      <h3>Dogmática</h3>
+      <span class="subtitle">La estructura · ¿Qué significa?</span>
+      <p>La ciencia del derecho positivo. Reconstruye el sistema vicarial, la distinción
+         entre pena y medida, los tipos de internación, los límites temporales.</p>
+    </div>
+    <div class="method-card o">
+      <h3>Ontología</h3>
+      <span class="subtitle">El fundamento · ¿Qué es?</span>
+      <p>La pregunta por el ser del inimputable, de la peligrosidad, de la curación.
+         ¿Qué realidad tiene un sujeto que no es culpable pero sí peligroso?</p>
+    </div>
+    <div class="method-card h">
+      <h3>Hermenéutica</h3>
+      <span class="subtitle">El sentido · ¿Cómo se aplica?</span>
+      <p>La teoría de la interpretación y de la aplicación. Cómo se armonizan la
+         protección social y la dignidad del inimputable, cómo se controla la medida.</p>
+    </div>
+    <div class="method-card p">
+      <h3>Razonabilidad procedimental</h3>
+      <span class="subtitle">El método · ¿Cómo se ejecuta?</span>
+      <p>El procedimiento de imposición, ejecución, control, suspensión y extinción.
+         La razonabilidad como garantía contra la internación indefinida.</p>
+    </div>
+  </div>
+</section>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#art69">Art. 69</a>
+    <a href="#art70">Art. 70</a>
+    <a href="#art71">Art. 71</a>
+    <a href="#art72">Art. 72</a>
+    <a href="#art74">Art. 74</a>
+    <a href="#art75">Art. 75</a>
+    <a href="#art76">Art. 76</a>
+    <a href="#art77">Art. 77</a>
+    <a href="#art78">Art. 78</a>
+    <a href="#art79">Art. 79</a>
+    <a href="#art80">Art. 80</a>
+    <a href="#art81">Art. 81</a>
+    <a href="#sintesis">Síntesis</a>
+    <a href="#glosario">Glosario</a>
+  </div>
+</nav>
+
+<main>
+
+<section class="mapa">
+  <div class="section-kicker">Recorrido del análisis</div>
+  <h2 class="serif" style="font-size:1.7rem;font-weight:400">Trece artículos. Una arquitectura terapéutica.</h2>
+  <div class="pipeline">
+    <a href="#art69" class="pipe-node">
+      <span class="num">LXIX</span>
+      <strong>Clasificación</strong>
+      <small>Cuatro tipos de medida.<br>Internación, casa de estudio, libertad vigilada.</small>
+    </a>
+    <a href="#art70" class="pipe-node">
+      <span class="num">LXX</span>
+      <strong>Trastorno permanente</strong>
+      <small>Internación psiquiátrica.<br>Máximo 20 años.</small>
+    </a>
+    <a href="#art71" class="pipe-node">
+      <span class="num">LXXI</span>
+      <strong>Trastorno transitorio</strong>
+      <small>Internación psiquiátrica.<br>Máximo 10 años.</small>
+    </a>
+    <a href="#art72" class="pipe-node">
+      <span class="num">LXXII</span>
+      <strong>Casa de estudio o trabajo</strong>
+      <small>Inimputables sin trastorno mental.<br>Máximo 10 años.</small>
+    </a>
+    <a href="#art74" class="pipe-node">
+      <span class="num">LXXIV</span>
+      <strong>Libertad vigilada</strong>
+      <small>Accesoria post-internación.<br>Máximo 3 años.</small>
+    </a>
+    <a href="#art75" class="pipe-node">
+      <span class="num">LXXV</span>
+      <strong>Trastorno sin base patológica</strong>
+      <small>Sin medida de seguridad.<br>Indemnización.</small>
+    </a>
+    <a href="#art76" class="pipe-node">
+      <span class="num">LXXVI</span>
+      <strong>Casos especiales</strong>
+      <small>Pena no privativa de libertad.<br>Máximo 2 años.</small>
+    </a>
+    <a href="#art77" class="pipe-node">
+      <span class="num">LXXVII</span>
+      <strong>Control judicial</strong>
+      <small>Informe trimestral.<br>Continuación, suspensión, modificación.</small>
+    </a>
+    <a href="#art78" class="pipe-node">
+      <span class="num">LXXVIII</span>
+      <strong>Revocación</strong>
+      <small>De la suspensión condicional.<br>Concepto pericial.</small>
+    </a>
+    <a href="#art79" class="pipe-node">
+      <span class="num">LXXIX</span>
+      <strong>Suspensión o cesación</strong>
+      <small>Dictamen de experto.<br>Decisión judicial.</small>
+    </a>
+    <a href="#art80" class="pipe-node">
+      <span class="num">LXXX</span>
+      <strong>Cómputo</strong>
+      <small>Detención preventiva.<br>Parte cumplida de la medida.</small>
+    </a>
+    <a href="#art81" class="pipe-node">
+      <span class="num">LXXXI</span>
+      <strong>Restricción de otros derechos</strong>
+      <small>Aplicación compatible.<br>Con la medida impuesta.</small>
+    </a>
+  </div>
+</section>
+
+<!-- ============================================================
+     ARTÍCULO 69
+     ============================================================ -->
+<section id="art69" class="article-section">
+  <div class="article-header">
+    <div class="roman">LXIX</div>
+    <h2>Medidas de seguridad
+      <span class="tagline">El catálogo de las respuestas al inimputable.</span>
+    </h2>
+  </div>
+
+  <blockquote class="legal-text">
+    <span class="legal-label">Texto normativo · Artículo 69°</span>
+    <p>Son medidas de seguridad:</p>
+    <ol>
+      <li>La internación en establecimiento psiquiátrico o clínica adecuada.</li>
+      <li>La internación en casa de estudio o trabajo.</li>
+      <li>La libertad vigilada.</li>
+      <li><em>INEXEQUIBLE.</em> La reintegración al medio cultural propio. Sentencia C-370 de 2002.</li>
+    </ol>
+  </blockquote>
+
+  <div class="chips">
+    <span class="chip">Sistema vicarial</span>
+    <span class="chip">Internación psiquiátrica</span>
+    <span class="chip">Casa de estudio o trabajo</span>
+    <span class="chip">Libertad vigilada</span>
+    <span class="chip">Reintegración cultural (inexequible)</span>
+  </div>
+
+  <div class="quad-grid">
+    <article class="perspective-card dogma">
+      <div class="card-header"><span class="card-icon">⚖️</span><h3 class="card-title">Dogmática</h3></div>
+      <div class="card-sub">El sistema vicarial colombiano</div>
+      <div class="card-content">
+        <p>El artículo 69 consagra el <strong>sistema vicarial</strong> (o dual): la pena
+        y la medida de seguridad son respuestas distintas, fundadas en presupuestos distintos.
+        La pena se funda en la <em>culpabilidad</em>; la medida, en la <em>peligrosidad</em>.
+        El catálogo reconoce tres tipos de medida:</p>
+        <ul>
+          <li><strong>Internación psiquiátrica</strong>: para inimputables por trastorno mental.</li>
+          <li><strong>Casa de estudio o trabajo</strong>: para inimputables sin trastorno mental (menores, diversidad sociocultural).</li>
+          <li><strong>Libertad vigilada</strong>: accesoria post-internación.</li>
+        </ul>
+        <p>El numeral 4 fue declarado <strong>inexequible</strong> por la Corte Constitucional
+        (C-370 de 2002) por violar la dignidad y la diversidad cultural: la "reintegración"
+        presupone que la cosmovisión indígena debe ser "corregida".</p>
+      </div>
+    </article>
+    <article class="perspective-card onto">
+      <div class="card-header"><span class="card-icon">🌌</span><h3 class="card-title">Ontología</h3></div>
+      <div class="card-sub">El inimputable como sujeto de protección</div>
+      <div class="card-content">
+        <p>Las medidas de seguridad revelan que el inimputable no es un <strong>objeto de
+        castigo</strong> sino un <em>sujeto de protección y tratamiento</em>. Ontológicamente,
+        el derecho penal reconoce que la desviación conductual a veces no nace de una decisión
+        libre sino de alteraciones psíquicas, de inmadurez o de diversidad cultural. La medida
+        no es retribución: es <em>curación, tutela, rehabilitación</em> (art. 5).</p>
+        <p>La inexequibilidad del numeral 4 revela algo profundo: la diversidad sociocultural
+        no es una patología que deba ser "reintegrada". Es una <em>alteridad</em> que merece
+        respeto, no corrección.</p>
+      </div>
+    </article>
+    <article class="perspective-card herm">
+      <div class="card-header"><span class="card-icon">📜</span><h3 class="card-title">Hermenéutica</h3></div>
+      <div class="card-sub">La interpretación restrictiva de la internación</div>
+      <div class="card-content">
+        <p>La hermenéutica del artículo 69 exige interpretación <strong>restrictiva</strong>
+        y <strong>conforme a los derechos humanos</strong>. La internación no puede convertirse
+        en pena encubierta ni en privación indefinida de libertad. La Corte Constitucional
+        (C-370 de 2002) ha subrayado que las medidas de seguridad deben respetar la dignidad,
+        el debido proceso y los estándares internacionales (Principios de la ONU para la
+        protección de los enfermos mentales, 1991).</p>
+        <p>La hermenéutica exige además <strong>individualización</strong>: no toda persona
+        con trastorno mental requiere internación; muchas pueden ser tratadas ambulatoriamente.</p>
+      </div>
+    </article>
+    <article class="perspective-card proc">
+      <div class="card-header"><span class="card-icon">📋</span><h3 class="card-title">Razonabilidad procedimental</h3></div>
+      <div class="card-sub">El procedimiento de imposición</div>
+      <div class="card-content">
+        <p>Procedimentalmente, el juez debe:</p>
+        <ul>
+          <li><strong>1.</strong> Declarar la inimputabilidad con base en pericia psiquiátrica o psicológica.</li>
+          <li><strong>2.</strong> Identificar el tipo de trastorno (permanente, transitorio con/sin base patológica).</li>
+          <li><strong>3.</strong> Seleccionar la medida adecuada según la naturaleza del trastorno y las necesidades de tratamiento.</li>
+          <li><strong>4.</strong> Fijar el mínimo y máximo dentro de los límites legales.</li>
+          <li><strong>5.</strong> Ordenar la internación en establecimiento oficial o privado adecuado.</li>
+          <li><strong>6.</strong> Activar el control judicial trimestral (art. 77).</li>
+        </ul>
+      </div>
+    </article>
+  </div>
+
+  <div class="callout">
+    <span class="label">Nodo de razonabilidad</span>
+    <p><strong>¿Por qué declarar inexequible la reintegración al medio cultural?</strong>
+    La Sentencia C-370 de 2002 reconoció que la medida presupone que la cosmovisión indígena
+    es una desviación que debe ser corregida. Esto viola la <em>diversidad étnica y cultural</em>
+    reconocida en el artículo 7 de la Constitución. La medida era irrazonable porque
+    confundía <em>alteridad</em> con <em>patología</em>. Hoy, la diversidad sociocultural es
+    causal de inimputabilidad (art. 33), no de "reintegración".</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     ARTÍCULO 70
+     ============================================================ -->
+<section id="art70" class="article-section">
+  <div class="article-header">
+    <div class="roman">LXX</div>
+    <h2>Internación para inimputable por trastorno mental permanente
+      <span class="tagline">La medida más intensa: curación, no castigo.</span>
+    </h2>
+  </div>
+
+  <blockquote class="legal-text">
+    <span class="legal-label">Texto normativo · Artículo 70°</span>
+    <p>Al inimputable por trastorno mental permanente, se le impondrá medida de internación
+       en establecimiento psiquiátrico, clínica o institución adecuada de carácter oficial o
+       privado, en donde se le prestará la atención especializada que requiera.</p>
+    <p>Esta medida tendrá un máximo de duración de veinte (20) años y el mínimo aplicable
+       dependerá de las necesidades de tratamiento en cada caso concreto. Cuando se establezca
+       que la persona se encuentra mentalmente rehabilitada cesará la medida.</p>
+    <p>Habrá lugar a la suspensión condicional de la medida cuando se establezca que la persona
+       se encuentra en condiciones de adaptarse al medio social en donde se desenvolverá su vida.</p>
+    <p>Igualmente procederá la suspensión cuando la persona sea susceptible de ser tratada
+       ambulatoriamente.</p>
+    <p>En ningún caso el término señalado para el cumplimiento de la medida podrá exceder el
+       máximo fijado para la pena privativa de la libertad del respectivo delito.</p>
+  </blockquote>
+
+  <div class="chips">
+    <span class="chip">Trastorno mental permanente</span>
+    <span class="chip">Internación psiquiátrica</span>
+    <span class="chip">Máximo 20 años</span>
+    <span class="chip">Rehabilitación mental</span>
+    <span class="chip">Suspensión condicional</span>
+    <span class="chip">Tratamiento ambulatorio</span>
+    <span class="chip">Límite de la pena del delito</span>
+  </div>
+
+  <div class="quad-grid">
+    <article class="perspective-card dogma">
+      <div class="card-header"><span class="card-icon">⚖️</span><h3 class="card-title">Dogmática</h3></div>
+      <div class="card-sub">Límites temporales y finalidad terapéutica</div>
+      <div class="card-content">
+        <p>El artículo 70 regula la medida más intensa del sistema. Dogmáticamente, establece
+        tres límites:</p>
+        <ul>
+          <li><strong>Límite máximo absoluto</strong>: 20 años.</li>
+          <li><strong>Límite relativo</strong>: no puede exceder el máximo de la pena del delito.</li>
+          <li><strong>Límite terapéutico</strong>: cesa cuando la persona se rehabilita.</li>
+        </ul>
+        <p>La medida tiene <em>duración indeterminada dentro de límites</em>: el mínimo depende
+        de las necesidades de tratamiento, no de la gravedad del hecho. Esto refleja que la
+        medida se funda en la peligrosidad y la necesidad de curación, no en la culpabilidad.</p>
+      </div>
+    </article>
+    <article class="perspective-card onto">
+      <div class="card-header"><span class="card-icon">🌌</span><h3 class="card-title">Ontología</h3></div>
+      <div class="card-sub">La curación como horizonte</div>
+      <div class="card-content">
+        <p>La internación psiquiátrica tiene una ontología <strong>terapéutica</strong>: no
+        es privación de libertad punitiva sino <em>tratamiento</em>. El horizonte de la medida
+        es la rehabilitación: el inimputable no es un condenado sino un paciente. La suspensión
+        condicional revela que el derecho reconoce la <em>capacidad de recuperación</em> del
+        sujeto: la enfermedad mental no es necesariamente perpetua.</p>
+        <p>El tratamiento ambulatorio es una forma de <em>progresividad</em>: el sujeto pasa
+        de la internación total a la libertad con acompañamiento. La ontología de la medida
+        es dinámica: evoluciona con la evolución clínica del paciente.</p>
+      </div>
+    </article>
+    <article class="perspective-card herm">
+      <div class="card-header"><span class="card-icon">📜</span><h3 class="card-title">Hermenéutica</h3></div>
+      <div class="card-sub">La interpretación conforme a los DD.HH.</div>
+      <div class="card-content">
+        <p>La hermenéutica del artículo 70 debe ser <strong>conforme a los estándares
+        internacionales</strong>: los Principios de la ONU para la protección de los enfermos
+        mentales (1991) y la Convención sobre los Derechos de las Personas con Discapacidad
+        (2006). Esto implica:</p>
+        <ul>
+          <li>La internación debe ser el <em>último recurso</em>: si el tratamiento ambulatorio es suficiente, debe preferirse.</li>
+          <li>El establecimiento debe ser <em>adecuado</em>: no una prisión disfrazada.</li>
+          <li>La rehabilitación debe ser evaluada periódicamente por expertos independientes.</li>
+          <li>El paciente conserva sus derechos fundamentales: dignidad, comunicación, visita.</li>
+        </ul>
+      </div>
+    </article>
+    <article class="perspective-card proc">
+      <div class="card-header"><span class="card-icon">📋</span><h3 class="card-title">Razonabilidad procedimental</h3></div>
+      <div class="card-sub">El procedimiento de ejecución</div>
+      <div class="card-content">
+        <p>Procedimentalmente, la medida sigue estos pasos:</p>
+        <ul>
+          <li><strong>1. Imposición</strong>: el juez ordena la internación en establecimiento adecuado, oficial o privado.</li>
+          <li><strong>2. Tratamiento</strong>: el establecimiento presta atención especializada según el plan terapéutico.</li>
+          <li><strong>3. Control trimestral</strong>: el juez solicita informes periódicos (art. 77).</li>
+          <li><strong>4. Evaluación de rehabilitación</strong>: cuando los peritos determinan que el paciente se ha rehabilitado, el juez cesa la medida.</li>
+          <li><strong>5. Suspensión condicional</strong>: si el paciente puede adaptarse al medio social o ser tratado ambulatoriamente, el juez suspende la internación.</li>
+          <li><strong>6. Libertad vigilada</strong>: tras la internación, puede imponerse como accesoria (art. 74).</li>
+          <li><strong>7. Extinción</strong>: transcurrido el máximo (20 años o el de la pena del delito), el juez declara la extinción.</li>
+        </ul>
+      </div>
+    </article>
+  </div>
+
+  <details class="case-study">
+    <summary><span class="marker">+</span> Caso aplicado · La esquizofrenia paranoide</summary>
+    <div class="case-body">
+      <p>Una persona con esquizofrenia paranoide comete homicidio en estado de delirio.
+      La pericia psiquiátrica determina trastorno mental permanente.</p>
+      <p><strong>Lectura procedimental:</strong> el juez declara la inimputabilidad, impone
+      medida de internación en establecimiento psiquiátrico, fija como mínimo el tiempo
+      necesario según los peritos (por ejemplo, 5 años) y como máximo 20 años (o el máximo
+      del homicidio: 225 meses = 18.75 años, que es menor). Ordena control trimestral.
+      Si tras 8 años los peritos determinan rehabilitación, el juez cesa la medida. Si
+      determina que puede ser tratado ambulatoriamente, suspende condicionalmente la
+      internación e impone libertad vigilada por 3 años.</p>
+    </div>
+  </details>
+</section>
+
+<!-- ============================================================
+     ARTÍCULO 71
+     ============================================================ -->
+<section id="art71" class="article-section">
+  <div class="article-header">
+    <div class="roman">LXXI</div>
+    <h2>Internación para inimputable por trastorno mental transitorio con base patológica
+      <span class="tagline">La medida temporal: la enfermedad pasa, la respuesta también.</span>
+    </h2>
+  </div>
+
+  <blockquote class="legal-text">
+    <span class="legal-label">Texto normativo · Artículo 71°</span>
+    <p>Al inimputable por trastorno mental transitorio con base patológica, se le impondrá
+       la medida de internación en establecimiento psiquiátrico, clínica o institución adecuada
+       de carácter oficial o privado, en donde se le prestará la atención especializada que requiera.</p>
+    <p>Esta medida tendrá una duración máxima de diez (10) años y un mínimo que dependerá de
+       las necesidades de tratamiento en cada caso concreto. La medida cesará cuando se establezca
+       la rehabilitación mental del sentenciado.</p>
+    <p>Habrá lugar a la suspensión condicional de la medida cuando se establezca que la persona
+       se encuentra en condiciones de adaptarse al medio social en donde se desenvolverá su vida.</p>
+    <p>Igualmente procederá la suspensión cuando la persona sea susceptible de ser tratada
+       ambulatoriamente.</p>
+    <p>En ningún caso el término señalado para el cumplimiento de la medida podrá exceder el
+       máximo fijado para la pena privativa de la libertad del respectivo delito.</p>
+  </blockquote>
+
+  <div class="chips">
+    <span class="chip">Trastorno transitorio</span>
+    <span class="chip">Base patológica</span>
+    <span class="chip">Máximo 10 años</span>
+    <span class="chip">Rehabilitación</span>
+    <span class="chip">Suspensión condicional</span>
+  </div>
+
+  <div class="quad-grid">
+    <article class="perspective-card dogma">
+      <div class="card-header"><span class="card-icon">⚖️</span><h3 class="card-title">Dogmática</h3></div>
+      <div class="card-sub">La diferencia con el trastorno permanente</div>
+      <div class="card-content">
+        <p>El artículo 71 regula una medida <strong>menos intensa</strong> que la del artículo 70.
+        La diferencia dogmática radica en la <em>naturaleza del trastorno</em>:</p>
+        <ul>
+          <li><strong>Permanente</strong> (art. 70): la enfermedad es crónica, el máximo es 20 años.</li>
+          <li><strong>Transitorio con base patológica</strong> (art. 71): la enfermedad tiene causa orgánica pero es reversible, el máximo es 10 años.</li>
+        </ul>
+        <p>Ejemplos de trastorno transitorio con base patológica: brotes psicóticos por
+        epilepsia, intoxicaciones patológicas, trastornos metabólicos agudos. La base
+        patológica distingue esta causal del trastorno transitorio <em>sin</em> base patológica
+        (art. 75), que no genera medida de seguridad.</p>
+      </div>
+    </article>
+    <article class="perspective-card onto">
+      <div class="card-header"><span class="card-icon">🌌</span><h3 class="card-title">Ontología</h3></div>
+      <div class="card-sub">La temporalidad de la enfermedad</div>
+      <div class="card-content">
+        <p>El trastorno transitorio revela que la enfermedad mental no siempre es una
+        <strong>condición perpetua</strong>. Ontológicamente, el sujeto puede enfermar
+        temporalmente y recuperarse. La medida de seguridad refleja esa temporalidad:
+        es una respuesta <em>provisoria</em>, no definitiva. La rehabilitación no es
+        una meta lejana sino un horizonte cercano.</p>
+        <p>La distinción entre "con base patológica" y "sin base patológica" refleja
+        una ontología <em>médico-jurídica</em>: la base patológica implica una alteración
+        orgánica que requiere tratamiento; la ausencia de base patológica (emoción violenta,
+        embriaguez común) no justifica internación.</p>
+      </div>
+    </article>
+    <article class="perspective-card herm">
+      <div class="card-header"><span class="card-icon">📜</span><h3 class="card-title">Hermenéutica</h3></div>
+      <div class="card-sub">La prueba de la base patológica</div>
+      <div class="card-content">
+        <p>La hermenéutica exige probar dos elementos: la <strong>transitoriedad</strong>
+        del trastorno y la <strong>base patológica</strong>. La pericia psiquiátrica debe
+        determinar si el trastorno tiene causa orgánica (epilepsia, tumor, intoxicación
+        patológica) o no (emoción violenta, embriaguez común). Si no hay base patológica,
+        aplica el artículo 75: no hay medida de seguridad.</p>
+        <p>La hermenéutica exige además que la <strong>rehabilitación</strong> sea evaluada
+        con criterios clínicos objetivos, no con criterios jurídicos o morales. El juez
+        no puede decidir por sí solo si el paciente está rehabilitado: requiere dictamen
+        pericial (art. 79).</p>
+      </div>
+    </article>
+    <article class="perspective-card proc">
+      <div class="card-header"><span class="card-icon">📋</span><h3 class="card-title">Razonabilidad procedimental</h3></div>
+      <div class="card-sub">El procedimiento específico</div>
+      <div class="card-content">
+        <p>Procedimentalmente, la medida sigue estos pasos:</p>
+        <ul>
+          <li><strong>1. Pericia</strong>: se determina que el trastorno es transitorio y tiene base patológica.</li>
+          <li><strong>2. Imposición</strong>: el juez ordena internación con máximo de 10 años (o el de la pena del delito si es menor).</li>
+          <li><strong>3. Tratamiento</strong>: atención especializada en establecimiento adecuado.</li>
+          <li><strong>4. Control trimestral</strong>: el juez solicita informes periódicos.</li>
+          <li><strong>5. Rehabilitación</strong>: cuando los peritos determinan rehabilitación, el juez cesa la medida.</li>
+          <li><strong>6. Suspensión condicional</strong>: si el paciente puede adaptarse al medio social o ser tratado ambulatoriamente.</li>
+          <li><strong>7. Extinción</strong>: transcurrido el máximo, el juez declara la extinción.</li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============================================================
+     ARTÍCULO 72
+     ============================================================ -->
+<section id="art72" class="article-section">
+  <div class="article-header">
+    <div class="roman">LXXII</div>
+    <h2>Internación en casa de estudio o de trabajo
+      <span class="tagline">La respuesta educativa para inimputables sin trastorno mental.</span>
+    </h2>
+  </div>
+
+  <blockquote class="legal-text">
+    <span class="legal-label">Texto normativo · Artículo 72°</span>
+    <p>A los inimputables que no padezcan trastorno mental, se les impondrá medida de internación
+       en establecimiento público o particular, aprobado oficialmente, que pueda suministrar
+       educación, adiestramiento industrial, artesanal, agrícola o similares.</p>
+    <p>Esta medida tendrá un máximo de diez (10) años y un mínimo que dependerá de las necesidades
+       de asistencia en cada caso concreto.</p>
+    <p>Habrá lugar a la suspensión condicional de la medida cuando se establezca que la persona
+       se encuentra en condiciones de adaptarse al medio social en donde se desenvolverá su vida.</p>
+    <p>Igualmente procederá la suspensión cuando la persona sea susceptible de ser tratada
+       ambulatoriamente.</p>
+    <p>En ningún caso el término señalado para el cumplimiento de la medida podrá exceder el
+       máximo fijado para la pena privativa de la libertad del respectivo delito.</p>
+  </blockquote>
+
+  <div class="chips">
+    <span class="chip">Inimputables sin trastorno mental</span>
+    <span class="chip">Casa de estudio o trabajo</span>
+    <span class="chip">Educación y adiestramiento</span>
+    <span class="chip">Máximo 10 años</span>
+    <span class="chip">Suspensión condicional</span>
+  </div>
+
+  <div class="quad-grid">
+    <article class="perspective-card dogma">
+      <div class="card-header"><span class="card-icon">⚖️</span><h3 class="card-title">Dogmática</h3></div>
+      <div class="card-sub">Una medida pedagógica, no terapéutica</div>
+      <div class="card-content">
+        <p>El artículo 72 regula una medida <strong>distinta</strong> de la internación
+        psiquiátrica. Dogmáticamente, se dirige a inimputables <em>sin trastorno mental</em>:
+        menores de edad (sistema de responsabilidad penal juvenil), personas con diversidad
+        sociocultural, personas con discapacidad intelectual no mental. La finalidad no es
+        la curación sino la <em>educación, el adiestramiento, la asistencia</em>.</p>
+        <p>La dogmática distingue tres tipos de inimputabilidad según la causa:
+        (1) trastorno mental permanente → art. 70; (2) trastorno mental transitorio con
+        base patológica → art. 71; (3) otras causas → art. 72.</p>
+      </div>
+    </article>
+    <article class="perspective-card onto">
+      <div class="card-header"><span class="card-icon">🌌</span><h3 class="card-title">Ontología</h3></div>
+      <div class="card-sub">La educación como alternativa a la curación</div>
+      <div class="card-content">
+        <p>La casa de estudio o trabajo revela que la inimputabilidad no siempre requiere
+        <strong>tratamiento médico</strong>. A veces requiere <em>educación, formación,
+        asistencia social</em>. Ontológicamente, el inimputable sin trastorno mental no
+        es un paciente: es un sujeto que necesita <em>orientación, acompañamiento, formación</em>.
+        La medida es pedagógica, no clínica.</p>
+        <p>Esto es especialmente relevante para los menores de edad y las personas con
+        diversidad sociocultural: su "inimputabilidad" no es una enfermedad sino una
+        condición de desarrollo o de alteridad que requiere acompañamiento, no curación.</p>
+      </div>
+    </article>
+    <article class="perspective-card herm">
+      <div class="card-header"><span class="card-icon">📜</span><h3 class="card-title">Hermenéutica</h3></div>
+      <div class="card-sub">La interpretación conforme al interés superior del menor</div>
+      <div class="card-content">
+        <p>La hermenéutica del artículo 72 debe ser <strong>conforme al interés superior
+        del menor</strong> (Convención sobre los Derechos del Niño) y al respeto de la
+        diversidad cultural (Convenio 169 OIT). Esto implica:</p>
+        <ul>
+          <li>La internación debe ser el <em>último recurso</em>: deben preferirse medidas en medio abierto.</li>
+          <li>El establecimiento debe ser <em>educativo</em>, no carcelario.</li>
+          <li>La educación debe respetar la <em>identidad cultural</em> del menor.</li>
+          <li>La medida debe ser <em>proporcional</em> a la edad y madurez del menor.</li>
+        </ul>
+      </div>
+    </article>
+    <article class="perspective-card proc">
+      <div class="card-header"><span class="card-icon">📋</span><h3 class="card-title">Razonabilidad procedimental</h3></div>
+      <div class="card-sub">El procedimiento específico</div>
+      <div class="card-content">
+        <p>Procedimentalmente, la medida sigue estos pasos:</p>
+        <ul>
+          <li><strong>1. Pericia</strong>: se determina que el inimputable no padece trastorno mental.</li>
+          <li><strong>2. Imposición</strong>: el juez ordena internación en casa de estudio o trabajo, con máximo de 10 años (o el de la pena del delito si es menor).</li>
+          <li><strong>3. Programa educativo</strong>: el establecimiento diseña un programa de educación, adiestramiento o asistencia.</li>
+          <li><strong>4. Control trimestral</strong>: el juez solicita informes periódicos.</li>
+          <li><strong>5. Suspensión condicional</strong>: si el inimputable puede adaptarse al medio social, el juez suspende la medida.</li>
+          <li><strong>6. Extinción</strong>: transcurrido el máximo, el juez declara la extinción.</li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============================================================
+     ARTÍCULO 74
+     ============================================================ -->
+<section id="art74" class="article-section">
+  <div class="article-header">
+    <div class="roman">LXXIV</div>
+    <h2>Libertad vigilada
+      <span class="tagline">La accesoria post-internación: el puente hacia la vida social.</span>
+    </h2>
+  </div>
+
+  <blockquote class="legal-text">
+    <span class="legal-label">Texto normativo · Artículo 74°</span>
+    <p>La libertad vigilada podrá imponerse como accesoria de la medida de internación, una vez
+       que esta se haya cumplido y consiste en:</p>
+    <ol>
+      <li>La obligación de residir en determinado lugar por un término no mayor de tres (3) años.</li>
+      <li>La prohibición de concurrir a determinados lugares hasta por un término de tres (3) años.</li>
+      <li>La obligación de presentarse periódicamente ante las autoridades encargadas de su control hasta por tres (3) años.</li>
+    </ol>
+    <p>Las anteriores obligaciones, sin sujeción a los términos allí señalados, podrán exigirse
+       cuando se suspenda condicionalmente la ejecución de las medidas de seguridad.</p>
+  </blockquote>
+
+  <div class="chips">
+    <span class="chip">Libertad vigilada</span>
+    <span class="chip">Accesoria post-internación</span>
+    <span class="chip">Residencia obligatoria</span>
+    <span class="chip">Prohibición de concurrir</span>
+    <span class="chip">Presentación periódica</span>
+    <span class="chip">Máximo 3 años</span>
+  </div>
+
+  <div class="quad-grid">
+    <article class="perspective-card dogma">
+      <div class="card-header"><span class="card-icon">⚖️</span><h3 class="card-title">Dogmática</h3></div>
+      <div class="card-sub">Una medida de transición</div>
+      <div class="card-content">
+        <p>La libertad vigilada es una <strong>medida accesoria</strong> que sigue a la
+        internación. Dogmáticamente, cumple una función de <em>transición</em>: el inimputable
+        pasa de la privación total de libertad a la libertad plena, con acompañamiento
+        progresivo. Las tres obligaciones (residencia, prohibición de concurrir, presentación)
+        son <em>controles</em>, no castigos.</p>
+        <p>La libertad vigilada también puede imponerse cuando se <em>suspende condicionalmente</em>
+        la internación: en ese caso, las obligaciones pueden exceder los 3 años porque
+        reemplazan la internación total.</p>
+      </div>
+    </article>
+    <article class="perspective-card onto">
+      <div class="card-header"><span class="card-icon">🌌</span><h3 class="card-title">Ontología</h3></div>
+      <div class="card-sub">La reinserción como proceso gradual</div>
+      <div class="card-content">
+        <p>La libertad vigilada revela que la <strong>reinserción social</strong> no es un
+        acto instantáneo sino un <em>proceso gradual</em>. Ontológicamente, el inimputable
+        no pasa de la internación a la libertad absoluta: hay un <em>período intermedio</em>
+        de adaptación. La libertad vigilada es el puente entre el establecimiento y la vida
+        social.</p>
+        <p>Las obligaciones (residir, no concurrir, presentarse) no son privaciones de
+        libertad sino <em>condiciones de la libertad</em>: el inimputable es libre pero
+        con acompañamiento. La ontología de la medida es <em>progresiva</em>: la libertad
+        se conquista paso a paso.</p>
+      </div>
+    </article>
+    <article class="perspective-card herm">
+      <div class="card-header"><span class="card-icon">📜</span><h3 class="card-title">Hermenéutica</h3></div>
+      <div class="card-sub">La proporcionalidad de las obligaciones</div>
+      <div class="card-content">
+        <p>La hermenéutica exige que las obligaciones de la libertad vigilada sean
+        <strong>proporcionales</strong> a la peligrosidad y a las necesidades de tratamiento.
+        No todas las obligaciones deben imponerse en todos los casos: el juez debe seleccionar
+        las que sean <em>idóneas, necesarias y proporcionales</em>.</p>
+        <p>La hermenéutica exige además que las obligaciones no conviertan la libertad
+        vigilada en una <em>privación de libertad encubierta</em>: el inimputable debe
+        poder trabajar, estudiar, relacionarse. Las obligaciones son controles, no
+        reclusión.</p>
+      </div>
+    </article>
+    <article class="perspective-card proc">
+      <div class="card-header"><span class="card-icon">📋</span><h3 class="card-title">Razonabilidad procedimental</h3></div>
+      <div class="card-sub">El procedimiento de imposición y control</div>
+      <div class="card-content">
+        <p>Procedimentalmente, la libertad vigilada sigue estos pasos:</p>
+        <ul>
+          <li><strong>1. Imposición</strong>: el juez impone la libertad vigilada como accesoria de la internación, al cesar o suspender la medida.</li>
+          <li><strong>2. Fijación de obligaciones</strong>: el juez determina las obligaciones específicas (residencia, prohibiciones, presentaciones).</li>
+          <li><strong>3. Designación de autoridad de control</strong>: el juez designa la autoridad encargada del control (normalmente, el INPEC o la Policía).</li>
+          <li><strong>4. Control periódico</strong>: la autoridad de control verifica el cumplimiento de las obligaciones.</li>
+          <li><strong>5. Extinción</strong>: transcurridos los 3 años (o el plazo fijado), la libertad vigilada se extingue.</li>
+          <li><strong>6. Revocación</strong>: si el inimputable incumple las obligaciones, el juez puede revocar la suspensión condicional y ordenar la internación.</li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============================================================
+     ARTÍCULO 75
+     ============================================================ -->
+<section id="art75" class="article-section">
+  <div class="article-header">
+    <div class="roman">LXXV</div>
+    <h2>Trastorno mental transitorio sin base patológica
+      <span class="tagline">Cuando la inimputabilidad no genera medida de seguridad.</span>
+    </h2>
+  </div>
+
+  <blockquote class="legal-text">
+    <span class="legal-label">Texto normativo · Artículo 75°</span>
+    <p>Si la inimputabilidad proviene exclusivamente de trastorno mental transitorio sin base
+       patológica no habrá lugar a la imposición de medidas de seguridad.</p>
+    <p>Igual medida procederá en el evento del trastorno mental transitorio con base patológica
+       cuando esta desaparezca antes de proferirse la sentencia.</p>
+    <p>En los casos anteriores, antes de pronunciarse la sentencia, el funcionario judicial podrá
+       terminar el procedimiento si las víctimas del delito son indemnizadas.</p>
+  </blockquote>
+
+  <div class="chips">
+    <span class="chip">Trastorno transitorio sin base patológica</span>
+    <span class="chip">Sin medida de seguridad</span>
+    <span class="chip">Desaparición de la base patológica</span>
+    <span class="chip">Indemnización</span>
+    <span class="chip">Terminación del procedimiento</span>
+  </div>
+
+  <div class="quad-grid">
+    <article class="perspective-card dogma">
+      <div class="card-header"><span class="card-icon">⚖️</span><h3 class="card-title">Dogmática</h3></div>
+      <div class="card-sub">La excepción al sistema vicarial</div>
+      <div class="card-content">
+        <p>El artículo 75 consagra una <strong>excepción</strong> al sistema vicarial: en
+        ciertos casos de inimputabilidad, no hay medida de seguridad. Dogmáticamente, esto
+        ocurre cuando:</p>
+        <ul>
+          <li>El trastorno es <em>transitorio sin base patológica</em> (ejemplo: emoción violenta, embriaguez común).</li>
+          <li>El trastorno transitorio con base patológica <em>desaparece antes de la sentencia</em>.</li>
+        </ul>
+        <p>La lógica es clara: si el trastorno ya pasó y no tiene base patológica, no hay
+        peligrosidad que justifique medida. La respuesta es la <em>indemnización</em>, no
+        la internación.</p>
+      </div>
+    </article>
+    <article class="perspective-card onto">
+      <div class="card-header"><span class="card-icon">🌌</span><h3 class="card-title">Ontología</h3></div>
+      <div class="card-sub">La responsabilidad civil como alternativa</div>
+      <div class="card-content">
+        <p>El artículo 75 revela que la inimputabilidad no siempre requiere respuesta penal:
+        a veces basta la <strong>responsabilidad civil</strong>. Ontológicamente, el daño
+        existe aunque el autor no sea culpable: la víctima merece reparación. La indemnización
+        es la respuesta adecuada cuando no hay peligrosidad que justifique medida.</p>
+        <p>La terminación del procedimiento por indemnización refleja una ontología
+        <em>restaurativa</em>: el conflicto se resuelve reparando el daño, no castigando
+        al autor.</p>
+      </div>
+    </article>
+    <article class="perspective-card herm">
+      <div class="card-header"><span class="card-icon">📜</span><h3 class="card-title">Hermenéutica</h3></div>
+      <div class="card-sub">La interpretación restrictiva</div>
+      <div class="card-content">
+        <p>La hermenéutica exige interpretar restrictivamente la <strong>ausencia de base
+        patológica</strong>. No todo trastorno transitorio carece de base patológica: la
+        pericia debe determinar si hay causa orgánica. Si la hay, aplica el artículo 71;
+        si no la hay, aplica el artículo 75.</p>
+        <p>La hermenéutica exige además que la <strong>indemnización</strong> sea efectiva:
+        no basta con prometerla; debe realizarse. La terminación del procedimiento es una
+        facultad del juez, no una obligación: el juez puede negarla si considera que la
+        indemnización no repara adecuadamente a la víctima.</p>
+      </div>
+    </article>
+    <article class="perspective-card proc">
+      <div class="card-header"><span class="card-icon">📋</span><h3 class="card-title">Razonabilidad procedimental</h3></div>
+      <div class="card-sub">El procedimiento de terminación</div>
+      <div class="card-content">
+        <p>Procedimentalmente, el artículo 75 sigue estos pasos:</p>
+        <ul>
+          <li><strong>1. Pericia</strong>: se determina que el trastorno es transitorio sin base patológica (o que la base patológica desapareció).</li>
+          <li><strong>2. Declaración de inimputabilidad</strong>: el juez declara la inimputabilidad pero no impone medida de seguridad.</li>
+          <li><strong>3. Indemnización</strong>: el juez verifica que el inimputable (o su representante) indemniza a las víctimas.</li>
+          <li><strong>4. Terminación del procedimiento</strong>: si la indemnización es efectiva, el juez termina el procedimiento antes de la sentencia.</li>
+          <li><strong>5. Archivo</strong>: el proceso se archiva.</li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============================================================
+     ARTÍCULO 76
+     ============================================================ -->
+<section id="art76" class="article-section">
+  <div class="article-header">
+    <div class="roman">LXXVI</div>
+    <h2>Medida de seguridad en casos especiales
+      <span class="tagline">Cuando la pena no es privativa de libertad.</span>
+    </h2>
+  </div>
+
+  <blockquote class="legal-text">
+    <span class="legal-label">Texto normativo · Artículo 76°</span>
+    <p>Cuando la conducta punible tenga señalada pena diferente a la privativa de la libertad,
+       la medida de seguridad no podrá superar el término de dos (2) años.</p>
+  </blockquote>
+
+  <div class="chips">
+    <span class="chip">Pena no privativa de libertad</span>
+    <span class="chip">Máximo 2 años</span>
+    <span class="chip">Proporcionalidad</span>
+  </div>
+
+  <div class="quad-grid">
+    <article class="perspective-card dogma">
+      <div class="card-header"><span class="card-icon">⚖️</span><h3 class="card-title">Dogmática</h3></div>
+      <div class="card-sub">La proporcionalidad con la pena</div>
+      <div class="card-content">
+        <p>El artículo 76 establece un <strong>límite especial</strong> para los casos en
+        que la pena del delito no es privativa de la libertad (multa, inhabilitación).
+        Dogmáticamente, la medida de seguridad no puede ser más intensa que la pena: si
+        el delito es menor, la medida también debe serlo. El máximo es de 2 años.</p>
+        <p>Esto refleja el principio de <em>proporcionalidad</em>: la medida debe guardar
+        relación con la gravedad del delito. No tiene sentido imponer una internación
+        prolongada por un delito que sólo merece multa.</p>
+      </div>
+    </article>
+    <article class="perspective-card onto">
+      <div class="card-header"><span class="card-icon">🌌</span><h3 class="card-title">Ontología</h3></div>
+      <div class="card-sub">La medida como respuesta proporcional</div>
+      <div class="card-content">
+        <p>El artículo 76 revela que la medida de seguridad no es una respuesta
+        <strong>autónoma</strong> al delito: está vinculada a la pena. Ontológicamente,
+        la medida es una <em>respuesta proporcional</em>: si el delito es menor, la
+        medida también debe serlo. La peligrosidad no justifica una medida desproporcionada
+        respecto a la gravedad del hecho.</p>
+      </div>
+    </article>
+    <article class="perspective-card herm">
+      <div class="card-header"><span class="card-icon">📜</span><h3 class="card-title">Hermenéutica</h3></div>
+      <div class="card-sub">La interpretación del límite</div>
+      <div class="card-content">
+        <p>La hermenéutica exige interpretar el <strong>límite de 2 años</strong> como
+        un máximo absoluto: la medida no puede excederlo, aunque las necesidades de
+        tratamiento sugieran un plazo mayor. Si el tratamiento requiere más tiempo,
+        debe recurrirse a otras vías (tratamiento ambulatorio voluntario, red de salud
+        mental).</p>
+        <p>La hermenéutica exige además que el juez <strong>individualice</strong> la
+        medida dentro del límite: no basta con imponer 2 años; debe fijar el mínimo
+        según las necesidades de tratamiento.</p>
+      </div>
+    </article>
+    <article class="perspective-card proc">
+      <div class="card-header"><span class="card-icon">📋</span><h3 class="card-title">Razonabilidad procedimental</h3></div>
+      <div class="card-sub">El procedimiento específico</div>
+      <div class="card-content">
+        <p>Procedimentalmente, la medida sigue estos pasos:</p>
+        <ul>
+          <li><strong>1. Verificación</strong>: el juez verifica que la pena del delito no es privativa de la libertad.</li>
+          <li><strong>2. Imposición</strong>: el juez impone la medida de seguridad con máximo de 2 años.</li>
+          <li><strong>3. Ejecución</strong>: la medida se ejecuta según su naturaleza (internación, libertad vigilada, etc.).</li>
+          <li><strong>4. Control trimestral</strong>: el juez solicita informes periódicos.</li>
+          <li><strong>5. Extinción</strong>: transcurridos los 2 años, el juez declara la extinción.</li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============================================================
+     ARTÍCULO 77
+     ============================================================ -->
+<section id="art77" class="article-section">
+  <div class="article-header">
+    <div class="roman">LXXVII</div>
+    <h2>Control judicial de las medidas
+      <span class="tagline">La garantía contra la internación indefinida.</span>
+    </h2>
+  </div>
+
+  <blockquote class="legal-text">
+    <span class="legal-label">Texto normativo · Artículo 77°</span>
+    <p>El Juez está en la obligación de solicitar trimestralmente informaciones tendientes a
+       establecer si la medida debe continuar, suspenderse o modificarse.</p>
+  </blockquote>
+
+  <div class="chips">
+    <span class="chip">Control judicial</span>
+    <span class="chip">Trimestral</span>
+    <span class="chip">Continuación, suspensión, modificación</span>
+    <span class="chip">Garantía del debido proceso</span>
+  </div>
+
+  <div class="quad-grid">
+    <article class="perspective-card dogma">
+      <div class="card-header"><span class="card-icon">⚖️</span><h3 class="card-title">Dogmática</h3></div>
+      <div class="card-sub">La obligación judicial</div>
+      <div class="card-content">
+        <p>El artículo 77 consagra una <strong>obligación judicial</strong>: el juez debe
+        solicitar informes trimestrales sobre la evolución del inimputable. Dogmáticamente,
+        es una garantía del <em>debido proceso</em>: la medida de seguridad no puede ser
+        indefinida sin control judicial. El juez debe evaluar periódicamente si la medida
+        debe continuar, suspenderse o modificarse.</p>
+        <p>La periodicidad trimestral es una <em>regla de razonabilidad</em>: ni tan frecuente
+        que sature al juez, ni tan espaciada que permita la internación indefinida.</p>
+      </div>
+    </article>
+    <article class="perspective-card onto">
+      <div class="card-header"><span class="card-icon">🌌</span><h3 class="card-title">Ontología</h3></div>
+      <div class="card-sub">La temporalidad de la medida</div>
+      <div class="card-content">
+        <p>El control trimestral revela que la medida de seguridad es <strong>temporal
+        y revisable</strong>. Ontológicamente, no es una condena perpetua: es una respuesta
+        que evoluciona con la evolución del inimputable. La periodicidad del control refleja
+        la <em>dinamicidad</em> de la enfermedad mental: el paciente puede mejorar, estabilizarse
+        o empeorar. La medida debe adaptarse a esa evolución.</p>
+      </div>
+    </article>
+    <article class="perspective-card herm">
+      <div class="card-header"><span class="card-icon">📜</span><h3 class="card-title">Hermenéutica</h3></div>
+      <div class="card-sub">La interpretación conforme a los DD.HH.</div>
+      <div class="card-content">
+        <p>La hermenéutica del artículo 77 debe ser <strong>conforme a los estándares
+        internacionales</strong>: los Principios de la ONU para la protección de los enfermos
+        mentales (1991) exigen que toda internación sea revisada periódicamente por un
+        tribunal independiente. El control trimestral es la materialización de ese mandato.</p>
+        <p>La hermenéutica exige que el juez no se limite a recibir los informes: debe
+        <em>evaluarlos</em> y <em>decidir</em>. Si los informes sugieren que la medida
+        debe suspenderse, el juez debe hacerlo. Si sugieren que debe modificarse, el juez
+        debe modificarla. El control no es formal: es sustancial.</p>
+      </div>
+    </article>
+    <article class="perspective-card proc">
+      <div class="card-header"><span class="card-icon">📋</span><h3 class="card-title">Razonabilidad procedimental</h3></div>
+      <div class="card-sub">El procedimiento de control</div>
+      <div class="card-content">
+        <p>Procedimentalmente, el control trimestral sigue estos pasos:</p>
+        <ul>
+          <li><strong>1. Solicitud de informes</strong>: cada tres meses, el juez solicita al establecimiento informes sobre la evolución del inimputable.</li>
+          <li><strong>2. Evaluación pericial</strong>: los informes deben incluir evaluación psiquiátrica o psicológica.</li>
+          <li><strong>3. Audiencia</strong>: el juez puede convocar audiencia para oír al inimputable, a los peritos, a las partes.</li>
+          <li><strong>4. Decisión</strong>: el juez decide si la medida debe continuar, suspenderse o modificarse.</li>
+          <li><strong>5. Notificación</strong>: la decisión se notifica al inimputable, a su defensor, al Ministerio Público.</li>
+          <li><strong>6. Recursos</strong>: contra la decisión proceden los recursos ordinarios.</li>
+        </ul>
+      </div>
+    </article>
+  </div>
+
+  <div class="callout">
+    <span class="label">Nodo de razonabilidad</span>
+    <p><strong>¿Qué pasa si el juez no cumple la obligación trimestral?</strong>
+    La omisión del juez constituye una <em>vía de hecho</em> por defecto absoluto: la
+    internación se vuelve arbitraria. El inimputable (o su defensor) puede acudir a la
+    <em>tutela</em> para exigir el control. La Corte Constitucional ha subrayado que la
+    internación sin control judicial viola el debido proceso y la dignidad humana.</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     ARTÍCULO 78
+     ============================================================ -->
+<section id="art78" class="article-section">
+  <div class="article-header">
+    <div class="roman">LXXVIII</div>
+    <h2>Revocación de la suspensión condicional
+      <span class="tagline">Cuando la libertad condicional ya no es suficiente.</span>
+    </h2>
+  </div>
+
+  <blockquote class="legal-text">
+    <span class="legal-label">Texto normativo · Artículo 78°</span>
+    <p>Podrá revocarse la suspensión condicional de la medida de seguridad cuando oído el concepto
+       del perito, se haga necesaria su continuación.</p>
+    <p>Transcurrido el tiempo máximo de duración de la medida, el Juez declarará su extinción.</p>
+  </blockquote>
+
+  <div class="chips">
+    <span class="chip">Revocación</span>
+    <span class="chip">Suspensión condicional</span>
+    <span class="chip">Concepto pericial</span>
+    <span class="chip">Extinción por máximo</span>
+  </div>
+
+  <div class="quad-grid">
+    <article class="perspective-card dogma">
+      <div class="card-header"><span class="card-icon">⚖️</span><h3 class="card-title">Dogmática</h3></div>
+      <div class="card-sub">La reversibilidad de la suspensión</div>
+      <div class="card-content">
+        <p>El artículo 78 regula dos situaciones: la <strong>revocación</strong> de la
+        suspensión condicional y la <strong>extinción</strong> por cumplimiento del máximo.
+        Dogmáticamente, la suspensión condicional no es definitiva: si el inimputable
+        empeora, el juez puede revocarla y ordenar la internación. Pero la medida tiene
+        un límite temporal absoluto: transcurrido el máximo, se extingue.</p>
+        <p>La revocación requiere <em>concepto pericial</em>: el juez no puede decidir
+        por sí solo; requiere evaluación clínica.</p>
+      </div>
+    </article>
+    <article class="perspective-card onto">
+      <div class="card-header"><span class="card-icon">🌌</span><h3 class="card-title">Ontología</h3></div>
+      <div class="card-sub">La dinamicidad de la enfermedad</div>
+      <div class="card-content">
+        <p>La revocación revela que la <strong>enfermedad mental es dinámica</strong>:
+        el paciente puede mejorar y empeorar. Ontológicamente, la suspensión condicional
+        es una <em>apuesta</em>: el juez apuesta a que el paciente puede vivir en libertad.
+        Si la apuesta falla, la medida se revoca. Pero la extinción por máximo revela que
+        la medida tiene un <em>límite</em>: no puede durar para siempre.</p>
+      </div>
+    </article>
+    <article class="perspective-card herm">
+      <div class="card-header"><span class="card-icon">📜</span><h3 class="card-title">Hermenéutica</h3></div>
+      <div class="card-sub">La interpretación del concepto pericial</div>
+      <div class="card-content">
+        <p>La hermenéutica exige que el <strong>concepto pericial</strong> sea vinculante:
+        el juez no puede revocar la suspensión sin concepto pericial. Pero el concepto no
+        es <em>decisorio</em>: el juez puede no seguirlo si lo motiva adecuadamente. La
+        hermenéutica exige que el juez <em>escuche</em> al perito pero <em>decida</em>
+        con autonomía.</p>
+        <p>La hermenéutica exige además que la <strong>extinción</strong> sea automática:
+        transcurrido el máximo, el juez debe declarar la extinción. No hay discrecionalidad:
+        es una obligación.</p>
+      </div>
+    </article>
+    <article class="perspective-card proc">
+      <div class="card-header"><span class="card-icon">📋</span><h3 class="card-title">Razonabilidad procedimental</h3></div>
+      <div class="card-sub">El procedimiento de revocación y extinción</div>
+      <div class="card-content">
+        <p>Procedimentalmente, la revocación y la extinción siguen estos pasos:</p>
+        <ul>
+          <li><strong>Revocación</strong>:
+            <ul>
+              <li>1. El juez solicita concepto pericial sobre la evolución del inimputable.</li>
+              <li>2. El perito evalúa si la suspensión condicional sigue siendo adecuada.</li>
+              <li>3. Si el perito considera que la medida debe continuar, el juez revoca la suspensión.</li>
+              <li>4. El juez ordena la internación.</li>
+            </ul>
+          </li>
+          <li><strong>Extinción</strong>:
+            <ul>
+              <li>1. Transcurrido el máximo de la medida, el juez declara la extinción.</li>
+              <li>2. El inimputable recupera su libertad plena.</li>
+              <li>3. Se levantan todas las obligaciones accesorias.</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============================================================
+     ARTÍCULO 79
+     ============================================================ -->
+<section id="art79" class="article-section">
+  <div class="article-header">
+    <div class="roman">LXXIX</div>
+    <h2>Suspensión o cesación de las medidas de seguridad
+      <span class="tagline">La decisión judicial con dictamen de experto.</span>
+    </h2>
+  </div>
+
+  <blockquote class="legal-text">
+    <span class="legal-label">Texto normativo · Artículo 79°</span>
+    <p>La suspensión o cesación de las medidas de seguridad se hará por decisión del Juez,
+       previo dictamen de experto oficial.</p>
+    <p>Si se tratare de la medida prevista en el Artículo 72, el dictamen se sustituirá por
+       concepto escrito y motivado de la Junta o Consejo Directivo del establecimiento en
+       donde hubiere cumplido la internación, o de su Director a falta de tales organismos.</p>
+  </blockquote>
+
+  <div class="chips">
+    <span class="chip">Suspensión</span>
+    <span class="chip">Cesación</span>
+    <span class="chip">Dictamen de experto oficial</span>
+    <span class="chip">Concepto de la Junta o Director</span>
+    <span class="chip">Decisión judicial</span>
+  </div>
+
+  <div class="quad-grid">
+    <article class="perspective-card dogma">
+      <div class="card-header"><span class="card-icon">⚖️</span><h3 class="card-title">Dogmática</h3></div>
+      <div class="card-sub">La distinción entre suspensión y cesación</div>
+      <div class="card-content">
+        <p>El artículo 79 distingue dos figuras: <strong>suspensión</strong> (la medida
+        se interrumpe temporalmente pero puede reanudarse) y <strong>cesación</strong>
+        (la medida termina definitivamente). Dogmáticamente, la suspensión opera cuando
+        el inimputable puede adaptarse al medio social o ser tratado ambulatoriamente;
+        la cesación opera cuando el inimputable se ha rehabilitado o ha transcurrido el
+        máximo.</p>
+        <p>La decisión es <em>judicial</em> pero requiere <em>dictamen de experto oficial</em>:
+        el juez no puede decidir sin evaluación clínica. Para la medida del artículo 72
+        (casa de estudio o trabajo), el dictamen se sustituye por concepto de la Junta
+        o Director del establecimiento.</p>
+      </div>
+    </article>
+    <article class="perspective-card onto">
+      <div class="card-header"><span class="card-icon">🌌</span><h3 class="card-title">Ontología</h3></div>
+      <div class="card-sub">La autoridad del saber clínico</div>
+      <div class="card-content">
+        <p>El dictamen de experto revela que la medida de seguridad se funda en un
+        <strong>saber clínico</strong>, no en un saber jurídico. Ontológicamente, el juez
+        no es el único que decide: el perito tiene una <em>autoridad epistémica</em>.
+        La decisión es jurídica pero se nutre de la evaluación clínica. Esto refleja que
+        la medida no es castigo sino tratamiento: requiere conocimiento médico, no sólo
+        conocimiento jurídico.</p>
+      </div>
+    </article>
+    <article class="perspective-card herm">
+      <div class="card-header"><span class="card-icon">📜</span><h3 class="card-title">Hermenéutica</h3></div>
+      <div class="card-sub">La interpretación del dictamen</div>
+      <div class="card-content">
+        <p>La hermenéutica exige que el <strong>dictamen de experto oficial</strong> sea
+        <em>vinculante</em> en lo clínico pero <em>no vinculante</em> en lo jurídico: el
+        juez debe seguir la evaluación clínica pero puede decidir autónomamente sobre la
+        suspensión o cesación. La hermenéutica exige que el juez <em>motive</em> su decisión:
+        si no sigue el dictamen, debe explicar por qué.</p>
+        <p>La hermenéutica exige además que el <strong>concepto de la Junta o Director</strong>
+        (art. 72) sea <em>escrito y motivado</em>: no basta con una opinión verbal; debe
+        haber una evaluación documentada.</p>
+      </div>
+    </article>
+    <article class="perspective-card proc">
+      <div class="card-header"><span class="card-icon">📋</span><h3 class="card-title">Razonabilidad procedimental</h3></div>
+      <div class="card-sub">El procedimiento de suspensión o cesación</div>
+      <div class="card-content">
+        <p>Procedimentalmente, la suspensión o cesación sigue estos pasos:</p>
+        <ul>
+          <li><strong>1. Solicitud</strong>: el inimputable, su defensor o el Ministerio Público solicitan la suspensión o cesación.</li>
+          <li><strong>2. Dictamen</strong>: el juez solicita dictamen de experto oficial (o concepto de la Junta o Director, en el caso del art. 72).</li>
+          <li><strong>3. Audiencia</strong>: el juez convoca audiencia para oír al inimputable, a los peritos, a las partes.</li>
+          <li><strong>4. Decisión</strong>: el juez decide si suspende o cesa la medida, con motivación expresa.</li>
+          <li><strong>5. Notificación</strong>: la decisión se notifica al inimputable, a su defensor, al Ministerio Público.</li>
+          <li><strong>6. Recursos</strong>: contra la decisión proceden los recursos ordinarios.</li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============================================================
+     ARTÍCULO 80
+     ============================================================ -->
+<section id="art80" class="article-section">
+  <div class="article-header">
+    <div class="roman">LXXX</div>
+    <h2>Cómputo de la internación preventiva
+      <span class="tagline">El tiempo de detención preventiva se descuenta de la medida.</span>
+    </h2>
+  </div>
+
+  <blockquote class="legal-text">
+    <span class="legal-label">Texto normativo · Artículo 80°</span>
+    <p>El tiempo que el sentenciado hubiese permanecido bajo detención preventiva se computará
+       como parte cumplida de la medida de seguridad impuesta.</p>
+  </blockquote>
+
+  <div class="chips">
+    <span class="chip">Internación preventiva</span>
+    <span class="chip">Cómputo</span>
+    <span class="chip">Parte cumplida</span>
+    <span class="chip">Garantía contra la doble sanción</span>
+  </div>
+
+  <div class="quad-grid">
+    <article class="perspective-card dogma">
+      <div class="card-header"><span class="card-icon">⚖️</span><h3 class="card-title">Dogmática</h3></div>
+      <div class="card-sub">La garantía contra la doble sanción</div>
+      <div class="card-content">
+        <p>El artículo 80 consagra una <strong>garantía fundamental</strong>: el tiempo
+        de detención preventiva se descuenta de la medida de seguridad. Dogmáticamente,
+        evita la <em>doble sanción</em>: el inimputable no puede ser castigado dos veces
+        por el mismo hecho. La detención preventiva no es pena ni medida, pero se computa
+        como parte cumplida de la medida.</p>
+        <p>Esta regla es análoga a la del artículo 37, numeral 3, para la pena de prisión:
+        la detención preventiva se computa como parte cumplida de la pena.</p>
+      </div>
+    </article>
+    <article class="perspective-card onto">
+      <div class="card-header"><span class="card-icon">🌌</span><h3 class="card-title">Ontología</h3></div>
+      <div class="card-sub">La unidad del tiempo de privación</div>
+      <div class="card-content">
+        <p>El cómputo revela que la <strong>privación de libertad</strong> es una realidad
+        unitaria: no importa si es preventiva o definitiva, si es pena o medida.
+        Ontológicamente, el tiempo de privación es el mismo: el inimputable sufrió la
+        privación. El derecho reconoce esa realidad y la computa.</p>
+      </div>
+    </article>
+    <article class="perspective-card herm">
+      <div class="card-header"><span class="card-icon">📜</span><h3 class="card-title">Hermenéutica</h3></div>
+      <div class="card-sub">La interpretación favorable al inimputable</div>
+      <div class="card-content">
+        <p>La hermenéutica del artículo 80 debe ser <strong>favorable al inimputable</strong>:
+        cualquier duda sobre el cómputo se resuelve a su favor. La hermenéutica exige que
+        el juez <em>verifique</em> el tiempo de detención preventiva con los registros
+        del establecimiento y lo descuente de la medida.</p>
+        <p>La hermenéutica exige además que el cómputo sea <em>automático</em>: no requiere
+        solicitud del inimputable; el juez debe hacerlo de oficio.</p>
+      </div>
+    </article>
+    <article class="perspective-card proc">
+      <div class="card-header"><span class="card-icon">📋</span><h3 class="card-title">Razonabilidad procedimental</h3></div>
+      <div class="card-sub">El procedimiento de cómputo</div>
+      <div class="card-content">
+        <p>Procedimentalmente, el cómputo sigue estos pasos:</p>
+        <ul>
+          <li><strong>1. Verificación</strong>: el juez verifica el tiempo de detención preventiva con los registros del establecimiento.</li>
+          <li><strong>2. Cómputo</strong>: el juez descuenta el tiempo de la medida impuesta.</li>
+          <li><strong>3. Motivación</strong>: el juez motiva el cómputo en la sentencia.</li>
+          <li><strong>4. Notificación</strong>: la decisión se notifica al inimputable, a su defensor, al Ministerio Público.</li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============================================================
+     ARTÍCULO 81
+     ============================================================ -->
+<section id="art81" class="article-section">
+  <div class="article-header">
+    <div class="roman">LXXXI</div>
+    <h2>Restricción de otros derechos a los inimputables
+      <span class="tagline">Las restricciones compatibles con la medida.</span>
+    </h2>
+  </div>
+
+  <blockquote class="legal-text">
+    <span class="legal-label">Texto normativo · Artículo 81°</span>
+    <p>La restricción de otros derechos consagrados en este código se aplicará a los inimputables
+       en cuanto no se opongan a la ejecución de la medida de seguridad impuesta y sean compatibles
+       con sus funciones.</p>
+  </blockquote>
+
+  <div class="chips">
+    <span class="chip">Restricción de otros derechos</span>
+    <span class="chip">Compatibilidad con la medida</span>
+    <span class="chip">Funciones de la medida</span>
+    <span class="chip">Interpretación restrictiva</span>
+  </div>
+
+  <div class="quad-grid">
+    <article class="perspective-card dogma">
+      <div class="card-header"><span class="card-icon">⚖️</span><h3 class="card-title">Dogmática</h3></div>
+      <div class="card-sub">La aplicabilidad condicionada</div>
+      <div class="card-content">
+        <p>El artículo 81 regula la <strong>aplicabilidad</strong> de las penas privativas
+        de otros derechos (arts. 43–51) a los inimputables. Dogmáticamente, estas penas
+        sólo se aplican si son <em>compatibles</em> con la medida de seguridad y con sus
+        funciones. Si la restricción se opone a la ejecución de la medida o a sus funciones
+        (curación, tutela, rehabilitación), no se aplica.</p>
+        <p>Ejemplo: la inhabilitación para el ejercicio de derechos políticos puede aplicarse
+        a un inimputable; la privación del derecho a conducir vehículos sólo si es compatible
+        con el tratamiento.</p>
+      </div>
+    </article>
+    <article class="perspective-card onto">
+      <div class="card-header"><span class="card-icon">🌌</span><h3 class="card-title">Ontología</h3></div>
+      <div class="card-sub">La prioridad de la curación</div>
+      <div class="card-content">
+        <p>El artículo 81 revela que la <strong>curación</strong> tiene prioridad sobre
+        la restricción de otros derechos. Ontológicamente, la medida de seguridad es una
+        respuesta terapéutica: cualquier restricción que se oponga a la curación es
+        irrazonable. El derecho reconoce que el inimputable es, ante todo, un paciente
+        que necesita tratamiento.</p>
+      </div>
+    </article>
+    <article class="perspective-card herm">
+      <div class="card-header"><span class="card-icon">📜</span><h3 class="card-title">Hermenéutica</h3></div>
+      <div class="card-sub">La interpretación restrictiva</div>
+      <div class="card-content">
+        <p>La hermenéutica del artículo 81 debe ser <strong>restrictiva</strong>: las
+        restricciones de otros derechos sólo se aplican si son <em>estrictamente necesarias</em>
+        y <em>compatibles</em> con la medida. La hermenéutica exige que el juez evalúe
+        caso por caso si la restricción es compatible con la curación, la tutela o la
+        rehabilitación del inimputable.</p>
+        <p>La hermenéutica exige además que las restricciones respeten la <em>dignidad</em>
+        del inimputable: no pueden ser crueles, infamantes o desproporcionadas.</p>
+      </div>
+    </article>
+    <article class="perspective-card proc">
+      <div class="card-header"><span class="card-icon">📋</span><h3 class="card-title">Razonabilidad procedimental</h3></div>
+      <div class="card-sub">El procedimiento de aplicación</div>
+      <div class="card-content">
+        <p>Procedimentalmente, la aplicación de restricciones sigue estos pasos:</p>
+        <ul>
+          <li><strong>1. Identificación</strong>: el juez identifica las restricciones de otros derechos aplicables al caso.</li>
+          <li><strong>2. Evaluación de compatibilidad</strong>: el juez evalúa si cada restricción es compatible con la medida y sus funciones.</li>
+          <li><strong>3. Dictamen pericial</strong>: el juez solicita dictamen pericial sobre la compatibilidad.</li>
+          <li><strong>4. Decisión</strong>: el juez decide si aplica o no cada restricción, con motivación expresa.</li>
+          <li><strong>5. Notificación</strong>: la decisión se notifica al inimputable, a su defensor, al Ministerio Público.</li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============================================================
+     SÍNTESIS
+     ============================================================ -->
+<section id="sintesis" class="sintesis">
+  <div class="section-kicker">Lectura transversal</div>
+  <h2>Trece artículos, cuatro preguntas</h2>
+  <p class="intro">
+    Los artículos 69 a 81 no son preceptos independientes: son las articulaciones de un
+    mismo sistema de respuestas al inimputable. La tabla siguiente reconstruye, para cada
+    artículo, las cuatro preguntas que lo atraviesan.
+  </p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Norma</th>
+          <th>Dogmática</th>
+          <th>Ontología</th>
+          <th>Hermenéutica</th>
+          <th>Razonabilidad procedimental</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Art. 69</td>
+          <td>Sistema vicarial; tres tipos de medida; reintegración cultural inexequible.</td>
+          <td>El inimputable como sujeto de protección, no de castigo.</td>
+          <td>Interpretación restrictiva y conforme a DD.HH.</td>
+          <td>Pericia, selección de medida, fijación de límites, control trimestral.</td>
+        </tr>
+        <tr>
+          <td>Art. 70</td>
+          <td>Internación psiquiátrica permanente; máximo 20 años o pena del delito.</td>
+          <td>La curación como horizonte; la progresividad del tratamiento.</td>
+          <td>Conforme a estándares internacionales; último recurso.</td>
+          <td>Imposición, tratamiento, control trimestral, rehabilitación, suspensión, extinción.</td>
+        </tr>
+        <tr>
+          <td>Art. 71</td>
+          <td>Internación psiquiátrica transitoria con base patológica; máximo 10 años.</td>
+          <td>La temporalidad de la enfermedad; la reversibilidad.</td>
+          <td>Prueba de la base patológica; evaluación clínica objetiva.</td>
+          <td>Pericia, imposición, tratamiento, control trimestral, rehabilitación, suspensión, extinción.</td>
+        </tr>
+        <tr>
+          <td>Art. 72</td>
+          <td>Casa de estudio o trabajo; inimputables sin trastorno mental; máximo 10 años.</td>
+          <td>La educación como alternativa a la curación.</td>
+          <td>Conforme al interés superior del menor y a la diversidad cultural.</td>
+          <td>Pericia, imposición, programa educativo, control trimestral, suspensión, extinción.</td>
+        </tr>
+        <tr>
+          <td>Art. 74</td>
+          <td>Libertad vigilada; accesoria post-internación; máximo 3 años.</td>
+          <td>La reinserción como proceso gradual.</td>
+          <td>Proporcionalidad de las obligaciones; no privación encubierta.</td>
+          <td>Imposición, fijación de obligaciones, control, extinción, revocación.</td>
+        </tr>
+        <tr>
+          <td>Art. 75</td>
+          <td>Trastorno transitorio sin base patológica; sin medida; indemnización.</td>
+          <td>La responsabilidad civil como alternativa.</td>
+          <td>Interpretación restrictiva de la ausencia de base patológica.</td>
+          <td>Pericia, declaración de inimputabilidad, indemnización, terminación.</td>
+        </tr>
+        <tr>
+          <td>Art. 76</td>
+          <td>Casos especiales; pena no privativa de libertad; máximo 2 años.</td>
+          <td>La medida como respuesta proporcional.</td>
+          <td>Límite absoluto de 2 años; individualización.</td>
+          <td>Verificación, imposición, ejecución, control trimestral, extinción.</td>
+        </tr>
+        <tr>
+          <td>Art. 77</td>
+          <td>Control judicial trimestral; obligación judicial.</td>
+          <td>La temporalidad y revisabilidad de la medida.</td>
+          <td>Conforme a estándares internacionales; control sustancial.</td>
+          <td>Solicitud de informes, evaluación pericial, audiencia, decisión, notificación, recursos.</td>
+        </tr>
+        <tr>
+          <td>Art. 78</td>
+          <td>Revocación de la suspensión; extinción por máximo.</td>
+          <td>La dinamicidad de la enfermedad; el límite temporal.</td>
+          <td>Concepto pericial vinculante en lo clínico; extinción automática.</td>
+          <td>Concepto pericial, decisión de revocación o extinción, notificación.</td>
+        </tr>
+        <tr>
+          <td>Art. 79</td>
+          <td>Suspensión o cesación; dictamen de experto oficial.</td>
+          <td>La autoridad del saber clínico.</td>
+          <td>Dictamen vinculante en lo clínico; decisión judicial autónoma.</td>
+          <td>Solicitud, dictamen, audiencia, decisión motivada, notificación, recursos.</td>
+        </tr>
+        <tr>
+          <td>Art. 80</td>
+          <td>Cómputo de la internación preventiva; parte cumplida.</td>
+          <td>La unidad del tiempo de privación.</td>
+          <td>Interpretación favorable al inimputable; cómputo automático.</td>
+          <td>Verificación, cómputo, motivación, notificación.</td>
+        </tr>
+        <tr>
+          <td>Art. 81</td>
+          <td>Restricción de otros derechos; compatibilidad con la medida.</td>
+          <td>La prioridad de la curación.</td>
+          <td>Interpretación restrictiva; respeto de la dignidad.</td>
+          <td>Identificación, evaluación de compatibilidad, dictamen pericial, decisión motivada.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="closing">
+    <div class="serif">"En el momento de la ejecución de la medida de seguridad operan las funciones de protección, curación, tutela y rehabilitación."</div>
+    <p>
+      En esa fórmula del artículo 5 se condensa todo el proyecto. Las medidas de seguridad no son
+      penas: son <strong>respuestas terapéuticas</strong> al inimputable. No se fundan en la culpabilidad
+      sino en la peligrosidad; no retribuyen sino que <em>curan, tutelan, rehabilitan</em>.
+      <strong>Dogmática, ontología, hermenéutica y razonabilidad procedimental convergen en un mismo
+      punto: el inimputable como sujeto de derechos, no como objeto de castigo.</strong>
+    </p>
+  </div>
+</section>
+
+<!-- ============================================================
+     GLOSARIO
+     ============================================================ -->
+<section id="glosario" class="glosario">
+  <details>
+    <summary>Glosario mínimo de las medidas de seguridad <span>+</span></summary>
+    <dl class="gloss-list">
+      <div><dt>Sistema vicarial</dt><dd>Modelo que distingue pena (fundada en culpabilidad) y medida de seguridad (fundada en peligrosidad).</dd></div>
+      <div><dt>Medida de seguridad</dt><dd>Respuesta terapéutica al inimputable: internación, casa de estudio, libertad vigilada.</dd></div>
+      <div><dt>Internación psiquiátrica</dt><dd>Medida de seguridad para inimputables por trastorno mental, en establecimiento adecuado.</dd></div>
+      <div><dt>Casa de estudio o trabajo</dt><dd>Medida de seguridad para inimputables sin trastorno mental, con fines educativos.</dd></div>
+      <div><dt>Libertad vigilada</dt><dd>Medida accesoria post-internación, con obligaciones de residencia, prohibición y presentación.</dd></div>
+      <div><dt>Trastorno mental permanente</dt><dd>Enfermedad mental crónica que genera internación con máximo de 20 años.</dd></div>
+      <div><dt>Trastorno mental transitorio con base patológica</dt><dd>Enfermedad mental reversible con causa orgánica; internación con máximo de 10 años.</dd></div>
+      <div><dt>Trastorno mental transitorio sin base patológica</dt><dd>Alteración mental pasajera sin causa orgánica; no genera medida de seguridad.</dd></div>
+      <div><dt>Rehabilitación mental</dt><dd>Recuperación clínica del inimputable que permite cesar la medida.</dd></div>
+      <div><dt>Suspensión condicional</dt><dd>Interrupción temporal de la internación cuando el inimputable puede adaptarse al medio social.</dd></div>
+      <div><dt>Tratamiento ambulatorio</dt><dd>Alternativa a la internación total; el paciente recibe tratamiento sin privación de libertad.</dd></div>
+      <div><dt>Control judicial trimestral</dt><dd>Obligación del juez de solicitar informes cada tres meses sobre la evolución del inimputable.</dd></div>
+      <div><dt>Revocación</dt><dd>Decisión judicial de reanudar la internación tras suspensión condicional, con concepto pericial.</dd></div>
+      <div><dt>Cesación</dt><dd>Terminación definitiva de la medida por rehabilitación o cumplimiento del máximo.</dd></div>
+      <div><dt>Extinción</dt><dd>Terminación de la medida por cumplimiento del máximo temporal.</dd></div>
+      <div><dt>Cómputo</dt><dd>Descuento del tiempo de detención preventiva de la medida de seguridad.</dd></div>
+      <div><dt>Dictamen de experto oficial</dt><dd>Evaluación clínica vinculante en lo clínico que requiere el juez para decidir sobre suspensión o cesación.</dd></div>
+      <div><dt>Compatibilidad</dt><dd>Requisito para aplicar restricciones de otros derechos al inimputable: no deben oponerse a la medida.</dd></div>
+      <div><dt>Principios de la ONU para la protección de los enfermos mentales (1991)</dt><dd>Estándar internacional que exige revisión periódica de toda internación.</dd></div>
+      <div><dt>Convención sobre los Derechos de las Personas con Discapacidad (2006)</dt><dd>Tratado internacional que reconoce la capacidad jurídica de las personas con discapacidad.</dd></div>
+    </dl>
+  </details>
+</section>
+
+<!-- ============================================================
+     REFERENCIAS
+     ============================================================ -->
+<section class="refs">
+  <h3>Claves doctrinales para profundizar</h3>
+  <div class="ref-grid">
+    <div class="ref"><b>Claus Roxin</b><i>Derecho Penal. Parte General</i><br>Medidas de seguridad, peligrosidad, sistema vicarial.</div>
+    <div class="ref"><b>Günther Jakobs</b><i>Derecho Penal. Parte General</i><br>Prevención especial positiva, tratamiento del inimputable.</div>
+    <div class="ref"><b>Eugenio Raúl Zaffaroni</b><i>Tratado de Derecho Penal</i><br>Medidas de seguridad, crítica al modelo de peligrosidad.</div>
+    <div class="ref"><b>Fernando Velásquez Velásquez</b><i>Manual de Derecho Penal Colombiano</i><br>Recepción dogmática de las medidas de seguridad en Colombia.</div>
+    <div class="ref"><b>Corte Constitucional de Colombia</b><i>Sentencias C-370 de 2002, C-439 de 1997, C-292 de 2014</i><br>Inimputabilidad, diversidad sociocultural, control judicial de medidas.</div>
+    <div class="ref"><b>Corte Suprema de Justicia</b><i>Sala de Casación Penal</i><br>Medidas de seguridad, internación, libertad vigilada.</div>
+    <div class="ref"><b>Principios de la ONU para la protección de los enfermos mentales (1991)</b><i>Instrumento internacional</i><br>Revisión periódica de la internación; derechos del paciente.</div>
+    <div class="ref"><b>Convención sobre los Derechos de las Personas con Discapacidad (2006)</b><i>Tratado internacional</i><br>Capacidad jurídica; apoyo en el ejercicio de la capacidad.</div>
+    <div class="ref"><b>Michel Foucault</b><i>Historia de la locura en la época clásica</i><br>Ontología de la internación psiquiátrica; el gran encierro.</div>
+    <div class="ref"><b>Erving Goffman</b><i>Internados</i><br>Sociología de las instituciones totales; la vida en el manicomio.</div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <strong>De las medidas de seguridad · Código Penal colombiano</strong>
+  <p>Análisis tetradimensional de los artículos 69 a 81, Ley 599 de 2000. Continuación del
+     estudio del Libro Primero, Parte General.</p>
+  <p class="fine">Material académico de estudio y reflexión filosófico-jurídica.
+     No constituye asesoría legal.</p>
+</footer>
+
+<script>
+const progress = document.getElementById('progress');
+function updateProgress(){
+  const h = document.documentElement;
+  const total = h.scrollHeight - h.clientHeight;
+  progress.style.width = (total > 0 ? (h.scrollTop / total) * 100 : 0) + '%';
+}
+window.addEventListener('scroll', updateProgress, {passive:true});
+window.addEventListener('resize', updateProgress);
+updateProgress();
+
+if ('IntersectionObserver' in window) {
+  const targets = document.querySelectorAll(
+    '.perspective-card, .callout, .case-study, .method-card, .pipe-node, .closing, .ref'
+  );
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, {threshold: 0.08, rootMargin: '0px 0px -40px 0px'});
+
+  targets.forEach((el, i) => {
+    el.classList.add('reveal');
+    el.style.transitionDelay = (i % 3) * 70 + 'ms';
+    revealObserver.observe(el);
+  });
+}
+
+const navLinks = document.querySelectorAll('nav a');
+const sections = [...navLinks].map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+
+if ('IntersectionObserver' in window) {
+  const navObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(a => {
+          a.classList.toggle('active', a.getAttribute('href') === '#' + entry.target.id);
+        });
+      }
+    });
+  }, {rootMargin: '-15% 0px -65% 0px', threshold: 0});
+  sections.forEach(s => navObserver.observe(s));
+}
+</script>
+</body>
+</html>
