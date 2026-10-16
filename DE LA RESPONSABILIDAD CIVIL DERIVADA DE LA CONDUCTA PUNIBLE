@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tríptico Penal · Responsabilidad Civil Derivada | Capítulo VI</title>
+<meta name="description" content="Análisis tridimensional —dogmática, ontología y hermenéutica— de los artículos 94 a 100 del Código Penal colombiano sobre responsabilidad civil derivada de la conducta punible.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<script>document.documentElement.classList.add('js');</script>
+
+<style>
+/* ============================================================
+   TOKENS DE DISEÑO (Idénticos al Capítulo III para consistencia)
+   ============================================================ */
+:root{
+  --bg:#f5f2ea; --surface:#fffdf7; --surface-2:#efeadd; --ink:#182430; --muted:#5d6874;
+  --line:#d9d2c2; --gold:#9a7638; --gold-soft:#f0e6d2;
+  --dogma:#2f5f8a; --dogma-soft:#e7eff7;
+  --onto:#9a5a2c; --onto-soft:#f7ece0;
+  --herme:#2b7267; --herme-soft:#e4f0ec;
+  --shadow:0 18px 45px -25px rgba(24,36,48,.35); --radius:5px; --max:1240px; --header-h:76px;
+}
+html[data-theme="dark"]{
+  --bg:#101820; --surface:#18222d; --surface-2:#1e2a36; --ink:#eae4d7; --muted:#a3aebb;
+  --line:#31404f; --gold:#d3af68; --gold-soft:#2b2a20;
+  --dogma:#8ab8e4; --dogma-soft:#1b2c3c; --onto:#d99b64; --onto-soft:#33271d; --herme:#7cc4b4; --herme-soft:#17302c;
+  --shadow:0 18px 45px -25px rgba(0,0,0,.7);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--header-h) + 90px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Inter',system-ui,sans-serif;font-size:16px;line-height:1.75;-webkit-font-smoothing:antialiased;transition:background .35s,color .35s}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.35;background-image:radial-gradient(var(--line) .6px,transparent .6px);background-size:22px 22px}
+main,header,footer{position:relative;z-index:1}
+h1,h2,h3,h4{font-family:'Fraunces',Georgia,serif;font-weight:500;line-height:1.15;margin:0}
+p{margin:0 0 1em}
+a{color:inherit;text-decoration:none}
+button,input,select{font:inherit;color:inherit}
+button{cursor:pointer}
+ul,ol{margin:0 0 1em;padding-left:1.2em}
+li{margin-bottom:.5em}
+::selection{background:var(--gold);color:var(--bg)}
+:focus-visible{outline:2px solid var(--gold);outline-offset:4px;border-radius:2px}
+.wrap{max-width:var(--max);margin-inline:auto;padding-inline:clamp(20px,5vw,60px)}
+.mono{font-family:'IBM Plex Mono',monospace}
+.eyebrow{font-family:'IBM Plex Mono',monospace;font-size:.7rem;letter-spacing:.19em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:10px;margin-bottom:22px}
+.eyebrow .dot{width:7px;height:7px;background:var(--gold);border-radius:50%;flex:none}
+section{padding-block:clamp(60px,8vw,110px)}
+.section-head{max-width:760px;margin-bottom:48px}
+.section-head h2{font-size:clamp(2rem,4vw,3.1rem);letter-spacing:-.02em;margin-bottom:18px}
+.section-head p{color:var(--muted);font-size:1.05rem;max-width:66ch}
+.skip{position:absolute;left:-9999px;top:0;background:var(--ink);color:var(--bg);padding:12px 20px;z-index:999}
+.skip:focus{left:12px;top:12px}
+
+/* Cabecera y Progreso */
+.progress{position:fixed;top:0;left:0;right:0;height:3px;z-index:1002;background:transparent}
+.progress span{display:block;height:100%;width:0;background:var(--gold);transition:width .1s linear}
+.site-header{position:sticky;top:0;z-index:1000;height:var(--header-h);background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.header-inner{height:100%;display:flex;align-items:center;gap:32px}
+.brand{display:flex;align-items:center;gap:12px;flex:none}
+.brand-mark{width:38px;height:44px;border:1px solid var(--gold);display:grid;place-items:center;font-family:'Fraunces',serif;font-size:1.6rem;color:var(--gold);border-radius:2px 2px 18px 18px}
+.brand-name{font-family:'Fraunces',serif;font-size:1.22rem;line-height:1.1;display:block}
+.brand-sub{display:block;font-family:'IBM Plex Mono',monospace;font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.site-nav{display:flex;gap:26px;margin-left:auto}
+.site-nav a{font-size:.82rem;font-weight:500;color:var(--muted);position:relative;padding-block:8px;transition:color .2s}
+.site-nav a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:2px;background:var(--gold);transition:width .25s}
+.site-nav a:hover,.site-nav a.active{color:var(--ink)}
+.site-nav a.active::after,.site-nav a:hover::after{width:100%}
+.header-actions{display:flex;gap:8px}
+.icon-btn{width:38px;height:38px;border:1px solid var(--line);background:var(--surface);display:grid;place-items:center;border-radius:50%;transition:.2s;font-size:1rem}
+.icon-btn:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-2px)}
+.icon-btn svg{width:17px;height:17px}
+
+/* Hero */
+.hero{padding-top:clamp(45px,6vw,80px);padding-bottom:0;overflow:hidden}
+.hero-grid{display:grid;grid-template-columns:1.25fr .85fr;gap:60px;align-items:center}
+.hero h1{font-size:clamp(3.2rem,7.5vw,6.4rem);letter-spacing:-.045em;line-height:.98}
+.hero h1 em{font-style:italic;color:var(--gold);display:block}
+.lede{font-size:1.16rem;color:var(--muted);max-width:52ch;margin-top:26px}
+.hero-meta{display:flex;flex-wrap:wrap;gap:8px;margin:26px 0 30px}
+.chip{font-family:'IBM Plex Mono',monospace;font-size:.66rem;letter-spacing:.06em;border:1px solid var(--line);padding:6px 12px;border-radius:999px;background:var(--surface);color:var(--muted);white-space:nowrap}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:14px 24px;border-radius:3px;font-size:.85rem;font-weight:600;transition:.25s;border:1px solid transparent}
+.btn-primary{background:var(--ink);color:var(--bg)}
+.btn-primary:hover{background:var(--gold);color:var(--bg);transform:translateY(-2px)}
+.btn-ghost{border-color:var(--line);color:var(--ink)}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap}
+.hero-note{font-size:.78rem;color:var(--muted);margin-top:24px;max-width:48ch}
+.hero-art{position:relative}
+.hero-art svg{width:100%;height:auto;display:block}
+
+/* Matriz */
+.table-shell{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface)}
+table{width:100%;border-collapse:collapse;min-width:880px;font-size:.85rem}
+thead{background:var(--surface-2)}
+th{text-align:left;padding:18px 20px;font-family:'IBM Plex Mono',monospace;font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;font-weight:500;color:var(--muted)}
+td{padding:20px;border-top:1px solid var(--line);vertical-align:top;color:var(--muted)}
+td:first-child{color:var(--ink);font-weight:600;white-space:nowrap}
+td:first-child a{border-bottom:1px solid var(--gold);padding-bottom:2px}
+tbody tr{transition:background .2s}
+tbody tr:hover{background:var(--surface-2)}
+th.c-dogma{color:var(--dogma)} th.c-onto{color:var(--onto)} th.c-herme{color:var(--herme)}
+
+/* Barra de lectura */
+.reader-bar{position:sticky;top:var(--header-h);z-index:900;background:color-mix(in srgb,var(--bg) 94%,transparent);backdrop-filter:blur(12px);border-block:1px solid var(--line);padding-block:14px}
+.reader-inner{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+.search-box{position:relative;flex:1;min-width:220px;max-width:340px}
+.search-box svg{position:absolute;left:13px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:var(--muted)}
+.search-box input{width:100%;padding:11px 36px 11px 38px;background:var(--surface);border:1px solid var(--line);border-radius:3px;font-size:.83rem}
+.search-box input:focus{outline:none;border-color:var(--gold)}
+.search-clear{position:absolute;right:8px;top:50%;transform:translateY(-50%);border:0;background:none;color:var(--muted);font-size:1.1rem;line-height:1;padding:4px}
+.lenses{display:flex;gap:6px;flex-wrap:wrap}
+.lens-btn{border:1px solid var(--line);background:transparent;padding:9px 15px;border-radius:999px;font-size:.75rem;font-weight:500;transition:.2s;display:flex;align-items:center;gap:7px}
+.lens-btn i{width:6px;height:6px;border-radius:50%;background:var(--c,var(--muted));font-style:normal}
+.lens-btn:hover{border-color:var(--c,var(--gold))}
+.lens-btn[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.reader-count{font-family:'IBM Plex Mono',monospace;font-size:.66rem;color:var(--muted);margin-left:auto;white-space:nowrap}
+
+/* Artículos / Tríptico */
+#articulos{padding-top:50px}
+.lexeme{padding-block:56px;border-bottom:1px solid var(--line);scroll-margin-top:160px}
+.lexeme:last-child{border-bottom:0}
+.lexeme-head{display:grid;grid-template-columns:100px 1fr;gap:26px;align-items:start;margin-bottom:32px}
+.lexeme-num{font-family:'Fraunces',serif;font-size:4.4rem;line-height:.9;color:transparent;-webkit-text-stroke:1px var(--gold);letter-spacing:-.04em}
+.lexeme-head h2{font-size:clamp(1.6rem,3vw,2.35rem);letter-spacing:-.02em;margin-bottom:12px}
+.lexeme-origin{font-size:.76rem;color:var(--muted);margin-bottom:14px}
+.lexeme-tags{display:flex;flex-wrap:wrap;gap:7px}
+.lexeme-tags .chip{font-size:.62rem}
+
+.dimensions{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:start}
+.dim{--c:var(--muted);--soft:var(--surface-2);background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--c);border-radius:var(--radius);padding:26px 24px;position:relative;transition:box-shadow .3s,transform .3s,opacity .3s}
+.dim:hover{box-shadow:var(--shadow);transform:translateY(-3px)}
+.dim-dogmatica{--c:var(--dogma);--soft:var(--dogma-soft)}
+.dim-ontologia{--c:var(--onto);--soft:var(--onto-soft)}
+.dim-hermeneutica{--c:var(--herme);--soft:var(--herme-soft)}
+
+.dim-head{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.dim-icon{width:34px;height:34px;flex:none;display:grid;place-items:center;border-radius:50%;background:var(--soft);color:var(--c);font-family:'Fraunces',serif;font-size:1.15rem}
+.dim-head h3{font-size:1.16rem;line-height:1.2}
+.dim-head small{display:block;font-family:'IBM Plex Mono',monospace;font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--c);margin-top:4px}
+.dim h4{font-family:'IBM Plex Mono',monospace;font-size:.63rem;letter-spacing:.12em;text-transform:uppercase;color:var(--c);margin:22px 0 10px;font-weight:500}
+.dim p,.dim li{font-size:.88rem;line-height:1.8}
+.dim p{color:var(--muted)}
+.dim strong{color:var(--ink);font-weight:600}
+.dim ul,.dim ol{color:var(--muted);padding-left:1.05em}
+.dim li::marker{color:var(--c)}
+.dim .pull{margin:20px 0 0;padding:16px 18px;background:var(--soft);border-left:2px solid var(--c);font-family:'Fraunces',serif;font-style:italic;font-size:1rem;line-height:1.6;color:var(--ink)}
+.dim .note{font-size:.76rem;padding:12px 14px;border:1px dashed var(--line);margin-top:18px;color:var(--muted)}
+.dim .note b{color:var(--c);font-family:'IBM Plex Mono',monospace;font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:5px}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:8px 14px;margin:16px 0 0;font-size:.8rem}
+.kv dt{font-family:'IBM Plex Mono',monospace;font-size:.62rem;letter-spacing:.06em;text-transform:uppercase;color:var(--c);padding-top:3px}
+.kv dd{margin:0;color:var(--muted)}
+
+body[data-lens="dogmatica"] .dim:not(.dim-dogmatica),
+body[data-lens="ontologia"] .dim:not(.dim-ontologia),
+body[data-lens="hermeneutica"] .dim:not(.dim-hermeneutica){display:none}
+body:not([data-lens="all"]) .dimensions{grid-template-columns:1fr;max-width:860px}
+body:not([data-lens="all"]) .dim{padding:34px}
+body:not([data-lens="all"]) .dim p,body:not([data-lens="all"]) .dim li{font-size:.98rem}
+
+.norm{margin-top:24px;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface-2);overflow:hidden}
+.norm summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:12px;padding:17px 22px;font-size:.8rem;font-weight:600;transition:background .2s}
+.norm summary::-webkit-details-marker{display:none}
+.norm summary:hover{background:var(--surface)}
+.norm summary .plus{margin-left:auto;font-family:'IBM Plex Mono',monospace;font-size:1.1rem;color:var(--gold);transition:transform .3s}
+.norm[open] summary .plus{transform:rotate(45deg)}
+.norm summary .tag{font-family:'IBM Plex Mono',monospace;font-size:.6rem;letter-spacing:.1em;color:var(--muted);font-weight:400}
+.norm-body{padding:8px 26px 26px;font-size:.83rem;line-height:1.85;color:var(--muted);border-top:1px solid var(--line)}
+.norm-body h5{font-family:'IBM Plex Mono',monospace;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);margin:22px 0 10px}
+.norm-body ol,.norm-body ul{padding-left:1.4em}
+.norm-body p{margin-bottom:.9em}
+
+.connections{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:22px}
+.connections .label{font-family:'IBM Plex Mono',monospace;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-right:6px}
+.link-chip{font-size:.72rem;border:1px solid var(--line);padding:5px 11px;border-radius:3px;transition:.2s;background:var(--surface)}
+.link-chip:hover{border-color:var(--gold);color:var(--gold)}
+.copy-btn{margin-left:auto;font-size:.7rem;background:none;border:1px solid var(--line);padding:5px 11px;border-radius:3px;color:var(--muted);transition:.2s}
+.copy-btn:hover{color:var(--gold);border-color:var(--gold)}
+.empty{display:none;padding:60px 20px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:var(--radius)}
+.empty.show{display:block}
+.empty b{display:block;font-family:'Fraunces',serif;font-size:1.6rem;color:var(--ink);margin-bottom:10px}
+
+/* Tensiones */
+.tension{border:1px solid var(--line);border-radius:var(--radius);margin-bottom:14px;background:var(--surface);overflow:hidden}
+.tension summary{list-style:none;cursor:pointer;padding:22px 26px;display:flex;gap:18px;align-items:center;font-family:'Fraunces',serif;font-size:1.12rem;transition:background .2s}
+.tension summary::-webkit-details-marker{display:none}
+.tension summary:hover{background:var(--surface-2)}
+.tension summary .n{font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--gold);flex:none}
+.tension summary .plus{margin-left:auto;color:var(--gold);transition:transform .3s;font-family:'Inter',sans-serif}
+.tension[open] summary .plus{transform:rotate(45deg)}
+.tension-body{padding:0 26px 26px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.tension-body h5{font-family:'IBM Plex Mono',monospace;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;margin:0 0 10px;color:var(--gold)}
+.tension-body p{font-size:.85rem;color:var(--muted);margin:0}
+.tension-body > div:last-child{border-left:1px solid var(--line);padding-left:24px}
+
+/* Footer y utilidades */
+.site-footer{border-top:1px solid var(--line);padding-block:36px;background:var(--surface)}
+.footer-inner{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+.footer-inner p{margin:0;font-size:.76rem;color:var(--muted)}
+.footer-inner .mono{font-size:.65rem;letter-spacing:.12em;text-transform:uppercase}
+.to-top{position:fixed;bottom:26px;right:26px;width:44px;height:44px;border-radius:50%;background:var(--ink);color:var(--bg);border:0;display:grid;place-items:center;opacity:0;pointer-events:none;transform:translateY(12px);transition:.3s;z-index:950}
+.to-top.show{opacity:1;pointer-events:auto;transform:none}
+.to-top:hover{background:var(--gold)}
+.toast{position:fixed;bottom:30px;left:50%;transform:translate(-50%,20px);background:var(--ink);color:var(--bg);padding:13px 24px;border-radius:4px;font-size:.82rem;opacity:0;pointer-events:none;transition:.3s;z-index:1100}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+.js .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+.js .reveal.in{opacity:1;transform:none}
+@media (max-width:1080px){
+  .site-nav{display:none}
+  .hero-grid{grid-template-columns:1fr;gap:40px}
+  .hero-art{max-width:360px;margin-inline:auto;order:-1}
+  .dimensions{grid-template-columns:1fr}
+  .tension-body{grid-template-columns:1fr;gap:20px}
+  .tension-body > div:last-child{border-left:0;padding-left:0;border-top:1px solid var(--line);padding-top:20px}
+}
+@media (max-width:760px){
+  :root{--header-h:66px}
+  .header-inner{gap:12px}
+  .brand-name{font-size:1.05rem}
+  .hero h1{font-size:clamp(2.8rem,13vw,4rem)}
+  .reader-inner{gap:12px}
+  .search-box{max-width:none;flex-basis:100%}
+  .reader-count{margin-left:0}
+  .lexeme-head{grid-template-columns:1fr;gap:12px}
+  .lexeme-num{font-size:3rem}
+  .copy-btn{margin-left:0}
+  .footer-inner{flex-direction:column;align-items:flex-start}
+}
+@media print{
+  :root{--bg:#fff;--surface:#fff;--ink:#111;--muted:#333;--line:#bbb}
+  body{font-size:11pt;background:#fff}
+  body::before,.site-header,.reader-bar,.progress,.to-top,.toast,.hero-cta,.hero-art,.copy-btn,.header-actions{display:none!important}
+  .wrap{max-width:none;padding:0}
+  section{padding-block:20px;break-inside:avoid}
+  .dimensions{grid-template-columns:repeat(3,1fr);gap:12px}
+  .dim{break-inside:avoid;box-shadow:none}
+  .lexeme{break-before:page}
+  .lexeme:first-child{break-before:auto}
+  .reveal{opacity:1!important;transform:none!important}
+}
+</style>
+</head>
+
+<body data-lens="all">
+<a class="skip" href="#contenido">Saltar al contenido principal</a>
+<div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a href="#inicio" class="brand" aria-label="Tríptico Penal, inicio">
+      <span class="brand-mark" aria-hidden="true">§</span>
+      <span>
+        <span class="brand-name">Tríptico Penal</span>
+        <span class="brand-sub">Dogmática · Ontología · Hermenéutica</span>
+      </span>
+    </a>
+    <nav class="site-nav" aria-label="Navegación principal">
+      <a href="#mapa">Matriz</a>
+      <a href="#articulos">Artículos</a>
+      <a href="#tensiones">Tensiones</a>
+    </nav>
+    <div class="header-actions">
+      <button class="icon-btn" id="themeToggle" aria-label="Cambiar tema" title="Cambiar tema">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
+      </button>
+      <button class="icon-btn" id="printBtn" aria-label="Imprimir" title="Imprimir">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6 9V3h12v6M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 14h12v8H6z"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="contenido">
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="dot"></span> Código Penal colombiano · Ley 599 de 2000</p>
+        <h1>La deuda <em>con la víctima.</em></h1>
+        <p class="lede">
+          Una lectura tridimensional del <strong>Capítulo Sexto: De la Responsabilidad Civil Derivada de la Conducta Punible</strong>. 
+          Cuando el delito hiere, el derecho no solo castiga: intenta, a través de la reparación, suturar el mundo roto.
+        </p>
+        <div class="hero-meta">
+          <span class="chip">CAPÍTULO SEXTO</span>
+          <span class="chip">ARTS. 94 — 100</span>
+          <span class="chip">REPARACIÓN · COMISO · PRESCRIPCIÓN</span>
+        </div>
+        <div class="hero-cta">
+          <a href="#articulos" class="btn btn-primary">Explorar los artículos</a>
+        </div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <svg viewBox="0 0 440 380" xmlns="http://www.w3.org/2000/svg">
+          <rect x="16" y="16" width="408" height="348" rx="3" fill="none" stroke="var(--line)"/>
+          <text x="220" y="48" text-anchor="middle" fill="var(--muted)" font-family="IBM Plex Mono, monospace" font-size="9" letter-spacing="4">RESPONSABILIDAD CIVIL</text>
+          
+          <!-- Balanza abstracta -->
+          <path d="M220 80 v160" stroke="var(--gold)" stroke-width="1.5"/>
+          <path d="M140 120 h160" stroke="var(--gold)" stroke-width="1.5"/>
+          <path d="M100 120 q40 60 80 0" fill="none" stroke="var(--dogma)" stroke-width="1.2"/>
+          <path d="M260 120 q40 60 80 0" fill="none" stroke="var(--herme)" stroke-width="1.2"/>
+          <circle cx="220" cy="80" r="5" fill="var(--gold)"/>
+          <path d="M180 280 h80 v20 h-80 z" fill="var(--onto-soft)" stroke="var(--onto)" stroke-width="1.2"/>
+          
+          <text x="140" y="150" text-anchor="middle" fill="var(--dogma)" font-family="IBM Plex Mono, monospace" font-size="9">DAÑO</text>
+          <text x="300" y="150" text-anchor="middle" fill="var(--herme)" font-family="IBM Plex Mono, monospace" font-size="9">REPARACIÓN</text>
+          <text x="220" y="330" text-anchor="middle" fill="var(--muted)" font-family="Fraunces, serif" font-style="italic" font-size="13">el peso de la historia, la medida del derecho</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MATRIZ -->
+<section id="mapa">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow"><span class="dot"></span> Mapa comparado</p>
+      <h2>La arquitectura de la reparación</h2>
+      <p>El delito no solo activa la potestad punitiva del Estado, sino que despliega una obligación patrimonial y moral hacia quien fue afectado.</p>
+    </div>
+    <div class="table-shell reveal">
+      <table>
+        <thead>
+          <tr>
+            <th>Núcleo</th>
+            <th>Función</th>
+            <th class="c-dogma">Dogmática · presupuesto</th>
+            <th class="c-onto">Ontología · modo de ser</th>
+            <th class="c-herme">Hermenéutica · clave</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><a href="#art-94">Art. 94</a></td>
+            <td>Génesis de la obligación</td>
+            <td>Daños materiales y morales derivados de la conducta punible</td>
+            <td>La herida y la sutura: el mundo roto que exige recomposición</td>
+            <td>Reparación integral y justicia restaurativa (Bloque de Constitucionalidad)</td>
+          </tr>
+          <tr>
+            <td><a href="#art-95">Arts. 95-96</a></td>
+            <td>Sujetos de la relación</td>
+            <td>Legitimación activa (víctimas, sucesores, acción popular) y pasiva (solidaridad)</td>
+            <td>El tejido de vínculos: la víctima concreta y la red de responsabilidad</td>
+            <td>Interpretación amplia de "perjudicado directamente"; solidaridad como garantía, no como pena</td>
+          </tr>
+          <tr>
+            <td><a href="#art-97">Arts. 97-98</a></td>
+            <td>Cuantificación y tiempo</td>
+            <td>Tope de 1000 SMLMV; prueba del daño material; prescripción igual a la penal</td>
+            <td>Lo inconmensurable hecho cifra; el tiempo como sanación o como olvido</td>
+            <td>El tope es un máximo, no un estándar; carga dinámica de la prueba para víctimas vulnerables</td>
+          </tr>
+          <tr>
+            <td><a href="#art-99">Art. 99</a></td>
+            <td>Supervivencia de la deuda</td>
+            <td>Extinción por modos civiles. Muerte, indulto o amnistía no extinguen la obligación económica</td>
+            <td>La sombra persistente: la deuda sobrevive al cuerpo y al perdón estatal</td>
+            <td>Interpretación restrictiva de las causales de extinción; primacía del derecho de la víctima</td>
+          </tr>
+          <tr>
+            <td><a href="#art-100">Art. 100</a></td>
+            <td>Destino de los objetos</td>
+            <td>Comiso de instrumentos/efectos. Regla especial de devolución provisional en culposos (18 meses)</td>
+            <td>El objeto "contaminado" vs. la herramienta de vida y trabajo</td>
+            <td>Proporcionalidad y derecho al trabajo: el comiso no puede ser una pena anticipada o desmedida</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- BARRA DE LECTURA -->
+<div class="reader-bar" id="readerBar">
+  <div class="wrap reader-inner">
+    <div class="search-box">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input type="search" id="searchInput" placeholder="Buscar: solidaridad, 1000 salarios, comiso, prescripción…" aria-label="Buscar en los análisis" autocomplete="off">
+      <button class="search-clear" id="searchClear" aria-label="Limpiar búsqueda" hidden>×</button>
+ </div>
+    <div class="lenses" role="group" aria-label="Filtrar por dimensión">
+      <button class="lens-btn" data-lens-btn="all" aria-pressed="true">Tríptico completo</button>
+      <button class="lens-btn" data-lens-btn="dogmatica" style="--c:var(--dogma)" aria-pressed="false"><i></i>Dogmática</button>
+      <button class="lens-btn" data-lens-btn="ontologia" style="--c:var(--onto)" aria-pressed="false"><i></i>Ontología</button>
+      <button class="lens-btn" data-lens-btn="hermeneutica" style="--c:var(--herme)" aria-pressed="false"><i></i>Hermenéutica</button>
+    </div>
+    <span class="reader-count" id="readerCount" aria-live="polite">5 / 5 núcleos</span>
+    <button class="link-chip" id="expandAll">Expandir toda la normativa</button>
+  </div>
+</div>
+
+<!-- ARTÍCULOS -->
+<section id="articulos">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow"><span class="dot"></span> Desarrollo artículo por artículo</p>
+      <h2>El texto y sus tres profundidades</h2>
+    </div>
+
+    <div id="emptyState" class="empty"><b>Sin resultados</b><p>Prueba con términos como "solidaridad", "comiso", "18 meses" o "prescripción".</p></div>
+
+    <div id="lista">
+
+      <!-- ART. 94 -->
+      <article class="lexeme reveal" id="art-94" data-cita="Colombia, Código Penal, art. 94: Reparación del daño (Ley 599 de 2000).">
+        <header class="lexeme-head">
+          <div class="lexeme-num" aria-hidden="true">01</div>
+          <div>
+            <h2>Reparación del daño</h2>
+            <p class="lexeme-origin">Artículo 94 · El principio fundante de la responsabilidad civil derivada del delito</p>
+            <div class="lexeme-tags"><span class="chip">DAÑO MATERIAL</span><span class="chip">DAÑO MORAL</span><span class="chip">OBLIGACIÓN AUTOMÁTICA</span></div>
+          </div>
+        </header>
+        <div class="dimensions">
+          <section class="dim dim-dogmatica">
+            <div class="dim-head"><span class="dim-icon" aria-hidden="true">§</span><h3>Dogmática<small>La norma y su sistema</small></h3></div>
+            <h4>Naturaleza de la obligación</h4>
+            <p>La conducta punible no solo activa el <em>ius puniendi</em> del Estado, sino que genera <strong>ipso iure</strong> una obligación civil de reparar. Es una responsabilidad <em>ex delicto</em>.</p>
+            <h4>Alcance del daño</h4>
+            <ul>
+              <li><strong>Daño material:</strong> perjuicios patrimoniales, lucro cesante y daño emergente.</li>
+              <li><strong>Daño moral:</strong> afectación a bienes extrapatrimoniales (dolor, aflicción, menoscabo a la reputación o la intimidad).</li>
+            </ul>
+            <div class="note"><b>Conexión sistemática</b>El art. 63 (suspensión condicional) establece expresamente que este beneficio <em>no</em> es extensivo a esta responsabilidad civil, reafirmando su autonomía e inevitabilidad.</div>
+          </section>
+          <section class="dim dim-ontologia">
+            <div class="dim-head"><span class="dim-icon" aria-hidden="true">◎</span><h3>Ontología<small>El ser y su transformación</small></h3></div>
+            <h4>La herida y la sutura</h4>
+            <p>Ontológicamente, el delito no es solo la violación de una norma abstracta; es la <strong>ruptura del mundo de la víctima</strong>. La reparación es el intento jurídico de "suturar" esa ruptura, de devolver, en lo posible, el equilibrio existencial y patrimonial perdido.</p>
+            <h4>La dualidad del daño</h4>
+            <p>Reconocer tanto el daño material como el moral implica admitir que la persona no es solo un patrimonio, sino un <strong>ser sensible y relacional</strong>. El dinero no "borra" el dolor, pero lo reconoce públicamente como una deuda real del ofensor.</p>
+            <div class="pull">Reparar no es borrar el pasado. Es asumir el peso del futuro que el delito intentó robar.</div>
+          </section>
+          <section class="dim dim-hermeneutica">
+            <div class="dim-head"><span class="dim-icon" aria-hidden="true">⌕</span><h3>Hermenéutica<small>El sentido y su aplicación</small></h3></div>
+            <h4>Principio de Reparación Integral</h4>
+            <p>Debe interpretarse a la luz del Bloque de Constitucionalidad y la justicia restaurativa. La reparación no es un mero trámite contable, sino un <strong>derecho fundamental de las víctimas</strong> a la verdad, la justicia y la no repetición.</p>
+            <h4>Claves de interpretación</h4>
+            <ul>
+              <li>La obligación nace "con ocasión" de la conducta, lo que exige un nexo causal adecuado, no necesariamente inmediato, pero sí jurídicamente imputable.</li>
+              <li>El juez penal debe privilegiar la reparación directa y efectiva, más allá de las fórmulas tarifadas, cuando la equidad lo exija.</li>
+            </ul>
+          </section>
+        </div>
+        <details class="norm">
+          <summary>Ver texto normativo · Artículo 94 <span class="tag">TRANSCRIPCIÓN</span><span class="plus" aria-hidden="true">+</span></summary>
+          <div class="norm-body">
+            <p><strong>ARTÍCULO 94.</strong> Reparación del daño. La conducta punible origina obligación de reparar los daños materiales y morales causados con ocasión de aquella.</p>
+          </div>
+        </details>
+        <div class="connections">
+          <span class="label">Conectado con</span>
+          <a class="link-chip" href="#art-99">99 · Extinción de la acción</a>
+          <button class="copy-btn" data-copy>Copiar cita</button>
+        </div>
+      </article>
+
+      <!-- ARTS. 95-96 -->
+      <article class="lexeme reveal" id="art-95" data-cita="Colombia, Código Penal, arts. 95 y 96: Titulares de la acción civil y Obligados a indemnizar.">
+        <header class="lexeme-head">
+          <div class="lexeme-num" aria-hidden="true">02</div>
+          <div>
+            <h2>Titulares y obligados a indemnizar</h2>
+            <p class="lexeme-origin">Artículos 95 y 96 · La red de sujetos de la responsabilidad</p>
+            <div class="lexeme-tags"><span class="chip">LEGITIMACIÓN ACTIVA</span><span class="chip">ACCIÓN POPULAR</span><span class="chip">SOLIDARIDAD</span></div>
+          </div>
+        </header>
+        <div class="dimensions">
+          <section class="dim dim-dogmatica">
+            <div class="dim-head"><span class="dim-icon" aria-hidden="true">§</span><h3>Dogmática<small>La norma y su sistema</small></h3></div>
+            <h4>Legitimación activa (Art. 95)</h4>
+            <ul>
+              <li>Personas naturales perjudicadas directamente o sus sucesores.</li>
+              <li>Personas jurídicas perjudicadas directamente.</li>
+              <li><strong>Actor popular:</strong> titular de la acción cuando se lesionan bienes jurídicos colectivos (ej. medio ambiente, moralidad administrativa).</li>
+            </ul>
+            <h4>Legitimación pasiva (Art. 96)</h4>
+            <p>La obligación recae sobre: 1) Los <strong>penalmente responsables</strong>, en forma solidaria; y 2) Aquellos que, conforme a la ley sustancial (Código Civil, Código de Comercio), estén obligados a responder (ej. empleadores por hechos de dependientes, padres por hechos de hijos menores).</p>
+          </section>
+          <section class="dim dim-ontologia">
+            <div class="dim-head"><span class="dim-icon" aria-hidden="true">◎</span><h3>Ontología<small>El ser y su transformación</small></h3></div>
+            <h4>El tejido de las relaciones</h4>
+            <p>La víctima no es un ente aislado: tiene sucesores que heredan su dolor y su derecho. El delincuente tampoco está solo: su acto resuena en las estructuras que lo cobijan (empresa, familia), las cuales asumen la carga de la reparación.</p>
+            <h4>La voz de lo colectivo</h4>
+            <p>La acción popular reconoce que hay heridas que no son de "uno", sino de "todos". Ontológicamente, transforma a la comunidad en un sujeto de derecho con capacidad de exigir la restauración de su entorno común.</p>
+            <div class="pull">La solidaridad no es un castigo para el tercero, es un abrazo forzoso del derecho para sostener a la víctima.</div>
+          </section>
+          <section class="dim dim-hermeneutica">
+            <div class="dim-head"><span class="dim-icon" aria-hidden="true">⌕</span><h3>Hermenéutica<small>El sentido y su aplicación</small></h3></div>
+            <h4>Interpretación de "Directamente perjudicado"</h4>
+            <p>No debe leerse de forma restrictiva. Incluye a quienes sufren el daño de manera inmediata, pero también a quienes, por lazos de estrecha dependencia afectiva o económica (ej. compañeros permanentes, hijos), sufren las consecuencias del delito.</p>
+            <h4>La solidaridad como garantía</h4>
+            <p>La solidaridad se interpreta como un mecanismo de <strong>garantía para la víctima</strong>, facilitando la cobrabilidad total a cualquiera de los responsables, sin que esto impida las acciones de repetición internas entre los codeudores. No debe interpretarse como una "pena" para el civilmente responsable, sino como una distribución de riesgos a favor del afectado.</p>
+          </section>
+        </div>
+        <details class="norm">
+          <summary>Ver texto normativo · Artículos 95 y 96 <span class="tag">TRANSCRIPCIÓN</span><span class="plus" aria-hidden="true">+</span></summary>
+          <div class="norm-body">
+            <p><strong>ARTÍCULO 95.</strong> Titulares de la acción civil. Las personas naturales, o sus sucesores, las jurídicas perjudicadas directamente por la conducta punible tienen derecho a la acción indemnizatoria correspondiente, la cual se ejercerá en la forma señalada por el Código de Procedimiento Penal.</p>
+            <p>El actor popular tendrá la titularidad de la acción civil cuando se trate de lesión directa de bienes jurídicos colectivos.</p>
+            <p><strong>ARTÍCULO 96.</strong> Obligados a indemnizar. Los daños causados con la infracción deben ser reparados por los penalmente responsables, en forma solidaria, y por los que, conforme a la ley sustancial, están obligados a responder.</p>
+          </div>
+        </details>
+        <div class="connections">
+          <span class="label">Conectado con</span>
+          <a class="link-chip" href="#art-97">97 · Cuantificación</a>
+          <button class="copy-btn" data-copy>Copiar cita</button>
+        </div>
+      </article>
+
+      <!-- ARTS. 97-98 -->
+      <article class="lexeme reveal" id="art-97" data-cita="Colombia, Código Penal, arts. 97 y 98: Indemnización por daños y Prescripción de la acción civil.">
+        <header class="lexeme-head">
+          <div class="lexeme-num" aria-hidden="true">03</div>
+          <div>
+            <h2>Indemnización y prescripción</h2>
+            <p class="lexeme-origin">Artículos 97 y 98 · La medida del daño y el paso del tiempo</p>
+            <div class="lexeme-tags"><span class="chip">1000 SMLMV</span><span class="chip">PRUEBA DEL DAÑO</span><span class="chip">PRESCRIPCIÓN</span></div>
+          </div>
+        </header>
+        <div class="dimensions">
+          <section class="dim dim-dogmatica">
+            <div class="dim-head"><span class="dim-icon" aria-hidden="true">§</span><h3>Dogmática<small>La norma y su sistema</small></h3></div>
+            <h4>Cuantificación (Art. 97)</h4>
+            <p>El juez <em>podrá</em> señalar una suma equivalente hasta <strong>mil (1000) salarios mínimos legales mensuales vigentes</strong>. La tasación considera la naturaleza de la conducta y la magnitud del daño. Los daños materiales <strong>deben probarse</strong> en el proceso.</p>
+            <h4>Prescripción (Art. 98)</h4>
+            <ul>
+              <li><strong>En el proceso penal:</strong> prescribe en tiempo igual al de la prescripción de la respectiva acción penal (contra los penalmente responsables).</li>
+              <li><strong>En demás casos:</strong> se aplican las normas pertinentes de la legislación civil (ej. 10 años para responsabilidad extracontractual, art. 2536 CC).</li>
+            </ul>
+          </section>
+          <section class="dim dim-ontologia">
+            <div class="dim-head"><span class="dim-icon" aria-hidden="true">◎</span><h3>Ontología<small>El ser y su transformación</small></h3></div>
+            <h4>Lo inconmensurable hecho cifra</h4>
+            <p>El derecho enfrenta aquí su límite: ¿cuánto vale el dolor, la vida, la tranquilidad? La cifra (1000 SMLMV) es un intento torpe pero necesario de traducir lo inconmensurable a un lenguaje que el sistema pueda ejecutar. Es la <strong>materialización simbólica de la justicia</strong>.</p>
+            <h4>El tiempo: ¿sanación o olvido?</h4>
+            <p>La prescripción es la tensión entre el derecho de la víctima a ser escuchada y la necesidad social de que las deudas no sean eternas. El tiempo, que debería sanar, aquí se convierte en un muro que, al caer, extingue la posibilidad de exigir.</p>
+            <div class="pull">Probar el daño material no debe ser un laberinto que castigue dos veces a quien ya fue herido.</div>
+          </section>
+          <section class="dim dim-hermeneutica">
+            <div class="dim-head"><span class="dim-icon" aria-hidden="true">⌕</span><h3>Hermenéutica<small>El sentido y su aplicación</small></h3></div>
+            <h4>El tope de los 1000 SMLMV</h4>
+            <p>Debe interpretarse como un <strong>límite máximo excepcional</strong>, no como una tarifa estándar o un techo rígido que impida una reparación integral en casos de extrema gravedad. El juez debe motivar por qué se aleja o se acerca a ese tope, basándose en la "magnitud del daño".</p>
+            <h4>Carga de la prueba</h4>
+            <p>Aunque el texto dice "deben probarse", la hermenéutica constitucional exige aplicar la <strong>carga dinámica de la prueba</strong>. Si la víctima está en situación de vulnerabilidad o el ofensor tiene el control de la información, no se le puede exigir un estándar probatorio imposible.</p>
+            <h4>Armonía en la prescripción</h4>
+            <p>La regla de que prescribe "en tiempo igual al de la acción penal" busca la economía procesal y la unidad del conflicto, evitando que la víctima tenga que litigar en dos jurisdicciones con plazos distintos contra el mismo hecho.</p>
+          </section>
+        </div>
+        <details class="norm">
+          <summary>Ver texto normativo · Artículos 97 y 98 <span class="tag">TRANSCRIPCIÓN</span><span class="plus" aria-hidden="true">+</span></summary>
+          <div class="norm-body">
+            <p><strong>ARTÍCULO 97.</strong> Indemnización por daños. En relación con el daño derivado de la conducta punible el juez podrá señalar como indemnización, una suma equivalente, en moneda nacional, hasta mil (1000) salarios mínimos legales mensuales.</p>
+            <p>Esta tasación se hará teniendo en cuenta factores como la naturaleza de la conducta y la magnitud del daño causado.</p>
+            <p>Los daños materiales deben probarse en el proceso.</p>
+            <p><strong>ARTÍCULO 98.</strong> Prescripción. La acción civil proveniente de la conducta punible, cuando se ejercita dentro del proceso penal, prescribe, en relación con los penalmente responsables, en tiempo igual al de la prescripción de la respectiva acción penal. En los demás casos, se aplicarán las normas pertinentes de la legislación civil.</p>
+          </div>
+        </details>
+        <div class="connections">
+          <span class="label">Conectado con</span>
+          <a class="link-chip" href="#art-99">99 · Extinción</a>
+          <button class="copy-btn" data-copy>Copiar cita</button>
+        </div>
+      </article>
+
+      <!-- ART. 99 -->
+      <article class="lexeme reveal" id="art-99" data-cita="Colombia, Código Penal, art. 99: Extinción de la acción civil.">
+        <header class="lexeme-head">
+          <div class="lexeme-num" aria-hidden="true">04</div>
+          <div>
+            <h2>Extinción de la acción civil</h2>
+            <p class="lexeme-origin">Artículo 99 · La independencia de la deuda frente al perdón estatal</p>
+            <div class="lexeme-tags"><span class="chip">MODOS CIVILES</span><span class="chip">SUPERVIVENCIA DE LA DEUDA</span><span class="chip">MUERTE DEL PROCESADO</span></div>
+          </div>
+        </header>
+        <div class="dimensions">
+          <section class="dim dim-dogmatica">
+            <div class="dim-head"><span class="dim-icon" aria-hidden="true">§</span><h3>Dogmática<small>La norma y su sistema</small></h3></div>
+            <h4>Modos de extinción</h4>
+            <p>Se extingue por los modos consagrados en el Código Civil (pago, compensación, novación, remisión, etc.).</p>
+            <h4>La regla de la supervivencia</h4>
+            <p>Hechos que extinguen la <em>punibilidad</em> (muerte del procesado, indulto, amnistía impropia) <strong>no extinguen la acción civil</strong>, siempre que no impliquen disposición del contenido económico de la obligación. La deuda patrimonial sobrevive al proceso penal.</p>
+          </section>
+          <section class="dim dim-ontologia">
+            <div class="dim-head"><span class="dim-icon" aria-hidden="true">◎</span><h3>Ontología<small>El ser y su transformación</small></h3></div>
+            <h4>La sombra persistente</h4>
+            <p>La muerte del ofensor pone fin a su existencia biológica y a la posibilidad de castigo penal, pero <strong>la huella del daño persiste en el mundo</strong>. La obligación de reparar se transfiere a su herencia, porque la deuda no muere con el deudor; se arraiga en su patrimonio.</p>
+            <h4>El perdón del Estado vs. el derecho de la víctima</h4>
+            <p>El indulto o la amnistía son actos de clemencia <em>del Estado</em>. Ontológicamente, el Estado no puede perdonar en nombre de la víctima lo que le pertenece a ella: su derecho a ser resarcida. La deuda moral y material es intransferible e imprescriptible por la voluntad de un tercero.</p>
+            <div class="pull">El Estado puede soltar al cuerpo, pero no puede borrar la deuda que el cuerpo dejó tras de sí.</div>
+          </section>
+          <section class="dim dim-hermeneutica">
+            <div class="dim-head"><span class="dim-icon" aria-hidden="true">⌕</span><h3>Hermenéutica<small>El sentido y su aplicación</small></h3></div>
+            <h4>Interpretación restrictiva de la extinción</h4>
+            <p>Cualquier duda sobre si una causal de extinción de la punibilidad afecta la acción civil debe resolverse a favor de la <strong>supervivencia de la acción civil</strong>. La frase "que no impliquen disposición del contenido económico" es la clave hermenéutica: solo el pago o la renuncia expresa de la víctima pueden matar la deuda.</p>
+            <h4>La muerte del procesado</h4>
+            <p>Se interpreta en armonía con el derecho sucesoral: la acción civil continúa contra los herederos, pero únicamente hasta el monto de la masa hereditaria recibida (beneficio de inventario), protegiendo así el patrimonio propio de los sucesores.</p>
+          </section>
+        </div>
+        <details class="norm">
+          <summary>Ver texto normativo · Artículo 99 <span class="tag">TRANSCRIPCIÓN</span><span class="plus" aria-hidden="true">+</span></summary>
+          <div class="norm-body">
+            <p><strong>ARTÍCULO 99.</strong> Extinción de la acción civil. La acción civil derivada de la conducta punible se extingue por cualquiera de los modos consagrados en el Código Civil. La muerte del procesado, el indulto, la amnistía impropia, y, en general las causales de extinción de la punibilidad que no impliquen disposición del contenido económico de la obligación, no extinguen la acción civil.</p>
+          </div>
+        </details>
+        <div class="connections">
+          <span class="label">Conectado con</span>
+          <a class="link-chip" href="#art-100">100 · Comiso</a>
+          <button class="copy-btn" data-copy>Copiar cita</button>
+        </div>
+      </article>
+
+      <!-- ART. 100 -->
+      <article class="lexeme reveal" id="art-100" data-cita="Colombia, Código Penal, art. 100: Comiso de instrumentos y efectos de la conducta punible.">
+        <header class="lexeme-head">
+          <div class="lexeme-num" aria-hidden="true">05</div>
+          <div>
+            <h2>Comiso</h2>
+            <p class="lexeme-origin">Artículo 100 · El destino de los objetos vinculados al delito</p>
+            <div class="lexeme-tags"><span class="chip">BIENES SIN LIBRE COMERCIO</span><span class="chip">DOLOSOS VS. CULPOSOS</span><span class="chip">18 MESES</span></div>
+          </div>
+        </header>
+        <div class="dimensions">
+          <section class="dim dim-dogmatica">
+            <div class="dim-head"><span class="dim-icon" aria-hidden="true">§</span><h3>Dogmática<small>La norma y su sistema</small></h3></div>
+            <h4>Regla general (Dolosos y bienes ilícitos)</h4>
+            <p>Instrumentos, objetos o productos del delito <strong>sin libre comercio</strong> pasan a la Fiscalía (o entidad designada) o se destruyen. En delitos <strong>dolosos</strong>, esto aplica también a bienes con libre comercio que pertenezcan al responsable y hayan sido usados o provengan del delito.</p>
+            <h4>Régimen especial para conductas culposas</h4>
+            <p>Para vehículos, naves, aeronaves u objetos con libre comercio en delitos <strong>culposos</strong>:</p>
+            <ol>
+              <li>Se someten a experticios técnicos.</li>
+              <li>Se entregan <strong>provisionalmente</strong> al propietario o legítimo tenedor.</li>
+              <li><strong>Excepción:</strong> No se entregan si se ha decretado embargo y secuestro.</li>
+              <li><strong>Entrega definitiva</strong> si: a) se garantiza el pago de perjuicios, b) se embargan bienes suficientes del sindicado, o c) transcurren <strong>18 meses</strong> desde la conducta sin afectación del bien.</li>
+            </ol>
+          </section>
+          <section class="dim dim-ontologia">
+            <div class="dim-head"><span class="dim-icon" aria-hidden="true">◎</span><h3>Ontología<small>El ser y su transformación</small></h3></div>
+            <h4>El objeto "contaminado"</h4>
+            <p>En los delitos dolosos, el objeto utilizado se convierte en una <strong>extensión de la voluntad criminal</strong>. Pierde su inocencia y su función social legítima; se "contamina" y el Estado debe sustraerlo del comercio para neutralizar su peligrosidad.</p>
+            <h4>La herramienta de vida vs. la herramienta del delito</h4>
+            <p>En los delitos culposos (ej. un accidente de tránsito), el vehículo no fue concebido para dañar; es una herramienta de trabajo o movilidad. Ontológicamente, privar a una persona de su vehículo de forma indefinida por un error no intencional es una <strong>pena anticipada y desproporcionada</strong> que destruye su proyecto de vida.</p>
+            <div class="pull">El comiso no debe ser un castigo encubierto, sino una medida de seguridad y garantía de reparación.</div>
+          </section>
+          <section class="dim dim-hermeneutica">
+            <div class="dim-head"><span class="dim-icon" aria-hidden="true">⌕</span><h3>Hermenéutica<small>El sentido y su aplicación</small></h3></div>
+            <h4>Principio de proporcionalidad</h4>
+            <p>El comiso debe interpretarse de manera restrictiva. No procede el comiso de bienes de terceros de buena fe, ni de bienes cuyo valor sea desproporcionadamente alto frente a la gravedad del delito (ej. decomisar un camión de carga por un delito culposo menor, si hay otras garantías).</p>
+            <h4>La regla de los 18 meses en culposos</h4>
+            <p>Es una <strong>garantía de libertad y derecho al trabajo</strong>. Se interpreta como un plazo máximo de retención administrativa. Si en 18 meses el Estado no ha asegurado la reparación mediante otras vías (embargo de otros bienes), debe devolver el bien, pues su retención pierde justificación jurídica y se vuelve arbitraria.</p>
+            <h4>"Pertenecer al responsable"</h4>
+            <p>En dolosos, el texto exige que el bien pertenezca al responsable penalmente. Si pertenece a un tercero de buena fe, el comiso no procede, protegiendo así la confianza legítima y el derecho de propiedad.</p>
+          </section>
+        </div>
+        <details class="norm">
+          <summary>Ver texto normativo · Artículo 100 <span class="tag">TRANSCRIPCIÓN</span><span class="plus" aria-hidden="true">+</span></summary>
+          <div class="norm-body">
+            <p><strong>ARTÍCULO 100.</strong> Comiso. Los instrumentos y efectos con los que se haya cometido la conducta punible o que provengan de su ejecución, y que no tengan libre comercio, pasarán a poder de la Fiscalía General de la Nación o a la entidad que esta designe, a menos que la ley disponga su destrucción.</p>
+            <p>Igual medida se aplicará en los delitos dolosos, cuando los bienes, que tengan libre comercio y pertenezcan al responsable penalmente, sean utilizados para la realización de la conducta punible, o provengan de su ejecución.</p>
+            <p>En las conductas culposas, los vehículos automotores, naves o aeronaves, cualquier unidad montada sobre ruedas y los demás objetos que tengan libre comercio, se someterán a los experticios técnicos y se entregarán provisionalmente al propietario, legítimo tenedor salvo que se haya solicitado y decretado su embargo y secuestro. En tal caso, no procederá la entrega, hasta tanto no se tome decisión definitiva respecto de ellos.</p>
+            <p>La entrega será definitiva cuando se garantice el pago de los perjuicios, se hayan embargado bienes del sindicado en cuantía suficiente para atender al pago de aquellos, o hayan transcurrido diez y ocho (18) meses desde la realización de la conducta, sin que se haya producido la afectación del bien.</p>
+          </div>
+        </details>
+        <div class="connections">
+          <span class="label">Conectado con</span>
+          <a class="link-chip" href="#art-97">97 · Garantía de perjuicios</a>
+          <button class="copy-btn" data-copy>Copiar cita</button>
+        </div>
+      </article>
+
+    </div><!-- /#lista -->
+  </div>
+</section>
+
+<!-- TENSIONES -->
+<section id="tensiones">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow"><span class="dot"></span> Dialéctica aplicada</p>
+      <h2>Cuatro tensiones que la letra no resuelve sola</h2>
+      <p>Puntos de fricción donde el operador jurídico debe argumentar más allá de la literalidad del texto.</p>
+    </div>
+
+    <details class="tension reveal">
+      <summary><span class="n">I</span> El tope de los 1000 SMLMV: ¿Techo justo o barrera de la reparación integral? <span class="plus">+</span></summary>
+      <div class="tension-body">
+        <div><h5>Tesis</h5><p>El legislador estableció un límite objetivo para evitar condenas astronómicas que sean inejecutables y para dar previsibilidad al juez.</p></div>
+        <div><h5>Contra-tesis</h5><p>En delitos de lesa humanidad, homicidios múltiples o daños ambientales masivos, 1000 SMLMV son irrisorios y violan el derecho a la reparación integral de las víctimas.</p></div>
+        <div><h5>Síntesis</h5><p>El tope debe aplicarse con flexibilidad hermenéutica. En casos de extrema gravedad, el juez puede acudir a mecanismos de justicia transicional o a la jurisprudencia constitucional que prioriza la reparación integral sobre los topes tarifados del código ordinario.</p></div>
+      </div>
+    </details>
+
+    <details class="tension reveal">
+      <summary><span class="n">II</span> La solidaridad del empleador: ¿Garantía para la víctima o desincentivo económico? <span class="plus">+</span></summary>
+      <div class="tension-body">
+        <div><h5>Tesis</h5><p>El art. 96 obliga a responder a quienes la ley sustancial indique (ej. empleadores), asegurando que la víctima cobre de quien tiene mayor solvencia.</p></div>
+        <div><h5>Contra-tesis</h5><p>Imponer responsabilidad solidaria automática puede llevar a una litigación desmedida contra empresas, encareciendo los bienes y servicios, o llevando a la quiebra a empleadores por actos individuales de sus dependientes.</p></div>
+        <div><h5>Síntesis</h5><p>La solidaridad se aplica, pero el empleador debe tener la posibilidad de demostrar que actuó con la "diligencia de un buen padre de familia" en la selección y supervisión, o ejercer la acción de repetición contra el empleado culpable, equilibrando protección a la víctima y justicia para el tercero.</p></div>
+      </div>
+    </details>
+
+    <details class="tension reveal">
+      <summary><span class="n">III</span> Comiso en delitos culposos: ¿Seguridad de la reparación o asfixia del derecho al trabajo? <span class="plus">+</span></summary>
+      <div class="tension-body">
+        <div><h5>Tesis</h5><p>Retener el vehículo o herramienta asegura que habrá un bien sobre el cual ejecutar la sentencia de reparación de perjuicios a la víctima.</p></div>
+        <div><h5>Contra-tesis</h5><p>Quitarle el vehículo a un conductor de taxi o a un campesino por 18 meses (o más) por un accidente culposo lo condena a la indigencia, creando un daño social mayor que el original.</p></div>
+        <div><h5>Síntesis</h5><p>La regla de los 18 meses y la entrega provisional son la clave. El juez debe priorizar el embargo de otros bienes o la constitución de una póliza de cumplimiento antes que la retención física del bien productivo, aplicando el principio de proporcionalidad y el derecho al trabajo (Art. 25 CP).</p></div>
+      </div>
+    </details>
+
+    <details class="tension reveal">
+      <summary><span class="n">IV</span> La prueba del daño material en contextos de vulnerabilidad <span class="plus">+</span></summary>
+      <div class="tension-body">
+        <div><h5>Tesis</h5><p>El art. 97 es claro: "Los daños materiales deben probarse en el proceso". Sin factura, sin recibo, no hay reparación.</p></div>
+        <div><h5>Contra-tesis</h5><p>Las víctimas de estratos bajos, violencia de género o desplazamiento a menudo no tienen documentos formales que acrediten el valor de lo perdido o los gastos médicos informales.</p></div>
+        <div><h5>Síntesis</h5><p>Se debe aplicar la carga dinámica de la prueba y la valoración equitativa del juez (art. 16 de la Ley 446 de 1998). La falta de formalidad documental no puede ser un obstáculo insuperable que niegue la justicia restaurativa a quienes más la necesitan.</p></div>
+      </div>
+    </details>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div>
+      <p class="mono" style="color:var(--gold);margin-bottom:8px">Tríptico Penal · Capítulo Sexto</p>
+      <p>Responsabilidad civil derivada de la conducta punible.</p>
+    </div>
+    <p>Dogmática · Ontología · Hermenéutica<br>El peso de la historia, la medida del derecho.</p>
+    <p class="mono">Recurso académico · Colombia · 2026</p>
+  </div>
+</footer>
+
+<button class="to-top" id="toTop" aria-label="Volver al inicio">↑</button>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* Mismo script funcional del Capítulo III, adaptado para ser autocontenido */
+const $ = (s, c = document) => c.querySelector(s);
+const $$ = (s, c = document) => Array.from(c.querySelectorAll(s));
+const normalize = str => str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+
+const themeBtn = $('#themeToggle');
+const root = document.documentElement;
+function setTheme(theme){
+  root.setAttribute('data-theme', theme);
+  themeBtn.setAttribute('aria-label', theme === 'dark' ? 'Activar modo claro' : 'Activar modo oscuro');
+  themeBtn.innerHTML = theme === 'dark'
+    ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>'
+    : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>';
+  try { localStorage.setItem('trip-tico-theme', theme); } catch(e){}
+}
+let saved = null; try { saved = localStorage.getItem('trip-tico-theme'); } catch(e){}
+setTheme(saved || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
+themeBtn.addEventListener('click', () => setTheme(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'));
+
+const progressBar = $('#progressBar');
+const toTop = $('#toTop');
+function onScroll(){
+  const h = document.documentElement;
+  const max = h.scrollHeight - h.clientHeight;
+  const pct = max > 0 ? (h.scrollTop / max) * 100 : 0;
+  progressBar.style.width = pct + '%';
+  toTop.classList.toggle('show', h.scrollTop > 700);
+}
+window.addEventListener('scroll', onScroll, { passive:true });
+window.addEventListener('resize', onScroll);
+onScroll();
+toTop.addEventListener('click', () => window.scrollTo({ top:0, behavior:'smooth' }));
+
+if ('IntersectionObserver' in window){
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => { if (entry.isIntersecting){ entry.target.classList.add('in'); revealObserver.unobserve(entry.target); } });
+  }, { threshold: .08 });
+  $$('.reveal').forEach(el => revealObserver.observe(el));
+} else { $$('.reveal').forEach(el => el.classList.add('in')); }
+
+const lensButtons = $$('[data-lens-btn]');
+function setLens(lens){
+  document.body.setAttribute('data-lens', lens);
+  lensButtons.forEach(btn => btn.setAttribute('aria-pressed', String(btn.dataset.lensBtn === lens)));
+}
+lensButtons.forEach(btn => btn.addEventListener('click', () => setLens(btn.dataset.lensBtn)));
+
+const searchInput = $('#searchInput');
+const searchClear = $('#searchClear');
+const readerCount = $('#readerCount');
+const emptyState = $('#emptyState');
+const articles = $$('.lexeme');
+const index = articles.map(article => ({ el: article, text: normalize(article.textContent + ' ' + (article.dataset.cita || '')) }));
+let searchTimer;
+
+function runSearch(){
+  const q = normalize(searchInput.value.trim());
+  searchClear.hidden = !q;
+  let visible = 0;
+  index.forEach(item => {
+    const match = !q || item.text.includes(q);
+    item.el.style.display = match ? '' : 'none';
+    if (match) visible++;
+  });
+  readerCount.textContent = visible + ' / ' + articles.length + ' núcleos';
+  emptyState.classList.toggle('show', visible === 0);
+}
+searchInput.addEventListener('input', () => { clearTimeout(searchTimer); searchTimer = setTimeout(runSearch, 160); });
+searchClear.addEventListener('click', () => { searchInput.value = ''; runSearch(); searchInput.focus(); });
+
+const expandBtn = $('#expandAll');
+const norms = $$('.norm');
+expandBtn.addEventListener('click', () => {
+  const shouldOpen = norms.some(n => !n.open);
+  norms.forEach(n => { n.open = shouldOpen; });
+  expandBtn.textContent = shouldOpen ? 'Contraer toda la normativa' : 'Expandir toda la normativa';
+});
+norms.forEach(n => n.addEventListener('toggle', () => {
+  expandBtn.textContent = norms.every(x => x.open) ? 'Contraer toda la normativa' : 'Expandir toda la normativa';
+}));
+
+const toast = $('#toast');
+let toastTimer;
+function showToast(message){
+  toast.textContent = message; toast.classList.add('show');
+  clearTimeout(toastTimer); toastTimer = setTimeout(() => toast.classList.remove('show'), 2600);
+}
+async function copyText(text){
+  if (navigator.clipboard && window.isSecureContext) { await navigator.clipboard.writeText(text); return; }
+  const ta = document.createElement('textarea'); ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+  document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
+}
+$$('[data-copy]').forEach(btn => {
+  btn.addEventListener('click', async () => {
+    const cita = btn.closest('.lexeme').dataset.cita;
+    try {
+      await copyText(cita); showToast('Cita copiada al portapapeles');
+      btn.textContent = '✓ Copiada'; setTimeout(() => { btn.textContent = 'Copiar cita'; }, 2200);
+    } catch(e){ showToast('No se pudo copiar. Selecciona el texto manualmente.'); }
+  });
+});
+
+$('#printBtn').addEventListener('click', () => window.print());
+let openedForPrint = [];
+window.addEventListener('beforeprint', () => { openedForPrint = norms.filter(n => n.open); norms.forEach(n => { n.open = true; }); });
+window.addEventListener('afterprint', () => { norms.forEach(n => { n.open = openedForPrint.includes(n); }); });
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === '/' && !['INPUT','TEXTAREA'].includes(document.activeElement.tagName)){ e.preventDefault(); searchInput.focus(); }
+  if (e.key === 'Escape' && document.activeElement === searchInput){ searchInput.value = ''; runSearch(); searchInput.blur(); }
+});
+</script>
+</body>
+</html>
