@@ -1,0 +1,1622 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Arquitectura de la Conducta Punible · Arts. 9–12 CP Colombiano</title>
+<style>
+/* ============================================================
+   SISTEMA DE DISEÑO
+   ============================================================ */
+:root{
+  --bg:#f7f5ef;
+  --paper:#ffffff;
+  --ink:#22303f;
+  --muted:#5b6675;
+  --dogma:#9b2c2c;
+  --onto:#2c5282;
+  --herm:#276749;
+  --gold:#975a16;
+  --line:#e3e0d6;
+  --shadow:0 6px 24px rgba(30,40,60,.06);
+  --shadow-hover:0 14px 34px rgba(30,40,60,.10);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  line-height:1.75;
+}
+h1,h2,h3,h4,.serif{font-family:Georgia,'Times New Roman',serif}
+a{color:inherit}
+::selection{background:#9b2c2c;color:#fff}
+
+/* Progreso de lectura */
+#progress{
+  position:fixed;top:0;left:0;height:3px;width:0%;
+  background:linear-gradient(90deg,var(--dogma),var(--onto),var(--herm));
+  z-index:1000;transition:width .1s linear;
+}
+
+/* ============================================================
+   PORTADA
+   ============================================================ */
+header{
+  background:
+    repeating-linear-gradient(135deg,rgba(255,255,255,.025) 0 2px,transparent 2px 22px),
+    linear-gradient(135deg,#16202c 0%,#2b3a4d 100%);
+  color:#fff;padding:5rem 2rem 4rem;text-align:center;
+  border-bottom:5px solid var(--dogma);
+}
+.eyebrow{
+  font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;
+  color:#c9b98a;margin-bottom:1.4rem;font-weight:600;
+}
+header h1{
+  font-size:clamp(2rem,5vw,3.4rem);line-height:1.2;
+  font-weight:400;letter-spacing:-.5px;margin-bottom:1.2rem;
+}
+header h1 em{font-style:italic;color:#e6d9b8}
+header p{
+  max-width:760px;margin:0 auto;font-size:1.05rem;
+  color:#c3cbd6;font-style:italic;
+}
+.header-meta{
+  margin-top:2rem;display:inline-flex;gap:1.6rem;flex-wrap:wrap;
+  justify-content:center;font-size:.78rem;letter-spacing:.12em;
+  text-transform:uppercase;color:#93a1b3;
+}
+.header-meta span{display:flex;align-items:center;gap:.5rem}
+.header-meta b{color:#e6d9b8;font-weight:600}
+
+/* ============================================================
+   MÉTODO
+   ============================================================ */
+.method{
+  max-width:1180px;margin:0 auto;padding:3.5rem 2rem 1rem;
+}
+.section-kicker{
+  font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--muted);font-weight:700;margin-bottom:.6rem;
+}
+.method h2{font-size:1.9rem;margin-bottom:1.6rem;font-weight:400}
+.method-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.4rem}
+.method-card{
+  background:var(--paper);padding:1.6rem;border-radius:10px;
+  box-shadow:var(--shadow);border-left:4px solid var(--line);
+}
+.method-card.d{border-color:var(--dogma)}
+.method-card.o{border-color:var(--onto)}
+.method-card.h{border-color:var(--herm)}
+.method-card h3{font-size:1.15rem;margin-bottom:.4rem}
+.method-card.d h3{color:var(--dogma)}
+.method-card.o h3{color:var(--onto)}
+.method-card.h h3{color:var(--herm)}
+.method-card .subtitle{
+  font-size:.72rem;text-transform:uppercase;letter-spacing:.16em;
+  color:var(--muted);display:block;margin-bottom:.8rem;
+}
+.method-card p{font-size:.92rem;color:var(--muted)}
+
+/* ============================================================
+   NAVEGACIÓN
+   ============================================================ */
+nav{
+  position:sticky;top:0;z-index:200;background:var(--paper);
+  border-bottom:1px solid var(--line);box-shadow:0 2px 12px rgba(0,0,0,.04);
+}
+.nav-inner{
+  max-width:1180px;margin:0 auto;display:flex;overflow-x:auto;
+  padding:0 1rem;scrollbar-width:thin;
+}
+nav a{
+  text-decoration:none;padding:1.05rem 1.15rem;font-size:.85rem;
+  font-weight:600;white-space:nowrap;border-bottom:3px solid transparent;
+  transition:.25s;color:var(--muted);
+}
+nav a:hover{color:var(--dogma);background:#faf6f6}
+nav a.active{color:var(--dogma);border-color:var(--dogma)}
+nav a.tool{color:var(--gold)}
+nav a.tool.active{border-color:var(--gold)}
+
+/* ============================================================
+   MAPA / PIPELINE
+   ============================================================ */
+main{max-width:1180px;margin:0 auto;padding:0 2rem}
+.mapa{padding:3.5rem 0 1rem}
+.pipeline{
+  display:flex;align-items:stretch;gap:.7rem;flex-wrap:wrap;
+  margin-top:1.4rem;
+}
+.pipe-node{
+  flex:1;min-width:190px;background:var(--paper);border:1px solid var(--line);
+  border-radius:10px;padding:1.2rem;text-decoration:none;
+  transition:.25s;position:relative;display:block;
+}
+.pipe-node:hover{transform:translateY(-4px);box-shadow:var(--shadow-hover);border-color:#c9b98a}
+.pipe-node .num{
+  font-family:Georgia,serif;font-size:1.6rem;color:#c9b98a;display:block;line-height:1;
+}
+.pipe-node strong{display:block;font-size:1rem;margin:.5rem 0 .3rem}
+.pipe-node small{font-size:.8rem;color:var(--muted);display:block}
+.pipe-arrow{align-self:center;color:#b9b3a3;font-size:1.3rem}
+
+/* ============================================================
+   ARTÍCULOS
+   ============================================================ */
+.article-section{padding:4.5rem 0 1rem;scroll-margin-top:75px;border-top:1px solid var(--line)}
+.article-section:first-of-type{border-top:none}
+.article-header{display:flex;align-items:center;gap:1.4rem;margin-bottom:1.6rem}
+.roman{
+  font-family:Georgia,serif;font-size:1.5rem;font-weight:bold;
+  color:var(--dogma);background:#f1e6e2;border:1px solid #e4cfc9;
+  width:72px;height:72px;display:flex;align-items:center;justify-content:center;
+  border-radius:8px;flex-shrink:0;
+}
+.article-header h2{font-size:2rem;font-weight:400;line-height:1.25}
+.article-header .tagline{
+  display:block;font-family:'Segoe UI',sans-serif;font-size:.9rem;
+  color:var(--muted);font-style:italic;margin-top:.4rem;font-weight:400;
+}
+.legal-text{
+  background:var(--paper);border-left:5px solid var(--dogma);
+  padding:1.6rem 1.9rem;margin-bottom:1.2rem;border-radius:0 10px 10px 0;
+  box-shadow:var(--shadow);font-family:Georgia,serif;
+  font-size:1.02rem;color:#3d4756;
+}
+.legal-text p+p{margin-top:.9rem}
+.legal-label{
+  display:block;font-family:'Segoe UI',sans-serif;font-size:.65rem;
+  letter-spacing:.22em;text-transform:uppercase;color:var(--muted);
+  margin-bottom:.8rem;font-weight:700;
+}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:2rem}
+.chip{
+  font-size:.72rem;letter-spacing:.04em;padding:.3rem .8rem;
+  background:#eceae2;border:1px solid var(--line);border-radius:30px;color:#5c6470;
+}
+
+.perspectives-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:1.5rem}
+.perspective-card{
+  background:var(--paper);border-radius:12px;padding:1.8rem;
+  box-shadow:var(--shadow);border-top:4px solid transparent;
+  transition:transform .3s,box-shadow .3s;display:flex;flex-direction:column;
+}
+.perspective-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-hover)}
+.perspective-card.dogma{border-top-color:var(--dogma)}
+.perspective-card.onto{border-top-color:var(--onto)}
+.perspective-card.herm{border-top-color:var(--herm)}
+.card-header{display:flex;align-items:center;gap:.7rem;margin-bottom:.3rem}
+.card-icon{font-size:1.35rem}
+.card-title{font-size:.95rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em}
+.dogma .card-title{color:var(--dogma)}
+.onto .card-title{color:var(--onto)}
+.herm .card-title{color:var(--herm)}
+.card-sub{font-size:.72rem;color:var(--muted);font-style:italic;margin-bottom:1.2rem;letter-spacing:.02em}
+.card-content p{font-size:.92rem;color:#4a5563;margin-bottom:1rem;text-align:justify}
+.card-content p:last-child{margin-bottom:0}
+.card-content strong{color:var(--ink);font-weight:650}
+.card-content em{color:#39434f}
+
+.callout{
+  margin-top:1.6rem;background:#fbf6ea;border:1px solid #ecdfbf;
+  border-left:4px solid var(--gold);border-radius:0 8px 8px 0;
+  padding:1.2rem 1.5rem;
+}
+.callout .label{
+  font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--gold);font-weight:700;display:block;margin-bottom:.5rem;
+}
+.callout p{font-size:.9rem;color:#6b5b3a}
+
+.case-study{
+  margin-top:1.2rem;background:var(--paper);border:1px solid var(--line);
+  border-radius:10px;overflow:hidden;
+}
+.case-study summary{
+  cursor:pointer;padding:1.1rem 1.5rem;font-weight:600;font-size:.92rem;
+  list-style:none;display:flex;align-items:center;gap:.7rem;transition:.2s;
+}
+.case-study summary::-webkit-details-marker{display:none}
+.case-study summary:hover{background:#faf9f5}
+.case-study summary .marker{
+  width:22px;height:22px;border:1px solid var(--line);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;font-size:.8rem;
+  color:var(--dogma);flex-shrink:0;transition:.3s;
+}
+.case-study[open] summary .marker{transform:rotate(45deg);background:var(--dogma);color:#fff;border-color:var(--dogma)}
+.case-study .case-body{padding:0 1.5rem 1.4rem;font-size:.92rem;color:var(--muted)}
+.case-study .case-body p+p{margin-top:.7rem}
+
+/* ============================================================
+   TALLER / SIMULADOR
+   ============================================================ */
+.taller{padding:4.5rem 0 2rem;scroll-margin-top:75px;border-top:1px solid var(--line)}
+.taller h2{font-size:2.1rem;font-weight:400;margin-bottom:.6rem}
+.taller .intro{color:var(--muted);max-width:780px;margin-bottom:2rem;font-size:.98rem}
+.simulator{
+  background:var(--paper);border-radius:16px;box-shadow:var(--shadow);
+  padding:2rem;border:1px solid var(--line);
+}
+.sim-top{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;margin-bottom:1.4rem}
+.sim-top h3{font-size:1.15rem;font-weight:600;font-family:'Segoe UI',sans-serif}
+.sim-top .hint{font-size:.78rem;color:var(--muted)}
+.case-tabs{display:flex;flex-wrap:wrap;gap:.6rem;margin-bottom:1.8rem}
+.case-tab{
+  border:1px solid var(--line);background:#faf9f6;color:var(--muted);
+  padding:.6rem 1rem;border-radius:30px;cursor:pointer;font-size:.82rem;
+  font-weight:600;transition:.25s;font-family:inherit;
+}
+.case-tab:hover{border-color:#c9b98a;color:var(--ink)}
+.case-tab[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.case-facts{
+  background:#f4f2ec;border-radius:10px;padding:1.3rem 1.5rem;margin-bottom:1.8rem;
+  border-left:3px solid #c9b98a;
+}
+.case-facts .label{
+  font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--gold);font-weight:700;display:block;margin-bottom:.5rem;
+}
+.case-facts p{font-size:.95rem;color:#4a5563}
+
+.gates{display:flex;flex-direction:column;gap:.9rem}
+.gate{
+  display:grid;grid-template-columns:44px 1fr;gap:1rem;
+  border:1px solid var(--line);border-left:4px solid var(--line);
+  border-radius:8px;padding:1.1rem 1.3rem;background:#fff;
+  transition:box-shadow .25s;
+}
+.gate:hover{box-shadow:var(--shadow)}
+.gate.pass{border-left-color:var(--herm)}
+.gate.fail{border-left-color:var(--dogma)}
+.gate.partial{border-left-color:var(--gold)}
+.gate.stop{border-left-color:#a0aec0;background:#fafaf8}
+.gate-index{
+  font-family:Georgia,serif;font-size:1.35rem;color:#b9b3a3;
+  line-height:1;padding-top:.15rem;
+}
+.gate-top{display:flex;align-items:center;justify-content:space-between;gap:.8rem;flex-wrap:wrap;margin-bottom:.5rem}
+.gate-top h4{font-size:1.02rem;font-weight:600;font-family:'Segoe UI',sans-serif}
+.pill{
+  font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;
+  font-weight:700;padding:.22rem .65rem;border-radius:20px;white-space:nowrap;
+}
+.pill.pass{background:#e6f2ea;color:var(--herm)}
+.pill.fail{background:#fae8e8;color:var(--dogma)}
+.pill.partial{background:#fbf0d9;color:var(--gold)}
+.pill.stop{background:#e9edf1;color:#64748b}
+.gate p{font-size:.9rem;color:var(--muted)}
+.gate-norma{
+  display:inline-block;margin-top:.6rem;font-size:.7rem;
+  color:#8a929e;letter-spacing:.06em;
+}
+.verdict{
+  margin-top:1.6rem;background:#22303f;color:#e6eaf0;
+  border-radius:10px;padding:1.5rem 1.7rem;border-left:5px solid #c9b98a;
+}
+.verdict .label{
+  font-size:.65rem;letter-spacing:.24em;text-transform:uppercase;
+  color:#c9b98a;font-weight:700;display:block;margin-bottom:.6rem;
+}
+.verdict p{font-size:.98rem}
+.contrast{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin-top:1.2rem}
+.contrast-box{border:1px solid var(--line);border-radius:8px;padding:1.1rem 1.3rem;background:#fbfaf7}
+.contrast-box h5{
+  font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;
+  margin-bottom:.5rem;font-family:'Segoe UI',sans-serif;font-weight:700;
+}
+.contrast-box.old h5{color:var(--dogma)}
+.contrast-box.new h5{color:var(--herm)}
+.contrast-box p{font-size:.86rem;color:var(--muted)}
+.gates.animate{animation:fadeUp .45s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+/* ============================================================
+   SÍNTESIS / GLOSARIO / REFERENCIAS
+   ============================================================ */
+.sintesis{padding:4.5rem 0 2rem;scroll-margin-top:75px;border-top:1px solid var(--line)}
+.sintesis h2{font-size:2.1rem;font-weight:400;margin-bottom:.8rem}
+.sintesis .intro{color:var(--muted);max-width:820px;margin-bottom:2rem}
+.table-wrap{overflow-x:auto;border-radius:12px;box-shadow:var(--shadow);background:var(--paper)}
+table{width:100%;border-collapse:collapse;min-width:820px;font-size:.86rem}
+thead{background:#22303f;color:#fff}
+th{padding:1rem;text-align:left;font-weight:600;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase}
+th:nth-child(3){color:#f0b9b9}
+th:nth-child(4){color:#a9c6e8}
+th:nth-child(5){color:#a3d4b6}
+td{padding:1.1rem 1rem;border-bottom:1px solid var(--line);vertical-align:top;color:var(--muted)}
+td:first-child{font-weight:700;color:var(--ink);white-space:nowrap}
+td:nth-child(2){color:var(--ink);font-style:italic}
+tbody tr:hover{background:#faf9f5}
+.closing{
+  margin-top:2rem;background:var(--paper);border:1px solid var(--line);
+  border-radius:12px;padding:2rem;text-align:center;
+}
+.closing .serif{font-size:1.5rem;font-style:italic;color:var(--dogma);margin-bottom:.8rem}
+.closing p{color:var(--muted);max-width:760px;margin:0 auto;font-size:.95rem}
+
+.glosario{padding:3rem 0 1rem;scroll-margin-top:75px}
+.glosario details{
+  background:var(--paper);border:1px solid var(--line);border-radius:12px;
+  padding:0 1.6rem;box-shadow:var(--shadow);
+}
+.glosario summary{
+  cursor:pointer;padding:1.4rem 0;font-family:Georgia,serif;
+  font-size:1.3rem;list-style:none;display:flex;justify-content:space-between;align-items:center;
+}
+.glosario summary::-webkit-details-marker{display:none}
+.glosario summary span{font-size:1.4rem;color:var(--dogma);transition:.3s}
+.glosario details[open] summary span{transform:rotate(45deg)}
+.gloss-list{padding-bottom:1.6rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.4rem}
+.gloss-list dt{font-weight:700;font-size:.92rem;color:var(--ink);margin-bottom:.3rem}
+.gloss-list dd{font-size:.88rem;color:var(--muted)}
+
+.refs{padding:3rem 0 4rem}
+.refs h3{font-size:1.4rem;font-weight:400;margin-bottom:1.4rem}
+.ref-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1rem}
+.ref{
+  background:var(--paper);border:1px solid var(--line);border-radius:8px;
+  padding:1.1rem 1.3rem;font-size:.87rem;color:var(--muted);
+}
+.ref b{color:var(--ink);display:block;margin-bottom:.25rem;font-weight:650}
+.ref i{color:#7a8391}
+
+footer{
+  background:#16202c;color:#8b98a9;text-align:center;padding:3rem 2rem;
+}
+footer strong{color:#d8dde5;display:block;font-family:Georgia,serif;font-size:1.1rem;margin-bottom:.6rem;font-weight:400}
+footer p{font-size:.82rem;max-width:760px;margin:0 auto .5rem}
+footer .fine{font-size:.72rem;opacity:.65;margin-top:1.2rem}
+
+/* Revelado */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+
+/* ============================================================
+   RESPONSIVE / IMPRESIÓN
+   ============================================================ */
+@media(max-width:900px){
+  .perspectives-grid{grid-template-columns:1fr}
+  .article-header{gap:1rem}
+  .article-header h2{font-size:1.6rem}
+  .roman{width:58px;height:58px;font-size:1.2rem}
+  .pipe-arrow{display:none}
+  header{padding:3.5rem 1.5rem}
+}
+@media(max-width:600px){
+  main{padding:0 1.1rem}
+  .method{padding:2.5rem 1.1rem 1rem}
+  .simulator{padding:1.2rem}
+  .gate{grid-template-columns:1fr;gap:.4rem}
+  .gate-index{display:none}
+  .legal-text{padding:1.2rem}
+  .card-content p{text-align:left}
+  .contrast{grid-template-columns:1fr}
+}
+@media print{
+  nav,#progress,.case-tabs,.sim-top .hint{display:none}
+  body{background:#fff;color:#000}
+  header{background:#fff;color:#000;border-bottom:2px solid #000;padding:2rem 0}
+  header p,header h1 em,.eyebrow,.header-meta{color:#000}
+  .perspective-card,.legal-text,.simulator{box-shadow:none;break-inside:avoid}
+  .article-section{break-before:page}
+  .reveal{opacity:1!important;transform:none!important}
+  .case-study{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+
+<header>
+  <div class="eyebrow">Libro Primero · Parte General · Continuidad del análisis</div>
+  <h1>La arquitectura de la<br><em>conducta punible</em></h1>
+  <p>Una lectura tridimensional de los artículos 9 a 12 del Código Penal colombiano:
+     de la causalidad a la imputación, del tipo al injusto, del injusto al reproche.</p>
+  <div class="header-meta">
+    <span><b>Ley 599 de 2000</b></span>
+    <span>Artículos <b>9 — 12</b></span>
+    <span>Dogmática · Ontología · Hermenéutica</span>
+  </div>
+</header>
+
+<!-- ================= MÉTODO ================= -->
+<section class="method">
+  <div class="section-kicker">La clave de lectura</div>
+  <h2>Tres preguntas frente a cada norma</h2>
+  <div class="method-grid">
+    <div class="method-card d">
+      <h3>Dogmática</h3>
+      <span class="subtitle">La estructura · ¿Qué significa?</span>
+      <p>La ciencia del derecho positivo. Reconstruye los conceptos, la sistema-
+         tización y las consecuencias jurídicas de la norma: sus elementos, sus
+         límites y su lugar en la teoría del delito.</p>
+    </div>
+    <div class="method-card o">
+      <h3>Ontología</h3>
+      <span class="subtitle">El fundamento · ¿Qué es?</span>
+      <p>La pregunta por el ser de lo que la norma nombra. ¿Qué realidad tiene
+         un “tipo”, un “bien jurídico”, una “omisión”, una “culpa”? Aquí el
+         derecho dialoga con la metafísica y la filosofía de la persona.</p>
+    </div>
+    <div class="method-card h">
+      <h3>Hermenéutica</h3>
+      <span class="subtitle">El sentido · ¿Cómo se aplica?</span>
+      <p>La teoría de la interpretación y de la aplicación. Qué métodos legitiman
+         un sentido del texto, cómo se resuelven sus tensiones y cómo se
+         traduce la norma en una decisión judicial concreta.</p>
+    </div>
+  </div>
+</section>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#art9">Art. 9 · Conducta</a>
+    <a href="#art10">Art. 10 · Tipicidad</a>
+    <a href="#art11">Art. 11 · Antijuridicidad</a>
+    <a href="#art12">Art. 12 · Culpabilidad</a>
+    <a href="#taller" class="tool">⚗ Taller de imputación</a>
+    <a href="#sintesis">Síntesis</a>
+    <a href="#glosario">Glosario</a>
+  </div>
+</nav>
+
+<main>
+
+<!-- ================= MAPA ================= -->
+<section class="mapa">
+  <div class="section-kicker">Recorrido del análisis</div>
+  <h2 class="serif" style="font-size:1.7rem;font-weight:400">Cuatro filtros. Un solo poder limitado.</h2>
+  <div class="pipeline">
+    <a href="#art9" class="pipe-node">
+      <span class="num">IX</span>
+      <strong>Conducta punible</strong>
+      <small>¿Puede atribuírsele el hecho?<br>Imputación, no mera causalidad.</small>
+    </a>
+    <span class="pipe-arrow">→</span>
+    <a href="#art10" class="pipe-node">
+      <span class="num">X</span>
+      <strong>Tipicidad</strong>
+      <small>¿Está descrito en la ley?<br>El molde legal de lo prohibido.</small>
+    </a>
+    <span class="pipe-arrow">→</span>
+    <a href="#art11" class="pipe-node">
+      <span class="num">XI</span>
+      <strong>Antijuridicidad</strong>
+      <small>¿Es materialmente injusto?<br>Lesión real y ausencia de permiso.</small>
+    </a>
+    <span class="pipe-arrow">→</span>
+    <a href="#art12" class="pipe-node">
+      <span class="num">XII</span>
+      <strong>Culpabilidad</strong>
+      <small>¿Puede reprochársele?<br>La persona como límite del castigo.</small>
+    </a>
+  </div>
+</section>
+
+<!-- ============================================================
+     ARTÍCULO 9
+     ============================================================ -->
+<section id="art9" class="article-section">
+  <div class="article-header">
+    <div class="roman">IX</div>
+    <h2>Conducta punible
+      <span class="tagline">El hecho no se imputa porque ocurra: se imputa porque puede atribuirse.</span>
+    </h2>
+  </div>
+
+  <blockquote class="legal-text">
+    <span class="legal-label">Texto normativo · Artículo 9°</span>
+    <p>Para que la conducta sea punible se requiere que sea típica, antijurídica y culpable.
+       La causalidad por sí sola no basta para la imputación jurídica del resultado.</p>
+    <p>Para que la conducta del inimputable sea punible se requiere que sea típica,
+       antijurídica y se constate la inexistencia de causales de ausencia de responsabilidad.</p>
+  </blockquote>
+
+  <div class="chips">
+    <span class="chip">Estructura tripartita</span>
+    <span class="chip">Imputación objetiva</span>
+    <span class="chip">Riesgo permitido</span>
+    <span class="chip">Injusto del inimputable</span>
+    <span class="chip">Sistema vicarial</span>
+  </div>
+
+  <div class="perspectives-grid">
+
+    <article class="perspective-card dogma">
+      <div class="card-header"><span class="card-icon">⚖️</span><h3 class="card-title">Dogmática</h3></div>
+      <div class="card-sub">La arquitectura del delito</div>
+      <div class="card-content">
+        <p>El artículo 9 es la <strong>norma de clausura del sistema</strong>: ninguna pena
+        sin una conducta que atraviese tres filtros sucesivos y acumulativos.
+        Tipicidad, antijuridicidad y culpabilidad no son sinónimos ni pueden
+        compensarse entre sí. Un hecho típico y reprochable pero justificado
+        no es delito; un hecho típico y antijurídico pero no reprochable no
+        habilita pena. <strong>Bastan dos filtros superados para no condenar.</strong></p>
+
+        <p>El inciso segundo desplaza el criterio de la <em>conditio sine qua non</em>.
+        La causalidad es condición necesaria pero insuficiente. La
+        <strong>imputación objetiva</strong> formula dos preguntas: ¿creó el autor
+        un riesgo jurídicamente desaprobado? ¿Ese riesgo —y no otro— se
+        realiza en el resultado? Si el resultado materializa un
+        <em>riesgo permitido</em> (medicina, tráfico, deporte) o pertenece a la
+        esfera de competencia de otra persona, no hay imputación aunque
+        medie causalidad física.</p>
+
+        <p>El segundo inciso reconoce una distinción decisiva: <strong>el injusto
+        del inimputable existe</strong>. La conducta de quien padece un trastorno
+        mental puede ser típica y antijurídica; lo que falta es culpabilidad.
+        Por eso es legítimo repeler su agresión y por eso se habilita el
+        régimen de medidas de seguridad. La palabra “punible” en ese inciso
+        no significa “susceptible de pena” —el artículo 12 lo prohíbe— sino
+        <em>sancionabilidad vicarial</em>: respuesta preventiva y terapéutica.</p>
+      </div>
+    </article>
+
+    <article class="perspective-card onto">
+      <div class="card-header"><span class="card-icon">🌌</span><h3 class="card-title">Ontología</h3></div>
+      <div class="card-sub">El hecho como significación, no como cosa</div>
+      <div class="card-content">
+        <p>¿Qué es un hecho punible? No es un objeto de la naturaleza.
+        “Homicidio” no designa una cosa sino una <strong>significación normativa</strong>
+        atribuida a un acontecimiento. El mismo movimiento corporal puede
+        ser deporte, accidente, defensa o asesinato. La ontología del delito
+        es por eso <em>relacional</em>: un hecho sólo es delito en relación con
+        una norma, un bien y un sujeto. No existe delito “en sí”.</p>
+
+        <p>La causalidad pertenece al orden del <strong>ser</strong>; la imputación,
+        al orden del <strong>deber-ser</strong>. Confundirlos es el error ontológico
+        fundamental del causalismo naturalista: tratar al ser humano como
+        una causa entre causas. La imputación objetiva restablece la
+        diferencia. El derecho no pregunta únicamente qué aconteció, sino
+        qué acontecimiento puede atribuirse a alguien <em>como su obra</em>.
+        Producir un resultado y responder por él no son lo mismo.</p>
+
+        <p>El inciso del inimputable revela además una separación entre
+        <strong>hecho y autor</strong>. El daño existe en el mundo aunque quien lo
+        causa no sea un agente moral pleno. Negar el injusto porque falta
+        culpabilidad sería borrar un daño real; imponer pena porque existe
+        el daño sería convertir al enfermo en objeto. La estructura
+        tripartita sostiene precisamente esa tensión: <em>el hecho es
+        injusto, pero el sujeto no es reprochable</em>.</p>
+      </div>
+    </article>
+
+    <article class="perspective-card herm">
+      <div class="card-header"><span class="card-icon">📜</span><h3 class="card-title">Hermenéutica</h3></div>
+      <div class="card-sub">El orden de las preguntas como garantía</div>
+      <div class="card-content">
+        <p>El artículo sep>“La causalidad por sí sola no basta” es una <strong>norma de método</strong>:
+        obliga al juez a argumentar dos veces. Primero la conexión fáctica;
+        después la atribución normativa. Una sentencia que salta de
+        “el accionado causó la muerte” a “es responsable de homicidio”
+        adolece de motivación insuficiente. Debe explicitarse el riesgo
+        creado, su desprobación jurídica y su realización en el resultado.</p>
+
+        <p>Finalmente, la disposición impone un <strong>orden irrenunciable</strong>.
+        No se pasa a la culpabilidad sin haber establecido el injusto; no
+        se declara justificado un hecho que ni siquiera es típico. Esta
+        secuencia no es una formalidad: garantiza que el poder punitivo
+        sólo avance cuando cada pregunta ha sido respondida a favor de
+        la imputación. <em>Cualquier respuesta negativa detiene el sistema.</em></p>
+      </div>
+    </article>
+  </div>
+
+  <div class="callout">
+    <span class="label">Nodo de tensión doctrinal</span>
+    <p><strong>¿El segundo inciso del artículo 9 es una clave o una trampa?</strong>
+    La lectura garantista lo entiende como reconocimiento del <em>injusto
+    objetivo</em> del inimputable: fundamento de la defensa y de la medida de
+    seguridad. Una lectura literalista lo convertiría en autorización de
+    pena sin culpabilidad, contradiciendo el artículo 12 y la dignidad del
+    artículo 1. La interpretación que salva la coherencia del código es
+    la primera.</p>
+  </div>
+
+  <details class="case-study">
+    <summary><span class="marker">+</span> Caso aplicado · El conductor que respetó todas las reglas</summary>
+    <div class="case-body">
+      <p>Un conductor circula a la velocidad permitida, con distancia de
+      seguridad y atención plena. Un peatón cruza repentinamente desde un
+      lugar oculto. Hay causalidad física entre el vehículo y la muerte.</p>
+      <p><strong>Lectura:</strong> existe causalidad, pero no imputación objetiva.
+      El conductor se mantuvo dentro de un <em>riesgo permitido</em> y no
+      tenía dominio sobre la situación. El principio de confianza protege
+      la libre circulación: quien actúa conforme a las reglas de una
+      actividad socialmente necesaria no responde por el resultado
+      aleatorio. <strong>Artículo 9, inciso segundo, en estado puro.</strong></p>
+    </div>
+  </details>
+</section>
+
+<!-- ============================================================
+     ARTÍCULO 10
+     ============================================================ -->
+<section id="art10" class="article-section">
+  <div class="article-header">
+    <div class="roman">X</div>
+    <h2>Tipicidad
+      <span class="tagline">El lenguaje como frontera: sólo se castiga lo que la ley pudo decir.</span>
+    </h2>
+  </div>
+
+  <blockquote class="legal-text">
+    <span class="legal-label">Texto normativo · Artículo 10°</span>
+    <p>La ley penal definirá de manera inequívoca, expresa y clara las
+       características básicas estructurales del tipo penal.</p>
+    <p>En los tipos de omisión también el deber tendrá que estar consagrado
+       y delimitado claramente en la Constitución Política o en la ley.</p>
+  </blockquote>
+
+  <div class="chips">
+    <span class="chip">Lex certa</span>
+    <span class="chip">Tipicidad objetiva</span>
+    <span class="chip">Tipicidad subjetiva</span>
+    <span class="chip">Posición de garante</span>
+    <span class="chip">Tipos en blanco</span>
+    <span class="chip">Omisión impropia</span>
+  </div>
+
+  <div class="perspectives-grid">
+
+    <article class="perspective-card dogma">
+      <div class="card-header"><span class="card-icon">⚖️</span><h3 class="card-title">Dogmática</h3></div>
+      <div class="card-sub">El tipo como molde y como garantía</div>
+      <div class="card-content">
+        <p>El tipo penal es la <strong>descripción legal de la conducta punible</strong>.
+        No es una definición filosófica del mal, sino un molde técnico:
+        sujeto, conducta, objeto, resultado, circunstancias. Cumple una
+        función de <em>garantía</em> —sólo lo descrito puede castigarse— y
+        una función de <em>base</em> —del tipo se deriva el indicio del
+        injusto—. “Inequívoca, expresa y clara” es la dimensión positiva
+        del principio de legalidad: la <strong>taxatividad</strong>.</p>
+
+        <p>Se distingue <strong>tipicidad objetiva</strong> (elementos descriptivos
+        y normativos del hecho, imputación del resultado) de
+        <strong>tipicidad subjetiva</strong> (dolo, culpa y, en ciertos tipos,
+        elementos subjetivos especiales del injusto como el ánimo de lucro).
+        La estructura colombiana, de raigambre finalista, sitúa el dolo y
+        la culpa en la conducta y en el tipo; la culpabilidad queda
+        reservada al <em>reproche</em> por haber realizado esa conducta.</p>
+
+        <p>En la omisión aparece un elemento adicional: la <strong>posición de
+        garante</strong>. No cualquiera responde por no evitar un resultado.
+        Garante es quien tiene jurídicamente asignada la protección de un
+        bien o el control de una fuente de peligro. El inciso segundo
+        <em>constitucionaliza y legaliza esa fuente</em>: el deber debe estar
+        consagrado y delimitado en la Constitución o en la ley. Quedan
+        excluidos los meros deberes morales.</p>
+      </div>
+    </article>
+
+    <article class="perspective-card onto">
+      <div class="card-header"><span class="card-icon">🌌</span><h3 class="card-title">Ontología</h3></div>
+      <div class="card-sub">¿Qué tipo de existencia tiene un tipo?</div>
+      <div class="card-content">
+        <p>Un tipo penal no es un objeto empírico ni una idea perfecta.
+        Es una <strong>estructura de sentido</strong> producida por el lenguaje
+        legislativo. Su existencia es normativa e intersubjetiva: existe
+        porque un ordenamiento la reconoce y porque una comunidad de
+        intérpretes puede reconstruirla. De ahí que la claridad no sea un
+        adorno estilístico: <em>sin sentido accesible no hay tipo; sin tipo
+        no hay delito</em>.</p>
+
+        <p>La omisión plantea el problema ontológico más delicado del derecho
+        penal: ¿cómo puede imputarse un <strong>no-ser</strong>? Físicamente,
+        quien no actúa no produce nada. Si el derecho castigara la omisión
+        como si fuera una causa física, otorgaría existencia causal a una
+        ausencia. La salida es normativa: no se imputa un “no hacer” como
+        evento, sino el <strong>incumplimiento de un deber previamente
+        asignado</strong>. La omisión punible es un concepto jurídico,
+        no un fenómeno natural.</p>
+
+        <p>El bien jurídico también está en juego. Para el <em>normativismo</em>,
+        el bien existe porque la norma lo tutela; para el
+        <em>materialismo</em>, la norma protege intereses humanos
+        preexistentes. Si el tipo pudiera crear su bien por el solo hecho
+        de describirlo, el legislador se volvería infinito. La exigencia
+        de claridad es, en el fondo, la frontera entre ambas ontologías.</p>
+      </div>
+    </article>
+
+    <article class="perspective-card herm">
+      <div class="card-header"><span class="card-icon">📜</span><h3 class="card-title">Hermenéutica</h3></div>
+      <div class="card-sub">Interpretar no es crear punibilidad</div>
+      <div class="card-content">
+        <p>La interpretación del tipo es <strong>restrictiva en lo punitivo</strong>.
+        Se admite la interpretación extensiva cuando el sentido natural
+        y racional del texto abarca el caso; se prohíbe la analogía
+        creadora. La diferencia es fina pero decisiva:
+        <em>interpretar es desplegar el sentido de la palabra; analogar
+        es saltar a un caso que la palabra no cubre</em>. Sólo lo primero
+        es legítimo <span class="serif">in malam partem</span>.</p>
+
+        <p>Los <strong>tipos en blanco</strong> exigen una operación de reenvío.
+        El artículo 6 exige preexistencia también del elemento remitido.
+        Hermenéuticamente no basta con que la ley diga “el que viole
+        una norma”: la norma complementaria debe existir, ser cierta
+        y tener el rango y la legitimidad requeridos. Un reglamento
+        posterior o indeterminado <em>no puede completar retroactivamente
+        un tipo penal</em>.</p>
+
+        <p>En la omisión, el intérprete debe identificar la <strong>fuente
+        exacta del deber</strong>. No basta invocar la solidaridad humana:
+        hay que señalar la disposición constitucional o legal que asigna
+        la protección del bien y verificar que el sujeto podía realmente
+        evitar el resultado. La hermenéutica es doble: del texto que
+        crea el deber y de las circunstancias que hacen exigible su
+        cumplimiento.</p>
+      </div>
+    </article>
+  </div>
+
+  <div class="callout">
+    <span class="label">Nodo de tensión doctrinal</span>
+    <p><strong>¿Puede un contrato o una asunción voluntaria crear garante?</strong>
+    El inciso segundo habla de Constitución o ley. Una lectura restrictiva
+    excluye fuentes autónomas; una lectura sistemática admite que el
+    contrato y la asunción de riesgo operan <em>en virtud de</em> normas
+    que los reconocen. El punto intocable es otro: <strong>nunca un deber
+    puramente moral</strong>. La moral puede inspirar el derecho; no puede
+    sustituir la reserva de ley.</p>
+  </div>
+
+  <details class="case-study">
+    <summary><span class="marker">+</span> Caso aplicado · Tres testigos del mismo ahogamiento</summary>
+    <div class="case-body">
+      <p>Un padre, un guardavidas contratado y un transeúnte observan cómo
+      un niño se ahoga. Los tres pueden salvarlo sin riesgo. Ninguno lo hace.</p>
+      <p><strong>Lectura:</strong> el padre tiene un deber legal de cuidado y
+      socorro; el guardavidas, un deber derivado de una función que el
+      ordenamiento reconoce. Ambos son <em>garantes</em> y pueden responder
+      por homicidio en modalidad de <strong>comisión por omisión</strong>.
+      El transeúnte no tiene posición de garante: no responde por el
+      homicidio, aunque podría configurar el tipo propio de omisión de
+      socorro si concurren sus requisitos. <strong>Mismo hecho físico,
+      distinta imputación normativa.</strong></p>
+    </div>
+  </details>
+</section>
+
+<!-- ============================================================
+     ARTÍCULO 11
+     ============================================================ -->
+<section id="art11" class="article-section">
+  <div class="article-header">
+    <div class="roman">XI</div>
+    <h2>Antijuridicidad
+      <span class="tagline">El daño permanece; lo que puede desaparecer es su injusticia.</span>
+    </h2>
+  </div>
+
+  <blockquote class="legal-text">
+    <span class="legal-label">Texto normativo · Artículo 11°</span>
+    <p>Para que una conducta típica sea punible se requiere que lesione o
+       ponga efectivamente en peligro, sin justa causa, el bien jurídicamente
+       tutelado por la ley penal.</p>
+  </blockquote>
+
+  <div class="chips">
+    <span class="chip">Antijuridicidad material</span>
+    <span class="chip">Principio de lesividad</span>
+    <span class="chip">Justificación vs. excusa</span>
+    <span class="chip">Legítima defensa</span>
+    <span class="chip">Estado de necesidad</span>
+    <span class="chip">Bagatela</span>
+  </div>
+
+  <div class="perspectives-grid">
+
+    <article class="perspective-card dogma">
+      <div class="card-header"><span class="card-icon">⚖️</span><h3 class="card-title">Dogmática</h3></div>
+      <div class="card-sub">Del encuadre verbal al daño real</div>
+      <div class="card-content">
+        <p>El artículo 11 adopta una <strong>antijuridicidad material</strong>.
+        No basta que la conducta encaje en el tipo: debe lesionar o poner
+        <em>efectivamente</em> en peligro el bien jurídico, y hacerlo
+        <em>sin justa causa</em>. Son tres exámenes distintos: gravedad
+        lesiva, identidad del bien protegido y ausencia de permiso.
+        La tipicidad entrega un indicio; la antijuridicidad exige
+        <strong>confirmación real</strong>.</p>
+
+        <p>Las causales de justificación operan como <strong>permisos del
+        ordenamiento</strong>: legítima defensa, estado de necesidad
+        justificante, cumplimiento de un deber o ejercicio legítimo de
+        un derecho, oficio o cargo, y —en bienes disponibles— el
+        consentimiento válidamente emitido por su titular. No son
+        “perdones”: niegan que el hecho sea injusto. La diferencia con
+        las excusas es estructural: <em>quien se justifica hace lo
+        correcto; quien se excusa hace algo injusto que no puede
+        reprochársele</em>.</p>
+
+        <p>La exigencia de peligro <em>efectivo</em> tensiona los delitos de
+        peligro abstracto. Si se castiga una conducta sin probar afectación
+        del bien, ¿se respeta el artículo 11? La dogmática garantista
+        responde que la abstractización sólo se justifica cuando la
+        conducta es, por su estructura y por experiencia, idónea para
+        lesionar; nunca cuando se castiga una simple desobediencia.
+        Aquí el artículo 11 funciona como <strong>criterio de control
+        del ius puniendi</strong>.</p>
+      </div>
+    </article>
+
+    <article class="perspective-card onto">
+      <div class="card-header"><span class="card-icon">🌌</span><h3 class="card-title">Ontología</h3></div>
+      <div class="card-sub">La injusticia como relación, el peligro como virtualidad</div>
+      <div class="card-content">
+        <p>Nadie encuentra “injusto” bajo un microscopio. La antijuridicidad
+        no es una propiedad física del acto, sino una <strong>relación de
+        contradicción</strong> entre una conducta y el conjunto del
+        ordenamiento. Su ontología es por eso <em>holística</em>: no se
+        mira una norma aislada, sino el sentido del sistema. Una conducta
+        puede contradecir una disposición y estar, sin embargo, permitida
+        por otra de mayor rango o por el principio que articula ambas.</p>
+
+        <p>La justificación revela algo desconcertante: <strong>el daño
+        permanece, la injusticia desaparece</strong>. Quien se defiende y
+        mata ha causado una muerte real. El ordenamiento no niega el
+        hecho ni lo vuelve inocuo; cambia su significación. Ontológicamente,
+        justificar es <em>reordenar permisos en un conflicto que la ley
+        no pudo evitar</em>. El derecho reconoce que a veces dos bienes
+        colisionan y que no todos los daños son injustos.</p>
+
+        <p>El peligro introduce la <strong>virtualidad</strong> en el corazón
+        del derecho penal. A diferencia de la lesión, que es actual, el
+        peligro es una disposición hacia el daño. Castigarlo anticipa la
+        protección, pero también avanza sobre el territorio de la conducta
+        sin resultado. La ontología del peligro obliga a preguntar
+        <em>cuándo una probabilidad basta para privar a alguien de su
+        libertad</em>. La respuesta garantista: sólo cuando es un peligro
+        real, individualizado y jurídicamente relevante.</p>
+      </div>
+    </article>
+
+    <article class="perspective-card herm">
+      <div class="card-header"><span class="card-icon">📜</span><h3 class="card-title">Hermenéutica</h3></div>
+      <div class="card-sub">Leer “sin justa causa” con todo el ordenamiento</div>
+      <div class="card-content">
+        <p>“Sin justa causa” es una <strong>cláusula de apertura</strong> que
+        se lee con el bloque de constitucionalidad y convencionalidad.
+        La dignidad humana, la prohibición de tratos crueles y la
+        proporcionalidad informan tanto la determinación del bien jurídico
+        como los límites de la defensa y del estado de necesidad.
+        <em>La vida no se pondera como una cantidad</em>: la persona
+        nunca es mero medio para salvar a otras.</p>
+
+        <p>La interpretación de las causales no puede ser ni mecánica ni
+        expansiva. Mecánica sería exigir que la defensa se ajuste a un
+        formulario abstracto, ignorando la situación real de quien es
+        atacado. Expansiva sería crear eximentes por analogía. El punto
+        de equilibrio es la <strong>ratio de cada causal</strong>: proteger
+        la autonomía frente a la agresión en un caso; permitir el mal
+        menor en una colisión inevitable en el otro.</p>
+
+        <p>La antijuridicidad material habilita figuras de reducción de la
+        punibilidad que el texto no enumera expresamente:
+        <strong>insignificancia o bagatela</strong>, principio de confianza,
+        adecuación social con función restrictiva. Su legitimidad no
+        consiste en “crear” justificaciones, sino en interpretar el
+        tipo a la luz de la lesividad real. <em>Donde no hay daño relevante
+        ni peligro efectivo, no hay injusto penal</em>, aunque haya
+        encuadre verbal.</p>
+      </div>
+    </article>
+  </div>
+
+  <div class="callout">
+    <span class="label">Nodo de tensión doctrinal</span>
+    <p><strong>Defensa real y defensa putativa.</strong> Si el sujeto cree
+    erróneamente que lo agreden, no hay legítima defensa real: hay un
+    <em>error sobre circunstancias justificantes</em>. La hermenéutica no
+    lo trata como justificado, sino que examina si el error era vencible
+    o invencible. La apariencia de defensa no equivale a defensa; pero
+    un error inevitable no puede reprocharse. Se cambia la categoría,
+    no la humanidad del caso.</p>
+  </div>
+
+  <details class="case-study">
+    <summary><span class="marker">+</span> Caso aplicado · El objeto de valor ínfimo</summary>
+    <div class="case-body">
+      <p>Un trabajador se lleva de la fábrica un material de valor
+      económico mínimo, en un contexto de necesidad y dentro de una
+      práctica tolerada por la propia organización.</p>
+      <p><strong>Lectura:</strong> hay encuadre verbal en un tipo patrimonial,
+      pero la antijuridicidad material obliga a preguntar si existe una
+      <em>lesión relevante</em> del patrimonio. La bagatela permite excluir
+      del injusto penal conductas de afectación insignificante.
+      <strong>No es un permiso general al hurto</strong>: es una valoración
+      concreta de lesividad que impide que el derecho penal se convierta
+      en un sistema de sanción de toda irregularidad.</p>
+    </div>
+  </details>
+</section>
+
+<!-- ============================================================
+     ARTÍCULO 12
+     ============================================================ -->
+<section id="art12" class="article-section">
+  <div class="article-header">
+    <div class="roman">XII</div>
+    <h2>Culpabilidad
+      <span class="tagline">No se condena lo que ocurrió, sino lo que puede reprocharse a quien lo hizo.</span>
+    </h2>
+  </div>
+
+  <blockquote class="legal-text">
+    <span class="legal-label">Texto normativo · Artículo 12°</span>
+    <p>Solo se podrá imponer penas por conductas realizadas con culpabilidad.
+       Queda erradicada toda forma de responsabilidad objetiva.</p>
+  </blockquote>
+
+  <div class="chips">
+    <span class="chip">Principio de culpabilidad</span>
+    <span class="chip">Responsabilidad subjetiva</span>
+    <span class="chip">Imputabilidad</span>
+    <span class="chip">Conciencia de antijuridicidad</span>
+    <span class="chip">Exigibilidad</span>
+    <span class="chip">Error de prohibición</span>
+  </div>
+
+  <div class="perspectives-grid">
+
+    <article class="perspective-card dogma">
+      <div class="card-header"><span class="card-icon">⚖️</span><h3 class="card-title">Dogmática</h3></div>
+      <div class="card-sub">El reproche personal como límite</div>
+      <div class="card-content">
+        <p>La culpabilidad es el <strong>juicio de reproche personal</strong>
+        sobre un autor que realizó un hecho típico y antijurídico. No es
+        un elemento descriptivo más: es la puerta por donde la
+        <em>persona</em> —y no sólo el hecho— entra en el sistema. Su
+        estructura clásica reúne tres componentes:
+        <strong>imputabilidad</strong> (capacidad de comprender y
+        autodeterminarse), <strong>conciencia de la antijuridicidad</strong>
+        (real o potencial) y <strong>exigibilidad de otra conducta</strong>.</p>
+
+        <p>La segunda frase es una de las conquistas garantistas más
+        importantes del código: <strong>queda erradicada toda forma de
+        responsabilidad objetiva</strong>. No se responde por el resultado
+        en cuanto tal, ni por el simple riesgo, ni por la calidad del
+        autor, ni por la gravedad del daño. Se responde por una
+        <em>conducta dolosa o culposa</em>. La causalidad del resultado,
+        desprovista de relación subjetiva con él, es jurídicamente estéril.</p>
+
+        <p>La culpa no es un “dolo menor”. Es una estructura autónoma:
+        infracción del <strong>deber objetivo de cuidado</strong>,
+        previsibilidad objetiva del resultado, imputación del riesgo y
+        relación de realización. Ese deber se determina por la función
+        desempeñada y por los protocolos de la actividad,
+        <em>no por el resultado observado a posteriori</em>. El principio
+        de confianza y la prohibición de regreso lo limitan en una
+        sociedad de tareas divididas.</p>
+      </div>
+    </article>
+
+    <article class="perspective-card onto">
+      <div class="card-header"><span class="card-icon">🌌</span><h3 class="card-title">Ontología</h3></div>
+      <div class="card-sub">Libertad, reproche y fragilidad</div>
+      <div class="card-content">
+        <p>La culpabilidad presupone una respuesta a la pregunta más antigua
+        de la filosofía del derecho: <em>¿es el hombre libre?</em> El
+        derecho penal no necesita resolver el debate entre determinismo
+        y libre albedrío. Opera con un <strong>postulado práctico</strong>:
+        tratamos a las personas como capaces de comprender motivos
+        normativos y orientarse por ellos. No es una verdad metafísica
+        comprobada; es una condición de sentido de la imputación y,
+        simultáneamente, una <em>garantía a favor del imputado</em>.</p>
+
+        <p>El concepto <em>psicológico</em> de culpabilidad (Liszt, Beling)
+        la reducía a una relación anímica entre autor y resultado: dolo
+        o culpa como hechos mentales. El concepto <em>normativo</em>
+        (Frank, Goldschmidt) la transforma: culpabilidad es
+        <strong>reprochabilidad</strong>, una relación entre lo que el
+        sujeto hizo, lo que podía comprender y lo que se le podía exigir.
+        Ontológicamente, la culpa no es una cosa dentro de la cabeza:
+        es una <em>atribución normativa situada</em>.</p>
+
+        <p>La exigibilidad introduce la <strong>fragilidad</strong> en el
+        concepto de persona. El derecho no se dirige a un agente ideal,
+        inmune al miedo, la necesidad o la presión jerárquica. Se dirige
+        a un ser humano concreto, con límites. Por eso existen el estado
+        de necesidad exculpante, el miedo insuperable y la obediencia
+        debida: figuras que reconocen que en ciertas circunstancias
+        <em>no era razonable pedir otra conducta</em>. La culpabilidad
+        humaniza el sistema al reconocer su propio límite.</p>
+      </div>
+    </article>
+
+    <article class="perspective-card herm">
+      <div class="card-header"><span class="card-icon">📜</span><h3 class="card-title">Hermenéutica</h3></div>
+      <div class="card-sub">La duda, el error y la biografía</div>
+      <div class="card-content">
+        <p>La prohibición de responsabilidad objetiva se traduce en una
+        <strong>regla de prueba y de duda</strong>: el Estado debe probar
+        la conducta dolosa o culposa; no puede presumirla a partir del
+        daño. El <em>in dubio pro reo</em> opera con plena fuerza sobre
+        el dolo, la culpa, la imputabilidad y la conciencia de
+        antijuridicidad. <strong>No se invierte la carga</strong>: el
+        acusado no tiene que demostrar que no quiso ni que no pudo prever.</p>
+
+        <p>El <strong>error de prohibición</strong> exige una hermenéutica
+        contextual. No se pregunta si el sujeto conocía el número del
+        artículo, sino si podía comprender que su conducta contradecía
+        el ordenamiento. Aquí el artículo 7 —igualdad material— es
+        decisivo: la formación, el entorno cultural, la marginalidad y
+        la pertenencia étnica pueden volver <em>invencible</em> un error
+        que para otro sería vencible. La culpabilidad se juzga desde la
+        biografía, no desde un “hombre medio” abstracto.</p>
+
+        <p>La lectura sistemática con el artículo 9, inciso segundo, cierra
+        el círculo: <strong>si no hay culpabilidad, no hay pena, aunque
+        haya injusto</strong>. La única respuesta posible es el régimen
+        de medidas de seguridad, sometido a necesidad, proporcionalidad
+        y finalidades de curación y rehabilitación. Cualquier interpretación
+        que use la “punibilidad” del inimputable para justificar una pena
+        convierte el artículo 12 en letra muerta y vulnera la dignidad
+        del artículo 1.</p>
+      </div>
+    </article>
+  </div>
+
+  <div class="callout">
+    <span class="label">Nodo de tensión doctrinal</span>
+    <p><strong>¿Libre albedrío o estabilización de la norma?</strong>
+    La lectura clásica funda la culpabilidad en la posibilidad real de
+    haber actuado de otro modo. La lectura funcionalista (Jakobs) la
+    funda en la necesidad de mantener vigente la norma frente a quien
+    la contradice. El riesgo de la segunda es deslizarse hacia la
+    <em>peligrosidad</em> y abandonar al individuo. El artículo 12 obliga
+    a anclar el reproche en <strong>el hecho y en su autor concreto</strong>,
+    nunca en una biografía temida.</p>
+  </div>
+
+  <details class="case-study">
+    <summary><span class="marker">+</span> Caso aplicado · Dos sentencias frente al mismo atropello</summary>
+    <div class="case-body">
+      <p><strong>Sentencia A:</strong> se prueba que el conductor infringió
+      límites de velocidad y el deber de atención. Hay infracción del
+      deber objetivo de cuidado y previsibilidad objetiva del resultado.
+      <em>Hay culpa.</em></p>
+      <p><strong>Sentencia B:</strong> sólo se prueba que el peatón murió y
+      que el vehículo lo impactó. <em>No hay base para imputar.</em>
+      La diferencia entre ambos fallos es exactamente la que el
+      artículo 12 ordena: <strong>del resultado no se deduce la culpabilidad</strong>.</p>
+    </div>
+  </details>
+</section>
+
+<!-- ============================================================
+     TALLER INTERACTIVO
+     ============================================================ -->
+<section id="taller" class="taller">
+  <div class="section-kicker">Aplicación guiada</div>
+  <h2>Taller de imputación</h2>
+  <p class="intro">
+    Cinco hechos concretos. Cuatro filtros sucesivos. Seleccione un caso y observe
+    cómo la estructura del delito decide —o detiene— el ejercicio del poder punitivo.
+    Cada filtro corresponde a una pregunta que el juez está obligado a responder.
+  </p>
+
+  <div class="simulator">
+    <div class="sim-top">
+      <h3>Seleccione un escenario</h3>
+      <span class="hint">Los filtros se recorren en orden: un “no” detiene la imputación.</span>
+    </div>
+
+    <div class="case-tabs" id="caseTabs" role="group" aria-label="Escenarios de análisis"></div>
+
+    <div id="simOutput" aria-live="polite"></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SÍNTESIS
+     ============================================================ -->
+<section id="sintesis" class="sintesis">
+  <div class="section-kicker">Lectura transversal</div>
+  <h2>Cuatro normas, una sola arquitectura</h2>
+  <p class="intro">
+    Los artículos 9 a 12 no son preceptos independientes: son las cuatro
+    articulaciones de un mismo mecanismo de limitación. La tabla siguiente
+    reconstruye, para cada uno, la pregunta rectora y sus tres dimensiones.
+  </p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Norma</th>
+          <th>Pregunta rectora</th>
+          <th>Dogmática · estructura</th>
+          <th>Ontología · fundamento</th>
+          <th>Hermenéutica · sentido</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Art. 9</td>
+          <td>¿Puede atribuírsele el hecho?</td>
+          <td>Estructura tripartita; imputación objetiva; injusto del inimputable.</td>
+          <td>El hecho como significación normativa. Causalidad (ser) ≠ imputación (deber-ser).</td>
+          <td>Lectura sistemática de “punible”; orden de los filtros; doble argumentación judicial.</td>
+        </tr>
+        <tr>
+          <td>Art. 10</td>
+          <td>¿Está descrito en la ley?</td>
+          <td>Tipicidad objetiva y subjetiva; posición de garante; reserva de ley.</td>
+          <td>El tipo como estructura de sentido; la omisión como imputación de un no-ser.</td>
+          <td>Interpretación restrictiva; prohibición de analogía; fuente legal exacta del deber.</td>
+        </tr>
+        <tr>
+          <td>Art. 11</td>
+          <td>¿Es materialmente injusto?</td>
+          <td>Antijuridicidad material; lesividad; justificación frente a excusa.</td>
+          <td>La injusticia como relación; el daño que persiste; el peligro como virtualidad.</td>
+          <td>Ponderación con DD.HH.; ratio de las causales; bagatela y confianza.</td>
+        </tr>
+        <tr>
+          <td>Art. 12</td>
+          <td>¿Puede reprochársele?</td>
+          <td>Culpabilidad; prohibición absoluta de responsabilidad objetiva.</td>
+          <td>Reprochabilidad como relación normativa; fragilidad y exigibilidad de la persona.</td>
+          <td>Regla de prueba e in dubio; error contextual; lectura armónica con el art. 9.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="closing">
+    <div class="serif">“La causalidad por sí sola no basta.”</div>
+    <p>
+      En esa frase del artículo 9 se condensa todo el proyecto. El derecho penal
+      no es una máquina de conectar causas con castigos: es un lenguaje que
+      pregunta, antes de sancionar, si el hecho está descrito, si es injusto
+      y si puede reprocharse. <strong>Dogmática, ontología y hermenéutica
+      convergen en un mismo punto: la dignidad de la persona como límite
+      infranqueable del poder.</strong>
+    </p>
+  </div>
+</section>
+
+<!-- ============================================================
+     GLOSARIO
+     ============================================================ -->
+<section id="glosario" class="glosario">
+  <details>
+    <summary>Glosario mínimo de la conducta punible <span>+</span></summary>
+    <dl class="gloss-list">
+      <div><dt>Imputación objetiva</dt><dd>Atribución normativa de un hecho o resultado a una persona porque creó un riesgo jurídicamente desaprobado que se realiza en ese resultado. Va más allá de la causalidad física.</dd></div>
+      <div><dt>Riesgo permitido</dt><dd>Probabilidad de daño que el ordenamiento tolera por ser inherente a una actividad socialmente necesaria: medicina, tráfico, deporte. Su materialización no genera imputación.</dd></div>
+      <div><dt>Posición de garante</dt><dd>Situación jurídica que asigna a alguien la protección de un bien o el control de una fuente de peligro. Es el presupuesto de la comisión por omisión.</dd></div>
+      <div><dt>Comisión por omisión</dt><dd>Realización de un tipo de resultado mediante el no-evitarlo, cuando se era garante y se podía hacerlo. Se equipara normativamente a causar.</dd></div>
+      <div><dt>Tipo en blanco</dt><dd>Descripción legal que remite a otra norma para completar sus elementos. El elemento remitido debe ser preexistente, cierto y legítimamente fuente de complementación.</dd></div>
+      <div><dt>Antijuridicidad material</dt><dd>Contradicción real y efectiva de la conducta con el ordenamiento, medida por la lesión o el peligro del bien jurídico, no por el mero encuadre verbal.</dd></div>
+      <div><dt>Justificación</dt><dd>Causal que excluye la antijuridicidad: el hecho es permitido. El ordenamiento autoriza el daño en esa situación concreta. No hay injusto.</dd></div>
+      <div><dt>Excusa / ausencia de responsabilidad</dt><dd>Causal que excluye la culpabilidad, no el injusto. El hecho sigue siendo contrario a derecho, pero no puede reprocharse al autor.</dd></div>
+      <div><dt>Responsabilidad objetiva</dt><dd>Imputación del resultado por el solo hecho de haberlo causado, sin dolo ni culpa. Está expresamente erradicada por el artículo 12.</dd></div>
+      <div><dt>Exigibilidad</dt><dd>Posibilidad concreta de requerir al sujeto una conducta distinta a la que realizó. Su ausencia —por miedo, necesidad u obediencia— excluye el reproche.</dd></div>
+      <div><dt>Error de prohibición</dt><dd>Representación errónea sobre la ilicitud de la conducta. Si es invencible, excluye la culpabilidad; si es vencible, el análisis cambia de nivel.</dd></div>
+      <div><dt>Sistema vicarial</dt><dd>Modelo que distingue pena (fundada en culpabilidad) y medida de seguridad (fundada en peligrosidad y finalidad terapéutica o protectora).</dd></div>
+    </dl>
+  </details>
+</section>
+
+<!-- ============================================================
+     REFERENCIAS
+     ============================================================ -->
+<section class="refs">
+  <h3>Claves doctrinales para profundizar</h3>
+  <div class="ref-grid">
+    <div class="ref"><b>Claus Roxin</b><i>Derecho Penal. Parte General</i><br>Creación y realización del riesgo; imputación objetiva y finalismo.</div>
+    <div class="ref"><b>Günther Jakobs</b><i>Derecho Penal. Parte General</i><br>Imputación por competencia, rol social y estabilización normativa.</div>
+    <div class="ref"><b>Eugenio Raúl Zaffaroni</b><i>Tratado de Derecho Penal</i><br>Imputación por dominio; tipicidad conglobante; crítica al autoritarismo penal.</div>
+    <div class="ref"><b>Luigi Ferrajoli</b><i>Derecho y razón</i><br>Garantismo, responsabilidad subjetiva y teoría del garantismo penal.</div>
+    <div class="ref"><b>Hans-Georg Gadamer</b><i>Verdad y método</i><br>Hermenéutica filosófica: comprensión, aplicación y horizonte de sentido.</div>
+    <div class="ref"><b>Paul Ricoeur</b><i>Del texto a la acción</i><br>Interpretación, distancia crítica y aplicación del texto normativo.</div>
+    <div class="ref"><b>Fernando Velásquez Velásquez</b><i>Manual de Derecho Penal Colombiano</i><br>Recepción dogmática de la estructura del delito en Colombia.</div>
+    <div class="ref"><b>César Bonesmo / Beccaria / Kant</b><i>De los delitos y las penas · Metafísica de las costumbres</i><br>Legalidad, proporcionalidad y persona como fin en sí misma.</div>
+    <div class="ref"><b>Jurisprudencia constitucional y penal colombiana</b><i>Corte Constitucional · Corte Suprema de Justicia</i><br>Taxatividad, favorabilidad, legítima defensa, inimputabilidad y medidas de seguridad.</div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <strong>Teoría del delito · Código Penal colombiano</strong>
+  <p>Análisis tridimensional de los artículos 9 a 12, Ley 599 de 2000.
+     Continuación del estudio del Libro Primero, Parte General.</p>
+  <p class="fine">Material académico de estudio y reflexión filosófico-jurídica.
+     No constituye asesoría legal. Transcripción con ortografía normalizada.</p>
+</footer>
+
+<script>
+/* ============================================================
+   1. BARRA DE PROGRESO
+   ============================================================ */
+const progress = document.getElementById('progress');
+function updateProgress(){
+  const h = document.documentElement;
+  const total = h.scrollHeight - h.clientHeight;
+  progress.style.width = (total > 0 ? (h.scrollTop / total) * 100 : 0) + '%';
+}
+window.addEventListener('scroll', updateProgress, {passive:true});
+window.addEventListener('resize', updateProgress);
+updateProgress();
+
+/* ============================================================
+   2. REVELADO PROGRESIVO
+   ============================================================ */
+if ('IntersectionObserver' in window) {
+  const targets = document.querySelectorAll(
+    '.perspective-card, .callout, .case-study, .method-card, .pipe-node, .closing, .ref'
+  );
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, {threshold: 0.08, rootMargin: '0px 0px -40px 0px'});
+
+  targets.forEach((el, i) => {
+    el.classList.add('reveal');
+    el.style.transitionDelay = (i % 3) * 70 + 'ms';
+    revealObserver.observe(el);
+  });
+}
+
+/* ============================================================
+   3. NAVEGACIÓN ACTIVA
+   ============================================================ */
+const navLinks = document.querySelectorAll('nav a');
+const sections = [...navLinks].map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+
+if ('IntersectionObserver' in window) {
+  const navObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(a => {
+          a.classList.toggle('active', a.getAttribute('href') === '#' + entry.target.id);
+        });
+      }
+    });
+  }, {rootMargin: '-15% 0px -65% 0px', threshold: 0});
+  sections.forEach(s => navObserver.observe(s));
+}
+
+/* ============================================================
+   4. TALLER DE IMPUTACIÓN · DATOS
+   ============================================================ */
+const ESTADOS = {
+  pass:    {label:'Superado',        cls:'pass'},
+  fail:    {label:'No superado',     cls:'fail'},
+  partial: {label:'En tensión',      cls:'partial'},
+  stop:    {label:'Sin lugar',       cls:'stop'}
+};
+
+const CASOS = [
+  {
+    id:'cirujano',
+    tab:'① El cirujano',
+    titulo:'El cirujano y la complicación imprevisible',
+    hechos:'Un cirujano realiza una intervención siguiendo todos los protocolos. ' +
+           'El paciente presenta una reacción alérgica excepcional, no detectable ' +
+           'con los exámenes de rutina, y fallece. Existe causalidad física entre ' +
+           'la intervención y la muerte.',
+    filtros:[
+      {
+        art:'9', titulo:'Conducta e imputación objetiva', estado:'fail',
+        texto:'Hay causalidad, pero no imputación. El cirujano creó un riesgo ' +
+              'permitido: una intervención indicada y ejecutada conforme a los ' +
+              'protocolos. El resultado no realiza un riesgo jurídicamente ' +
+              'desaprobado, sino un riesgo inherente a la actividad médica. ' +
+              'La causalidad por sí sola no basta.'
+      },
+      {
+        art:'10', titulo:'Tipicidad', estado:'fail',
+        texto:'No se configura el tipo de homicidio culposo: falta la infracción ' +
+              'del deber objetivo de cuidado. Tampoco hay dolo. El hecho no ' +
+              'encuentra un tipo que lo describa como punible.'
+      },
+      {
+        art:'11', titulo:'Antijuridicidad', estado:'stop',
+        texto:'No hay lugar a examinarla. Sin tipicidad no se avanza en la ' +
+              'estructura. El filtro ya se detuvo en la imputación objetiva.'
+      },
+      {
+        art:'12', titulo:'Culpabilidad', estado:'stop',
+        texto:'No se alcanza este nivel. Y aun si se alcanzara, no habría ' +
+              'reproche: no se puede exigir al profesional haber previsto ' +
+              'lo imprevisible.'
+      }
+    ],
+    veredicto:'Hecho no punible. La muerte es un resultado trágico, pero no es ' +
+              'una obra imputable penalmente. El artículo 9, inciso segundo, ' +
+              'impide convertir la causalidad en responsabilidad.',
+    contraste:{
+      old:'Lectura causalista: “el paciente murió por la intervención; ' +
+          'luego el cirujano causó la muerte y debe responder”.',
+      new:'Lectura de imputación objetiva: “el cirujano actuó dentro de un ' +
+          'riesgo permitido; el resultado no es realización de un riesgo ' +
+          'desaprobado”. No hay imputación.'
+    }
+  },
+
+  {
+    id:'padre',
+    tab:'② El padre en la orilla',
+    titulo:'El padre que decidió no salvar a su hijo',
+    hechos:'Un padre observa cómo su hijo pequeño se ahoga en un lago. Puede ' +
+           'salvarlo sin riesgo alguno extendiendo una rama, pero decide no ' +
+           'hacerlo porque desea su muerte. Un transeúnte presencia la misma ' +
+           'escena y tampoco interviene.',
+    filtros:[
+      {
+        art:'9', titulo:'Conducta e imputación objetiva', estado:'pass',
+        texto:'Al padre se le imputa el resultado: tiene dominio de la situación ' +
+              'y posición de garante. Su inacción es jurídicamente equivalente ' +
+              'a causar la muerte. Al transeúnte no se le imputa el homicidio: ' +
+              'no tiene asignada normativamente la protección del bien.'
+      },
+      {
+        art:'10', titulo:'Tipicidad', estado:'pass',
+        texto:'Se configura el homicidio en modalidad de comisión por omisión. ' +
+              'El deber de cuidado y socorro parental está consagrado y ' +
+              'delimitado en la Constitución y en la ley, como exige el ' +
+              'artículo 10, inciso segundo. El padre podía evitar el resultado ' +
+              'con facilidad.'
+      },
+      {
+        art:'11', titulo:'Antijuridicidad', estado:'pass',
+        texto:'Hay lesión efectiva del bien jurídico vida, sin justa causa. ' +
+              'Ningún permiso del ordenamiento ampara la decisión de dejar ' +
+              'morir a quien se está obligado a proteger.'
+      },
+      {
+        art:'12', titulo:'Culpabilidad', estado:'pass',
+        texto:'Hay dolo: el padre quiere la muerte del hijo. Concurren ' +
+              'imputabilidad, conciencia de antijuridicidad y exigibilidad ' +
+              'de otra conducta. El reproche es pleno.'
+      }
+    ],
+    veredicto:'Conducta punible como homicidio doloso por comisión por omisión, ' +
+              'no como mera omisión de socorro. La posición de garante ' +
+              'transforma normativamente el “no hacer” en “causar”.',
+    contraste:{
+      old:'Lectura naturalista: “el padre no hizo nada; por tanto no causó ' +
+          'la muerte. Sólo podría reprochársele falta de solidaridad”.',
+      new:'Lectura normativa: “al padre se le había asignado jurídicamente ' +
+          'la protección de ese bien y podía evitar el resultado. El ' +
+          'incumplimiento del deber es la base de la imputación”.'
+    }
+  },
+
+  {
+    id:'defensa',
+    tab:'③ La repulsión',
+    titulo:'La defensa que causó la muerte del agresor',
+    hechos:'A es atacado con un cuchillo por B. Para repeler la agresión, A ' +
+           'utiliza un objeto contundente y causa la muerte de B. No provocó ' +
+           'la agresión y, en las circunstancias reales del ataque, no ' +
+           'disponía de otro medio razonable de defensa.',
+    filtros:[
+      {
+        art:'9', titulo:'Conducta e imputación objetiva', estado:'pass',
+        texto:'El resultado es objetivamente imputable a la conducta de A: ' +
+              'existe conexión fáctica y atribución normativa. Pero eso no ' +
+              'decide el caso: la imputación objetiva abre el análisis, ' +
+              'no lo cierra.'
+      },
+      {
+        art:'10', titulo:'Tipicidad', estado:'pass',
+        texto:'Hay encuade en el tipo de homicidio: conducta, resultado ' +
+              'y nexo de imputación. En esta etapa el hecho parece punible.'
+      },
+      {
+        art:'11', titulo:'Antijuridicidad', estado:'fail',
+        texto:'No hay antijuridicidad. Concurre la legítima defensa: agresión ' +
+              'ilegítima actual, necesidad racional del medio empleado y ' +
+              'ausencia de provocación suficiente. El ordenamiento permite ' +
+              'la repulsión. El daño existe; el injusto no.'
+      },
+      {
+        art:'12', titulo:'Culpabilidad', estado:'stop',
+        texto:'No se alcanza. No hay injusto que reprochar. Si hubiera ' +
+              'exceso en la defensa, sí habría injusto y entonces —y sólo ' +
+              'entonces— se examinaría la culpabilidad.'
+      }
+    ],
+    veredicto:'Hecho justificado. No hay delito. La justificación no borra ' +
+              'la muerte: modifica su significación jurídica. ' +
+              'Lo justificado no es injusto.',
+    contraste:{
+      old:'Lectura formal: “A mató a B; el tipo de homicidio está ' +
+          'satisfecho; debe condenarse”.',
+      new:'Lectura material: “A repelió una agresión ilegítima en términos ' +
+          'razonables; el ordenamiento lo autoriza”. La antijuridicidad ' +
+          'falla y el sistema se detiene.'
+    }
+  },
+
+  {
+    id:'orden',
+    tab:'④ La orden del superior',
+    titulo:'El subordinado que ejecutó una retención ilegal',
+    hechos:'Un subordinado recibe de su superior la orden de retener ' +
+           'ilegalmente a una persona. La orden no es manifiestamente ilícita ' +
+           'y el subordinado cree que cumple un procedimiento. Sin embargo, ' +
+           'tenía dudas razonables que no consultó ni verificó.',
+    filtros:[
+      {
+        art:'9', titulo:'Conducta e imputación objetiva', estado:'pass',
+        texto:'La privación de la libertad es imputable objetivamente a la ' +
+              'conducta del subordinado. Haber recibido una orden no ' +
+              'interrumpe por sí sola la cadena de imputación.'
+      },
+      {
+        art:'10', titulo:'Tipicidad', estado:'pass',
+        texto:'La conducta encuadra en el tipo de privación ilegal de la ' +
+              'libertad. Sujeto, acción y bien jurídico coinciden con la ' +
+              'descripción legal.'
+      },
+      {
+        art:'11', titulo:'Antijuridicidad', estado:'pass',
+        texto:'La retención es injusta. La obediencia jerárquica no ' +
+              'convierte automáticamente en lícita una restricción ' +
+              'ilegal de la libertad. El injusto existe.'
+      },
+      {
+        art:'12', titulo:'Culpabilidad', estado:'partial',
+        texto:'Aquí se decide todo. La obediencia debida como causal de ' +
+              'ausencia de responsabilidad exige una orden no manifiestamente ' +
+              'ilícita y que no se conozca su ilicitud. Pero las dudas ' +
+              'razonables y la posibilidad de verificar introducen el ' +
+              'problema de la exigibilidad: ¿era razonable exigirle ' +
+              'que se negara o consultara?'
+      }
+    ],
+    veredicto:'Resultado abierto y dependiente de la prueba. La jerarquía ' +
+              'no exime automáticamente; tampoco la obediencia convierte ' +
+              'en lícito el hecho. Sólo una valoración concreta de la ' +
+              'exigibilidad puede resolver si hay reproche.',
+    contraste:{
+      old:'Lectura jerárquica: “cumplí una orden superior; por tanto ' +
+          'no tengo responsabilidad”.',
+      new:'Lectura garantista: “la obediencia sólo releva del reproche ' +
+          'cuando la orden no es manifiestamente ilícita y no era ' +
+          'exigible otra conducta”. La conciencia y la situación ' +
+          'concreta deciden.'
+    }
+  },
+
+  {
+    id:'inimputable',
+    tab:'⑤ El trastorno mental',
+    titulo:'El hecho de quien no podía comprender',
+    hechos:'Una persona que padece un trastorno mental transitorio severo ' +
+           'causa un daño. En el momento exacto de los hechos no era capaz ' +
+           'de comprender el carácter ilícito de su conducta ni de ' +
+           'determinarse de acuerdo con esa comprensión.',
+    filtros:[
+      {
+        art:'9', titulo:'Conducta e imputación objetiva', estado:'pass',
+        texto:'Se constata la realización objetiva del hecho. La alteración ' +
+              'psíquica no borra el acontecimiento ni el daño. El inciso ' +
+              'segundo del artículo 9 habla precisamente de esto: ' +
+              'el injusto del inimputable existe.'
+      },
+      {
+        art:'10', titulo:'Tipicidad', estado:'pass',
+        texto:'La conducta realiza los elementos objetivos del tipo. ' +
+              'La tipicidad se predica del hecho, no de la salud ' +
+              'mental de quien lo ejecuta.'
+      },
+      {
+        art:'11', titulo:'Antijuridicidad', estado:'pass',
+        texto:'El daño es injusto. La inimputabilidad no justifica el ' +
+              'hecho: por eso es legítimo repeler la agresión de un ' +
+              'inimputable, con los límites de proporcionalidad ' +
+              'que impone la dignidad.'
+      },
+      {
+        art:'12', titulo:'Culpabilidad', estado:'fail',
+        texto:'No hay culpabilidad: falta imputabilidad. No se puede ' +
+              'reprochar a quien no podía comprender ni autodeterminarse. ' +
+              'El artículo 12 prohíbe imponer pena.'
+      }
+    ],
+    veredicto:'No hay pena. Puede haber medida de seguridad si se constatan ' +
+              'los requisitos del artículo 9, inciso segundo, y del régimen ' +
+              'correspondiente. “Punible” en ese inciso significa ' +
+              'sancionabilidad con medida, no reproche penal.',
+    contraste:{
+      old:'Lectura confusiva: “es inimputable; entonces no ocurrió nada ' +
+          'jurídicamente relevante”.',
+      new:'Lectura sistemática: “el injusto existe; lo que falta es el ' +
+          'reproche”. Por eso se admite la defensa frente a él y por ' +
+          'eso procede una medida de curación y protección, nunca ' +
+          'una pena retributiva.'
+    }
+  }
+];
+
+/* ============================================================
+   5. TALLER · RENDER
+   ============================================================ */
+const tabsEl = document.getElementById('caseTabs');
+const outputEl = document.getElementById('simOutput');
+
+CASOS.forEach((c, index) => {
+  const btn = document.createElement('button');
+  btn.className = 'case-tab';
+  btn.type = 'button';
+  btn.textContent = c.tab;
+  btn.setAttribute('aria-pressed', index === 0 ? 'true' : 'false');
+  btn.addEventListener('click', () => render Caso(c, btn));
+  tabsEl.appendChild(btn);
+});
+
+function renderCaso(caso, btn) {
+  [...tabsEl.children].forEach(b => b.setAttribute('aria-pressed','false'));
+  btn.setAttribute('aria-pressed','true');
+
+  const filtrosHTML = caso.filtros.map((f, i) => {
+    const e = ESTADOS[f.estado];
+    return `
+      <div class="gate ${e.cls}">
+        <div class="gate-index">${String(i+1).padStart(2,'0')}</div>
+        <div class="gate-body">
+          <div class="gate-top">
+            <h4>${f.titulo}</h4>
+            <span class="pill ${e.cls}">${e.label}</span>
+          </div>
+          <p>${f.texto}</p>
+          <span class="gate-norma">ARTÍCULO ${f.art} · CÓDIGO PENAL</span>
+        </div>
+      </div>`;
+  }).join('');
+
+  outputEl.innerHTML = `
+    <div class="case-facts">
+      <span class="label">Hechos del escenario</span>
+      <p>${caso.hechos}</p>
+    </div>
+
+    <div class="gates animate">${filtrosHTML}</div>
+
+    <div class="verdict">
+      <span class="label">Conclusión del análisis</span>
+      <p>${caso.veredicto}</p>
+    </div>
+
+    <div class="contrast">
+      <div class="contrast-box old">
+        <h5>La lectura ingenua</h5>
+        <p>${caso.contraste.old}</p>
+      </div>
+      <div class="contrast-box new">
+        <h5>La lectura garantista</h5>
+        <p>${caso.contraste.new}</p>
+      </div>
+    </div>
+  `;
+
+  // Reinicia la animación en cada cambio
+  const gates = outputEl.querySelector('.gates');
+  gates.classList.remove('animate');
+  void gates.offsetWidth;
+  gates.classList.add('animate');
+}
+
+// Corrección del nombre de la función en los listeners
+[...tabsEl.children].forEach((btn, i) => {
+  btn.onclick = () => renderCaso(CASOS[i], btn);
+});
+
+renderCaso(CASOS[0], tabsEl.children[0]);
+</script>
+</body>
+</html>
