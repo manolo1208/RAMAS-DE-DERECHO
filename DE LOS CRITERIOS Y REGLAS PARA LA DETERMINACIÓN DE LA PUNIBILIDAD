@@ -1,0 +1,1543 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Criterios y reglas para la determinación de la punibilidad · Arts. 54–62 CP Colombiano</title>
+<style>
+:root{
+  --bg:#f7f5ef;
+  --paper:#ffffff;
+  --ink:#22303f;
+  --muted:#5b6675;
+  --dogma:#9b2c2c;
+  --onto:#2c5282;
+  --herm:#276749;
+  --proc:#975a16;
+  --line:#e3e0d6;
+  --shadow:0 6px 24px rgba(30,40,60,.06);
+  --shadow-hover:0 14px 34px rgba(30,40,60,.10);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
+  background:var(--bg);color:var(--ink);line-height:1.75;
+}
+h1,h2,h3,h4,.serif{font-family:Georgia,'Times New Roman',serif}
+a{color:inherit}
+::selection{background:#9b2c2c;color:#fff}
+
+#progress{
+  position:fixed;top:0;left:0;height:3px;width:0%;
+  background:linear-gradient(90deg,var(--dogma),var(--onto),var(--herm),var(--proc));
+  z-index:1000;transition:width .1s linear;
+}
+
+header{
+  background:
+    repeating-linear-gradient(135deg,rgba(255,255,255,.025) 0 2px,transparent 2px 22px),
+    linear-gradient(135deg,#16202c 0%,#2b3a4d 100%);
+  color:#fff;padding:5rem 2rem 4rem;text-align:center;
+  border-bottom:5px solid var(--dogma);
+}
+.eyebrow{
+  font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;
+  color:#c9b98a;margin-bottom:1.4rem;font-weight:600;
+}
+header h1{
+  font-size:clamp(2rem,5vw,3.4rem);line-height:1.2;
+  font-weight:400;letter-spacing:-.5px;margin-bottom:1.2rem;
+}
+header h1 em{font-style:italic;color:#e6d9b8}
+header p{
+  max-width:760px;margin:0 auto;font-size:1.05rem;
+  color:#c3cbd6;font-style:italic;
+}
+.header-meta{
+  margin-top:2rem;display:inline-flex;gap:1.6rem;flex-wrap:wrap;
+  justify-content:center;font-size:.78rem;letter-spacing:.12em;
+  text-transform:uppercase;color:#93a1b3;
+}
+.header-meta span{display:flex;align-items:center;gap:.5rem}
+.header-meta b{color:#e6d9b8;font-weight:600}
+
+.method{max-width:1180px;margin:0 auto;padding:3.5rem 2rem 1rem}
+.section-kicker{
+  font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--muted);font-weight:700;margin-bottom:.6rem;
+}
+.method h2{font-size:1.9rem;margin-bottom:1.6rem;font-weight:400}
+.method-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.4rem}
+.method-card{
+  background:var(--paper);padding:1.6rem;border-radius:10px;
+  box-shadow:var(--shadow);border-left:4px solid var(--line);
+}
+.method-card.d{border-color:var(--dogma)}
+.method-card.o{border-color:var(--onto)}
+.method-card.h{border-color:var(--herm)}
+.method-card.p{border-color:var(--proc)}
+.method-card h3{font-size:1.15rem;margin-bottom:.4rem}
+.method-card.d h3{color:var(--dogma)}
+.method-card.o h3{color:var(--onto)}
+.method-card.h h3{color:var(--herm)}
+.method-card.p h3{color:var(--proc)}
+.method-card .subtitle{
+  font-size:.72rem;text-transform:uppercase;letter-spacing:.16em;
+  color:var(--muted);display:block;margin-bottom:.8rem;
+}
+.method-card p{font-size:.92rem;color:var(--muted)}
+
+nav{
+  position:sticky;top:0;z-index:200;background:var(--paper);
+  border-bottom:1px solid var(--line);box-shadow:0 2px 12px rgba(0,0,0,.04);
+}
+.nav-inner{
+  max-width:1180px;margin:0 auto;display:flex;overflow-x:auto;
+  padding:0 1rem;scrollbar-width:thin;
+}
+nav a{
+  text-decoration:none;padding:1.05rem 1.15rem;font-size:.85rem;
+  font-weight:600;white-space:nowrap;border-bottom:3px solid transparent;
+  transition:.25s;color:var(--muted);
+}
+nav a:hover{color:var(--dogma);background:#faf6f6}
+nav a.active{color:var(--dogma);border-color:var(--dogma)}
+
+main{max-width:1180px;margin:0 auto;padding:0 2rem}
+.mapa{padding:3.5rem 0 1rem}
+.pipeline{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:.7rem;margin-top:1.4rem;
+}
+.pipe-node{
+  background:var(--paper);border:1px solid var(--line);
+  border-radius:10px;padding:1.2rem;text-decoration:none;
+  transition:.25s;position:relative;display:block;
+}
+.pipe-node:hover{transform:translateY(-4px);box-shadow:var(--shadow-hover);border-color:#c9b98a}
+.pipe-node .num{
+  font-family:Georgia,serif;font-size:1.6rem;color:#c9b98a;display:block;line-height:1;
+}
+.pipe-node strong{display:block;font-size:1rem;margin:.5rem 0 .3rem}
+.pipe-node small{font-size:.8rem;color:var(--muted);display:block}
+
+.section-divider{
+  margin:5rem 0 2rem;padding:2rem 0;border-top:2px solid var(--line);
+  border-bottom:2px solid var(--line);text-align:center;
+}
+.section-divider .num{
+  font-family:Georgia,serif;font-size:3rem;color:var(--proc);
+  display:block;line-height:1;margin-bottom:.5rem;
+}
+.section-divider h2{
+  font-size:1.8rem;font-weight:400;margin-bottom:.5rem;
+}
+.section-divider p{
+  color:var(--muted);max-width:720px;margin:0 auto;font-size:.95rem;
+}
+
+.article-section{padding:3.5rem 0 1rem;scroll-margin-top:75px}
+.article-header{display:flex;align-items:center;gap:1.4rem;margin-bottom:1.6rem}
+.roman{
+  font-family:Georgia,serif;font-size:1.5rem;font-weight:bold;
+  color:var(--dogma);background:#f1e6e2;border:1px solid #e4cfc9;
+  width:72px;height:72px;display:flex;align-items:center;justify-content:center;
+  border-radius:8px;flex-shrink:0;
+}
+.article-header h2{font-size:2rem;font-weight:400;line-height:1.25}
+.article-header .tagline{
+  display:block;font-family:'Segoe UI',sans-serif;font-size:.9rem;
+  color:var(--muted);font-style:italic;margin-top:.4rem;font-weight:400;
+}
+.legal-text{
+  background:var(--paper);border-left:5px solid var(--dogma);
+  padding:1.6rem 1.9rem;margin-bottom:1.2rem;border-radius:0 10px 10px 0;
+  box-shadow:var(--shadow);font-family:Georgia,serif;
+  font-size:1.02rem;color:#3d4756;
+}
+.legal-text p+p{margin-top:.9rem}
+.legal-text ol,.legal-text ul{margin-top:.8rem;padding-left:1.3rem}
+.legal-text ol li,.legal-text ul li{margin-bottom:.5rem}
+.legal-label{
+  display:block;font-family:'Segoe UI',sans-serif;font-size:.65rem;
+  letter-spacing:.22em;text-transform:uppercase;color:var(--muted);
+  margin-bottom:.8rem;font-weight:700;
+}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:2rem}
+.chip{
+  font-size:.72rem;letter-spacing:.04em;padding:.3rem .8rem;
+  background:#eceae2;border:1px solid var(--line);border-radius:30px;color:#5c6470;
+}
+
+.quad-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.4rem}
+.perspective-card{
+  background:var(--paper);border-radius:12px;padding:1.7rem;
+  box-shadow:var(--shadow);border-top:4px solid transparent;
+  transition:transform .3s,box-shadow .3s;display:flex;flex-direction:column;
+}
+.perspective-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-hover)}
+.perspective-card.dogma{border-top-color:var(--dogma)}
+.perspective-card.onto{border-top-color:var(--onto)}
+.perspective-card.herm{border-top-color:var(--herm)}
+.perspective-card.proc{border-top-color:var(--proc)}
+.card-header{display:flex;align-items:center;gap:.7rem;margin-bottom:.3rem}
+.card-icon{font-size:1.35rem}
+.card-title{font-size:.92rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em}
+.dogma .card-title{color:var(--dogma)}
+.onto .card-title{color:var(--onto)}
+.herm .card-title{color:var(--herm)}
+.proc .card-title{color:var(--proc)}
+.card-sub{font-size:.72rem;color:var(--muted);font-style:italic;margin-bottom:1.1rem;letter-spacing:.02em}
+.card-content p{font-size:.9rem;color:#4a5563;margin-bottom:.9rem;text-align:justify}
+.card-content p:last-child{margin-bottom:0}
+.card-content strong{color:var(--ink);font-weight:650}
+.card-content ul{margin-top:.5rem;padding-left:1.2rem}
+.card-content ul li{margin-bottom:.4rem;font-size:.88rem;color:#4a5563}
+
+.callout{
+  margin-top:1.6rem;background:#fbf6ea;border:1px solid #ecdfbf;
+  border-left:4px solid var(--proc);border-radius:0 8px 8px 0;
+  padding:1.2rem 1.5rem;
+}
+.callout .label{
+  font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--proc);font-weight:700;display:block;margin-bottom:.5rem;
+}
+.callout p{font-size:.9rem;color:#6b5b3a}
+
+.case-study{
+  margin-top:1.2rem;background:var(--paper);border:1px solid var(--line);
+  border-radius:10px;overflow:hidden;
+}
+.case-study summary{
+  cursor:pointer;padding:1.1rem 1.5rem;font-weight:600;font-size:.92rem;
+  list-style:none;display:flex;align-items:center;gap:.7rem;transition:.2s;
+}
+.case-study summary::-webkit-details-marker{display:none}
+.case-study summary:hover{background:#faf9f5}
+.case-study summary .marker{
+  width:22px;height:22px;border:1px solid var(--line);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;font-size:.8rem;
+  color:var(--dogma);flex-shrink:0;transition:.3s;
+}
+.case-study[open] summary .marker{transform:rotate(45deg);background:var(--dogma);color:#fff;border-color:var(--dogma)}
+.case-study .case-body{padding:0 1.5rem 1.4rem;font-size:.92rem;color:var(--muted)}
+.case-study .case-body p+p{margin-top:.7rem}
+
+.sintesis{padding:4.5rem 0 2rem;scroll-margin-top:75px;border-top:1px solid var(--line)}
+.sintesis h2{font-size:2.1rem;font-weight:400;margin-bottom:.8rem}
+.sintesis .intro{color:var(--muted);max-width:820px;margin-bottom:2rem}
+.table-wrap{overflow-x:auto;border-radius:12px;box-shadow:var(--shadow);background:var(--paper)}
+table{width:100%;border-collapse:collapse;min-width:900px;font-size:.85rem}
+thead{background:#22303f;color:#fff}
+th{padding:1rem .8rem;text-align:left;font-weight:600;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase}
+th:nth-child(2){color:#f0b9b9}
+th:nth-child(3){color:#a9c6e8}
+th:nth-child(4){color:#a3d4b6}
+th:nth-child(5){color:#e6d9b8}
+td{padding:1rem .8rem;border-bottom:1px solid var(--line);vertical-align:top;color:var(--muted)}
+td:first-child{font-weight:700;color:var(--ink);white-space:nowrap}
+tbody tr:hover{background:#faf9f5}
+.closing{
+  margin-top:2rem;background:var(--paper);border:1px solid var(--line);
+  border-radius:12px;padding:2rem;text-align:center;
+}
+.closing .serif{font-size:1.5rem;font-style:italic;color:var(--dogma);margin-bottom:.8rem}
+.closing p{color:var(--muted);max-width:760px;margin:0 auto;font-size:.95rem}
+
+.glosario{padding:3rem 0 1rem;scroll-margin-top:75px}
+.glosario details{
+  background:var(--paper);border:1px solid var(--line);border-radius:12px;
+  padding:0 1.6rem;box-shadow:var(--shadow);
+}
+.glosario summary{
+  cursor:pointer;padding:1.4rem 0;font-family:Georgia,serif;
+  font-size:1.3rem;list-style:none;display:flex;justify-content:space-between;align-items:center;
+}
+.glosario summary::-webkit-details-marker{display:none}
+.glosario summary span{font-size:1.4rem;color:var(--dogma);transition:.3s}
+.glosario details[open] summary span{transform:rotate(45deg)}
+.gloss-list{padding-bottom:1.6rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.4rem}
+.gloss-list dt{font-weight:700;font-size:.92rem;color:var(--ink);margin-bottom:.3rem}
+.gloss-list dd{font-size:.88rem;color:var(--muted)}
+
+.refs{padding:3rem 0 4rem}
+.refs h3{font-size:1.4rem;font-weight:400;margin-bottom:1.4rem}
+.ref-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1rem}
+.ref{
+  background:var(--paper);border:1px solid var(--line);border-radius:8px;
+  padding:1.1rem 1.3rem;font-size:.87rem;color:var(--muted);
+}
+.ref b{color:var(--ink);display:block;margin-bottom:.25rem;font-weight:650}
+.ref i{color:#7a8391}
+
+footer{
+  background:#16202c;color:#8b98a9;text-align:center;padding:3rem 2rem;
+}
+footer strong{color:#d8dde5;display:block;font-family:Georgia,serif;font-size:1.1rem;margin-bottom:.6rem;font-weight:400}
+footer p{font-size:.82rem;max-width:760px;margin:0 auto .5rem}
+footer .fine{font-size:.72rem;opacity:.65;margin-top:1.2rem}
+
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+
+@media(max-width:900px){
+  .quad-grid{grid-template-columns:1fr}
+  .article-header{gap:1rem}
+  .article-header h2{font-size:1.6rem}
+  .roman{width:58px;height:58px;font-size:1.2rem}
+  header{padding:3.5rem 1.5rem}
+}
+@media(max-width:600px){
+  main{padding:0 1.1rem}
+  .method{padding:2.5rem 1.1rem 1rem}
+  .legal-text{padding:1.2rem}
+  .card-content p{text-align:left}
+}
+@media print{
+  nav,#progress{display:none}
+  body{background:#fff;color:#000}
+  header{background:#fff;color:#000;border-bottom:2px solid #000;padding:2rem 0}
+  .perspective-card,.legal-text{box-shadow:none;break-inside:avoid}
+  .article-section{break-before:page}
+  .reveal{opacity:1!important;transform:none!important}
+}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+
+<header>
+  <div class="eyebrow">Libro Primero · Parte General · Capítulo Segundo</div>
+  <h1>Criterios y reglas para la<br><em>determinación de la punibilidad</em></h1>
+  <p>Una lectura tetradimensional de los artículos 54 a 62 del Código Penal colombiano:
+     de las circunstancias de menor y mayor punibilidad al sistema de cuartos,
+     de la motivación judicial a la comunicabilidad entre intervinientes.</p>
+  <div class="header-meta">
+    <span><b>Ley 599 de 2000</b></span>
+    <span>Modificado por <b>Leyes 2098/2021, 2197/2022, 2364/2024, 2455/2025</b></span>
+    <span>Artículos <b>54 — 62</b></span>
+    <span>Dogmática · Ontología · Hermenéutica · Razonabilidad procedimental</span>
+  </div>
+</header>
+
+<section class="method">
+  <div class="section-kicker">La clave de lectura</div>
+  <h2>Cuatro preguntas frente a cada norma</h2>
+  <div class="method-grid">
+    <div class="method-card d">
+      <h3>Dogmática</h3>
+      <span class="subtitle">La estructura · ¿Qué significa?</span>
+      <p>La ciencia del derecho positivo. Reconstruye los conceptos, la sistematización
+         y las consecuencias jurídicas: circunstancias, cuartos, movilidad punitiva.</p>
+    </div>
+    <div class="method-card o">
+      <h3>Ontología</h3>
+      <span class="subtitle">El fundamento · ¿Qué es?</span>
+      <p>La pregunta por el ser de lo que la norma nombra. ¿Qué realidad tiene una
+         "circunstancia", un "motivo noble", una "marginalidad", un "cuarto"?</p>
+    </div>
+    <div class="method-card h">
+      <h3>Hermenéutica</h3>
+      <span class="subtitle">El sentido · ¿Cómo se aplica?</span>
+      <p>La teoría de la interpretación y de la aplicación. Cómo se resuelven las
+         tensiones, cómo se armoniza la ley con la Constitución, cómo se traduce
+         la norma en decisión judicial concreta.</p>
+    </div>
+    <div class="method-card p">
+      <h3>Razonabilidad procedimental</h3>
+      <span class="subtitle">El método · ¿Cómo se dosifica?</span>
+      <p>El procedimiento de individualización de la pena: pasos, reglas aritméticas,
+         motivación, control. La razonabilidad como garantía contra el arbitrio
+         y como método verificable de dosificación.</p>
+    </div>
+  </div>
+</section>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#art54">Art. 54</a>
+    <a href="#art55">Art. 55</a>
+    <a href="#art56">Art. 56</a>
+    <a href="#art57">Art. 57</a>
+    <a href="#art58">Art. 58</a>
+    <a href="#art59">Art. 59</a>
+    <a href="#art60">Art. 60</a>
+    <a href="#art61">Art. 61</a>
+    <a href="#art62">Art. 62</a>
+    <a href="#sintesis">Síntesis</a>
+    <a href="#glosario">Glosario</a>
+  </div>
+</nav>
+
+<main>
+
+<section class="mapa">
+  <div class="section-kicker">Recorrido del análisis</div>
+  <h2 class="serif" style="font-size:1.7rem;font-weight:400">Nueve artículos. Un solo método de dosificación.</h2>
+  <div class="pipeline">
+    <a href="#art54" class="pipe-node">
+      <span class="num">LIV</span>
+      <strong>Mayor y menor punibilidad</strong>
+      <small>El principio rector.<br>Atenuantes y agravantes generales.</small>
+    </a>
+    <a href="#art55" class="pipe-node">
+      <span class="num">LV</span>
+      <strong>Menor punibilidad</strong>
+      <small>Diez circunstancias.<br>Antecedentes, motivos, emoción, reparación.</small>
+    </a>
+    <a href="#art56" class="pipe-node">
+      <span class="num">LVI</span>
+      <strong>Marginalidad</strong>
+      <small>Pobreza extrema.<br>La pena reducida por contexto.</small>
+    </a>
+    <a href="#art57" class="pipe-node">
+      <span class="num">LVII</span>
+      <strong>Ira o intenso dolor</strong>
+      <small>Emoción violenta.<br>La respuesta humana desbordada.</small>
+    </a>
+    <a href="#art58" class="pipe-node">
+      <span class="num">LVIII</span>
+      <strong>Mayor punibilidad</strong>
+      <small>Veintitrés circunstancias.<br>Medios, móviles, víctimas, contextos.</small>
+    </a>
+    <a href="#art59" class="pipe-node">
+      <span class="num">LIX</span>
+      <strong>Motivación</strong>
+      <small>La exigencia argumentativa.<br>Fundamentación explícita.</small>
+    </a>
+    <a href="#art60" class="pipe-node">
+      <span class="num">LX</span>
+      <strong>Mínimos y máximos</strong>
+      <small>Reglas aritméticas.<br>Cinco fórmulas de movilidad.</small>
+    </a>
+    <a href="#art61" class="pipe-node">
+      <span class="num">LXI</span>
+      <strong>Sistema de cuartos</strong>
+      <small>El método de dosificación.<br>Cuartos, ponderación, excepciones.</small>
+    </a>
+    <a href="#art62" class="pipe-node">
+      <span class="num">LXII</span>
+      <strong>Comunicabilidad</strong>
+      <small>Circunstancias entre autores y partícipes.<br>Personales vs. materiales.</small>
+    </a>
+  </div>
+</section>
+
+<!-- ============================================================
+     ARTÍCULO 54
+     ============================================================ -->
+<section id="art54" class="article-section">
+  <div class="article-header">
+    <div class="roman">LIV</div>
+    <h2>Mayor y menor punibilidad
+      <span class="tagline">La puerta de entrada al sistema de circunstancias.</span>
+    </h2>
+  </div>
+
+  <blockquote class="legal-text">
+    <span class="legal-label">Texto normativo · Artículo 54°</span>
+    <p>Además de las atenuantes y agravantes consagradas en otras disposiciones, regirán las siguientes.</p>
+  </blockquote>
+
+  <div class="chips">
+    <span class="chip">Circunstancias modificadoras</span>
+    <span class="chip">Sistema abierto</span>
+    <span class="chip">Remisión a otras disposiciones</span>
+    <span class="chip">Movilidad punitiva</span>
+  </div>
+
+  <div class="quad-grid">
+    <article class="perspective-card dogma">
+      <div class="card-header"><span class="card-icon">⚖️</span><h3 class="card-title">Dogmática</h3></div>
+      <div class="card-sub">La cláusula de apertura del sistema</div>
+      <div class="card-content">
+        <p>El artículo 54 es una <strong>norma de remisión y apertura</strong>. Reconoce que las
+        circunstancias modificadoras no se agotan en los artículos 55 y 58: existen otras
+        dispersas en la parte especial (agravantes por calidad de la víctima, atenuantes
+        calificadas, etc.). Dogmáticamente, consagra un <em>sistema mixto</em>: circunstancias
+        típicas (expresas en la ley) y extratípicas (analógicas del numeral 10 del art. 55).</p>
+      </div>
+    </article>
+    <article class="perspective-card onto">
+      <div class="card-header"><span class="card-icon">🌌</span><h3 class="card-title">Ontología</h3></div>
+      <div class="card-sub">La circunstancia como cualidad del hecho</div>
+      <div class="card-content">
+        <p>La circunstancia no es un elemento del tipo: es una <strong>cualidad del hecho o del
+        autor</strong> que modifica la punibilidad sin alterar la tipicidad. Ontológicamente,
+        revela que el injusto no es una magnitud fija: tiene <em>gradaciones</em>. El mismo
+        homicidio puede ser más o menos injusto según el móvil, el medio, la víctima.
+        La punibilidad es por eso <strong>relacional</strong>: depende del contexto.</p>
+      </div>
+    </article>
+    <article class="perspective-card herm">
+      <div class="card-header"><span class="card-icon">📜</span><h3 class="card-title">Hermenéutica</h3></div>
+      <div class="card-sub">La remisión a otras disposiciones</div>
+      <div class="card-content">
+        <p>La hermenéutica exige <strong>integrar sistemáticamente</strong> el código: las
+        agravantes y atenuantes de la parte especial (homicidio agravado, acceso carnal
+        violento agravado, etc.) se suman a las generales. El intérprete debe evitar la
+        <em>double counting</em>: si una circunstancia ya es elemento del tipo o calificante,
+        no puede volver a usarse como agravante general.</p>
+      </div>
+    </article>
+    <article class="perspective-card proc">
+      <div class="card-header"><span class="card-icon">📋</span><h3 class="card-title">Razonabilidad procedimental</h3></div>
+      <div class="card-sub">El inventario de circunstancias</div>
+      <div class="card-content">
+        <p>Procedimentalmente, el juez debe elaborar un <strong>inventario taxativo</strong>
+        de todas las circunstancias concurrentes: las del tipo, las de la parte especial,
+        las de los arts. 55 y 58, y las analógicas. Este inventario es el insumo para
+        el sistema de cuartos del art. 61. La razonabilidad exige que ninguna circunstancia
+        sea omitida ni duplicada.</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============================================================
+     ARTÍCULO 55
+     ============================================================ -->
+<section id="art55" class="article-section">
+  <div class="article-header">
+    <div class="roman">LV</div>
+    <h2>Circunstancias de menor punibilidad
+      <span class="tagline">Diez circunstancias que reducen el reproche penal.</span>
+    </h2>
+  </div>
+
+  <blockquote class="legal-text">
+    <span class="legal-label">Texto normativo · Artículo 55°</span>
+    <p>Son circunstancias de menor punibilidad, siempre que no hayan sido previstas de otra manera:</p>
+    <ol>
+      <li>La carencia de antecedentes penales.</li>
+      <li>El obrar por motivos nobles o altruistas.</li>
+      <li>El obrar en estado de emoción, pasión excusables, o de temor intenso.</li>
+      <li>La influencia de apremiantes circunstancias personales o familiares en la ejecución de la conducta punible.</li>
+      <li>Procurar voluntariamente después de cometida la conducta, anular o disminuir sus consecuencias.</li>
+      <li>Reparar voluntariamente el daño ocasionado aunque no sea en forma total. Así mismo, si se ha procedido a indemnizar a las personas afectadas con el hecho punible.</li>
+      <li>Presentarse voluntariamente a las autoridades después de haber cometido la conducta punible o evitar la injusta sindicación de terceros.</li>
+      <li>La indigencia o la falta de ilustración, en cuanto hayan influido en la ejecución de la conducta punible.</li>
+      <li>Las condiciones de inferioridad psíquica determinadas por la edad o por circunstancias orgánicas, en cuanto hayan influido en la ejecución de la conducta punible.</li>
+      <li>Cualquier circunstancia de análoga significación a las anteriores.</li>
+    </ol>
+  </blockquote>
+
+  <div class="chips">
+    <span class="chip">Carencia de antecedentes</span>
+    <span class="chip">Motivos nobles</span>
+    <span class="chip">Emoción o pasión</span>
+    <span class="chip">Circunstancias apremiantes</span>
+    <span class="chip">Arrepentimiento activo</span>
+    <span class="chip">Reparación del daño</span>
+    <span class="chip">Presentación voluntaria</span>
+    <span class="chip">Indigencia o falta de ilustración</span>
+    <span class="chip">Inferioridad psíquica</span>
+    <span class="chip">Cláusula analógica</span>
+  </div>
+
+  <div class="quad-grid">
+    <article class="perspective-card dogma">
+      <div class="card-header"><span class="card-icon">⚖️</span><h3 class="card-title">Dogmática</h3></div>
+      <div class="card-sub">Tres familias de atenuantes</div>
+      <div class="card-content">
+        <p>Los diez numerales pueden clasificarse en tres familias dogmáticas:</p>
+        <ul>
+          <li><strong>Personales del autor</strong> (1, 8, 9): antecedentes, indigencia, inferioridad psíquica. Modifican la culpabilidad.</li>
+          <li><strong>Subjetivos del hecho</strong> (2, 3, 4): motivos nobles, emoción, circunstancias apremiantes. Modifican la relación del autor con el hecho.</li>
+          <li><strong>Conducta postdelictual</strong> (5, 6, 7): arrepentimiento activo, reparación, presentación. Modifican la necesidad de pena.</li>
+        </ul>
+        <p>La cláusula del numeral 10 es una <strong>cláusula abierta</strong> que permite
+        al juez reconocer otras circunstancias análogas, siempre que no estén ya previstas.</p>
+      </div>
+    </article>
+    <article class="perspective-card onto">
+      <div class="card-header"><span class="card-icon">🌌</span><h3 class="card-title">Ontología</h3></div>
+      <div class="card-sub">La humanidad como atenuante</div>
+      <div class="card-content">
+        <p>Las circunstancias de menor punibilidad reconocen la <strong>finitud humana</strong>:
+        la emoción, la pasión, la indigencia, la falta de ilustración son condiciones
+        reales que limitan la agencia moral. Ontológicamente, el derecho penal no se dirige
+        a un agente ideal sino a un ser humano concreto, con fragilidades.</p>
+        <p>La reparación y el arrepentimiento revelan algo más profundo: la <strong>capacidad
+        de transformación</strong> del agente. Quien repara no es el mismo que cometió:
+        ha cambiado. El derecho reconoce esa transformación atenuando la pena.</p>
+      </div>
+    </article>
+    <article class="perspective-card herm">
+      <div class="card-header"><span class="card-icon">📜</span><h3 class="card-title">Hermenéutica</h3></div>
+      <div class="card-sub">La analogía permisiva del numeral 10</div>
+      <div class="card-content">
+        <p>El numeral 10 permite la <strong>analogía in bonam partem</strong>: el juez puede
+        reconocer circunstancias no expresamente previstas pero de análoga significación.
+        La hermenéutica exige que la circunstancia reconocida comparta la <em>ratio</em> de
+        las previstas: reducir la culpabilidad o la necesidad de pena.</p>
+        <p>La cláusula "siempre que no hayan sido previstas de otra manera" evita la
+        <strong>duplicación</strong>: si una circunstancia ya es elemento del tipo o
+        calificante, no puede usarse como atenuante general.</p>
+      </div>
+    </article>
+    <article class="perspective-card proc">
+      <div class="card-header"><span class="card-icon">📋</span><h3 class="card-title">Razonabilidad procedimental</h3></div>
+      <div class="card-sub">La prueba de cada circunstancia</div>
+      <div class="card-content">
+        <p>Procedimentalmente, cada atenuante debe ser <strong>probada</strong> en el proceso:
+        los antecedentes se verifican con certificados; la reparación, con recibos o acuerdos;
+        la presentación voluntaria, con el registro de comparendo. La razonabilidad exige
+        que el juez motive por qué reconoce o niega cada circunstancia.</p>
+        <p>El efecto procedimental es la <strong>reducción del marco punitivo</strong>: las
+        atenuantes mueven la pena hacia el cuarto mínimo del art. 61. Si sólo hay atenuantes,
+        el juez debe moverse dentro del cuarto mínimo.</p>
+      </div>
+    </article>
+  </div>
+
+  <details class="case-study">
+    <summary><span class="marker">+</span> Caso aplicado · El hurto por indigencia</summary>
+    <div class="case-body">
+      <p>Una persona sin hogar, sin antecedentes, hurta alimentos de un supermercado.
+      Se presenta voluntariamente a las autoridades y repara el daño devolviendo los
+      productos.</p>
+      <p><strong>Lectura dogmática:</strong> concurren tres atenuantes: carencia de
+      antecedentes (num. 1), indigencia (num. 8), presentación voluntaria (num. 7),
+      reparación (num. 6).</p>
+      <p><strong>Lectura procedimental:</strong> el juez verifica cada circunstancia con
+      pruebas, las incluye en el inventario, y al aplicar el sistema de cuartos del art. 61,
+      se mueve dentro del cuarto mínimo por concurrir únicamente atenuantes.</p>
+    </div>
+  </details>
+</section>
+
+<!-- ============================================================
+     ARTÍCULO 56
+     ============================================================ -->
+<section id="art56" class="article-section">
+  <div class="article-header">
+    <div class="roman">LVI</div>
+    <h2>Marginalidad, ignorancia o pobreza extrema
+      <span class="tagline">La pena reducida por contexto: la igualdad material en acción.</span>
+    </h2>
+  </div>
+
+  <blockquote class="legal-text">
+    <span class="legal-label">Texto normativo · Artículo 56°</span>
+    <p>El que realice la conducta punible bajo la influencia de profundas situaciones de
+       marginalidad, ignorancia o pobreza extremas, en cuanto hayan influido directamente en
+       la ejecución de la conducta punible y no tengan la entidad suficiente para excluir la
+       responsabilidad, incurrirá en pena no mayor de la mitad del máximo, ni menor de la
+       sexta parte del mínimo de la señalada en la respectiva disposición.</p>
+  </blockquote>
+
+  <div class="chips">
+    <span class="chip">Marginalidad</span>
+    <span class="chip">Ignorancia</span>
+    <span class="chip">Pobreza extrema</span>
+    <span class="chip">Nexo causal con la conducta</span>
+    <span class="chip">Atenuante cualificada</span>
+    <span class="chip">Igualdad material</span>
+  </div>
+
+  <div class="quad-grid">
+    <article class="perspective-card dogma">
+      <div class="card-header"><span class="card-icon">⚖️</span><h3 class="card-title">Dogmática</h3></div>
+      <div class="card-sub">Una atenuante cualificada</div>
+      <div class="card-content">
+        <p>El artículo 56 no es una atenuante común: es una <strong>atenuante cualificada</strong>
+        que reduce el marco punitivo de manera drástica (entre la sexta parte del mínimo y
+        la mitad del máximo). Dogmáticamente, se distingue del numeral 8 del art. 55
+        (indigencia) porque exige <em>profundidad</em> y <em>influencia directa</em> en la
+        conducta. No basta ser pobre: la pobreza debe haber <em>determinado</em> la conducta.</p>
+      </div>
+    </article>
+    <article class="perspective-card onto">
+      <div class="card-header"><span class="card-icon">🌌</span><h3 class="card-title">Ontología</h3></div>
+      <div class="card-sub">La situación como condicionante de la agencia</div>
+      <div class="card-content">
+        <p>El artículo 56 reconoce que la <strong>situación material</strong> condiciona la
+        agencia moral. Ontológicamente, no todos los agentes actúan desde la misma base:
+        quien vive en marginalidad extrema tiene un horizonte de posibilidades reducido.
+        La culpabilidad no puede medirse con el mismo rasero: la exigibilidad de otra
+        conducta es menor cuando la necesidad es absoluta.</p>
+      </div>
+    </article>
+    <article class="perspective-card herm">
+      <div class="card-header"><span class="card-icon">📜</span><h3 class="card-title">Hermenéutica</h3></div>
+      <div class="card-sub">La prueba de la influencia directa</div>
+      <div class="card-content">
+        <p>La hermenéutica exige probar dos elementos: la <strong>situación de marginalidad</strong>
+        (condición objetiva) y la <strong>influencia directa</strong> en la conducta (nexo
+        causal). No basta demostrar pobreza: debe probarse que la pobreza <em>determinó</em>
+        la conducta. La hermenéutica constitucional exige interpretar este artículo a la luz
+        del artículo 13 de la Constitución (igualdad material).</p>
+      </div>
+    </article>
+    <article class="perspective-card proc">
+      <div class="card-header"><span class="card-icon">📋</span><h3 class="card-title">Razonabilidad procedimental</h3></div>
+      <div class="card-sub">El procedimiento de verificación</div>
+      <div class="card-content">
+        <p>Procedimentalmente, el juez debe:</p>
+        <ul>
+          <li><strong>1.</strong> Verificar la situación de marginalidad con pruebas sociales (estudio socioeconómico, testimonios, certificados).</li>
+          <li><strong>2.</strong> Establecer el nexo causal entre la situación y la conducta (¿el delito fue expresión de la necesidad?).</li>
+          <li><strong>3.</strong> Verificar que la situación no excluya la responsabilidad (si la excluye, aplica inimputabilidad, no atenuante).</li>
+          <li><strong>4.</strong> Aplicar el marco reducido: pena entre la sexta parte del mínimo y la mitad del máximo.</li>
+        </ul>
+      </div>
+    </article>
+  </div>
+
+  <details class="case-study">
+    <summary><span class="marker">+</span> Caso aplicado · La madre que hurtó por hambre</summary>
+    <div class="case-body">
+      <p>Una madre en extrema pobreza, sin ingresos, sin red familiar, hurta medicamentos
+      para su hijo enfermo. No tiene antecedentes.</p>
+      <p><strong>Lectura procedimental:</strong> el juez verifica con estudio socioeconómico
+      la situación de pobreza extrema, prueba que el hurto fue determinado por la necesidad
+      (no había otra forma de obtener los medicamentos), y que la situación no excluye la
+      responsabilidad (la madre comprendía la ilicitud pero actuó por necesidad). Aplica
+      el marco reducido del art. 56: pena entre la sexta parte del mínimo y la mitad del
+      máximo del hurto simple.</p>
+    </div>
+  </details>
+</section>
+
+<!-- ============================================================
+     ARTÍCULO 57
+     ============================================================ -->
+<section id="art57" class="article-section">
+  <div class="article-header">
+    <div class="roman">LVII</div>
+    <h2>Ira o intenso dolor
+      <span class="tagline">La emoción violenta como respuesta humana desbordada.</span>
+    </h2>
+  </div>
+
+  <blockquote class="legal-text">
+    <span class="legal-label">Texto normativo · Artículo 57°</span>
+    <p>El que realice la conducta punible en estado de ira o de intenso dolor, causados por
+       comportamiento ajeno grave e injustificado, incurrirá en pena no menor de la sexta parte
+       del mínimo ni mayor de la mitad del máximo de la señalada en la respectiva disposición.</p>
+  </blockquote>
+
+  <div class="chips">
+    <span class="chip">Ira</span>
+    <span class="chip">Intenso dolor</span>
+    <span class="chip">Comportamiento ajeno grave</span>
+    <span class="chip">Injustificado</span>
+    <span class="chip">Nexo causal</span>
+  </div>
+
+  <div class="quad-grid">
+    <article class="perspective-card dogma">
+      <div class="card-header"><span class="card-icon">⚖️</span><h3 class="card-title">Dogmática</h3></div>
+      <div class="card-sub">Una atenuante cualificada emocional</div>
+      <div class="card-content">
+        <p>El artículo 56 y el 57 tienen la misma estructura: marco punitivo reducido (entre
+        la sexta parte del mínimo y la mitad del máximo). Dogmáticamente, la ira o intenso
+        dolor es una <strong>atenuante emocional cualificada</strong>. Requiere tres elementos:
+        (1) estado emocional intenso (ira o dolor); (2) causado por comportamiento ajeno
+        grave e injustificado; (3) nexo causal entre el comportamiento y la emoción.</p>
+      </div>
+    </article>
+    <article class="perspective-card onto">
+      <div class="card-header"><span class="card-icon">🌌</span><h3 class="card-title">Ontología</h3></div>
+      <div class="card-sub">La emoción como desbordamiento de la razón</div>
+      <div class="card-content">
+        <p>La ira o el intenso dolor son <strong>emociones desbordantes</strong> que reducen
+        temporalmente la capacidad de autodeterminación. Ontológicamente, el agente no pierde
+        la imputabilidad (no es inimputable) pero su capacidad de motivación normativa se
+        ve disminuida. El derecho reconoce esa fragilidad: no todo acto cometido en emoción
+        violenta merece el mismo reproche que un acto frío y calculado.</p>
+      </div>
+    </article>
+    <article class="perspective-card herm">
+      <div class="card-header"><span class="card-icon">📜</span><h3 class="card-title">Hermenéutica</h3></div>
+      <div class="card-sub">La prueba de la emoción y su causa</div>
+      <div class="card-content">
+        <p>La hermenéutica exige probar dos elementos: la <strong>emoción</strong> (pericia
+        psicológica, testimonios, circunstancias) y la <strong>causa</strong> (comportamiento
+        ajeno grave e injustificado). La gravedad e injustificación se valoran objetivamente:
+        no basta que el agente subjetivamente lo perciba así; debe ser objetivamente grave
+        e injustificado. La hermenéutica distingue esta causal del numeral 3 del art. 55
+        (emoción o pasión excusables): aquí la emoción es más intensa y la causa más grave.</p>
+      </div>
+    </article>
+    <article class="perspective-card proc">
+      <div class="card-header"><span class="card-icon">📋</span><h3 class="card-title">Razonabilidad procedimental</h3></div>
+      <div class="card-sub">El procedimiento de verificación</div>
+      <div class="card-content">
+        <p>Procedimentalmente, el juez debe:</p>
+        <ul>
+          <li><strong>1.</strong> Verificar la emoción con pericia psicológica o psiquiátrica.</li>
+          <li><strong>2.</strong> Identificar el comportamiento ajeno que la causó.</li>
+          <li><strong>3.</strong> Valorar si el comportamiento fue grave e injustificado (valoración objetiva).</li>
+          <li><strong>4.</strong> Establecer el nexo causal: la emoción fue determinada por el comportamiento.</li>
+          <li><strong>5.</strong> Aplicar el marco reducido: pena entre la sexta parte del mínimo y la mitad del máximo.</li>
+        </ul>
+      </div>
+    </article>
+  </div>
+
+  <details class="case-study">
+    <summary><span class="marker">+</span> Caso aplicado · El padre que descubre la infidelidad</summary>
+    <div class="case-body">
+      <p>Un padre descubre inesperadamente que su cónyuge mantiene una relación extramatrimonial
+      prolongada. En estado de ira intensa, agrede físicamente al amante causándole lesiones.</p>
+      <p><strong>Lectura procedimental:</strong> el juez verifica con pericia psicológica el
+      estado de ira, identifica el comportamiento del amante (relación prolongada y oculta),
+      valora que fue grave e injustificado (desde la perspectiva del padre), y establece el
+      nexo causal. Aplica el marco reducido del art. 57: pena entre la sexta parte del mínimo
+      y la mitad del máximo de lesiones personales.</p>
+    </div>
+  </details>
+</section>
+
+<!-- ============================================================
+     ARTÍCULO 58
+     ============================================================ -->
+<section id="art58" class="article-section">
+  <div class="article-header">
+    <div class="roman">LVIII</div>
+    <h2>Circunstancias de mayor punibilidad
+      <span class="tagline">Veintitrés circunstancias que aumentan el reproche penal.</span>
+    </h2>
+  </div>
+
+  <blockquote class="legal-text">
+    <span class="legal-label">Texto normativo · Artículo 58° (con modificaciones de Leyes 1273/2009, 1356/2009, 2197/2022, 2364/2024, 2455/2025)</span>
+    <p>Son circunstancias de mayor punibilidad, siempre que no hayan sido previstas de otra manera:</p>
+    <ol>
+      <li>Ejecutar la conducta sobre bienes o recursos destinados a actividades de utilidad común o a la satisfacción de necesidades básicas de una colectividad.</li>
+      <li>Ejecutar la conducta por motivo abyecto, fútil o mediante precio, recompensa o promesa remuneratoria.</li>
+      <li>Que la ejecución esté inspirada en móviles de intolerancia y discriminación (raza, etnia, ideología, religión, creencias, sexo, orientación sexual, enfermedad o minusvalía).</li>
+      <li>Emplear medios de cuyo uso pueda resultar peligro común.</li>
+      <li>Ejecutar mediante ocultamiento, con abuso de superioridad, o aprovechando circunstancias que dificulten la defensa o identificación.</li>
+      <li>Hacer más nocivas las consecuencias de la conducta punible.</li>
+      <li>Ejecutar con quebrantamiento de los deberes que las relaciones sociales o de parentesco impongan respecto de la víctima.</li>
+      <li>Aumentar deliberada e inhumanamente el sufrimiento de la víctima.</li>
+      <li>La posición distinguida del sentenciado por cargo, posición económica, ilustración, poder, oficio o ministerio.</li>
+      <li>Obrar en coparticipación criminal.</li>
+      <li>Ejecutar valiéndose de un inimputable.</li>
+      <li>Cuando la conducta fuere cometida contra servidor público por razón del ejercicio de sus funciones.</li>
+      <li>Cuando fuere dirigida o cometida desde el interior de un lugar de reclusión o fuera del territorio nacional.</li>
+      <li>Cuando se produjere un daño ambiental grave, irreversible modificación del equilibrio ecológico o extinción de especie biológica.</li>
+      <li>Cuando se hubieren utilizado explosivos, venenos u otros instrumentos de similar eficacia destructiva.</li>
+      <li>Cuando se realice sobre áreas de especial importancia ecológica o ecosistemas estratégicos.</li>
+      <li>Cuando se utilicen medios informáticos, electrónicos o telemáticos (Ley 1273 de 2009).</li>
+      <li>Cuando fuere cometida en escenario deportivo o con ocasión de evento deportivo (Ley 1356 de 2009).</li>
+      <li>Cuando el procesado haya sido condenado mediante sentencia en firme por delito doloso dentro de los 60 meses anteriores (Ley 2197 de 2022).</li>
+      <li>Cuando se hubiere utilizado arma blanca, de fuego, armas, elementos y dispositivos menos letales (Ley 2197 de 2022).</li>
+      <li>Cuando las armas, elementos, dispositivos o municiones menos letales hayan sido modificadas para aumentar su letalidad (Ley 2197 de 2022).</li>
+      <li>Cuando se dirija o tenga por propósito impedir, obstaculizar, represaliar o desincentivar la labor de mujeres buscadoras de víctimas de desaparición forzada (Ley 2364 de 2024).</li>
+      <li>Emplear o valerse de animales en la ejecución de la conducta punible o causarles la muerte para tales fines (Ley 2455 de 2025).</li>
+    </ol>
+    <p><strong>PARÁGRAFO.</strong> Se entiende como arma blanca un elemento punzante, cortante, cortopunzante o cortocontundente.</p>
+  </blockquote>
+
+  <div class="chips">
+    <span class="chip">Bienes colectivos</span>
+    <span class="chip">Motivos abyectos</span>
+    <span class="chip">Discriminación</span>
+    <span class="chip">Peligro común</span>
+    <span class="chip">Ocultamiento</span>
+    <span class="chip">Agravación del daño</span>
+    <span class="chip">Quebrantamiento de deberes</span>
+    <span class="chip">Crueldad</span>
+    <span class="chip">Posición distinguida</span>
+    <span class="chip">Coparticipación</span>
+    <span class="chip">Inimputable como instrumento</span>
+    <span class="chip">Servidor público</span>
+    <span class="chip">Desde la reclusión o el exterior</span>
+    <span class="chip">Daño ambiental</span>
+    <span class="chip">Explosivos y venenos</span>
+    <span class="chip">Áreas ecológicas</span>
+    <span class="chip">Medios informáticos</span>
+    <span class="chip">Escenarios deportivos</span>
+    <span class="chip">Reincidencia</span>
+    <span class="chip">Armas</span>
+    <span class="chip">Armas modificadas</span>
+    <span class="chip">Mujeres buscadoras</span>
+    <span class="chip">Animales como instrumentos</span>
+  </div>
+
+  <div class="quad-grid">
+    <article class="perspective-card dogma">
+      <div class="card-header"><span class="card-icon">⚖️</span><h3 class="card-title">Dogmática</h3></div>
+      <div class="card-sub">Cinco familias de agravantes</div>
+      <div class="card-content">
+        <p>Las veintitrés circunstancias pueden clasificarse en cinco familias dogmáticas:</p>
+        <ul>
+          <li><strong>Objetivas del hecho</strong> (1, 4, 5, 6, 14, 15, 16, 17, 18, 20, 21, 23): medios, bienes afectados, peligrosidad.</li>
+          <li><strong>Subjetivas del autor</strong> (2, 3, 9): motivos, posición social.</li>
+          <li><strong>Relacionales</strong> (7, 8, 10, 11, 12): vínculos con la víctima, coparticipación.</li>
+          <li><strong>Contextuales</strong> (13, 19): lugar de ejecución, reincidencia.</li>
+          <li><strong>Postdelictuales</strong>: ninguna en este artículo (las de menor punibilidad sí las tienen).</li>
+        </ul>
+      </div>
+    </article>
+    <article class="perspective-card onto">
+      <div class="card-header"><span class="card-icon">🌌</span><h3 class="card-title">Ontología</h3></div>
+      <div class="card-sub">La gravedad como cualidad multidimensional</div>
+      <div class="card-content">
+        <p>Las agravantes revelan que la <strong>gravedad del injusto</strong> no es una
+        magnitud unidimensional. Ontológicamente, un delito puede ser más grave por el
+        medio empleado (explosivos), por el móvil (discriminación), por la víctima (servidor
+        público), por el contexto (desde la reclusión), por la posición del autor (cargo
+        público). Cada circunstancia expresa una <em>dimensión distinta de la gravedad</em>:
+        el derecho penal reconoce que el injusto tiene múltiples facetas.</p>
+      </div>
+    </article>
+    <article class="perspective-card herm">
+      <div class="card-header"><span class="card-icon">📜</span><h3 class="card-title">Hermenéutica</h3></div>
+      <div class="card-sub">La prohibición de doble valoración</div>
+      <div class="card-content">
+        <p>La hermenéutica exige aplicar la cláusula "siempre que no hayan sido previstas
+        de otra manera": si una circunstancia ya es <strong>elemento del tipo</strong> o
+        <strong>calificante</strong>, no puede usarse como agravante general. Ejemplo: el
+        uso de arma de fuego ya es elemento del tipo de porte ilegal de armas; no puede
+        agravar el homicidio si ya fue tenido en cuenta en el tipo base.</p>
+        <p>La hermenéutica constitucional exige que las agravantes respeten el principio
+        de <strong>proporcionalidad</strong>: no pueden convertir una pena razonable en
+        desproporcionada.</p>
+      </div>
+    </article>
+    <article class="perspective-card proc">
+      <div class="card-header"><span class="card-icon">📋</span><h3 class="card-title">Razonabilidad procedimental</h3></div>
+      <div class="card-sub">El inventario y la motivación</div>
+      <div class="card-content">
+        <p>Procedimentalmente, el juez debe:</p>
+        <ul>
+          <li><strong>1.</strong> Elaborar el inventario de agravantes concurrentes.</li>
+          <li><strong>2.</strong> Verificar que cada una esté probada en el proceso.</li>
+          <li><strong>3.</strong> Verificar que no estén ya previstas como elementos del tipo o calificantes.</li>
+          <li><strong>4.</strong> Motivir por qué reconoce cada agravante y por qué no aplica la prohibición de doble valoración.</li>
+          <li><strong>5.</strong> Aplicar el sistema de cuartos del art. 61: si sólo hay agravantes, el juez debe moverse dentro del cuarto máximo.</li>
+        </ul>
+      </div>
+    </article>
+  </div>
+
+  <div class="callout">
+    <span class="label">Nodo de razonabilidad</span>
+    <p><strong>¿Por qué tantas agravantes?</strong>
+    El legislador ha adicionado agravantes en respuesta a demandas sociales (violencia
+    en escenarios deportivos, mujeres buscadoras, animales como instrumentos). La
+    razonabilidad exige que cada agravante sea <em>realmente</em> gravosa: no basta con
+    que el legislador la haya previsto; debe guardar relación con el injusto y no
+    duplicar otras circunstancias.</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     ARTÍCULO 59
+     ============================================================ -->
+<section id="art59" class="article-section">
+  <div class="article-header">
+    <div class="roman">LIX</div>
+    <h2>Motivación del proceso de individualización
+      <span class="tagline">La exigencia argumentativa: toda sentencia debe fundamentar la pena.</span>
+    </h2>
+  </div>
+
+  <blockquote class="legal-text">
+    <span class="legal-label">Texto normativo · Artículo 59°</span>
+    <p>Toda sentencia deberá contener una fundamentación explícita sobre los motivos de la
+       determinación cualitativa y cuantitativa de la pena.</p>
+  </blockquote>
+
+  <div class="chips">
+    <span class="chip">Fundamentación explícita</span>
+    <span class="chip">Determinación cualitativa</span>
+    <span class="chip">Determinación cuantitativa</span>
+    <span class="chip">Debido proceso</span>
+    <span class="chip">Control de casación</span>
+  </div>
+
+  <div class="quad-grid">
+    <article class="perspective-card dogma">
+      <div class="card-header"><span class="card-icon">⚖️</span><h3 class="card-title">Dogmática</h3></div>
+      <div class="card-sub">La motivación como garantía</div>
+      <div class="card-content">
+        <p>El artículo 59 consagra la <strong>obligación de motivar</strong> la individualización
+        de la pena. Dogmáticamente, es una garantía del debido proceso (art. 29 C.P.): el
+        condenado tiene derecho a saber por qué se le impuso esa pena y no otra. La motivación
+        debe ser <em>explícita</em>: no basta con fórmulas genéricas; el juez debe explicar
+        paso a paso cómo llegó a la pena concreta.</p>
+      </div>
+    </article>
+    <article class="perspective-card onto">
+      <div class="card-header"><span class="card-icon">🌌</span><h3 class="card-title">Ontología</h3></div>
+      <div class="card-sub">La pena como decisión racional, no arbitraria</div>
+      <div class="card-content">
+        <p>La motivación revela que la pena no es un acto de voluntad arbitraria sino una
+        <strong>decisión racional</strong>. Ontológicamente, el derecho penal se distingue
+        de la venganza precisamente por esto: la pena debe ser justificada, no impuesta.
+        La motivación es la materialización del principio de razonabilidad: el Estado debe
+        dar razones de por qué castiga en esa medida.</p>
+      </div>
+    </article>
+    <article class="perspective-card herm">
+      <div class="card-header"><span class="card-icon">📜</span><h3 class="card-title">Hermenéutica</h3></div>
+      <div class="card-sub">La motivación como control</div>
+      <div class="card-content">
+        <p>La hermenéutica del artículo 59 exige que la motivación sea <strong>suficiente para
+        el control</strong>: la Corte Suprema, en casación, debe poder verificar si el juez
+        aplicó correctamente el sistema de cuartos. Si la motivación es insuficiente, la
+        sentencia es nula por falta de fundamentación. La hermenéutica constitucional exige
+        que la motivación sea congruente con las pruebas y con las circunstancias reconocidas.</p>
+      </div>
+    </article>
+    <article class="perspective-card proc">
+      <div class="card-header"><span class="card-icon">📋</span><h3 class="card-title">Razonabilidad procedimental</h3></div>
+      <div class="card-sub">Los pasos de la motivación</div>
+      <div class="card-content">
+        <p>Procedimentalmente, la motivación debe seguir estos pasos:</p>
+        <ul>
+          <li><strong>1.</strong> Identificar el tipo penal y el marco punitivo base.</li>
+          <li><strong>2.</strong> Enumerar las circunstancias modificadoras (atenuantes y agravantes).</li>
+          <li><strong>3.</strong> Aplicar las reglas del art. 60 para fijar mínimos y máximos.</li>
+          <li><strong>4.</strong> Determinar el cuarto o cuartos aplicables según el art. 61.</li>
+          <li><strong>5.</strong> Ponderar los aspectos del inciso 3 del art. 61 (gravedad, daño, dolo, necesidad de pena).</li>
+          <li><strong>6.</strong> Fijar la pena concreta dentro del cuarto, explicando por qué en ese punto.</li>
+          <li><strong>7.</strong> Imponer las penas accesorias y las consecuencias jurídicas complementarias.</li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============================================================
+     ARTÍCULO 60
+     ============================================================ -->
+<section id="art60" class="article-section">
+  <div class="article-header">
+    <div class="roman">LX</div>
+    <h2>Parámetros para la determinación de mínimos y máximos
+      <span class="tagline">Las cinco reglas aritméticas de la movilidad punitiva.</span>
+    </h2>
+  </div>
+
+  <blockquote class="legal-text">
+    <span class="legal-label">Texto normativo · Artículo 60°</span>
+    <p>Para efectuar el proceso de individualización de la pena el sentenciador deberá fijar,
+       en primer término, los límites mínimos y máximos en los que se ha de mover. Para ello,
+       y cuando hubiere circunstancias modificadoras de dichos límites, aplicará las siguientes reglas:</p>
+    <ol>
+      <li>Si la pena se aumenta o disminuye en una proporción determinada, esta se aplicará al mínimo y al máximo de la infracción básica.</li>
+      <li>Si la pena se aumenta hasta en una proporción, esta se aplicará al máximo de la infracción básica.</li>
+      <li>Si la pena se disminuye hasta en una proporción, esta se aplicará al mínimo de la infracción básica.</li>
+      <li>Si la pena se aumenta en dos proporciones, la menor se aplicará al mínimo y la mayor al máximo de la infracción básica.</li>
+      <li>Si la pena se disminuye en dos proporciones, la mayor se aplicará al mínimo y la menor al máximo de la infracción básica.</li>
+    </ol>
+  </blockquote>
+
+  <div class="chips">
+    <span class="chip">Regla 1: aumento/disminución determinada</span>
+    <span class="chip">Regla 2: aumento hasta</span>
+    <span class="chip">Regla 3: disminución hasta</span>
+    <span class="chip">Regla 4: dos aumentos</span>
+    <span class="chip">Regla 5: dos disminuciones</span>
+  </div>
+
+  <div class="quad-grid">
+    <article class="perspective-card dogma">
+      <div class="card-header"><span class="card-icon">⚖️</span><h3 class="card-title">Dogmática</h3></div>
+      <div class="card-sub">Cinco fórmulas aritméticas</div>
+      <div class="card-content">
+        <p>El artículo 60 consagra <strong>cinco reglas aritméticas</strong> para calcular los
+        nuevos mínimos y máximos cuando concurren circunstancias modificadoras. Dogmáticamente,
+        son reglas de <em>movilidad punitiva</em>: desplazan el marco base hacia arriba (agravantes)
+        o hacia abajo (atenuantes). La distinción entre "en una proporción determinada" (regla 1)
+        y "hasta en una proporción" (reglas 2 y 3) es técnica: la primera es fija, las segundas
+        son máximas.</p>
+      </div>
+    </article>
+    <article class="perspective-card onto">
+      <div class="card-header"><span class="card-icon">🌌</span><h3 class="card-title">Ontología</h3></div>
+      <div class="card-sub">La pena como magnitud calculable</div>
+      <div class="card-content">
+        <p>Las reglas del artículo 60 revelan que la pena es una <strong>magnitud calculable</strong>,
+        no una decisión discrecional. Ontológicamente, el derecho penal colombiano adopta un
+        modelo <em>racional-aritmético</em>: la pena se calcula, no se intuye. Esto refleja la
+        pretensión de objetividad: el mismo hecho, con las mismas circunstancias, debe producir
+        la misma pena, independientemente del juez.</p>
+      </div>
+    </article>
+    <article class="perspective-card herm">
+      <div class="card-header"><span class="card-icon">📜</span><h3 class="card-title">Hermenéutica</h3></div>
+      <div class="card-sub">La interpretación de las reglas</div>
+      <div class="card-content">
+        <p>La hermenéutica exige aplicar las reglas en este orden:</p>
+        <ul>
+          <li><strong>Regla 1</strong>: cuando la ley dice "aumente en X" (ejemplo: "aumente en la mitad"). Se aplica la proporción al mínimo y al máximo.</li>
+          <li><strong>Regla 2</strong>: cuando la ley dice "aumente hasta en X" (ejemplo: "aumente hasta en la mitad"). Se aplica sólo al máximo.</li>
+          <li><strong>Regla 3</strong>: cuando la ley dice "disminuya hasta en X". Se aplica sólo al mínimo.</li>
+          <li><strong>Regla 4</strong>: cuando concurren dos agravantes de aumento determinado. La menor al mínimo, la mayor al máximo.</li>
+          <li><strong>Regla 5</strong>: cuando concurren dos atenuantes de disminución determinada. La mayor al mínimo, la menor al máximo.</li>
+        </ul>
+      </div>
+    </article>
+    <article class="perspective-card proc">
+      <div class="card-header"><span class="card-icon">📋</span><h3 class="card-title">Razonabilidad procedimental</h3></div>
+      <div class="card-sub">El cálculo paso a paso</div>
+      <div class="card-content">
+        <p>Procedimentalmente, el juez debe:</p>
+        <ul>
+          <li><strong>1.</strong> Identificar el marco punitivo base del tipo penal (ejemplo: homicidio simple, 96 a 225 meses).</li>
+          <li><strong>2.</strong> Identificar las circunstancias modificadoras y las reglas aplicables.</li>
+          <li><strong>3.</strong> Aplicar las reglas del art. 60 para calcular el nuevo mínimo y máximo.</li>
+          <li><strong>4.</strong> Verificar que el cálculo sea aritméticamente correcto.</li>
+          <li><strong>5.</strong> Motivir el cálculo en la sentencia.</li>
+        </ul>
+        <p><strong>Ejemplo:</strong> homicidio simple (96–225 meses) con agravante de reincidencia
+        (aumenta hasta en la mitad). Regla 2: se aplica al máximo. Nuevo mínimo: 96. Nuevo
+        máximo: 225 + (225 × 0.5) = 337.5 meses. Marco de movilidad: 96–337.5 meses.</p>
+      </div>
+    </article>
+  </div>
+
+  <details class="case-study">
+    <summary><span class="marker">+</span> Caso aplicado · El cálculo aritmético</summary>
+    <div class="case-body">
+      <p>Hurto simple (32–120 meses) con dos atenuantes: carencia de antecedentes (disminuye
+      hasta en la mitad) y reparación del daño (disminuye hasta en la mitad).</p>
+      <p><strong>Cálculo:</strong> Regla 5: dos disminuciones determinadas. La mayor al mínimo,
+      la menor al máximo. Como ambas son "hasta la mitad", se aplica la mitad al mínimo y la
+      mitad al máximo. Nuevo mínimo: 32 - (32 × 0.5) = 16. Nuevo máximo: 120 - (120 × 0.5) = 60.
+      Marco de movilidad: 16–60 meses.</p>
+    </div>
+  </details>
+</section>
+
+<!-- ============================================================
+     ARTÍCULO 61
+     ============================================================ -->
+<section id="art61" class="article-section">
+  <div class="article-header">
+    <div class="roman">LXI</div>
+    <h2>Fundamentos para la individualización de la pena
+      <span class="tagline">El sistema de cuartos: el método de dosificación penal.</span>
+    </h2>
+  </div>
+
+  <blockquote class="legal-text">
+    <span class="legal-label">Texto normativo · Artículo 61° (modificado por Ley 2098 de 2021)</span>
+    <p>Efectuado el procedimiento anterior, el sentenciador dividirá el ámbito punitivo de
+       movilidad previsto en la ley en cuartos: uno mínimo, dos medios y uno máximo.</p>
+    <p>El sentenciador sólo podrá moverse dentro del cuarto mínimo cuando no existan atenuantes
+       ni agravantes o concurran únicamente circunstancias de atenuación punitiva, dentro de
+       los cuartos medios cuando concurran circunstancias de atenuación y de agravación punitiva,
+       y dentro del cuarto máximo cuando únicamente concurran circunstancias de agravación punitiva.</p>
+    <p>Establecido el cuarto o cuartos dentro del que deberá determinarse la pena, el sentenciador
+       la impondrá ponderando los siguientes aspectos: la mayor o menor gravedad de la conducta,
+       el daño real o potencial creado, la naturaleza de las causales que agraven o atenúen la
+       punibilidad, la intensidad del dolo, la preterintención o la culpa concurrente, la
+       necesidad de pena y la función que ella ha de cumplir en el caso concreto.</p>
+    <p>Además de los fundamentos señalados en el inciso anterior, para efectos de la determinación
+       de la pena, en la tentativa se tendrá en cuenta el mayor o menor grado de aproximación al
+       momento consumativo y en la complicidad el mayor o menor grado de eficacia de la contribución
+       o ayuda.</p>
+    <p>El sistema de cuartos no se aplicará en aquellos eventos en los cuales se han llevado a
+       cabo Preacuerdos o negociaciones entre la Fiscalía y la defensa, o se trate de delitos
+       que impongan como pena la prisión perpetua revisable.</p>
+  </blockquote>
+
+  <div class="chips">
+    <span class="chip">Sistema de cuartos</span>
+    <span class="chip">Cuarto mínimo</span>
+    <span class="chip">Cuartos medios</span>
+    <span class="chip">Cuarto máximo</span>
+    <span class="chip">Ponderación</span>
+    <span class="chip">Tentativa</span>
+    <span class="chip">Complicidad</span>
+    <span class="chip">Excepción: preacuerdos</span>
+    <span class="chip">Excepción: perpetua revisable</span>
+  </div>
+
+  <div class="quad-grid">
+    <article class="perspective-card dogma">
+      <div class="card-header"><span class="card-icon">⚖️</span><h3 class="card-title">Dogmática</h3></div>
+      <div class="card-sub">El método de dosificación</div>
+      <div class="card-content">
+        <p>El artículo 61 consagra el <strong>sistema de cuartos</strong>, el método dogmático
+        de individualización de la pena. Divide el ámbito punitivo en cuatro partes iguales:
+        cuarto mínimo, dos cuartos medios (segundo y tercero), cuarto máximo. La ubicación
+        dentro del cuarto depende de las circunstancias:</p>
+        <ul>
+          <li><strong>Sólo atenuantes o ninguna circunstancia</strong>: cuarto mínimo.</li>
+          <li><strong>Atenuantes y agravantes concurrentes</strong>: cuartos medios.</li>
+          <li><strong>Sólo agravantes</strong>: cuarto máximo.</li>
+        </ul>
+        <p>Dentro del cuarto, el juez pondera los aspectos del inciso 3.</p>
+      </div>
+    </article>
+    <article class="perspective-card onto">
+      <div class="card-header"><span class="card-icon">🌌</span><h3 class="card-title">Ontología</h3></div>
+      <div class="card-sub">La pena como proporción matemática</div>
+      <div class="card-content">
+        <p>El sistema de cuartos revela que la pena es una <strong>proporción matemática</strong>
+        entre el injusto y la respuesta estatal. Ontológicamente, el derecho penal colombiano
+        adopta un modelo <em>racional-cuantitativo</em>: la pena no es una decisión intuitiva
+        sino un cálculo. Esto refleja la pretensión de igualdad: el mismo hecho, con las mismas
+        circunstancias, debe producir la misma pena.</p>
+        <p>La ponderación del inciso 3 introduce, sin embargo, un elemento <em>cualitativo</em>:
+        la gravedad, el daño, la necesidad de pena no son magnitudes puramente aritméticas.
+        El sistema combina lo cuantitativo (cuartos) con lo cualitativo (ponderación).</p>
+      </div>
+    </article>
+    <article class="perspective-card herm">
+      <div class="card-header"><span class="card-icon">📜</span><h3 class="card-title">Hermenéutica</h3></div>
+      <div class="card-sub">Las excepciones al sistema</div>
+      <div class="card-content">
+        <p>El último inciso del artículo 61 consagra dos <strong>excepciones</strong> al sistema
+        de cuartos:</p>
+        <ul>
+          <li><strong>Preacuerdos y negociaciones</strong>: cuando la Fiscalía y la defensa llegan a un acuerdo, el juez no aplica el sistema de cuartos sino el acuerdo (art. 351 CPP). La pena puede ser menor pero debe ser razonable.</li>
+          <li><strong>Prisión perpetua revisable</strong>: para delitos que impongan esta pena (lesa humanidad, genocidio), no aplica el sistema de cuartos. La pena se impone directamente según la gravedad.</li>
+        </ul>
+        <p>La hermenéutica constitucional exige que las excepciones no conviertan el sistema
+        en letra muerta: deben interpretarse restrictivamente.</p>
+      </div>
+    </article>
+    <article class="perspective-card proc">
+      <div class="card-header"><span class="card-icon">📋</span><h3 class="card-title">Razonabilidad procedimental</h3></div>
+      <div class="card-sub">El procedimiento completo de dosificación</div>
+      <div class="card-content">
+        <p>Procedimentalmente, el juez debe seguir estos pasos:</p>
+        <ul>
+          <li><strong>1.</strong> Identificar el tipo penal y el marco punitivo base.</li>
+          <li><strong>2.</strong> Aplicar las reglas del art. 60 para calcular el nuevo mínimo y máximo.</li>
+          <li><strong>3.</strong> Dividir el ámbito en cuartos: cuarto mínimo, dos cuartos medios, cuarto máximo.</li>
+          <li><strong>4.</strong> Determinar el cuarto aplicable según las circunstancias (sólo atenuantes, atenuantes + agravantes, sólo agravantes).</li>
+          <li><strong>5.</strong> Ponderar los aspectos del inciso 3 (gravedad, daño, dolo, necesidad de pena).</li>
+          <li><strong>6.</strong> Fijar la pena concreta dentro del cuarto.</li>
+          <li><strong>7.</strong> Motivir la decisión explicando por qué en ese punto del cuarto.</li>
+        </ul>
+        <p><strong>Ejemplo:</strong> homicidio simple (96–225 meses) con una atenuante (reparación)
+        y una agravante (reincidencia). Regla 1: se aplica al mínimo y máximo. Nuevo mínimo:
+        96 - (96 × 0.5) = 48. Nuevo máximo: 225 + (225 × 0.5) = 337.5. Ámbito: 48–337.5.
+        Cuartos: 48–102.75 (mínimo); 102.75–157.5 (medio 1); 157.5–212.25 (medio 2);
+        212.25–337.5 (máximo). Como hay atenuante y agravante, se mueve en los cuartos medios
+        (102.75–212.25). Pondera gravedad, daño, dolo, necesidad de pena, y fija la pena en,
+        por ejemplo, 180 meses.</p>
+      </div>
+    </article>
+  </div>
+
+  <div class="callout">
+    <span class="label">Nodo de razonabilidad</span>
+    <p><strong>¿El sistema de cuartos garantiza la igualdad?</strong>
+    En teoría, sí: el mismo hecho produce la misma pena. En la práctica, depende de la
+    motivación: si el juez no explica por qué fija la pena en ese punto del cuarto, el
+    sistema se vuelve arbitrario. La razonabilidad exige motivación explícita de cada paso.</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     ARTÍCULO 62
+     ============================================================ -->
+<section id="art62" class="article-section">
+  <div class="article-header">
+    <div class="roman">LXII</div>
+    <h2>Comunicabilidad de circunstancias
+      <span class="tagline">¿Las circunstancias del autor se comunican al partícipe?</span>
+    </h2>
+  </div>
+
+  <blockquote class="legal-text">
+    <span class="legal-label">Texto normativo · Artículo 62°</span>
+    <p>Las circunstancias agravantes o atenuantes de carácter personal que concurran en el autor
+       de la conducta no se comunican a los partícipes, y sólo serán tenidas en cuenta para agravar
+       o atenuar la responsabilidad de aquellos que las hayan conocido.</p>
+    <p>Las circunstancias agravantes o atenuantes de índole material que concurran en el autor,
+       se comunicarán a los partícipes que las hubiesen conocido en el momento de la planeación
+       o ejecución de la conducta punible.</p>
+  </blockquote>
+
+  <div class="chips">
+    <span class="chip">Circunstancias personales</span>
+    <span class="chip">Circunstancias materiales</span>
+    <span class="chip">Comunicabilidad</span>
+    <span class="chip">Conocimiento</span>
+    <span class="chip">Autor vs. partícipe</span>
+  </div>
+
+  <div class="quad-grid">
+    <article class="perspective-card dogma">
+      <div class="card-header"><span class="card-icon">⚖️</span><h3 class="card-title">Dogmática</h3></div>
+      <div class="card-sub">La distinción entre personales y materiales</div>
+      <div class="card-content">
+        <p>El artículo 62 distingue dos tipos de circunstancias:</p>
+        <ul>
+          <li><strong>Personales</strong> (antecedentes, posición social, indigencia): no se comunican a los partícipes, salvo que las hayan conocido.</li>
+          <li><strong>Materiales</strong> (medios empleados, modo de ejecución, lugar): se comunican a los partícipes que las hayan conocido en la planeación o ejecución.</li>
+        </ul>
+        <p>Dogmáticamente, la distinción descansa en la <em>naturaleza</em> de la circunstancia:
+        las personales afectan la culpabilidad del autor; las materiales afectan el injusto
+        del hecho. Las materiales se comunican porque el partícipe contribuye al injusto común.</p>
+      </div>
+    </article>
+    <article class="perspective-card onto">
+      <div class="card-header"><span class="card-icon">🌌</span><h3 class="card-title">Ontología</h3></div>
+      <div class="card-sub">La responsabilidad individual y compartida</div>
+      <div class="card-content">
+        <p>El artículo 62 revela que la responsabilidad penal es <strong>individual pero no
+        aislada</strong>. Ontológicamente, el partícipe no responde por las cualidades personales
+        del autor (su reincidencia, su posición social) pero sí por las cualidades materiales
+        del hecho (el medio empleado, el modo de ejecución). La responsabilidad es por el
+        <em>hecho común</em>, no por la biografía del autor.</p>
+      </div>
+    </article>
+    <article class="perspective-card herm">
+      <div class="card-header"><span class="card-icon">📜</span><h3 class="card-title">Hermenéutica</h3></div>
+      <div class="card-sub">La prueba del conocimiento</div>
+      <div class="card-content">
+        <p>La hermenéutica exige probar el <strong>conocimiento</strong> de la circunstancia
+        por el partícipe. Para las personales, el partícipe sólo responde si las conocía.
+        Para las materiales, el partícipe responde si las conocía en la planeación o ejecución.
+        La hermenéutica exige que el conocimiento sea <em>actual</em>, no potencial: no basta
+        que el partícipe pudiera haber conocido; debe haber conocido efectivamente.</p>
+      </div>
+    </article>
+    <article class="perspective-card proc">
+      <div class="card-header"><span class="card-icon">📋</span><h3 class="card-title">Razonabilidad procedimental</h3></div>
+      <div class="card-sub">El procedimiento de verificación</div>
+      <div class="card-content">
+        <p>Procedimentalmente, el juez debe:</p>
+        <ul>
+          <li><strong>1.</strong> Identificar las circunstancias concurrentes en el autor.</li>
+          <li><strong>2.</strong> Clasificarlas como personales o materiales.</li>
+          <li><strong>3.</strong> Verificar si el partícipe las conocía (prueba testimonial, documental, pericial).</li>
+          <li><strong>4.</strong> Aplicar la comunicabilidad: las personales sólo se comunican si las conocía; las materiales se comunican si las conocía en la planeación o ejecución.</li>
+          <li><strong>5.</strong> Dosificar la pena del partícipe según las circunstancias comunicadas.</li>
+        </ul>
+      </div>
+    </article>
+  </div>
+
+  <details class="case-study">
+    <summary><span class="marker">+</span> Caso aplicado · El partícipe que no conocía la reincidencia</summary>
+    <div class="case-body">
+      <p>A (reincidente) y B (sin antecedentes) cometen juntos un hurto. B no sabía que A
+      era reincidente.</p>
+      <p><strong>Lectura procedimental:</strong> la reincidencia es una circunstancia personal
+      de A. No se comunica a B porque B no la conocía. A responde con la agravante de
+      reincidencia; B responde sin ella. La pena de A será mayor que la de B, aunque ambos
+      participaron en el mismo hecho.</p>
+    </div>
+  </details>
+</section>
+
+<!-- ============================================================
+     SÍNTESIS
+     ============================================================ -->
+<section id="sintesis" class="sintesis">
+  <div class="section-kicker">Lectura transversal</div>
+  <h2>Nueve artículos, cuatro preguntas</h2>
+  <p class="intro">
+    Los artículos 54 a 62 no son preceptos independientes: son las articulaciones de un
+    mismo método de dosificación de la pena. La tabla siguiente reconstruye, para cada
+    artículo, las cuatro preguntas que lo atraviesan.
+  </p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Norma</th>
+          <th>Dogmática</th>
+          <th>Ontología</th>
+          <th>Hermenéutica</th>
+          <th>Razonabilidad procedimental</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Art. 54</td>
+          <td>Cláusula de apertura del sistema de circunstancias.</td>
+          <td>La circunstancia como cualidad del hecho o del autor.</td>
+          <td>Integración sistemática; prohibición de doble valoración.</td>
+          <td>Inventario taxativo de circunstancias.</td>
+        </tr>
+        <tr>
+          <td>Art. 55</td>
+          <td>Tres familias de atenuantes: personales, subjetivas, postdelictuales.</td>
+          <td>La finitud humana y la capacidad de transformación.</td>
+          <td>Analogía permisiva del numeral 10; prohibición de duplicación.</td>
+          <td>Prueba de cada atenuante; reducción del marco punitivo.</td>
+        </tr>
+        <tr>
+          <td>Art. 56</td>
+          <td>Atenuante cualificada por marginalidad.</td>
+          <td>La situación material como condicionante de la agencia.</td>
+          <td>Prueba de la influencia directa; interpretación conforme al art. 13 C.P.</td>
+          <td>Verificación de la situación, el nexo causal, el marco reducido.</td>
+        </tr>
+        <tr>
+          <td>Art. 57</td>
+          <td>Atenuante cualificada emocional.</td>
+          <td>La emoción como desbordamiento de la razón.</td>
+          <td>Prueba de la emoción y su causa; valoración objetiva.</td>
+          <td>Pericia psicológica, identificación de la causa, nexo causal, marco reducido.</td>
+        </tr>
+        <tr>
+          <td>Art. 58</td>
+          <td>Cinco familias de agravantes: objetivas, subjetivas, relacionales, contextuales.</td>
+          <td>La gravedad como cualidad multidimensional.</td>
+          <td>Prohibición de doble valoración; proporcionalidad constitucional.</td>
+          <td>Inventario, prueba, verificación de no duplicación, motivación.</td>
+        </tr>
+        <tr>
+          <td>Art. 59</td>
+          <td>Obligación de motivar la individualización.</td>
+          <td>La pena como decisión racional, no arbitraria.</td>
+          <td>Motivación suficiente para el control de casación.</td>
+          <td>Siete pasos de motivación: tipo, circunstancias, reglas, cuartos, ponderación, pena, accesorias.</td>
+        </tr>
+        <tr>
+          <td>Art. 60</td>
+          <td>Cinco reglas aritméticas de movilidad punitiva.</td>
+          <td>La pena como magnitud calculable.</td>
+          <td>Interpretación de las cinco reglas: determinada, hasta, dos proporciones.</td>
+          <td>Cálculo paso a paso del nuevo mínimo y máximo.</td>
+        </tr>
+        <tr>
+          <td>Art. 61</td>
+          <td>Sistema de cuartos: método de dosificación.</td>
+          <td>La pena como proporción matemática y cualitativa.</td>
+          <td>Excepciones: preacuerdos y perpetua revisable.</td>
+          <td>Siete pasos de dosificación: tipo, reglas, cuartos, cuarto aplicable, ponderación, pena, motivación.</td>
+        </tr>
+        <tr>
+          <td>Art. 62</td>
+          <td>Comunicabilidad de circunstancias entre autor y partícipe.</td>
+          <td>Responsabilidad individual pero no aislada.</td>
+          <td>Prueba del conocimiento actual.</td>
+          <td>Clasificación de circunstancias, verificación del conocimiento, dosificación diferenciada.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="closing">
+    <div class="serif">"Toda sentencia deberá contener una fundamentación explícita sobre los motivos de la determinación cualitativa y cuantitativa de la pena."</div>
+    <p>
+      En esa fórmula del artículo 59 se condensa todo el proyecto. El derecho penal no se agota
+      en la declaración de responsabilidad: debe <strong>dosificar</strong> la pena con un método
+      verificable, <strong>motivar</strong> la decisión con razones explícitas, y <strong>respetar</strong>
+      la dignidad del condenado evitando el arbitrio. <strong>Dogmática, ontología, hermenéutica y
+      razonabilidad procedimental convergen en un mismo punto: la pena como respuesta racional,
+      proporcional y motivada del Estado.</strong>
+    </p>
+  </div>
+</section>
+
+<!-- ============================================================
+     GLOSARIO
+     ============================================================ -->
+<section id="glosario" class="glosario">
+  <details>
+    <summary>Glosario mínimo de la determinación de la punibilidad <span>+</span></summary>
+    <dl class="gloss-list">
+      <div><dt>Circunstancia modificativa</dt><dd>Cualidad del hecho o del autor que modifica la punibilidad sin alterar la tipicidad.</dd></div>
+      <div><dt>Atenuante</dt><dd>Circunstancia que reduce la punibilidad.</dd></div>
+      <div><dt>Agravante</dt><dd>Circunstancia que aumenta la punibilidad.</dd></div>
+      <div><dt>Atenuante cualificada</dt><dd>Atenuante que reduce el marco punitivo de manera drástica (arts. 56 y 57).</dd></div>
+      <div><dt>Cláusula analógica</dt><dd>Numeral 10 del art. 55: permite reconocer circunstancias no previstas pero de análoga significación.</dd></div>
+      <div><dt>Marginalidad</dt><dd>Situación de exclusión social que condiciona la agencia moral.</dd></div>
+      <div><dt>Ira o intenso dolor</dt><dd>Emoción violenta causada por comportamiento ajeno grave e injustificado.</dd></div>
+      <div><dt>Movilidad punitiva</dt><dd>Desplazamiento del marco punitivo base por circunstancias modificadoras.</dd></div>
+      <div><dt>Reglas aritméticas</dt><dd>Cinco fórmulas del art. 60 para calcular el nuevo mínimo y máximo.</dd></div>
+      <div><dt>Sistema de cuartos</dt><dd>Método de dosificación que divide el ámbito punitivo en cuatro partes iguales.</dd></div>
+      <div><dt>Cuarto mínimo</dt><dd>Cuando sólo hay atenuantes o ninguna circunstancia.</dd></div>
+      <div><dt>Cuartos medios</dt><dd>Cuando concurren atenuantes y agravantes.</dd></div>
+      <div><dt>Cuarto máximo</dt><dd>Cuando sólo hay agravantes.</dd></div>
+      <div><dt>Ponderación</dt><dd>Valoración cualitativa de la gravedad, daño, dolo, necesidad de pena dentro del cuarto.</dd></div>
+      <div><dt>Motivación</dt><dd>Obligación de fundamentar explícitamente la determinación de la pena.</dd></div>
+      <div><dt>Comunicabilidad</dt><dd>Transmisión de circunstancias del autor al partícipe según su naturaleza (personal o material).</dd></div>
+      <div><dt>Circunstancia personal</dt><dd>Afecta la culpabilidad del autor; no se comunica salvo conocimiento.</dd></div>
+      <div><dt>Circunstancia material</dt><dd>Afecta el injusto del hecho; se comunica si el partícipe la conocía.</dd></div>
+      <div><dt>Preacuerdos</dt><dd>Excepción al sistema de cuartos cuando Fiscalía y defensa llegan a un acuerdo.</dd></div>
+      <div><dt>Prisión perpetua revisable</dt><dd>Excepción al sistema de cuartos para delitos de lesa humanidad y genocidio.</dd></div>
+    </dl>
+  </details>
+</section>
+
+<!-- ============================================================
+     REFERENCIAS
+     ============================================================ -->
+<section class="refs">
+  <h3>Claves doctrinales para profundizar</h3>
+  <div class="ref-grid">
+    <div class="ref"><b>Claus Roxin</b><i>Derecho Penal. Parte General</i><br>Teoría de la pena, individualización, circunstancias.</div>
+    <div class="ref"><b>Günther Jakobs</b><i>Derecho Penal. Parte General</i><br>Penalización, prevención, necesidad de pena.</div>
+    <div class="ref"><b>Eugenio Raúl Zaffaroni</b><i>Tratado de Derecho Penal</i><br>Dosificación de la pena, sistema de cuartos, crítica al arbitrio.</div>
+    <div class="ref"><b>Fernando Velásquez Velásquez</b><i>Manual de Derecho Penal Colombiano</i><br>Recepción dogmática de la determinación de la punibilidad en Colombia.</div>
+    <div class="ref"><b>Gustavo Emilio Malo Fernández</b><i>Derecho Penal. Parte General</i><br>Circunstancias modificadoras, sistema de cuartos.</div>
+    <div class="ref"><b>Corte Suprema de Justicia</b><i>Sala de Casación Penal</i><br>Sentencias sobre sistema de cuartos, motivación, comunicabilidad.</div>
+    <div class="ref"><b>Corte Constitucional</b><i>Sentencias C-383 de 2022, C-144 de 2023</i><br>Prisión perpetua revisable, sistema de cuartos, proporcionalidad.</div>
+    <div class="ref"><b>Luigi Ferrajoli</b><i>Derecho y razón</i><br>Proporcionalidad, motivación, garantía contra el arbitrio.</div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <strong>Criterios y reglas para la determinación de la punibilidad · Código Penal colombiano</strong>
+  <p>Análisis tetradimensional de los artículos 54 a 62, Ley 599 de 2000, modificados por
+     Leyes 2098 de 2021, 2197 de 2022, 2364 de 2024 y 2455 de 2025. Continuación del estudio
+     del Libro Primero, Parte General.</p>
+  <p class="fine">Material académico de estudio y reflexión filosófico-jurídica.
+     No constituye asesoría legal.</p>
+</footer>
+
+<script>
+const progress = document.getElementById('progress');
+function updateProgress(){
+  const h = document.documentElement;
+  const total = h.scrollHeight - h.clientHeight;
+  progress.style.width = (total > 0 ? (h.scrollTop / total) * 100 : 0) + '%';
+}
+window.addEventListener('scroll', updateProgress, {passive:true});
+window.addEventListener('resize', updateProgress);
+updateProgress();
+
+if ('IntersectionObserver' in window) {
+  const targets = document.querySelectorAll(
+    '.perspective-card, .callout, .case-study, .method-card, .pipe-node, .closing, .ref'
+  );
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, {threshold: 0.08, rootMargin: '0px 0px -40px 0px'});
+
+  targets.forEach((el, i) => {
+    el.classList.add('reveal');
+    el.style.transitionDelay = (i % 3) * 70 + 'ms';
+    revealObserver.observe(el);
+  });
+}
+
+const navLinks = document.querySelectorAll('nav a');
+const sections = [...navLinks].map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+
+if ('IntersectionObserver' in window) {
+  const navObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(a => {
+          a.classList.toggle('active', a.getAttribute('href') === '#' + entry.target.id);
+        });
+      }
+    });
+  }, {rootMargin: '-15% 0px -65% 0px', threshold: 0});
+  sections.forEach(s => navObserver.observe(s));
+}
+</script>
+</body>
+</html>
