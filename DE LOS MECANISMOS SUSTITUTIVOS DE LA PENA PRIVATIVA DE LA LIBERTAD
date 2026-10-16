@@ -1,0 +1,2240 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tríptico Penal · Mecanismos sustitutivos de la pena | Capítulo III</title>
+<meta name="description" content="Análisis tridimensional —dogmática, ontología y hermenéutica— de los artículos 63 a 68C del Código Penal colombiano sobre mecanismos sustitutivos de la pena privativa de la libertad.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<script>document.documentElement.classList.add('js');</script>
+
+<style>
+/* ============================================================
+   1. TOKENS DE DISEÑO
+   ============================================================ */
+:root{
+  --bg:#f5f2ea;
+  --surface:#fffdf7;
+  --surface-2:#efeadd;
+  --ink:#182430;
+  --muted:#5d6874;
+  --line:#d9d2c2;
+  --gold:#9a7638;
+  --gold-soft:#f0e6d2;
+
+  --dogma:#2f5f8a;
+  --dogma-soft:#e7eff7;
+  --onto:#9a5a2c;
+  --onto-soft:#f7ece0;
+  --herme:#2b7267;
+  --herme-soft:#e4f0ec;
+
+  --shadow:0 18px 45px -25px rgba(24,36,48,.35);
+  --radius:5px;
+  --max:1240px;
+  --header-h:76px;
+}
+html[data-theme="dark"]{
+  --bg:#101820;
+  --surface:#18222d;
+  --surface-2:#1e2a36;
+  --ink:#eae4d7;
+  --muted:#a3aebb;
+  --line:#31404f;
+  --gold:#d3af68;
+  --gold-soft:#2b2a20;
+
+  --dogma:#8ab8e4;
+  --dogma-soft:#1b2c3c;
+  --onto:#d99b64;
+  --onto-soft:#33271d;
+  --herme:#7cc4b4;
+  --herme-soft:#17302c;
+
+  --shadow:0 18px 45px -25px rgba(0,0,0,.7);
+}
+
+/* ============================================================
+   2. BASE
+   ============================================================ */
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--header-h) + 90px)}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:'Inter',system-ui,sans-serif;
+  font-size:16px;
+  line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+  transition:background .35s,color .35s;
+}
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.35;
+  background-image:radial-gradient(var(--line) .6px,transparent .6px);
+  background-size:22px 22px;
+}
+main,header,footer{position:relative;z-index:1}
+h1,h2,h3,h4{font-family:'Fraunces',Georgia,serif;font-weight:500;line-height:1.15;margin:0}
+p{margin:0 0 1em}
+a{color:inherit;text-decoration:none}
+button,input,select{font:inherit;color:inherit}
+button{cursor:pointer}
+ul,ol{margin:0 0 1em;padding-left:1.2em}
+li{margin-bottom:.5em}
+::selection{background:var(--gold);color:var(--bg)}
+:focus-visible{outline:2px solid var(--gold);outline-offset:4px;border-radius:2px}
+
+.wrap{max-width:var(--max);margin-inline:auto;padding-inline:clamp(20px,5vw,60px)}
+.mono{font-family:'IBM Plex Mono',monospace}
+.eyebrow{
+  font-family:'IBM Plex Mono',monospace;font-size:.7rem;letter-spacing:.19em;
+  text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:10px;margin-bottom:22px;
+}
+.eyebrow .dot{width:7px;height:7px;background:var(--gold);border-radius:50%;flex:none}
+section{padding-block:clamp(60px,8vw,110px)}
+.section-head{max-width:760px;margin-bottom:48px}
+.section-head h2{font-size:clamp(2rem,4vw,3.1rem);letter-spacing:-.02em;margin-bottom:18px}
+.section-head p{color:var(--muted);font-size:1.05rem;max-width:66ch}
+.skip{position:absolute;left:-9999px;top:0;background:var(--ink);color:var(--bg);padding:12px 20px;z-index:999}
+.skip:focus{left:12px;top:12px}
+
+/* ============================================================
+   3. PROGRESO + CABECERA
+   ============================================================ */
+.progress{position:fixed;top:0;left:0;right:0;height:3px;z-index:1002;background:transparent}
+.progress span{display:block;height:100%;width:0;background:var(--gold);transition:width .1s linear}
+
+.site-header{
+  position:sticky;top:0;z-index:1000;height:var(--header-h);
+  background:color-mix(in srgb,var(--bg) 88%,transparent);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+}
+.header-inner{height:100%;display:flex;align-items:center;gap:32px}
+.brand{display:flex;align-items:center;gap:12px;flex:none}
+.brand-mark{
+  width:38px;height:44px;border:1px solid var(--gold);display:grid;place-items:center;
+  font-family:'Fraunces',serif;font-size:1.6rem;color:var(--gold);border-radius:2px 2px 18px 18px;
+}
+.brand-name{font-family:'Fraunces',serif;font-size:1.22rem;line-height:1.1;display:block}
+.brand-sub{display:block;font-family:'IBM Plex Mono',monospace;font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.site-nav{display:flex;gap:26px;margin-left:auto}
+.site-nav a{font-size:.82rem;font-weight:500;color:var(--muted);position:relative;padding-block:8px;transition:color .2s}
+.site-nav a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:2px;background:var(--gold);transition:width .25s}
+.site-nav a:hover,.site-nav a.active{color:var(--ink)}
+.site-nav a.active::after,.site-nav a:hover::after{width:100%}
+.header-actions{display:flex;gap:8px}
+.icon-btn{
+  width:38px;height:38px;border:1px solid var(--line);background:var(--surface);
+  display:grid;place-items:center;border-radius:50%;transition:.2s;font-size:1rem;
+}
+.icon-btn:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-2px)}
+.icon-btn svg{width:17px;height:17px}
+
+/* ============================================================
+   4. HERO
+   ============================================================ */
+.hero{padding-top:clamp(45px,6vw,80px);padding-bottom:0;overflow:hidden}
+.hero-grid{display:grid;grid-template-columns:1.25fr .85fr;gap:60px;align-items:center}
+.hero h1{font-size:clamp(3.2rem,7.5vw,6.4rem);letter-spacing:-.045em;line-height:.98}
+.hero h1 em{font-style:italic;color:var(--gold);display:block}
+.lede{font-size:1.16rem;color:var(--muted);max-width:52ch;margin-top:26px}
+.hero-meta{display:flex;flex-wrap:wrap;gap:8px;margin:26px 0 30px}
+.chip{
+  font-family:'IBM Plex Mono',monospace;font-size:.66rem;letter-spacing:.06em;
+  border:1px solid var(--line);padding:6px 12px;border-radius:999px;
+  background:var(--surface);color:var(--muted);white-space:nowrap;
+}
+.btn{
+  display:inline-flex;align-items:center;gap:10px;padding:14px 24px;border-radius:3px;
+  font-size:.85rem;font-weight:600;transition:.25s;border:1px solid transparent;
+}
+.btn-primary{background:var(--ink);color:var(--bg)}
+.btn-primary:hover{background:var(--gold);color:var(--bg);transform:translateY(-2px)}
+.btn-ghost{border-color:var(--line);color:var(--ink)}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap}
+.hero-note{font-size:.78rem;color:var(--muted);margin-top:24px;max-width:48ch}
+.hero-art{position:relative}
+.hero-art svg{width:100%;height:auto;display:block}
+.hero-art .beam{animation:breathe 7s ease-in-out infinite}
+@keyframes breathe{0%,100%{opacity:.55}50%{opacity:1}}
+
+.hero-stats{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:30px;
+  margin-top:70px;padding:32px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+}
+.stat{display:flex;align-items:baseline;gap:16px}
+.stat b{font-family:'Fraunces',serif;font-size:2.7rem;font-weight:400;color:var(--gold);line-height:1}
+.stat span{font-size:.78rem;color:var(--muted);max-width:22ch}
+
+/* ============================================================
+   5. MÉTODO
+   ============================================================ */
+.method-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.method-card{
+  background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--c);
+  padding:32px 28px;border-radius:var(--radius);transition:transform .3s,box-shadow .3s;
+}
+.method-card:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+.method-symbol{
+  font-family:'Fraunces',serif;font-size:2.2rem;color:var(--c);line-height:1;
+  display:block;margin-bottom:20px;
+}
+.method-card h3{font-size:1.5rem;margin-bottom:6px}
+.method-card .sub{font-family:'IBM Plex Mono',monospace;font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:var(--c)}
+.method-card p{font-size:.92rem;color:var(--muted);margin-top:18px}
+.method-question{
+  border-top:1px dashed var(--line);padding-top:16px;margin-top:20px;
+  font-family:'Fraunces',serif;font-style:italic;font-size:1.05rem;color:var(--ink);
+}
+.method-foot{
+  margin-top:32px;padding:22px 26px;background:var(--gold-soft);
+  border-left:3px solid var(--gold);font-size:.9rem;display:flex;gap:16px;align-items:flex-start;
+}
+.method-foot b{font-family:'IBM Plex Mono',monospace;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;padding-top:3px}
+
+/* ============================================================
+   6. MATRIZ
+   ============================================================ */
+.table-shell{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface)}
+table{width:100%;border-collapse:collapse;min-width:880px;font-size:.85rem}
+thead{background:var(--surface-2)}
+th{
+  text-align:left;padding:18px 20px;font-family:'IBM Plex Mono',monospace;
+  font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;font-weight:500;color:var(--muted);
+}
+td{padding:20px;border-top:1px solid var(--line);vertical-align:top;color:var(--muted)}
+td:first-child{color:var(--ink);font-weight:600;white-space:nowrap}
+td:first-child a{border-bottom:1px solid var(--gold);padding-bottom:2px}
+tbody tr{transition:background .2s}
+tbody tr:hover{background:var(--surface-2)}
+th.c-dogma{color:var(--dogma)} th.c-onto{color:var(--onto)} th.c-herme{color:var(--herme)}
+
+/* ============================================================
+   7. BARRA DE LECTURA (buscador + lentes)
+   ============================================================ */
+.reader-bar{
+  position:sticky;top:var(--header-h);z-index:900;
+  background:color-mix(in srgb,var(--bg) 94%,transparent);
+  backdrop-filter:blur(12px);border-block:1px solid var(--line);
+  padding-block:14px;
+}
+.reader-inner{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+.search-box{position:relative;flex:1;min-width:220px;max-width:340px}
+.search-box svg{position:absolute;left:13px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:var(--muted)}
+.search-box input{
+  width:100%;padding:11px 36px 11px 38px;background:var(--surface);
+  border:1px solid var(--line);border-radius:3px;font-size:.83rem;
+}
+.search-box input:focus{outline:none;border-color:var(--gold)}
+.search-clear{position:absolute;right:8px;top:50%;transform:translateY(-50%);border:0;background:none;color:var(--muted);font-size:1.1rem;line-height:1;padding:4px}
+.lenses{display:flex;gap:6px;flex-wrap:wrap}
+.lens-btn{
+  border:1px solid var(--line);background:transparent;padding:9px 15px;border-radius:999px;
+  font-size:.75rem;font-weight:500;transition:.2s;display:flex;align-items:center;gap:7px;
+}
+.lens-btn i{width:6px;height:6px;border-radius:50%;background:var(--c,var(--muted));font-style:normal}
+.lens-btn:hover{border-color:var(--c,var(--gold))}
+.lens-btn[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.reader-count{font-family:'IBM Plex Mono',monospace;font-size:.66rem;color:var(--muted);margin-left:auto;white-space:nowrap}
+
+/* ============================================================
+   8. ARTÍCULOS / TRÍPTICO
+   ============================================================ */
+#articulos{padding-top:50px}
+.lexeme{padding-block:56px;border-bottom:1px solid var(--line);scroll-margin-top:160px}
+.lexeme:last-child{border-bottom:0}
+.lexeme-head{display:grid;grid-template-columns:100px 1fr;gap:26px;align-items:start;margin-bottom:32px}
+.lexeme-num{
+  font-family:'Fraunces',serif;font-size:4.4rem;line-height:.9;color:transparent;
+  -webkit-text-stroke:1px var(--gold);letter-spacing:-.04em;
+}
+.lexeme-head h2{font-size:clamp(1.6rem,3vw,2.35rem);letter-spacing:-.02em;margin-bottom:12px}
+.lexeme-origin{font-size:.76rem;color:var(--muted);margin-bottom:14px}
+.lexeme-tags{display:flex;flex-wrap:wrap;gap:7px}
+.lexeme-tags .chip{font-size:.62rem}
+
+.dimensions{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:start}
+.dim{
+  --c:var(--muted);--soft:var(--surface-2);
+  background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--c);
+  border-radius:var(--radius);padding:26px 24px;position:relative;
+  transition:box-shadow .3s,transform .3s,opacity .3s;
+}
+.dim:hover{box-shadow:var(--shadow);transform:translateY(-3px)}
+.dim-dogmatica{--c:var(--dogma);--soft:var(--dogma-soft)}
+.dim-ontologia{--c:var(--onto);--soft:var(--onto-soft)}
+.dim-hermeneutica{--c:var(--herme);--soft:var(--herme-soft)}
+
+.dim-head{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.dim-icon{
+  width:34px;height:34px;flex:none;display:grid;place-items:center;border-radius:50%;
+  background:var(--soft);color:var(--c);font-family:'Fraunces',serif;font-size:1.15rem;
+}
+.dim-head h3{font-size:1.16rem;line-height:1.2}
+.dim-head small{display:block;font-family:'IBM Plex Mono',monospace;font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--c);margin-top:4px}
+.dim h4{
+  font-family:'IBM Plex Mono',monospace;font-size:.63rem;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--c);margin:22px 0 10px;font-weight:500;
+}
+.dim p,.dim li{font-size:.88rem;line-height:1.8}
+.dim p{color:var(--muted)}
+.dim strong{color:var(--ink);font-weight:600}
+.dim ul,.dim ol{color:var(--muted);padding-left:1.05em}
+.dim li::marker{color:var(--c)}
+.dim .pull{
+  margin:20px 0 0;padding:16px 18px;background:var(--soft);border-left:2px solid var(--c);
+  font-family:'Fraunces',serif;font-style:italic;font-size:1rem;line-height:1.6;color:var(--ink);
+}
+.dim .note{
+  font-size:.76rem;padding:12px 14px;border:1px dashed var(--line);margin-top:18px;color:var(--muted);
+}
+.dim .note b{color:var(--c);font-family:'IBM Plex Mono',monospace;font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:5px}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:8px 14px;margin:16px 0 0;font-size:.8rem}
+.kv dt{font-family:'IBM Plex Mono',monospace;font-size:.62rem;letter-spacing:.06em;text-transform:uppercase;color:var(--c);padding-top:3px}
+.kv dd{margin:0;color:var(--muted)}
+
+/* Modo lente: aísla una dimensión */
+body[data-lens="dogmatica"] .dim:not(.dim-dogmatica),
+body[data-lens="ontologia"] .dim:not(.dim-ontologia),
+body[data-lens="hermeneutica"] .dim:not(.dim-hermeneutica){display:none}
+body:not([data-lens="all"]) .dimensions{grid-template-columns:1fr;max-width:860px}
+body:not([data-lens="all"]) .dim{padding:34px}
+body:not([data-lens="all"]) .dim p,body:not([data-lens="all"]) .dim li{font-size:.98rem}
+
+/* Normativa */
+.norm{margin-top:24px;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface-2);overflow:hidden}
+.norm summary{
+  list-style:none;cursor:pointer;display:flex;align-items:center;gap:12px;
+  padding:17px 22px;font-size:.8rem;font-weight:600;transition:background .2s;
+}
+.norm summary::-webkit-details-marker{display:none}
+.norm summary:hover{background:var(--surface)}
+.norm summary .plus{margin-left:auto;font-family:'IBM Plex Mono',monospace;font-size:1.1rem;color:var(--gold);transition:transform .3s}
+.norm[open] summary .plus{transform:rotate(45deg)}
+.norm summary .tag{font-family:'IBM Plex Mono',monospace;font-size:.6rem;letter-spacing:.1em;color:var(--muted);font-weight:400}
+.norm-body{padding:8px 26px 26px;font-size:.83rem;line-height:1.85;color:var(--muted);border-top:1px solid var(--line)}
+.norm-body h5{font-family:'IBM Plex Mono',monospace;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);margin:22px 0 10px}
+.norm-body ol,.norm-body ul{padding-left:1.4em}
+.norm-body p{margin-bottom:.9em}
+.norm-body .sentencia{font-size:.72rem;color:var(--gold);border-left:2px solid var(--gold);padding-left:12px;margin-top:18px}
+
+.connections{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:22px}
+.connections .label{font-family:'IBM Plex Mono',monospace;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-right:6px}
+.link-chip{font-size:.72rem;border:1px solid var(--line);padding:5px 11px;border-radius:3px;transition:.2s;background:var(--surface)}
+.link-chip:hover{border-color:var(--gold);color:var(--gold)}
+.copy-btn{margin-left:auto;font-size:.7rem;background:none;border:1px solid var(--line);padding:5px 11px;border-radius:3px;color:var(--muted);transition:.2s}
+.copy-btn:hover{color:var(--gold);border-color:var(--gold)}
+.empty{display:none;padding:60px 20px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:var(--radius)}
+.empty.show{display:block}
+.empty b{display:block;font-family:'Fraunces',serif;font-size:1.6rem;color:var(--ink);margin-bottom:10px}
+
+/* ============================================================
+   9. SÍNTESIS / CONSTELACIÓN
+   ============================================================ */
+.core-band{
+  text-align:center;padding:26px;border:1px solid var(--gold);background:var(--gold-soft);
+  border-radius:var(--radius);margin-bottom:0;position:relative;
+}
+.core-band span{font-family:'IBM Plex Mono',monospace;font-size:.66rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold)}
+.core-band h3{font-size:2rem;margin-top:8px}
+.stems{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;position:relative;padding-top:34px}
+.stems::before{content:"";position:absolute;top:0;left:16.66%;right:16.66%;height:34px;border-inline:1px solid var(--line);border-bottom:1px solid var(--line)}
+.axis-card{
+  --c:var(--muted);background:var(--surface);border:1px solid var(--line);
+  border-top:3px solid var(--c);padding:28px 24px;border-radius:var(--radius);position:relative;
+}
+.axis-card::before{content:"";position:absolute;top:-35px;left:50%;height:34px;width:1px;background:var(--line)}
+.axis-card.dog{--c:var(--dogma)} .axis-card.ont{--c:var(--onto)} .axis-card.her{--c:var(--herme)}
+.axis-card h4{font-family:'Fraunces',serif;font-size:1.4rem;color:var(--ink);margin-bottom:8px;font-weight:500}
+.axis-card .q{font-size:.85rem;color:var(--muted);font-style:italic;margin-bottom:20px}
+.axis-card ul{list-style:none;padding:0;margin:0}
+.axis-card li{font-size:.82rem;padding:9px 0;border-top:1px dashed var(--line);color:var(--muted)}
+.axis-card li b{color:var(--c);font-family:'IBM Plex Mono',monospace;font-size:.68rem;font-weight:500;margin-right:8px}
+.axis-apply{
+  margin-top:20px;width:100%;background:var(--soft,var(--surface-2));border:1px solid var(--line);
+  padding:11px;font-size:.74rem;border-radius:3px;color:var(--c);transition:.2s;font-weight:600;
+}
+.axis-apply:hover{background:var(--c);color:var(--bg)}
+
+/* Ciclo */
+.cycle{display:grid;grid-template-columns:repeat(5,1fr);gap:18px;margin-top:30px}
+.step{position:relative;padding-top:34px}
+.step::before{content:"";position:absolute;top:11px;left:0;right:-18px;height:1px;background:var(--line)}
+.step:last-child::before{right:0}
+.step .node{
+  position:absolute;top:0;left:0;width:24px;height:24px;border-radius:50%;
+  background:var(--bg);border:1px solid var(--gold);color:var(--gold);
+  display:grid;place-items:center;font-family:'IBM Plex Mono',monospace;font-size:.62rem;
+}
+.step h4{font-family:'Fraunces',serif;font-size:1.1rem;margin-bottom:8px;font-weight:500}
+.step p{font-size:.78rem;color:var(--muted);margin:0}
+
+/* ============================================================
+   10. TENSIONES
+   ============================================================ */
+.tension{border:1px solid var(--line);border-radius:var(--radius);margin-bottom:14px;background:var(--surface);overflow:hidden}
+.tension summary{
+  list-style:none;cursor:pointer;padding:22px 26px;display:flex;gap:18px;align-items:center;
+  font-family:'Fraunces',serif;font-size:1.12rem;transition:background .2s;
+}
+.tension summary::-webkit-details-marker{display:none}
+.tension summary:hover{background:var(--surface-2)}
+.tension summary .n{font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--gold);flex:none}
+.tension summary .plus{margin-left:auto;color:var(--gold);transition:transform .3s;font-family:'Inter',sans-serif}
+.tension[open] summary .plus{transform:rotate(45deg)}
+.tension-body{padding:0 26px 26px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.tension-body h5{font-family:'IBM Plex Mono',monospace;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;margin:0 0 10px;color:var(--gold)}
+.tension-body p{font-size:.85rem;color:var(--muted);margin:0}
+.tension-body > div:last-child{border-left:1px solid var(--line);padding-left:24px}
+
+/* ============================================================
+   11. FUENTES + PIE
+   ============================================================ */
+.sources{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.source-list{list-style:none;padding:0;margin:0}
+.source-list li{padding:14px 0;border-bottom:1px solid var(--line);font-size:.86rem;display:flex;gap:16px}
+.source-list .ref{font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--gold);flex:none;padding-top:3px;min-width:90px}
+.source-list .desc{color:var(--muted)}
+.disclaimer{margin-top:36px;padding:24px 28px;border:1px dashed var(--line);font-size:.8rem;color:var(--muted)}
+.disclaimer b{color:var(--ink)}
+
+.site-footer{border-top:1px solid var(--line);padding-block:36px;background:var(--surface)}
+.footer-inner{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+.footer-inner p{margin:0;font-size:.76rem;color:var(--muted)}
+.footer-inner .mono{font-size:.65rem;letter-spacing:.12em;text-transform:uppercase}
+
+.to-top{
+  position:fixed;bottom:26px;right:26px;width:44px;height:44px;border-radius:50%;
+  background:var(--ink);color:var(--bg);border:0;display:grid;place-items:center;
+  opacity:0;pointer-events:none;transform:translateY(12px);transition:.3s;z-index:950;
+}
+.to-top.show{opacity:1;pointer-events:auto;transform:none}
+.to-top:hover{background:var(--gold)}
+.toast{
+  position:fixed;bottom:30px;left:50%;transform:translate(-50%,20px);
+  background:var(--ink);color:var(--bg);padding:13px 24px;border-radius:4px;
+  font-size:.82rem;opacity:0;pointer-events:none;transition:.3s;z-index:1100;
+}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+/* ============================================================
+   12. ANIMACIONES
+   ============================================================ */
+.js .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+.js .reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .js .reveal{opacity:1;transform:none}
+}
+
+/* ============================================================
+   13. RESPONSIVE
+   ============================================================ */
+@media (max-width:1080px){
+  .site-nav{gap:16px}
+  .hero-grid{grid-template-columns:1fr;gap:40px}
+  .hero-art{max-width:360px;margin-inline:auto;order:-1}
+  .dimensions{grid-template-columns:1fr}
+  .dim{padding:28px}
+  .method-grid{grid-template-columns:1fr}
+  .stems{grid-template-columns:1fr}
+  .stems::before{display:none}
+  .axis-card::before{display:none}
+  .cycle{grid-template-columns:1fr;gap:26px}
+  .step::before{display:none}
+  .tension-body{grid-template-columns:1fr;gap:20px}
+  .tension-body > div:last-child{border-left:0;padding-left:0;border-top:1px solid var(--line);padding-top:20px}
+  .sources{grid-template-columns:1fr}
+}
+@media (max-width:760px){
+  :root{--header-h:66px}
+  .site-nav{display:none}
+  .header-inner{gap:12px}
+  .brand-name{font-size:1.05rem}
+  .hero h1{font-size:clamp(2.8rem,13vw,4rem)}
+  .hero-stats{grid-template-columns:1fr;gap:22px}
+  .stat b{font-size:2.2rem}
+  .reader-inner{gap:12px}
+  .search-box{max-width:none;flex-basis:100%}
+  .reader-count{margin-left:0}
+  .lexeme-head{grid-template-columns:1fr;gap:12px}
+  .lexeme-num{font-size:3rem}
+  .lexeme{padding-block:40px}
+  .norm-body{padding-inline:18px}
+  .dim{padding:24px 20px}
+  .copy-btn{margin-left:0}
+  .footer-inner{flex-direction:column;align-items:flex-start}
+}
+
+/* ============================================================
+   14. IMPRESIÓN
+   ============================================================ */
+@media print{
+  :root{--bg:#fff;--surface:#fff;--ink:#111;--muted:#333;--line:#bbb}
+  body{font-size:11pt;background:#fff}
+  body::before,.site-header,.reader-bar,.progress,.to-top,.toast,.hero-cta,.hero-art,
+  .copy-btn,.axis-apply,.header-actions{display:none!important}
+  .wrap{max-width:none;padding:0}
+  section{padding-block:20px;break-inside:avoid}
+  .hero-grid{display:block}
+  .hero h1{font-size:32pt}
+  .dimensions{grid-template-columns:repeat(3,1fr);gap:12px}
+  .dim{break-inside:avoid;box-shadow:none}
+  .dim p,.dim li{font-size:9pt}
+  .lexeme{break-before:page}
+  .lexeme:first-child{break-before:auto}
+  .norm-body{font-size:9pt}
+  .reveal{opacity:1!important;transform:none!important}
+  .table-shell{overflow:visible}
+  table{min-width:0;font-size:8pt}
+  a{color:inherit}
+}
+</style>
+</head>
+
+<body data-lens="all">
+<a class="skip" href="#contenido">Saltar al contenido principal</a>
+<div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
+
+<!-- ============================ CABECERA ============================ -->
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a href="#inicio" class="brand" aria-label="Tríptico Penal, inicio">
+      <span class="brand-mark" aria-hidden="true">§</span>
+      <span>
+        <span class="brand-name">Tríptico Penal</span>
+        <span class="brand-sub">Dogmática · Ontología · Hermenéutica</span>
+      </span>
+    </a>
+
+    <nav class="site-nav" aria-label="Navegación principal">
+      <a href="#metodo">Método</a>
+      <a href="#mapa">Matriz</a>
+      <a href="#articulos">Artículos</a>
+      <a href="#sintesis">Síntesis</a>
+      <a href="#tensiones">Tensiones</a>
+      <a href="#fuentes">Fuentes</a>
+    </nav>
+
+    <div class="header-actions">
+      <button class="icon-btn" id="themeToggle" aria-label="Activar modo oscuro" title="Cambiar tema">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+          <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/>
+        </svg>
+      </button>
+      <button class="icon-btn" id="printBtn" aria-label="Imprimir o guardar en PDF" title="Imprimir">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+          <path d="M6 9V3h12v6M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
+          <path d="M6 14h12v8H6z"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="contenido">
+
+<!-- ============================ HERO ============================ -->
+<section class="hero" id="inicio">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="dot"></span> Código Penal colombiano · Ley 599 de 2000</p>
+        <h1>La pena <em>sin muros.</em></h1>
+        <p class="lede">
+          Una lectura tridimensional de los <strong>mecanismos sustitutivos de la pena privativa
+          de la libertad</strong>: qué prescribe la norma, qué le sucede al ser humano que la
+          atraviesa y cómo se interpreta su sentido en un Estado constitucional de derecho.
+        </p>
+
+        <div class="hero-meta">
+          <span class="chip">CAPÍTULO TERCERO</span>
+          <span class="chip">ARTS. 63 — 68C</span>
+          <span class="chip">HORIZONTE NORMATIVO · 2026</span>
+        </div>
+
+        <div class="hero-cta">
+          <a href="#metodo" class="btn btn-primary">Explorar el método →</a>
+          <a href="#articulos" class="btn btn-ghost">Ir a los artículos</a>
+        </div>
+
+        <p class="hero-note">
+          Material académico de análisis conceptual. No reemplaza el texto oficial consolidado
+          ni constituye asesoría jurídica.
+        </p>
+      </div>
+
+      <div class="hero-art" aria-hidden="true">
+        <svg viewBox="0 0 440 470" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="lightBeam" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="var(--gold)" stop-opacity=".38"/>
+              <stop offset="1" stop-color="var(--gold)" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+
+          <rect x="16" y="16" width="408" height="438" rx="3" fill="none" stroke="var(--line)"/>
+          <text x="220" y="52" text-anchor="middle" fill="var(--muted)"
+                font-family="IBM Plex Mono, monospace" font-size="9" letter-spacing="4">TRÍPTICO HERMENÉUTICO</text>
+
+          <!-- Arco dogmático -->
+          <path d="M40 350V172a54 54 0 0 1 108 0v178Z" fill="var(--dogma-soft)" stroke="var(--dogma)" stroke-width="1.3"/>
+          <path d="M54 350V176a40 40 0 0 1 80 0v174" fill="none" stroke="var(--dogma)" stroke-width=".7" opacity=".5"/>
+          <path d="M68 350V180a26 26 0 0 1 52 0v170" fill="none" stroke="var(--dogma)" stroke-width=".7" opacity=".35"/>
+
+          <!-- Arco ontológico (central, abierto) -->
+          <path d="M166 350V150a54 54 0 0 1 108 0v200Z" fill="var(--onto-soft)" stroke="var(--onto)" stroke-width="1.3"/>
+          <path class="beam" d="M220 112 L286 350 L154 350 Z" fill="url(#lightBeam)"/>
+          <path d="M220 350V196l34-14v154l-34 14Z" fill="var(--gold)" opacity=".22" stroke="var(--gold)" stroke-width="1"/>
+          <circle cx="220" cy="150" r="4" fill="var(--gold)"/>
+
+          <!-- Arco hermenéutico -->
+          <path d="M292 350V172a54 54 0 0 1 108 0v178Z" fill="var(--herme-soft)" stroke="var(--herme)" stroke-width="1.3"/>
+          <circle cx="346" cy="228" r="24" fill="none" stroke="var(--herme)" stroke-width="1.2"/>
+          <path d="M363 246l17 17" stroke="var(--herme)" stroke-width="1.6"/>
+          <path d="M336 228h20M346 218v20" stroke="var(--herme)" stroke-width=".8" opacity=".6"/>
+
+          <path d="M30 350h380" stroke="var(--ink)" stroke-width="1" opacity=".35"/>
+          <path d="M30 358h380" stroke="var(--line)" stroke-width="1"/>
+
+          <text x="94" y="392" text-anchor="middle" fill="var(--dogma)" font-family="IBM Plex Mono, monospace" font-size="10" letter-spacing="2">DOGMA</text>
+          <text x="220" y="392" text-anchor="middle" fill="var(--onto)" font-family="IBM Plex Mono, monospace" font-size="10" letter-spacing="2">SER</text>
+          <text x="346" y="392" text-anchor="middle" fill="var(--herme)" font-family="IBM Plex Mono, monospace" font-size="10" letter-spacing="2">SENTIDO</text>
+
+          <text x="220" y="432" text-anchor="middle" fill="var(--muted)" font-family="Fraunces, serif" font-style="italic" font-size="13">
+            tres miradas sobre una misma libertad
+          </text>
+        </svg>
+      </div>
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat"><b>06</b><span>núcleos normativos analizados, del artículo 63 al 68C</span></div>
+      <div class="stat"><b>03</b><span>dimensiones de lectura aplicadas a cada instituto</span></div>
+      <div class="stat"><b>25</b><span>años de privación efectiva: umbral de revisión de la pena</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ MÉTODO ============================ -->
+<section id="metodo">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow"><span class="dot"></span> 01 / Marco metodológico</p>
+      <h2>Tres preguntas ante una misma norma</h2>
+      <p>
+        Leer un subrogado penal únicamente como una lista de requisitos es dejar intacta la
+        pregunta por su sentido. Esta web despliega cada institución en tres planos
+        complementarios que no compiten entre sí: se exigen mutuamente.
+      </p>
+    </div>
+
+    <div class="method-grid">
+      <div class="method-card reveal" style="--c:var(--dogma)">
+        <span class="method-symbol" aria-hidden="true">§</span>
+        <h3>Dogmática</h3>
+        <span class="sub">Plano normativo · el deber ser</span>
+        <p>
+          Estructura del instituto: naturaleza jurídica, presupuestos objetivos y subjetivos,
+          competencias, efectos, límites y régimen de revocación. Es el análisis del
+          <strong>qué</strong> de la norma y de su encaje sistemático en el Código Penal.
+        </p>
+        <div class="method-question">¿Qué prescribe exactamente el legislador?</div>
+      </div>
+
+      <div class="method-card reveal" style="--c:var(--onto)">
+        <span class="method-symbol" aria-hidden="true">◎</span>
+        <h3>Ontología</h3>
+        <span class="sub">Plano existencial · el ser</span>
+        <p>
+          Qué modo de existencia produce la norma en el condenado: suspensión, transición,
+          vulnerabilidad, exclusión o transformación. Investiga el <strong>ser-en-pena</strong>
+          y el <strong>ser-en-libertad</strong> como estados jurídicos que configuran una vida.
+        </p>
+        <div class="method-question">¿Qué llega a ser el sujeto bajo esta figura?</div>
+      </div>
+
+      <div class="method-card reveal" style="--c:var(--herme)">
+        <span class="method-symbol" aria-hidden="true">⌕</span>
+        <h3>Hermenéutica</h3>
+        <span class="sub">Plano interpretativo · el sentido</span>
+        <p>
+          Cómo se comprende y se aplica el texto: interpretación literal, sistemática,
+          teleológica y constitucional. Define el <strong>cómo</strong> del juez ante la ambigüedad,
+          la laguna y la tensión entre texto y dignidad.
+        </p>
+        <div class="method-question">¿Cómo se decide cuando la letra no basta?</div>
+      </div>
+    </div>
+
+    <div class="method-foot reveal">
+      <b>Regla de lectura</b>
+      <span>
+        La dogmática sin ontología se vuelve burocracia; la ontología sin dogmática se vuelve
+        retórica; la hermenéutica sin ambas se vuelve arbitrio. Usa los <strong>lentes</strong>
+        de la barra de lectura para aislar una dimensión en todos los artículos.
+      </span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ MATRIZ ============================ -->
+<section id="mapa">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow"><span class="dot"></span> 02 / Mapa comparado</p>
+      <h2>La arquitectura del sistema</h2>
+      <p>
+        Los mecanismos no son alternativas intercambiables: responden a momentos distintos
+        de la ejecución, a distintos supuestos fácticos y a distintas concepciones del sujeto.
+      </p>
+    </div>
+
+    <div class="table-shell reveal">
+      <table>
+        <caption class="sr-only" style="position:absolute;left:-9999px">Matriz tridimensional de los mecanismos sustitutivos</caption>
+        <thead>
+          <tr>
+            <th>Núcleo</th>
+            <th>Momento</th>
+            <th class="c-dogma">Dogmática · presupuesto</th>
+            <th class="c-onto">Ontología · modo de ser</th>
+            <th class="c-herme">Hermenéutica · clave</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><a href="#art-63">Art. 63</a></td>
+            <td>Inicio de la ejecución</td>
+            <td>Prisión ≤ 4 años + ausencia o valoración de antecedentes</td>
+            <td>Libertad en suspenso: pena vigente, ejecución detenida</td>
+            <td>Intervención mínima; automatismo reglado frente a valoración individual</td>
+          </tr>
+          <tr>
+            <td><a href="#art-64">Art. 64</a></td>
+            <td>Durante la ejecución</td>
+            <td>3/5 de la pena + comportamiento + arraigo + reparación</td>
+            <td>Ser en reinserción: mutación reconocida por el Estado</td>
+            <td>Valoración probatoria integral; arraigo no patrimonial</td>
+          </tr>
+          <tr>
+            <td><a href="#art-65">Arts. 65–67</a></td>
+            <td>Período de prueba</td>
+            <td>Obligaciones + caución → revocación o extinción</td>
+            <td>Vínculo, ruptura y clausura del vínculo punitivo</td>
+            <td>Proporcionalidad de la revocación; <em>pro libertate</em></td>
+          </tr>
+          <tr>
+            <td><a href="#art-68">Art. 68</a></td>
+            <td>Ejecución con condición de salud</td>
+            <td>Enfermedad muy grave incompatible + peritazgo médico</td>
+            <td>Finitud del cuerpo como límite del poder de castigar</td>
+            <td>Principio de humanidad y bloque de constitucionalidad</td>
+          </tr>
+          <tr>
+            <td><a href="#art-68a">Art. 68A</a></td>
+            <td>Límite transversal</td>
+            <td>Antecedentes dolosos o listado legal de delitos</td>
+            <td>El sujeto excluido: la presunción de peligrosidad</td>
+            <td>Interpretación restrictiva; enfoque diferencial y igualdad</td>
+          </tr>
+          <tr>
+            <td><a href="#art-68b">Arts. 68B–68C</a></td>
+            <td>Tras 25 años efectivos</td>
+            <td>Revisión de la pena + plan individual + control automático</td>
+            <td>Ser mutante: la esperanza como estructura jurídica</td>
+            <td>Revisabilidad como estándar de derechos; justicia terapéutica</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ BARRA DE LECTURA ============================ -->
+<div class="reader-bar" id="readerBar">
+  <div class="wrap reader-inner">
+    <div class="search-box">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+        <circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>
+      </svg>
+      <input type="search" id="searchInput" placeholder="Buscar: arraigo, caución, mujer cabeza de familia…"
+             aria-label="Buscar en los análisis y textos normativos" autocomplete="off">
+      <button class="search-clear" id="searchClear" aria-label="Limpiar búsqueda" hidden>×</button>
+    </div>
+
+    <div class="lenses" role="group" aria-label="Filtrar por dimensión de lectura">
+      <button class="lens-btn" data-lens-btn="all" aria-pressed="true">Tríptico completo</button>
+      <button class="lens-btn" data-lens-btn="dogmatica" style="--c:var(--dogma)" aria-pressed="false"><i></i>Dogmática</button>
+      <button class="lens-btn" data-lens-btn="ontologia" style="--c:var(--onto)" aria-pressed="false"><i></i>Ontología</button>
+      <button class="lens-btn" data-lens-btn="hermeneutica" style="--c:var(--herme)" aria-pressed="false"><i></i>Hermenéutica</button>
+    </div>
+
+    <span class="reader-count" id="readerCount" aria-live="polite">6 / 6 núcleos</span>
+    <button class="link-chip" id="expandAll">Expandir toda la normativa</button>
+  </div>
+</div>
+
+<!-- ============================ ARTÍCULOS ============================ -->
+<section id="articulos">
+  <div class="wrap">
+
+    <div class="section-head reveal">
+      <p class="eyebrow"><span class="dot"></span> 03 / Desarrollo artículo por artículo</p>
+      <h2>El texto y sus tres profundidades</h2>
+      <p>
+        Cada núcleo se despliega en tres fichas y contiene, al final, la transcripción del
+        texto normativo facilitado para contrastar el análisis con la letra de la ley.
+      </p>
+    </div>
+
+    <div id="emptyState" class="empty">
+      <b>Sin resultados</b>
+      <p>Prueba con términos como “reparación”, “enfermedad”, “25 años” o “68A”.</p>
+    </div>
+
+    <div id="lista">
+
+      <!-- ==================== 01 · ART. 63 ==================== -->
+      <article class="lexeme reveal" id="art-63" data-cita="Colombia, Código Penal, art. 63: suspensión condicional de la ejecución de la pena (Ley 599 de 2000; adicionado por Ley 890 de 2004, art. 4; modificado por Ley 1709 de 2014, art. 29).">
+        <header class="lexeme-head">
+          <div class="lexeme-num" aria-hidden="true">01</div>
+          <div>
+            <h2>Suspensión condicional de la ejecución de la pena</h2>
+            <p class="lexeme-origin">Artículo 63 · Adicionado por el art. 4 de la Ley 890 de 2004 · Modificado por el art. 29 de la Ley 1709 de 2014</p>
+            <div class="lexeme-tags">
+              <span class="chip">SUBROGADO PENAL</span>
+              <span class="chip">2 A 5 AÑOS</span>
+              <span class="chip">PENA ≤ 4 AÑOS</span>
+              <span class="chip">DE OFICIO O A PETICIÓN</span>
+            </div>
+          </div>
+        </header>
+
+        <div class="dimensions">
+          <!-- DOGMÁTICA -->
+          <section class="dim dim-dogmatica">
+            <div class="dim-head">
+              <span class="dim-icon" aria-hidden="true">§</span>
+              <h3>Dogmática<small>La norma y su sistema</small></h3>
+            </div>
+
+            <h4>Naturaleza jurídica</h4>
+            <p>
+              No es una absolución ni una extinción anticipada: es un <strong>obstáculo temporal
+              a la ejecutividad</strong> de la pena. La condena existe y permanece; lo que se
+              suspende es su realización material en el centro de reclusión. Su incumplimiento
+              no genera una pena nueva: <strong>reactiva la ya impuesta</strong>.
+            </p>
+
+            <h4>Estruetura de presupuestos</h4>
+            <ol>
+              <li><strong>Objetivo:</strong> pena impuesta de <em>prisión</em> que no exceda de cuatro (4) años. No basta cualquier pena: el texto se refiere a la prisión.</li>
+              <li><strong>Vía automática:</strong> si no hay antecedentes penales y el delito no está en el inciso 2.º del art. 68A, el juez <em>concederá</em> la medida con base únicamente en el requisito objetivo.</li>
+              <li><strong>Vía valorativa:</strong> si existen antecedentes por delito doloso dentro de los cinco (5) años anteriores, el juez <em>podrá</em> concederla cuando los antecedentes personales, sociales y familiares indiquen que no hay necesidad de ejecutar la pena.</li>
+            </ol>
+
+            <h4>Efectos y límites</h4>
+            <dl class="kv">
+              <dt>Alcance</dt><dd>Primera, segunda o única instancia; de oficio o a petición del interesado.</dd>
+              <dt>Civil</dt><dd>No se extiende a la responsabilidad civil derivada de la conducta punible.</dd>
+              <dt>Accesorias</dt><dd>El juez puede exigir las penas no privativas de libertad accesorias.</dd>
+              <dt>Imperativo</dt><dd>Debe exigirse el cumplimiento del inciso final del art. 122 de la Constitución: inhabilidad para funciones públicas y contratación con el Estado en condenas por delitos contra el patrimonio del Estado.</dd>
+            </dl>
+
+            <div class="note">
+              <b>Precisión sistemática</b>
+              El art. 66 habla de “suspensión condicional de la condena”, mientras el art. 63 se refiere a la “ejecución de la pena”. La lectura sistemática dominante es que no se suspende la condena como tal, sino su ejecución.
+            </div>
+          </section>
+
+          <!-- ONTOLOGÍA -->
+          <section class="dim dim-ontologia">
+            <div class="dim-head">
+              <span class="dim-icon" aria-hidden="true">◎</span>
+              <h3>Ontología<small>El ser y su transformación</small></h3>
+            </div>
+
+            <h4>La libertad en tensión</h4>
+            <p>
+              El beneficiario habita un <strong>estado intermedio de existencia jurídica</strong>:
+              no es un condenado recluido, pero tampoco es un ciudadano plenamente sustraído
+              al poder punitivo. Su libertad es una <em>libertad prestada</em>, sostenida por
+              una condición resolutoria que puede activarse en cualquier momento del plazo.
+            </p>
+
+            <h4>La pena como tiempo, no como espacio</h4>
+            <p>
+              La suspensión desplaza la pena del <strong>adentro</strong> al <strong>entre</strong>.
+              El castigo deja de ser un lugar y se convierte en un lapso: dos a cinco años
+              durante los cuales el sujeto existe bajo mirada judicial sin perder su tejido
+              familiar, laboral y comunitario.
+            </p>
+
+            <h4>La dualidad del sujeto</h4>
+            <p>
+              Ontológicamente coexisten dos figuras en la misma persona: el <strong>condenado</strong>,
+              portador de una deuda penal intacta, y el <strong>libre</strong>, portador de una
+              oportunidad de acreditación social. Esa dualidad es la fuente de todas las
+              obligaciones del art. 65.
+            </p>
+
+            <div class="pull">
+              La condena no desaparece: se vuelve invisible. Y lo invisible no deja de pesar.
+            </div>
+
+            <p>
+              Que la responsabilidad civil no se suspenda revela algo esencial: <strong>el daño
+              a la víctima no conoce el plazo de gracia del Estado</strong>. La reparación
+              permanece actual aunque la cárcel esté en suspenso.
+            </p>
+          </section>
+
+          <!-- HERMENÉUTICA -->
+          <section class="dim dim-hermeneutica">
+            <div class="dim-head">
+              <span class="dim-icon" aria-hidden="true">⌕</span>
+              <h3>Hermenéutica<small>El sentido y su aplicación</small></h3>
+            </div>
+
+            <h4>Principio rector</h4>
+            <p>
+              La <strong>intervención mínima</strong> y la función resocializadora de la pena
+              (art. 4 CP) imponen una lectura que no trate el encierro como regla y la libertad
+              como excepción graciosa, sino como alternativas cuya elección depende de la
+              <em>necesidad concreta de punición</em>.
+            </p>
+
+            <h4>“Concederá” frente a “podrá”</h4>
+            <p>
+              El numeral 2.º establece un <strong>automatismo reglado</strong>: verificados el
+              tope punitivo y la ausencia de antecedentes, no queda un margen libre de
+              discrecionalidad. El numeral 3.º, en cambio, abre una <strong>cláusula de
+              individualización</strong> que exige motivación fáctica y no una negativa ritual.
+            </p>
+
+            <h4>Claves de interpretación</h4>
+            <ul>
+              <li><strong>“Antecedentes penales”:</strong> no se identifican con cualquier anotación judicial, investigación en curso o sanción disciplinaria. Se requiere condena previa por delito doloso en la ventana temporal señalada.</li>
+              <li><strong>“Doloso”:</strong> excluye, por literalidad, los antecedentes puramente culposos del bloque restrictivo.</li>
+              <li><strong>“No existe necesidad de ejecución”:</strong> fórmula prospectiva y criminológica; obliga a valorar trayectoria, vínculos y contexto, no a sumar reproches.</li>
+              <li><strong>Restricciones del 68A:</strong> se interpretan restrictivamente; no se amplían por analogía en perjuicio del condenado.</li>
+            </ul>
+
+            <div class="note">
+              <b>Tensión textual</b>
+              El art. 63.3 habla de “no existe <em>necesidad</em> de ejecución”; el parágrafo 2.º del 68A dice “no existe la <em>posibilidad</em> de la ejecución”. Una lectura armónica entiende ambas como habilitaciones de individualización, pero la diverbdancia lexical exige motivación reforzada cuando se usa la vía del 68A.
+            </div>
+          </section>
+        </div>
+
+        <details class="norm">
+          <summary>
+            Ver texto normativo · Artículo 63
+            <span class="tag">TRANSCRIPCIÓN</span>
+            <span class="plus" aria-hidden="true">+</span>
+          </summary>
+          <div class="norm-body">
+            <p><strong>ARTÍCULO 63.</strong> Suspensión condicional de la ejecución de la pena.
+            Adicionado por el art. 4, Ley 890 de 2004, Modificado por el art. 29, Ley 1709 de 2014.
+            La ejecución de la pena privativa de la libertad impuesta en sentencia de primera,
+            segunda o única instancia, se suspenderá por un período de dos (2) a cinco (5) años,
+            de oficio o a petición del interesado, siempre que concurran los siguientes requisitos:</p>
+            <ol>
+              <li>Que la pena impuesta sea de prisión que no exceda de cuatro (4) años.</li>
+              <li>Si la persona condenada carece de antecedentes penales y no se trata de uno de los delitos contenidos en el inciso 2.º del artículo 68A de la Ley 599 de 2000, el juez de conocimiento concederá la medida con base solamente en el requisito objetivo señalado en el numeral 1 de este artículo.</li>
+              <li>Si la persona condenada tiene antecedentes penales por delito doloso dentro de los cinco (5) años anteriores, el juez podrá conceder la medida cuando los antecedentes personales, sociales y familiares del sentenciado sean indicativos de que no existe necesidad de ejecución de la pena.</li>
+            </ol>
+            <p>La suspensión de la ejecución de la pena privativa de la libertad no será extensiva a la responsabilidad civil derivada de la conducta punible.</p>
+            <p>El juez podrá exigir el cumplimiento de las penas no privativas de la libertad accesorias a esta. En todo caso cuando se trate de lo dispuesto en el inciso final del Artículo 122 de la Constitución Política se exigirá su cumplimiento.</p>
+          </div>
+        </details>
+
+        <div class="connections">
+          <span class="label">Conectado con</span>
+          <a class="link-chip" href="#art-68a">68A · Exclusión de beneficios</a>
+          <a class="link-chip" href="#art-65">65–67 · Obligaciones y extinción</a>
+          <button class="copy-btn" data-copy> Copiar cita</button>
+        </div>
+      </article>
+
+      <!-- ==================== 02 · ART. 64 ==================== -->
+      <article class="lexeme reveal" id="art-64" data-cita="Colombia, Código Penal, art. 64: libertad condicional (Ley 599 de 2000; modificado por Ley 2098 de 2021, art. 5; exequible según Sentencia C-383 de 2022).">
+        <header class="lexeme-head">
+          <div class="lexeme-num" aria-hidden="true">02</div>
+          <div>
+            <h2>Libertad condicional</h2>
+            <p class="lexeme-origin">Artículo 64 · Modificado por el art. 5 de la Ley 2098 de 2021 · Declarado EXEQUIBLE: Sentencia C-383 de 2022</p>
+            <div class="lexeme-tags">
+              <span class="chip">3/5 DE LA PENA</span>
+              <span class="chip">ARRAIGO</span>
+              <span class="chip">REPARACIÓN O GARANTÍA</span>
+              <span class="chip">PERÍODO DE PRUEBA</span>
+            </div>
+          </div>
+        </header>
+
+        <div class="dimensions">
+          <section class="dim dim-dogmatica">
+            <div class="dim-head">
+              <span class="dim-icon" aria-hidden="true">§</span>
+              <h3>Dogmática<small>La norma y su sistema</small></h3>
+            </div>
+
+            <h4>Naturaleza jurídica</h4>
+            <p>
+              Es un mecanismo de <strong>ejecución progresiva de la pena</strong>: opera cuando
+              la pena ya comenzó a cumplirse. A diferencia del art. 63, no evita el ingreso
+              al establecimiento, sino que <strong>anticipa su egreso bajo vigilancia</strong>.
+            </p>
+
+            <h4>Requisitos acumulativos</h4>
+            <ol>
+              <li>Haber cumplido las <strong>tres quintas (3/5) partes</strong> de la pena.</li>
+              <li>Que el adecuado desempeño y comportamiento durante el tratamiento penitenciario permita suponer fundadamente que no hay necesidad de continuar la ejecución.</li>
+              <li>Que se demuestre <strong>arraigo familiar y social</strong>.</li>
+            </ol>
+
+            <h4>La doble garantía</h4>
+            <p>
+              El juez debe establecer la existencia o inexistencia del arraigo
+              <strong>con todos los elementos de prueba allegados a la actuación</strong>.
+              Además, la concesión está supeditada a la <strong>reparación a la víctima</strong>
+              o al aseguramiento del pago mediante garantía personal, real, bancaria o acuerdo
+              de pago, <em>salvo insolvencia demostrada</em>.
+            </p>
+
+            <h4>Período de prueba y exclusión</h4>
+            <dl class="kv">
+              <dt>Duración</dt><dd>El tiempo que falte para cumplir la pena. Si es inferior a tres años, el juez puede aumentarlo hasta en otro tanto igual.</dd>
+              <dt>Exclusión</dt><dd>No se aplica cuando se haya impuesto prisión perpetua revisable.</dd>
+              <dt>Armonización</dt><dd>El parágrafo 1.º del art. 68A excluye la libertad condicional del art. 64 de la prohibición general de beneficios.</dd>
+            </dl>
+          </section>
+
+          <section class="dim dim-ontologia">
+            <div class="dim-head">
+              <span class="dim-icon" aria-hidden="true">◎</span>
+              <h3>Ontología<small>El ser y su transformación</small></h3>
+            </div>
+
+            <h4>El ser-en-transición</h4>
+            <p>
+              La libertad condicional materializa la idea de que <strong>el sujeto no es
+              indefinidamente su delito</strong>. Tras una fracción substantial del cumplimiento,
+              el Estado reconoce una mutación: quien entra como infractor puede salir como
+              persona en proceso de reinserción.
+            </p>
+
+            <h4>El arraigo como “estar-en-el-mundo”</h4>
+            <p>
+              Arraigo no es propiedad ni patrimonio: es <strong>densidad de vínculos</strong>.
+              Ontológicamente designa los hilos que atan a una persona a un mundo compartible:
+              cuidados, trabajo, pertenencia, reconocimiento. Sin esos hilos, la libertad
+              física puede ser una forma de expulsión social.
+            </p>
+
+            <h4>La reparación como restitución del lazo</h4>
+            <p>
+              Reparar no es comprar la libertad. Es <strong>reconocer al otro como semejante</strong>
+              y asumir materialmente la huella del daño. Por eso la norma no permite que la
+              libertad condicional sea un puro trámite entre el sujeto y el Estado: exige la
+              presencia de la víctima en la estructura del beneficio.
+            </p>
+
+            <div class="pull">
+              La libertad condicional no declara que el daño fue menor. Declara que la persona ya no es solamente su daño.
+            </div>
+
+            <p>
+              La cláusula de insolvencia preserva una distinción ontológica decisiva:
+              <strong>no es lo mismo no querer reparar que no poder reparar</strong>.
+              Confundirlos convertiría la pobreza en una pena adicional.
+            </p>
+          </section>
+
+          <section class="dim dim-hermeneutica">
+            <div class="dim-head">
+              <span class="dim-icon" aria-hidden="true">⌕</span>
+              <h3>Hermenéutica<small>El sentido y su aplicación</small></h3>
+            </div>
+
+            <h4>¿Gracia o derecho?</h4>
+            <p>
+              La fórmula “el juez… concederá”, combineda con la exigencia de valoración
+              probatoria, orienta a leer la libertad condicional como un
+              <strong>derecho subjetivo de configuración legal</strong> cuando se acreditan los
+              presupuestos, no como una concesión discrecional sin fundamento.
+            </p>
+
+            <h4>Claves de interpretación</h4>
+            <ul>
+              <li><strong>Arraigo:</strong> se interpreta de manera funcional y no censitaria. La ausencia de vivienda propia o de ingresos estables no equivale, por sí sola, a ausencia de arraigo.</li>
+              <li><strong>Concepto penitenciario:</strong> es un elemento de juicio, no un sustituto de la función judicial. El juez valora el expediente completo.</li>
+              <li><strong>“Fundadamente”:</strong> exige razonamiento probatorio; excluye tanto el automatismo por buen comportamiento como la negativa por desconfianza genérica.</li>
+              <li><strong>Reparación:</strong> se lee desde la justicia restaurativa, junto con la garantía de pago y la excepción de insolvencia.</li>
+              <li><strong>Ampliación del plazo:</strong> al ser una restricción de libertad, se interpreta restrictivamente y requiere motivación específica.</li>
+            </ul>
+
+            <div class="note">
+              <b>Control constitucional</b>
+              La Sentencia C-383 de 2022 examinó el diseño de la prisión perpetua revisable y declaró exequibles estas disposiciones. Su lectura debe hacerse junto con el art. 4 CP y el estándar interamericano de posibilidad de reinserción.
+            </div>
+          </section>
+        </div>
+
+        <details class="norm">
+          <summary>Ver texto normativo · Artículo 64 <span class="tag">TRANSCRIPCIÓN</span><span class="plus" aria-hidden="true">+</span></summary>
+          <div class="norm-body">
+            <p><strong>ARTÍCULO 64.</strong> Libertad Condicional. Modificado por el Art. 5 de la Ley 2098 de 2021. El juez, previa valoración de la conducta punible, concederá la libertad condicional a la persona condenada a pena privativa de la libertad cuando haya cumplido con los siguientes requisitos:</p>
+            <ol>
+              <li>Que la persona haya cumplido las tres quintas (3/5) partes de la pena.</li>
+              <li>Que su adecuado desempeño y comportamiento durante el tratamiento penitenciario en el centro de reclusión permita suponer fundadamente que no existe necesidad de continuar la ejecución de la pena.</li>
+              <li>Que demuestre arraigo familiar y social.</li>
+            </ol>
+            <p>Corresponde al juez competente para conceder la libertad condicional establecer, con todos los elementos de prueba allegados a la actuación, la existencia o inexistencia del arraigo.</p>
+            <p>En todo caso su concesión estará supeditada a la reparación a la víctima o al aseguramiento del pago de la indemnización mediante garantía personal, real, bancaria o acuerdo del pago, salvo que se demuestre insolvencia del condenado.</p>
+            <p>El tiempo que falte para el cumplimiento de la pena se tendrá como período de prueba. Cuando este sea inferior a tres años, el juez podrá aumentarlo hasta en otro tanto igual, de considerarlo necesario.</p>
+            <p>Lo dispuesto en el presente artículo no se aplicará cuando se haya impuesto la pena de prisión perpetua revisable.</p>
+            <p class="sentencia">NOTA: Artículo declarado EXEQUIBLE por la Corte Constitucional mediante Sentencia C-383 de 2022.</p>
+          </div>
+        </details>
+
+        <div class="connections">
+          <span class="label">Conectado con</span>
+          <a class="link-chip" href="#art-68a">68A · Parágrafo 1.º</a>
+          <a class="link-chip" href="#art-68b">68B · Prisión perpetua revisable</a>
+          <button class="copy-btn" data-copy>Copiar cita</button>
+        </div>
+      </article>
+
+      <!-- ==================== 03 · ARTS. 65–67 ==================== -->
+      <article class="lexeme reveal" id="art-65" data-cita="Colombia, Código Penal, arts. 65, 66 y 67: obligaciones, revocación y extinción de la suspensión condicional y de la libertad condicional.">
+        <header class="lexeme-head">
+          <div class="lexeme-num" aria-hidden="true">03</div>
+          <div>
+            <h2>Obligaciones, revocación y extinción</h2>
+            <p class="lexeme-origin">Artículos 65, 66 y 67 · El arco completo del período de prueba</p>
+            <div class="lexeme-tags">
+              <span class="chip">CINCO OBLIGACIONES</span>
+              <span class="chip">CAUCIÓN</span>
+              <span class="chip">90 DÍAS</span>
+              <span class="chip">LIBERACIÓN DEFINITIVA</span>
+            </div>
+          </div>
+        </header>
+
+        <div class="dimensions">
+          <section class="dim dim-dogmatica">
+            <div class="dim-head">
+              <span class="dim-icon" aria-hidden="true">§</span>
+              <h3>Dogmática<small>La norma y su sistema</small></h3>
+            </div>
+
+            <h4>Art. 65 · El contenido del período de prueba</h4>
+            <ol>
+              <li>Informar todo cambio de residencia.</li>
+              <li>Observar buena conducta.</li>
+              <li>Reparar los daños ocasionados con el delito, salvo imposibilidad económica demostrada.</li>
+              <li>Comparecer personalmente ante la autoridad judicial vigilante cuando sea requerido.</li>
+              <li>No salir del país sin autorización previa del funcionario que vigila la ejecución.</li>
+            </ol>
+            <p>Estas obligaciones <strong>se garantizan mediante caución</strong>: existe un respaldo patrimonial o personal de la confianza concedida.</p>
+
+            <h4>Art. 66 · Dos vías de revocación</h4>
+            <ul>
+              <li><strong>Material:</strong> violación de cualquiera de las obligaciones durante el período de prueba → ejecución inmediata de la sentencia en lo suspendido y efectividad de la caución.</li>
+              <li><strong>Por incomparecencia:</strong> si transcurridos <strong>noventa (90) días</strong> desde la ejecutoria de la sentencia que reconoce el beneficio el amparado no comparece ante la autoridad judicial → ejecución inmediata.</li>
+            </ul>
+
+            <h4>Art. 67 · La clausura del vínculo</h4>
+            <p>
+              Transcurrido el período de prueba sin incurrencia en las conductas del art. 66,
+              <strong>la condena queda extinguida</strong> y la liberación se tiene por definitiva,
+              <em>previa resolución judicial que así lo determine</em>.
+            </p>
+          </section>
+
+          <section class="dim dim-ontologia">
+            <div class="dim-head">
+              <span class="dim-icon" aria-hidden="true">◎</span>
+              <h3>Ontología<small>El ser y su transformación</small></h3>
+            </div>
+
+            <h4>Tres modos de un mismo tiempo</h4>
+            <p>
+              Los artículos 65, 66 y 67 no describen tres instituciones aisladas: describen
+              <strong>tres destinos existenciales de un mismo lapso</strong>. El período de prueba
+              es un tiempo suspendido entre la culpa y la restitución, cuyo sentido solo se
+              revela al final.
+            </p>
+
+            <h4>La obligación como cordón</h4>
+            <p>
+              Las obligaciones son el <strong>hilo que mantiene al libre dentro del derecho penal</strong>.
+              Informar la residencia, comparecer, reparar: cada acto es una reafirmación
+              periódica de que el vínculo no se ha roto. La caución es la forma material de ese hilo.
+            </p>
+
+            <h4>La revocación como retorno</h4>
+            <p>
+              Revocar no es descubrir un delito nuevo: es <strong>constatar que la confianza
+              resultó infundada</strong>. Ontológicamente, el sujeto regresa al estado de
+              reclusión del que había sido provisionalmente extraído. La libertad se revela
+              como lo que era: condicional.
+            </p>
+
+            <h4>La extinción como muerte jurídica</h4>
+            <p>
+              La extinción es el <strong>agotamiento del poder punitivo sobre ese hecho</strong>.
+              No es una declaración de inocencia: la condena existió. Es el reconocimiento
+              de que el tiempo y la conducta han cerrado el capítulo y de que el sujeto
+              vuelve a ser, plenamente, un ciudadano ante el Estado.
+            </p>
+
+            <div class="pull">
+              La cárcel termina con una puerta. La extinción termina con un reconocimiento.
+            </div>
+          </section>
+
+          <section class="dim dim-hermeneutica">
+            <div class="dim-head">
+              <span class="dim-icon" aria-hidden="true">⌕</span>
+              <h3>Hermenéutica<small>El sentido y su aplicación</small></h3>
+            </div>
+
+            <h4>“Buena conducta”: ¿moral o jurídico?</h4>
+            <p>
+              La fórmula no autoriza un control moral integral de la vida del beneficiario.
+              Se interpreta en conexión con el <strong>fin de prevención y reinserción</strong>:
+              no cualquier desacuerdo social, estilo de vida o decisión personal habilita
+              la revocación.
+            </p>
+
+            <h4>Literalidad versus proporcionalidad</h4>
+            <p>
+              El art. 66 dice <em>cualquiera</em> de las obligaciones. Una lectura puramente
+              literal conduciría a revocar por un incumplimiento mínimo o formal.
+              La lectura constitucional exige ponderar <strong>gravedad, intencionalidad,
+              trascendencia y posibilidad de corrección</strong>, sin desconocer la letra de la ley.
+            </p>
+
+            <h4>Claves de interpretación</h4>
+            <ul>
+              <li><strong>Imposibilidad económica:</strong> se prueba; no se presume ni se exige de manera imposible. Opera en armonía con la cláusula de insolvencia del art. 64.</li>
+              <li><strong>Caución:</strong> funciona como garantía, no como pena patrimonial autónoma ni como condena adicional.</li>
+              <li><strong>Plazo de 90 días:</strong> requiere verificar cuándo se produjo la ejecutoria y si existió comparecencia efectiva; no debe convertirse en revocación automática por un error de notificación.</li>
+              <li><strong>Resolución del art. 67:</strong> se lee como declarativa de un efecto ya producido por el transcurso del plazo, no como una concesión discrecional diferida.</li>
+            </ul>
+
+            <div class="note">
+              <b>Regla de cierre</b>
+              Ante dos lecturas posibles de una restricción durante el período de prueba, rige el principio <em>pro libertate</em>: la más favorable a la consolidación de la reinserción.
+            </div>
+          </section>
+        </div>
+
+        <details class="norm">
+          <summary>Ver texto normativo · Artículos 65, 66 y 67 <span class="tag">TRANSCRIPCIÓN</span><span class="plus" aria-hidden="true">+</span></summary>
+          <div class="norm-body">
+            <h5>Artículo 65. Obligaciones</h5>
+            <p>El reconocimiento de la suspensión condicional de la ejecución de la pena y de la libertad condicional comporta las siguientes obligaciones para el beneficiario:</p>
+            <ol>
+              <li>Informar todo cambio de residencia.</li>
+              <li>Observar buena conducta.</li>
+              <li>Reparar los daños ocasionados con el delito, a menos que se demuestre que está en imposibilidad económica de hacerlo.</li>
+              <li>Comparecer personalmente ante la autoridad judicial que vigile el cumplimiento de la sentencia, cuando fuere requerido para ello.</li>
+              <li>No salir del país sin previa autorización del funcionario que vigile la ejecución de la pena.</li>
+            </ol>
+            <p>Estas obligaciones se garantizarán mediante caución.</p>
+
+            <h5>Artículo 66. Revocación</h5>
+            <p>Si durante el período de prueba el condenado violare cualquiera de las obligaciones impuestas, se ejecutará inmediatamente la sentencia en lo que hubiere sido motivo de suspensión y se hará efectiva la caución prestada.</p>
+            <p>Igualmente, si transcurridos noventa días contados a partir del momento de la ejecutoria de la sentencia en la cual se reconozca el beneficio de la suspensión condicional de la condena, el amparado no compareciere ante la autoridad judicial respectiva, se procederá a ejecutar inmediatamente la sentencia.</p>
+
+            <h5>Artículo 67. Extinción y liberación</h5>
+            <p>Transcurrido el período de prueba sin que el condenado incurra en las conductas de que trata el artículo anterior, la condena queda extinguida, y la liberación se tendrá como definitiva, previa resolución judicial que así lo determine.</p>
+          </div>
+        </details>
+
+        <div class="connections">
+          <span class="label">Conectado con</span>
+          <a class="link-chip" href="#art-63">63 · Suspensión</a>
+          <a class="link-chip" href="#art-64">64 · Libertad condicional</a>
+          <button class="copy-btn" data-copy>Copiar cita</button>
+        </div>
+      </article>
+
+      <!-- ==================== 04 · ART. 68 ==================== -->
+      <article class="lexeme reveal" id="art-68" data-cita="Colombia, Código Penal, art. 68: reclusión domiciliaria u hospitalaria por enfermedad muy grave incompatible con la vida en reclusión formal.">
+        <header class="lexeme-head">
+          <div class="lexeme-num" aria-hidden="true">04</div>
+          <div>
+            <h2>Reclusión domiciliaria u hospitalaria por enfermedad muy grave</h2>
+            <p class="lexeme-origin">Artículo 68 · Límite humanitario de la ejecución penológica</p>
+            <div class="lexeme-tags">
+              <span class="chip">ENFERMEDAD MUY GRAVE</span>
+              <span class="chip">PERITAZGO LEGISTA</span>
+              <span class="chip">EXÁMENES PERIÓDICOS</span>
+              <span class="chip">EXTINCIÓN POR SALUD</span>
+            </div>
+          </div>
+        </header>
+
+        <div class="dimensions">
+          <section class="dim dim-dogmatica">
+            <div class="dim-head">
+              <span class="dim-icon" aria-hidden="true">§</span>
+              <h3>Dogmática<small>La norma y su sistema</small></h3>
+            </div>
+
+            <h4>Naturaleza jurídica</h4>
+            <p>
+              No es un beneficio de reinserción ni un premio por buena conducta: es una
+              <strong>adaptación humanitaria del lugar de cumplimiento</strong>. La pena sigue
+              ejecutándose; cambia el espacio en que se ejecuta porque el cuerpo no puede
+              soportar el espacio ordinario.
+            </p>
+
+            <h4>Presupuestos</h4>
+            <ul>
+              <li>Enfermedad <strong>muy grave</strong> incompatible con la vida en reclusión formal.</li>
+              <li>Autorización judicial: el juez <em>podrá</em> permitir el cumplimiento en la residencia del penado o en un centro hospitalario determinado por el INPEC.</li>
+              <li><strong>Concepto de médico legista especializado</strong> como mediación técnica indispensable.</li>
+            </ul>
+
+            <h4>Reglas especiales</h4>
+            <dl class="kv">
+              <dt>Excepción</dt><dd>No procede si al momento de cometer la conducta el condenado ya tenía otra pena suspendida por el mismo motivo.</dd>
+              <dt>Gastos</dt><dd>Si el condenado elige el centro hospitalario, los gastos corren por su cuenta.</dd>
+              <dt>Remisión</dt><dd>Se aplica lo dispuesto en el inciso 3.º del art. 38 del Código Penal.</dd>
+              <dt>Control</dt><dd>El juez ordena exámenes periódicos para verificar si la causa persiste.</dd>
+            </dl>
+
+            <h4>Destinos de la medida</h4>
+            <ol>
+              <li><strong>Revocación:</strong> si la patología evoluciona hasta ser compatible con la reclusión formal.</li>
+              <li><strong>Extinción:</strong> si cumplido el tiempo de la pena la condición de salud conserva las características que justificaron la medida.</li>
+            </ol>
+          </section>
+
+          <section class="dim dim-ontologia">
+            <div class="dim-head">
+              <span class="dim-icon" aria-hidden="true">◎</span>
+              <h3>Ontología<small>El ser y su transformación</small></h3>
+            </div>
+
+            <h4>El cuerpo como límite del poder</h4>
+            <p>
+              Esta figura enfrenta al derecho con su condición material más elemental:
+              <strong>el castigado es un cuerpo vulnerable</strong>. Cuando ese cuerpo está
+              aquejado por una enfermedad muy grave, la reclusión deja de ser solamente
+              privación de libertad y se transforma, de hecho, en una exposición al daño
+              o a la muerte.
+            </p>
+
+            <h4>Doble sufrimiento</h4>
+            <p>
+              El penado enfermo soporta dos penas simultáneas: la jurídica y la biológica.
+              La ontología de este artículo consiste en el reconocimiento de que
+              <strong>el Estado no puede sumar crueldad a la enfermedad</strong>. La dignidad
+              no se suspende con la libertad.
+            </p>
+
+            <h4>Finitud y reconocimiento</h4>
+            <p>
+              La regla de extinción cuando la enfermedad persiste al vencer la pena es
+              una de las más densas del Código: el Estado reconoce que <strong>no puede
+              seguir encerrando a quien ya no puede ser encerrado</strong>. No es impunidad;
+              es el límite antropológico de la potestad punitiva.
+            </p>
+
+            <div class="pull">
+              Hay un momento en que el cuerpo deja de ser objeto de la pena y se convierte en razón suficiente para detenerla.
+            </div>
+
+            <p>
+              Por eso la medida no es un “subrogado de privilegio”: es la traducción jurídica
+              de una verdad previa al derecho, la <strong>finitud humana</strong>.
+            </p>
+          </section>
+
+          <section class="dim dim-hermeneutica">
+            <div class="dim-head">
+              <span class="dim-icon" aria-hidden="true">⌕</span>
+              <h3>Hermenéutica<small>El sentido y su aplicación</small></h3>
+            </div>
+
+            <h4>Principio rector</h4>
+            <p>
+              Se interpreta desde la prohibición de tratos crueles, inhumanos o degradantes
+              y del <strong>principio de humanidad</strong>, en consonancia con el bloque de
+              constitucionalidad y los estándares interamericanos de protección de personas privadas de la libertad.
+            </p>
+
+            <h4>“Enfermedad muy grave”: categoría jurídico-axiológica</h4>
+            <p>
+              No es únicamente un diagnóstico clínico. Es un <strong>juicio de compatibilidad</strong>
+              entre una patología, las condiciones reales del establecimiento y la expectativa
+              de vida del sujeto. El mismo diagnóstico puede ser compatible con la reclusión
+              en un centro con tratamiento adecuado y no en otro que carezca de él.
+            </p>
+
+            <h4>Claves de interpretación</h4>
+            <ul>
+              <li><strong>Peritazgo:</strong> el concepto del legista es necesario, pero no sustituye la decisión judicial ni la valoración de la totalidad de la prueba médica.</li>
+              <li><strong>Capacidad económica:</strong> la regla de gastos no puede convertir la protección de la vida en un beneficio reservado a quienes pueden pagarla.</li>
+              <li><strong>Excepción del “mismo motivo”:</strong> se lee como prevención de instrumentalización, no como castigo a la recidiva de la enfermedad.</li>
+              <li><strong>Exámenes periódicos:</strong> deben ser razonables y respetuosos; no una vigilia permanente que vacíe de contenido la medida.</li>
+            </ul>
+
+            <div class="note">
+              <b>Debate abierto</b>
+              La inclusión de patologías mentales graves dentro de la fórmula “enfermedad muy grave” se sustenta en una lectura funcional y constitucional del artículo: lo decisivo es la incompatibilidad con la reclusión, no la etiqueta nosológica.
+            </div>
+          </section>
+        </div>
+
+        <details class="norm">
+          <summary>Ver texto normativo · Artículo 68 <span class="tag">TRANSCRIPCIÓN</span><span class="plus" aria-hidden="true">+</span></summary>
+          <div class="norm-body">
+            <p><strong>ARTÍCULO 68.</strong> Reclusión domiciliaria u hospitalaria por enfermedad muy grave. El juez podrá autorizar la ejecución de la pena privativa de la libertad en la residencia del penado o centro hospitalario determinado por el INPEC, en caso que se encuentre aquejado por una enfermedad muy grave incompatible con la vida en reclusión formal, salvo que en el momento de la comisión de la conducta tuviese ya otra pena suspendida por el mismo motivo. Cuando el condenado sea quien escoja el centro hospitalario, los gastos correrán por su cuenta.</p>
+            <p>Para la concesión de este beneficio debe mediar concepto de médico legista especializado.</p>
+            <p>Se aplicará lo dispuesto en el inciso 3 del Artículo 38.</p>
+            <p>El Juez ordenará exámenes periódicos al sentenciado a fin de determinar si la situación que dio lugar a la concesión de la medida persiste.</p>
+            <p>En el evento de que la prueba médica arroje evidencia de que la patología que padece el sentenciado ha evolucionado al punto que su tratamiento sea compatible con la reclusión formal, revocará la medida.</p>
+            <p>Si cumplido el tiempo impuesto como pena privativa de la libertad, la condición de salud del sentenciado continúa presentando las características que justificaron su suspensión, se declarará extinguida la sanción.</p>
+          </div>
+        </details>
+
+        <div class="connections">
+          <span class="label">Conectado con</span>
+          <a class="link-chip" href="#art-68a">68A · Alcance de las exclusiones</a>
+          <a class="link-chip" href="#tensiones">Tensiones · Dignidad y lista legal</a>
+          <button class="copy-btn" data-copy>Copiar cita</button>
+        </div>
+      </article>
+
+      <!-- ==================== 05 · ART. 68A ==================== -->
+      <article class="lexeme reveal" id="art-68a" data-cita="Colombia, Código Penal, art. 68A: exclusión de beneficios y subrogados (Ley 1142 de 2007, art. 32; Ley 1474 de 2011, art. 13; Ley 1709 de 2014, art. 32; Ley 1944 de 2018, art. 6; parágrafo 3.º adicionado por Ley 2292 de 2023, art. 19).">
+        <header class="lexeme-head">
+          <div class="lexeme-num" aria-hidden="true">05</div>
+          <div>
+            <h2>Exclusión de beneficios y subrogados</h2>
+            <p class="lexeme-origin">Artículo 68A · Ley 1142/2007 · Ley 1474/2011 · Ley 1709/2014 · Ley 1944/2018 · Parágrafo 3.º: Ley 2292/2023</p>
+            <div class="lexeme-tags">
+              <span class="chip">LISTA DE DELITOS</span>
+              <span class="chip">DOLO + 5 AÑOS</span>
+              <span class="chip">COLABORACIÓN EFECTIVA</span>
+              <span class="chip">MUJERES CABEZA DE FAMILIA</span>
+            </div>
+          </div>
+        </header>
+
+        <div class="dimensions">
+          <section class="dim dim-dogmatica">
+            <div class="dim-head">
+              <span class="dim-icon" aria-hidden="true">§</span>
+              <h3>Dogmática<small>La norma y su sistema</small></h3>
+            </div>
+
+            <h4>Una norma de bloqueo, no un subrogado</h4>
+            <p>
+              El 68A no concede nada: <strong>cierra puertas</strong>. Opera como límite transversal
+              sobre la suspensión de ejecución, la prisión domiciliaria sustitutiva y “ningún
+              otro beneficio judicial o administrativo”.
+            </p>
+
+            <h4>Dos fundamentos de exclusión</h4>
+            <ol>
+              <li><strong>Temporal-subjetivo:</strong> condena por delito doloso dentro de los cinco (5) años anteriores.</li>
+              <li><strong>Material-delictivo:</strong> condena por cualquiera de los delitos del inciso segundo, <em>independientemente de antecedentes</em>.</li>
+            </ol>
+
+            <h4>El bloque del inciso segundo (síntesis temática)</h4>
+            <p>
+              Administración Pública; DIH; libertad, integridad y formación sexual; estafa y
+              abuso de confianza sobre bienes del Estado; captación masiva y habitual de dineros;
+              información privilegiada; concierto agravado; lavado de activos; soborno transnacional;
+              violencia intrafamiliar; hurto calificado; abigeato; extorsión; homicidio agravado
+              (104.6); lesiones con agentes químicos o ácidos; violación ilícita de comunicaciones;
+              trata de personas; apología al genocidio; lesiones con pérdida anatómica o funcional;
+              desplazamiento forzado; tráfico de migrantes; testaferrato; enriquecimiento ilícito
+              de particulares; apoderamiento de hidrocarburos; receptación; instigación a delinquir;
+              sustancias u objetos peligrosos; armas químicas, biológicas y nucleares; estupefacientes;
+              espionaje; rebelión; usurpación de inmuebles; falsificación de moneda; exportación o
+              importación ficticia; evasión fiscal; negativa de reintegro; contrabando agravado y de
+              hidrocarburos; minas antipersonales.
+            </p>
+
+            <h4>Las cuatro válvulas de escape</h4>
+            <dl class="kv">
+              <dt>Colaboración</dt><dd>Beneficios por colaboración regulados por la ley, siempre que sea efectiva.</dd>
+              <dt>Art. 314</dt><dd>No se aplica a la sustitución de detención preventiva ni de ejecución en los numerales 2.º, 3.º, 4.º y 5.º del art. 314 de la Ley 906 de 2004.</dd>
+              <dt>Parágrafo 1.º</dt><dd>No se aplica a la libertad condicional del art. 64 ni al art. 38G.</dd>
+              <dt>Parágrafo 2.º</dt><dd>El primer inciso no bloquea la suspensión cuando los antecedentes personales, sociales y familiares indican que no existe la posibilidad de ejecución de la pena.</dd>
+              <dt>Parágrafo 3.º</dt><dd>No se aplica a las <strong>mujeres cabeza de familia</strong> que cumplan los requisitos establecidos en la ley (Ley 2292 de 2023).</dd>
+            </dl>
+          </section>
+
+          <section class="dim dim-ontologia">
+            <div class="dim-head">
+              <span class="dim-icon" aria-hidden="true">◎</span>
+              <h3>Ontología<small>El ser y su transformación</small></h3>
+            </div>
+
+            <h4>La producción del “sujeto excluido”</h4>
+            <p>
+              Una lista legal no solamente clasifica conductas: <strong>produce una categoría
+              de personas</strong>. El condenado incluido en el 68A pasa a existir, para el sistema
+              de ejecución, como alguien a quien no se le presume capacidad de reinserción
+              fuera de la cárcel.
+            </p>
+
+            <h4>La peligrosidad como sustituto del acto</h4>
+            <p>
+              El derecho penal clásico castiga <em>lo que se hizo</em>. La lógica del 68A
+              introduce una sombra: se trata al sujeto según <em>lo que se presume que es</em>.
+              Ontológicamente, la lista desplaza el centro desde el hecho hacia una
+              <strong>esencia atribuida</strong>.
+            </p>
+
+            <h4>La excepción como rehumanización</h4>
+            <p>
+              El parágrafo 3.º es filosóficamente decisivo. Al exceptuar a las mujeres cabeza
+              de familia, el legislador reconoce que el sujeto <strong>no es una unidad aislada</strong>:
+              existe en relación. La madre no es solamente una condenada; es una condición
+              de existencia para otras personas. La norma vuelve a mirar vínculos, no solo delitos.
+            </p>
+
+            <div class="pull">
+              La lista dice quiénes no merecen confianza. El parágrafo recuerda que nadie es solamente su delito.
+            </div>
+
+            <p>
+              La colaboración <em>efectiva</em> introduce otra idea ontológica: el sujeto puede
+              <strong>reconfigurar su posición en el mundo jurídico mediante un acto real</strong>,
+              no mediante una declaración formal.
+            </p>
+          </section>
+
+          <section class="dim dim-hermeneutica">
+            <div class="dim-head">
+              <span class="dim-icon" aria-hidden="true">⌕</span>
+              <h3>Hermenéutica<small>El sentido y su aplicación</small></h3>
+            </div>
+
+            <h4>Regla de oro: interpretación restrictiva</h4>
+            <p>
+              Al tratarse de una norma que <strong>restringe derechos y amplifica el ius puniendi</strong>,
+              rige la interpretación estricta de sus supuestos. No se admite analogía
+              <em>in malam partem</em> para incorporar delitos no listados ni figuras no previstas.
+            </p>
+
+            <h4>Armonización con el bloque constitucional</h4>
+            <ul>
+              <li><strong>Legalidad y taxatividad:</strong> el listado debe aplicarse tal como fue tipificado, con atención a las modificaciones legislativas y a la conducta concretamente condenada.</li>
+              <li><strong>Culpabilidad frente a peligrosidad:</strong> la exclusión no puede fundarse en una valoración abstracta de “personalidad”, sino en los presupuestos legales objetivos.</li>
+              <li><strong>Igualdad y proporcionalidad:</strong> tratamientos idénticos para delitos muy distintos requieren justificación; la pena no puede convertirse en una herramienta de excepción permanente.</li>
+              <li><strong>“Colaboración efectiva”:</strong> se interpreta materialmente. No basta la voluntad de colaborar; se requiere colaboración real y verificable.</li>
+            </ul>
+
+            <h4>El parágrafo 3.º como enfoque diferencial</h4>
+            <p>
+              Se lee junto con el <strong>interés superior del niño</strong>, la protección de la
+              primera infancia y la perspectiva de género. No es un privilegio: es una
+              corrección de desigualdad estructural dirigida a evitar que la pena recaiga
+              de hecho sobre hijas e hijos que no fueron condenados.
+            </p>
+
+            <div class="note">
+              <b>Lectura sistémica</b>
+              El 68A no puede leerse aisladamente: sus parágrafos forman parte de la norma y operan como límites internos de la propia exclusión. Ignorarlos es mutilar el precepto.
+            </div>
+          </section>
+        </div>
+
+        <details class="norm">
+          <summary>Ver texto normativo · Artículo 68A y sus parágrafos <span class="tag">TRANSCRIPCIÓN COMPLETA</span><span class="plus" aria-hidden="true">+</span></summary>
+          <div class="norm-body">
+            <p><strong>ARTÍCULO 68A.</strong> Adicionado por el art. 32, Ley 1142 de 2007, Modificado por el art. 13, Ley 1474 de 2011, Modificado por el art. 32, Ley 1709 de 2014. Exclusión de beneficios y subrogados. No se concederán la suspensión condicional de la ejecución de la pena; la prisión domiciliaria como sustitutiva de la prisión; ni habrá lugar a ningún otro beneficio, judicial o administrativo, salvo los beneficios por colaboración regulados por la ley, siempre que esta sea efectiva, cuando la persona haya sido condenada por delito doloso dentro de los cinco (5) años anteriores.</p>
+
+            <p>Modificado por el art. 6 de la Ley 1944 de 2018. Tampoco quienes hayan sido condenados por delitos dolosos contra la Administración Pública; delitos contra las personas y bienes protegidos por el Derecho Internacional Humanitario; delitos contra la libertad, integridad y formación sexual; estafa y abuso de confianza que recaiga sobre los bienes del Estado; captación masiva y habitual de dineros; utilización indebida de información privilegiada; concierto para delinquir agravado; lavado de activos; soborno transnacional; violencia intrafamiliar; hurto calificado; abigeato enunciado en el inciso tercero del Artículo 243; extorsión; homicidio agravado contemplado en el numeral 6 del Artículo 104; lesiones causadas con agentes químicos, ácidos y/o sustancias similares; violación ilícita de comunicaciones; violación ilícita de comunicaciones o correspondencia de carácter oficial; trata de personas; apología al genocidio; lesiones personales por pérdida anatómica o funcional de un órgano o miembro; desplazamiento forzado; tráfico de migrantes; testaferrato; enriquecimiento ilícito de particulares; apoderamiento de hidrocarburos, sus derivados, biocombustibles o mezclas que los contengan; receptación; instigación a delinquir; empleo o lanzamiento de sustancias u objeto peligrosos; fabricación, importación, tráfico, posesión o uso de armas químicas, biológicas y nucleares; delitos relacionados con el tráfico de estupefacientes y otras infracciones; espionaje; rebelión; y desplazamiento forzado; usurpación de inmuebles, falsificación de moneda nacional o extranjera; exportación o importación ficticia; evasión fiscal; negativa de reintegro; contrabando agravado; contrabando de hidrocarburos y sus derivados; ayuda e instigación al empleo, producción y transferencia de minas antipersonales.</p>
+
+            <p>Lo dispuesto en el presente artículo no se aplicará respecto de la sustitución de la detención preventiva y de la sustitución de la ejecución de la pena en los eventos contemplados en los numerales 2, 3, 4 y 5 del Artículo 314 de la Ley 906 de 2004.</p>
+
+            <p><strong>PARÁGRAFO 1.</strong> Lo dispuesto en el presente artículo no se aplicará a la libertad condicional contemplada en el Artículo 64 de este Código, ni tampoco para lo dispuesto en el Artículo 38G del presente Código.</p>
+
+            <p><strong>PARÁGRAFO 2.</strong> Lo dispuesto en el primer inciso del presente artículo no se aplicará respecto de la suspensión de la ejecución de la pena, cuando los antecedentes personales, sociales y familiares sean indicativos de que no existe la posibilidad de la ejecución de la pena.</p>
+
+            <p><strong>PARÁGRAFO 3.</strong> Lo dispuesto en este artículo no se aplicará para las mujeres cabeza de familia que cumplan los requisitos establecidos en la presente ley.</p>
+            <p class="sentencia">Parágrafo 3 adicionado por el Art. 19 de la Ley 2292 de 2023.</p>
+          </div>
+        </details>
+
+        <div class="connections">
+          <span class="label">Conectado con</span>
+          <a class="link-chip" href="#art-63">63 · Requisitos subjetivos</a>
+          <a class="link-chip" href="#art-64">64 · Parágrafo 1.º</a>
+          <a class="link-chip" href="#tensiones">Tensiones · Lista y proporcionalidad</a>
+          <button class="copy-btn" data-copy>Copiar cita</button>
+        </div>
+      </article>
+
+      <!-- ==================== 06 · ARTS. 68B–68C ==================== -->
+      <article class="lexeme reveal" id="art-68b" data-cita="Colombia, Código Penal, arts. 68B y 68C: revisión de la pena por evaluación de resocialización de la prisión perpetua y plan individual de resocialización (Ley 2098 de 2021, arts. 6 y 7; exequibles según Sentencia C-383 de 2022).">
+        <header class="lexeme-head">
+          <div class="lexeme-num" aria-hidden="true">06</div>
+          <div>
+            <h2>Revisión de la prisión perpetua y plan individual de resocialización</h2>
+            <p class="lexeme-origin">Artículos 68B y 68C · Adicionados por los arts. 6 y 7 de la Ley 2098 de 2021 · EXEQUIBLES: Sentencia C-383 de 2022</p>
+            <div class="lexeme-tags">
+              <span class="chip">25 AÑOS EFECTIVOS</span>
+              <span class="chip">50 / 60 AÑOS</span>
+              <span class="chip">PIR</span>
+              <span class="chip">JUSTICIA TERAPÉUTICA</span>
+            </div>
+          </div>
+        </header>
+
+        <div class="dimensions">
+          <section class="dim dim-dogmatica">
+            <div class="dim-head">
+              <span class="dim-icon" aria-hidden="true">§</span>
+              <h3>Dogmática<small>La norma y su sistema</small></h3>
+            </div>
+
+            <h4>Art. 68B · El mecanismo de revisión</h4>
+            <p>
+              La prisión perpetua <strong>será revisada</strong> de oficio o a petición de parte
+              al cumplirse <strong>veinticinco (25) años de privación efectiva</strong>, para
+              evaluar el proceso de resocialización. No es una facultad discrecional de iniciar
+              la evaluación: es un deberanclaje temporal.
+            </p>
+
+            <h4>Iter procedimental</h4>
+            <ol>
+              <li>El <strong>Juez de Ejecución de Penas y Medidas de Seguridad</strong> verifica los 25 años y ordena allegar los documentos.</li>
+              <li>Se requieren: <strong>(a)</strong> antecedentes disciplinarios intramurales; <strong>(b)</strong> certificado del mecanismo de reparación integral de víctimas; <strong>(c)</strong> certificado de trabajo, enseñanza o estudio; <strong>(d)</strong> concepto del equipo psicosocial a través de la Dirección General del INPEC, con los contenidos del art. 483C de la Ley 906 de 2004.</li>
+              <li>Si el concepto INPEC es <strong>positivo</strong>, el juez de ejecución remite al <strong>juez de instancia</strong>.</li>
+              <li>Este decide mediante el incidente del <strong>art. 483A de la Ley 906 de 2004</strong>.</li>
+            </ol>
+
+            <h4>Resultado de la revisión</h4>
+            <dl class="kv">
+              <dt>Conversión</dt><dd>La pena se modifica por una temporal no inferior al máximo ordinario: cincuenta (50) años, o sesenta (60) en concurso.</dd>
+              <dt>Descuento</dt><dd>Los 25 años de privación efectiva se descuentan al fijar la pena temporal.</dd>
+              <dt>Control</dt><dd>Contra el auto que niega o modifica la prisión perpetua procede control automático en los términos del art. 199A de la Ley 906 de 2004.</dd>
+            </dl>
+
+            <h4>Art. 68C · El plan individual</h4>
+            <p>
+              Con base en la pericia del art. 483A, el juez de ejecución ordena
+              <strong>continuidad, modificación o adición</strong> del Plan Individual de
+              Resocialización elaborado por el equipo psicosocial del INPEC. Su seguimiento
+              se verifica mediante <strong>evaluaciones periódicas bianuales</strong>, orientadas
+              a conocer el grado de <strong>habilitación social y convivencia</strong>.
+            </p>
+            <p><strong>Parágrafo transitorio:</strong> el Ministerio de Justicia y del Derecho tenía un plazo máximo de un (1) año para expedir lineamientos, sin que ello fuera requisito de aplicación, acogiendo los principios de <em>justicia terapéutica</em> y <em>enfoque de justicia restaurativa</em>.</p>
+          </section>
+
+          <section class="dim dim-ontologia">
+            <div class="dim-head">
+              <span class="dim-icon" aria-hidden="true">◎</span>
+              <h3>Ontología<small>El ser y su transformación</small></h3>
+            </div>
+
+            <h4>Contra la perpetuidad del ser</h4>
+            <p>
+              Una pena sin revisión posible afirma, en el plano ontológico, que
+              <strong>el sujeto es definitivamente su crimen</strong>. La revisabilidad rompe esa
+              identificación: reconoce que veinticinco años pueden transformar a una persona
+              y que el derecho no tiene autoridad para congelar esa transformación.
+            </p>
+
+            <h4>El tiempo como horizonte de esperanza</h4>
+            <p>
+              Los 25 años no son simplemente una cifra de castigo: son un
+              <strong>horizonte de inteligibilidad para quien cumple</strong>. Saber que habrá
+              una evaluación convierte el tiempo carcelario de tiempo sufrido en
+              <em>tiempo habitado</em>, susceptible de proyecto.
+            </p>
+
+            <h4>El PIR como proyecto de ser</h4>
+            <p>
+              El Plan Individual de Resocialización es la traducción técnica de una idea
+              antropológica: <strong>cada persona necesita un camino distinto para volver</strong>.
+              No existe “el resocializable” abstracto; existen sujetos concretos con historias,
+             损伤, adicciones, saberes y capacidades singulares.
+            </p>
+
+            <h4>La resocialización como deber compartido</h4>
+            <p>
+              Si el Estado exige cambio, debe ofrecer las condiciones del cambio. El PIR
+              implica que la resocialización <strong>no es una obligación de resultado que
+              el preso deba cumplir solo</strong>, sino una tarea relacional en la que el
+              Estado debe proveer educación, trabajo, salud y acompañamiento.
+            </p>
+
+            <div class="pull">
+              Revisar una pena es reconocer que el tiempo humano no se agota en el delito.
+            </div>
+          </section>
+
+          <section class="dim dim-hermeneutica">
+            <div class="dim-head">
+              <span class="dim-icon" aria-hidden="true">⌕</span>
+              <h3>Hermenéutica<small>El sentido y su aplicación</small></h3>
+            </div>
+
+            <h4>El estándar de la revisabilidad</h4>
+            <p>
+              La lectura constitucional e interamericana —en particular el art. 5.6 de la
+              Convención Americana sobre Derechos Humanos, relativo a la posibilidad de
+              rehabilitación y readaptación social— exige que toda pena privativa de la
+              libertad tenga una <strong>posibilidad real y no ilusoria de libertad</strong>.
+            </p>
+
+            <h4>Claves de interpretación</h4>
+            <ul>
+              <li><strong>“Será revisada”:</strong> mandato, no facultad. El vencimiento de los 25 años activa un deber de trámite.</li>
+              <li><strong>“Privación efectiva”:</strong> se computa la privación real, no cualquier anotación formal ni periodos no efectivamente sufridos.</li>
+              <li><strong>Revisión ≠ libertad automática:</strong> el dispositivo prevé un juicio de resocialización; no un egreso mecánico.</li>
+              <li><strong>Concepto INPEC:</strong> siendo condición del envío al juez de instancia, su emisión exige criterios técnicos verificables y no puede depender de arbitrariedad administrativa.</li>
+              <li><strong>Conversión a 50/60 años:</strong> se interpreta como el diseño legal de conversión, sin descontar la exigencia de que la revisión sea sustantiva y no una mera reformulación nominal de la perpetuidad.</li>
+              <li><strong>Control automático:</strong> garantiza que la decisión —favorable o desfavorable— sea revisada por una instancia superior.</li>
+            </ul>
+
+            <h4>Justicia terapéutica y restaurativa</h4>
+            <p>
+              El parágrafo transitorio no es un adorno: establece la <strong>cláusula axiológica</strong>
+              del sistema. El PIR no se orienta a adaptar pasivamente al interno a la cárcel,
+              sino a tratar las condiciones que produjeron el daño y a restablecer los lazos
+              con las víctimas y la comunidad.
+            </p>
+
+            <div class="note">
+              <b>Sentencia C-383 de 2022</b>
+              La Corte Constitucional declaró exequibles estos preceptos dentro del diseño de la prisión perpetua revisable. Su aplicación debe leerse con esa sentencia, no como texto aislado.
+            </div>
+          </section>
+        </div>
+
+        <details class="norm">
+          <summary>Ver texto normativo · Artículos 68B y 68C <span class="tag">TRANSCRIPCIÓN COMPLETA</span><span class="plus" aria-hidden="true">+</span></summary>
+          <div class="norm-body">
+            <h5>Artículo 68B. Revisión de la pena por evaluación de resocialización de la prisión perpetua</h5>
+            <p>Adicionado por el Art. 6 de la Ley 2098 de 2021. La pena de prisión perpetua será revisada, de oficio o a petición de parte, cuando la persona sentenciada haya cumplido veinticinco (25) años de privación efectiva de la libertad, para evaluar el proceso de resocialización del condenado.</p>
+            <p>De la evaluación de resocialización del condenado conoce el Juez de Ejecución de Penas y Medidas de Seguridad, quien al verificar el cumplimiento de veinticinco (25) años de privación efectiva de la libertad del condenado ordenará de oficio o a petición de parte que se allegue:</p>
+            <ol type="a">
+              <li>Certificado de los antecedentes disciplinarios del condenado dentro del establecimiento penitenciario y/o carcelario.</li>
+              <li>Certificado del mecanismo de reparación integral de las víctimas.</li>
+              <li>Certificado de trabajo, enseñanza o estudio, según corresponda.</li>
+              <li>Concepto del equipo psicosocial presentado a través de la Dirección General del INPEC, con los contenidos reglamentarios exigidos en el Artículo 483C de la Ley 906 de 2004.</li>
+            </ol>
+            <p>Cuando el concepto del INPEC sea positivo sobre los avances de resocialización del condenado, el juez de ejecución de penas y medidas de seguridad remitirá los documentos, junto con la solicitud de revisión de la pena al juez de instancia que haya proferido la sentencia condenatoria para que a través de un incidente de que trata el Artículo 483A de la Ley 906 de 2004, determine si hay lugar a la revisión de la pena de prisión perpetua.</p>
+            <p>Cuando haya lugar a la revisión de la pena de prisión perpetua el juez de instancia competente ordenará su modificación por una pena temporal, que no podrá ser inferior al máximo de prisión establecido para los tipos penales de cincuenta (50) años y en caso de concurso de sesenta (60) años.</p>
+            <p>Los veinticinco años de privación efectiva de la libertad serán descontados por el juez de instancia competente, al momento de fijar la pena temporal.</p>
+            <p>Contra el auto que niega o modifica la prisión perpetua procede el control automático en los mismos términos del Artículo 199A de la Ley 906 de 2004.</p>
+            <p class="sentencia">NOTA: Artículo declarado EXEQUIBLE por la Corte Constitucional mediante Sentencia C-383 de 2022.</p>
+
+            <h5>Artículo 68C. Plan Individual de Resocialización</h5>
+            <p>Adicionado por el Art. 7 de la Ley 2098 de 2021. Con base en la prueba pericial practicada, de que trata el Artículo 483A de la Ley 906 de 2004, el juez de ejecución de penas y medidas de seguridad ordenará la continuidad, modificación o adición al Plan individual de resocialización del condenado elaborado por el equipo psicosocial allegado a través de la Dirección General del INPEC, cuyo seguimiento y cumplimiento se verificará mediante evaluaciones periódicas bianuales ante el equipo psicosocial, el cual debe permitir conocer el grado de habilitación social y de convivencia del condenado.</p>
+            <p class="sentencia">NOTA: Artículo declarado EXEQUIBLE por la Corte Constitucional mediante Sentencia C-383 de 2022.</p>
+
+            <h5>Parágrafo transitorio</h5>
+            <p>El Ministerio de Justicia y del Derecho, sin que sea requisito para la aplicación de lo reglamentado en la presente ley, en un plazo no mayor a un (1) año expedirán los lineamientos para la formulación del plan de resocialización, el cual deberá, en cualquier caso, acogerse a los principios de la justicia terapéutica y el enfoque de justicia restaurativa.</p>
+          </div>
+        </details>
+
+        <div class="connections">
+          <span class="label">Conectado con</span>
+          <a class="link-chip" href="#art-64">64 · Exclusión de la perpetua</a>
+          <a class="link-chip" href="#sintesis">Síntesis · La esperanza normativa</a>
+          <button class="copy-btn" data-copy>Copiar cita</button>
+        </div>
+      </article>
+
+    </div><!-- /#lista -->
+  </div>
+</section>
+
+<!-- ============================ SÍNTESIS ============================ -->
+<section id="sintesis">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow"><span class="dot"></span> 04 / Síntesis estructural</p>
+      <h2>Un único eje, tres dimensiones</h2>
+      <p>
+        Todos los mecanismos del capítulo convergen en una misma pregunta: hasta dónde
+        llega el poder del Estado sobre una persona y cuándo debe ceder ante la posibilidad
+        de una vida distinta.
+      </p>
+    </div>
+
+    <div class="reveal">
+      <div class="core-band">
+        <span>Eje axiológico del capítulo</span>
+        <h3>Dignidad humana</h3>
+      </div>
+
+      <div class="stems">
+        <div class="axis-card dog">
+          <h4>Dogmática</h4>
+          <p class="q">¿Qué autoriza y qué limita al Estado?</p>
+          <ul>
+            <li><b>63</b> Presupuestos objetivos y subjetivos de la suspensión.</li>
+            <li><b>64</b> Cumplimiento, arraigo y reparación.</li>
+            <li><b>65–67</b> Obligaciones, revocación y extinción.</li>
+            <li><b>68</b> Incompatibilidad médica con la reclusión.</li>
+            <li><b>68A</b> Límites legales y excepciones diferenciales.</li>
+            <li><b>68B–C</b> Revisión, PIR y control automático.</li>
+          </ul>
+          <button class="axis-apply" data-apply="dogmatica">Leer todos los artículos en clave dogmática →</button>
+        </div>
+
+        <div class="axis-card ont">
+          <h4>Ontología</h4>
+          <p class="q">¿Qué modo de existencia produce la norma?</p>
+          <ul>
+            <li><b>63</b> Libertad en suspenso: el sujeto dual.</li>
+            <li><b>64</b> Ser-en-reinserción y densidad de vínculos.</li>
+            <li><b>65–67</b> Vínculo, ruptura y clausura.</li>
+            <li><b>68</b> Finitud corporal como límite del poder.</li>
+            <li><b>68A</b> Producción del “sujeto excluido”.</li>
+            <li><b>68B–C</b> Ser mutante y tiempo habitado.</li>
+          </ul>
+          <button class="axis-apply" data-apply="ontologia">Leer todos los artículos en clave ontológica →</button>
+        </div>
+
+        <div class="axis-card her">
+          <h4>Hermenéutica</h4>
+          <p class="q">¿Cómo se interpreta cuando el texto tensiona?</p>
+          <ul>
+            <li><b>63</b> Intervención mínima y automatismo reglado.</li>
+            <li><b>64</b> Arraigo funcional y reparación restaurativa.</li>
+            <li><b>65–67</b> Proporcionalidad y <em>pro libertate</em>.</li>
+            <li><b>68</b> Principio de humanidad y bloque constitucional.</li>
+            <li><b>68A</b> Interpretación restrictiva y enfoque diferencial.</li>
+            <li><b>68B–C</b> Revisabilidad real y justicia terapéutica.</li>
+          </ul>
+          <button class="axis-apply" data-apply="hermeneutica">Leer todos los artículos en clave hermenéutica →</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-head reveal" style="margin-top:80px;margin-bottom:10px">
+      <h2 style="font-size:1.9rem">El ciclo de vida de un subrogado</h2>
+      <p>Del reconocimiento del beneficio a la clausura definitiva del vínculo punitivo.</p>
+    </div>
+
+    <div class="cycle reveal">
+      <div class="step">
+        <span class="node">1</span>
+        <h4>Solicitud</h4>
+        <p>De oficio o a petición del interesado. Verificación de presupuestos objetivos y subjetivos.</p>
+      </div>
+      <div class="step">
+        <span class="node">2</span>
+        <h4>Concesión</h4>
+        <p>Decisión motivada. Fijación del período de prueba, obligaciones y caución.</p>
+      </div>
+      <div class="step">
+        <span class="node">3</span>
+        <h4>Prueba</h4>
+        <p>Vigilancia judicial, comparecencias, reparación y acreditación de buena conducta.</p>
+      </div>
+      <div class="step">
+        <span class="node">4</span>
+        <h4>Disyunción</h4>
+        <p>Incumplimiento → revocación y ejecución de la pena. Cumplimiento → consolidación.</p>
+      </div>
+      <div class="step">
+        <span class="node">5</span>
+        <h4>Clausura</h4>
+        <p>Resolución judicial de extinción. Liberación definitiva y restitución plena del estatuto ciudadano.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ TENSIONES ============================ -->
+<section id="tensiones">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow"><span class="dot"></span> 05 / Dialéctica aplicada</p>
+      <h2>Cinco tensiones que la letra no resuelve sola</h2>
+      <p>
+        La hermenéutica comienza donde termina la literalidad. Estos son los puntos
+        de fricción donde el operador jurídico debe argumentar, no simplemente repetir el artículo.
+      </p>
+    </div>
+
+    <details class="tension reveal">
+      <summary><span class="n">I</span> Automatismo versus individualización en el artículo 63 <span class="plus">+</span></summary>
+      <div class="tension-body">
+        <div><h5>Tesis</h5><p>El numeral 2.º ordena conceder la medida cuando concurren los requisitos objetivos y no hay antecedentes. La ley elimina la discrecionalidad para garantizar igualdad y evitar favoritismos.</p></div>
+        <div><h5>Contra-tesis</h5><p>Una aplicación puramente mecánica pierde la oportunidad de individualizar la pena y puede conceder subrogados sin ninguna valoración del caso concreto.</p></div>
+        <div><h5>Síntesis</h5><p>El automatismo es <em>reglado</em>, no ciego: exige verificar previamente el tope punitivo, la naturaleza de los antecedentes y la exclusión del 68A. Una vez verificados, el juez no puede añadir requisitos no previstos.</p></div>
+      </div>
+    </details>
+
+    <details class="tension reveal">
+      <summary><span class="n">II</span> Arraigo y reparación: ¿garantía o privilegio socioeconomico? <span class="plus">+</span></summary>
+      <div class="tension-body">
+        <div><h5>Tesis</h5><p>El arraigo y la reparación protegen a la víctima y aseguran que la libertad exterior será efectiva y no una simple circulación sin anclajes.</p></div>
+        <div><h5>Contra-tesis</h5><p>Si se entienden como propiedad, empleo formal o capacidad de pago, el beneficio queda reservado a quienes ya estaban integrados antes del delito.</p></div>
+        <div><h5>Síntesis</h5><p>Se interpreta el arraigo como red de vínculos verificable y la reparación como obligación con alternativas de garantía y cláusula expresa de insolvencia. La pobreza no puede ser un presupuesto de permanencia en prisión.</p></div>
+      </div>
+    </details>
+
+    <details class="tension reveal">
+      <summary><span class="n">III</span> La lista del 68A frente a proporcionalidad e igualdad <span class="plus">+</span></summary>
+      <div class="tension-body">
+        <div><h5>Tesis</h5><p>El legislador puede definir políticas criminales y excluir de beneficios a conductas de especial gravedad o impacto social.</p></div>
+        <div><h5>Contra-tesis</h5><p>Una lista heterogénea trata de igual forma delitos muy distintos y desplaza el juicio sobre el hecho hacia una presunción de peligrosidad del sujeto.</p></div>
+        <div><h5>Síntesis</h5><p>Aplicación taxativa y restrictiva, control de proporcionalidad y lectura conjunta de los parágrafos. El parágrafo 3.º muestra que el propio legislador admitió la corrección diferencial frente al rigor abstracto.</p></div>
+      </div>
+    </details>
+
+    <details class="tension reveal">
+      <summary><span class="n">IV</span> Revocación automática versus proporcionalidad <span class="plus">+</span></summary>
+      <div class="tension-body">
+        <div><h5>Tesis</h5><p>El art. 66 es claro: violar <em>cualquiera</em> de las obligaciones habilita la ejecución inmediata de la pena y la efectividad de la caución.</p></div>
+        <div><h5>Contra-tesis</h5><p>Una lectura literal absoluta permitiría recluir a una persona por una formalidad mínima, destruyendo todo el trabajo de reinserción acumulado.</p></div>
+        <div><h5>Síntesis</h5><p>Sin desconocer la letra, la decisión debe motivarse y ponderar gravedad, culpabilidad del incumplimiento y posibilidad de corrección. La revocación es una última razón, no un reflejo automático.</p></div>
+      </div>
+    </details>
+
+    <details class="tension reveal">
+      <summary><span class="n">V</span> Prisión perpetua revisable: ¿esperanza real o perpetuidad disfrazada? <span class="plus">+</span></summary>
+      <div class="tension-body">
+        <div><h5>Tesis</h5><p>El diseño del 68B introduce revisión obligatoria a los 25 años, descuento del tiempo cumplido y control automático: structuralmente ya no es una pena sin salida.</p></div>
+        <div><h5>Contra-tesis</h5><p>La conversión a 50 o 60 años y la dependencia de un concepto INPEC positivo pueden vaciar de efectividad la revisión si el trámite se vuelve meramente nominal.</p></div>
+        <div><h5>Síntesis</h5><p>La revisión debe ser sustantiva: pericia individualizada, PIR con recursos reales, evaluación bianual y motivación verificable. La revisabilidad es un estándar de derechos, no una figura decorativa del texto.</p></div>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- ============================ FUENTES ============================ -->
+<section id="fuentes">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow"><span class="dot"></span> 06 / Fuentes y referencias</p>
+      <h2>Base normativa y marco de control</h2>
+      <p>
+        El análisis se apoya en el texto facilitado del Capítulo Tercero y en las normas
+        de modificación y control constitucional citadas en el propio articulado.
+      </p>
+    </div>
+
+    <div class="sources reveal">
+      <div>
+        <h3 style="font-size:1.3rem;margin-bottom:18px">Texto principal y modificaciones</h3>
+        <ul class="source-list">
+          <li><span class="ref">Ley 599</span><span class="desc"><b>de 2000</b> · Código Penal colombiano. Capítulo Tercero, artículos 63 a 68C.</span></li>
+          <li><span class="ref">Ley 890</span><span class="desc"><b>de 2004</b> · art. 4: adición del artículo 63.</span></li>
+          <li><span class="ref">Ley 1142</span><span class="desc"><b>de 2007</b> · art. 32: adición del artículo 68A.</span></li>
+          <li><span class="ref">Ley 1474</span><span class="desc"><b>de 2011</b> · art. 13: modificación del artículo 68A.</span></li>
+          <li><span class="ref">Ley 1709</span><span class="desc"><b>de 2014</b> · arts. 29 y 32: modificación de los artículos 63 y 68A.</span></li>
+          <li><span class="ref">Ley 1944</span><span class="desc"><b>de 2018</b> · art. 6: modificación del inciso segundo del artículo 68A.</span></li>
+          <li><span class="ref">Ley 2098</span><span class="desc"><b>de 2021</b> · arts. 5, 6 y 7: libertad condicional, revisión de la perpetua y plan individual de resocialización.</span></li>
+          <li><span class="ref">Ley 2292</span><span class="desc"><b>de 2023</b> · art. 19: parágrafo 3.º del artículo 68A, mujeres cabeza de familia.</span></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 style="font-size:1.3rem;margin-bottom:18px">Control y normas conexas</h3>
+        <ul class="source-list">
+          <li><span class="ref">C-383</span><span class="desc"><b>de 2022</b> · Corte Constitucional: exequibilidad de los artículos 64, 68B y 68C en el diseño de la prisión perpetua revisable.</span></li>
+          <li><span class="ref">Constitución</span><span class="desc">Art. 122, inciso final: inhabilidad por delitos contra el patrimonio del Estado. Arts. 1, 2, 11, 12 y 47: dignidad, vida, salud y reinserción social.</span></li>
+          <li><span class="ref">Ley 906</span><span class="desc"><b>de 2004</b> · arts. 199A, 314 (num. 2–5), 483A y 483C: control automático, sustituciones, incidente de revisión y contenido del concepto psicosocial.</span></li>
+          <li><span class="ref">Código Penal</span><span class="desc">Art. 4: función resocializadora de la pena. Arts. 38 y 38G: prisión domiciliaria y normas conexas remitidas por el capítulo.</span></li>
+          <li><span class="ref">CADH</span><span class="desc">Art. 5.6: los penas privativas de la libertad tendrán como esencial finalidad la reforma y la readaptación social.</span></li>
+          <li><span class="ref">Enfoques</span><span class="desc">Justicia terapéutica · justicia restaurativa · enfoque diferencial de género · interés superior del niño.</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="disclaimer reveal">
+      <b>Advertencia de uso.</b> Esta web es un recurso de estudio y análisis conceptual.
+      Las transcripciones reproduce el texto suministrado, con correcciones menores de
+      puntuación y ortografía. Para cualquier decisión jurídica se requiere consultar el
+      <b>texto oficial consolidado</b>, la jurisprudencia aplicable y la normativa vigente
+      a la fecha del caso. Última revisión conceptual: <b>17 de octubre de 2026</b>.
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============================ PIE ============================ -->
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div>
+      <p class="mono" style="color:var(--gold);margin-bottom:8px">Tríptico Penal · Capítulo Tercero</p>
+      <p>Mecanismos sustitutivos de la pena privativa de la libertad.</p>
+    </div>
+    <p>Dogmática · Ontología · Hermenéutica<br>Tres miradas sobre una misma libertad.</p>
+    <p class="mono">Recurso académico · Colombia · 2026</p>
+  </div>
+</footer>
+
+<button class="to-top" id="toTop" aria-label="Volver al inicio">↑</button>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* ============================================================
+   UTILIDADES
+   ============================================================ */
+const $  = (s, c = document) => c.querySelector(s);
+const $$ = (s, c = document) => Array.from(c.querySelectorAll(s));
+const normalize = str => str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+
+/* ============================================================
+   1. TEMA
+   ============================================================ */
+const themeBtn = $('#themeToggle');
+const root = document.documentElement;
+
+function setTheme(theme){
+  root.setAttribute('data-theme', theme);
+  themeBtn.setAttribute('aria-label', theme === 'dark' ? 'Activar modo claro' : 'Activar modo oscuro');
+  themeBtn.innerHTML = theme === 'dark'
+    ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>'
+    : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>';
+  try { localStorage.setItem('trip-tico-theme', theme); } catch(e){}
+}
+
+let saved = null;
+try { saved = localStorage.getItem('trip-tico-theme'); } catch(e){}
+setTheme(saved || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
+
+themeBtn.addEventListener('click', () => {
+  setTheme(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+});
+
+/* ============================================================
+   2. PROGRESO DE LECTURA + BOTÓN SUPERIOR
+   ============================================================ */
+const progressBar = $('#progressBar');
+const toTop = $('#toTop');
+
+function onScroll(){
+  const h = document.documentElement;
+  const max = h.scrollHeight - h.clientHeight;
+  const pct = max > 0 ? (h.scrollTop / max) * 100 : 0;
+  progressBar.style.width = pct + '%';
+  toTop.classList.toggle('show', h.scrollTop > 700);
+}
+window.addEventListener('scroll', onScroll, { passive:true });
+window.addEventListener('resize', onScroll);
+onScroll();
+
+toTop.addEventListener('click', () => window.scrollTo({ top:0, behavior:'smooth' }));
+
+/* ============================================================
+   3. REVELADO + NAVEGACIÓN ACTIVA
+   ============================================================ */
+if ('IntersectionObserver' in window){
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting){
+        entry.target.classList.add('in');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: .08 });
+
+  $$('.reveal').forEach(el => revealObserver.observe(el));
+
+  const navLinks = $$('.site-nav a');
+  const sections = navLinks.map(a => $(a.getAttribute('href'))).filter(Boolean);
+
+  const navObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting){
+        navLinks.forEach(a => {
+          a.classList.toggle('active', a.getAttribute('href') === '#' + entry.target.id);
+        });
+      }
+    });
+  }, { rootMargin:'-20% 0px -65% 0px', threshold:0 });
+
+  sections.forEach(s => navObserver.observe(s));
+} else {
+  $$('.reveal').forEach(el => el.classList.add('in'));
+}
+
+/* ============================================================
+   4. LENTES DE LECTURA
+   ============================================================ */
+const lensButtons = $$('[data-lens-btn]');
+
+function setLens(lens){
+  document.body.setAttribute('data-lens', lens);
+  lensButtons.forEach(btn => {
+    btn.setAttribute('aria-pressed', String(btn.dataset.lensBtn === lens));
+  });
+}
+
+lensButtons.forEach(btn => {
+  btn.addEventListener('click', () => setLens(btn.dataset.lensBtn));
+});
+
+$$('[data-apply]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    setLens(btn.dataset.apply);
+    $('#articulos').scrollIntoView({ behavior:'smooth' });
+    showToast('Lente activado: ' + btn.dataset.apply);
+  });
+});
+
+/* ============================================================
+   5. BUSCADOR
+   ============================================================ */
+const searchInput = $('#searchInput');
+const searchClear = $('#searchClear');
+const readerCount = $('#readerCount');
+const emptyState  = $('#emptyState');
+const articles    = $$('.lexeme');
+
+// Índice de búsqueda precalculado
+const index = articles.map(article => ({
+  el: article,
+  text: normalize(article.textContent + ' ' + (article.dataset.cita || ''))
+}));
+
+let searchTimer;
+
+function runSearch(){
+  const q = normalize(searchInput.value.trim());
+  searchClear.hidden = !q;
+  let visible = 0;
+
+  index.forEach(item => {
+    const match = !q || item.text.includes(q);
+    item.el.style.display = match ? '' : 'none';
+    if (match) visible++;
+  });
+
+  readerCount.textContent = visible + ' / ' + articles.length + ' núcleos';
+  emptyState.classList.toggle('show', visible === 0);
+}
+
+searchInput.addEventListener('input', () => {
+  clearTimeout(searchTimer);
+  searchTimer = setTimeout(runSearch, 160);
+});
+
+searchClear.addEventListener('click', () => {
+  searchInput.value = '';
+  runSearch();
+  searchInput.focus();
+});
+
+/* ============================================================
+   6. EXPANSIÓN DE NORMATIVA
+   ============================================================ */
+const expandBtn = $('#expandAll');
+const norms = $$('.norm');
+
+expandBtn.addEventListener('click', () => {
+  const shouldOpen = norms.some(n => !n.open);
+  norms.forEach(n => { n.open = shouldOpen; });
+  expandBtn.textContent = shouldOpen ? 'Contraer toda la normativa' : 'Expandir toda la normativa';
+});
+
+norms.forEach(n => {
+  n.addEventListener('toggle', () => {
+    const allOpen = norms.every(x => x.open);
+    const allClosed = norms.every(x => !x.open);
+    expandBtn.textContent = allOpen ? 'Contraer toda la normativa' : 'Expandir toda la normativa';
+  });
+});
+
+/* ============================================================
+   7. COPIAR CITA + TOAST
+   ============================================================ */
+const toast = $('#toast');
+let toastTimer;
+
+function showToast(message){
+  toast.textContent = message;
+  toast.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toast.classList.remove('show'), 2600);
+}
+
+async function copyText(text){
+  if (navigator.clipboard && window.isSecureContext){
+    await navigator.clipboard.writeText(text);
+    return;
+  }
+  const ta = document.createElement('textarea');
+  ta.value = text;
+  ta.style.position = 'fixed';
+  ta.style.opacity = '0';
+  document.body.appendChild(ta);
+  ta.select();
+  const ok = document.execCommand('copy');
+  document.body.removeChild(ta);
+  if (!ok) throw new Error('No se pudo copiar');
+}
+
+$$('[data-copy]').forEach(btn => {
+  btn.addEventListener('click', async () => {
+    const cita = btn.closest('.lexeme').dataset.cita;
+    try {
+      await copyText(cita);
+      showToast('Cita copiada al portapapeles');
+      btn.textContent = '✓ Copiada';
+      setTimeout(() => { btn.textContent = 'Copiar cita'; }, 2200);
+    } catch(e){
+      showToast('No se pudo copiar. Selecciona el texto normativo.');
+    }
+  });
+});
+
+/* ============================================================
+   8. IMPRESIÓN
+   ============================================================ */
+$('#printBtn').addEventListener('click', () => window.print());
+
+let openedForPrint = [];
+window.addEventListener('beforeprint', () => {
+  openedForPrint = norms.filter(n => n.open);
+  norms.forEach(n => { n.open = true; });
+});
+window.addEventListener('afterprint', () => {
+  norms.forEach(n => { n.open = openedForPrint.includes(n); });
+});
+
+/* ============================================================
+   9. ATAJOS
+   ============================================================ */
+document.addEventListener('keydown', (e) => {
+  // "/" enfoca el buscador
+  if (e.key === '/' && !['INPUT','TEXTAREA'].includes(document.activeElement.tagName)){
+    e.preventDefault();
+    searchInput.focus();
+  }
+  // Esc limpia la búsqueda
+  if (e.key === 'Escape' && document.activeElement === searchInput){
+    searchInput.value = '';
+    runSearch();
+    searchInput.blur();
+  }
+});
+</script>
+</body>
+</html>
