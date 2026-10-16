@@ -1,0 +1,2182 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>De la extinción de la acción y de la sanción penal · Arts. 82–93 CP Colombiano</title>
+<style>
+:root{
+  --bg:#f7f5ef;
+  --paper:#ffffff;
+  --ink:#22303f;
+  --muted:#5b6675;
+  --dogma:#9b2c2c;
+  --onto:#2c5282;
+  --herm:#276749;
+  --proc:#975a16;
+  --line:#e3e0d6;
+  --shadow:0 6px 24px rgba(30,40,60,.06);
+  --shadow-hover:0 14px 34px rgba(30,40,60,.10);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
+  background:var(--bg);color:var(--ink);line-height:1.75;
+}
+h1,h2,h3,h4,.serif{font-family:Georgia,'Times New Roman',serif}
+a{color:inherit}
+::selection{background:#9b2c2c;color:#fff}
+
+#progress{
+  position:fixed;top:0;left:0;height:3px;width:0%;
+  background:linear-gradient(90deg,var(--dogma),var(--onto),var(--herm),var(--proc));
+  z-index:1000;transition:width .1s linear;
+}
+
+header{
+  background:
+    repeating-linear-gradient(135deg,rgba(255,255,255,.025) 0 2px,transparent 2px 22px),
+    linear-gradient(135deg,#16202c 0%,#2b3a4d 100%);
+  color:#fff;padding:5rem 2rem 4rem;text-align:center;
+  border-bottom:5px solid var(--dogma);
+}
+.eyebrow{
+  font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;
+  color:#c9b98a;margin-bottom:1.4rem;font-weight:600;
+}
+header h1{
+  font-size:clamp(2rem,5vw,3.4rem);line-height:1.2;
+  font-weight:400;letter-spacing:-.5px;margin-bottom:1.2rem;
+}
+header h1 em{font-style:italic;color:#e6d9b8}
+header p{
+  max-width:760px;margin:0 auto;font-size:1.05rem;
+  color:#c3cbd6;font-style:italic;
+}
+.header-meta{
+  margin-top:2rem;display:inline-flex;gap:1.6rem;flex-wrap:wrap;
+  justify-content:center;font-size:.78rem;letter-spacing:.12em;
+  text-transform:uppercase;color:#93a1b3;
+}
+.header-meta span{display:flex;align-items:center;gap:.5rem}
+.header-meta b{color:#e6d9b8;font-weight:600}
+
+.method{max-width:1180px;margin:0 auto;padding:3.5rem 2rem 1rem}
+.section-kicker{
+  font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--muted);font-weight:700;margin-bottom:.6rem;
+}
+.method h2{font-size:1.9rem;margin-bottom:1.6rem;font-weight:400}
+.method-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.4rem}
+.method-card{
+  background:var(--paper);padding:1.6rem;border-radius:10px;
+  box-shadow:var(--shadow);border-left:4px solid var(--line);
+}
+.method-card.d{border-color:var(--dogma)}
+.method-card.o{border-color:var(--onto)}
+.method-card.h{border-color:var(--herm)}
+.method-card.p{border-color:var(--proc)}
+.method-card h3{font-size:1.15rem;margin-bottom:.4rem}
+.method-card.d h3{color:var(--dogma)}
+.method-card.o h3{color:var(--onto)}
+.method-card.h h3{color:var(--herm)}
+.method-card.p h3{color:var(--proc)}
+.method-card .subtitle{
+  font-size:.72rem;text-transform:uppercase;letter-spacing:.16em;
+  color:var(--muted);display:block;margin-bottom:.8rem;
+}
+.method-card p{font-size:.92rem;color:var(--muted)}
+
+nav{
+  position:sticky;top:0;z-index:200;background:var(--paper);
+  border-bottom:1px solid var(--line);box-shadow:0 2px 12px rgba(0,0,0,.04);
+}
+.nav-inner{
+  max-width:1180px;margin:0 auto;display:flex;overflow-x:auto;
+  padding:0 1rem;scrollbar-width:thin;
+}
+nav a{
+  text-decoration:none;padding:1.05rem 1.1rem;font-size:.85rem;
+  font-weight:600;white-space:nowrap;border-bottom:3px solid transparent;
+  transition:.25s;color:var(--muted);
+}
+nav a:hover{color:var(--dogma);background:#faf6f6}
+nav a.active{color:var(--dogma);border-color:var(--dogma)}
+nav a.tool{color:var(--proc)}
+nav a.tool.active{color:var(--proc);border-color:var(--proc)}
+
+main{max-width:1180px;margin:0 auto;padding:0 2rem}
+.mapa{padding:3.5rem 0 1rem}
+.pipeline{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));
+  gap:.7rem;margin-top:1.4rem;
+}
+.pipe-node{
+  background:var(--paper);border:1px solid var(--line);
+  border-radius:10px;padding:1.2rem;text-decoration:none;
+  transition:.25s;position:relative;display:block;
+}
+.pipe-node:hover{transform:translateY(-4px);box-shadow:var(--shadow-hover);border-color:#c9b98a}
+.pipe-node .num{
+  font-family:Georgia,serif;font-size:1.5rem;color:#c9b98a;display:block;line-height:1;
+}
+.pipe-node strong{display:block;font-size:.98rem;margin:.5rem 0 .3rem}
+.pipe-node small{font-size:.79rem;color:var(--muted);display:block}
+
+.section-divider{
+  margin:5rem 0 2rem;padding:2rem 0;border-top:2px solid var(--line);
+  border-bottom:2px solid var(--line);text-align:center;
+}
+.section-divider .num{
+  font-family:Georgia,serif;font-size:3rem;color:var(--proc);
+  display:block;line-height:1;margin-bottom:.5rem;
+}
+.section-divider h2{font-size:1.8rem;font-weight:400;margin-bottom:.5rem}
+.section-divider p{
+  color:var(--muted);max-width:760px;margin:0 auto;font-size:.95rem;
+}
+
+.article-section{padding:3.5rem 0 1rem;scroll-margin-top:75px}
+.article-header{display:flex;align-items:center;gap:1.4rem;margin-bottom:1.6rem}
+.roman{
+  font-family:Georgia,serif;font-size:1.4rem;font-weight:bold;
+  color:var(--dogma);background:#f1e6e2;border:1px solid #e4cfc9;
+  width:74px;height:74px;display:flex;align-items:center;justify-content:center;
+  border-radius:8px;flex-shrink:0;
+}
+.article-header h2{font-size:1.95rem;font-weight:400;line-height:1.25}
+.article-header .tagline{
+  display:block;font-family:'Segoe UI',sans-serif;font-size:.9rem;
+  color:var(--muted);font-style:italic;margin-top:.4rem;font-weight:400;
+}
+.legal-text{
+  background:var(--paper);border-left:5px solid var(--dogma);
+  padding:1.6rem 1.9rem;margin-bottom:1.2rem;border-radius:0 10px 10px 0;
+  box-shadow:var(--shadow);font-family:Georgia,serif;
+  font-size:1.02rem;color:#3d4756;
+}
+.legal-text p+p{margin-top:.9rem}
+.legal-text ol,.legal-text ul{margin-top:.8rem;padding-left:1.3rem}
+.legal-text ol li,.legal-text ul li{margin-bottom:.5rem}
+.legal-label{
+  display:block;font-family:'Segoe UI',sans-serif;font-size:.65rem;
+  letter-spacing:.22em;text-transform:uppercase;color:var(--muted);
+  margin-bottom:.8rem;font-weight:700;
+}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:2rem}
+.chip{
+  font-size:.72rem;letter-spacing:.04em;padding:.3rem .8rem;
+  background:#eceae2;border:1px solid var(--line);border-radius:30px;color:#5c6470;
+}
+.chip.hot{background:#f6e7d8;border-color:#e0c6a4;color:#7a4a12}
+
+.quad-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.4rem}
+.perspective-card{
+  background:var(--paper);border-radius:12px;padding:1.7rem;
+  box-shadow:var(--shadow);border-top:4px solid transparent;
+  transition:transform .3s,box-shadow .3s;display:flex;flex-direction:column;
+}
+.perspective-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-hover)}
+.perspective-card.dogma{border-top-color:var(--dogma)}
+.perspective-card.onto{border-top-color:var(--onto)}
+.perspective-card.herm{border-top-color:var(--herm)}
+.perspective-card.proc{border-top-color:var(--proc)}
+.card-header{display:flex;align-items:center;gap:.7rem;margin-bottom:.3rem}
+.card-icon{font-size:1.35rem}
+.card-title{font-size:.92rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em}
+.dogma .card-title{color:var(--dogma)}
+.onto .card-title{color:var(--onto)}
+.herm .card-title{color:var(--herm)}
+.proc .card-title{color:var(--proc)}
+.card-sub{font-size:.72rem;color:var(--muted);font-style:italic;margin-bottom:1.1rem;letter-spacing:.02em}
+.card-content p{font-size:.9rem;color:#4a5563;margin-bottom:.9rem;text-align:justify}
+.card-content p:last-child{margin-bottom:0}
+.card-content strong{color:var(--ink);font-weight:650}
+.card-content ul{margin-top:.5rem;padding-left:1.2rem}
+.card-content ul li{margin-bottom:.4rem;font-size:.88rem;color:#4a5563}
+
+.callout{
+  margin-top:1.6rem;background:#fbf6ea;border:1px solid #ecdfbf;
+  border-left:4px solid var(--proc);border-radius:0 8px 8px 0;
+  padding:1.2rem 1.5rem;
+}
+.callout .label{
+  font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--proc);font-weight:700;display:block;margin-bottom:.5rem;
+}
+.callout p{font-size:.9rem;color:#6b5b3a}
+
+.case-study{
+  margin-top:1.2rem;background:var(--paper);border:1px solid var(--line);
+  border-radius:10px;overflow:hidden;
+}
+.case-study summary{
+  cursor:pointer;padding:1.1rem 1.5rem;font-weight:600;font-size:.92rem;
+  list-style:none;display:flex;align-items:center;gap:.7rem;transition:.2s;
+}
+.case-study summary::-webkit-details-marker{display:none}
+.case-study summary:hover{background:#faf9f5}
+.case-study summary .marker{
+  width:22px;height:22px;border:1px solid var(--line);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;font-size:.8rem;
+  color:var(--dogma);flex-shrink:0;transition:.3s;
+}
+.case-study[open] summary .marker{transform:rotate(45deg);background:var(--dogma);color:#fff;border-color:var(--dogma)}
+.case-study .case-body{padding:0 1.5rem 1.4rem;font-size:.92rem;color:var(--muted)}
+.case-study .case-body p+p{margin-top:.7rem}
+
+/* CALCULADORA */
+.calc-section{padding:4.5rem 0 1rem;scroll-margin-top:75px;border-top:1px solid var(--line)}
+.calc-section h2{font-size:2.1rem;font-weight:400;margin-bottom:.6rem}
+.calc-section .intro{color:var(--muted);max-width:820px;margin-bottom:2rem;font-size:.98rem}
+.calc{
+  background:var(--paper);border:1px solid var(--line);border-radius:14px;
+  padding:1.8rem;box-shadow:var(--shadow);
+}
+.calc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1.2rem}
+.field label{
+  display:block;font-size:.7rem;text-transform:uppercase;letter-spacing:.12em;
+  color:var(--muted);font-weight:700;margin-bottom:.4rem;
+}
+.field input,.field select{
+  width:100%;padding:.7rem .8rem;border:1px solid var(--line);border-radius:6px;
+  font:inherit;font-size:.92rem;background:#fbfaf7;color:var(--ink);
+}
+.field input:focus,.field select:focus{outline:2px solid #c9b98a;outline-offset:1px}
+.checks{display:flex;flex-wrap:wrap;gap:1.2rem;margin-top:.4rem}
+.check{display:flex;align-items:center;gap:.55rem;font-size:.88rem;color:var(--muted);cursor:pointer}
+.check input{width:18px;height:18px;accent-color:#9b2c2c;cursor:pointer}
+.calc-result{
+  margin-top:1.5rem;background:#22303f;color:#e6eaf0;border-radius:10px;
+  padding:1.4rem 1.6rem;border-left:5px solid #c9b98a;
+}
+.calc-result .label{
+  font-size:.65rem;letter-spacing:.24em;text-transform:uppercase;
+  color:#c9b98a;font-weight:700;display:block;margin-bottom:.8rem;
+}
+.calc-line{
+  display:flex;justify-content:space-between;gap:1rem;padding:.5rem 0;
+  border-bottom:1px dashed rgba(255,255,255,.16);font-size:.9rem;
+}
+.calc-line:last-child{border-bottom:none}
+.calc-line b{color:#fff;font-weight:600}
+.calc-state{
+  margin-top:1rem;padding:.9rem 1.1rem;border-radius:8px;font-weight:600;
+  font-size:.95rem;text-align:center;
+}
+.calc-state.ok{background:rgba(163,212,182,.18);color:#a3d4b6;border:1px solid rgba(163,212,182,.35)}
+.calc-state.warn{background:rgba(240,185,185,.16);color:#f0b9b9;border:1px solid rgba(240,185,185,.3)}
+.calc-note{font-size:.78rem;color:var(--muted);margin-top:1rem;font-style:italic}
+
+.sintesis{padding:4.5rem 0 2rem;scroll-margin-top:75px;border-top:1px solid var(--line)}
+.sintesis h2{font-size:2.1rem;font-weight:400;margin-bottom:.8rem}
+.sintesis .intro{color:var(--muted);max-width:820px;margin-bottom:2rem}
+.table-wrap{overflow-x:auto;border-radius:12px;box-shadow:var(--shadow);background:var(--paper)}
+table{width:100%;border-collapse:collapse;min-width:940px;font-size:.85rem}
+thead{background:#22303f;color:#fff}
+th{padding:1rem .8rem;text-align:left;font-weight:600;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase}
+th:nth-child(2){color:#f0b9b9}
+th:nth-child(3){color:#a9c6e8}
+th:nth-child(4){color:#a3d4b6}
+th:nth-child(5){color:#e6d9b8}
+td{padding:1rem .8rem;border-bottom:1px solid var(--line);vertical-align:top;color:var(--muted)}
+td:first-child{font-weight:700;color:var(--ink);white-space:nowrap}
+tbody tr:hover{background:#faf9f5}
+.closing{
+  margin-top:2rem;background:var(--paper);border:1px solid var(--line);
+  border-radius:12px;padding:2rem;text-align:center;
+}
+.closing .serif{font-size:1.4rem;font-style:italic;color:var(--dogma);margin-bottom:.8rem;line-height:1.5}
+.closing p{color:var(--muted);max-width:780px;margin:0 auto;font-size:.95rem}
+
+.glosario{padding:3rem 0 1rem;scroll-margin-top:75px}
+.glosario details{
+  background:var(--paper);border:1px solid var(--line);border-radius:12px;
+  padding:0 1.6rem;box-shadow:var(--shadow);
+}
+.glosario summary{
+  cursor:pointer;padding:1.4rem 0;font-family:Georgia,serif;
+  font-size:1.3rem;list-style:none;display:flex;justify-content:space-between;align-items:center;
+}
+.glosario summary::-webkit-details-marker{display:none}
+.glosario summary span{font-size:1.4rem;color:var(--dogma);transition:.3s}
+.glosario details[open] summary span{transform:rotate(45deg)}
+.gloss-list{padding-bottom:1.6rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.4rem}
+.gloss-list dt{font-weight:700;font-size:.92rem;color:var(--ink);margin-bottom:.3rem}
+.gloss-list dd{font-size:.88rem;color:var(--muted)}
+
+.refs{padding:3rem 0 4rem}
+.refs h3{font-size:1.4rem;font-weight:400;margin-bottom:1.4rem}
+.ref-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1rem}
+.ref{
+  background:var(--paper);border:1px solid var(--line);border-radius:8px;
+  padding:1.1rem 1.3rem;font-size:.87rem;color:var(--muted);
+}
+.ref b{color:var(--ink);display:block;margin-bottom:.25rem;font-weight:650}
+.ref i{color:#7a8391}
+
+footer{
+  background:#16202c;color:#8b98a9;text-align:center;padding:3rem 2rem;
+}
+footer strong{color:#d8dde5;display:block;font-family:Georgia,serif;font-size:1.1rem;margin-bottom:.6rem;font-weight:400}
+footer p{font-size:.82rem;max-width:760px;margin:0 auto .5rem}
+footer .fine{font-size:.72rem;opacity:.65;margin-top:1.2rem}
+
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+
+@media(max-width:900px){
+  .quad-grid{grid-template-columns:1fr}
+  .article-header{gap:1rem}
+  .article-header h2{font-size:1.55rem}
+  .roman{width:58px;height:58px;font-size:1.1rem}
+  header{padding:3.5rem 1.5rem}
+}
+@media(max-width:600px){
+  main{padding:0 1.1rem}
+  .method{padding:2.5rem 1.1rem 1rem}
+  .legal-text{padding:1.2rem}
+  .card-content p{text-align:left}
+  .calc{padding:1.2rem}
+}
+@media print{
+  nav,#progress{display:none}
+  body{background:#fff;color:#000}
+  header{background:#fff;color:#000;border-bottom:2px solid #000;padding:2rem 0}
+  .perspective-card,.legal-text,.calc{box-shadow:none;break-inside:avoid}
+  .article-section,.calc-section{break-before:page}
+  .reveal{opacity:1!important;transform:none!important}
+}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+
+<header>
+  <div class="eyebrow">Libro Primero · Parte General · Capítulo Quinto</div>
+  <h1>La extinción de la acción<br>y de la <em>sanción penal</em></h1>
+  <p>Una lectura tetradimensional de los artículos 82 a 93 del Código Penal colombiano:
+     del tiempo como límite del poder punitivo, de la prescripción a la rehabilitación,
+     de la oblación a la imprescriptibilidad de los crímenes contra la humanidad.</p>
+  <div class="header-meta">
+    <span><b>Ley 599 de 2000</b></span>
+    <span>Modificado por <b>Leyes 890/2004, 2098/2021, 2277/2022, 2477/2025</b></span>
+    <span>Artículos <b>82 — 93</b></span>
+    <span>Dogmática · Ontología · Hermenéutica · Razonabilidad procedimental</span>
+  </div>
+</header>
+
+<section class="method">
+  <div class="section-kicker">La clave de lectura</div>
+  <h2>Cuatro preguntas frente a cada norma</h2>
+  <div class="method-grid">
+    <div class="method-card d">
+      <h3>Dogmática</h3>
+      <span class="subtitle">La estructura · ¿Qué significa?</span>
+      <p>La ciencia del derecho positivo. Reconstruye las causales de extinción, la
+         distinción acción/sanción, los términos, los cómputos, las interrupciones
+         y las suspensiones.</p>
+    </div>
+    <div class="method-card o">
+      <h3>Ontología</h3>
+      <span class="subtitle">El fundamento · ¿Qué es?</span>
+      <p>La pregunta por el ser del tiempo penal. ¿Qué es la prescripción: un derecho,
+         una presunción, un castigo del Estado inactivo? ¿Qué es la imprescriptibilidad
+         de un crimen contra la humanidad?</p>
+    </div>
+    <div class="method-card h">
+      <h3>Hermenéutica</h3>
+      <span class="subtitle">El sentido · ¿Cómo se aplica?</span>
+      <p>La teoría de la interpretación. Cómo se armoniza la prescripción con los
+         derechos de las víctimas, con los estándares internacionales y con el
+         deber de no impunidad.</p>
+    </div>
+    <div class="method-card p">
+      <h3>Razonabilidad procedimental</h3>
+      <span class="subtitle">El método · ¿Cómo se declara?</span>
+      <p>El iter procedimental: quién computa, quién declara, de oficio o a petición,
+         con qué pruebas, con qué efectos, y cómo se garantiza que la extinción no
+         se convierta en impunidad.</p>
+    </div>
+  </div>
+</section>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#art82">Art. 82</a>
+    <a href="#art83">Art. 83</a>
+    <a href="#art84">Art. 84</a>
+    <a href="#art85">Art. 85</a>
+    <a href="#art86">Art. 86</a>
+    <a href="#art87">Art. 87</a>
+    <a href="#art88">Art. 88</a>
+    <a href="#art89">Art. 89</a>
+    <a href="#art90">Art. 90</a>
+    <a href="#art91">Art. 91</a>
+    <a href="#art92">Art. 92</a>
+    <a href="#art93">Art. 93</a>
+    <a href="#calculadora" class="tool">⏳ Calculadora</a>
+    <a href="#sintesis">Síntesis</a>
+    <a href="#glosario">Glosario</a>
+  </div>
+</nav>
+
+<main>
+
+<section class="mapa">
+  <div class="section-kicker">Recorrido del análisis</div>
+  <h2 class="serif" style="font-size:1.7rem;font-weight:400">Doce artículos. Dos extinciones. Un solo límite: el tiempo.</h2>
+  <div class="pipeline">
+    <a href="#sA" class="pipe-node">
+      <span class="num">A</span>
+      <strong>Extinción de la acción</strong>
+      <small>Arts. 82–87<br>Causales, términos, cómputo, renuncia, interrupción, oblación.</small>
+    </a>
+    <a href="#sB" class="pipe-node">
+      <span class="num">B</span>
+      <strong>Extinción de la sanción</strong>
+      <small>Arts. 88–92<br>Indulto, amnistía impropia, prescripción, rehabilitación.</small>
+    </a>
+    <a href="#art93" class="pipe-node">
+      <span class="num">C</span>
+      <strong>Extensión</strong>
+      <small>Art. 93<br>Aplicación a las medidas de seguridad.</small>
+    </a>
+    <a href="#calculadora" class="pipe-node">
+      <span class="num">⏳</span>
+      <strong>Calculadora</strong>
+      <small>Taller de cómputo<br>Prescripción de la acción penal.</small>
+    </a>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECCIÓN A: EXTINCIÓN DE LA ACCIÓN PENAL
+     ============================================================ -->
+<div id="sA" class="section-divider">
+  <span class="num">A</span>
+  <h2>Extinción de la acción penal</h2>
+  <p>Arts. 82–87 · Causales · Término · Inicio · Renuncia · Interrupción y suspensión · Oblación</p>
+</div>
+
+<!-- ============================================================
+     ARTÍCULO 82
+     ============================================================ -->
+<section id="art82" class="article-section">
+  <div class="article-header">
+    <div class="roman">LXXXII</div>
+    <h2>Extinción de la acción penal
+      <span class="tagline">Nueve puertas por donde se apaga el poder de perseguir.</span>
+    </h2>
+  </div>
+
+  <blockquote class="legal-text">
+    <span class="legal-label">Texto normativo · Artículo 82°</span>
+    <p>Son causales de extinción de la acción penal:</p>
+    <ol>
+      <li>La muerte del procesado.</li>
+      <li>El desistimiento.</li>
+      <li>La amnistía propia.</li>
+      <li>La prescripción.</li>
+      <li>La oblación.</li>
+      <li>El pago en los casos previstos en la ley.</li>
+      <li>La indemnización integral en los casos previstos en la ley.</li>
+      <li>La retractación en los casos previstos en la ley.</li>
+      <li>Las demás que consagre la ley.</li>
+    </ol>
+    <p><strong>NOTA:</strong> Texto subrayado declarado EXEQUIBLE por la Corte Constitucional
+       mediante Sentencia <b>C-828 de 2010</b>, en el entendido de que el juez de conocimiento
+       debe decidir oficiosamente o a petición de interesado, independientemente de que exista
+       reserva judicial, poner a disposición u ordenar el traslado de todas las pruebas o elementos
+       probatorios que se hayan recaudado hasta el momento en que se produzca la muerte, para que
+       adelanten otros mecanismos judiciales o administrativos que permitan garantizar los derechos
+       de las víctimas.</p>
+  </blockquote>
+
+  <div class="chips">
+    <span class="chip">Muerte del procesado</span>
+    <span class="chip">Desistimiento</span>
+    <span class="chip">Amnistía propia</span>
+    <span class="chip">Prescripción</span>
+    <span class="chip">Oblación</span>
+    <span class="chip">Pago</span>
+    <span class="chip">Indemnización integral</span>
+    <span class="chip">Retracción</span>
+    <span class="chip">Cláusula abierta</span>
+    <span class="chip hot">Derechos de las víctimas (C-828/2010)</span>
+  </div>
+
+  <div class="quad-grid">
+    <article class="perspective-card dogma">
+      <div class="card-header"><span class="card-icon">⚖️</span><h3 class="card-title">Dogmática</h3></div>
+      <div class="card-sub">Cinco familias de causales</div>
+      <div class="card-content">
+        <p>Las nueve causales se ordenan en cinco familias dogmáticas. <strong>Naturales</strong>:
+        la muerte del procesado —la pena es personal y no sobrevive al penado—.
+        <strong>Dispositivas</strong>: el desistimiento y la retractación, en los delitos
+        de querella o con beneficio de retratación. <strong>Políticas</strong>: la amnistía
+        propia, ley que extingue la acción antes de la condena. <strong>Temporales</strong>:
+        la prescripción, la causal de mayor densidad práctica.</p>
+        <p><strong>Satisfactivas</strong>: la oblación, el pago y la indemnización integral,
+        que extinguen la acción porque el conflicto ya fue reparado. Finalmente, la cláusula
+        <em>las demás que consagre la ley</em> es una apertura sujeta a <strong>reserva de
+        ley</strong>: no la crea el juez ni el reglamento.</p>
+        <p>La distinción técnica clave es entre <strong>amnistía propia</strong> (extingue la
+        acción penal, antes de sentencia) y <strong>amnistía impropia</strong> (extingue la
+        sanción, después de condena, art. 88). Confundirlas es un error frecuente.</p>
+      </div>
+    </article>
+
+    <article class="perspective-card onto">
+      <div class="card-header"><span class="card-icon">🌌</span><h3 class="card-title">Ontología</h3></div>
+      <div class="card-sub">La muerte de una pretensión</div>
+      <div class="card-content">
+        <p>La acción penal es una <strong>entidad temporal</strong>: nace con el hecho, se
+        desarrolla en el proceso y puede morir. La extinción no es una absolución ni una
+        declaración de inocencia: es el <em>apagamiento de la pretensión punitiva</em>.
+        Ontológicamente, el Estado deja de poder pedir porque perdió el título para hacerlo.</p>
+        <p>La <strong>muerte del procesado</strong> revela el límite más antiguo: la pena
+        no puede recaer sobre un cadáver ni transmitirse a los herederos. La responsabilidad
+        penal es intransferible; sólo sobrevive, como carga, la responsabilidad civil
+        patrimonial. La muerte no extingue el daño: extingue la posibilidad de castigar.</p>
+        <p>La <strong>prescripción</strong> tiene una ontología doble: es al mismo tiempo un
+        <em>hecho</em> (el tiempo transcurrió) y una <em>valoración</em> (el conflicto ya
+        se disolvió, la prueba se degradó, el orden se restableció). No es olvido: es el
+        reconocimiento de que el poder punitivo también envejece.</p>
+      </div>
+    </article>
+
+    <article class="perspective-card herm">
+      <div class="card-header"><span class="card-icon">📜</span><h3 class="card-title">Hermenéutica</h3></div>
+      <div class="card-sub">La extinción no puede ser impunidad</div>
+      <div class="card-content">
+        <p>Las causales se interpretan <strong>restrictivamente</strong>: quien alega extinción
+        prueba el presupuesto. La cláusula abierta del numeral 9 no permite crear causales por
+        analogía: sólo opera por remisión a una ley expresa.</p>
+        <p>La nota de la Sentencia <strong>C-828 de 2010</strong> es la clave hermenéutica
+        del artículo: la muerte del procesado extingue la acción, <em>pero no los derechos de
+        las víctimas</em>. El juez está obligado a poner a disposición y ordenar el traslado de
+        las pruebas recaudadas, incluso si hay reserva, para que se adelanten otros mecanismos
+        judiciales o administrativos. La extinción se interpreta entonces <strong>en clave de
+        transición probatoria</strong>: lo que el proceso penal ya construyó no se destruye
+        con la muerte del perseguido.</p>
+        <p>El mismo principio se proyecta sobre toda la lista: la extinción de la acción
+        penal no extingue la responsabilidad civil, la restitución ni el derecho a la verdad.
+        <em>Se apaga el poder de castigar; no se apaga el deber de reparar.</em></p>
+      </div>
+    </article>
+
+    <article class="perspective-card proc">
+      <div class="card-header"><span class="card-icon">📋</span><h3 class="card-title">Razonabilidad procedimental</h3></div>
+      <div class="card-sub">Quién declara, cuándo y con qué efectos</div>
+      <div class="card-content">
+        <p>Procedimentalmente, la extinción se declara así:</p>
+        <ul>
+          <li><strong>Competencia</strong>: el juez de conocimiento, en cualquier etapa del proceso; en fase de ejecución, el juez de ejecución de penas.</li>
+          <li><strong>Iniciativa</strong>: de oficio o a petición de parte. El juez no puede esperar la solicitud si la causal es evidente: la prescripción es orden público.</li>
+          <li><strong>Prueba</strong>: el acta de defunción y el registro civil; la constancia de pago o indemnización; la ley de amnistía; el cómputo prescriptivo con sus soportes.</li>
+          <li><strong>Decisión</strong>: providencia motivada que declara la extinción, ordena el archivo y, si hay medida de aseguramiento, la libertad inmediata.</li>
+          <li><strong>Trámite adicional (C-828/2010)</strong>: en caso de muerte, ordenar el traslado de las pruebas a los Mechanismos pertinentes para proteger a las víctimas.</li>
+          <li><strong>Impugnación</strong>: contra la providencia procede el recurso de apelación, con efecto suspensivo limitado en materia de libertad.</li>
+        </ul>
+      </div>
+    </article>
+  </div>
+
+  <div class="callout">
+    <span class="label">Nodo de razonabilidad</span>
+    <p><strong>¿Puede la extinción de la acción sacrificar a las víctimas?</strong>
+    No. La razonabilidad del instituto exige que la extinción del <em>ius puniendi</em>
+    no se traduzca en supresión de los derechos de las víctimas a la verdad, la justicia,
+    la reparación y las garantías de no repetición. De ahí la obligación judicial de
+    trasladar las pruebas: la extinción cierra un proceso, no borra una memoria.</p>
+  </div>
+
+  <details class="case-study">
+    <summary><span class="marker">+</span> Caso aplicado · La muerte del procesado y el archivo que no borra</summary>
+    <div class="case-body">
+      <p>Durante la audiencia preparatoria fallece el procesado por homicidio. La defensa
+      solicita la extinción de la acción penal.</p>
+      <p><strong>Lectura procedimental:</strong> el juez verifica el registro civil de
+      defunción, declara la extinción de la acción penal, ordena el archivo y dispone la
+      libertad si había medida de aseguramiento. Pero, conforme a la C-828 de 2010, ordena
+      además el traslado de todo lo recaudado —peritajes, entrevistas, elementos materiales—
+      a los mecanismos pertinentes, para que la familia de la víctima pueda adelantar las
+      acciones civiles y de verdad que le asisten. La acción se extingue; el material probatorio
+      no se destruye.</p>
+    </div>
+  </details>
+</section>
+
+<!-- ============================================================
+     ARTÍCULO 83
+     ============================================================ -->
+<section id="art83" class="article-section">
+  <div class="article-header">
+    <div class="roman">LXXXIII</div>
+    <h2>Término de prescripción de la acción penal
+      <span class="tagline">La aritmética del olvido y la excepción de la memoria.</span>
+    </h2>
+  </div>
+
+  <blockquote class="legal-text">
+    <span class="legal-label">Texto normativo · Artículo 83° (modificado por Ley 2098 de 2021)</span>
+    <p>La acción penal prescribirá en un tiempo igual al máximo de la pena fijada en la ley,
+       si fuere privativa de la libertad, pero en ningún caso será inferior a cinco (5) años,
+       ni excederá de veinte (20), salvo lo dispuesto en el inciso siguiente de este artículo.</p>
+    <p>El término de prescripción para las conductas punibles de desaparición forzada, tortura,
+       homicidio de miembro de una organización sindical, homicidio de defensor de Derechos
+       Humanos, homicidio de periodista, desplazamiento forzado será de treinta (30) años. En
+       las conductas punibles de ejecución permanente el término de prescripción comenzará a
+       correr desde la perpetración del último acto. La acción penal para los delitos de genocidio,
+       lesa humanidad y crímenes de guerra será imprescriptible.</p>
+    <p>Cuando se trate de delitos contra la libertad, integridad y formación sexuales, del incesto
+       o del homicidio agravado del artículo 103A del Código Penal, cometidos contra niños, niñas
+       y adolescentes, la acción penal será imprescriptible.</p>
+    <p>En las conductas punibles que tengan señalada pena no privativa de la libertad, la acción
+       penal prescribirá en cinco (5) años.</p>
+    <p>Para este efecto se tendrán en cuenta las causales sustanciales modificadoras de la punibilidad.</p>
+    <p>Al servidor público que en ejercicio de las funciones de su cargo realice una conducta punible
+       o participe en ella, el término de prescripción se aumentará en la mitad. Lo anterior se aplicará
+       también en relación con los particulares que ejerzan funciones públicas en forma permanente o
+       transitoria y de quienes obren como agentes retenedores o recaudadores.</p>
+    <p>También se aumentará el término de prescripción, en la mitad, cuando la conducta punible se
+       hubiere iniciado o consumado en el exterior.</p>
+    <p>En todo caso, cuando se aumente el término de prescripción, no se excederá el límite máximo fijado.</p>
+    <p>En los delitos previstos en los artículos 402 (Omisión del agente retenedor o recaudador),
+       434A (Omisión de activos o inclusión de pasivos inexistentes) y 434B (Defraudación o evasión
+       tributaria), el término de prescripción de la acción penal se suspende por la suscripción de
+       acuerdo de pago con la administración tributaria sobre las obligaciones objeto de investigación
+       penal durante el tiempo en que sea concedido el acuerdo de pago, sin que se supere un término
+       de cinco (5) años, contado desde el momento de suscripción del acuerdo, y hasta la declaratoria
+       de cumplimiento o incumplimiento del acuerdo de pago por la autoridad tributaria. Acaecido
+       cualquiera de estos eventos se reanudará el término de prescripción de la acción penal.</p>
+    <p><strong>NOTA:</strong> Artículo declarado EXEQUIBLE por la Corte Constitucional mediante
+       Sentencia C-383 de 2022.</p>
+  </blockquote>
+
+  <div class="chips">
+    <span class="chip">Regla general: máximo de la pena</span>
+    <span class="chip">Piso 5 años · Techo 20 años</span>
+    <span class="chip">Delitos agravados: 30 años</span>
+    <span class="chip hot">Imprescriptibles: genocidio, lesa humanidad, crímenes de guerra</span>
+    <span class="chip hot">Imprescriptibles: delitos sexuales e incesto contra NNA</span>
+    <span class="chip">Penas no privativas: 5 años</span>
+    <span class="chip">Aumento por función pública</span>
+    <span class="chip">Aumento por comisión en el exterior</span>
+    <span class="chip">Tope infranqueable</span>
+    <span class="chip">Suspensión tributaria (5 años máx.)</span>
+  </div>
+
+  <div class="quad-grid">
+    <article class="perspective-card dogma">
+      <div class="card-header"><span class="card-icon">⚖️</span><h3 class="card-title">Dogmática</h3></div>
+      <div class="card-sub">Una regla, cuatro correctores y dos excepciones absolutas</div>
+      <div class="card-content">
+        <p>La <strong>regla general</strong> es proporcionalista: el término de prescripción
+        de la acción es igual al <em>máximo de la pena privativa de libertad fijada en la ley</em>.
+        El fundamento es elegante: cuanto más grave el injusto, más tiempo tiene el Estado
+        para perseguirlo. Sobre esa regla operan cuatro correctores:</p>
+        <ul>
+          <li><strong>Piso y techo</strong>: nunca menos de 5 años, nunca más de 20.</li>
+          <li><strong>Calificación agravada</strong>: 30 años para desaparición forzada, tortura, homicidio de sindicalista, defensor de DD.HH. o periodista, y desplazamiento forzado.</li>
+          <li><strong>Aumentos</strong>: mitad por función pública, mitad por comisión en el exterior —con tope final—.</li>
+          <li><strong>Penas no privativas</strong>: 5 años fijos.</li>
+        </ul>
+        <p>Las dos <strong>excepciones absolutas</strong> son la imprescriptibilidad: los
+        crímenes de genocidio, lesa humanidad y crímenes de guerra; y los delitos contra la
+        libertad, integridad y formación sexuales, el incesto y el homicidio agravado del
+        art. 103A cometidos contra niños, niñas y adolescentes.</p>
+        <p>La frase <em>se tendrán en cuenta las causales sustanciales modificadoras de la
+        punibilidad</em> es una orden de cálculo: el término no se toma del tipo base, sino
+        del <strong>máximo ya modificado</strong> por atenuantes y agravantes del capítulo anterior.</p>
+      </div>
+    </article>
+
+    <article class="perspective-card onto">
+      <div class="card-header"><span class="card-icon">🌌</span><h3 class="card-title">Ontología</h3></div>
+      <div class="card-sub">El tiempo como co-límite del poder</div>
+      <div class="card-content">
+        <p>La prescripción es la forma más pura en que el derecho penal reconoce su propio
+        <strong>límite temporal</strong>. Ontológicamente, el <em>ius puniendi</em> no es
+        eterno: nace con el hecho y caduca si el Estado no lo ejercita. La prescripción no
+        premia al culpable: sanciona la inercia estatal y protege la seguridad de quien ya
+        no vive bajo la amenaza indefinida de un proceso.</p>
+        <p>La <strong>imprescriptibilidad</strong> invierte el fundamento. No se trata de
+        delitos que ofendan a un Estado, sino de crímenes que ofenden a la <em>humanidad como
+        comunidad</em>. Cuando el sujeto pasivo es la humanidad, ningún Estado tiene título
+        para perdonar en su nombre. La imprescriptibilidad es la expresión jurídica de que
+        hay hechos cuya gravedad los sustrae del tiempo.</p>
+        <p>La imprescriptibilidad de los delitos contra niños, niñas y adolescentes tiene una
+        ontología distinta y complementaria: no es la magnitud del hecho sino la <strong>estructura
+        del daño</strong>. El abuso infantil se revela tardíamente; la víctima necesita años para
+        nombrarlo. El tiempo, que en otros casos disuelve, aquí <em>retrasa la posibilidad de
+        hablar</em>. Prescribir sería castigar a la víctima por su silencio forzado.</p>
+      </div>
+    </article>
+
+    <article class="perspective-card herm">
+      <div class="card-header"><span class="card-icon">📜</span><h3 class="card-title">Hermenéutica</h3></div>
+      <div class="card-sub">Interpretar el tiempo a la luz de los estándares internacionales</div>
+      <div class="card-content">
+        <p>La hermenéutica del artículo 83 es <strong>dual</strong>. Para los delitos ordinarios
+        rige el criterio favorable al procesado: ante la duda sobre el término, se aplica el
+        más corto. Para los crímenes imprescriptibles rige el estándar internacional: la
+        imprescriptibilidad de los crímenes de lesa humanidad es <em>ius cogens</em> y no puede
+        interpretarse restrictivamente ni aplicarse con criterios internos que la disfracen.</p>
+        <p>Dos reglas hermenéuticas son decisivas:</p>
+        <ul>
+          <li><strong>La regla de cierre del tope</strong>: los aumentos se calculan sobre el término base, pero <em>en ningún caso se excede el límite máximo fijado</em>. El aumento no puede crear un término mayor que el techo del propio artículo.</li>
+          <li><strong>El cómputo con causales sustanciales</strong>: se toma el máximo de la pena ya modificada por atenuantes y agravantes, no el del tipo base. Ignorar esta orden distorsiona todo el cálculo.</li>
+        </ul>
+        <p>La hermenéutica exige también distinguir el <strong>aumento por función pública</strong>
+        como una agravación del deber de persecución: quien sirve al Estado y lo traiciona no
+        merece un plazo más corto. Pero el aumento es una regla aritmética, no una redefinición
+        del delito: no convierte un hecho en otro.</p>
+      </div>
+    </article>
+
+    <article class="perspective-card proc">
+      <div class="card-header"><span class="card-icon">📋</span><h3 class="card-title">Razonabilidad procedimental</h3></div>
+      <div class="card-sub">El algoritmo del cómputo</div>
+      <div class="card-content">
+        <p>Procedimentalmente, el juez sigue este orden estricto:</p>
+        <ul>
+          <li><strong>1.</strong> Verificar si el delito es <em>imprescriptible</em>. Si lo es, el análisis termina: no hay prescripción.</li>
+          <li><strong>2.</strong> Determinar el máximo de la pena <em>con causales sustanciales</em> aplicadas.</li>
+          <li><strong>3.</strong> Fijar el término: ese máximo, con piso de 5 y techo de 20; o 30 años si está en la lista agravada; o 5 años si la pena no es privativa de libertad.</li>
+          <li><strong>4.</strong> Aplicar aumentos: mitad por función pública, mitad por comisión en el exterior.</li>
+          <li><strong>5.</strong> Aplicar la <em>regla de cierre</em>: no exceder el tope.</li>
+          <li><strong>6.</strong> Identificar el <em>inicio</em> del término (art. 84) y las <em>interrupciones o suspensiones</em> (art. 86).</li>
+          <li><strong>7.</strong> Restar el tiempo transcurrido y declarar o negar la prescripción, de oficio o a petición.</li>
+        </ul>
+        <p>La suspensión tributaria exige un trámite propio: acreditar el <strong>acuerdo de pago</strong>
+        y su declaratoria de cumplimiento o incumplimiento, con tope de 5 años, y reanudar el cómputo
+        acaecido el evento.</p>
+      </div>
+    </article>
+  </div>
+
+  <div class="callout">
+    <span class="label">Nodo de razonabilidad</span>
+    <p><strong>¿Por qué la imprescriptibilidad es la excepción y no la regla?</strong>
+    Porque la prescripción es una garantía, no un beneficio: protege a toda persona de la
+    amenaza indefinida del proceso. Convertirla en regla general de excepción la destruiría.
+    La razonabilidad exige que la imprescriptibilidad se justifique por la <em>naturaleza del
+    bien afectado</em> (la humanidad, la infancia), nunca por la conveniencia política de
+    perseguir más tiempo.</p>
+  </div>
+
+  <details class="case-study">
+    <summary><span class="marker">+</span> Caso aplicado · El servidor público y el techo que no se rompe</summary>
+    <div class="case-body">
+      <p>Un funcionario público comete prevaricato por acción fuera del país. El máximo de la
+      pena, con causales sustanciales aplicadas, es de 10 años.</p>
+      <p><strong>Cómputo:</strong> término base = 10 años (dentro del piso de 5 y el techo de 20).
+      Aumento por función pública: 10 + 5 = 15. Aumento por comisión en el exterior: 15 + 7.5 = 22.5.
+      <strong>Regla de cierre</strong>: no se excede el límite máximo fijado. El término queda en
+      <strong>20 años</strong>, no en 22.5. El aumento no puede perforar el techo del propio artículo.</p>
+    </div>
+  </details>
+</section>
+
+<!-- ============================================================
+     ARTÍCULO 84
+     ============================================================ -->
+<section id="art84" class="article-section">
+  <div class="article-header">
+    <div class="roman">LXXXIV</div>
+    <h2>Iniciación del término de prescripción de la acción
+      <span class="tagline">El delito define el reloj: la estructura manda sobre el calendario.</span>
+    </h2>
+  </div>
+
+  <blockquote class="legal-text">
+    <span class="legal-label">Texto normativo · Artículo 84°</span>
+    <p>En las conductas punibles de ejecución instantánea el término de prescripción de la acción
+       comenzará a correr desde el día de su consumación.</p>
+    <p>En las conductas punibles de ejecución permanente o en las que sólo alcancen el grado de
+       tentativa, el término comenzará a correr desde la perpetración del último acto.</p>
+    <p>En las conductas punibles omisivas el término comenzará a correr cuando haya cesado el deber de actuar.</p>
+    <p>Cuando fueren varias las conductas punibles investigadas y juzgadas en un mismo proceso, el
+       término de prescripción correrá independientemente para cada una de ellas.</p>
+  </blockquote>
+
+  <div class="chips">
+    <span class="chip">Instantánea: consumación</span>
+    <span class="chip">Permanente y tentativa: último acto</span>
+    <span class="chip">Omisión: cese del deber</span>
+    <span class="chip">Pluralidad: cómputo independiente</span>
+  </div>
+
+  <div class="quad-grid">
+    <article class="perspective-card dogma">
+      <div class="card-header"><span class="card-icon">⚖️</span><h3 class="card-title">Dogmática</h3></div>
+      <div class="card-sub">Cuatro reglas según la estructura del delito</div>
+      <div class="card-content">
+        <p>El artículo 84 no fija un criterio único: <strong>adapta el inicio del cómputo a
+        la estructura del delito</strong>. Es la consecuencia directa de la teoría del delito
+        construida en los capítulos anteriores.</p>
+        <ul>
+          <li><strong>Instantánea</strong>: el delito se agota en un momento; el término corre desde la consumación, no desde la ejecución ni desde el resultado posterior.</li>
+          <li><strong>Permanente</strong>: el delito se prolonga mientras dura la situación ilícita; el término corre desde el <em>último acto</em>. Mientras el secuestro dura, la prescripción no corre.</li>
+          <li><strong>Tentativa</strong>: el proceso se truncó; el término corre desde el último acto de ejecución realizado.</li>
+          <li><strong>Omisión</strong>: el deber está vivo; el término corre cuando <em>cesa el deber de actuar</em>, no desde el primer momento de inacción.</li>
+        </ul>
+        <p>La cuarta regla consagra la <strong>independencia de los términos</strong>: en el
+        concurso real cada conducta prescribe por separado. Un delito menor puede prescribir
+        mientras el mayor sigue vigente.</p>
+      </div>
+    </article>
+
+    <article class="perspective-card onto">
+      <div class="card-header"><span class="card-icon">🌌</span><h3 class="card-title">Ontología</h3></div>
+      <div class="card-sub">El tiempo penal no es homogéneo</div>
+      <div class="card-content">
+        <p>El artículo 84 revela que el <strong>tiempo penal no es un flujo uniforme</strong>
+        sino una medida que se ajusta a la forma del hecho. Ontológicamente, el delito
+        instantáneo es un <em>punto</em>; el permanente, un <em>continuum</em>; la omisión,
+        un <em>deber suspendido en el tiempo</em>. Cada uno tiene su propia temporalidad y,
+        por tanto, su propio punto de partida.</p>
+        <p>La regla de la omisión es la más honda: el tiempo no corre mientras el deber está
+        vigente, porque mientras el garante puede actuar, el hecho <em>aún no se ha cerrado</em>.
+        La prescripción presupone un hecho terminado; una omisión en curso no ha terminado.</p>
+        <p>La independencia de los términos en el concurso revela que la pluralidad de delitos
+        es una pluralidad de <strong>pretensiones punitivas autónomas</strong>, no una masa
+        indistinta que prescribe junta.</p>
+      </div>
+    </article>
+
+    <article class="perspective-card herm">
+      <div class="card-header"><span class="card-icon">📜</span><h3 class="card-title">Hermenéutica</h3></div>
+      <div class="card-sub">Clasificar antes de computar</div>
+      <div class="card-content">
+        <p>La hermenéutica impone un <strong>orden de operaciones</strong>: antes de calcular
+        fechas, hay que calificar la estructura del delito. Un error de clasificación contamina
+        todo el cómputo: tratar como instantánea una conducta permanente puede declarar prescrita
+        una acción que no lo está, y viceversa.</p>
+        <p>Los casos límite son los más frecuentes en la práctica: el <strong>enriquecimiento
+        ilícito</strong> (¿instantáneo o de trato sucesivo?), el <strong>concierto para
+        delinquir</strong> (¿permanente?), el <strong>abuso de confianza continuado</strong>.
+        La hermenéutica exige remitirse a la doctrina del delito permanente y continuado, y en
+        caso de duda, resolver favorablemente al procesado.</p>
+        <p>En los delitos imprescriptibles la discusión sobre el inicio pierde eficacia práctica,
+        pero conserva relevancia para las conductas concurrentes prescriptibles del mismo proceso,
+        precisamente por la regla de independencia.</p>
+      </div>
+    </article>
+
+    <article class="perspective-card proc">
+      <div class="card-header"><span class="card-icon">📋</span><h3 class="card-title">Razonabilidad procedimental</h3></div>
+      <div class="card-sub">Fijar la fecha y probarla</div>
+      <div class="card-content">
+        <p>Procedimentalmente, el juez debe:</p>
+        <ul>
+          <li><strong>1.</strong> Calificar la estructura: instantánea, permanente, tentativa u omisión.</li>
+          <li><strong>2.</strong> Identificar la fecha relevante: consumación, último acto o cese del deber.</li>
+          <li><strong>3.</strong> Probarla con el material del proceso: peritajes, declaraciones, documentos, interceptaciones.</li>
+          <li><strong>4.</strong> Abrir un cómputo independiente por cada conducta punible del proceso.</li>
+          <li><strong>5.</strong> Registrar el resultado en la providencia, con la fecha inicial y el término aplicable.</li>
+        </ul>
+        <p>La razonabilidad exige que la fecha no se presuma: es un <strong>hecho probatorio</strong>,
+        discutible por las partes, y su fijación debe estar motivada.</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============================================================
+     ARTÍCULO 85
+     ============================================================ -->
+<section id="art85" class="article-section">
+  <div class="article-header">
+    <div class="roman">LXXXV</div>
+    <h2>Renuncia a la prescripción
+      <span class="tagline">El procesado puede renunciar, pero el tiempo pone el punto final.</span>
+    </h2>
+  </div>
+
+  <blockquote class="legal-text">
+    <span class="legal-label">Texto normativo · Artículo 85°</span>
+    <p>El procesado podrá renunciar a la prescripción de la acción penal. En todo caso, si
+       transcurridos dos (2) años contados a partir de la prescripción no se ha proferido
+       decisión definitiva, se decretará la prescripción.</p>
+  </blockquote>
+
+  <div class="chips">
+    <span class="chip">Renuncia voluntaria</span>
+    <span class="chip">Autonomía del procesado</span>
+    <span class="chip">Límite de 2 años</span>
+    <span class="chip">Prescripción forzosa</span>
+    <span class="chip">Orden público</span>
+  </div>
+
+  <div class="quad-grid">
+    <article class="perspective-card dogma">
+      <div class="card-header"><span class="card-icon">⚖️</span><h3 class="card-title">Dogmática</h3></div>
+      <div class="card-sub">Un derecho disponible, pero no ilimitado</div>
+      <div class="card-content">
+        <p>El artículo 85 consagra una <strong>facultad de disposición</strong>: el procesado
+        puede renunciar a la prescripción. Dogmáticamente, esto confirma que la prescripción
+        es un <em>derecho subjetivo</em> del procesado, no sólo una norma de orden público:
+        por eso puede renunciarse.</p>
+        <p>Pero la renuncia tiene un <strong>límite temporal imperativo</strong>: si a los
+        dos años de consumada la prescripción no hay decisión definitiva, el juez <em>debe</em>
+        decretarla. La renuncia no puede transformarse en una renuncia perpetua ni en un
+        mecanismo para mantener al procesado bajo amenaza indefinida.</p>
+        <p>La arquitectura es de <strong>autonomía con tope</strong>: libertad para renunciar,
+        imposibilidad de renunciar para siempre.</p>
+      </div>
+    </article>
+
+    <article class="perspective-card onto">
+      <div class="card-header"><span class="card-icon">🌌</span><h3 class="card-title">Ontología</h3></div>
+      <div class="card-sub">La renuncia como acto y el tiempo como señor</div>
+      <div class="card-content">
+        <p>La renuncia es un <strong>acto de libertad</strong>: el procesado, buscando una
+        decisión de fondo —quizá una absolución que limpie su nombre—, acepta seguir expuesto.
+        Ontológicamente, es el ejercicio de la autonomía procesal frente al beneficio del tiempo.</p>
+        <p>Pero el límite de los dos años revela que <strong>el tiempo tiene una soberanía que
+        la voluntad privada no puede suspender indefinidamente</strong>. La prescripción es
+        también interés público: seguridad jurídica, economía procesal, dignidad de no vivir
+        bajo acusación eterna. La renuncia es válida mientras el proceso avance; cuando el
+        proceso se estanca, el tiempo recupera su autoridad.</p>
+      </div>
+    </article>
+
+    <article class="perspective-card herm">
+      <div class="card-header"><span class="card-icon">📜</span><h3 class="card-title">Hermenéutica</h3></div>
+      <div class="card-sub">Renuncia libre, informada y expresa</div>
+      <div class="card-content">
+        <p>La hermenéutica exige que la renuncia sea <strong>libre, informada y expresa</strong>.
+        No se presume: debe constar en el proceso, con asistencia de defensor y comprensión de
+        sus efectos. Una renuncia arrancada por presión o formulada sin defensa es inválida.</p>
+        <p>La expresión <em>si transcurridos dos años contados a partir de la prescripción no se
+        ha proferido decisión definitiva</em> se interpreta de manera <strong>favorable al
+        procesado</strong>: el plazo corre desde que la prescripción se consumió, no desde la
+        renuncia; y la <em>decisión definitiva</em> es la sentencia de instancia o la providencia
+        que ponga fin al asunto, no cualquier auto interlocutorio.</p>
+        <p>El verbo del precepto es imperativo: <em>se decretará la prescripción</em>. No hay
+        discrecionalidad judicial: vencido el plazo, la extinción es obligatoria.</p>
+      </div>
+    </article>
+
+    <article class="perspective-card proc">
+      <div class="card-header"><span class="card-icon">📋</span><h3 class="card-title">Razonabilidad procedimental</h3></div>
+      <div class="card-sub">El trámite y el control del plazo</div>
+      <div class="card-content">
+        <p>Procedimentalmente:</p>
+        <ul>
+          <li><strong>1.</strong> La renuncia se formula por escrito o en audiencia, con constancia expresa y presencia del defensor.</li>
+          <li><strong>2.</strong> El juez deja constancia de la fecha de consumación de la prescripción y de la renuncia.</li>
+          <li><strong>3.</strong> El juez lleva el control del plazo de dos años desde la consumación de la prescripción.</li>
+          <li><strong>4.</strong> Vencido el plazo sin decisión definitiva, el juez decreta la prescripción de oficio.</li>
+          <li><strong>5.</strong> La providencia ordena el archivo y la libertad si hay medida de aseguramiento.</li>
+        </ul>
+        <p>La razonabilidad procedimental exige que el juez no dependa de la petición de la
+        defensa: el control del plazo es un <strong>deber de oficio</strong>.</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============================================================
+     ARTÍCULO 86
+     ============================================================ -->
+<section id="art86" class="article-section">
+  <div class="article-header">
+    <div class="roman">LXXXVI</div>
+    <h2>Interrupción y suspensión del término prescriptivo
+      <span class="tagline">Cuando el Estado actúa, el reloj se reinicia; cuando negocia, se pausa.</span>
+    </h2>
+  </div>
+
+  <blockquote class="legal-text">
+    <span class="legal-label">Texto normativo · Artículo 86° (modificado por Ley 890 de 2004)</span>
+    <p>La prescripción de la acción penal se interrumpe con la resolución acusatoria o su equivalente
+       debidamente ejecutoriada.</p>
+    <p>Producida la interrupción del término prescriptivo, este comenzará a correr de nuevo por un
+       tiempo igual a la mitad del señalado en el artículo 83. En este evento el término no podrá
+       ser inferior a cinco (5) años, ni superior a diez (10).</p>
+    <p>Con la aplicación del principio de oportunidad, se suspenderá el término de prescripción de
+       la acción penal hasta por un término de tres (3) años. Dicha suspensión se contará a partir
+       de la fecha en que se imparta legalidad de su aplicación ante el Juez de Control de Garantías,
+       en las modalidades de suspensión, interrupción o renuncia de la persecución penal.</p>
+    <p>(Adicionado por el art. 11 de la Ley 2477 de 2025)</p>
+  </blockquote>
+
+  <div class="chips">
+    <span class="chip">Interrupción: acusación ejecutoriada</span>
+    <span class="chip">Reinicio por la mitad</span>
+    <span class="chip">Piso 5 · Techo 10</span>
+    <span class="chip">Suspensión: principio de oportunidad</span>
+    <span class="chip">Hasta 3 años</span>
+    <span class="chip">Desde la legalidad</span>
+  </div>
+
+  <div class="quad-grid">
+    <article class="perspective-card dogma">
+      <div class="card-header"><span class="card-icon">⚖️</span><h3 class="card-title">Dogmática</h3></div>
+      <div class="card-sub">Dos figuras distintas: reinicio y pausa</div>
+      <div class="card-content">
+        <p>El artículo distingue dos mecanismos que la práctica suele confundir.
+        <strong>Interrupción</strong>: el término transcurrido <em>se pierde</em> y comienza a
+        correr uno nuevo, de la mitad del término del art. 83, con piso de 5 y techo de 10 años.
+        <strong>Suspensión</strong>: el término se <em>congela</em>; el tiempo ya corrido se
+        conserva y se retoma al cesar la causa.</p>
+        <p>El <strong>hecho interruptivo</strong> es la resolución acusatoria o su equivalente
+        <em>debidamente ejecutoriada</em>. No basta la formulación de imputación: se exige el
+        acto procesal que cierra la investigación y define la posición formal de la acusación,
+        y que además haya quedado firme.</p>
+        <p>La <strong>suspensión por principio de oportunidad</strong> es de hasta tres años y
+        corre desde la audiencia de legalidad ante el Juez de Control de Garantías, en sus
+        modalidades de suspensión, interrupción o renuncia de la persecución penal.</p>
+      </div>
+    </article>
+
+    <article class="perspective-card onto">
+      <div class="card-header"><span class="card-icon">🌌</span><h3 class="card-title">Ontología</h3></div>
+      <div class="card-sub">La acción estatal reactiva el poder</div>
+      <div class="card-content">
+        <p>La interrupción expresa un principio ontológico sencillo: <strong>la prescripción
+        castiga la inercia, no la actividad</strong>. Mientras el Estado investiga y acusa,
+        ejerce su poder; el tiempo no puede apagar lo que se está ejerciendo. La acusación
+        ejecutoriada es el momento en que la pretensión punitiva se <em>formaliza</em> y deja
+        de ser una amenaza latente para convertirse en un conflicto definido.</p>
+        <p>Pero el reinicio es por <strong>la mitad</strong>, con techo de diez años. La
+        ontología del instituto se mantiene: el poder no se reactiva con la misma potencia
+        inicial. El tiempo ya transcurrido deja una huella irreversible; el Estado que
+        acusó ya gastó una parte de su legitimidad temporal.</p>
+        <p>La suspensión por principio de oportunidad tiene una ontología distinta: es el
+        <em>tiempo concedido a la negociación</em>. Mientras el Estado y el procesado conversan
+        sobre colaboración y beneficios, el reloj no corre contra nadie: está en suspenso por
+        decisión acordada y controlada judicialmente.</p>
+      </div>
+    </article>
+
+    <article class="perspective-card herm">
+      <div class="card-header"><span class="card-icon">📜</span><h3 class="card-title">Hermenéutica</h3></div>
+      <div class="card-sub">La "resolución acusatoria o su equivalente"</div>
+      <div class="card-content">
+        <p>La expresión es el punto más litigioso del artículo. La jurisprudencia de la
+        <strong>Corte Suprema de Justicia</strong> ha sostenido que, en el sistema procesal
+        acusatorio, la <em>formulación de imputación</em> no interrumpe la prescripción:
+        el hecho interruptivo es la <strong>acusación</strong>, y además ejecutoriada. Ampliar
+        el concepto a todo acto de investigación destruiría la prescripción y convertiría
+        el proceso en indefinido.</p>
+        <p>La <em>ejecutoria</em> es un requisito autónomo: una acusación impugnada y revocada
+        no interrumpió nada. El juez debe verificar la firmeza antes de recalcular.</p>
+        <p>El piso de cinco años del término posterior a la interrupción es una
+        <strong>cláusula de protección</strong>: evita que, por la vía del cálculo, el nuevo
+        término se vuelva irrisorio. Y el techo de diez garantiza que la interrupción no
+        prolongue la persecución más allá de lo razonable.</p>
+        <p>La suspensión por principio de oportunidad debe interpretarse <strong>restrictivamente</strong>:
+        no puede usarse como instrumento para prorrogar indefinidamente procesos de alta
+        complejidad. Su duración máxima es de tres años y su punto de partida es la
+        <em>legalidad judicial</em>, no la simple solicitud fiscal.</p>
+      </div>
+    </article>
+
+    <article class="perspective-card proc">
+      <div class="card-header"><span class="card-icon">📋</span><h3 class="card-title">Razonabilidad procedimental</h3></div>
+      <div class="card-sub">Verificar, recalcular, declarar</div>
+      <div class="card-content">
+        <p>Procedimentalmente, el juez debe:</p>
+        <ul>
+          <li><strong>1.</strong> Identificar si se configura interrupción o suspensión.</li>
+          <li><strong>2.</strong> En la interrupción: verificar la existencia y la ejecutoria de la resolución acusatoria o su equivalente.</li>
+          <li><strong>3.</strong> Recalcular el nuevo término: mitad del del art. 83, ajustado al piso de 5 y al techo de 10.</li>
+          <li><strong>4.</strong> En la suspensión: verificar la audiencia de legalidad del principio de oportunidad y contar hasta tres años desde esa fecha.</li>
+          <li><strong>5.</strong> Registrar en la providencia las fechas exactas: inicio, interrupción, suspensión, reinicio.</li>
+          <li><strong>6.</strong> Declarar la prescripción cuando el nuevo término se haya cumplido sin decisión definitiva.</li>
+        </ul>
+      </div>
+    </article>
+  </div>
+
+  <div class="callout">
+    <span class="label">Nodo de razonabilidad</span>
+    <p><strong>¿Puede la suma de suspensiones eternizar un proceso?</strong>
+    No. La razonabilidad impone que el tiempo total de persecución tenga un horizonte
+    razonable: ni la acumulación de suspensiones ni la repetición de interrupciones pueden
+    convertir la prescripción en una figura nominal. El juez que permite esa deriva vulnera
+    el debido proceso y el derecho a un juzgamiento sin dilaciones injustificadas.</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     ARTÍCULO 87
+     ============================================================ -->
+<section id="art87" class="article-section">
+  <div class="article-header">
+    <div class="roman">LXXXVII</div>
+    <h2>La oblación
+      <span class="tagline">La reparación como vía de extinción en los delitos de multa.</span>
+    </h2>
+  </div>
+
+  <blockquote class="legal-text">
+    <span class="legal-label">Texto normativo · Artículo 87°</span>
+    <p>El procesado por conducta punible que solo tenga pena de unidad multa, previa tasación de
+       la indemnización cuando a ello haya lugar, podrá poner fin al proceso pagando la suma que
+       el Juez le señale, dentro de los límites fijados por el artículo 39.</p>
+  </blockquote>
+
+  <div class="chips">
+    <span class="chip">Solo unidad multa</span>
+    <span class="chip">Tasación de indemnización</span>
+    <span class="chip">Suma señalada por el juez</span>
+    <span class="chip">Límites del art. 39</span>
+    <span class="chip">Extinción de la acción</span>
+    <span class="chip">Justicia restaurativa</span>
+  </div>
+
+  <div class="quad-grid">
+    <article class="perspective-card dogma">
+      <div class="card-header"><span class="card-icon">⚖️</span><h3 class="card-title">Dogmática</h3></div>
+      <div class="card-sub">Una causal satisfactiva de alcance reducido</div>
+      <div class="card-content">
+        <p>La oblación es una <strong>causal de extinción satisfactiva</strong>: el proceso
+        termina porque el procesado paga. Pero su campo de aplicación es <em>muy estrecho</em>:
+        sólo procede en conductas punibles cuya única pena sea la <strong>unidad multa</strong>.
+        Si el tipo prevé prisión, aunque sea breve, no hay oblación.</p>
+        <p>Su estructura exige tres elementos: (1) que la pena sea exclusivamente de unidad
+        multa; (2) la <strong>previa tasación de la indemnización</strong> cuando haya lugar;
+        (3) el pago de la suma que el juez señale <em>dentro de los límites del artículo 39</em>
+        (grados de unidad multa según la capacidad económica del condenado).</p>
+        <p>Dogmáticamente, la oblación se distingue del <em>pago</em> y de la
+        <em>indemnización integral</em> del artículo 82: son causales distintas, con
+        presupuestos y ámbitos propios.</p>
+      </div>
+    </article>
+
+    <article class="perspective-card onto">
+      <div class="card-header"><span class="card-icon">🌌</span><h3 class="card-title">Ontología</h3></div>
+      <div class="card-sub">La reparación antes que la retribución</div>
+      <div class="card-content">
+        <p>La oblación expresa una concepción <strong>restaurativa</strong> del derecho penal
+        para los injustos de menor entidad. Ontológicamente, cuando el daño es patrimonial y
+        el bien es disponible, la satisfacción del damnificado puede agotar el sentido de la
+        persecución: ya no hay nada que el castigo pueda añadir.</p>
+        <p>El patrimonio se convierte aquí en el <strong>lenguaje de la reparación</strong>.
+        No es que el dinero compre la impunidad: es que, en ciertos conflictos, la reparación
+        es la forma adecuada de justicia. El proceso se extingue porque su fin ya se cumplió
+        por otra vía.</p>
+        <p>La exigencia de <em>tasación previa</em> revela el orden ontológico correcto: primero
+        la víctima, después el Estado. La oblación no es un trato entre el procesado y la
+        fiscalía: es una satisfacción cuyo primer destinatario es el afectado.</p>
+      </div>
+    </article>
+
+    <article class="perspective-card herm">
+      <div class="card-header"><span class="card-icon">📜</span><h3 class="card-title">Hermenéutica</h3></div>
+      <div class="card-sub">Interpretación restrictiva y proporcionalidad de la suma</div>
+      <div class="card-content">
+        <p>La hermenéutica es <strong>restrictiva</strong>: la expresión <em>solo tenga pena de
+        unidad multa</em> se lee al pie de la letra. No procede por analogía a delitos con
+        prisión, ni a delitos mixtos, ni a contravenciones que la ley no contemple.</p>
+        <p>La suma señalada por el juez debe respetar los <strong>límites del artículo 39</strong>:
+        los grados de unidad multa según los ingresos del condenado. Fijar una suma irreal para
+        un procesado indigente sería convertir la oblación en una trampa: se extingue el acceso
+        a la extinción por pobreza. La hermenéutica exige que la suma sea <em>razonable y
+        pagable</em>.</p>
+        <p>La tasación de la indemnización es un <strong>presupuesto de procedibilidad</strong>,
+        no un trámite posterior: sin ella no hay oblación posible.</p>
+      </div>
+    </article>
+
+    <article class="perspective-card proc">
+      <div class="card-header"><span class="card-icon">📋</span><h3 class="card-title">Razonabilidad procedimental</h3></div>
+      <div class="card-sub">El trámite de la oblación</div>
+      <div class="card-content">
+        <p>Procedimentalmente:</p>
+        <ul>
+          <li><strong>1.</strong> Verificación del presupuesto: la pena del tipo es exclusivamente de unidad multa.</li>
+          <li><strong>2.</strong> Solicitud del procesado ante el juez de conocimiento.</li>
+          <li><strong>3.</strong> Tasación de la indemnización, cuando a ello haya lugar, con audiencia de la víctima.</li>
+          <li><strong>4.</strong> Determinación judicial de la suma, dentro de los límites del art. 39 y según la capacidad económica acreditada.</li>
+          <li><strong>5.</strong> Pago por el procesado.</li>
+          <li><strong>6.</strong> Providencia que declara extinguida la acción penal y ordena el archivo.</li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECCIÓN B: EXTINCIÓN DE LA SANCIÓN PENAL
+     ============================================================ -->
+<div id="sB" class="section-divider">
+  <span class="num">B</span>
+  <h2>Extinción de la sanción penal</h2>
+  <p>Arts. 88–92 · Causales · Término · Interrupción de la prisión y de la multa · Rehabilitación</p>
+</div>
+
+<!-- ============================================================
+     ARTÍCULO 88
+     ============================================================ -->
+<section id="art88" class="article-section">
+  <div class="article-header">
+    <div class="roman">LXXXVIII</div>
+    <h2>Extinción de la sanción penal
+      <span class="tagline">Cuando ya hay condena: siete formas de apagar la pena.</span>
+    </h2>
+  </div>
+
+  <blockquote class="legal-text">
+    <span class="legal-label">Texto normativo · Artículo 88°</span>
+    <p>Son causas de extinción de la sanción penal:</p>
+    <ol>
+      <li>La muerte del condenado.</li>
+      <li>El indulto.</li>
+      <li>La amnistía impropia.</li>
+      <li>La prescripción.</li>
+      <li>La rehabilitación para las sanciones privativas de derechos cuando operen como accesorias.</li>
+      <li>La exención de punibilidad en los casos previstos en la ley.</li>
+      <li>Las demás que señale la ley.</li>
+    </ol>
+  </blockquote>
+
+  <div class="chips">
+    <span class="chip">Muerte del condenado</span>
+    <span class="chip">Indulto</span>
+    <span class="chip">Amnistía impropia</span>
+    <span class="chip">Prescripción</span>
+    <span class="chip">Rehabilitación</span>
+    <span class="chip">Exención de punibilidad</span>
+    <span class="chip">Cláusula abierta</span>
+  </div>
+
+  <div class="quad-grid">
+    <article class="perspective-card dogma">
+      <div class="card-header"><span class="card-icon">⚖️</span><h3 class="card-title">Dogmática</h3></div>
+      <div class="card-sub">La otra mitad del capítulo</div>
+      <div class="card-content">
+        <p>El artículo 88 desplaza el objeto: ya no se extingue la <em>acción</em> sino la
+        <em>sanción</em>. Supone una condena en firme. Las causales se agrupan en cuatro familias:
+        <strong>naturales</strong> (muerte del condenado); <strong>de gracia o de ley</strong>
+        (indulto y amnistía impropia); <strong>temporales</strong> (prescripción de la pena);
+        y <strong>de restitución</strong> (rehabilitación de las sanciones privativas de derechos
+        accesorias).</p>
+        <p>La distinción técnica entre <strong>indulto</strong> (acto de gracia sobre la pena)
+        y <strong>amnistía impropia</strong> (ley que extingue la sanción ya impuesta) es
+        esencial: el indulto es un acto de clemencia individualizado; la amnistía es una
+        norma general. La amnistía <em>propia</em>, en cambio, opera antes de la condena y
+        extingue la acción (art. 82).</p>
+        <p>La <strong>exención de punibilidad</strong> es una categoría distinta: no extingue
+        una pena ya impuesta sino que excluye la punibilidad por decisión legal en supuestos
+        tasados.</p>
+      </div>
+    </article>
+
+    <article class="perspective-card onto">
+      <div class="card-header"><span class="card-icon">🌌</span><h3 class="card-title">Ontología</h3></div>
+      <div class="card-sub">La pena que se apaga con el penado y la que se apaga con la persona nueva</div>
+      <div class="card-content">
+        <p>La <strong>muerte del condenado</strong> es el límite absoluto: la pena es una
+        relación entre el Estado y una persona concreta. Sin persona, no hay relación.
+        Ontológicamente, la muerte no perdona: hace imposible el castigo.</p>
+        <p>El <strong>indulto</strong> tiene una ontología política: es la irrupción de la
+        clemencia sobre la rigidez de la condena. No niega el delito ni la culpa: suspende la
+        ejecución por razones de justicia, equidad o política criminal. Es el momento en que
+        el poder reconoce que aplicar la pena en ese caso sería injusto.</p>
+        <p>La <strong>rehabilitación</strong> es la causal más profundamente humana: supone
+        que la persona <em>cambió</em>. No se extingue la pena porque haya pasado el tiempo,
+        sino porque la inhabilitación ya no tiene sentido frente a quien recuperó una conducta
+        intachable. Es el reconocimiento jurídico de la transformación personal.</p>
+      </div>
+    </article>
+
+    <article class="perspective-card herm">
+      <div class="card-header"><span class="card-icon">📜</span><h3 class="card-title">Hermenéutica</h3></div>
+      <div class="card-sub">Límites internacionales a la gracia</div>
+      <div class="card-content">
+        <p>La hermenéutica del artículo 88 está atravesada por los <strong>estándares
+        interamericanos</strong>: el indulto, la amnistía y las medidas análogas son
+        <em>inadmisibles</em> respecto de graves violaciones de derechos humanos y crímenes
+        de lesa humanidad. Toda interpretación que los extienda a esos supuestos es
+        inconvencional.</p>
+        <p>La <strong>exención de punibilidad</strong> se interpreta restrictivamente: sólo
+        opera en los casos expresamente previstos por la ley. No se crea por analogía ni se
+        aplica por equidad judicial.</p>
+        <p>La <strong>rehabilitación</strong> se interpreta conforme a la función de
+        reinserción de la pena (art. 4): es el mecanismo por el cual el derecho restituye al
+        condenado el pleno estatuto de ciudadanía. Por eso sus requisitos se valoran con
+        criterio de <em>reintegración</em>, no de castigo adicional.</p>
+      </div>
+    </article>
+
+    <article class="perspective-card proc">
+      <div class="card-header"><span class="card-icon">📋</span><h3 class="card-title">Razonabilidad procedimental</h3></div>
+      <div class="card-sub">El juez de ejecución como autoridad central</div>
+      <div class="card-content">
+        <p>Procedimentalmente, la extinción de la sanción se tramita así:</p>
+        <ul>
+          <li><strong>Competencia</strong>: el Juez de Ejecución de Penas y Medidas de Seguridad.</li>
+          <li><strong>Iniciativa</strong>: de oficio o a petición del condenado, su defensor o el Ministerio Público.</li>
+          <li><strong>Prueba</strong>: registro civil de defunción; acto de indulto o ley de amnistía; cómputo de la prescripción; expediente de rehabilitación con sus anexos.</li>
+          <li><strong>Decisión</strong>: providencia motivada que declara la extinción, ordena la libertad si corresponde y comunica a las autoridades registrales.</li>
+          <li><strong>Impugnación</strong>: recursos ordinarios; tutela como mecanismo residual ante la vía de hecho.</li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============================================================
+     ARTÍCULO 89
+     ============================================================ -->
+<section id="art89" class="article-section">
+  <div class="article-header">
+    <div class="roman">LXXXIX</div>
+    <h2>Término de prescripción de la sanción penal
+      <span class="tagline">El Estado que no ejecuta la condena pierde el derecho a ejecutarla.</span>
+    </h2>
+  </div>
+
+  <blockquote class="legal-text">
+    <span class="legal-label">Texto normativo · Artículo 89° (modificado por Ley 2098 de 2021)</span>
+    <p>La pena privativa de la libertad, salvo lo previsto en tratados internacionales debidamente
+       incorporados al ordenamiento jurídico, prescribe en el término fijado para ella en la sentencia
+       o en el que falte por ejecutar, pero en ningún caso podrá ser inferior a cinco años contados a
+       partir de la ejecutoria de la correspondiente sentencia.</p>
+    <p>La pena no privativa de la libertad prescribe en cinco (5) años.</p>
+    <p>La pena de prisión perpetua revisable prescribirá en 60 años contados a partir de la ejecutoria
+       de la sentencia que la impone.</p>
+    <p><strong>NOTA:</strong> Artículo declarado EXEQUIBLE por la Corte Constitucional mediante
+       Sentencia C-383 de 2022.</p>
+  </blockquote>
+
+  <div class="chips">
+    <span class="chip">Privativa: el término de la sentencia o el faltante</span>
+    <span class="chip">Piso: 5 años desde la ejecutoria</span>
+    <span class="chip">No privativa: 5 años</span>
+    <span class="chip">Prisión perpetua revisable: 60 años</span>
+    <span class="chip">Reserva de tratados internacionales</span>
+  </div>
+
+  <div class="quad-grid">
+    <article class="perspective-card dogma">
+      <div class="card-header"><span class="card-icon">⚖️</span><h3 class="card-title">Dogmática</h3></div>
+      <div class="card-sub">Tres reglas y un piso común</div>
+      <div class="card-content">
+        <p>El artículo 89 fija tres reglas según la naturaleza de la pena:</p>
+        <ul>
+          <li><strong>Privativa de la libertad</strong>: prescribe en el término fijado en la sentencia o en el que falte por ejecutar, con <em>piso imperativo de cinco años</em> contados desde la ejecutoria.</li>
+          <li><strong>No privativa</strong>: cinco años, cifra fija.</li>
+          <li><strong>Prisión perpetua revisable</strong>: sesenta años desde la ejecutoria de la sentencia que la impone.</li>
+        </ul>
+        <p>El piso de cinco años es una regla de <strong>protección del condenado</strong>:
+        aunque la sentencia fije una pena de dos años, la prescripción no puede ser inferior
+        a cinco. El legislador evita así que una condena breve se extinga antes de que el
+        Estado haya tenido oportunidad real de ejecutarla.</p>
+        <p>La referencia a <em>tratados internacionales debidamente incorporados</em> es una
+        cláusula de apertura al derecho internacional: los estándares convencionales pueden
+        modificar el régimen interno, en especial en materia de crímenes internacionales.</p>
+      </div>
+    </article>
+
+    <article class="perspective-card onto">
+      <div class="card-header"><span class="card-icon">🌌</span><h3 class="card-title">Ontología</h3></div>
+      <div class="card-sub">La caducidad del poder de ejecutar</div>
+      <div class="card-content">
+        <p>La prescripción de la sanción tiene una ontología distinta a la de la acción.
+        Aquí el poder punitivo <em>ya se ejercitó</em>: hay condena. Lo que caduca no es la
+        facultad de perseguir sino la de <strong>ejecutar</strong>. Ontológicamente, una
+        condena que el Estado no hace efectiva durante años pierde su fuerza: la sentencia
+        queda como un título sin eficacia.</p>
+        <p>La regla del término <em>faltante por ejecutar</em> revela que el tiempo de
+        prescripción es proporcional a lo que queda de pena: no se prescribe lo ya cumplido,
+        porque ya se cumplió. La pena es un <em>saldo</em> que se extingue.</p>
+        <p>La prescripción de la <strong>prisión perpetua revisable en 60 años</strong>
+        es una pieza de coherencia interna: la pena más grave del sistema tiene también su
+        tiempo de extinción. Nada en el derecho penal colombiano es literalmente infinito.</p>
+      </div>
+    </article>
+
+    <article class="perspective-card herm">
+      <div class="card-header"><span class="card-icon">📜</span><h3 class="card-title">Hermenéutica</h3></div>
+      <div class="card-sub">El piso imperativo y la excepción convencional</div>
+      <div class="card-content">
+        <p>La hermenéutica del piso de cinco años es <strong>imperativa</strong>: no admite
+        pacto, renuncia ni interpretación que lo reduzca. Es una norma de protección que opera
+        aunque la sentencia no lo mencione.</p>
+        <p>La cláusula de los <em>tratados internacionales</em> se interpreta conforme al
+        bloque de constitucionalidad: los estándares internacionales de derechos humanos y
+        de justicia transicional pueden establecer regímenes propios de prescripción de la
+        sanción. El juez debe verificar la <em>incorporación debida</em> del tratado antes
+        de aplicarlo: no basta la firma, se exige el perfeccionamiento interno.</p>
+        <p>La <strong>ejecutoria</strong> es el punto de partida único: no la fecha del hecho,
+        ni la de la lectura de la sentencia, sino la firmeza de la condena. Antes de ella no
+        hay sanción prescribible, porque no hay sanción.</p>
+      </div>
+    </article>
+
+    <article class="perspective-card proc">
+      <div class="card-header"><span class="card-icon">📋</span><h3 class="card-title">Razonabilidad procedimental</h3></div>
+      <div class="card-sub">El cómputo en la ejecución</div>
+      <div class="card-content">
+        <p>Procedimentalmente, el Juez de Ejecución debe:</p>
+        <ul>
+          <li><strong>1.</strong> Verificar la ejecutoria de la sentencia y su fecha exacta.</li>
+          <li><strong>2.</strong> Determinar la naturaleza de la pena: privativa, no privativa o perpetua revisable.</li>
+          <li><strong>3.</strong> Fijar el término: el de la sentencia o el faltante, con piso de 5 años; 5 años para las no privativas; 60 años para la perpetua revisable.</li>
+          <li><strong>4.</strong> Verificar las interrupciones (arts. 90 y 91).</li>
+          <li><strong>5.</strong> Declarar la prescripción de oficio si se cumplió el término sin ejecución.</li>
+          <li><strong>6.</strong> Ordenar la libertad inmediata y comunicar el archivo.</li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============================================================
+     ARTÍCULOS 90 Y 91
+     ============================================================ -->
+<section id="art90" class="article-section">
+  <div class="article-header">
+    <div class="roman">XC–XCI</div>
+    <h2>Interrupción del término de prescripción de la sanción
+      <span class="tagline">La aprehensión y el cobro coactivo como hechos interruptivos.</span>
+    </h2>
+  </div>
+
+  <blockquote class="legal-text">
+    <span class="legal-label">Texto normativo · Artículos 90° y 91°</span>
+    <p><strong>Art. 90.</strong> El término de prescripción de la sanción privativa de la libertad
+       se interrumpirá cuando el sentenciado fuere aprehendido en virtud de la sentencia, o fuere
+       puesto a disposición de la autoridad competente para el cumplimiento de la misma.</p>
+    <p><strong>Art. 91.</strong> El término prescriptivo de la pena de multa se interrumpirá con la
+       decisión mediante la cual se inicia el procedimiento de ejecución coactiva de la multa o su
+       conversión en arresto.</p>
+    <p>Producida la interrupción el término comenzará a correr de nuevo por un lapso de cinco (5) años.</p>
+  </blockquote>
+
+  <div class="chips">
+    <span class="chip">Aprehensión en virtud de la sentencia</span>
+    <span class="chip">Puesta a disposición</span>
+    <span class="chip">Inicio del cobro coactivo</span>
+    <span class="chip">Conversión en arresto</span>
+    <span class="chip">Reinicio por 5 años (multa)</span>
+  </div>
+
+  <div class="quad-grid">
+    <article class="perspective-card dogma">
+      <div class="card-header"><span class="card-icon">⚖️</span><h3 class="card-title">Dogmática</h3></div>
+      <div class="card-sub">Dos hechos interruptivos según la pena</div>
+      <div class="card-content">
+        <p>Los dos artículos regulan la interrupción según la naturaleza de la pena. Para la
+        <strong>prisión</strong>, el hecho interruptivo es fáctico: la <em>aprehensión en
+        virtud de la sentencia</em> o la <em>puesta a disposición</em> de la autoridad
+        competente. Para la <strong>multa</strong>, el hecho interruptivo es procesal: la
+        decisión que inicia la <em>ejecución coactiva</em> o su <em>conversión en arresto</em>.</p>
+        <p>En el caso de la multa, el artículo añade una regla de cálculo: producida la
+        interrupción, el término corre de nuevo por <strong>cinco años</strong>. En el de la
+        prisión, la regla no se repite expresamente: rige el término del artículo 89, reiniciado
+        desde la aprehensión.</p>
+      </div>
+    </article>
+
+    <article class="perspective-card onto">
+      <div class="card-header"><span class="card-icon">🌌</span><h3 class="card-title">Ontología</h3></div>
+      <div class="card-sub">El Estado que se hace cargo del condenado recupera el tiempo</div>
+      <div class="card-content">
+        <p>La interrupción de la sanción privada de la libertad expresa que la prescripción
+        sólo corre mientras el condenado está <em>fuera del alcance del Estado</em>. En el
+        momento en que es aprehendido, la relación punitiva se restablece: el tiempo de fuga
+        se interrumpió. Ontológicamente, la aprehensión es el instante en que el condenado
+        vuelve a ser <em>sujeto de la ejecución</em>.</p>
+        <p>La interrupción de la multa tiene una lógica análoga pero distinta: no es la captura
+        de una persona sino el <em>inicio formal de la cobrança</em>. El Estado que cobra
+        manifiesta su interés; el Estado que no cobra, deja correr el tiempo.</p>
+      </div>
+    </article>
+
+    <article class="perspective-card herm">
+      <div class="card-header"><span class="card-icon">📜</span><h3 class="card-title">Hermenéutica</h3></div>
+      <div class="card-sub">La causalidad de la aprehensión</div>
+      <div class="card-content">
+        <p>La expresión <em>aprehendido en virtud de la sentencia</em> es decisiva: la captura
+        debe obedecer a esa condena, no a otro proceso. Si el sentenciado es capturado por un
+        hecho distinto, esa aprehensión no interrumpe la prescripción de la primera condena.
+        La hermenéutica exige probar el <strong>nexo entre la captura y el título ejecutivo</strong>.</p>
+        <p>La <em>puesta a disposición de la autoridad competente</em> debe ser efectiva y
+        documentada: no basta una orden librada sin diligencia. La hermenéutica exige el
+        registro de la diligencia, con fecha y hora.</p>
+        <p>En la multa, la decisión interruptiva es la que <em>inicia</em> el procedimiento
+        coactivo: no cualquier providencia posterior ni un mero requerimiento de pago.</p>
+      </div>
+    </article>
+
+    <article class="perspective-card proc">
+      <div class="card-header"><span class="card-icon">📋</span><h3 class="card-title">Razonabilidad procedimental</h3></div>
+      <div class="card-sub">Certificar la fecha y recalcular</div>
+      <div class="card-content">
+        <p>Procedimentalmente:</p>
+        <ul>
+          <li><strong>1.</strong> La autoridad de policía o el INPEC informa la aprehensión o la puesta a disposición, con fecha y hora.</li>
+          <li><strong>2.</strong> El juez certifica la ocurrencia del hecho interruptivo y su fecha.</li>
+          <li><strong>3.</strong> En la multa, se incorpora la providencia que inicia el cobro coactivo o la conversión en arresto.</li>
+          <li><strong>4.</strong> El juez recalcula el término desde la fecha de interrupción.</li>
+          <li><strong>5.</strong> Se registra en la carpeta de ejecución y se notifica al condenado y a su defensor.</li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============================================================
+     ARTÍCULO 92
+     ============================================================ -->
+<section id="art92" class="article-section">
+  <div class="article-header">
+    <div class="roman">XCII</div>
+    <h2>La rehabilitación
+      <span class="tagline">La restitución de la ciudadanía perdida por una pena accesoria.</span>
+    </h2>
+  </div>
+
+  <blockquote class="legal-text">
+    <span class="legal-label">Texto normativo · Artículo 92°</span>
+    <p>La rehabilitación de derechos afectados por una pena privativa de los mismos, cuando se
+       imponga como accesoria, operará conforme a las siguientes reglas:</p>
+    <ol>
+      <li>Una vez transcurrido el término impuesto en la sentencia, la rehabilitación operará de
+          derecho. Para ello bastará que el interesado formule la solicitud pertinente, acompañada
+          de los respectivos documentos ante la autoridad correspondiente.</li>
+      <li>Antes del vencimiento del término previsto en la sentencia podrá solicitarse la
+          rehabilitación cuando la persona haya observado intachable conducta personal, familiar,
+          social y no haya evadido la ejecución de la pena; allegando copia de la cartilla biográfica,
+          dos declaraciones, por lo menos, de personas de reconocida honorabilidad que den cuenta de
+          la conducta observada después de la condena, certificado de la entidad bajo cuya vigilancia
+          hubiere estado el peticionario en el período de prueba de la libertad condicional o vigilada
+          y comprobación del pago de los perjuicios civiles.
+          <br>En este evento, si la pena privativa de derechos no concurriere con una privativa de la
+          libertad, la rehabilitación podrá pedirse dos (2) años después de la ejecutoria de la sentencia
+          que la impuso, si hubiere transcurrido la mitad del término impuesto.
+          <br>Si la pena privativa de derechos concurriere con una privativa de la libertad, solo podrá
+          pedirse la rehabilitación después de dos (2) años contados a partir del día en que el condenado
+          haya cumplido la pena privativa de la libertad, si hubiere transcurrido la mitad del término
+          impuesto.</li>
+      <li>Cuando en la sentencia se otorgue la suspensión condicional de la ejecución de la pena
+          privativa de la libertad, y no se exceptúe de ella la pena accesoria, esta se extinguirá con
+          el cumplimiento del período de prueba fijado en el respectivo fallo.
+          <br>Cuando, por el contrario, concedido el beneficio en mención, se exceptúe de este la pena
+          accesoria, su rehabilitación solo podrá solicitarse dos (2) años después de ejecutoriada la
+          sentencia en que fue impuesta, si hubiere transcurrido la mitad del término impuesto.
+          <br>No procede la rehabilitación en el evento contemplado en el inciso 5 del artículo 122 de
+          la Constitución Política.</li>
+    </ol>
+  </blockquote>
+
+  <div class="chips">
+    <span class="chip">Rehabilitación de derecho</span>
+    <span class="chip">Rehabilitación anticipada</span>
+    <span class="chip">Conducta intachable</span>
+    <span class="chip">Cartilla biográfica</span>
+    <span class="chip">Dos declaraciones</span>
+    <span class="chip">Pago de perjuicios civiles</span>
+    <span class="chip">Regla de los 2 años + mitad</span>
+    <span class="chip">Efecto de la suspensión condicional</span>
+    <span class="chip hot">Excepción: art. 122 inc. 5 C.P.</span>
+  </div>
+
+  <div class="quad-grid">
+    <article class="perspective-card dogma">
+      <div class="card-header"><span class="card-icon">⚖️</span><h3 class="card-title">Dogmática</h3></div>
+      <div class="card-sub">Tres reglas y una prohibición constitucional</div>
+      <div class="card-content">
+        <p>La rehabilitación tiene una <strong>estructura de tres niveles</strong>:</p>
+        <ul>
+          <li><strong>Regla 1 — de derecho</strong>: vencido el término de la sentencia, la rehabilitación opera automáticamente. La solicitud es un trámite declarativo, no concedido.</li>
+          <li><strong>Regla 2 — anticipada</strong>: antes del vencimiento, procede si hay conducta intachable y se acreditan los requisitos probatorios, con el doble umbral temporal: dos años y mitad del término impuesto.</li>
+          <li><strong>Regla 3 — efecto de la suspensión condicional</strong>: si la accesoria no se exceptúa del beneficio, se extingue con el período de prueba; si se exceptúa, rige nuevamente la regla de los dos años y la mitad.</li>
+        </ul>
+        <p>La regla 2 distingue dos escenarios temporales según la accesoria concurra o no con
+        prisión: en el segundo, los dos años se cuentan desde el <em>cumplimiento de la pena
+        privativa de la libertad</em>, no desde la ejecutoria. Es una protección: quien está
+        preso no puede empezar a probar su conducta social mientras está encerrado.</p>
+        <p>La prohibición final es constitucional: <strong>no procede rehabilitación</strong>
+        en el evento del inciso 5 del artículo 122 de la Constitución, relativo a la
+        inhabilitación para functions públicas de quienes son condenados por delitos contra
+        el patrimonio del Estado.</p>
+      </div>
+    </article>
+
+    <article class="perspective-card onto">
+      <div class="card-header"><span class="card-icon">🌌</span><h3 class="card-title">Ontología</h3></div>
+      <div class="card-sub">La persona que ya no es la misma</div>
+      <div class="card-content">
+        <p>La rehabilitación es la causal de extinción más profundamente antropológica del
+        capítulo. Su presupuesto no es el tiempo transcurrido sino la <strong>transformación
+        de la persona</strong>. Ontológicamente, supone que el sujeto que cometió el delito y
+        el sujeto que hoy solicita la rehabilitación no son el mismo: entre uno y otro hay una
+        historia de conducta intachable.</p>
+        <p>La exigencia de pruebas —cartilla biográfica, declaraciones de honorabilidad,
+        certificado de vigilancia, pago de perjuicios— no es burocracia: es la
+        <strong>materialización jurídica de un cambio interior</strong>. El derecho no puede
+        creer en la transformación: debe verificarla.</p>
+        <p>El pago de los perjuicios civiles como requisito revela el orden ético del instituto:
+        no hay restitución de derechos sin reparación del daño. La rehabilitación no es un
+        olvido: es una <em>reconciliación verificada</em>.</p>
+        <p>La prohibición constitucional del inciso 5 del art. 122 introduce una excepción
+        severa: en ciertos delitos contra el patrimonio del Estado, la inhabilitación es
+        permanente y no admite rehabilitación. Es la expresión de que, para el constituyente,
+        hay traiciones a lo público que agotan definitivamente la confianza.</p>
+      </div>
+    </article>
+
+    <article class="perspective-card herm">
+      <div class="card-header"><span class="card-icon">📜</span><h3 class="card-title">Hermenéutica</h3></div>
+      <div class="card-sub">Automática en la regla 1, discrecional en la 2, estricta en la prohibición</div>
+      <div class="card-content">
+        <p>La hermenéutica distingue tres intensidades:</p>
+        <ul>
+          <li><strong>Regla 1</strong>: la rehabilitación es <em>de derecho</em>. El juez no evalúa discrecionalmente: verifica el vencimiento y declara. Negarla sería vulnerar el debido proceso.</li>
+          <li><strong>Regla 2</strong>: la rehabilitación es <em>concedida</em>. El juez valora la conducta intachable con criterio razonable y motivado, sin exigir requisitos no previstos.</li>
+          <li><strong>Prohibición constitucional</strong>: se interpreta <em>estrictamente</em>, sólo para el supuesto del art. 122, inc. 5. No se amplía por analogía a otros delitos.</li>
+        </ul>
+        <p>La expresión <em>intachable conducta personal, familiar, social</em> se interpreta
+        con criterio de <strong>reinserción</strong> (art. 4), no de perfección moral: se exige
+        ausencia de nuevos comportamientos delictivos y de integración social, no una biografía
+        impecable en todo sentido.</p>
+      </div>
+    </article>
+
+    <article class="perspective-card proc">
+      <div class="card-header"><span class="card-icon">📋</span><h3 class="card-title">Razonabilidad procedimental</h3></div>
+      <div class="card-sub">El expediente de rehabilitación</div>
+      <div class="card-content">
+        <p>Procedimentalmente, el trámite exige:</p>
+        <ul>
+          <li><strong>1.</strong> Solicitud del interesado ante la autoridad correspondiente, con los documentos pertinentes.</li>
+          <li><strong>2.</strong> Copia de la cartilla biográfica.</li>
+          <li><strong>3.</strong> Al menos dos declaraciones de personas de reconocida honorabilidad sobre la conducta posterior a la condena.</li>
+          <li><strong>4.</strong> Certificado de la entidad de vigilancia del período de prueba de la libertad condicional o vigilada.</li>
+          <li><strong>5.</strong> Comprobación del pago de los perjuicios civiles.</li>
+          <li><strong>6.</strong> Verificación del umbral temporal: dos años y mitad del término, contados según concurra o no con prisión.</li>
+          <li><strong>7.</strong> Decisión motivada y comunicación a la autoridad registral (Registraduría, RUES, autoridades profesionales) para el levantamiento de la inhabilitación.</li>
+        </ul>
+      </div>
+    </article>
+  </div>
+
+  <div class="callout">
+    <span class="label">Nodo de razonabilidad</span>
+    <p><strong>¿Es razonable una inhabilitación sin posibilidad de rehabilitación?</strong>
+    La regla general del artículo 92 es la restitución de la ciudadanía; la excepción
+    constitucional del art. 122, inc. 5, es la permanencia de la inhabilitación. La
+    razonabilidad exige que la excepción se justifique por la <em>gravedad de la traición
+    a lo público</em> y se aplique estrictamente al supuesto previsto: cuando se extiende,
+    convierte la rehabilitación en letra muerta y borra la posibilidad de transformación
+    que el propio sistema reconoce como función de la pena.</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     ARTÍCULO 93
+     ============================================================ -->
+<section id="art93" class="article-section">
+  <div class="article-header">
+    <div class="roman">XCIII</div>
+    <h2>Extensión de las anteriores disposiciones
+      <span class="tagline">Las reglas de extinción aplicadas a las medidas de seguridad.</span>
+    </h2>
+  </div>
+
+  <blockquote class="legal-text">
+    <span class="legal-label">Texto normativo · Artículo 93°</span>
+    <p>Las reglas anteriormente enunciadas se aplicarán a las medidas de seguridad, en cuanto no
+       se opongan a la naturaleza de las mismas.</p>
+  </blockquote>
+
+  <div class="chips">
+    <span class="chip">Remisión analógica</span>
+    <span class="chip">Cláusula de adecuación</span>
+    <span class="chip">Naturaleza de la medida</span>
+    <span class="chip">Peligrosidad vs. culpabilidad</span>
+  </div>
+
+  <div class="quad-grid">
+    <article class="perspective-card dogma">
+      <div class="card-header"><span class="card-icon">⚖️</span><h3 class="card-title">Dogmática</h3></div>
+      <div class="card-sub">Una remisión con filtro</div>
+      <div class="card-content">
+        <p>El artículo 93 es una <strong>norma de remisión analógica con cláusula de
+        adecuación</strong>. Las reglas del capítulo se aplican a las medidas de seguridad
+        <em>en cuanto no se opongan a su naturaleza</em>. El filtro es imprescindible: la
+        medida se funda en la peligrosidad y en la finalidad terapéutica, no en la
+        culpabilidad.</p>
+        <p>En consecuencia, son <strong>aplicables</strong>: la muerte del internado como
+        causal de extinción; la prescripción de la medida según los máximos de los artículos
+        70 a 72; el cómputo de la detención preventiva (art. 80); la declaración judicial de
+        extinción. Y son <strong>inaplicables</strong> o de adaptación problemática: el indulto
+        como gracia sobre una pena que no existe; la rehabilitación, cuyo equivalente funcional
+        es la rehabilitación clínica prevista en los artículos 70 a 72; la exención de
+        punibilidad, ajena a la lógica de la medida.</p>
+      </div>
+    </article>
+
+    <article class="perspective-card onto">
+      <div class="card-header"><span class="card-icon">🌌</span><h3 class="card-title">Ontología</h3></div>
+      <div class="card-sub">Dos naturalezas, un solo límite temporal</div>
+      <div class="card-content">
+        <p>El artículo 93 reconoce que la medida de seguridad tiene una <strong>naturaleza
+        propia</strong> que no se deja absorber por las categorías de la pena. Ontológicamente,
+        la medida es tratamiento; la pena es reproche. Lo que comparten es el hecho de ser
+        <em>privaciones de libertad atribuidas por el Estado</em>, y por eso comparten su
+        límite: el tiempo.</p>
+        <p>Pero el tiempo opera distinto. En la pena, la prescripción mide el desinterés del
+        Estado por castigar. En la medida, el cese depende sobre todo de la <strong>evolución
+        clínica</strong>: la medida cesa cuando cesa la peligrosidad, aunque el plazo no se
+        haya cumplido. La temporalidad de la medida es <em>terapéutica</em> antes que
+        punitiva.</p>
+        <p>La cláusula de adecuación es, en el fondo, una protección: impide que las reglas
+        de la pena —pensadas para el culpable— se apliquen mecánicamente al paciente,
+        convirtiendo el tratamiento en un castigo encubierto.</p>
+      </div>
+    </article>
+
+    <article class="perspective-card herm">
+      <div class="card-header"><span class="card-icon">📜</span><h3 class="card-title">Hermenéutica</h3></div>
+      <div class="card-sub">Interpretar con el filtro de la dignidad</div>
+      <div class="card-content">
+        <p>La cláusula <em>en cuanto no se opongan a la naturaleza de las mismas</em> se
+        interpreta a la luz de las funciones de la medida de seguridad (art. 5):
+        <strong>protección, curación, tutela y rehabilitación</strong>. Toda regla del capítulo
+        que contradiga esas funciones se excluye.</p>
+        <p>La hermenéutica exige además coordinación con el <strong>control trimestral</strong>
+        del artículo 77: en las medidas, ese control es la vía natural de extinción, y la
+        prescripción opera como techo último, no como regla ordinaria.</p>
+        <p>El estándar internacional es decisivo: la internación de personas con discapacidad
+        psicosocial no puede prolongarse por criterios de peligrosidad abstractos. La
+        interpretación conforme exige que toda extensión de las reglas de extinción se lea
+        como <strong>garantía de libertad anticipada</strong>, nunca como fundamento de
+        permanencia.</p>
+      </div>
+    </article>
+
+    <article class="perspective-card proc">
+      <div class="card-header"><span class="card-icon">📋</span><h3 class="card-title">Razonabilidad procedimental</h3></div>
+      <div class="card-sub">El trámite de extinción de la medida</div>
+      <div class="card-content">
+        <p>Procedimentalmente:</p>
+        <ul>
+          <li><strong>1.</strong> Identificar la medida impuesta y su máximo legal (arts. 70, 71, 72, 76).</li>
+          <li><strong>2.</strong> Aplicar el cómputo de la detención preventiva (art. 80).</li>
+          <li><strong>3.</strong> Solicitar el dictamen de experto oficial o el concepto de la Junta o Director (art. 79).</li>
+          <li><strong>4.</strong> Verificar el control trimestral y los informes periódicos (art. 77).</li>
+          <li><strong>5.</strong> Declarar la suspensión, la cesación o la extinción, según corresponda.</li>
+          <li><strong>6.</strong> Ordenar la libertad y disponer la libertad vigilada accesoria si procede (art. 74).</li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============================================================
+     CALCULADORA
+     ============================================================ -->
+<section id="calculadora" class="calc-section">
+  <div class="section-kicker">Taller de cómputo · Arts. 83, 84 y 86</div>
+  <h2>Calculadora de prescripción de la acción penal</h2>
+  <p class="intro">
+    Herramienta pedagógica para aplicar el algoritmo del artículo 83: término base,
+    piso y techo, aumentos por función pública y comisión en el exterior, regla de
+    cierre del límite máximo y recálculo posterior a la interrupción acusatoria.
+    No reemplaza el análisis jurídico del caso concreto.
+  </p>
+
+  <div class="calc">
+    <div class="calc-grid">
+      <div class="field">
+        <label for="pena">Máximo de la pena (años, con causales sustanciales)</label>
+        <input type="number" id="pena" min="0" step="0.5" value="8">
+      </div>
+      <div class="field">
+        <label for="tipo">Naturaleza del delito</label>
+        <select id="tipo">
+          <option value="general">Delito general</option>
+          <option value="agravado">Delito agravado del art. 83 (30 años)</option>
+          <option value="imprescriptible">Imprescriptible (lesa humanidad, NNA)</option>
+          <option value="noprivativa">Pena no privativa de la libertad</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="transcurrido">Tiempo transcurrido (años)</label>
+        <input type="number" id="transcurrido" min="0" step="0.5" value="6">
+      </div>
+      <div class="field">
+        <label for="acusatoria">¿Hay resolución acusatoria ejecutoriada?</label>
+        <select id="acusatoria">
+          <option value="no">No</option>
+          <option value="si">Sí (interrupción)</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="checks" style="margin-top:1.2rem">
+      <label class="check"><input type="checkbox" id="funcionario"> Servidor público o particular con funciones públicas</label>
+      <label class="check"><input type="checkbox" id="exterior"> Conducta iniciada o consumada en el exterior</label>
+    </div>
+
+    <div class="calc-result" id="resultado">
+      <span class="label">Resultado del cómputo</span>
+      <div id="lineas"></div>
+      <div id="estado" class="calc-state ok"></div>
+    </div>
+
+    <p class="calc-note">
+      Algoritmo aplicado: término igual al máximo de la pena privativa de libertad, con piso de
+      5 años y techo de 20; aumentos de la mitad por función pública y por comisión en el exterior,
+      sin exceder el límite máximo; tras la interrupción acusatoria, reinicio por la mitad del
+      término, con piso de 5 y techo de 10 años. Los delitos imprescriptibles no prescriben.
+    </p>
+  </div>
+</section>
+
+<!-- ============================================================
+     SÍNTESIS
+     ============================================================ -->
+<section id="sintesis" class="sintesis">
+  <div class="section-kicker">Lectura transversal</div>
+  <h2>Doce artículos, dos extinciones, cuatro preguntas</h2>
+  <p class="intro">
+    Los artículos 82 a 93 no son preceptos independientes: son las articulaciones de un
+    mismo límite temporal del poder punitivo. La tabla reconstruye, para cada norma, las
+    cuatro dimensiones que la atraviesan.
+  </p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Norma</th>
+          <th>Dogmática</th>
+          <th>Ontología</th>
+          <th>Hermenéutica</th>
+          <th>Razonabilidad procedimental</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Art. 82</td>
+          <td>Cinco familias de causales; amnistía propia vs. impropia.</td>
+          <td>La acción como entidad temporal que puede morir.</td>
+          <td>La extinción no puede ser impunidad (C-828/2010).</td>
+          <td>Declaración de oficio, prueba, archivo, traslado de pruebas.</td>
+        </tr>
+        <tr>
+          <td>Art. 83</td>
+          <td>Regla proporcionalista, piso y techo, aumentos, imprescriptibilidad.</td>
+          <td>El tiempo como co-límite del poder; la humanidad como sujeto pasivo.</td>
+          <td>Regla de cierre del tope; causales sustanciales en el cálculo.</td>
+          <td>Algoritmo de siete pasos, con la suspensión tributaria.</td>
+        </tr>
+        <tr>
+          <td>Art. 84</td>
+          <td>Cuatro reglas de inicio según la estructura del delito.</td>
+          <td>El tiempo penal no es homogéneo: punto, continuo, deber.</td>
+          <td>Clasificar antes de computar; duda a favor del procesado.</td>
+          <td>Fijar y probar la fecha; cómputos independientes por conducta.</td>
+        </tr>
+        <tr>
+          <td>Art. 85</td>
+          <td>Renuncia como disposición con límite de dos años.</td>
+          <td>La autonomía procesal y la soberanía del tiempo.</td>
+          <td>Renuncia libre, informada y expresa; plazo imperativo.</td>
+          <td>Constancia, control judicial del plazo, declaración de oficio.</td>
+        </tr>
+        <tr>
+          <td>Art. 86</td>
+          <td>Interrupción (reinicio) y suspensión (pausa); hechos interruptivos.</td>
+          <td>La actividad estatal reactiva; el tiempo de la negociación.</td>
+          <td>Acusación ejecutoriada, no imputación; piso y techo protectores.</td>
+          <td>Verificar ejecutoria y legalidad; recalcular; registrar fechas.</td>
+        </tr>
+        <tr>
+          <td>Art. 87</td>
+          <td>Causal satisfactiva limitada a la unidad multa.</td>
+          <td>La reparación antes que la retribución.</td>
+          <td>Interpretación restrictiva; suma razonable y pagable.</td>
+          <td>Tasación previa, suma judicial, pago, extinción y archivo.</td>
+        </tr>
+        <tr>
+          <td>Art. 88</td>
+          <td>Cuatro familias: naturales, gracia/ley, temporales, restitución.</td>
+          <td>La muerte, la clemencia y la persona transformada.</td>
+          <td>Prohibición de indultos en crímenes de lesa humanidad.</td>
+          <td>Juez de ejecución; prueba; libertad; comunicación registral.</td>
+        </tr>
+        <tr>
+          <td>Art. 89</td>
+          <td>Tres reglas por naturaleza de la pena y piso común de 5 años.</td>
+          <td>La caducidad del poder de ejecutar; la pena como saldo.</td>
+          <td>Piso imperativo; reserva de tratados; ejecutoria como punto único.</td>
+          <td>Verificar ejecutoria, computar, declarar, ordenar libertad.</td>
+        </tr>
+        <tr>
+          <td>Arts. 90–91</td>
+          <td>Aprehensión y cobro coactivo como hechos interruptivos.</td>
+          <td>El Estado que se hace cargo recupera el tiempo.</td>
+          <td>Nexo entre captura y sentencia; decisión que inicia el cobro.</td>
+          <td>Certificar fecha y hora; recalcular; notificar.</td>
+        </tr>
+        <tr>
+          <td>Art. 92</td>
+          <td>Tres reglas de rehabilitación y la prohibición constitucional.</td>
+          <td>La persona que ya no es la misma; la reparación como presupuesto.</td>
+          <td>De derecho en la regla 1; discrecional en la 2; estricta la excepción.</td>
+          <td>Expediente probatorio completo y comunicación registral.</td>
+        </tr>
+        <tr>
+          <td>Art. 93</td>
+          <td>Remisión analógica con cláusula de adecuación.</td>
+          <td>Dos naturalezas, un solo límite temporal.</td>
+          <td>Filtro de las funciones de la medida y estándares internacionales.</td>
+          <td>Dictamen pericial, control trimestral, libertad vigilada accesoria.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="closing">
+    <div class="serif">«La acción penal prescribirá en un tiempo igual al máximo de la pena fijada en la ley…<br>pero la acción penal para los delitos de genocidio, lesa humanidad y crímenes de guerra será imprescriptible.»</div>
+    <p>
+      En esa tensión se condensa todo el capítulo. El derecho penal colombiano reconoce que
+      el poder de castigar tiene un tiempo: caduca si no se ejerce, se suspende mientras se
+      negocia, se interrumpe cuando se formaliza la acusación. Pero reconoce también que hay
+      hechos que el tiempo no puede disolver, porque su sujeto pasivo no es un Estado sino la
+      humanidad, o porque su víctima necesitó años para poder nombrar el daño.
+      <strong>Dogmática, ontología, hermenéutica y razonabilidad procedimental convergen en un
+      mismo punto: el tiempo como garantía para el perseguido y como límite para el poder —
+      nunca como instrumento de impunidad.</strong>
+    </p>
+  </div>
+</section>
+
+<!-- ============================================================
+     GLOSARIO
+     ============================================================ -->
+<section id="glosario" class="glosario">
+  <details>
+    <summary>Glosario mínimo de la extinción <span>+</span></summary>
+    <dl class="gloss-list">
+      <div><dt>Extinción de la acción penal</dt><dd>Apagamiento de la pretensión punitiva antes de la condena, por alguna de las causales del art. 82.</dd></div>
+      <div><dt>Extinción de la sanción penal</dt><dd>Terminación de la pena ya impuesta, por alguna de las causales del art. 88.</dd></div>
+      <div><dt>Prescripción</dt><dd>Extinción por el transcurso del tiempo sin que el Estado ejercite eficazmente su poder.</dd></div>
+      <div><dt>Amnistía propia</dt><dd>Ley que extingue la acción penal antes de la condena.</dd></div>
+      <div><dt>Amnistía impropia</dt><dd>Ley que extingue la sanción ya impuesta.</dd></div>
+      <div><dt>Indulto</dt><dd>Acto de gracia que extingue o reduce la pena del condenado.</dd></div>
+      <div><dt>Desistimiento</dt><dd>Retirada de la querella en los delitos que la requieren.</dd></div>
+      <div><dt>Retracción</dt><dd>Manifestación voluntaria que extingue la acción en los casos previstos por la ley.</dd></div>
+      <div><dt>Oblación</dt><dd>Extinción de la acción por pago, en conductas con pena exclusiva de unidad multa.</dd></div>
+      <div><dt>Indemnización integral</dt><dd>Reparación total del daño que extingue la acción en los casos legales.</dd></div>
+      <div><dt>Término prescriptivo</dt><dd>Duración del plazo tras el cual se extingue la acción o la sanción.</dd></div>
+      <div><dt>Piso y techo</dt><dd>Límites mínimo (5 años) y máximo (20 años) del término de la acción.</dd></div>
+      <div><dt>Imprescriptibilidad</dt><dd>Inaplicabilidad de la prescripción por la naturaleza del crimen o de la víctima.</dd></div>
+      <div><dt>Regla de cierre</dt><dd>Prohibición de exceder el límite máximo aun cuando se apliquen aumentos.</dd></div>
+      <div><dt>Causales sustanciales</dt><dd>Atenuantes y agravantes que modifican el máximo de la pena y, con él, el término.</dd></div>
+      <div><dt>Delito de ejecución permanente</dt><dd>Aquel cuya consumación se prolonga; el término corre desde el último acto.</dd></div>
+      <div><dt>Delito instantáneo</dt><dd>Aquel que se agota en un momento; el término corre desde la consumación.</dd></div>
+      <div><dt>Interrupción</dt><dd>Pérdida del tiempo transcurrido y reinicio del cómputo por un nuevo término.</dd></div>
+      <div><dt>Suspensión</dt><dd>Congelación del cómputo, conservando el tiempo ya transcurrido.</dd></div>
+      <div><dt>Resolución acusatoria ejecutoriada</dt><dd>Hecho interruptivo de la prescripción de la acción; no la formulación de imputación.</dd></div>
+      <div><dt>Principio de oportunidad</dt><dd>Causal de suspensión del término prescriptivo por hasta tres años, desde la legalidad judicial.</dd></div>
+      <div><dt>Renuncia a la prescripción</dt><dd>Disposición del procesado, limitada a dos años tras la consumación de la prescripción.</dd></div>
+      <div><dt>Rehabilitación</dt><dd>Restitución de los derechos afectados por una pena privativa de derechos impuesta como accesoria.</dd></div>
+      <div><dt>Cartilla biográfica</dt><dd>Documento que registra la trayectoria del condenado, exigido en la rehabilitación anticipada.</dd></div>
+      <div><dt>Prisión perpetua revisable</dt><dd>Pena máxima del sistema; su prescripción es de 60 años desde la ejecutoria.</dd></div>
+      <div><dt>Ejecutoria</dt><dd>Firmeza de la sentencia; punto de partida de la prescripción de la sanción.</dd></div>
+      <div><dt>Cláusula de adecuación</dt><dd>Filtro del art. 93 que aplica las reglas a las medidas de seguridad en cuanto sean compatibles con su naturaleza.</dd></div>
+    </dl>
+  </details>
+</section>
+
+<!-- ============================================================
+     REFERENCIAS
+     ============================================================ -->
+<section class="refs">
+  <h3>Claves doctrinales para profundizar</h3>
+  <div class="ref-grid">
+    <div class="ref"><b>Claus Roxin</b><i>Derecho Penal. Parte General</i><br>Prescripción, fines de la pena, límites temporales del ius puniendi.</div>
+    <div class="ref"><b>Eugenio Raúl Zaffaroni</b><i>Tratado de Derecho Penal</i><br>Prescripción y crítica al autoritarismo punitivo; el tiempo como garantía.</div>
+    <div class="ref"><b>Luigi Ferrajoli</b><i>Derecho y razón</i><br>Garantismo, seguridad jurídica y la función de las extinciones procesales.</div>
+    <div class="ref"><b>Fernando Velásquez Velásquez</b><i>Manual de Derecho Penal Colombiano</i><br>Recepción dogmática de la extinción de la acción y de la sanción.</div>
+    <div class="ref"><b>Corte Constitucional de Colombia</b><i>Sentencias C-828 de 2010, C-383 de 2022, C-010 de 2002</i><br>Derechos de las víctimas, imprescriptibilidad, prisión perpetua revisable.</div>
+    <div class="ref"><b>Corte Suprema de Justicia</b><i>Sala de Casación Penal</i><br>Resolución acusatoria como hecho interruptivo; cómputo y estructura del delito.</div>
+    <div class="ref"><b>Corte Interamericana de Derechos Humanos</b><i>Barrios Altos, Almonacid Arellano, Gomes Lund</i><br>Inadmisibilidad de amnistías e indultos en graves violaciones de DD.HH.</div>
+    <div class="ref"><b>Convención sobre la imprescriptibilidad de los crímenes de guerra y de lesa humanidad (1968)</b><i>Tratado internacional</i><br>Fundamento del ius cogens de la imprescriptibilidad.</div>
+    <div class="ref"><b>Paul Ricoeur</b><i>La memoria, la historia, el olvido</i><br>Ontología del tiempo, la memoria y la deuda: trasfondo filosófico del capítulo.</div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <strong>De la extinción de la acción y de la sanción penal · Código Penal colombiano</strong>
+  <p>Análisis tetradimensional de los artículos 82 a 93, Ley 599 de 2000, modificados por
+     Leyes 890 de 2004, 2098 de 2021, 2277 de 2022 y 2477 de 2025. Continuación del estudio
+     del Libro Primero, Parte General.</p>
+  <p class="fine">Material académico de estudio y reflexión filosófico-jurídica.
+     No constituye asesoría legal. La calculadora es un ejercicio pedagógico.</p>
+</footer>
+
+<script>
+const progress = document.getElementById('progress');
+function updateProgress(){
+  const h = document.documentElement;
+  const total = h.scrollHeight - h.clientHeight;
+  progress.style.width = (total > 0 ? (h.scrollTop / total) * 100 : 0) + '%';
+}
+window.addEventListener('scroll', updateProgress, {passive:true});
+window.addEventListener('resize', updateProgress);
+updateProgress();
+
+if ('IntersectionObserver' in window) {
+  const targets = document.querySelectorAll(
+    '.perspective-card, .callout, .case-study, .method-card, .pipe-node, .closing, .ref, .calc'
+  );
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, {threshold: 0.08, rootMargin: '0px 0px -40px 0px'});
+
+  targets.forEach((el, i) => {
+    el.classList.add('reveal');
+    el.style.transitionDelay = (i % 3) * 70 + 'ms';
+    revealObserver.observe(el);
+  });
+}
+
+const navLinks = document.querySelectorAll('nav a');
+const sections = [...navLinks].map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+
+if ('IntersectionObserver' in window) {
+  const navObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(a => {
+          a.classList.toggle('active', a.getAttribute('href') === '#' + entry.target.id);
+        });
+      }
+    });
+  }, {rootMargin: '-15% 0px -65% 0px', threshold: 0});
+  sections.forEach(s => navObserver.observe(s));
+}
+
+/* ============================================================
+   CALCULADORA DE PRESCRIPCIÓN (Arts. 83, 84, 86)
+   ============================================================ */
+const el = id => document.getElementById(id);
+
+function fmt(n){
+  if (!isFinite(n)) return '—';
+  const r = Math.round(n * 10) / 10;
+  return (Number.isInteger(r) ? r.toString() : r.toFixed(1)) + ' años';
+}
+
+function calcular(){
+  const pena = parseFloat(el('pena').value) || 0;
+  const tipo = el('tipo').value;
+  const trans = parseFloat(el('transcurrido').value) || 0;
+  const acusatoria = el('acusatoria').value === 'si';
+  const funcionario = el('funcionario').checked;
+  const exterior = el('exterior').checked;
+
+  const lineas = [];
+  let termino = 0;
+  let techo = 20;
+  let imprescriptible = false;
+
+  lineas.push(['Regla del art. 83',
+    tipo === 'general' ? 'Máximo de la pena privativa de libertad' :
+    tipo === 'agravado' ? 'Delitos agravados: 30 años fijos' :
+    tipo === 'imprescriptible' ? 'Imprescriptible' :
+    'Pena no privativa: 5 años fijos']);
+
+  if (tipo === 'imprescriptible'){
+    imprescriptible = true;
+    termino = Infinity;
+    lineas.push(['Término aplicable', 'Imprescriptible']);
+  } else if (tipo === 'agravado'){
+    termino = 30;
+    techo = 30;
+    lineas.push(['Término base', '30 años']);
+  } else if (tipo === 'noprivativa'){
+    termino = 5;
+    lineas.push(['Término base', '5 años (pena no privativa)']);
+  } else {
+    let base = pena;
+    if (base < 5) base = 5;
+    if (base > 20) base = 20;
+    termino = base;
+    lineas.push(['Término base (piso 5, techo 20)', fmt(base)]);
+  }
+
+  if (!imprescriptible && tipo !== 'noprivativa'){
+    let acumulado = termino;
+    if (funcionario){
+      acumulado = acumulado * 1.5;
+      lineas.push(['Aumento por función pública (+½)', fmt(acumulado)]);
+    }
+    if (exterior){
+      acumulado = acumulado * 1.5;
+      lineas.push(['Aumento por comisión en el exterior (+½)', fmt(acumulado)]);
+    }
+    if (acumulado !== termino){
+      if (acumulado > techo){
+        acumulado = techo;
+        lineas.push(['Regla de cierre (tope ' + techo + ' años)', fmt(acumulado) + ' — el aumento no excede el límite máximo']);
+      } else {
+        lineas.push(['Término con aumentos', fmt(acumulado)]);
+      }
+      termino = acumulado;
+    }
+  }
+
+  if (acusatoria && !imprescriptible){
+    let nuevo = termino / 2;
+    if (nuevo < 5) nuevo = 5;
+    if (nuevo > 10) nuevo = 10;
+    lineas.push(['Interrupción: resolución acusatoria ejecutoriada', 'Reinicio por la mitad (piso 5, techo 10)']);
+    lineas.push(['Nuevo término tras la interrupción', fmt(nuevo)]);
+    termino = nuevo;
+  }
+
+  let html = '';
+  lineas.forEach(l => {
+    html += '<div class="calc-line"><span>' + l[0] + '</span><b>' + l[1] + '</b></div>';
+  });
+  el('lineas').innerHTML = html;
+
+  const estado = el('estado');
+  if (imprescriptible){
+    estado.className = 'calc-state warn';
+    estado.textContent = 'La acción penal es IMPRESCRIPTIBLE. No hay lugar a decretar la prescripción.';
+  } else if (trans >= termino){
+    estado.className = 'calc-state ok';
+    estado.textContent = 'La acción penal está PRESCRITA. Transcurrieron ' + fmt(trans) + ' de un término de ' + fmt(termino) + '. Debe decretarse la extinción.';
+  } else {
+    const falta = termino - trans;
+    estado.className = 'calc-state warn';
+    estado.textContent = 'La acción penal está VIGENTE. Faltan ' + fmt(falta) + ' para completar el término de ' + fmt(termino) + '.';
+  }
+}
+
+['pena','tipo','transcurrido','acusatoria','funcionario','exterior'].forEach(id => {
+  const node = el(id);
+  if (node){
+    node.addEventListener('input', calcular);
+    node.addEventListener('change', calcular);
+  }
+});
+calcular();
+</script>
+</body>
+</html>
